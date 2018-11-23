@@ -1,0 +1,71 @@
+{
+  "name": "bra",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "check:ts": "tsc -p tsconfig.json",
+    "format:prettier": "prettier --config prettier.json --write \"src/**/*.tsx\"",
+    "format:tslint": "tslint --fix 'src/**/*.{ts,tsx}'",
+    "format": "yarn format:prettier && yarn format:tslint",
+    "graphql-types": "yarn graphql:download && yarn graphql:codegen",
+    "graphql:codegen": "apollo client:codegen --passthroughCustomScalars --target=typescript --globalTypesFile=src/__generated__/globalTypes.ts",
+    "graphql:download": "apollo service:download"
+  },
+  "dependencies": {
+    "@bit/eddeee888.learnd-utils.forms.validations": "^0.1.6",
+    "@bit/eddeee888.learnd-utils.graphql": "^0.0.5",
+    "@material-ui/core": "^3.9.2",
+    "@types/graphql": "^14.0.5",
+    "@types/node": "10.12.10",
+    "@types/react": "^16.8.2",
+    "@types/react-dom": "^16.8.0",
+    "@types/react-router": "^4.4.1",
+    "@types/react-router-dom": "^4.3.1",
+    "@types/yup": "^0.26.4",
+    "apollo": "^2.3.0",
+    "apollo-cache-inmemory": "^1.4.2",
+    "apollo-client": "^2.4.12",
+    "apollo-link": "^1.2.6",
+    "apollo-link-error": "^1.1.5",
+    "apollo-link-http": "^1.5.9",
+    "apollo-link-state": "^0.4.2",
+    "emotion": "^10.0.7",
+    "formik": "^1.4.1",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
+    "react": "^16.8.1",
+    "react-apollo": "^2.4.0",
+    "react-dom": "^16.8.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.5",
+    "typescript": "^3.3.3",
+    "yup": "^0.26.6"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.1.15",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/jest": "23.3.9",
+    "@types/react-test-renderer": "^16.0.3",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "jest-environment-enzyme": "^7.0.1",
+    "jest-enzyme": "^7.0.1",
+    "prettier": "1.15.2",
+    "react-test-renderer": "^16.6.3",
+    "tslint": "^5.11.0",
+    "waait": "^1.0.4"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
