@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LayoutController from 'src/common/components/LayoutController';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
+import CreateClass from 'src/pages/CreateClass';
 import Home from 'src/pages/Home';
 import Login from 'src/pages/Login';
 import Logout from 'src/pages/Logout';
@@ -15,6 +16,7 @@ const AppRouter = () => (
         <Route path={linkgen(Paths.login)} component={Login} />
         <Route path={linkgen(Paths.signup)} component={Signup} />
         <Route path={linkgen(Paths.logout)} component={Logout} />
+        <Route path={linkgen(Paths.createClass)} component={CreateClass} />
       </Switch>
     </LayoutController>
   </BrowserRouter>
