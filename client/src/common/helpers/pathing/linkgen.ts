@@ -1,7 +1,7 @@
 import Paths from './Paths';
 
 interface QueryOptions {
-  redirect?: string;
+  redirect?: Paths;
 }
 
 interface LinkgenOptions {
@@ -14,18 +14,25 @@ const linkgen: LinkgenFn = (path, options) => {
   let urlParts = '';
 
   if (options) {
-    if (options.query) {
-      urlParts += '?';
-      (Object.keys(options.query) as Array<keyof QueryOptions>).forEach(
-        queryKey => {
-          urlParts += `${queryKey}=${options.query![queryKey]}&`;
-        }
-      );
-      urlParts = urlParts.substring(0, urlParts.length - 1);
-    }
+    urlParts += generateQueryPart(options.query);
   }
 
   return path + urlParts;
+};
+
+const generateQueryPart = (queryOptions?: QueryOptions): string => {
+  if (!queryOptions) {
+    return '';
+  }
+
+  let result = '?';
+
+  (Object.keys(queryOptions) as Array<keyof QueryOptions>).forEach(queryKey => {
+    result += `${queryKey}=${queryOptions[queryKey]}&`;
+  });
+  result = result.substring(0, result.length - 1);
+
+  return result;
 };
 
 export default linkgen;
