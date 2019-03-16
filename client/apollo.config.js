@@ -1,8 +1,8 @@
 module.exports = {
   client: {
     service: {
-      name: 'bra',
-      url: 'http://bra.com.dockervm/graphql'
+      name: 'learnd',
+      url: 'http://learnd.com.dockervm/graphql'
     }
   }
 };

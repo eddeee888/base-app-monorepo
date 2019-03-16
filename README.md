@@ -1,4 +1,4 @@
-# Base react app (BRA)
+# Learnd
 
 ## CLI & containers
 
@@ -8,30 +8,30 @@ To start on MacOS, install the CLI command to make development easier. Go to the
 ./bin/init.sh
 ```
 
-This will create allow you to use `bra` in the CLI to control the project from anywhere, not just in the project folder. Typing `bra` in the CLI will show options. For example:
+This will create allow you to use `learnd` in the CLI to control the project from anywhere, not just in the project folder. Typing `learnd` in the CLI will show options. For example:
 
 To build/rebuild:
 
 ```
-bra rebuild
+learnd rebuild
 ```
 
 To start the project:
 
 ```
-bra start
+learnd start
 ```
 
 To stop the project:
 
 ```
-bra stop
+learnd stop
 ```
 
-The project should be accessible on http://localhost. It is recommended to add the dev base URL to your hosts file. The default is `http://bra.com.dockervm`. It should look something like this:
+The project should be accessible on http://localhost. It is recommended to add the dev base URL to your hosts file. The default is `http://learnd.com.dockervm`. It should look something like this:
 
 ```
-127.0.0.1   bra.com.dockervm
+127.0.0.1   learnd.com.dockervm
 ```
 
 This setup step is optional. You can use `docker-compose` from the root of the project as an alternative.

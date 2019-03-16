@@ -27,7 +27,7 @@ function symlink(){
 }
 
 function init(){
-    echo -e "Welcome to BRA setup!"
+    echo -e "Welcome to learnd setup!"
     echo -e "========= **** =========\n"
 
     remove_old_symlink
