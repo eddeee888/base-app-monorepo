@@ -1,12 +1,12 @@
 import { css } from 'emotion';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router';
 import H1 from 'src/common/components/H1';
 import Link from 'src/common/components/Link';
 import Logo from 'src/common/components/Logo';
 import Main from 'src/common/components/Main';
 import Paper from 'src/common/components/Paper';
-import { ViewerConsumer } from 'src/common/components/ViewerContext';
+import ViewerContext from 'src/common/components/ViewerContext';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
 import { breakpoints } from 'src/common/styles/media';
 import SignupForm from './SignupForm';
@@ -29,30 +29,30 @@ const paperContainerClassName = css`
   align-items: center;
 `;
 
-const Signup: React.FunctionComponent = () => (
-  <ViewerConsumer>
-    {({ viewer }) => {
-      if (viewer) {
-        return <Redirect to={linkgen(Paths.home)} />;
-      }
-      return (
-        <Main className={mainClassName}>
-          <div className={paperContainerClassName}>
-            <Paper>
-              <div className={logoContainerClassName}>
-                <Link to={linkgen(Paths.home)}>
-                  <Logo />
-                </Link>
-              </div>
-              <H1 align={'center'}>Sign up</H1>
-              <SignupForm />
-            </Paper>
+const Signup: React.FunctionComponent = () => {
+  const { viewer } = useContext(ViewerContext);
+
+  if (viewer) {
+    return <Redirect to={linkgen(Paths.home)} />;
+  }
+
+  return (
+    <Main className={mainClassName}>
+      <div className={paperContainerClassName}>
+        <Paper>
+          <div className={logoContainerClassName}>
+            <Link to={linkgen(Paths.home)}>
+              <Logo />
+            </Link>
           </div>
-          ;
-        </Main>
-      );
-    }}
-  </ViewerConsumer>
-);
+          <H1 align="center" variant="h2">
+            Sign up
+          </H1>
+          <SignupForm />
+        </Paper>
+      </div>
+    </Main>
+  );
+};
 
 export default Signup;
