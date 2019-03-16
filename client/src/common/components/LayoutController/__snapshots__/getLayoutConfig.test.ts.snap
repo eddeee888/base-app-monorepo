@@ -11,6 +11,17 @@ Object {
 }
 `;
 
+exports[`getLayoutConfig() should match snapshot for '/create-a-class' path 1`] = `
+Object {
+  "footer": Object {
+    "display": true,
+  },
+  "header": Object {
+    "display": true,
+  },
+}
+`;
+
 exports[`getLayoutConfig() should match snapshot for '/dashboard' path 1`] = `
 Object {
   "footer": Object {
