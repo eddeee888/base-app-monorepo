@@ -45,7 +45,9 @@ const Login: React.FunctionComponent = () => {
               <Logo />
             </Link>
           </div>
-          <H1 align={'center'}>Login</H1>
+          <H1 align="center" variant="h2">
+            Login
+          </H1>
           <LoginForm />
         </Paper>
       </div>
