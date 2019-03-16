@@ -1,5 +1,6 @@
 import { Resolvers } from 'src/web/graphql/generated/graphqlgen';
 
+import { ClassCategory } from 'src/web/graphql/resolvers/ClassCategory';
 import { LoginPayload } from 'src/web/graphql/resolvers/LoginPayload';
 import { Mutation } from 'src/web/graphql/resolvers/Mutation';
 import { Query } from 'src/web/graphql/resolvers/Query';
@@ -10,6 +11,7 @@ export const resolvers: Resolvers = {
   Query,
   Mutation,
   User,
+  ClassCategory,
   SignupPayload,
   LoginPayload
 };

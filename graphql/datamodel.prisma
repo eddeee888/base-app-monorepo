@@ -19,8 +19,7 @@ type Class {
   categories: [ClassCategory!]!
 }
 
-enum ClassCategory {
-  ACCOUNTING
-  PROGRAMMING
-  HEALTH_FITNESS
+type ClassCategory {
+  id: ID! @unique
+  name: String!
 }

@@ -1,5 +1,6 @@
 type Query {
   user(id: ID!): User
+  classCategories: [ClassCategory!]!
 }
 
 type Mutation {
@@ -13,6 +14,11 @@ type User {
   firstName: String!
   lastName: String!
   displayName: String
+}
+
+type ClassCategory {
+  id: ID!
+  name: String!
 }
 
 input SignupInput {
