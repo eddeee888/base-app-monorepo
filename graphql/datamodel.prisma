@@ -1,3 +1,5 @@
+# https://www.prisma.io/features/data-modeling/
+
 type User {
   id: ID! @unique
   email: String! @unique
@@ -6,4 +8,18 @@ type User {
   lastName: String!
   password: String!
   userGroup: String
+  classes: [Class!]! @relation(name: "UserCreatedClasses")
+}
+
+type Class {
+  id: ID! @unique
+  creator: User! @relation(name: "UserCreatedClasses")
+  name: String!
+  description: String!
+  categories: [ClassCategory!]!
+}
+
+type ClassCategory {
+  id: ID! @unique
+  name: String!
 }

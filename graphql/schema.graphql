@@ -1,10 +1,14 @@
 type Query {
   user(id: ID!): User
+  classCategories: [ClassCategory!]!
 }
 
 type Mutation {
   signup(input: SignupInput!): SignupPayload!
   login(input: LoginInput!): LoginPayload
+  createClassCategory(
+    input: CreateClassCategoryInput!
+  ): CreateClassCategoryPayload!
 }
 
 type User {
@@ -13,6 +17,11 @@ type User {
   firstName: String!
   lastName: String!
   displayName: String
+}
+
+type ClassCategory {
+  id: ID!
+  name: String!
 }
 
 input SignupInput {
@@ -25,6 +34,14 @@ input SignupInput {
 input LoginInput {
   email: String!
   password: String!
+}
+
+input CreateClassCategoryInput {
+  name: String!
+}
+
+type CreateClassCategoryPayload {
+  classCategory: ClassCategory!
 }
 
 type SignupPayload {

@@ -1,4 +1,12 @@
-export const typeDefs = /* GraphQL */ `type AggregateUser {
+export const typeDefs = /* GraphQL */ `type AggregateClass {
+  count: Int!
+}
+
+type AggregateClassCategory {
+  count: Int!
+}
+
+type AggregateUser {
   count: Int!
 }
 
@@ -6,9 +14,425 @@ type BatchPayload {
   count: Long!
 }
 
+type Class {
+  id: ID!
+  creator: User!
+  name: String!
+  description: String!
+  categories(where: ClassCategoryWhereInput, orderBy: ClassCategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClassCategory!]
+}
+
+type ClassCategory {
+  id: ID!
+  name: String!
+}
+
+type ClassCategoryConnection {
+  pageInfo: PageInfo!
+  edges: [ClassCategoryEdge]!
+  aggregate: AggregateClassCategory!
+}
+
+input ClassCategoryCreateInput {
+  name: String!
+}
+
+input ClassCategoryCreateManyInput {
+  create: [ClassCategoryCreateInput!]
+  connect: [ClassCategoryWhereUniqueInput!]
+}
+
+type ClassCategoryEdge {
+  node: ClassCategory!
+  cursor: String!
+}
+
+enum ClassCategoryOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ClassCategoryPreviousValues {
+  id: ID!
+  name: String!
+}
+
+input ClassCategoryScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [ClassCategoryScalarWhereInput!]
+  OR: [ClassCategoryScalarWhereInput!]
+  NOT: [ClassCategoryScalarWhereInput!]
+}
+
+type ClassCategorySubscriptionPayload {
+  mutation: MutationType!
+  node: ClassCategory
+  updatedFields: [String!]
+  previousValues: ClassCategoryPreviousValues
+}
+
+input ClassCategorySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ClassCategoryWhereInput
+  AND: [ClassCategorySubscriptionWhereInput!]
+  OR: [ClassCategorySubscriptionWhereInput!]
+  NOT: [ClassCategorySubscriptionWhereInput!]
+}
+
+input ClassCategoryUpdateDataInput {
+  name: String
+}
+
+input ClassCategoryUpdateInput {
+  name: String
+}
+
+input ClassCategoryUpdateManyDataInput {
+  name: String
+}
+
+input ClassCategoryUpdateManyInput {
+  create: [ClassCategoryCreateInput!]
+  update: [ClassCategoryUpdateWithWhereUniqueNestedInput!]
+  upsert: [ClassCategoryUpsertWithWhereUniqueNestedInput!]
+  delete: [ClassCategoryWhereUniqueInput!]
+  connect: [ClassCategoryWhereUniqueInput!]
+  set: [ClassCategoryWhereUniqueInput!]
+  disconnect: [ClassCategoryWhereUniqueInput!]
+  deleteMany: [ClassCategoryScalarWhereInput!]
+  updateMany: [ClassCategoryUpdateManyWithWhereNestedInput!]
+}
+
+input ClassCategoryUpdateManyMutationInput {
+  name: String
+}
+
+input ClassCategoryUpdateManyWithWhereNestedInput {
+  where: ClassCategoryScalarWhereInput!
+  data: ClassCategoryUpdateManyDataInput!
+}
+
+input ClassCategoryUpdateWithWhereUniqueNestedInput {
+  where: ClassCategoryWhereUniqueInput!
+  data: ClassCategoryUpdateDataInput!
+}
+
+input ClassCategoryUpsertWithWhereUniqueNestedInput {
+  where: ClassCategoryWhereUniqueInput!
+  update: ClassCategoryUpdateDataInput!
+  create: ClassCategoryCreateInput!
+}
+
+input ClassCategoryWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [ClassCategoryWhereInput!]
+  OR: [ClassCategoryWhereInput!]
+  NOT: [ClassCategoryWhereInput!]
+}
+
+input ClassCategoryWhereUniqueInput {
+  id: ID
+}
+
+type ClassConnection {
+  pageInfo: PageInfo!
+  edges: [ClassEdge]!
+  aggregate: AggregateClass!
+}
+
+input ClassCreateInput {
+  creator: UserCreateOneWithoutClassesInput!
+  name: String!
+  description: String!
+  categories: ClassCategoryCreateManyInput
+}
+
+input ClassCreateManyWithoutCreatorInput {
+  create: [ClassCreateWithoutCreatorInput!]
+  connect: [ClassWhereUniqueInput!]
+}
+
+input ClassCreateWithoutCreatorInput {
+  name: String!
+  description: String!
+  categories: ClassCategoryCreateManyInput
+}
+
+type ClassEdge {
+  node: Class!
+  cursor: String!
+}
+
+enum ClassOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  description_ASC
+  description_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ClassPreviousValues {
+  id: ID!
+  name: String!
+  description: String!
+}
+
+input ClassScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  AND: [ClassScalarWhereInput!]
+  OR: [ClassScalarWhereInput!]
+  NOT: [ClassScalarWhereInput!]
+}
+
+type ClassSubscriptionPayload {
+  mutation: MutationType!
+  node: Class
+  updatedFields: [String!]
+  previousValues: ClassPreviousValues
+}
+
+input ClassSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ClassWhereInput
+  AND: [ClassSubscriptionWhereInput!]
+  OR: [ClassSubscriptionWhereInput!]
+  NOT: [ClassSubscriptionWhereInput!]
+}
+
+input ClassUpdateInput {
+  creator: UserUpdateOneRequiredWithoutClassesInput
+  name: String
+  description: String
+  categories: ClassCategoryUpdateManyInput
+}
+
+input ClassUpdateManyDataInput {
+  name: String
+  description: String
+}
+
+input ClassUpdateManyMutationInput {
+  name: String
+  description: String
+}
+
+input ClassUpdateManyWithoutCreatorInput {
+  create: [ClassCreateWithoutCreatorInput!]
+  delete: [ClassWhereUniqueInput!]
+  connect: [ClassWhereUniqueInput!]
+  set: [ClassWhereUniqueInput!]
+  disconnect: [ClassWhereUniqueInput!]
+  update: [ClassUpdateWithWhereUniqueWithoutCreatorInput!]
+  upsert: [ClassUpsertWithWhereUniqueWithoutCreatorInput!]
+  deleteMany: [ClassScalarWhereInput!]
+  updateMany: [ClassUpdateManyWithWhereNestedInput!]
+}
+
+input ClassUpdateManyWithWhereNestedInput {
+  where: ClassScalarWhereInput!
+  data: ClassUpdateManyDataInput!
+}
+
+input ClassUpdateWithoutCreatorDataInput {
+  name: String
+  description: String
+  categories: ClassCategoryUpdateManyInput
+}
+
+input ClassUpdateWithWhereUniqueWithoutCreatorInput {
+  where: ClassWhereUniqueInput!
+  data: ClassUpdateWithoutCreatorDataInput!
+}
+
+input ClassUpsertWithWhereUniqueWithoutCreatorInput {
+  where: ClassWhereUniqueInput!
+  update: ClassUpdateWithoutCreatorDataInput!
+  create: ClassCreateWithoutCreatorInput!
+}
+
+input ClassWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  creator: UserWhereInput
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  categories_every: ClassCategoryWhereInput
+  categories_some: ClassCategoryWhereInput
+  categories_none: ClassCategoryWhereInput
+  AND: [ClassWhereInput!]
+  OR: [ClassWhereInput!]
+  NOT: [ClassWhereInput!]
+}
+
+input ClassWhereUniqueInput {
+  id: ID
+}
+
 scalar Long
 
 type Mutation {
+  createClass(data: ClassCreateInput!): Class!
+  updateClass(data: ClassUpdateInput!, where: ClassWhereUniqueInput!): Class
+  updateManyClasses(data: ClassUpdateManyMutationInput!, where: ClassWhereInput): BatchPayload!
+  upsertClass(where: ClassWhereUniqueInput!, create: ClassCreateInput!, update: ClassUpdateInput!): Class!
+  deleteClass(where: ClassWhereUniqueInput!): Class
+  deleteManyClasses(where: ClassWhereInput): BatchPayload!
+  createClassCategory(data: ClassCategoryCreateInput!): ClassCategory!
+  updateClassCategory(data: ClassCategoryUpdateInput!, where: ClassCategoryWhereUniqueInput!): ClassCategory
+  updateManyClassCategories(data: ClassCategoryUpdateManyMutationInput!, where: ClassCategoryWhereInput): BatchPayload!
+  upsertClassCategory(where: ClassCategoryWhereUniqueInput!, create: ClassCategoryCreateInput!, update: ClassCategoryUpdateInput!): ClassCategory!
+  deleteClassCategory(where: ClassCategoryWhereUniqueInput!): ClassCategory
+  deleteManyClassCategories(where: ClassCategoryWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -35,6 +459,12 @@ type PageInfo {
 }
 
 type Query {
+  class(where: ClassWhereUniqueInput!): Class
+  classes(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Class]!
+  classesConnection(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassConnection!
+  classCategory(where: ClassCategoryWhereUniqueInput!): ClassCategory
+  classCategories(where: ClassCategoryWhereInput, orderBy: ClassCategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClassCategory]!
+  classCategoriesConnection(where: ClassCategoryWhereInput, orderBy: ClassCategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassCategoryConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -42,6 +472,8 @@ type Query {
 }
 
 type Subscription {
+  class(where: ClassSubscriptionWhereInput): ClassSubscriptionPayload
+  classCategory(where: ClassCategorySubscriptionWhereInput): ClassCategorySubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
@@ -53,6 +485,7 @@ type User {
   lastName: String!
   password: String!
   userGroup: String
+  classes(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Class!]
 }
 
 type UserConnection {
@@ -62,6 +495,21 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  email: String!
+  displayName: String
+  firstName: String!
+  lastName: String!
+  password: String!
+  userGroup: String
+  classes: ClassCreateManyWithoutCreatorInput
+}
+
+input UserCreateOneWithoutClassesInput {
+  create: UserCreateWithoutClassesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutClassesInput {
   email: String!
   displayName: String
   firstName: String!
@@ -131,6 +579,7 @@ input UserUpdateInput {
   lastName: String
   password: String
   userGroup: String
+  classes: ClassUpdateManyWithoutCreatorInput
 }
 
 input UserUpdateManyMutationInput {
@@ -140,6 +589,27 @@ input UserUpdateManyMutationInput {
   lastName: String
   password: String
   userGroup: String
+}
+
+input UserUpdateOneRequiredWithoutClassesInput {
+  create: UserCreateWithoutClassesInput
+  update: UserUpdateWithoutClassesDataInput
+  upsert: UserUpsertWithoutClassesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutClassesDataInput {
+  email: String
+  displayName: String
+  firstName: String
+  lastName: String
+  password: String
+  userGroup: String
+}
+
+input UserUpsertWithoutClassesInput {
+  update: UserUpdateWithoutClassesDataInput!
+  create: UserCreateWithoutClassesInput!
 }
 
 input UserWhereInput {
@@ -241,6 +711,9 @@ input UserWhereInput {
   userGroup_not_starts_with: String
   userGroup_ends_with: String
   userGroup_not_ends_with: String
+  classes_every: ClassWhereInput
+  classes_some: ClassWhereInput
+  classes_none: ClassWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

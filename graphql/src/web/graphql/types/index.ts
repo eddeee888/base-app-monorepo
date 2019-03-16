@@ -5,6 +5,11 @@ export interface User {
   lastName: string;
   displayName?: string;
 }
+
+export interface ClassCategory {
+  id: string;
+  name: string;
+}
 export interface SignupInput {
   email: string;
   firstName: string;
@@ -17,4 +22,8 @@ export interface SignupPayload {
 
 export interface LoginPayload {
   user: User;
+}
+
+export interface CreateClassCategoryPayload {
+  classCategory: ClassCategory;
 }
