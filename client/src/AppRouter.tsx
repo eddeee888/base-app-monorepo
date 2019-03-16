@@ -13,8 +13,14 @@ const AppRouter = () => (
     <LayoutController>
       <Switch>
         <Route exact path={linkgen(Paths.home)} component={Home} />
-        <Route path={linkgen(Paths.login)} component={Login} />
-        <Route path={linkgen(Paths.signup)} component={Signup} />
+        <Route
+          path={linkgen(Paths.login)}
+          render={routerProps => <Login routerProps={routerProps} />}
+        />
+        <Route
+          path={linkgen(Paths.signup)}
+          render={routerProps => <Signup routerProps={routerProps} />}
+        />
         <Route path={linkgen(Paths.logout)} component={Logout} />
         <Route path={linkgen(Paths.createClass)} component={CreateClass} />
       </Switch>

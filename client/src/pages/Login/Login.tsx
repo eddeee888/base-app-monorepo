@@ -1,6 +1,6 @@
 import { css } from 'emotion';
 import React, { useContext } from 'react';
-import { Redirect } from 'react-router';
+import { Redirect, RouteComponentProps } from 'react-router';
 import H1 from 'src/common/components/H1';
 import Link from 'src/common/components/Link';
 import Logo from 'src/common/components/Logo';
@@ -29,10 +29,16 @@ const paperContainerClassName = css`
   align-items: center;
 `;
 
-const Login: React.FunctionComponent = () => {
+interface Props {
+  routerProps: RouteComponentProps;
+}
+
+const Login: React.FunctionComponent<Props> = ({ routerProps }) => {
   const { viewer } = useContext(ViewerContext);
 
   if (viewer) {
+    // TODO: if there's `redirect` in `routerProps.location.search`, redirectthere instead of homepage
+    // TODO: add test
     return <Redirect to={linkgen(Paths.dashboard)} />;
   }
 

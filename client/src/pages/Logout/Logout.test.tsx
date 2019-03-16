@@ -15,7 +15,7 @@ jest.mock('src/common/components/ViewerContext', () => {
 });
 
 describe('<Logout />', () => {
-  it.only('should clear session and log user out', () => {
+  it('should clear session and log user out', () => {
     const wrapper = shallow(<Logout />);
 
     wrapper.instance();

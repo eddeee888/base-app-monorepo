@@ -9,7 +9,7 @@ describe('linkgen()', () => {
     });
   });
 
-  it.only(`should generate URL with 1 query correctly`, () => {
+  it(`should generate URL with 1 query correctly`, () => {
     expect(linkgen(Paths.login, { query: { redirect: Paths.signup } })).toBe(
       `${Paths.login}?redirect=${Paths.signup}`
     );
