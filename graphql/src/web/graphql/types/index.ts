@@ -23,3 +23,7 @@ export interface SignupPayload {
 export interface LoginPayload {
   user: User;
 }
+
+export interface CreateClassCategoryPayload {
+  classCategory: ClassCategory;
+}

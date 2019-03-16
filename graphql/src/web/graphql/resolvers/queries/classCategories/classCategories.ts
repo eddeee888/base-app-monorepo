@@ -4,6 +4,8 @@ const classCategories: QueryResolvers.ClassCategoriesResolver = async (
   parent,
   args,
   ctx
-) => {};
+) => {
+  return await ctx.prisma.classCategories();
+};
 
 export default classCategories;
