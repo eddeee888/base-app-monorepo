@@ -1,4 +1,4 @@
-import Paths from './Paths';
+import { Paths } from './types';
 
 const getPathFromLocation: (location: string) => Paths | null = location => {
   const strippedPath = stripUrlSpecialCharacterIfExists(
@@ -10,14 +10,12 @@ const getPathFromLocation: (location: string) => Paths | null = location => {
   );
   const path = '/' + strippedPath.split('/')[1];
 
-  const resultArray = Object.keys(Paths).filter(key => {
-    const typedKey = key as keyof typeof Paths;
-    return Paths[typedKey] === path;
-  });
+  const resultArray = (Object.keys(Paths) as Array<keyof typeof Paths>).filter(
+    key => Paths[key] === path
+  );
 
   if (resultArray.length > 0) {
-    const resultIndex = resultArray[0] as keyof typeof Paths;
-    return Paths[resultIndex];
+    return Paths[resultArray[0]];
   }
   return null;
 };

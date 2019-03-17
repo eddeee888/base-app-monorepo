@@ -1,5 +1,5 @@
 import linkgen from './linkgen';
-import Paths from './Paths';
+import { Paths } from './types';
 
 describe('linkgen()', () => {
   Object.keys(Paths).forEach(key => {

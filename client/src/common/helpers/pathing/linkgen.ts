@@ -1,12 +1,4 @@
-import Paths from './Paths';
-
-interface QueryOptions {
-  redirect?: Paths;
-}
-
-interface LinkgenOptions {
-  query?: QueryOptions;
-}
+import { LinkgenOptions, Paths, QueryStringOptions } from './types';
 
 type LinkgenFn = (path: Paths, options?: LinkgenOptions) => string;
 
@@ -20,16 +12,18 @@ const linkgen: LinkgenFn = (path, options) => {
   return path + urlParts;
 };
 
-const generateQueryPart = (queryOptions?: QueryOptions): string => {
-  if (!queryOptions) {
+const generateQueryPart = (queryStringOptions?: QueryStringOptions): string => {
+  if (!queryStringOptions) {
     return '';
   }
 
   let result = '?';
 
-  (Object.keys(queryOptions) as Array<keyof QueryOptions>).forEach(queryKey => {
-    result += `${queryKey}=${queryOptions[queryKey]}&`;
-  });
+  (Object.keys(queryStringOptions) as Array<keyof QueryStringOptions>).forEach(
+    queryKey => {
+      result += `${queryKey}=${queryStringOptions[queryKey]}&`;
+    }
+  );
   result = result.substring(0, result.length - 1);
 
   return result;
