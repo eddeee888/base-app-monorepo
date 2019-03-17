@@ -7,7 +7,7 @@ import FormError, { checkIfError } from 'src/common/components/FormError';
 import Link from 'src/common/components/Link';
 import Text from 'src/common/components/Text';
 import TextInput from 'src/common/components/TextInput';
-import { linkgen, Paths } from 'src/common/helpers/pathing';
+import { linkgen, Paths, QueryStringOptions } from 'src/common/helpers/pathing';
 import * as Yup from 'yup';
 
 export type LoginFormikFn = (
@@ -19,6 +19,7 @@ interface Props {
   handleSubmit: LoginFormikFn;
   generalError: string;
   isSubmitting: boolean;
+  queryStringOptions: QueryStringOptions;
 }
 
 const LoginSchema = Yup.object().shape({
@@ -29,7 +30,8 @@ const LoginSchema = Yup.object().shape({
 const LoginFormComponent: React.FunctionComponent<Props> = ({
   handleSubmit,
   generalError,
-  isSubmitting
+  isSubmitting,
+  queryStringOptions
 }) => (
   <Formik<LoginInput>
     initialValues={{ email: '', password: '' }}
@@ -73,7 +75,10 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({
         <FormError error={generalError} display={!!generalError} />
 
         <Text gutterBottom>
-          Don't have an account? <Link to={linkgen(Paths.signup)}>Sign up</Link>
+          Don't have an account?{' '}
+          <Link to={linkgen(Paths.signup, { query: queryStringOptions })}>
+            Sign up
+          </Link>
         </Text>
 
         <Button type="submit" disabled={isSubmitting}>

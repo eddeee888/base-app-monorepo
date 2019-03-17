@@ -1,13 +1,13 @@
 import { css } from 'emotion';
-import React, { useContext } from 'react';
+import React from 'react';
 import { Redirect, RouteComponentProps } from 'react-router';
 import H1 from 'src/common/components/H1';
 import Link from 'src/common/components/Link';
 import Logo from 'src/common/components/Logo';
 import Main from 'src/common/components/Main';
 import Paper from 'src/common/components/Paper';
-import ViewerContext from 'src/common/components/ViewerContext';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
+import useRouteChecker from 'src/common/hooks/useRouteChecker';
 import { breakpoints } from 'src/common/styles/media';
 import LoginForm from './LoginForm';
 
@@ -34,12 +34,15 @@ interface Props {
 }
 
 const Login: React.FunctionComponent<Props> = ({ routerProps }) => {
-  const { viewer } = useContext(ViewerContext);
+  const { viewer, queryStringOptions } = useRouteChecker({ routerProps });
+  const { redirect } = queryStringOptions;
 
   if (viewer) {
-    // TODO: if there's `redirect` in `routerProps.location.search`, redirectthere instead of homepage
-    // TODO: add test
-    return <Redirect to={linkgen(Paths.dashboard)} />;
+    // TODO: add test:
+    // - useRouteChecker
+    // - getQueryStringOptions
+    // - login/signup component w/ query string options
+    return <Redirect to={redirect ? redirect : linkgen(Paths.dashboard)} />;
   }
 
   return (
@@ -52,9 +55,9 @@ const Login: React.FunctionComponent<Props> = ({ routerProps }) => {
             </Link>
           </div>
           <H1 align="center" variant="h2">
-            Login
+            Log in {redirect ? 'to continue' : ''}
           </H1>
-          <LoginForm />
+          <LoginForm queryStringOptions={queryStringOptions} />
         </Paper>
       </div>
     </Main>

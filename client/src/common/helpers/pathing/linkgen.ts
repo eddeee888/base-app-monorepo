@@ -6,18 +6,20 @@ const linkgen: LinkgenFn = (path, options) => {
   let urlParts = '';
 
   if (options) {
-    urlParts += generateQueryPart(options.query);
+    urlParts += generateQueryString(options.query);
   }
 
   return path + urlParts;
 };
 
-const generateQueryPart = (queryStringOptions?: QueryStringOptions): string => {
+const generateQueryString = (
+  queryStringOptions?: QueryStringOptions
+): string => {
   if (!queryStringOptions) {
     return '';
   }
 
-  let result = '?';
+  let result: string = '?';
 
   (Object.keys(queryStringOptions) as Array<keyof QueryStringOptions>).forEach(
     queryKey => {
