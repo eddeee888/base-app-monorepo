@@ -36,7 +36,7 @@ interface Props {
 
 const Signup: React.FunctionComponent<Props> = ({ routerProps }) => {
   const { viewer } = useContext(ViewerContext);
-  const { queryStringOptions } = useRouterProps({ routerProps });
+  const { queryStringOptions } = useRouterProps(routerProps);
   const { redirect } = queryStringOptions;
 
   if (viewer) {

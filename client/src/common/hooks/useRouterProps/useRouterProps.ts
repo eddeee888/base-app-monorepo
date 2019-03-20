@@ -4,25 +4,17 @@ import {
   QueryStringOptions
 } from 'src/common/helpers/pathing';
 
-type Param =
-  | {
-      routerProps?: RouteComponentProps;
-    }
-  | undefined;
-
 type UseRouterPropsFn = (
-  param: Param
+  routerProps?: RouteComponentProps
 ) => {
   queryStringOptions: QueryStringOptions;
 };
 
-const useRouterProps: UseRouterPropsFn = param => {
+const useRouterProps: UseRouterPropsFn = routerProps => {
   let queryStringOptions: QueryStringOptions = {};
 
-  if (param && param.routerProps) {
-    queryStringOptions = getQueryStringOptions(
-      param.routerProps.location.search
-    );
+  if (routerProps) {
+    queryStringOptions = getQueryStringOptions(routerProps.location.search);
   }
 
   return {

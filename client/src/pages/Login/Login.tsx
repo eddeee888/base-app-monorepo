@@ -36,12 +36,11 @@ interface Props {
 
 const Login: React.FunctionComponent<Props> = ({ routerProps }) => {
   const { viewer } = useContext(ViewerContext);
-  const { queryStringOptions } = useRouterProps({ routerProps });
+  const { queryStringOptions } = useRouterProps(routerProps);
   const { redirect } = queryStringOptions;
 
   if (viewer) {
     // TODO: add test:
-    // - useRouterProps
     // - login/signup component w/ query string options
     return <Redirect to={redirect ? redirect : linkgen(Paths.dashboard)} />;
   }
