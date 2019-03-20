@@ -1,13 +1,14 @@
 import { css } from 'emotion';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Redirect, RouteComponentProps } from 'react-router';
 import H1 from 'src/common/components/H1';
 import Link from 'src/common/components/Link';
 import Logo from 'src/common/components/Logo';
 import Main from 'src/common/components/Main';
 import Paper from 'src/common/components/Paper';
+import ViewerContext from 'src/common/components/ViewerContext';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
-import useRouteChecker from 'src/common/hooks/useRouteChecker';
+import useRouterProps from 'src/common/hooks/useRouterProps';
 import { breakpoints } from 'src/common/styles/media';
 import SignupForm from './SignupForm';
 
@@ -34,7 +35,8 @@ interface Props {
 }
 
 const Signup: React.FunctionComponent<Props> = ({ routerProps }) => {
-  const { viewer, queryStringOptions } = useRouteChecker({ routerProps });
+  const { viewer } = useContext(ViewerContext);
+  const { queryStringOptions } = useRouterProps({ routerProps });
   const { redirect } = queryStringOptions;
 
   if (viewer) {

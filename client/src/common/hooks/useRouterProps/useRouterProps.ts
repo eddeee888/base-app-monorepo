@@ -1,7 +1,8 @@
-import { useContext } from 'react';
 import { RouteComponentProps } from 'react-router';
-import ViewerContext, { Viewer } from '../components/ViewerContext';
-import { getQueryStringOptions, QueryStringOptions } from '../helpers/pathing';
+import {
+  getQueryStringOptions,
+  QueryStringOptions
+} from 'src/common/helpers/pathing';
 
 type Param =
   | {
@@ -9,15 +10,13 @@ type Param =
     }
   | undefined;
 
-type UseRouteCheckerFn = (
+type UseRouterPropsFn = (
   param: Param
 ) => {
-  viewer: Viewer | null;
   queryStringOptions: QueryStringOptions;
 };
 
-const useRouteChecker: UseRouteCheckerFn = param => {
-  const { viewer } = useContext(ViewerContext);
+const useRouterProps: UseRouterPropsFn = param => {
   let queryStringOptions: QueryStringOptions = {};
 
   if (param && param.routerProps) {
@@ -27,9 +26,8 @@ const useRouteChecker: UseRouteCheckerFn = param => {
   }
 
   return {
-    viewer,
     queryStringOptions
   };
 };
 
-export default useRouteChecker;
+export default useRouterProps;
