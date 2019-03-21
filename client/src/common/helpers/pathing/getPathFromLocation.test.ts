@@ -1,10 +1,6 @@
-import { getPathFromLocation, linkgen, Paths } from './pathing';
+import getPathFromLocation from './getPathFromLocation';
 
-describe('linkgen()', () => {
-  it('linkgen should generate a path', () => {
-    expect(linkgen(Paths.login)).not.toBeFalsy();
-  });
-
+describe('getPathFromLocation()', () => {
   it('getPathFromLocation should strip ? &', () => {
     const testString = '/signup?param1=100&param2=200';
     const result = getPathFromLocation(testString);
