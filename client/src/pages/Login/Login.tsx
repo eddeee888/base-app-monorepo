@@ -41,7 +41,7 @@ const Login: React.FunctionComponent<Props> = ({ routerProps }) => {
 
   if (viewer) {
     // TODO: add test:
-    // - login/signup component w/ query string options
+    // - login/signup component w/ query string options.. update to react router 5 first!
     return <Redirect to={redirect ? redirect : linkgen(Paths.dashboard)} />;
   }
 
