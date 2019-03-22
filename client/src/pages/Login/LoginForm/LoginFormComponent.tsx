@@ -31,61 +31,63 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({
   handleSubmit,
   generalError,
   isSubmitting
-}) => (
-  <Formik<LoginInput>
-    initialValues={{ email: '', password: '' }}
-    validationSchema={LoginSchema}
-    onSubmit={handleSubmit}
-  >
-    {({ errors, touched }) => (
-      <Form>
-        <Grid container>
-          <Grid item xs={12}>
-            <Field
-              name="email"
-              render={({ field }: FieldProps) => (
-                <TextInput
-                  {...field}
-                  label="Email"
-                  error={checkIfError(errors.email, touched.email)}
-                />
-              )}
-            />
-            <FormError error={errors.email} display={touched.email} />
+}) => {
+  const query = useUrlQuery();
+
+  return (
+    <Formik<LoginInput>
+      initialValues={{ email: '', password: '' }}
+      validationSchema={LoginSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ errors, touched }) => (
+        <Form>
+          <Grid container>
+            <Grid item xs={12}>
+              <Field
+                name="email"
+                render={({ field }: FieldProps) => (
+                  <TextInput
+                    {...field}
+                    label="Email"
+                    error={checkIfError(errors.email, touched.email)}
+                  />
+                )}
+              />
+              <FormError error={errors.email} display={touched.email} />
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid container>
-          <Grid item xs={12}>
-            <Field
-              name="password"
-              render={({ field }: FieldProps) => (
-                <TextInput
-                  {...field}
-                  type="password"
-                  label="Password"
-                  error={checkIfError(errors.password, touched.password)}
-                />
-              )}
-            />
-            <FormError error={errors.password} display={touched.password} />
+          <Grid container>
+            <Grid item xs={12}>
+              <Field
+                name="password"
+                render={({ field }: FieldProps) => (
+                  <TextInput
+                    {...field}
+                    type="password"
+                    label="Password"
+                    error={checkIfError(errors.password, touched.password)}
+                  />
+                )}
+              />
+              <FormError error={errors.password} display={touched.password} />
+            </Grid>
           </Grid>
-        </Grid>
 
-        <FormError error={generalError} display={!!generalError} />
+          <FormError error={generalError} display={!!generalError} />
 
-        <Text gutterBottom>
-          Don't have an account?{' '}
-          <Link to={linkgen(Paths.signup, { query: useUrlQuery() })}>
-            Sign up
-          </Link>
-        </Text>
+          <Text gutterBottom>
+            Don't have an account?{' '}
+            <Link to={linkgen(Paths.signup, { query })}>Sign up</Link>
+          </Text>
 
-        <Button type="submit" disabled={isSubmitting}>
-          Log in
-        </Button>
-      </Form>
-    )}
-  </Formik>
-);
+          <Button type="submit" disabled={isSubmitting}>
+            Log in
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
+};
 
 export default LoginFormComponent;

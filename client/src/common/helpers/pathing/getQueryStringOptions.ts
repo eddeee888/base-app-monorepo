@@ -1,8 +1,4 @@
-import {
-  GetQueryStringOptionsFn,
-  QueryStringKeys,
-  QueryStringOptions
-} from './types';
+import { GetQueryStringOptionsFn, QueryStringKeys, UrlQuery } from './types';
 
 const isQueryStringKey = (key: string): key is keyof typeof QueryStringKeys => {
   const found = Object.keys(QueryStringKeys).filter(qsKey => qsKey === key);
@@ -10,7 +6,7 @@ const isQueryStringKey = (key: string): key is keyof typeof QueryStringKeys => {
 };
 
 const getQueryStringOptions: GetQueryStringOptionsFn = queryString => {
-  const result: QueryStringOptions = {};
+  const result: UrlQuery = {};
 
   const stripped = queryString.replace('?', '');
   const optionsString = stripped.split('&');

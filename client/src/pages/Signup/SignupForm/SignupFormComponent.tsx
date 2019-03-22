@@ -40,6 +40,7 @@ const SignupFormComponent = ({
   loading,
   generalError
 }: Props) => {
+  const query = useUrlQuery();
   return (
     <Formik<SignupInput>
       initialValues={{
@@ -119,9 +120,7 @@ const SignupFormComponent = ({
 
           <Text gutterBottom>
             Already have an account?{' '}
-            <Link to={linkgen(Paths.login, { query: useUrlQuery() })}>
-              Log in
-            </Link>
+            <Link to={linkgen(Paths.login, { query })}>Log in</Link>
           </Text>
 
           <Button type="submit" disabled={loading}>
