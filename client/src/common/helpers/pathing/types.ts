@@ -11,12 +11,10 @@ export enum QueryStringKeys {
   redirect = 'redirect'
 }
 
-export type QueryStringOptions = { [key in QueryStringKeys]?: string };
+export type UrlQuery = { [key in QueryStringKeys]?: string };
 
 export interface LinkgenOptions {
-  query?: QueryStringOptions;
+  query?: UrlQuery;
 }
 
-export type GetQueryStringOptionsFn = (
-  queryString: string
-) => QueryStringOptions;
+export type GetQueryStringOptionsFn = (queryString: string) => UrlQuery;

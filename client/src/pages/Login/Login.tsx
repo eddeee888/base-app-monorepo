@@ -8,7 +8,7 @@ import Main from 'src/common/components/Main';
 import Paper from 'src/common/components/Paper';
 import ViewerContext from 'src/common/components/ViewerContext';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
-import useRouterProps from 'src/common/hooks/useRouterProps';
+import useUrlQuery from 'src/common/hooks/useUrlQuery';
 import { breakpoints } from 'src/common/styles/media';
 import LoginForm from './LoginForm';
 
@@ -36,8 +36,7 @@ interface Props {
 
 const Login: React.FunctionComponent<Props> = ({ routerProps }) => {
   const { viewer } = useContext(ViewerContext);
-  const { queryStringOptions } = useRouterProps(routerProps);
-  const { redirect } = queryStringOptions;
+  const { redirect } = useUrlQuery();
 
   if (viewer) {
     // TODO: add test:
@@ -57,7 +56,7 @@ const Login: React.FunctionComponent<Props> = ({ routerProps }) => {
           <H1 align="center" variant="h2">
             Log in {redirect ? 'to continue' : ''}
           </H1>
-          <LoginForm queryStringOptions={queryStringOptions} />
+          <LoginForm />
         </Paper>
       </div>
     </Main>

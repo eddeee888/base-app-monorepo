@@ -12,8 +12,9 @@ import FormError, { checkIfError } from 'src/common/components/FormError';
 import Link from 'src/common/components/Link';
 import Text from 'src/common/components/Text';
 import TextInput from 'src/common/components/TextInput';
-import { linkgen, Paths, QueryStringOptions } from 'src/common/helpers/pathing';
+import { linkgen, Paths } from 'src/common/helpers/pathing';
 import { spacingPx } from 'src/common/helpers/spacing';
+import useUrlQuery from 'src/common/hooks/useUrlQuery';
 import * as Yup from 'yup';
 
 export type SignupFormikFn = (
@@ -32,14 +33,12 @@ interface Props {
   handleSubmit: SignupFormikFn;
   loading: boolean;
   generalError: string;
-  queryStringOptions: QueryStringOptions;
 }
 
 const SignupFormComponent = ({
   handleSubmit,
   loading,
-  generalError,
-  queryStringOptions
+  generalError
 }: Props) => {
   return (
     <Formik<SignupInput>
@@ -120,7 +119,7 @@ const SignupFormComponent = ({
 
           <Text gutterBottom>
             Already have an account?{' '}
-            <Link to={linkgen(Paths.login, { query: queryStringOptions })}>
+            <Link to={linkgen(Paths.login, { query: useUrlQuery() })}>
               Log in
             </Link>
           </Text>

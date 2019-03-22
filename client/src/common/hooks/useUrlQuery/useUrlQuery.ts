@@ -1,0 +1,10 @@
+import { getQueryStringOptions, UrlQuery } from 'src/common/helpers/pathing';
+import useReactRouter from 'use-react-router';
+
+function useUrlQuery(): UrlQuery {
+  const { location } = useReactRouter();
+
+  return getQueryStringOptions(location.search);
+}
+
+export default useUrlQuery;

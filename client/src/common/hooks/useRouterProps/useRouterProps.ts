@@ -1,17 +1,14 @@
 import { RouteComponentProps } from 'react-router';
-import {
-  getQueryStringOptions,
-  QueryStringOptions
-} from 'src/common/helpers/pathing';
+import { getQueryStringOptions, UrlQuery } from 'src/common/helpers/pathing';
 
 type UseRouterPropsFn = (
   routerProps?: RouteComponentProps
 ) => {
-  queryStringOptions: QueryStringOptions;
+  queryStringOptions: UrlQuery;
 };
 
 const useRouterProps: UseRouterPropsFn = routerProps => {
-  let queryStringOptions: QueryStringOptions = {};
+  let queryStringOptions: UrlQuery = {};
 
   if (routerProps) {
     queryStringOptions = getQueryStringOptions(routerProps.location.search);
