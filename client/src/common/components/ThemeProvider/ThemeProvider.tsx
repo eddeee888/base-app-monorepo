@@ -23,7 +23,10 @@ const theme = createMuiTheme({
     fontFamily: [primaryFont, '"Helvetica Neue"', 'Arial', 'sans-serif'].join(
       ','
     ),
-    useNextVariants: true
+    useNextVariants: true,
+    h1: {
+      fontSize: '4.25rem'
+    }
   }
 });
 

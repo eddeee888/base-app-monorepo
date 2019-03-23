@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import { Field, FieldProps, Form, Formik, FormikActions } from 'formik';
 import React from 'react';
 import { LoginInput } from 'src/__generated__/globalTypes';

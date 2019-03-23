@@ -1,7 +1,8 @@
 import { css } from 'emotion';
 import React, { useContext } from 'react';
-import { Redirect, RouteComponentProps } from 'react-router';
+import { Redirect } from 'react-router';
 import H1 from 'src/common/components/H1';
+import H2 from 'src/common/components/H2';
 import Link from 'src/common/components/Link';
 import Logo from 'src/common/components/Logo';
 import Main from 'src/common/components/Main';
@@ -30,17 +31,11 @@ const paperContainerClassName = css`
   align-items: center;
 `;
 
-interface Props {
-  routerProps: RouteComponentProps;
-}
-
-const Login: React.FunctionComponent<Props> = ({ routerProps }) => {
+const Login: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
   const { redirect } = useUrlQuery();
 
   if (viewer) {
-    // TODO: add test:
-    // - login/signup component w/ query string options.. update to react router 5 first!
     return <Redirect to={redirect ? redirect : linkgen(Paths.dashboard)} />;
   }
 
@@ -54,8 +49,9 @@ const Login: React.FunctionComponent<Props> = ({ routerProps }) => {
             </Link>
           </div>
           <H1 align="center" variant="h2">
-            Log in {redirect ? 'to continue' : ''}
+            Log in
           </H1>
+          {redirect && <H2 align="center">to continue</H2>}
           <LoginForm />
         </Paper>
       </div>
