@@ -8,58 +8,72 @@ import Link from 'src/common/components/Link';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
 import SignupFormComponent from './SignupFormComponent';
 
-function assertFieldName(
-  reactWrapper: ReactWrapper,
+const props = {
+  handleSubmit: jest.fn(),
+  loading: false,
+  generalFormError: {
+    error: '',
+    display: false
+  }
+};
+
+const assertFieldName = (
+  wrapper: ReactWrapper,
   fieldName: string,
   count: number
-) {
+) => {
   expect(
-    reactWrapper
-      .find(Field)
-      .filterWhere(field => field.prop('name') === fieldName)
+    wrapper.find(Field).filterWhere(field => field.prop('name') === fieldName)
   ).toHaveLength(count);
-}
+};
+
+const assertCommonElements = (wrapper: ReactWrapper) => {
+  expect(wrapper.find(Formik)).toHaveLength(1);
+  expect(wrapper.find(Formik).prop('onSubmit')).toBe(props.handleSubmit);
+
+  expect(wrapper.find(Field)).toHaveLength(4);
+  assertFieldName(wrapper, 'email', 1);
+  assertFieldName(wrapper, 'firstName', 1);
+  assertFieldName(wrapper, 'lastName', 1);
+  assertFieldName(wrapper, 'password', 1);
+
+  expect(wrapper.find(FormError)).toHaveLength(5);
+
+  expect(
+    wrapper.find(Button).filterWhere(button => button.prop('type') === 'submit')
+  ).toHaveLength(1);
+
+  expect(wrapper.find(Link)).toHaveLength(1);
+};
 
 describe('<SignupFormComponent />', () => {
-  const props = {
-    handleSubmit: jest.fn(),
-    loading: false,
-    generalFormError: {
-      error: '',
-      display: false
-    }
-  };
-
-  it('should render correct structure', () => {
+  it('should render correct structure and a link to /login', () => {
     const wrapper = mount(
       <StaticRouter context={{}}>
         <SignupFormComponent {...props} />
       </StaticRouter>
     );
-
-    expect(wrapper.find(Formik)).toHaveLength(1);
-    expect(wrapper.find(Formik).prop('onSubmit')).toBe(props.handleSubmit);
-
-    expect(wrapper.find(Field)).toHaveLength(4);
-    assertFieldName(wrapper, 'email', 1);
-    assertFieldName(wrapper, 'firstName', 1);
-    assertFieldName(wrapper, 'lastName', 1);
-    assertFieldName(wrapper, 'password', 1);
-
-    expect(wrapper.find(FormError)).toHaveLength(5);
-
-    expect(
-      wrapper
-        .find(Button)
-        .filterWhere(button => button.prop('type') === 'submit')
-    ).toHaveLength(1);
-
-    expect(wrapper.find(Link)).toHaveLength(1);
+    assertCommonElements(wrapper);
     expect(wrapper.find(Link).prop('to')).toBe(linkgen(Paths.login));
   });
 
+  it('should render correct structure and a link to /login with redirect query that matches the one from url', () => {
+    const wrapper = mount(
+      <StaticRouter
+        location={{ search: '?redirect=/redirect-to-this-path' }}
+        context={{}}
+      >
+        <SignupFormComponent {...props} />
+      </StaticRouter>
+    );
+    assertCommonElements(wrapper);
+    expect(wrapper.find(Link).prop('to')).toBe(
+      linkgen(Paths.login) + '?redirect=/redirect-to-this-path'
+    );
+  });
+
   it('should show a general error if is passed in', () => {
-    const mounted = mount(
+    const wrapper = mount(
       <StaticRouter context={{}}>
         <SignupFormComponent
           {...props}
@@ -67,19 +81,19 @@ describe('<SignupFormComponent />', () => {
         />
       </StaticRouter>
     );
-
-    expect(mounted.text()).toMatch(/OMG there's an error!/);
+    assertCommonElements(wrapper);
+    expect(wrapper.text()).toMatch(/OMG there's an error!/);
   });
 
   it('should disable sign up button if loading is passed in', () => {
-    const mounted = mount(
+    const wrapper = mount(
       <StaticRouter context={{}}>
         <SignupFormComponent {...props} loading={true} />
       </StaticRouter>
     );
 
     expect(
-      mounted.find(`button[type='submit']`).filterWhere(button => {
+      wrapper.find(`button[type='submit']`).filterWhere(button => {
         return button.prop('disabled') === true;
       })
     ).toHaveLength(1);

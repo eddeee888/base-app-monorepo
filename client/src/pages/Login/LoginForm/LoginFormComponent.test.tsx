@@ -24,6 +24,12 @@ describe('<LoginFormComponent />', () => {
     ).toHaveLength(1);
     expect(wrapper.find(`button[type='submit']`).text()).toBe('Log in');
   };
+  const assertCommonElements = (wrapper: ReactWrapper) => {
+    expect(wrapper.find(Formik).props().onSubmit).toBe(handleSubmit);
+    expect(wrapper.find('form')).toHaveLength(1);
+    expect(wrapper.find(`input[name='email']`)).toHaveLength(1);
+    expect(wrapper.find(`input[name='password']`)).toHaveLength(1);
+  };
 
   it('should contain form, email, password, submit and link to /signup', () => {
     const wrapper = mount(
@@ -31,12 +37,25 @@ describe('<LoginFormComponent />', () => {
         <LoginFormComponent {...defaultProps} />
       </StaticRouter>
     );
-
-    expect(wrapper.find('form')).toHaveLength(1);
-    expect(wrapper.find(`input[name='email']`)).toHaveLength(1);
-    expect(wrapper.find(`input[name='password']`)).toHaveLength(1);
-    expect(wrapper.find(`a[href='${Paths.signup}']`)).toHaveLength(1);
+    assertCommonElements(wrapper);
     assertButton(wrapper, false);
+    expect(wrapper.find(`a[href='${Paths.signup}']`)).toHaveLength(1);
+  });
+
+  it('should have link to /signup with redirect query if it exists in url', () => {
+    const wrapper = mount(
+      <StaticRouter
+        location={{ search: '?redirect=/redirect-to-this-path' }}
+        context={{}}
+      >
+        <LoginFormComponent {...defaultProps} />
+      </StaticRouter>
+    );
+    assertCommonElements(wrapper);
+    assertButton(wrapper, false);
+    expect(
+      wrapper.find(`a[href='${Paths.signup}?redirect=/edirect-to-this-path']`)
+    ).toHaveLength(1);
   });
 
   it('should display generalError if passed in', () => {
@@ -51,7 +70,8 @@ describe('<LoginFormComponent />', () => {
         />
       </StaticRouter>
     );
-
+    assertCommonElements(wrapper);
+    assertButton(wrapper, false);
     expect(wrapper.text()).toMatch(/OMG! there has been some error!/);
   });
 
@@ -62,16 +82,7 @@ describe('<LoginFormComponent />', () => {
       </StaticRouter>
     );
 
+    assertCommonElements(wrapper);
     assertButton(wrapper, true);
-  });
-
-  it('should pass handleSubmit to Formik', () => {
-    const wrapper = mount(
-      <StaticRouter context={{}}>
-        <LoginFormComponent {...defaultProps} />
-      </StaticRouter>
-    );
-
-    expect(wrapper.find(Formik).props().onSubmit).toBe(handleSubmit);
   });
 });

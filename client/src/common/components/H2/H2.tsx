@@ -5,10 +5,10 @@ interface Props extends TypographyProps {
   children: React.ReactNode;
 }
 
-const H1: React.FunctionComponent<Props> = ({ children, ...props }) => (
-  <Typography gutterBottom variant="h1" {...props} component="h1">
+const H2: React.FunctionComponent<Props> = ({ children, ...props }) => (
+  <Typography gutterBottom variant="h2" {...props} component="h2">
     {children}
   </Typography>
 );
 
-export default H1;
+export default H2;
