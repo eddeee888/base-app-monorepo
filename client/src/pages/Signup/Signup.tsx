@@ -39,6 +39,7 @@ const Signup: React.FunctionComponent<Props> = ({ routerProps }) => {
   const { redirect } = useUrlQuery();
 
   if (viewer) {
+    // TOTEST: test with UrlQuery
     return <Redirect to={redirect ? redirect : linkgen(Paths.home)} />;
   }
 
