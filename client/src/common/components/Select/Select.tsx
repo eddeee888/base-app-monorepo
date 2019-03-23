@@ -3,8 +3,6 @@ import TextField, { OutlinedTextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
 import Omit from 'src/common/helpers/typings/Omit';
 
-// TOTEST
-
 interface SelectOptions {
   value: string | number;
   label: string;
