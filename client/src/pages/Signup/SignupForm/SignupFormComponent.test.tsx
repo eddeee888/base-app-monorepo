@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import { mount, ReactWrapper } from 'enzyme';
 import { Field, Formik } from 'formik';
 import React from 'react';
@@ -46,14 +47,12 @@ describe('<SignupFormComponent />', () => {
     assertFieldName(wrapper, 'password', 1);
 
     expect(wrapper.find(FormError)).toHaveLength(5);
-    wrapper.find(FormError).forEach(formError => {
-      expect(formError.props()).toEqual({
-        error: undefined,
-        display: undefined
-      });
-    });
 
-    expect(wrapper.find('submit')).toHaveLength(1);
+    expect(
+      wrapper
+        .find(Button)
+        .filterWhere(button => button.prop('type') === 'submit')
+    ).toHaveLength(1);
 
     expect(wrapper.find(Link)).toHaveLength(1);
     expect(wrapper.find(Link).prop('to')).toBe(linkgen(Paths.login));
