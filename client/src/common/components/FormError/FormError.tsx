@@ -1,7 +1,7 @@
 import React from 'react';
 import Text from 'src/common/components/Text';
 
-interface Props {
+export interface FormErrorProps {
   error?: string;
   display?: boolean;
 }
@@ -15,7 +15,10 @@ export const checkIfError: CheckIfErrorFn = (error, touched) => {
   return false;
 };
 
-const FormError: React.FunctionComponent<Props> = ({ error, display }) => {
+const FormError: React.FunctionComponent<FormErrorProps> = ({
+  error,
+  display
+}) => {
   if (error && display) {
     return (
       <Text error variant="body2">

@@ -8,7 +8,10 @@ import { Field, FieldProps, Form, Formik, FormikActions } from 'formik';
 import React from 'react';
 import { SignupInput } from 'src/__generated__/globalTypes';
 import Button from 'src/common/components/Button';
-import FormError, { checkIfError } from 'src/common/components/FormError';
+import FormError, {
+  checkIfError,
+  FormErrorProps
+} from 'src/common/components/FormError';
 import Link from 'src/common/components/Link';
 import Text from 'src/common/components/Text';
 import TextInput from 'src/common/components/TextInput';
@@ -32,13 +35,13 @@ const SignupSchema = Yup.object().shape({
 interface Props {
   handleSubmit: SignupFormikFn;
   loading: boolean;
-  generalError: string;
+  generalFormError: FormErrorProps;
 }
 
 const SignupFormComponent = ({
   handleSubmit,
   loading,
-  generalError
+  generalFormError
 }: Props) => {
   const query = useUrlQuery();
   return (
@@ -116,7 +119,7 @@ const SignupFormComponent = ({
             </Grid>
           </Grid>
 
-          <FormError error={generalError} display={!!generalError} />
+          <FormError {...generalFormError} />
 
           <Text gutterBottom>
             Already have an account?{' '}

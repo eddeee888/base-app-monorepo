@@ -3,7 +3,10 @@ import { Field, FieldProps, Form, Formik, FormikActions } from 'formik';
 import React from 'react';
 import { LoginInput } from 'src/__generated__/globalTypes';
 import Button from 'src/common/components/Button';
-import FormError, { checkIfError } from 'src/common/components/FormError';
+import FormError, {
+  checkIfError,
+  FormErrorProps
+} from 'src/common/components/FormError';
 import Link from 'src/common/components/Link';
 import Text from 'src/common/components/Text';
 import TextInput from 'src/common/components/TextInput';
@@ -18,7 +21,7 @@ export type LoginFormikFn = (
 
 interface Props {
   handleSubmit: LoginFormikFn;
-  generalError: string;
+  generalFormError: FormErrorProps;
   isSubmitting: boolean;
 }
 
@@ -29,7 +32,7 @@ const LoginSchema = Yup.object().shape({
 
 const LoginFormComponent: React.FunctionComponent<Props> = ({
   handleSubmit,
-  generalError,
+  generalFormError,
   isSubmitting
 }) => {
   const query = useUrlQuery();
@@ -74,7 +77,7 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({
             </Grid>
           </Grid>
 
-          <FormError error={generalError} display={!!generalError} />
+          <FormError {...generalFormError} />
 
           <Text gutterBottom>
             Don't have an account?{' '}

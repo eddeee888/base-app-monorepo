@@ -23,7 +23,10 @@ describe('<SignupFormComponent />', () => {
   const props = {
     handleSubmit: jest.fn(),
     loading: false,
-    generalError: ''
+    generalFormError: {
+      error: '',
+      display: false
+    }
   };
 
   it('should render correct structure', () => {
@@ -61,7 +64,7 @@ describe('<SignupFormComponent />', () => {
       <StaticRouter context={{}}>
         <SignupFormComponent
           {...props}
-          generalError={`OMG there's an error!`}
+          generalFormError={{ error: `OMG there's an error!`, display: true }}
         />
       </StaticRouter>
     );
