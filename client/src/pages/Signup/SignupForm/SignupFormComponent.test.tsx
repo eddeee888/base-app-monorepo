@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import { mount, ReactWrapper } from 'enzyme';
 import { Field, Formik } from 'formik';
 import React from 'react';

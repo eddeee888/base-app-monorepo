@@ -7,7 +7,7 @@ import Paper from 'src/common/components/Paper';
 import ViewerContext from 'src/common/components/ViewerContext';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
 import { breakpoints } from 'src/common/styles/media';
-import ClassGeneralDetails from 'src/pages/CreateClass/ClassGeneralDetails';
+import CreateClassForm from './CreateClassForm';
 
 const paperContainerClassName = css`
   max-width: ${breakpoints.small}px;
@@ -20,7 +20,7 @@ const paperContainerClassName = css`
 
 const CreateClass: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
-
+  // TOTEST
   if (!viewer) {
     return (
       <Redirect
@@ -34,7 +34,7 @@ const CreateClass: React.FunctionComponent = () => {
       <H1 align="center">Create a class</H1>
       <div className={paperContainerClassName}>
         <Paper>
-          <ClassGeneralDetails />
+          <CreateClassForm />
         </Paper>
       </div>
     </Main>
