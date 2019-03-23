@@ -8,7 +8,7 @@ import Main from 'src/common/components/Main';
 import Paper from 'src/common/components/Paper';
 import ViewerContext from 'src/common/components/ViewerContext';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
-import useRouterProps from 'src/common/hooks/useRouterProps';
+import useUrlQuery from 'src/common/hooks/useUrlQuery';
 import { breakpoints } from 'src/common/styles/media';
 import SignupForm from './SignupForm';
 
@@ -36,8 +36,7 @@ interface Props {
 
 const Signup: React.FunctionComponent<Props> = ({ routerProps }) => {
   const { viewer } = useContext(ViewerContext);
-  const { queryStringOptions } = useRouterProps(routerProps);
-  const { redirect } = queryStringOptions;
+  const { redirect } = useUrlQuery();
 
   if (viewer) {
     return <Redirect to={redirect ? redirect : linkgen(Paths.home)} />;
@@ -55,7 +54,7 @@ const Signup: React.FunctionComponent<Props> = ({ routerProps }) => {
           <H1 align="center" variant="h2">
             Sign up {redirect ? 'to continue' : ''}
           </H1>
-          <SignupForm queryStringOptions={queryStringOptions} />
+          <SignupForm />
         </Paper>
       </div>
     </Main>

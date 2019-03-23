@@ -1,97 +1,69 @@
-import { mount, shallow, ShallowWrapper } from 'enzyme';
-import { Field } from 'formik';
+import { Button } from '@material-ui/core';
+import { mount, ReactWrapper } from 'enzyme';
+import { Field, Formik } from 'formik';
 import React from 'react';
 import { StaticRouter } from 'react-router';
-import Button from 'src/common/components/Button';
 import FormError from 'src/common/components/FormError';
 import Link from 'src/common/components/Link';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
 import SignupFormComponent from './SignupFormComponent';
 
-describe('<SignupForm />', () => {
-  const handleSubmit = jest.fn();
-  let wrapper: ShallowWrapper;
-  let fields: ShallowWrapper;
-  let errorFields: ShallowWrapper;
-  let submitButton: ShallowWrapper;
-  let linkToLogin: ShallowWrapper;
-  let emailField: ShallowWrapper;
-  let emailErrorField: ShallowWrapper;
-  let firstNameField: ShallowWrapper;
-  let firstNameErrorField: ShallowWrapper;
-  let lastNameField: ShallowWrapper;
-  let lastNameErrorField: ShallowWrapper;
-  let passwordField: ShallowWrapper;
-  let passwordErrorField: ShallowWrapper;
+function assertFieldName(
+  reactWrapper: ReactWrapper,
+  fieldName: string,
+  count: number
+) {
+  expect(
+    reactWrapper
+      .find(Field)
+      .filterWhere(field => field.prop('name') === fieldName)
+  ).toHaveLength(count);
+}
 
-  beforeEach(() => {
-    wrapper = shallow(
-      <SignupFormComponent
-        handleSubmit={handleSubmit}
-        loading={false}
-        generalError={''}
-      />
-    );
-    fields = wrapper.dive().find(Field);
-    errorFields = wrapper.dive().find(FormError);
-    submitButton = wrapper.dive().find(Button);
-    linkToLogin = wrapper.dive().find(Link) as any;
-    emailField = fields.at(0);
-    emailErrorField = errorFields.at(0);
-    firstNameField = fields.at(1);
-    firstNameErrorField = errorFields.at(1);
-    lastNameField = fields.at(2);
-    lastNameErrorField = errorFields.at(2);
-    passwordField = fields.at(3);
-    passwordErrorField = errorFields.at(3);
-  });
+describe('<SignupFormComponent />', () => {
+  const props = {
+    handleSubmit: jest.fn(),
+    loading: false,
+    generalFormError: {
+      error: '',
+      display: false
+    }
+  };
 
   it('should render correct structure', () => {
-    expect(fields).toHaveLength(4);
-    expect(emailField.prop('name')).toBe('email');
-    expect(firstNameField.prop('name')).toBe('firstName');
-    expect(lastNameField.prop('name')).toBe('lastName');
-    expect(passwordField.prop('name')).toBe('password');
+    const wrapper = mount(
+      <StaticRouter context={{}}>
+        <SignupFormComponent {...props} />
+      </StaticRouter>
+    );
 
-    expect(errorFields).toHaveLength(5);
-    expect(emailErrorField.props()).toEqual({
-      error: undefined,
-      touched: undefined
-    });
-    expect(firstNameErrorField.props()).toEqual({
-      error: undefined,
-      touched: undefined
-    });
-    expect(lastNameErrorField.props()).toEqual({
-      error: undefined,
-      touched: undefined
-    });
-    expect(passwordErrorField.props()).toEqual({
-      error: undefined,
-      touched: undefined
-    });
+    expect(wrapper.find(Formik)).toHaveLength(1);
+    expect(wrapper.find(Formik).prop('onSubmit')).toBe(props.handleSubmit);
 
-    expect(submitButton).toHaveLength(1);
-    expect(submitButton.prop('type')).toBe('submit');
+    expect(wrapper.find(Field)).toHaveLength(4);
+    assertFieldName(wrapper, 'email', 1);
+    assertFieldName(wrapper, 'firstName', 1);
+    assertFieldName(wrapper, 'lastName', 1);
+    assertFieldName(wrapper, 'password', 1);
 
-    expect(linkToLogin).toHaveLength(1);
-    expect(linkToLogin.prop('to')).toBe(linkgen(Paths.login));
-  });
+    expect(wrapper.find(FormError)).toHaveLength(5);
 
-  it('should call handleSubmit if Formik onSubmit is called', () => {
-    const formikInstance = wrapper.dive().instance();
-    // @ts-ignore:
-    formikInstance.props.onSubmit();
-    expect(handleSubmit).toHaveBeenCalledTimes(1);
+    expect(
+      wrapper
+        .find(Button)
+        .filterWhere(button => button.prop('type') === 'submit')
+    ).toHaveLength(1);
+
+    expect(wrapper.find(Link)).toHaveLength(1);
+    expect(wrapper.find(Link).prop('to')).toBe(linkgen(Paths.login));
   });
 
   it('should show a general error if is passed in', () => {
     const mounted = mount(
       <StaticRouter context={{}}>
         <SignupFormComponent
-          handleSubmit={handleSubmit}
-          loading={false}
-          generalError={`OMG there's an error!`}
+          {...props}
+          generalFormError={{ error: `OMG there's an error!`, display: true }}
         />
       </StaticRouter>
     );
@@ -102,11 +74,7 @@ describe('<SignupForm />', () => {
   it('should disable sign up button if loading is passed in', () => {
     const mounted = mount(
       <StaticRouter context={{}}>
-        <SignupFormComponent
-          handleSubmit={handleSubmit}
-          loading={true}
-          generalError={''}
-        />
+        <SignupFormComponent {...props} loading={true} />
       </StaticRouter>
     );
 

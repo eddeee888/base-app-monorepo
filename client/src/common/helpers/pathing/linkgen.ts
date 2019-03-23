@@ -1,4 +1,4 @@
-import { LinkgenOptions, Paths, QueryStringOptions } from './types';
+import { LinkgenOptions, Paths, UrlQuery } from './types';
 
 type LinkgenFn = (path: Paths, options?: LinkgenOptions) => string;
 
@@ -12,20 +12,16 @@ const linkgen: LinkgenFn = (path, options) => {
   return path + urlParts;
 };
 
-const generateQueryString = (
-  queryStringOptions?: QueryStringOptions
-): string => {
-  if (!queryStringOptions) {
+const generateQueryString = (urlQuery?: UrlQuery): string => {
+  if (!urlQuery) {
     return '';
   }
 
   let result: string = '?';
 
-  (Object.keys(queryStringOptions) as Array<keyof QueryStringOptions>).forEach(
-    queryKey => {
-      result += `${queryKey}=${queryStringOptions[queryKey]}&`;
-    }
-  );
+  (Object.keys(urlQuery) as Array<keyof UrlQuery>).forEach(queryKey => {
+    result += `${queryKey}=${urlQuery[queryKey]}&`;
+  });
   result = result.substring(0, result.length - 1);
 
   return result;

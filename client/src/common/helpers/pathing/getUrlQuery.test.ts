@@ -1,15 +1,15 @@
-import getQueryStringOptions from './getQueryStringOptions';
-import { QueryStringKeys } from './types';
+import getUrlQuery from './getUrlQuery';
+import { UrlQueryKeys } from './types';
 
-describe('getQueryStringOptions()', () => {
+describe('getUrlQuery()', () => {
   it('should return empty object if empty string is given', () => {
-    const result = getQueryStringOptions('');
+    const result = getUrlQuery('');
     expect(result).toEqual({});
   });
 
-  Object.keys(QueryStringKeys).forEach(key => {
+  Object.keys(UrlQueryKeys).forEach(key => {
     it(`should return correct value if ${key} exists`, () => {
-      const result = getQueryStringOptions(`?${key}=abc`);
+      const result = getUrlQuery(`?${key}=abc`);
       expect(result).toEqual({
         [key]: 'abc'
       });
@@ -17,7 +17,7 @@ describe('getQueryStringOptions()', () => {
   });
 
   it('should ignore other keys and return only valid key', () => {
-    const result = getQueryStringOptions(
+    const result = getUrlQuery(
       '?invalid_key_1=abc&redirect=/signup&invalid_key_2=def'
     );
     expect(result).toEqual({
@@ -26,7 +26,7 @@ describe('getQueryStringOptions()', () => {
   });
 
   it('should return empty object if non of the keys match', () => {
-    const result = getQueryStringOptions('?invalid_key_1=/&invalid_key_2=abc');
+    const result = getUrlQuery('?invalid_key_1=/&invalid_key_2=abc');
     expect(result).toEqual({});
   });
 });

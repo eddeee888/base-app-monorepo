@@ -7,16 +7,14 @@ export enum Paths {
   createClass = '/create-a-class'
 }
 
-export enum QueryStringKeys {
+export enum UrlQueryKeys {
   redirect = 'redirect'
 }
 
-export type QueryStringOptions = { [key in QueryStringKeys]?: string };
+export type UrlQuery = { [key in UrlQueryKeys]?: string };
 
 export interface LinkgenOptions {
-  query?: QueryStringOptions;
+  query?: UrlQuery;
 }
 
-export type GetQueryStringOptionsFn = (
-  queryString: string
-) => QueryStringOptions;
+export type GetUrlQueryFn = (queryString: string) => UrlQuery;

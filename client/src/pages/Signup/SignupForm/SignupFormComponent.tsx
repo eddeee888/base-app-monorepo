@@ -8,12 +8,16 @@ import { Field, FieldProps, Form, Formik, FormikActions } from 'formik';
 import React from 'react';
 import { SignupInput } from 'src/__generated__/globalTypes';
 import Button from 'src/common/components/Button';
-import FormError, { checkIfError } from 'src/common/components/FormError';
+import FormError, {
+  checkIfError,
+  FormErrorProps
+} from 'src/common/components/FormError';
 import Link from 'src/common/components/Link';
 import Text from 'src/common/components/Text';
 import TextInput from 'src/common/components/TextInput';
-import { linkgen, Paths, QueryStringOptions } from 'src/common/helpers/pathing';
+import { linkgen, Paths } from 'src/common/helpers/pathing';
 import { spacingPx } from 'src/common/helpers/spacing';
+import useUrlQuery from 'src/common/hooks/useUrlQuery';
 import * as Yup from 'yup';
 
 export type SignupFormikFn = (
@@ -31,16 +35,15 @@ const SignupSchema = Yup.object().shape({
 interface Props {
   handleSubmit: SignupFormikFn;
   loading: boolean;
-  generalError: string;
-  queryStringOptions: QueryStringOptions;
+  generalFormError: FormErrorProps;
 }
 
 const SignupFormComponent = ({
   handleSubmit,
   loading,
-  generalError,
-  queryStringOptions
+  generalFormError
 }: Props) => {
+  const query = useUrlQuery();
   return (
     <Formik<SignupInput>
       initialValues={{
@@ -116,13 +119,11 @@ const SignupFormComponent = ({
             </Grid>
           </Grid>
 
-          <FormError error={generalError} display={!!generalError} />
+          <FormError {...generalFormError} />
 
           <Text gutterBottom>
             Already have an account?{' '}
-            <Link to={linkgen(Paths.login, { query: queryStringOptions })}>
-              Log in
-            </Link>
+            <Link to={linkgen(Paths.login, { query })}>Log in</Link>
           </Text>
 
           <Button type="submit" disabled={loading}>

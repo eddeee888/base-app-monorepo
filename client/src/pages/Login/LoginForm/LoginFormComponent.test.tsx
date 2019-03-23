@@ -9,7 +9,10 @@ describe('<LoginFormComponent />', () => {
   const handleSubmit = jest.fn();
   const defaultProps = {
     handleSubmit,
-    generalError: '',
+    generalFormError: {
+      error: '',
+      display: false
+    },
     isSubmitting: false
   };
 
@@ -41,7 +44,10 @@ describe('<LoginFormComponent />', () => {
       <StaticRouter context={{}}>
         <LoginFormComponent
           {...defaultProps}
-          generalError={'OMG! there has been some error!'}
+          generalFormError={{
+            error: 'OMG! there has been some error!',
+            display: true
+          }}
         />
       </StaticRouter>
     );
