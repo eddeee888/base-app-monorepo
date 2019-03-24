@@ -16,7 +16,7 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
   // TODO: get this from backend!
   // TOTEST
   const options = [
-    { value: '', label: 'Select' },
+    { value: '', label: '' },
     { value: '100', label: 'Accounting' },
     { value: '200', label: 'Programming' }
   ];

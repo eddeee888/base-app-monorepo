@@ -17,6 +17,8 @@ describe('<Select />', () => {
     expect(wrapper.find(TextField).prop('children')).toHaveLength(
       options.length
     );
-    expect(wrapper.find('input').prop('value')).toBe('option1');
+    expect(wrapper.find('select')).toHaveLength(1);
+    expect(wrapper.find('select').prop('value')).toBe('option1');
+    expect(wrapper.find('option')).toHaveLength(3);
   });
 });
