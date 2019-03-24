@@ -6,8 +6,13 @@ import Main from 'src/common/components/Main';
 import Paper from 'src/common/components/Paper';
 import ViewerContext from 'src/common/components/ViewerContext';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
+import { spacingRem } from 'src/common/helpers/spacing';
 import { breakpoints } from 'src/common/styles/media';
 import CreateClassForm from './CreateClassForm';
+
+const mainContentClassName = css`
+  padding-top: ${spacingRem(3)}rem;
+`;
 
 const paperContainerClassName = css`
   max-width: ${breakpoints.small}px;
@@ -31,11 +36,13 @@ const CreateClass: React.FunctionComponent = () => {
 
   return (
     <Main>
-      <H1 align="center">Create a class</H1>
-      <div className={paperContainerClassName}>
-        <Paper>
-          <CreateClassForm />
-        </Paper>
+      <div className={mainContentClassName}>
+        <H1 align="center">Create a class</H1>
+        <div className={paperContainerClassName}>
+          <Paper>
+            <CreateClassForm />
+          </Paper>
+        </div>
       </div>
     </Main>
   );
