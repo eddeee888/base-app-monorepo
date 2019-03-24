@@ -3,6 +3,7 @@ import { Field, FieldProps, FormikProps } from 'formik';
 import React from 'react';
 import FormError, { checkIfError } from 'src/common/components/FormError';
 import Select from 'src/common/components/Select';
+import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
 import { CreateClassInput } from './CreateClassForm';
 
@@ -30,7 +31,7 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
               {...field}
               required
               label="Class name"
-              placeholder="Please choose your class name. e.g. Piano lession, Yoga class, etc."
+              placeholder="Choose your class name. e.g. Piano lession, Yoga class, etc."
               error={checkIfError(errors.className, touched.className)}
             />
           )}
@@ -41,7 +42,6 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
           {({ field }: FieldProps<CreateClassInput>) => (
             <Select
               {...field}
-              id="class-category-picker"
               label="Class category"
               options={options}
               required
@@ -53,6 +53,21 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
           error={errors.classCategory}
           display={touched.classCategory}
         />
+
+        <Field name="classDescription">
+          {({ field }: FieldProps<CreateClassInput>) => (
+            <TextArea
+              label="Class description"
+              error={checkIfError(
+                errors.classDescription,
+                touched.classDescription
+              )}
+              rows={5}
+              placeholder={'Tell the learners what your class is about'}
+              {...field}
+            />
+          )}
+        </Field>
       </Grid>
     </Grid>
   );

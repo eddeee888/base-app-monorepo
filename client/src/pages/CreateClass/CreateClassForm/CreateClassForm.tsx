@@ -8,6 +8,7 @@ import ClassGeneralDetails from './ClassGeneralDetails';
 export interface CreateClassInput {
   className: string;
   classCategory: string;
+  classDescription: string;
 }
 
 const CreateClassSchema = Yup.object().shape({
@@ -20,7 +21,8 @@ const CreateClassForm: React.FunctionComponent = () => {
     <Formik<CreateClassInput>
       initialValues={{
         className: '',
-        classCategory: ''
+        classCategory: '',
+        classDescription: ''
       }}
       validationSchema={CreateClassSchema}
       onSubmit={() => {}}

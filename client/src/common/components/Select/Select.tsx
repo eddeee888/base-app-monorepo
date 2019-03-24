@@ -11,23 +11,21 @@ interface Props extends Omit<OutlinedTextFieldProps, 'variant'> {
   options: SelectOptions[];
 }
 
-const Select: React.FunctionComponent<Props> = ({ options, ...props }) => {
-  return (
-    <TextField
-      fullWidth
-      margin="normal"
-      {...props}
-      select
-      variant="outlined"
-      SelectProps={{ native: true }}
-    >
-      {options.map(option => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </TextField>
-  );
-};
+const Select: React.FunctionComponent<Props> = ({ options, ...props }) => (
+  <TextField
+    fullWidth
+    margin="normal"
+    {...props}
+    select
+    variant="outlined"
+    SelectProps={{ native: true }}
+  >
+    {options.map(option => (
+      <option key={option.value} value={option.value}>
+        {option.label}
+      </option>
+    ))}
+  </TextField>
+);
 
 export default Select;
