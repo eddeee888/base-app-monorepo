@@ -1,12 +1,15 @@
-import TextField, { OutlinedTextFieldProps } from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField';
 import React from 'react';
-import Omit from 'src/common/helpers/typings/Omit';
+import OmittedTextFieldProps from 'src/common/helpers/typings/OmittedTextFieldProps';
 
-interface TextAreaProps
-  extends Omit<Omit<OutlinedTextFieldProps, 'variant'>, 'multiline'> {}
-
-const TextArea: React.FunctionComponent<TextAreaProps> = props => (
-  <TextField fullWidth {...props} multiline variant="outlined" />
+const TextArea: React.FunctionComponent<OmittedTextFieldProps> = props => (
+  <TextField
+    fullWidth
+    margin="normal"
+    {...props}
+    multiline
+    variant="outlined"
+  />
 );
 
 export default TextArea;

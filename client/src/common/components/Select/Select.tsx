@@ -1,13 +1,13 @@
-import TextField, { OutlinedTextFieldProps } from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField';
 import React from 'react';
-import Omit from 'src/common/helpers/typings/Omit';
+import OmittedTextFieldProps from 'src/common/helpers/typings/OmittedTextFieldProps';
 
 interface SelectOptions {
   value: string | number;
   label: string;
 }
 
-interface Props extends Omit<OutlinedTextFieldProps, 'variant'> {
+interface Props extends OmittedTextFieldProps {
   options: SelectOptions[];
 }
 
