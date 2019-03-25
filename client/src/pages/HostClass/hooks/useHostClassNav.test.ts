@@ -17,12 +17,17 @@ describe('useHostClassNav()', () => {
     {
       formPart: 'first',
       classId: undefined,
-      expectedResult: { next: '/host-a-class/part2', previous: undefined }
+      expectedResult: {
+        currentFormPart: 'first',
+        next: '/host-a-class/part2',
+        previous: undefined
+      }
     },
     {
       formPart: 'part2',
       classId: undefined,
       expectedResult: {
+        currentFormPart: 'part2',
         next: '/host-a-class/part3',
         previous: '/host-a-class/first'
       }
@@ -31,6 +36,7 @@ describe('useHostClassNav()', () => {
       formPart: 'last',
       classId: undefined,
       expectedResult: {
+        currentFormPart: 'last',
         next: undefined,
         previous: '/host-a-class/part3'
       }
@@ -38,12 +44,17 @@ describe('useHostClassNav()', () => {
     {
       formPart: 'first',
       classId: '100',
-      expectedResult: { next: '/host-a-class/100/part2', previous: undefined }
+      expectedResult: {
+        currentFormPart: 'first',
+        next: '/host-a-class/100/part2',
+        previous: undefined
+      }
     },
     {
       formPart: 'part2',
       classId: '100',
       expectedResult: {
+        currentFormPart: 'part2',
         next: '/host-a-class/100/part3',
         previous: '/host-a-class/100/first'
       }
@@ -52,6 +63,7 @@ describe('useHostClassNav()', () => {
       formPart: 'last',
       classId: '100',
       expectedResult: {
+        currentFormPart: 'last',
         next: undefined,
         previous: '/host-a-class/100/part3'
       }

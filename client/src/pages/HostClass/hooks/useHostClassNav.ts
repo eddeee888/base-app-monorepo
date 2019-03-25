@@ -4,31 +4,33 @@ import { HostClassFormPart } from '../types';
 import useHostClassParams from './useHostClassParams';
 
 type UseHostClassNavFn = () => {
+  currentFormPart: HostClassFormPart | undefined;
   next: string | undefined;
   previous: string | undefined;
 };
 
-// TOTEST
 const useHostClassNav: UseHostClassNavFn = () => {
-  let nextForm: HostClassFormPart | undefined;
-  let previousForm: HostClassFormPart | undefined;
+  let currentFormPart: HostClassFormPart | undefined;
+  let nextFormPart: HostClassFormPart | undefined;
+  let previousFormPart: HostClassFormPart | undefined;
 
   const params = useHostClassParams();
 
   if (params.formPart) {
     const currentFormIndex = formOrder.indexOf(params.formPart);
-    nextForm = formOrder[currentFormIndex + 1]
+    nextFormPart = formOrder[currentFormIndex + 1]
       ? formOrder[currentFormIndex + 1]
       : undefined;
-
-    previousForm = formOrder[currentFormIndex - 1]
+    previousFormPart = formOrder[currentFormIndex - 1]
       ? formOrder[currentFormIndex - 1]
       : undefined;
+    currentFormPart = params.formPart;
   }
 
   return {
-    next: linkgenHostClass(nextForm, params.classId),
-    previous: linkgenHostClass(previousForm, params.classId)
+    currentFormPart,
+    next: linkgenHostClass(nextFormPart, params.classId),
+    previous: linkgenHostClass(previousFormPart, params.classId)
   };
 };
 
