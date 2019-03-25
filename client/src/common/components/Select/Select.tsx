@@ -1,27 +1,31 @@
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField, { OutlinedTextFieldProps } from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField';
 import React from 'react';
-import Omit from 'src/common/helpers/typings/Omit';
+import OmittedTextFieldProps from 'src/common/helpers/typings/OmittedTextFieldProps';
 
 interface SelectOptions {
   value: string | number;
   label: string;
 }
 
-interface Props extends Omit<OutlinedTextFieldProps, 'variant'> {
+interface Props extends OmittedTextFieldProps {
   options: SelectOptions[];
 }
 
-const Select: React.FunctionComponent<Props> = ({ options, ...props }) => {
-  return (
-    <TextField fullWidth margin="normal" {...props} select variant="outlined">
-      {options.map(option => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
-    </TextField>
-  );
-};
+const Select: React.FunctionComponent<Props> = ({ options, ...props }) => (
+  <TextField
+    fullWidth
+    margin="normal"
+    {...props}
+    select
+    variant="outlined"
+    SelectProps={{ native: true }}
+  >
+    {options.map(option => (
+      <option key={option.value} value={option.value}>
+        {option.label}
+      </option>
+    ))}
+  </TextField>
+);
 
 export default Select;

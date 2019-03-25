@@ -54,7 +54,7 @@ describe('<LoginFormComponent />', () => {
     assertCommonElements(wrapper);
     assertButton(wrapper, false);
     expect(
-      wrapper.find(`a[href='${Paths.signup}?redirect=/edirect-to-this-path']`)
+      wrapper.find(`a[href='${Paths.signup}?redirect=/redirect-to-this-path']`)
     ).toHaveLength(1);
   });
 

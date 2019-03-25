@@ -3,11 +3,12 @@ import { Field, FieldProps, FormikProps } from 'formik';
 import React from 'react';
 import FormError, { checkIfError } from 'src/common/components/FormError';
 import Select from 'src/common/components/Select';
+import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
-import { CreateClassInput } from './CreateClassForm';
+import { HostClassInput } from './types';
 
 interface Props {
-  formikProps: FormikProps<CreateClassInput>;
+  formikProps: FormikProps<HostClassInput>;
 }
 
 const ClassGeneralDetails: React.FunctionComponent<Props> = ({
@@ -16,7 +17,7 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
   // TODO: get this from backend!
   // TOTEST
   const options = [
-    { value: '', label: 'Select' },
+    { value: '', label: '' },
     { value: '100', label: 'Accounting' },
     { value: '200', label: 'Programming' }
   ];
@@ -25,12 +26,11 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
     <Grid container>
       <Grid item xs={12}>
         <Field name="className">
-          {({ field }: FieldProps<CreateClassInput>) => (
+          {({ field }: FieldProps<HostClassInput>) => (
             <TextInput
               {...field}
-              required
-              label="Class name"
-              placeholder="Please choose your class name. e.g. Piano lession, Yoga class, etc."
+              label="Class name*"
+              placeholder="Choose your class name. e.g. Piano lession, Yoga class, etc."
               error={checkIfError(errors.className, touched.className)}
             />
           )}
@@ -38,13 +38,11 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
         <FormError error={errors.className} display={touched.className} />
 
         <Field name="classCategory">
-          {({ field }: FieldProps<CreateClassInput>) => (
+          {({ field }: FieldProps<HostClassInput>) => (
             <Select
               {...field}
-              id="class-category-picker"
-              label="Class category"
+              label="Class category*"
               options={options}
-              required
               error={checkIfError(errors.classCategory, touched.classCategory)}
             />
           )}
@@ -53,6 +51,21 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
           error={errors.classCategory}
           display={touched.classCategory}
         />
+
+        <Field name="classDescription">
+          {({ field }: FieldProps<HostClassInput>) => (
+            <TextArea
+              label="Class description"
+              error={checkIfError(
+                errors.classDescription,
+                touched.classDescription
+              )}
+              rows={5}
+              placeholder={'Tell the learners what your class is about'}
+              {...field}
+            />
+          )}
+        </Field>
       </Grid>
     </Grid>
   );
