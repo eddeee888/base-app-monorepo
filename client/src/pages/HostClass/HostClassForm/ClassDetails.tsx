@@ -7,20 +7,25 @@ import { SelectOptions } from 'src/common/components/Select/Select';
 import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
 import { ClassCategoryData } from './__generated__/ClassCategoryData';
+import { ClassCategoryQueryResult } from './ClassCategoriesQuery';
 import { HostClassInput } from './types';
 
 interface Props {
   formikProps: FormikProps<HostClassInput>;
-  categoryData?: ClassCategoryData;
+  categoriesResult: ClassCategoryQueryResult;
 }
 
 // TOTEST
 const ClassGeneralDetails: React.FunctionComponent<Props> = ({
   formikProps: { errors, touched },
-  categoryData
+  categoriesResult: { data, error, loading }
 }) => {
-  if (!categoryData || !categoryData.classCategories) {
+  if (!data || !data.classCategories || loading) {
     return <div>LOADING</div>;
+  }
+
+  if (error) {
+    return <div>Error</div>;
   }
 
   return (
@@ -43,7 +48,7 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
             <Select
               {...field}
               label="Class category*"
-              options={generateOptions(categoryData.classCategories)}
+              options={generateOptions(data.classCategories)}
               error={checkIfError(errors.classCategory, touched.classCategory)}
             />
           )}

@@ -20,7 +20,7 @@ const HostClassForm: React.FunctionComponent = () => {
   const { currentFormPart } = useHostClassNav();
   return (
     <ClassCategoriesQuery>
-      {({ data }) => (
+      {result => (
         <Formik<HostClassInput>
           initialValues={{
             className: '',
@@ -33,7 +33,10 @@ const HostClassForm: React.FunctionComponent = () => {
           {formikProps => (
             <Form>
               {currentFormPart === 'details' && (
-                <ClassDetails formikProps={formikProps} categoryData={data} />
+                <ClassDetails
+                  formikProps={formikProps}
+                  categoriesResult={result}
+                />
               )}
               {currentFormPart === 'time' && <ClassTimes />}
               {currentFormPart === 'summary' && <ClassSummary />}
