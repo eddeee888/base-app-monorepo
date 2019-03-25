@@ -6,7 +6,6 @@ interface LinkgenCreateClass {
   (formPart?: CreateClassFormPart, id?: string): string | undefined;
 }
 
-// TOTEST
 const linkgenCreateClass: LinkgenCreateClass = (
   formPart: any,
   id: any
