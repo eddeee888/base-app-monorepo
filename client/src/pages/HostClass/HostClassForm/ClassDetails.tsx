@@ -3,24 +3,25 @@ import { Field, FieldProps, FormikProps } from 'formik';
 import React from 'react';
 import FormError, { checkIfError } from 'src/common/components/FormError';
 import Select from 'src/common/components/Select';
+import { SelectOptions } from 'src/common/components/Select/Select';
 import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
+import { ClassCategoryData } from './__generated__/ClassCategoryData';
 import { HostClassInput } from './types';
 
 interface Props {
   formikProps: FormikProps<HostClassInput>;
+  categoryData?: ClassCategoryData;
 }
 
+// TOTEST
 const ClassGeneralDetails: React.FunctionComponent<Props> = ({
-  formikProps: { errors, touched }
+  formikProps: { errors, touched },
+  categoryData
 }) => {
-  // TODO: get this from backend!
-  // TOTEST
-  const options = [
-    { value: '', label: '' },
-    { value: '100', label: 'Accounting' },
-    { value: '200', label: 'Programming' }
-  ];
+  if (!categoryData || !categoryData.classCategories) {
+    return <div>LOADING</div>;
+  }
 
   return (
     <Grid container>
@@ -42,7 +43,7 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
             <Select
               {...field}
               label="Class category*"
-              options={options}
+              options={generateOptions(categoryData.classCategories)}
               error={checkIfError(errors.classCategory, touched.classCategory)}
             />
           )}
@@ -69,6 +70,23 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
       </Grid>
     </Grid>
   );
+};
+
+const generateOptions = (
+  categories: ClassCategoryData['classCategories']
+): SelectOptions[] => {
+  const options = categories.map(({ id, name }) => {
+    return {
+      value: id,
+      label: name
+    };
+  });
+  options.unshift({
+    value: '',
+    label: ''
+  });
+
+  return options;
 };
 
 export default ClassGeneralDetails;
