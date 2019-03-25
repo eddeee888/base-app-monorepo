@@ -13,9 +13,8 @@ const linkgen: LinkgenFn = (path, options) => {
   return path + urlParts;
 };
 
-// TOTEST
 const generateParams = (params?: string[]): string => {
-  if (!params) {
+  if (!params || (params && params.length === 0)) {
     return '';
   }
 
