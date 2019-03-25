@@ -5,10 +5,10 @@ import FormError, { checkIfError } from 'src/common/components/FormError';
 import Select from 'src/common/components/Select';
 import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
-import { CreateClassInput } from './CreateClassForm';
+import { HostClassInput } from './types';
 
 interface Props {
-  formikProps: FormikProps<CreateClassInput>;
+  formikProps: FormikProps<HostClassInput>;
 }
 
 const ClassGeneralDetails: React.FunctionComponent<Props> = ({
@@ -26,7 +26,7 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
     <Grid container>
       <Grid item xs={12}>
         <Field name="className">
-          {({ field }: FieldProps<CreateClassInput>) => (
+          {({ field }: FieldProps<HostClassInput>) => (
             <TextInput
               {...field}
               required
@@ -39,7 +39,7 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
         <FormError error={errors.className} display={touched.className} />
 
         <Field name="classCategory">
-          {({ field }: FieldProps<CreateClassInput>) => (
+          {({ field }: FieldProps<HostClassInput>) => (
             <Select
               {...field}
               label="Class category"
@@ -55,7 +55,7 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
         />
 
         <Field name="classDescription">
-          {({ field }: FieldProps<CreateClassInput>) => (
+          {({ field }: FieldProps<HostClassInput>) => (
             <TextArea
               label="Class description"
               error={checkIfError(

@@ -9,9 +9,9 @@ import { linkgen, Paths } from 'src/common/helpers/pathing';
 import { spacingRem } from 'src/common/helpers/spacing';
 import { breakpoints } from 'src/common/styles/media';
 import { defaultFormPart } from './constants';
-import CreateClassForm from './CreateClassForm';
-import linkgenCreateClass from './helper/linkgenCreateClass';
-import useCreateClassParams from './hooks/useCreateClassParams';
+import linkgenHostClass from './helper/linkgenHostClass';
+import useHostClassParams from './hooks/useHostClassParams';
+import HostClassForm from './HostClassForm';
 
 const mainContentClassName = css`
   padding-top: ${spacingRem(3)}rem;
@@ -26,24 +26,22 @@ const paperContainerClassName = css`
   align-items: center;
 `;
 
-const CreateClass: React.FunctionComponent = () => {
+const HostClass: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
-  const params = useCreateClassParams();
+  const params = useHostClassParams();
 
   // TOTEST
   if (!viewer) {
     return (
       <Redirect
-        to={linkgen(Paths.signup, { query: { redirect: Paths.createClass } })}
+        to={linkgen(Paths.signup, { query: { redirect: Paths.hostClass } })}
       />
     );
   }
 
   // TOTEST
   if (!params.formPart) {
-    return (
-      <Redirect to={linkgenCreateClass(defaultFormPart, params.classId)} />
-    );
+    return <Redirect to={linkgenHostClass(defaultFormPart, params.classId)} />;
   }
 
   return (
@@ -52,7 +50,7 @@ const CreateClass: React.FunctionComponent = () => {
         <H1 align="center">Create a class</H1>
         <div className={paperContainerClassName}>
           <Paper>
-            <CreateClassForm />
+            <HostClassForm />
           </Paper>
         </div>
       </div>
@@ -60,4 +58,4 @@ const CreateClass: React.FunctionComponent = () => {
   );
 };
 
-export default CreateClass;
+export default HostClass;

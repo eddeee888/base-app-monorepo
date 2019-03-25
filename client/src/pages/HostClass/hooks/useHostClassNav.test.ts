@@ -1,14 +1,14 @@
 // @ts-ignore
-import { formOrder } from 'src/pages/CreateClass/constants';
-import useCreateClassParams from 'src/pages/CreateClass/hooks/useCreateClassParams';
-import useCreateClassNav from './useCreateClassNav';
+import { formOrder } from 'src/pages/HostClass/constants';
+import useHostClassParams from 'src/pages/HostClass/hooks/useHostClassParams';
+import useHostClassNav from './useHostClassNav';
 
-jest.mock('src/pages/CreateClass/constants', () => ({
+jest.mock('src/pages/HostClass/constants', () => ({
   formOrder: ['first', 'part2', 'part3', 'last']
 }));
-jest.mock('src/pages/CreateClass/hooks/useCreateClassParams');
+jest.mock('src/pages/HostClass/hooks/useHostClassParams');
 
-describe('useCreateClassNav()', () => {
+describe('useHostClassNav()', () => {
   afterEach(() => {
     jest.resetAllMocks();
   });
@@ -17,14 +17,14 @@ describe('useCreateClassNav()', () => {
     {
       formPart: 'first',
       classId: undefined,
-      expectedResult: { next: '/create-a-class/part2', previous: undefined }
+      expectedResult: { next: '/host-a-class/part2', previous: undefined }
     },
     {
       formPart: 'part2',
       classId: undefined,
       expectedResult: {
-        next: '/create-a-class/part3',
-        previous: '/create-a-class/first'
+        next: '/host-a-class/part3',
+        previous: '/host-a-class/first'
       }
     },
     {
@@ -32,20 +32,20 @@ describe('useCreateClassNav()', () => {
       classId: undefined,
       expectedResult: {
         next: undefined,
-        previous: '/create-a-class/part3'
+        previous: '/host-a-class/part3'
       }
     },
     {
       formPart: 'first',
       classId: '100',
-      expectedResult: { next: '/create-a-class/100/part2', previous: undefined }
+      expectedResult: { next: '/host-a-class/100/part2', previous: undefined }
     },
     {
       formPart: 'part2',
       classId: '100',
       expectedResult: {
-        next: '/create-a-class/100/part3',
-        previous: '/create-a-class/100/first'
+        next: '/host-a-class/100/part3',
+        previous: '/host-a-class/100/first'
       }
     },
     {
@@ -53,19 +53,19 @@ describe('useCreateClassNav()', () => {
       classId: '100',
       expectedResult: {
         next: undefined,
-        previous: '/create-a-class/100/part3'
+        previous: '/host-a-class/100/part3'
       }
     }
   ];
 
   testCases.forEach(({ expectedResult, classId, formPart }) => {
     it(`should return correct object if formPart is ${formPart} and classId is ${classId}`, () => {
-      (useCreateClassParams as jest.Mock).mockReturnValueOnce({
+      (useHostClassParams as jest.Mock).mockReturnValueOnce({
         classId,
         formPart
       });
 
-      const result = useCreateClassNav();
+      const result = useHostClassNav();
 
       expect(result).toEqual(expectedResult);
     });

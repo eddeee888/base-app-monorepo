@@ -9,20 +9,18 @@ describe('linkgen()', () => {
   });
 
   it('should generate URL with 0 param', () => {
-    expect(linkgen(Paths.createClass, { params: [] })).toBe(
-      `${Paths.createClass}`
-    );
+    expect(linkgen(Paths.hostClass, { params: [] })).toBe(`${Paths.hostClass}`);
   });
 
   it('should generate URL with 1 param', () => {
-    expect(linkgen(Paths.createClass, { params: ['abcd'] })).toBe(
-      `${Paths.createClass}/abcd`
+    expect(linkgen(Paths.hostClass, { params: ['abcd'] })).toBe(
+      `${Paths.hostClass}/abcd`
     );
   });
 
   it('should generate URL with multiple params', () => {
-    expect(linkgen(Paths.createClass, { params: ['abcd', 'xyz'] })).toBe(
-      `${Paths.createClass}/abcd/xyz`
+    expect(linkgen(Paths.hostClass, { params: ['abcd', 'xyz'] })).toBe(
+      `${Paths.hostClass}/abcd/xyz`
     );
   });
 

@@ -67,7 +67,7 @@ const Header: React.FunctionComponent<{}> = () => {
         </div>
 
         <div className={actionWrapperClassName}>
-          <Link to={linkgen(Paths.createClass)}>
+          <Link to={linkgen(Paths.hostClass)}>
             <Button variant="outlined">Create a class</Button>
           </Link>
           {!viewer && (
