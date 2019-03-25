@@ -29,8 +29,7 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
           {({ field }: FieldProps<HostClassInput>) => (
             <TextInput
               {...field}
-              required
-              label="Class name"
+              label="Class name*"
               placeholder="Choose your class name. e.g. Piano lession, Yoga class, etc."
               error={checkIfError(errors.className, touched.className)}
             />
@@ -42,9 +41,8 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
           {({ field }: FieldProps<HostClassInput>) => (
             <Select
               {...field}
-              label="Class category"
+              label="Class category*"
               options={options}
-              required
               error={checkIfError(errors.classCategory, touched.classCategory)}
             />
           )}

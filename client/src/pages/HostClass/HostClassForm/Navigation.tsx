@@ -9,17 +9,17 @@ const Navigation: React.FunctionComponent = () => {
   const { previous, next } = useHostClassNav();
   return (
     <Grid container justify="space-between">
-      <Grid item xs={4} alignContent="flex-start">
+      <Grid item xs={4}>
         {previous && (
           <Link to={previous}>
             <Button>Previous</Button>
           </Link>
         )}
       </Grid>
-      <Grid item xs={4} alignContent="flex-end">
+      <Grid item xs={4}>
         {next && (
           <Link to={next}>
-            <Button href={next}>Next</Button>
+            <Button>Next</Button>
           </Link>
         )}
 

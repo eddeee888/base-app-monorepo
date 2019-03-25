@@ -20,8 +20,9 @@ const AppRouter = () => (
           exact
           path={[
             linkgen(Paths.hostClass),
-            linkgen(Paths.hostClass) + '/:formPart(details|time)?',
-            linkgen(Paths.hostClass) + '/:classId?/:formPart(details|time)?'
+            linkgen(Paths.hostClass) + '/:formPart(details|time|summary)?',
+            linkgen(Paths.hostClass) +
+              '/:classId?/:formPart(details|time|summary)?'
           ]}
           component={HostClass}
         />
