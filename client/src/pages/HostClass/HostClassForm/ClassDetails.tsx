@@ -4,6 +4,7 @@ import React from 'react';
 import FormError, { checkIfError } from 'src/common/components/FormError';
 import Select from 'src/common/components/Select';
 import { SelectOptions } from 'src/common/components/Select/Select';
+import Spinner from 'src/common/components/Spinner';
 import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
 import { ClassCategoryData } from './__generated__/ClassCategoryData';
@@ -21,9 +22,10 @@ const ClassGeneralDetails: React.FunctionComponent<Props> = ({
   categoriesResult: { data, error, loading }
 }) => {
   if (!data || !data.classCategories || loading) {
-    return <div>LOADING</div>;
+    return <Spinner fullWidth />;
   }
 
+  // TODO: handle error here!
   if (error) {
     return <div>Error</div>;
   }
