@@ -30,7 +30,6 @@ const HostClass: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
   const params = useHostClassParams();
 
-  // TOTEST
   if (!viewer) {
     return (
       <Redirect
@@ -39,7 +38,6 @@ const HostClass: React.FunctionComponent = () => {
     );
   }
 
-  // TOTEST
   if (!params.formPart) {
     return <Redirect to={linkgenHostClass(defaultFormPart, params.classId)} />;
   }
