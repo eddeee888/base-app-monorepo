@@ -47,7 +47,7 @@ const HostClass: React.FunctionComponent = () => {
   return (
     <Main>
       <div className={mainContentClassName}>
-        <H1 align="center">Create a class</H1>
+        <H1 align="center">Host a class</H1>
         <div className={paperContainerClassName}>
           <Paper>
             <HostClassForm />
