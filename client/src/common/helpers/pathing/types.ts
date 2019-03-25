@@ -14,6 +14,7 @@ export enum UrlQueryKeys {
 export type UrlQuery = { [key in UrlQueryKeys]?: string };
 
 export interface LinkgenOptions {
+  params?: string[];
   query?: UrlQuery;
 }
 

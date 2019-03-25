@@ -6,10 +6,25 @@ const linkgen: LinkgenFn = (path, options) => {
   let urlParts = '';
 
   if (options) {
+    urlParts += generateParams(options.params);
     urlParts += generateQueryString(options.query);
   }
 
   return path + urlParts;
+};
+
+// TOTEST
+const generateParams = (params?: string[]): string => {
+  if (!params) {
+    return '';
+  }
+
+  return (
+    '/' +
+    params.reduce(
+      (accumulator, currentValue) => accumulator + '/' + currentValue
+    )
+  );
 };
 
 const generateQueryString = (urlQuery?: UrlQuery): string => {

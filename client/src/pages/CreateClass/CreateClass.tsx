@@ -8,7 +8,10 @@ import ViewerContext from 'src/common/components/ViewerContext';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
 import { spacingRem } from 'src/common/helpers/spacing';
 import { breakpoints } from 'src/common/styles/media';
+import { defaultFormPart } from './constants';
 import CreateClassForm from './CreateClassForm';
+import linkgenCreateClass from './helper/linkgenCreateClass';
+import useCreateClassParams from './hooks/useCreateClassParams';
 
 const mainContentClassName = css`
   padding-top: ${spacingRem(3)}rem;
@@ -25,6 +28,8 @@ const paperContainerClassName = css`
 
 const CreateClass: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
+  const params = useCreateClassParams();
+
   // TOTEST
   if (!viewer) {
     return (
@@ -32,6 +37,11 @@ const CreateClass: React.FunctionComponent = () => {
         to={linkgen(Paths.signup, { query: { redirect: Paths.createClass } })}
       />
     );
+  }
+
+  // TOTEST
+  if (!params.formPart) {
+    return <Redirect to={linkgenCreateClass(defaultFormPart, params.id)} />;
   }
 
   return (

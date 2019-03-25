@@ -16,7 +16,15 @@ const AppRouter = () => (
         <Route path={linkgen(Paths.login)} component={Login} />
         <Route path={linkgen(Paths.signup)} component={Signup} />
         <Route path={linkgen(Paths.logout)} component={Logout} />
-        <Route path={linkgen(Paths.createClass)} component={CreateClass} />
+        <Route
+          exact
+          path={[
+            linkgen(Paths.createClass),
+            linkgen(Paths.createClass) + '/:formPart(details|time)?',
+            linkgen(Paths.createClass) + '/:id?/:formPart(details|time)?'
+          ]}
+          component={CreateClass}
+        />
       </Switch>
     </LayoutController>
   </BrowserRouter>

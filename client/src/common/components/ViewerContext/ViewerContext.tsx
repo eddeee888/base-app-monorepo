@@ -39,7 +39,7 @@ class ViewerProvider extends React.Component<ContextProps, ContextState> {
     viewer: null
   };
 
-  componentDidMount() {
+  componentWillMount() {
     const viewerId = getViewerId();
 
     if (viewerId && !this.state.viewer) {
