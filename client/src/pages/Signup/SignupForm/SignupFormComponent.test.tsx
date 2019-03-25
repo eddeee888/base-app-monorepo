@@ -9,7 +9,7 @@ import { linkgen, Paths } from 'src/common/helpers/pathing';
 import SignupFormComponent from './SignupFormComponent';
 
 const props = {
-  handleSubmit: jest.fn(),
+  onSubmit: jest.fn(),
   loading: false,
   generalFormError: {
     error: '',
@@ -29,7 +29,7 @@ const assertFieldName = (
 
 const assertCommonElements = (wrapper: ReactWrapper) => {
   expect(wrapper.find(Formik)).toHaveLength(1);
-  expect(wrapper.find(Formik).prop('onSubmit')).toBe(props.handleSubmit);
+  expect(wrapper.find(Formik).prop('onSubmit')).toBe(props.onSubmit);
 
   expect(wrapper.find(Field)).toHaveLength(4);
   assertFieldName(wrapper, 'email', 1);

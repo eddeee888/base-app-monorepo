@@ -6,9 +6,9 @@ import { Paths } from 'src/common/helpers/pathing';
 import LoginFormComponent from './LoginFormComponent';
 
 describe('<LoginFormComponent />', () => {
-  const handleSubmit = jest.fn();
+  const onSubmit = jest.fn();
   const defaultProps = {
-    handleSubmit,
+    onSubmit,
     generalFormError: {
       error: '',
       display: false
@@ -25,7 +25,7 @@ describe('<LoginFormComponent />', () => {
     expect(wrapper.find(`button[type='submit']`).text()).toBe('Log in');
   };
   const assertCommonElements = (wrapper: ReactWrapper) => {
-    expect(wrapper.find(Formik).props().onSubmit).toBe(handleSubmit);
+    expect(wrapper.find(Formik).props().onSubmit).toBe(onSubmit);
     expect(wrapper.find('form')).toHaveLength(1);
     expect(wrapper.find(`input[name='email']`)).toHaveLength(1);
     expect(wrapper.find(`input[name='password']`)).toHaveLength(1);

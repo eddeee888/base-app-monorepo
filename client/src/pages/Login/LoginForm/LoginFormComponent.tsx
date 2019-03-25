@@ -20,7 +20,7 @@ export type LoginFormikFn = (
 ) => void;
 
 interface Props {
-  handleSubmit: LoginFormikFn;
+  onSubmit: LoginFormikFn;
   generalFormError: FormErrorProps;
   isSubmitting: boolean;
 }
@@ -31,7 +31,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 const LoginFormComponent: React.FunctionComponent<Props> = ({
-  handleSubmit,
+  onSubmit,
   generalFormError,
   isSubmitting
 }) => {
@@ -41,7 +41,7 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({
     <Formik<LoginInput>
       initialValues={{ email: '', password: '' }}
       validationSchema={LoginSchema}
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
     >
       {({ errors, touched }) => (
         <Form>

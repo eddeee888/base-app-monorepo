@@ -15,11 +15,7 @@ const LoginForm: React.FunctionComponent = () => {
         <LoginFormComponent
           generalFormError={formError.formErrorProps}
           isSubmitting={loading}
-          handleSubmit={createHandleLoginFn(
-            login,
-            setViewer,
-            formError.setError
-          )}
+          onSubmit={createHandleLoginFn(login, setViewer, formError.setError)}
         />
       )}
     </LoginFormMutation>
