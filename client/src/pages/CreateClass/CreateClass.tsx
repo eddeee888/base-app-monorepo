@@ -41,7 +41,9 @@ const CreateClass: React.FunctionComponent = () => {
 
   // TOTEST
   if (!params.formPart) {
-    return <Redirect to={linkgenCreateClass(defaultFormPart, params.id)} />;
+    return (
+      <Redirect to={linkgenCreateClass(defaultFormPart, params.classId)} />
+    );
   }
 
   return (

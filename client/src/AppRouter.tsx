@@ -21,7 +21,7 @@ const AppRouter = () => (
           path={[
             linkgen(Paths.createClass),
             linkgen(Paths.createClass) + '/:formPart(details|time)?',
-            linkgen(Paths.createClass) + '/:id?/:formPart(details|time)?'
+            linkgen(Paths.createClass) + '/:classId?/:formPart(details|time)?'
           ]}
           component={CreateClass}
         />

@@ -27,8 +27,8 @@ const useCreateClassNav: UseCreateClassNavFn = () => {
   }
 
   return {
-    nextForm: linkgenCreateClass(nextForm, params.id),
-    previousForm: linkgenCreateClass(previousForm, params.id)
+    nextForm: linkgenCreateClass(nextForm, params.classId),
+    previousForm: linkgenCreateClass(previousForm, params.classId)
   };
 };
 

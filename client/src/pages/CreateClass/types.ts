@@ -1,5 +1,5 @@
 export type CreateClassFormPart = 'details' | 'time';
 export interface CreateClassParams {
-  id?: string;
+  classId?: string;
   formPart?: CreateClassFormPart;
 }
