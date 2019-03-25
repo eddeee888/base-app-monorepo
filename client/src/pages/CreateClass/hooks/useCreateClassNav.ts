@@ -4,8 +4,8 @@ import { CreateClassFormPart } from '../types';
 import useCreateClassParams from './useCreateClassParams';
 
 type UseCreateClassNavFn = () => {
-  nextForm: string | undefined;
-  previousForm: string | undefined;
+  next: string | undefined;
+  previous: string | undefined;
 };
 
 // TOTEST
@@ -27,8 +27,8 @@ const useCreateClassNav: UseCreateClassNavFn = () => {
   }
 
   return {
-    nextForm: linkgenCreateClass(nextForm, params.classId),
-    previousForm: linkgenCreateClass(previousForm, params.classId)
+    next: linkgenCreateClass(nextForm, params.classId),
+    previous: linkgenCreateClass(previousForm, params.classId)
   };
 };
 
