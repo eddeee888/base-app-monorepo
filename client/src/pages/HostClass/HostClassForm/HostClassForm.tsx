@@ -3,10 +3,7 @@ import React from 'react';
 import * as Yup from 'yup';
 import useHostClassNav from '../hooks/useHostClassNav';
 import ClassCategoriesQuery from './ClassCategoriesQuery';
-import ClassDetails from './ClassDetails';
-import ClassSummary from './ClassSummary';
-import ClassTimes from './ClassTimes';
-import Navigation from './Navigation';
+import HostClassFormComponent from './HostClassFormComponent';
 import { HostClassInput } from './types';
 
 const HostClassSchema = Yup.object().shape({
@@ -20,7 +17,7 @@ const HostClassForm: React.FunctionComponent = () => {
   const { currentFormPart } = useHostClassNav();
   return (
     <ClassCategoriesQuery>
-      {result => (
+      {categoriesResult => (
         <Formik<HostClassInput>
           initialValues={{
             className: '',
@@ -32,16 +29,11 @@ const HostClassForm: React.FunctionComponent = () => {
         >
           {formikProps => (
             <Form>
-              {currentFormPart === 'details' && (
-                <ClassDetails
-                  formikProps={formikProps}
-                  categoriesResult={result}
-                />
-              )}
-              {currentFormPart === 'time' && <ClassTimes />}
-              {currentFormPart === 'summary' && <ClassSummary />}
-
-              <Navigation />
+              <HostClassFormComponent
+                categoriesResult={categoriesResult}
+                formikProps={formikProps}
+                currentFormPart={currentFormPart}
+              />
             </Form>
           )}
         </Formik>

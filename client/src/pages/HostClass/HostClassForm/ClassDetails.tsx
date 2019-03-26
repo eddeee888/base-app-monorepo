@@ -17,17 +17,12 @@ interface Props {
 }
 
 // TOTEST
-const ClassGeneralDetails: React.FunctionComponent<Props> = ({
+const ClassDetails: React.FunctionComponent<Props> = ({
   formikProps: { errors, touched },
   categoriesResult: { data, error, loading }
 }) => {
   if (!data || !data.classCategories || loading) {
     return <Spinner fullWidth />;
-  }
-
-  // TODO: handle error here!
-  if (error) {
-    return <div>Error</div>;
   }
 
   return (
@@ -96,4 +91,4 @@ const generateOptions = (
   return options;
 };
 
-export default ClassGeneralDetails;
+export default ClassDetails;
