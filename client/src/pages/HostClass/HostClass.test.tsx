@@ -1,17 +1,21 @@
 import { mount } from 'enzyme';
 import React from 'react';
+import { MockedProvider } from 'react-apollo/test-utils';
 import { Redirect, StaticRouter } from 'react-router';
 import Main from 'src/common/components/Main';
 import Paper from 'src/common/components/Paper';
 import ViewerContext from 'src/common/components/ViewerContext';
 import { Paths } from 'src/common/helpers/pathing';
+import ClassDetails from './components/ClassDetails';
+import ClassSessions from './components/ClassSessions';
+import ClassSummary from './components/ClassSummary';
 import { defaultFormPart, formOrder } from './constants';
 import useHostClassParams from './hooks/useHostClassParams';
 import HostClass from './HostClass';
-import HostClassForm from './HostClassForm';
 import { HostClassFormPart } from './types';
 
 jest.mock('./hooks/useHostClassParams');
+jest.mock('./hooks/useHostClassNav');
 
 const viewerContextValue = {
   viewer: null,
@@ -85,6 +89,12 @@ describe('<HostClass />: has viewer and has form part', () => {
     classId: string | undefined;
   }
 
+  const formPartComponents = {
+    details: ClassDetails,
+    sessions: ClassSessions,
+    summary: ClassSummary
+  };
+
   const testCasesWithoutClassId: TestCase[] = formOrder.map(formPart => ({
     formPart,
     classId: undefined
@@ -105,13 +115,15 @@ describe('<HostClass />: has viewer and has form part', () => {
       });
 
       const wrapper = mount(
-        <StaticRouter context={{}}>
-          <ViewerContext.Provider
-            value={{ ...viewerContextValue, viewer: { id: 'viewer1' } }}
-          >
-            <HostClass />
-          </ViewerContext.Provider>
-        </StaticRouter>
+        <MockedProvider>
+          <StaticRouter context={{}}>
+            <ViewerContext.Provider
+              value={{ ...viewerContextValue, viewer: { id: 'viewer1' } }}
+            >
+              <HostClass />
+            </ViewerContext.Provider>
+          </StaticRouter>
+        </MockedProvider>
       );
 
       expect(
@@ -119,7 +131,13 @@ describe('<HostClass />: has viewer and has form part', () => {
       );
       expect(wrapper.find(Main)).toHaveLength(1);
       expect(wrapper.find(Paper)).toHaveLength(1);
-      expect(wrapper.find(HostClassForm)).toHaveLength(1);
+      expect(wrapper.find(formPartComponents[formPart])).toHaveLength(1);
+      Object.keys(formPartComponents)
+        .filter(key => key !== formPart)
+        .forEach((part: string) => {
+          // @ts-ignore
+          expect(wrapper.find(formPartComponents[part])).toHaveLength(0);
+        });
     });
   });
 });

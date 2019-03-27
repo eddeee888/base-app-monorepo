@@ -8,10 +8,11 @@ import ViewerContext from 'src/common/components/ViewerContext';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
 import { spacingRem } from 'src/common/helpers/spacing';
 import { breakpoints } from 'src/common/styles/media';
-import ClassDetails from './ClassDetails';
+import ClassDetails from 'src/pages/HostClass/components/ClassDetails';
+import ClassSessions from 'src/pages/HostClass/components/ClassSessions';
+import ClassSummary from 'src/pages/HostClass/components/ClassSummary';
 import { defaultFormPart } from './constants';
 import linkgenHostClass from './helper/linkgenHostClass';
-import useHostClassNav from './hooks/useHostClassNav';
 import useHostClassParams from './hooks/useHostClassParams';
 
 const mainContentClassName = css`
@@ -31,9 +32,6 @@ const HostClass: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
   const params = useHostClassParams();
 
-  // TOTEST
-  const { currentFormPart } = useHostClassNav();
-
   if (!viewer) {
     return (
       <Redirect
@@ -51,7 +49,11 @@ const HostClass: React.FunctionComponent = () => {
       <div className={mainContentClassName}>
         <H1 align="center">Host a class</H1>
         <div className={paperContainerClassName}>
-          <Paper>{currentFormPart === 'details' && <ClassDetails />}</Paper>
+          <Paper>
+            {params.formPart === 'details' && <ClassDetails />}
+            {params.formPart === 'sessions' && <ClassSessions />}
+            {params.formPart === 'summary' && <ClassSummary />}
+          </Paper>
         </div>
       </div>
     </Main>
