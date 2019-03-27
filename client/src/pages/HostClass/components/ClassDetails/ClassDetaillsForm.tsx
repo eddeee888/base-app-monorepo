@@ -9,110 +9,95 @@ import Text from 'src/common/components/Text';
 import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
 import * as Yup from 'yup';
+import { classDetailsInitialValues } from '../../constants';
+import { ClassDetailsInput, UpdateState } from '../../types';
 import Navigation from '../Navigation';
 import { ClassCategoryData } from './__generated__/ClassCategoryData';
-import ClassCategoriesQuery from './ClassCategoriesQuery';
-
-interface ClassDetailsInput {
-  className: string;
-  classCategory: string;
-  classDescription: string;
-}
+import { ClassCategoryQueryResult } from './ClassCategoriesQuery';
 
 const validationSchema = Yup.object().shape({
-  className: Yup.string().required('Class name is required'),
-  classCategory: Yup.string().required('Class category is required'),
-  classDescription: Yup.string()
+  name: Yup.string().required('Class name is required'),
+  category: Yup.string().required('Class category is required'),
+  desription: Yup.string()
 });
 
-const ClassDetailsForm: React.FunctionComponent = () => (
-  <ClassCategoriesQuery>
-    {({ error, loading, data }) => (
-      <>
-        {error && (
-          <Text align="center">
-            Unexpected error occurred. Please try again later.
-          </Text>
-        )}
+interface Props {
+  categoryResult: ClassCategoryQueryResult;
+  updateState: UpdateState<ClassDetailsInput>;
+}
 
-        {loading && <Spinner fullWidth />}
-
-        {!error && !loading && (
-          <Formik<ClassDetailsInput>
-            validationSchema={validationSchema}
-            initialValues={{
-              className: '',
-              classCategory: '',
-              classDescription: ''
-            }}
-            onSubmit={() => {}}
-          >
-            {({ errors, touched }) => (
-              <Form>
-                <Grid container>
-                  <Grid item xs={12}>
-                    <Field name="className">
-                      {({ field }: FieldProps<ClassDetailsInput>) => (
-                        <TextInput
-                          {...field}
-                          label="Class name*"
-                          placeholder="Choose your class name. e.g. Piano lession, Yoga class, etc."
-                          error={checkIfError(
-                            errors.className,
-                            touched.className
-                          )}
-                        />
-                      )}
-                    </Field>
-                    <FormError
-                      error={errors.className}
-                      display={touched.className}
-                    />
-
-                    <Field name="classCategory">
-                      {({ field }: FieldProps<ClassDetailsInput>) => (
-                        <Select
-                          {...field}
-                          label="Class category*"
-                          options={generateOptions(data)}
-                          error={checkIfError(
-                            errors.classCategory,
-                            touched.classCategory
-                          )}
-                        />
-                      )}
-                    </Field>
-                    <FormError
-                      error={errors.classCategory}
-                      display={touched.classCategory}
-                    />
-
-                    <Field name="classDescription">
-                      {({ field }: FieldProps<ClassDetailsInput>) => (
-                        <TextArea
-                          label="Class description"
-                          error={checkIfError(
-                            errors.classDescription,
-                            touched.classDescription
-                          )}
-                          rows={5}
-                          placeholder={
-                            'Tell the learners what your class is about'
-                          }
-                          {...field}
-                        />
-                      )}
-                    </Field>
-                  </Grid>
-                </Grid>
-                <Navigation />
-              </Form>
-            )}
-          </Formik>
-        )}
-      </>
+// TOTEST
+const ClassDetailsForm: React.FunctionComponent<Props> = ({
+  categoryResult: { error, loading, data },
+  updateState
+}) => (
+  <>
+    {error && (
+      <Text align="center">
+        Unexpected error occurred. Please try again later.
+      </Text>
     )}
-  </ClassCategoriesQuery>
+
+    {loading && <Spinner fullWidth />}
+
+    {!error && !loading && (
+      <Formik<ClassDetailsInput>
+        validationSchema={validationSchema}
+        initialValues={classDetailsInitialValues}
+        onSubmit={values => {
+          updateState(values, true);
+        }}
+      >
+        {({ errors, touched }) => (
+          <Form>
+            <Grid container>
+              <Grid item xs={12}>
+                <Field name="name">
+                  {({ field }: FieldProps<ClassDetailsInput>) => (
+                    <TextInput
+                      {...field}
+                      label="Class name*"
+                      placeholder="Choose your class name. e.g. Piano lession, Yoga class, etc."
+                      error={checkIfError(errors.name, touched.name)}
+                    />
+                  )}
+                </Field>
+                <FormError error={errors.name} display={touched.name} />
+
+                <Field name="category">
+                  {({ field }: FieldProps<ClassDetailsInput>) => (
+                    <Select
+                      {...field}
+                      label="Class category*"
+                      options={generateOptions(data)}
+                      error={checkIfError(errors.category, touched.category)}
+                    />
+                  )}
+                </Field>
+                <FormError error={errors.category} display={touched.category} />
+
+                <Field name="description">
+                  {({ field }: FieldProps<ClassDetailsInput>) => (
+                    <TextArea
+                      label="Class description"
+                      error={checkIfError(
+                        errors.description,
+                        touched.description
+                      )}
+                      rows={5}
+                      placeholder={'Tell the learners what your class is about'}
+                      {...field}
+                    />
+                  )}
+                </Field>
+              </Grid>
+            </Grid>
+            <Navigation />
+          </Form>
+        )}
+      </Formik>
+    )}
+  </>
 );
 
 const generateOptions = (

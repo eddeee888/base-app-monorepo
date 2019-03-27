@@ -14,6 +14,7 @@ import ClassSummary from 'src/pages/HostClass/components/ClassSummary';
 import { defaultFormPart } from './constants';
 import linkgenHostClass from './helper/linkgenHostClass';
 import useHostClassParams from './hooks/useHostClassParams';
+import useHostClassState from './hooks/useHostClassState';
 
 const mainContentClassName = css`
   padding-top: ${spacingRem(3)}rem;
@@ -31,6 +32,7 @@ const paperContainerClassName = css`
 const HostClass: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
   const params = useHostClassParams();
+  const { details } = useHostClassState();
 
   if (!viewer) {
     return (
@@ -50,7 +52,9 @@ const HostClass: React.FunctionComponent = () => {
         <H1 align="center">Host a class</H1>
         <div className={paperContainerClassName}>
           <Paper>
-            {params.formPart === 'details' && <ClassDetails />}
+            {params.formPart === 'details' && (
+              <ClassDetails updateState={details.updateState} />
+            )}
             {params.formPart === 'sessions' && <ClassSessions />}
             {params.formPart === 'summary' && <ClassSummary />}
           </Paper>

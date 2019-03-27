@@ -1,25 +1,18 @@
 import React from 'react';
-import Spinner from 'src/common/components/Spinner';
-import Text from 'src/common/components/Text';
+import { ClassDetailsInput, UpdateState } from '../../types';
 import ClassCategoriesQuery from './ClassCategoriesQuery';
 import ClassDetailsForm from './ClassDetaillsForm';
 
+interface Props {
+  updateState: UpdateState<ClassDetailsInput>;
+}
+
 // TOTEST
-const ClassDetails: React.FunctionComponent = () => {
+const ClassDetails: React.FunctionComponent<Props> = ({ updateState }) => {
   return (
     <ClassCategoriesQuery>
-      {({ error, loading, data }) => (
-        <>
-          {error && (
-            <Text align="center">
-              Unexpected error occurred. Please try again later.
-            </Text>
-          )}
-
-          {loading && <Spinner fullWidth />}
-
-          {!error && !loading && <ClassDetailsForm />}
-        </>
+      {result => (
+        <ClassDetailsForm categoryResult={result} updateState={updateState} />
       )}
     </ClassCategoriesQuery>
   );
