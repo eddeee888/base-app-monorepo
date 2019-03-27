@@ -8,10 +8,11 @@ import ViewerContext from 'src/common/components/ViewerContext';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
 import { spacingRem } from 'src/common/helpers/spacing';
 import { breakpoints } from 'src/common/styles/media';
+import ClassDetails from './ClassDetails';
 import { defaultFormPart } from './constants';
 import linkgenHostClass from './helper/linkgenHostClass';
+import useHostClassNav from './hooks/useHostClassNav';
 import useHostClassParams from './hooks/useHostClassParams';
-import HostClassForm from './HostClassForm';
 
 const mainContentClassName = css`
   padding-top: ${spacingRem(3)}rem;
@@ -30,6 +31,9 @@ const HostClass: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
   const params = useHostClassParams();
 
+  // TOTEST
+  const { currentFormPart } = useHostClassNav();
+
   if (!viewer) {
     return (
       <Redirect
@@ -47,9 +51,7 @@ const HostClass: React.FunctionComponent = () => {
       <div className={mainContentClassName}>
         <H1 align="center">Host a class</H1>
         <div className={paperContainerClassName}>
-          <Paper>
-            <HostClassForm />
-          </Paper>
+          <Paper>{currentFormPart === 'details' && <ClassDetails />}</Paper>
         </div>
       </div>
     </Main>

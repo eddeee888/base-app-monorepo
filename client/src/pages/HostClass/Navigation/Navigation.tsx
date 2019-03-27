@@ -17,13 +17,7 @@ const Navigation: React.FunctionComponent = () => {
         )}
       </Grid>
       <Grid item xs={4}>
-        {next && (
-          <Link to={next}>
-            <Button>Next</Button>
-          </Link>
-        )}
-
-        {!next && <Button type="submit">Submit</Button>}
+        <Button type="submit">{next ? 'Next' : 'Submit'}</Button>
       </Grid>
     </Grid>
   );

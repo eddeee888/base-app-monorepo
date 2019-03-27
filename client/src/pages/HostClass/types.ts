@@ -1,4 +1,4 @@
-export type HostClassFormPart = 'details' | 'time' | 'summary';
+export type HostClassFormPart = 'details' | 'sessions' | 'summary';
 export interface HostClassParams {
   classId?: string;
   formPart?: HostClassFormPart;
