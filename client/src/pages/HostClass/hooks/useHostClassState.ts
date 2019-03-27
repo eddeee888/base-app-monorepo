@@ -1,11 +1,15 @@
 import { useState } from 'react';
-import { classDetailsInitialValues } from '../constants';
-import { ClassDetailsInput, UpdateState } from '../types';
+import { initialValues } from '../constants';
+import { ClassContactInput, ClassDetailsInput, UpdateState } from '../types';
 
 interface State {
   details: {
     values: ClassDetailsInput;
-    validated: boolean;
+    isValidated: boolean;
+  };
+  contact: {
+    values: ClassContactInput;
+    isValidated: boolean;
   };
 }
 
@@ -14,8 +18,13 @@ type KeyOfState = keyof State;
 interface Result {
   details: {
     values: ClassDetailsInput;
-    validated: boolean;
+    isValidated: boolean;
     updateState: UpdateState<ClassDetailsInput>;
+  };
+  contact: {
+    values: ClassContactInput;
+    isValidated: boolean;
+    updateState: UpdateState<ClassContactInput>;
   };
 }
 
@@ -23,23 +32,33 @@ interface Result {
 const useHostClassState = (): Result => {
   const [state, setState] = useState<State>({
     details: {
-      values: classDetailsInitialValues,
-      validated: false
+      values: initialValues.details,
+      isValidated: false
+    },
+    contact: {
+      values: initialValues.contact,
+      isValidated: false
     }
   });
 
-  const createResultPartial = <I extends ClassDetailsInput>(
+  const createResultPartial = <I>(
     formPart: KeyOfState
-  ) => {
-    const updateState: UpdateState<I> = (values, validated) => {
+  ): {
+    values: I;
+    isValidated: boolean;
+    updateState: UpdateState<I>;
+  } => {
+    const updateState: UpdateState<I> = (values: I, isValidated) => {
       setState({
         ...state,
         [formPart]: {
           values,
-          validated
+          isValidated
         }
       });
     };
+
+    // TOFIX
     return {
       ...state[formPart],
       updateState
@@ -47,7 +66,8 @@ const useHostClassState = (): Result => {
   };
 
   return {
-    details: createResultPartial('details')
+    details: createResultPartial<ClassDetailsInput>('details'),
+    contact: createResultPartial<ClassContactInput>('contact')
   };
 };
 

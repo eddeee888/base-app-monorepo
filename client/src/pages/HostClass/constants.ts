@@ -1,4 +1,8 @@
-import { ClassDetailsInput, HostClassFormPart } from './types';
+import {
+  ClassContactInput,
+  ClassDetailsInput,
+  HostClassFormPart
+} from './types';
 
 export const formOrder: HostClassFormPart[] = [
   'details',
@@ -6,8 +10,17 @@ export const formOrder: HostClassFormPart[] = [
   'summary'
 ];
 export const defaultFormPart = formOrder[0];
-export const classDetailsInitialValues: ClassDetailsInput = {
-  name: '',
-  category: '',
-  description: ''
+export const initialValues = {
+  details: {
+    name: '',
+    category: '',
+    description: ''
+  } as ClassDetailsInput,
+  contact: {
+    streetAddress: '',
+    city: '',
+    postcode: '',
+    country: '',
+    contactNumber: ''
+  } as ClassContactInput
 };

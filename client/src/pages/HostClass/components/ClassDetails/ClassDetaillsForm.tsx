@@ -9,16 +9,16 @@ import Text from 'src/common/components/Text';
 import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
 import * as Yup from 'yup';
-import { classDetailsInitialValues } from '../../constants';
+import { initialValues } from '../../constants';
 import { ClassDetailsInput, UpdateState } from '../../types';
 import Navigation from '../Navigation';
 import { ClassCategoryData } from './__generated__/ClassCategoryData';
 import { ClassCategoryQueryResult } from './ClassCategoriesQuery';
 
-const validationSchema = Yup.object().shape({
+const validationSchema = Yup.object().shape<ClassDetailsInput>({
   name: Yup.string().required('Class name is required'),
   category: Yup.string().required('Class category is required'),
-  desription: Yup.string()
+  description: Yup.string()
 });
 
 interface Props {
@@ -43,7 +43,7 @@ const ClassDetailsForm: React.FunctionComponent<Props> = ({
     {!error && !loading && (
       <Formik<ClassDetailsInput>
         validationSchema={validationSchema}
-        initialValues={classDetailsInitialValues}
+        initialValues={initialValues.details}
         onSubmit={values => {
           updateState(values, true);
         }}

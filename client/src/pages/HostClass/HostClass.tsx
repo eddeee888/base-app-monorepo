@@ -11,6 +11,7 @@ import { breakpoints } from 'src/common/styles/media';
 import ClassDetails from 'src/pages/HostClass/components/ClassDetails';
 import ClassSessions from 'src/pages/HostClass/components/ClassSessions';
 import ClassSummary from 'src/pages/HostClass/components/ClassSummary';
+import ClassContact from './components/ClassContact';
 import { defaultFormPart } from './constants';
 import linkgenHostClass from './helper/linkgenHostClass';
 import useHostClassParams from './hooks/useHostClassParams';
@@ -55,6 +56,7 @@ const HostClass: React.FunctionComponent = () => {
             {params.formPart === 'details' && (
               <ClassDetails updateState={details.updateState} />
             )}
+            {params.formPart === 'contact' && <ClassContact />}
             {params.formPart === 'sessions' && <ClassSessions />}
             {params.formPart === 'summary' && <ClassSummary />}
           </Paper>
