@@ -2,6 +2,7 @@ import { HostClassFormPart, HostClassState } from './types';
 
 export const formOrder: HostClassFormPart[] = [
   'details',
+  'contact',
   'sessions',
   'summary'
 ];
