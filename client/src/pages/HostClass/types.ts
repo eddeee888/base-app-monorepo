@@ -17,4 +17,9 @@ export interface ClassContactInput {
   contactNumber: string;
 }
 
-export type UpdateState<I> = (values: I, validated: boolean) => void;
+export interface HostClassState {
+  details: ClassDetailsInput;
+  contact: ClassContactInput;
+}
+
+export type SetFormPartValues<I> = (values: I) => void;

@@ -10,7 +10,7 @@ import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
 import * as Yup from 'yup';
 import { initialValues } from '../../constants';
-import { ClassDetailsInput, UpdateState } from '../../types';
+import { ClassDetailsInput, SetFormPartValues } from '../../types';
 import Navigation from '../Navigation';
 import { ClassCategoryData } from './__generated__/ClassCategoryData';
 import { ClassCategoryQueryResult } from './ClassCategoriesQuery';
@@ -23,13 +23,13 @@ const validationSchema = Yup.object().shape<ClassDetailsInput>({
 
 interface Props {
   categoryResult: ClassCategoryQueryResult;
-  updateState: UpdateState<ClassDetailsInput>;
+  setValues: SetFormPartValues<ClassDetailsInput>;
 }
 
 // TOTEST
 const ClassDetailsForm: React.FunctionComponent<Props> = ({
   categoryResult: { error, loading, data },
-  updateState
+  setValues
 }) => (
   <>
     {error && (
@@ -45,7 +45,7 @@ const ClassDetailsForm: React.FunctionComponent<Props> = ({
         validationSchema={validationSchema}
         initialValues={initialValues.details}
         onSubmit={values => {
-          updateState(values, true);
+          setValues(values);
         }}
       >
         {({ errors, touched }) => (

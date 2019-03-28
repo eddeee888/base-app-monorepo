@@ -33,7 +33,7 @@ const paperContainerClassName = css`
 const HostClass: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
   const params = useHostClassParams();
-  const { details } = useHostClassState();
+  const { setPartialValues } = useHostClassState();
 
   if (!viewer) {
     return (
@@ -54,7 +54,7 @@ const HostClass: React.FunctionComponent = () => {
         <div className={paperContainerClassName}>
           <Paper>
             {params.formPart === 'details' && (
-              <ClassDetails updateState={details.updateState} />
+              <ClassDetails setValues={setPartialValues.details} />
             )}
             {params.formPart === 'contact' && <ClassContact />}
             {params.formPart === 'sessions' && <ClassSessions />}

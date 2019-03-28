@@ -1,18 +1,18 @@
 import React from 'react';
-import { ClassDetailsInput, UpdateState } from '../../types';
+import { ClassDetailsInput, SetFormPartValues } from '../../types';
 import ClassCategoriesQuery from './ClassCategoriesQuery';
 import ClassDetailsForm from './ClassDetaillsForm';
 
 interface Props {
-  updateState: UpdateState<ClassDetailsInput>;
+  setValues: SetFormPartValues<ClassDetailsInput>;
 }
 
 // TOTEST
-const ClassDetails: React.FunctionComponent<Props> = ({ updateState }) => {
+const ClassDetails: React.FunctionComponent<Props> = ({ setValues }) => {
   return (
     <ClassCategoriesQuery>
       {result => (
-        <ClassDetailsForm categoryResult={result} updateState={updateState} />
+        <ClassDetailsForm categoryResult={result} setValues={setValues} />
       )}
     </ClassCategoriesQuery>
   );

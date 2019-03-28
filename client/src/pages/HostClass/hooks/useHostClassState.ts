@@ -1,73 +1,37 @@
 import { useState } from 'react';
 import { initialValues } from '../constants';
-import { ClassContactInput, ClassDetailsInput, UpdateState } from '../types';
-
-interface State {
-  details: {
-    values: ClassDetailsInput;
-    isValidated: boolean;
-  };
-  contact: {
-    values: ClassContactInput;
-    isValidated: boolean;
-  };
-}
-
-type KeyOfState = keyof State;
+import {
+  ClassContactInput,
+  ClassDetailsInput,
+  HostClassFormPart,
+  HostClassState,
+  SetFormPartValues
+} from '../types';
 
 interface Result {
-  details: {
-    values: ClassDetailsInput;
-    isValidated: boolean;
-    updateState: UpdateState<ClassDetailsInput>;
-  };
-  contact: {
-    values: ClassContactInput;
-    isValidated: boolean;
-    updateState: UpdateState<ClassContactInput>;
+  values: HostClassState;
+  setPartialValues: {
+    details: SetFormPartValues<ClassDetailsInput>;
+    contact: SetFormPartValues<ClassContactInput>;
   };
 }
 
 // TOTEST
 const useHostClassState = (): Result => {
-  const [state, setState] = useState<State>({
-    details: {
-      values: initialValues.details,
-      isValidated: false
-    },
-    contact: {
-      values: initialValues.contact,
-      isValidated: false
-    }
-  });
+  const [values, setValues] = useState<HostClassState>(initialValues);
 
-  const createResultPartial = <I>(
-    formPart: KeyOfState
-  ): {
-    values: I;
-    isValidated: boolean;
-    updateState: UpdateState<I>;
-  } => {
-    const updateState: UpdateState<I> = (values: I, isValidated) => {
-      setState({
-        ...state,
-        [formPart]: {
-          values,
-          isValidated
-        }
-      });
-    };
-
-    // TOFIX
-    return {
-      ...state[formPart],
-      updateState
-    };
-  };
+  function createUpdateFn<I>(
+    formPart: HostClassFormPart
+  ): SetFormPartValues<I> {
+    return newValues => setValues({ ...values, [formPart]: newValues });
+  }
 
   return {
-    details: createResultPartial<ClassDetailsInput>('details'),
-    contact: createResultPartial<ClassContactInput>('contact')
+    values,
+    setPartialValues: {
+      details: createUpdateFn<ClassDetailsInput>('details'),
+      contact: createUpdateFn<ClassContactInput>('contact')
+    }
   };
 };
 
