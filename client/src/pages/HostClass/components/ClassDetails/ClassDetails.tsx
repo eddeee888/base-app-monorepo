@@ -7,12 +7,13 @@ interface Props {
   setValues: SetFormPartValues<ClassDetailsInput>;
 }
 
-// TOTEST
 const ClassDetails: React.FunctionComponent<Props> = ({ setValues }) => {
   return (
     <ClassCategoriesQuery>
       {result => (
-        <ClassDetailsForm categoryResult={result} setValues={setValues} />
+        <>
+          <ClassDetailsForm categoryResult={result} setValues={setValues} />
+        </>
       )}
     </ClassCategoriesQuery>
   );
