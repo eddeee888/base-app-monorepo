@@ -13,11 +13,7 @@ const SignupForm: React.FunctionComponent = () => {
     <SignupFormMutation>
       {(signup, { loading }) => (
         <SignupFormComponent
-          handleSubmit={createHandleSignupFn(
-            signup,
-            setViewer,
-            formError.setError
-          )}
+          onSubmit={createHandleSignupFn(signup, setViewer, formError.setError)}
           generalFormError={formError.formErrorProps}
           loading={loading}
         />

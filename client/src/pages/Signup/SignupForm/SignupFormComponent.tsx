@@ -33,13 +33,13 @@ const SignupSchema = Yup.object().shape({
 });
 
 interface Props {
-  handleSubmit: SignupFormikFn;
+  onSubmit: SignupFormikFn;
   loading: boolean;
   generalFormError: FormErrorProps;
 }
 
 const SignupFormComponent = ({
-  handleSubmit,
+  onSubmit,
   loading,
   generalFormError
 }: Props) => {
@@ -53,7 +53,7 @@ const SignupFormComponent = ({
         password: ''
       }}
       validationSchema={SignupSchema}
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
     >
       {({ errors, touched }) => (
         <Form>

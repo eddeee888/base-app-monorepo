@@ -8,10 +8,14 @@ import ViewerContext from 'src/common/components/ViewerContext';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
 import { spacingRem } from 'src/common/helpers/spacing';
 import { breakpoints } from 'src/common/styles/media';
+import ClassDetails from 'src/pages/HostClass/components/ClassDetails';
+import ClassSessions from 'src/pages/HostClass/components/ClassSessions';
+import ClassSummary from 'src/pages/HostClass/components/ClassSummary';
+import ClassContact from './components/ClassContact';
 import { defaultFormPart } from './constants';
 import linkgenHostClass from './helper/linkgenHostClass';
 import useHostClassParams from './hooks/useHostClassParams';
-import HostClassForm from './HostClassForm';
+import useHostClassState from './hooks/useHostClassState';
 
 const mainContentClassName = css`
   padding-top: ${spacingRem(3)}rem;
@@ -29,6 +33,7 @@ const paperContainerClassName = css`
 const HostClass: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
   const params = useHostClassParams();
+  const { setPartialValues } = useHostClassState();
 
   if (!viewer) {
     return (
@@ -48,7 +53,12 @@ const HostClass: React.FunctionComponent = () => {
         <H1 align="center">Host a class</H1>
         <div className={paperContainerClassName}>
           <Paper>
-            <HostClassForm />
+            {params.formPart === 'details' && (
+              <ClassDetails setValues={setPartialValues.details} />
+            )}
+            {params.formPart === 'contact' && <ClassContact />}
+            {params.formPart === 'sessions' && <ClassSessions />}
+            {params.formPart === 'summary' && <ClassSummary />}
           </Paper>
         </div>
       </div>

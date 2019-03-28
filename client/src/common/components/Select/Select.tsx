@@ -2,7 +2,7 @@ import TextField from '@material-ui/core/TextField';
 import React from 'react';
 import OmittedTextFieldProps from 'src/common/helpers/typings/OmittedTextFieldProps';
 
-interface SelectOptions {
+export interface SelectOptions {
   value: string | number;
   label: string;
 }
