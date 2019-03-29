@@ -26,7 +26,6 @@ interface Props<V> {
   touched: FormikTouched<V>;
 }
 
-// TOTEST
 function FormField<V>({ name, children, errors, touched }: Props<V>) {
   return (
     <Field name={name}>
