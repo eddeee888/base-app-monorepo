@@ -14,7 +14,7 @@ const SignupForm: React.FunctionComponent = () => {
       {(signup, { loading }) => (
         <SignupFormComponent
           onSubmit={createHandleSignupFn(signup, setViewer, formError.setError)}
-          generalFormError={formError.formErrorProps}
+          generalFormError={formError.error}
           loading={loading}
         />
       )}

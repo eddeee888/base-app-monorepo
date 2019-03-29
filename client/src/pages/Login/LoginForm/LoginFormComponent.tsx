@@ -1,12 +1,10 @@
 import Grid from '@material-ui/core/Grid';
-import { Field, FieldProps, Form, Formik, FormikActions } from 'formik';
+import { Form, Formik, FormikActions } from 'formik';
 import React from 'react';
 import { LoginInput } from 'src/__generated__/globalTypes';
 import Button from 'src/common/components/Button';
-import FormError, {
-  checkIfError,
-  FormErrorProps
-} from 'src/common/components/FormError';
+import FormError from 'src/common/components/FormError';
+import FormField from 'src/common/components/FormField';
 import Link from 'src/common/components/Link';
 import Text from 'src/common/components/Text';
 import TextInput from 'src/common/components/TextInput';
@@ -21,7 +19,7 @@ export type LoginFormikFn = (
 
 interface Props {
   onSubmit: LoginFormikFn;
-  generalFormError: FormErrorProps;
+  generalFormError: string;
   isSubmitting: boolean;
 }
 
@@ -47,37 +45,22 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({
         <Form>
           <Grid container>
             <Grid item xs={12}>
-              <Field
-                name="email"
-                render={({ field }: FieldProps) => (
-                  <TextInput
-                    {...field}
-                    label="Email"
-                    error={checkIfError(errors.email, touched.email)}
-                  />
-                )}
-              />
-              <FormError error={errors.email} display={touched.email} />
+              <FormField name="email" errors={errors} touched={touched}>
+                {({ field }) => <TextInput {...field} label="Email" />}
+              </FormField>
             </Grid>
           </Grid>
           <Grid container>
             <Grid item xs={12}>
-              <Field
-                name="password"
-                render={({ field }: FieldProps) => (
-                  <TextInput
-                    {...field}
-                    type="password"
-                    label="Password"
-                    error={checkIfError(errors.password, touched.password)}
-                  />
+              <FormField name="password" errors={errors} touched={touched}>
+                {({ field }) => (
+                  <TextInput {...field} type="password" label="Password" />
                 )}
-              />
-              <FormError error={errors.password} display={touched.password} />
+              </FormField>
             </Grid>
           </Grid>
 
-          <FormError {...generalFormError} />
+          <FormError error={generalFormError} />
 
           <Text gutterBottom>
             Don't have an account?{' '}

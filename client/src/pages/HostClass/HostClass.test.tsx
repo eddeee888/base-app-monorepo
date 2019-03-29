@@ -6,6 +6,7 @@ import Main from 'src/common/components/Main';
 import Paper from 'src/common/components/Paper';
 import ViewerContext from 'src/common/components/ViewerContext';
 import { Paths } from 'src/common/helpers/pathing';
+import ClassContact from './components/ClassContact';
 import ClassDetails from './components/ClassDetails';
 import ClassSessions from './components/ClassSessions';
 import ClassSummary from './components/ClassSummary';
@@ -91,6 +92,7 @@ describe('<HostClass />: has viewer and has form part', () => {
 
   const formPartComponents = {
     details: ClassDetails,
+    contact: ClassContact,
     sessions: ClassSessions,
     summary: ClassSummary
   };

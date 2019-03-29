@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid';
-import { Field, FieldProps, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import React from 'react';
-import FormError, { checkIfError } from 'src/common/components/FormError';
+import FormField from 'src/common/components/FormField';
 import Select from 'src/common/components/Select';
 import { SelectOptions } from 'src/common/components/Select/Select';
 import Spinner from 'src/common/components/Spinner';
@@ -52,44 +52,36 @@ const ClassDetailsForm: React.FunctionComponent<Props> = ({
           <Form>
             <Grid container>
               <Grid item xs={12}>
-                <Field name="name">
-                  {({ field }: FieldProps<ClassDetailsInput>) => (
+                <FormField name="name" errors={errors} touched={touched}>
+                  {({ field }) => (
                     <TextInput
                       {...field}
                       label="Class name*"
                       placeholder="Choose your class name. e.g. Piano lession, Yoga class, etc."
-                      error={checkIfError(errors.name, touched.name)}
                     />
                   )}
-                </Field>
-                <FormError error={errors.name} display={touched.name} />
+                </FormField>
 
-                <Field name="category">
-                  {({ field }: FieldProps<ClassDetailsInput>) => (
+                <FormField name="category" errors={errors} touched={touched}>
+                  {({ field }) => (
                     <Select
                       {...field}
                       label="Class category*"
                       options={generateOptions(data)}
-                      error={checkIfError(errors.category, touched.category)}
                     />
                   )}
-                </Field>
-                <FormError error={errors.category} display={touched.category} />
+                </FormField>
 
-                <Field name="description">
-                  {({ field }: FieldProps<ClassDetailsInput>) => (
+                <FormField name="description" errors={errors} touched={touched}>
+                  {({ field }) => (
                     <TextArea
                       label="Class description"
-                      error={checkIfError(
-                        errors.description,
-                        touched.description
-                      )}
                       rows={5}
                       placeholder={'Tell the learners what your class is about'}
                       {...field}
                     />
                   )}
-                </Field>
+                </FormField>
               </Grid>
             </Grid>
             <Navigation />
