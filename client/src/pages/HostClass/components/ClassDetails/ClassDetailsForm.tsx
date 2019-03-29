@@ -10,7 +10,6 @@ import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
 import useHistory from 'src/common/hooks/useHistory';
 import * as Yup from 'yup';
-import { initialValues } from '../../constants';
 import useHostClassNav from '../../hooks/useHostClassNav';
 import { ClassDetailsInput, SetFormPartValues } from '../../types';
 import Navigation from '../Navigation';
@@ -26,11 +25,13 @@ const validationSchema = Yup.object().shape<ClassDetailsInput>({
 interface Props {
   categoryResult: ClassCategoryQueryResult;
   setValues: SetFormPartValues<ClassDetailsInput>;
+  initialValues: ClassDetailsInput;
 }
 
 const ClassDetailsForm: React.FunctionComponent<Props> = ({
   categoryResult: { error, loading, data },
-  setValues
+  setValues,
+  initialValues
 }) => {
   const history = useHistory();
   const { next } = useHostClassNav();
@@ -48,7 +49,7 @@ const ClassDetailsForm: React.FunctionComponent<Props> = ({
       {!error && !loading && (
         <Formik<ClassDetailsInput>
           validationSchema={validationSchema}
-          initialValues={initialValues.details}
+          initialValues={initialValues}
           onSubmit={values => {
             setValues(values);
             if (next) {
