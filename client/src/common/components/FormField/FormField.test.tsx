@@ -56,7 +56,7 @@ describe('<FormField />', () => {
   });
 
   testCases.forEach(({ errors, touched, isError }) => {
-    it('should show no FormError if not touched', () => {
+    it(`should have isError:${isError} if touched:${!!touched.field1} and has error:${!!errors.field1} `, () => {
       const wrapper = mountWithFormik(
         <FormField
           name="field1"

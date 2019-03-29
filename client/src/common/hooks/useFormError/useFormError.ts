@@ -7,7 +7,6 @@ export interface FormErrorObject {
 
 type UseFormErrorFn = (numberOfErrors: number) => FormErrorObject[];
 
-// TOTEST
 const useFormError: UseFormErrorFn = numberOfErrors => {
   const result: FormErrorObject[] = [...Array(numberOfErrors)].map(() => {
     const [error, setError] = useState<string>('');
