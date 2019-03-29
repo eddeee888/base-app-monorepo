@@ -16,7 +16,6 @@ interface Result {
   };
 }
 
-// TOTEST
 const useHostClassState = (): Result => {
   const [values, setValues] = useState<HostClassState>(initialValues);
 

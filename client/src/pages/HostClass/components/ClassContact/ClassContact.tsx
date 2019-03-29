@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import { initialValues } from '../../constants';
 import { ClassContactInput } from '../../types';
 
-// TOTEST
 const validationSchema = Yup.object().shape<ClassContactInput>({
   streetAddress: Yup.string().required('Street address is required'),
   city: Yup.string().required('City is required'),

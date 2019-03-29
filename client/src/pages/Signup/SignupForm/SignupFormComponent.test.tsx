@@ -3,7 +3,6 @@ import { mount, ReactWrapper } from 'enzyme';
 import { Field, Formik } from 'formik';
 import React from 'react';
 import { StaticRouter } from 'react-router';
-import FormError from 'src/common/components/FormError';
 import Link from 'src/common/components/Link';
 import { linkgen, Paths } from 'src/common/helpers/pathing';
 import SignupFormComponent from './SignupFormComponent';
@@ -11,10 +10,7 @@ import SignupFormComponent from './SignupFormComponent';
 const props = {
   onSubmit: jest.fn(),
   loading: false,
-  generalFormError: {
-    error: '',
-    display: false
-  }
+  generalFormError: ''
 };
 
 const assertFieldName = (
@@ -36,8 +32,6 @@ const assertCommonElements = (wrapper: ReactWrapper) => {
   assertFieldName(wrapper, 'firstName', 1);
   assertFieldName(wrapper, 'lastName', 1);
   assertFieldName(wrapper, 'password', 1);
-
-  expect(wrapper.find(FormError)).toHaveLength(5);
 
   expect(
     wrapper.find(Button).filterWhere(button => button.prop('type') === 'submit')
@@ -77,7 +71,7 @@ describe('<SignupFormComponent />', () => {
       <StaticRouter context={{}}>
         <SignupFormComponent
           {...props}
-          generalFormError={{ error: `OMG there's an error!`, display: true }}
+          generalFormError={`OMG there's an error!`}
         />
       </StaticRouter>
     );

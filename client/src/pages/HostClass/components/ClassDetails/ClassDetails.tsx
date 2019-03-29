@@ -1,7 +1,7 @@
 import React from 'react';
 import { ClassDetailsInput, SetFormPartValues } from '../../types';
 import ClassCategoriesQuery from './ClassCategoriesQuery';
-import ClassDetailsForm from './ClassDetaillsForm';
+import ClassDetailsForm from './ClassDetailsForm';
 
 interface Props {
   setValues: SetFormPartValues<ClassDetailsInput>;
