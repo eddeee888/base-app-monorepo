@@ -2,8 +2,8 @@ import { mount } from 'enzyme';
 import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';
 import ClassCategoriesQuery from './ClassCategoriesQuery';
-import ClassDetailsForm from './ClassDetaillsForm';
 import ClassDetails from './ClassDetails';
+import ClassDetailsForm from './ClassDetailsForm';
 
 describe('ClassDetails()', () => {
   const props = {
