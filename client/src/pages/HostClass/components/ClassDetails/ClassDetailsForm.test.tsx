@@ -1,10 +1,138 @@
 import { mount } from 'enzyme';
+import { Formik } from 'formik';
 import React from 'react';
+import { StaticRouter } from 'react-router';
+import Spinner from 'src/common/components/Spinner';
+import useHistory from 'src/common/hooks/useHistory';
+// @ts-ignore
+import useHostClassNav from 'src/pages/HostClass/hooks/useHostClassNav';
+import Navigation from '../Navigation';
 import ClassDetailsForm from './ClassDetailsForm';
 
+jest.mock('src/common/hooks/useHistory');
+jest.mock('src/pages/HostClass/hooks/useHostClassNav', () => ({
+  __esModule: true,
+  default: () => ({
+    next: '/link-to-next'
+  })
+}));
+
 describe('<ClassDetailsForm />', () => {
-  it.skip('TODO', () => {
-    // @ts-ignore
-    mount(<ClassDetailsForm />);
+  const props: any = {
+    categoryResult: {
+      error: undefined,
+      loading: false,
+      data: {
+        classCategories: [
+          { id: '100', name: 'Cat. one' },
+          { id: '200', name: 'Cat. two' }
+        ]
+      }
+    },
+    setValues: jest.fn()
+  };
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+  it('should render form if no error and not loading', () => {
+    const wrapper = mount(
+      <StaticRouter context={{}}>
+        <ClassDetailsForm {...props} />
+      </StaticRouter>
+    );
+
+    expect(wrapper.find('form')).toHaveLength(1);
+    expect(wrapper.find(`input[name='name']`)).toHaveLength(1);
+    expect(wrapper.find(`select[name='category']`)).toHaveLength(1);
+    expect(wrapper.find('option')).toHaveLength(3);
+    expect(
+      wrapper
+        .find('option')
+        .filterWhere(
+          option =>
+            option.text() === 'Cat. one' && option.prop('value') === '100'
+        )
+    ).toHaveLength(1);
+    expect(
+      wrapper
+        .find('option')
+        .filterWhere(
+          option =>
+            option.text() === 'Cat. two' && option.prop('value') === '200'
+        )
+    ).toHaveLength(1);
+    expect(wrapper.find(Navigation)).toHaveLength(1);
+    expect(wrapper.find(Spinner)).toHaveLength(0);
+    expect(wrapper.text()).not.toMatch(
+      /Unexpected error occurred. Please try again later./
+    );
+  });
+
+  it('should render error text if has error', () => {
+    const wrapper = mount(
+      <StaticRouter context={{}}>
+        <ClassDetailsForm
+          {...props}
+          categoryResult={{
+            ...props.categoryResult,
+            error: new Error('Error!')
+          }}
+        />
+      </StaticRouter>
+    );
+
+    expect(wrapper.text()).toMatch(
+      /Unexpected error occurred. Please try again later./
+    );
+    expect(wrapper.find(Spinner)).toHaveLength(0);
+  });
+
+  it('should render loading spinner if categories are being loaded', () => {
+    const wrapper = mount(
+      <StaticRouter context={{}}>
+        <ClassDetailsForm
+          {...props}
+          categoryResult={{
+            ...props.categoryResult,
+            loading: true
+          }}
+        />
+      </StaticRouter>
+    );
+
+    expect(wrapper.find(Spinner)).toHaveLength(1);
+    expect(wrapper.text()).not.toMatch(
+      /Unexpected error occurred. Please try again later./
+    );
+  });
+
+  it('when form submits, should set state values and ', () => {
+    const push = jest.fn();
+    (useHistory as jest.Mock).mockReturnValueOnce({
+      push
+    });
+
+    const formValues = {
+      name: 'nameValue',
+      category: 'categoryValue',
+      description: 'descriptionValue'
+    };
+
+    const wrapper = mount(
+      <StaticRouter context={{}}>
+        <ClassDetailsForm {...props} />
+      </StaticRouter>
+    );
+
+    const handleSubmit = wrapper.find(Formik).prop('onSubmit');
+
+    handleSubmit(formValues, {} as any);
+
+    expect(props.setValues).toHaveBeenCalledTimes(1);
+    expect(props.setValues).toHaveBeenCalledWith(formValues);
+    expect(push).toHaveBeenCalledTimes(1);
+    expect(push).toHaveBeenCalledWith('/link-to-next');
   });
 });
