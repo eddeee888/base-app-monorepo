@@ -4,14 +4,12 @@ import {
   passwordValidation
 } from '@bit/eddeee888.learnd-utils.forms.validations';
 import Grid from '@material-ui/core/Grid';
-import { Field, FieldProps, Form, Formik, FormikActions } from 'formik';
+import { Form, Formik, FormikActions } from 'formik';
 import React from 'react';
 import { SignupInput } from 'src/__generated__/globalTypes';
 import Button from 'src/common/components/Button';
-import FormError, {
-  checkIfError,
-  FormErrorProps
-} from 'src/common/components/FormError';
+import FormError from 'src/common/components/FormError';
+import FormField from 'src/common/components/FormField';
 import Link from 'src/common/components/Link';
 import Text from 'src/common/components/Text';
 import TextInput from 'src/common/components/TextInput';
@@ -35,7 +33,7 @@ const SignupSchema = Yup.object().shape({
 interface Props {
   onSubmit: SignupFormikFn;
   loading: boolean;
-  generalFormError: FormErrorProps;
+  generalFormError: string;
 }
 
 const SignupFormComponent = ({
@@ -59,67 +57,36 @@ const SignupFormComponent = ({
         <Form>
           <Grid container>
             <Grid item xs={12}>
-              <Field
-                name="email"
-                render={({ field }: FieldProps) => (
-                  <TextInput
-                    {...field}
-                    label="Email"
-                    error={checkIfError(errors.email, touched.email)}
-                  />
-                )}
-              />
-              <FormError error={errors.email} display={touched.email} />
+              <FormField name="email" errors={errors} touched={touched}>
+                {({ field }) => <TextInput {...field} label="Email" />}
+              </FormField>
             </Grid>
           </Grid>
 
           <Grid container spacing={spacingPx(2)}>
             <Grid item xs={12} md={6}>
-              <Field
-                name="firstName"
-                render={({ field }: FieldProps) => (
-                  <TextInput
-                    {...field}
-                    label="First name"
-                    error={checkIfError(errors.firstName, touched.firstName)}
-                  />
-                )}
-              />
-              <FormError error={errors.firstName} display={touched.firstName} />
+              <FormField name="firstName" errors={errors} touched={touched}>
+                {({ field }) => <TextInput {...field} label="First name" />}
+              </FormField>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Field
-                name="lastName"
-                render={({ field }: FieldProps) => (
-                  <TextInput
-                    {...field}
-                    label="Last name"
-                    error={checkIfError(errors.lastName, touched.lastName)}
-                  />
-                )}
-              />
-              <FormError error={errors.lastName} display={touched.lastName} />
+              <FormField name="lastName" errors={errors} touched={touched}>
+                {({ field }) => <TextInput {...field} label="Last name" />}
+              </FormField>
             </Grid>
           </Grid>
 
           <Grid container>
             <Grid item xs={12}>
-              <Field
-                name="password"
-                render={({ field }: FieldProps) => (
-                  <TextInput
-                    {...field}
-                    type="password"
-                    label="Password"
-                    error={checkIfError(errors.password, touched.password)}
-                  />
+              <FormField name="password" errors={errors} touched={touched}>
+                {({ field }) => (
+                  <TextInput {...field} type="password" label="Password" />
                 )}
-              />
-              <FormError error={errors.password} display={touched.password} />
+              </FormField>
             </Grid>
           </Grid>
 
-          <FormError {...generalFormError} />
+          <FormError error={generalFormError} />
 
           <Text gutterBottom>
             Already have an account?{' '}

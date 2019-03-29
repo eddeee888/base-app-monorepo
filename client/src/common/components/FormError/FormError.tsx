@@ -2,11 +2,10 @@ import React from 'react';
 import Text from 'src/common/components/Text';
 
 export interface FormErrorProps {
-  error?: string;
-  display?: boolean;
+  error: React.ReactNode;
 }
 
-type CheckIfErrorFn = (error?: string, touched?: boolean) => boolean;
+type CheckIfErrorFn = (error?: boolean, touched?: boolean) => boolean;
 
 export const checkIfError: CheckIfErrorFn = (error, touched) => {
   if (error && touched) {
@@ -15,19 +14,16 @@ export const checkIfError: CheckIfErrorFn = (error, touched) => {
   return false;
 };
 
-const FormError: React.FunctionComponent<FormErrorProps> = ({
-  error,
-  display
-}) => {
-  if (error && display) {
-    return (
-      <Text error variant="body2">
-        {error}
-      </Text>
-    );
+const FormError: React.FunctionComponent<FormErrorProps> = ({ error }) => {
+  if (!!!error) {
+    return null;
   }
 
-  return null;
+  return (
+    <Text error variant="body2">
+      {error}
+    </Text>
+  );
 };
 
 export default FormError;
