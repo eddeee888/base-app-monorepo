@@ -4,7 +4,6 @@ import Button from 'src/common/components/Button';
 import Link from 'src/common/components/Link';
 import useHostClassNav from 'src/pages/HostClass/hooks/useHostClassNav';
 
-// TOTEST
 const Navigation: React.FunctionComponent = () => {
   const { previous, next } = useHostClassNav();
   return (
