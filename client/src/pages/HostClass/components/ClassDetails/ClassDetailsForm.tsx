@@ -26,7 +26,6 @@ interface Props {
   setValues: SetFormPartValues<ClassDetailsInput>;
 }
 
-// TOTEST
 const ClassDetailsForm: React.FunctionComponent<Props> = ({
   categoryResult: { error, loading, data },
   setValues
