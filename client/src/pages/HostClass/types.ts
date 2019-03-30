@@ -15,6 +15,8 @@ export interface ClassContactInput {
   postcode: string;
   country: string;
   contactNumber: string;
+  state: string;
+  unit: string;
 }
 
 export interface HostClassState {

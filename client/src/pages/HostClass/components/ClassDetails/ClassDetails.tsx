@@ -1,17 +1,25 @@
 import React from 'react';
-import { ClassDetailsInput, SetFormPartValues } from '../../types';
+import { NavFunctions } from '../../handlers/createNavFunctions';
+import { ClassDetailsInput } from '../../types';
 import ClassCategoriesQuery from './ClassCategoriesQuery';
 import ClassDetailsForm from './ClassDetailsForm';
 
-interface Props {
-  setValues: SetFormPartValues<ClassDetailsInput>;
+export interface ClassDetailsProps<I> {
+  initialValues: I;
+  goNext: NavFunctions<I>['goNext'];
 }
 
-const ClassDetails: React.FunctionComponent<Props> = ({ setValues }) => {
+const ClassDetails: React.FunctionComponent<
+  ClassDetailsProps<ClassDetailsInput>
+> = ({ initialValues, goNext }) => {
   return (
     <ClassCategoriesQuery>
       {result => (
-        <ClassDetailsForm categoryResult={result} setValues={setValues} />
+        <ClassDetailsForm
+          categoryResult={result}
+          initialValues={initialValues}
+          goNext={goNext}
+        />
       )}
     </ClassCategoriesQuery>
   );

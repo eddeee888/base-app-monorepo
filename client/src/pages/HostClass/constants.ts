@@ -19,6 +19,8 @@ export const initialValues: HostClassState = {
     city: '',
     postcode: '',
     country: '',
-    contactNumber: ''
+    contactNumber: '',
+    state: '',
+    unit: ''
   }
 };

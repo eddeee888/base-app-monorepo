@@ -3,13 +3,11 @@ import { Formik } from 'formik';
 import React from 'react';
 import { StaticRouter } from 'react-router';
 import Spinner from 'src/common/components/Spinner';
-import useHistory from 'src/common/hooks/useHistory';
 // @ts-ignore
 import useHostClassNav from 'src/pages/HostClass/hooks/useHostClassNav';
 import Navigation from '../Navigation';
-import ClassDetailsForm from './ClassDetailsForm';
+import ClassDetailsForm, { ClassDetailsFormProps } from './ClassDetailsForm';
 
-jest.mock('src/common/hooks/useHistory');
 jest.mock('src/pages/HostClass/hooks/useHostClassNav', () => ({
   __esModule: true,
   default: () => ({
@@ -18,7 +16,7 @@ jest.mock('src/pages/HostClass/hooks/useHostClassNav', () => ({
 }));
 
 describe('<ClassDetailsForm />', () => {
-  const props: any = {
+  const props: ClassDetailsFormProps = {
     categoryResult: {
       error: undefined,
       loading: false,
@@ -28,8 +26,13 @@ describe('<ClassDetailsForm />', () => {
           { id: '200', name: 'Cat. two' }
         ]
       }
+    } as any,
+    initialValues: {
+      name: '',
+      category: '',
+      description: ''
     },
-    setValues: jest.fn()
+    goNext: jest.fn()
   };
 
   afterEach(() => {
@@ -68,6 +71,12 @@ describe('<ClassDetailsForm />', () => {
     expect(wrapper.text()).not.toMatch(
       /Unexpected error occurred. Please try again later./
     );
+    expect(
+      wrapper.find('button').filterWhere(button => button.text() === 'Previous')
+    ).toHaveLength(0);
+    expect(
+      wrapper.find('button').filterWhere(button => button.text() === 'Next')
+    ).toHaveLength(1);
   });
 
   it('should render error text if has error', () => {
@@ -77,7 +86,7 @@ describe('<ClassDetailsForm />', () => {
           {...props}
           categoryResult={{
             ...props.categoryResult,
-            error: new Error('Error!')
+            error: new Error('Error!') as any
           }}
         />
       </StaticRouter>
@@ -108,12 +117,7 @@ describe('<ClassDetailsForm />', () => {
     );
   });
 
-  it('when form submits, should set state values and ', () => {
-    const push = jest.fn();
-    (useHistory as jest.Mock).mockReturnValueOnce({
-      push
-    });
-
+  it('when form submits, should call goNext function', () => {
     const formValues = {
       name: 'nameValue',
       category: 'categoryValue',
@@ -130,9 +134,7 @@ describe('<ClassDetailsForm />', () => {
 
     handleSubmit(formValues, {} as any);
 
-    expect(props.setValues).toHaveBeenCalledTimes(1);
-    expect(props.setValues).toHaveBeenCalledWith(formValues);
-    expect(push).toHaveBeenCalledTimes(1);
-    expect(push).toHaveBeenCalledWith('/link-to-next');
+    expect(props.goNext).toHaveBeenCalledTimes(1);
+    expect(props.goNext).toHaveBeenCalledWith(formValues, {});
   });
 });

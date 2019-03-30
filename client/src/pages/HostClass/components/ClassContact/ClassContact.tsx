@@ -4,55 +4,96 @@ import React from 'react';
 import FormField from 'src/common/components/FormField';
 import TextInput from 'src/common/components/TextInput';
 import * as Yup from 'yup';
-import { initialValues } from '../../constants';
+import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassContactInput } from '../../types';
+import Navigation from '../Navigation';
+
+export interface ClassContactProps<I> {
+  initialValues: I;
+  goNext: NavFunctions<I>['goNext'];
+  goPrevious: NavFunctions<I>['goPrevious'];
+}
 
 const validationSchema = Yup.object().shape<ClassContactInput>({
   streetAddress: Yup.string().required('Street address is required'),
   city: Yup.string().required('City is required'),
   postcode: Yup.string(),
   country: Yup.string().required('Country is required'),
-  contactNumber: Yup.string().required('Contact number is required')
+  contactNumber: Yup.string().required('Contact number is required'),
+  unit: Yup.string(),
+  state: Yup.string().required('State is required')
 });
 
-const ClassContact: React.FunctionComponent = () => {
+const ClassContact: React.FunctionComponent<
+  ClassContactProps<ClassContactInput>
+> = ({ initialValues, goNext, goPrevious }) => {
   return (
     <Formik<ClassContactInput>
       validationSchema={validationSchema}
-      initialValues={initialValues.contact}
-      onSubmit={values => {}}
+      initialValues={initialValues}
+      onSubmit={goNext}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, values }) => (
         <Form>
           <Grid container>
             <Grid item xs={12}>
-              <FormField name="streetAddress" errors={errors} touched={touched}>
-                {({ field }) => (
-                  <TextInput {...field} label="Street address*" />
-                )}
-              </FormField>
-
-              <FormField name="city" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="City*" />}
-              </FormField>
-
-              <FormField name="postcode" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="Postcode" />}
-              </FormField>
-
-              <FormField name="postcode" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="Postcode" />}
-              </FormField>
-
               <FormField name="country" errors={errors} touched={touched}>
                 {({ field }) => <TextInput {...field} label="Country*" />}
               </FormField>
 
-              <FormField name="contactNumber" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="contactNumber" />}
+              <FormField name="streetAddress" errors={errors} touched={touched}>
+                {({ field }) => (
+                  <TextInput
+                    {...field}
+                    label="Street address*"
+                    placeholder="e.g. 123 Main St"
+                  />
+                )}
+              </FormField>
+
+              <FormField name="unit" errors={errors} touched={touched}>
+                {({ field }) => (
+                  <TextInput
+                    {...field}
+                    label="Unit, Apt"
+                    placeholder="e.g. Unit 400"
+                  />
+                )}
               </FormField>
             </Grid>
           </Grid>
+          <Grid container justify="space-between">
+            <Grid item xs={12} md={5}>
+              <FormField name="city" errors={errors} touched={touched}>
+                {({ field }) => <TextInput {...field} label="Suburb / Town*" />}
+              </FormField>
+            </Grid>
+            <Grid item xs={12} md={5}>
+              <FormField name="state" errors={errors} touched={touched}>
+                {({ field }) => <TextInput {...field} label="State" />}
+              </FormField>
+            </Grid>
+
+            <Grid item xs={12} md={5}>
+              <FormField name="postcode" errors={errors} touched={touched}>
+                {({ field }) => <TextInput {...field} label="Postcode" />}
+              </FormField>
+            </Grid>
+          </Grid>
+
+          <hr />
+
+          <Grid container>
+            <Grid item xs={12}>
+              <FormField name="contactNumber" errors={errors} touched={touched}>
+                {({ field }) => (
+                  <TextInput {...field} label="Contact number*" />
+                )}
+              </FormField>
+            </Grid>
+          </Grid>
+
+          <Navigation goPrevious={() => goPrevious(values)} />
         </Form>
       )}
     </Formik>
