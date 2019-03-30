@@ -8,7 +8,7 @@ import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassContactInput } from '../../types';
 import Navigation from '../Navigation';
 
-interface Props<I> {
+export interface ClassContactProps<I> {
   initialValues: I;
   goNext: NavFunctions<I>['goNext'];
   goPrevious: NavFunctions<I>['goPrevious'];
@@ -24,11 +24,9 @@ const validationSchema = Yup.object().shape<ClassContactInput>({
   state: Yup.string().required('State is required')
 });
 
-const ClassContact: React.FunctionComponent<Props<ClassContactInput>> = ({
-  initialValues,
-  goNext,
-  goPrevious
-}) => {
+const ClassContact: React.FunctionComponent<
+  ClassContactProps<ClassContactInput>
+> = ({ initialValues, goNext, goPrevious }) => {
   return (
     <Formik<ClassContactInput>
       validationSchema={validationSchema}
