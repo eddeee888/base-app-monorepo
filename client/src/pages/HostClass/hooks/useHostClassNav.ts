@@ -1,5 +1,5 @@
 import { formOrder } from '../constants';
-import linkgenHostClass from '../helper/linkgenHostClass';
+import linkgenHostClass from '../helpers/linkgenHostClass';
 import { HostClassFormPart } from '../types';
 import useHostClassParams from './useHostClassParams';
 

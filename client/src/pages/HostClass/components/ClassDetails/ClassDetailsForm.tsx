@@ -8,10 +8,9 @@ import Spinner from 'src/common/components/Spinner';
 import Text from 'src/common/components/Text';
 import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
-import useHistory from 'src/common/hooks/useHistory';
 import * as Yup from 'yup';
-import useHostClassNav from '../../hooks/useHostClassNav';
-import { ClassDetailsInput, SetFormPartValues } from '../../types';
+import { GoNextFn } from '../../handlers/createGoNextFn';
+import { ClassDetailsInput } from '../../types';
 import Navigation from '../Navigation';
 import { ClassCategoryData } from './__generated__/ClassCategoryData';
 import { ClassCategoryQueryResult } from './ClassCategoriesQuery';
@@ -22,20 +21,17 @@ const validationSchema = Yup.object().shape<ClassDetailsInput>({
   description: Yup.string()
 });
 
-interface Props {
+export interface ClassDetailsFormProps {
   categoryResult: ClassCategoryQueryResult;
-  setValues: SetFormPartValues<ClassDetailsInput>;
+  goNext: GoNextFn<ClassDetailsInput>;
   initialValues: ClassDetailsInput;
 }
 
-const ClassDetailsForm: React.FunctionComponent<Props> = ({
+const ClassDetailsForm: React.FunctionComponent<ClassDetailsFormProps> = ({
   categoryResult: { error, loading, data },
-  setValues,
+  goNext,
   initialValues
 }) => {
-  const history = useHistory();
-  const { next } = useHostClassNav();
-
   return (
     <>
       {error && (
@@ -50,12 +46,7 @@ const ClassDetailsForm: React.FunctionComponent<Props> = ({
         <Formik<ClassDetailsInput>
           validationSchema={validationSchema}
           initialValues={initialValues}
-          onSubmit={values => {
-            setValues(values);
-            if (next) {
-              history.push(next);
-            }
-          }}
+          onSubmit={goNext}
         >
           {({ errors, touched }) => (
             <Form>

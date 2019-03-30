@@ -1,16 +1,17 @@
 import React from 'react';
-import { ClassDetailsInput, SetFormPartValues } from '../../types';
+import { GoNextFn } from '../../handlers/createGoNextFn';
+import { ClassDetailsInput } from '../../types';
 import ClassCategoriesQuery from './ClassCategoriesQuery';
 import ClassDetailsForm from './ClassDetailsForm';
 
-interface Props {
+export interface ClassDetailsProps {
   initialValues: ClassDetailsInput;
-  setValues: SetFormPartValues<ClassDetailsInput>;
+  goNext: GoNextFn<ClassDetailsInput>;
 }
 
-const ClassDetails: React.FunctionComponent<Props> = ({
+const ClassDetails: React.FunctionComponent<ClassDetailsProps> = ({
   initialValues,
-  setValues
+  goNext
 }) => {
   return (
     <ClassCategoriesQuery>
@@ -18,7 +19,7 @@ const ClassDetails: React.FunctionComponent<Props> = ({
         <ClassDetailsForm
           categoryResult={result}
           initialValues={initialValues}
-          setValues={setValues}
+          goNext={goNext}
         />
       )}
     </ClassCategoriesQuery>

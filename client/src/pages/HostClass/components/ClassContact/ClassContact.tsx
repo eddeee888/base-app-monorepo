@@ -4,9 +4,12 @@ import React from 'react';
 import FormField from 'src/common/components/FormField';
 import TextInput from 'src/common/components/TextInput';
 import * as Yup from 'yup';
-import { initialValues } from '../../constants';
 import { ClassContactInput } from '../../types';
 import Navigation from '../Navigation';
+
+interface Props {
+  initialValues: ClassContactInput;
+}
 
 const validationSchema = Yup.object().shape<ClassContactInput>({
   streetAddress: Yup.string().required('Street address is required'),
@@ -18,11 +21,11 @@ const validationSchema = Yup.object().shape<ClassContactInput>({
   state: Yup.string().required('State is required')
 });
 
-const ClassContact: React.FunctionComponent = () => {
+const ClassContact: React.FunctionComponent<Props> = ({ initialValues }) => {
   return (
     <Formik<ClassContactInput>
       validationSchema={validationSchema}
-      initialValues={initialValues.contact}
+      initialValues={initialValues}
       onSubmit={values => {}}
     >
       {({ errors, touched }) => (

@@ -16,13 +16,22 @@ import HostClass from './HostClass';
 import { HostClassFormPart } from './types';
 
 jest.mock('./hooks/useHostClassParams');
-jest.mock('./hooks/useHostClassNav');
+jest.mock('./hooks/useHostClassNav', () => ({
+  __esModule: true,
+  default: () => ({
+    next: '/link-to-next'
+  })
+}));
 
 const viewerContextValue = {
   viewer: null,
   setViewer: jest.fn(),
   clearViewer: jest.fn()
 };
+
+afterEach(() => {
+  jest.resetAllMocks();
+});
 
 describe('<HostClass />: no viewer', () => {
   it('should redirect to /signup with redirect route back here', () => {
@@ -42,10 +51,6 @@ describe('<HostClass />: no viewer', () => {
 });
 
 describe('<HostClass />: has viewer and no form part', () => {
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   const testCases = [
     {
       classId: undefined,
@@ -81,10 +86,6 @@ describe('<HostClass />: has viewer and no form part', () => {
 });
 
 describe('<HostClass />: has viewer and has form part', () => {
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   interface TestCase {
     formPart: HostClassFormPart;
     classId: string | undefined;
