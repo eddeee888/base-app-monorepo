@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassContactInput } from '../../types';
 import Navigation from '../Navigation';
+import PaperContainer from '../PaperContainer';
 
 export interface ClassContactProps<I> {
   initialValues: I;
@@ -28,75 +29,87 @@ const ClassContact: React.FunctionComponent<
   ClassContactProps<ClassContactInput>
 > = ({ initialValues, goNext, goPrevious }) => {
   return (
-    <Formik
-      validationSchema={validationSchema}
-      initialValues={initialValues}
-      onSubmit={goNext}
-    >
-      {({ errors, touched, values }) => (
-        <Form>
-          <Grid container>
-            <Grid item xs={12}>
-              <FormField name="country" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="Country*" />}
-              </FormField>
+    <PaperContainer size="small">
+      <Formik
+        validationSchema={validationSchema}
+        initialValues={initialValues}
+        onSubmit={goNext}
+      >
+        {({ errors, touched, values }) => (
+          <Form>
+            <Grid container>
+              <Grid item xs={12}>
+                <FormField name="country" errors={errors} touched={touched}>
+                  {({ field }) => <TextInput {...field} label="Country*" />}
+                </FormField>
 
-              <FormField name="streetAddress" errors={errors} touched={touched}>
-                {({ field }) => (
-                  <TextInput
-                    {...field}
-                    label="Street address*"
-                    placeholder="e.g. 123 Main St"
-                  />
-                )}
-              </FormField>
+                <FormField
+                  name="streetAddress"
+                  errors={errors}
+                  touched={touched}
+                >
+                  {({ field }) => (
+                    <TextInput
+                      {...field}
+                      label="Street address*"
+                      placeholder="e.g. 123 Main St"
+                    />
+                  )}
+                </FormField>
 
-              <FormField name="unit" errors={errors} touched={touched}>
-                {({ field }) => (
-                  <TextInput
-                    {...field}
-                    label="Unit, Apt"
-                    placeholder="e.g. Unit 400"
-                  />
-                )}
-              </FormField>
+                <FormField name="unit" errors={errors} touched={touched}>
+                  {({ field }) => (
+                    <TextInput
+                      {...field}
+                      label="Unit, Apt"
+                      placeholder="e.g. Unit 400"
+                    />
+                  )}
+                </FormField>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid container justify="space-between">
-            <Grid item xs={12} md={5}>
-              <FormField name="city" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="Suburb / Town*" />}
-              </FormField>
-            </Grid>
-            <Grid item xs={12} md={5}>
-              <FormField name="state" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="State" />}
-              </FormField>
+            <Grid container justify="space-between">
+              <Grid item xs={12} md={5}>
+                <FormField name="city" errors={errors} touched={touched}>
+                  {({ field }) => (
+                    <TextInput {...field} label="Suburb / Town*" />
+                  )}
+                </FormField>
+              </Grid>
+              <Grid item xs={12} md={5}>
+                <FormField name="state" errors={errors} touched={touched}>
+                  {({ field }) => <TextInput {...field} label="State" />}
+                </FormField>
+              </Grid>
+
+              <Grid item xs={12} md={5}>
+                <FormField name="postcode" errors={errors} touched={touched}>
+                  {({ field }) => <TextInput {...field} label="Postcode" />}
+                </FormField>
+              </Grid>
             </Grid>
 
-            <Grid item xs={12} md={5}>
-              <FormField name="postcode" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="Postcode" />}
-              </FormField>
+            <hr />
+
+            <Grid container>
+              <Grid item xs={12}>
+                <FormField
+                  name="contactNumber"
+                  errors={errors}
+                  touched={touched}
+                >
+                  {({ field }) => (
+                    <TextInput {...field} label="Contact number*" />
+                  )}
+                </FormField>
+              </Grid>
             </Grid>
-          </Grid>
 
-          <hr />
-
-          <Grid container>
-            <Grid item xs={12}>
-              <FormField name="contactNumber" errors={errors} touched={touched}>
-                {({ field }) => (
-                  <TextInput {...field} label="Contact number*" />
-                )}
-              </FormField>
-            </Grid>
-          </Grid>
-
-          <Navigation goPrevious={() => goPrevious(values)} />
-        </Form>
-      )}
-    </Formik>
+            <Navigation goPrevious={() => goPrevious(values)} />
+          </Form>
+        )}
+      </Formik>
+    </PaperContainer>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassDetailsInput } from '../../types';
+import PaperContainer from '../PaperContainer';
 import ClassCategoriesQuery from './ClassCategoriesQuery';
 import ClassDetailsForm from './ClassDetailsForm';
 
@@ -13,15 +14,17 @@ const ClassDetails: React.FunctionComponent<
   ClassDetailsProps<ClassDetailsInput>
 > = ({ initialValues, goNext }) => {
   return (
-    <ClassCategoriesQuery>
-      {result => (
-        <ClassDetailsForm
-          categoryResult={result}
-          initialValues={initialValues}
-          goNext={goNext}
-        />
-      )}
-    </ClassCategoriesQuery>
+    <PaperContainer size="small">
+      <ClassCategoriesQuery>
+        {result => (
+          <ClassDetailsForm
+            categoryResult={result}
+            initialValues={initialValues}
+            goNext={goNext}
+          />
+        )}
+      </ClassCategoriesQuery>
+    </PaperContainer>
   );
 };
 
