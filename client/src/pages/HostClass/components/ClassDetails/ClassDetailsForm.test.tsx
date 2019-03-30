@@ -71,6 +71,12 @@ describe('<ClassDetailsForm />', () => {
     expect(wrapper.text()).not.toMatch(
       /Unexpected error occurred. Please try again later./
     );
+    expect(
+      wrapper.find('button').filterWhere(button => button.text() === 'Previous')
+    ).toHaveLength(0);
+    expect(
+      wrapper.find('button').filterWhere(button => button.text() === 'Next')
+    ).toHaveLength(1);
   });
 
   it('should render error text if has error', () => {
