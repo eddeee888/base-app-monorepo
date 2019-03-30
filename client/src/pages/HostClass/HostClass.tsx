@@ -80,7 +80,9 @@ const HostClass: React.FunctionComponent = () => {
                 })}
               />
             )}
-            {params.formPart === 'sessions' && <ClassSessions />}
+            {params.formPart === 'sessions' && (
+              <ClassSessions initialValues={values.sessions} />
+            )}
             {params.formPart === 'summary' && <ClassSummary />}
           </Paper>
         </div>

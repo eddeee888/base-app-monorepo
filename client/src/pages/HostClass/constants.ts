@@ -22,5 +22,6 @@ export const initialValues: HostClassState = {
     contactNumber: '',
     state: '',
     unit: ''
-  }
+  },
+  sessions: []
 };

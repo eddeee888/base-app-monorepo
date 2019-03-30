@@ -43,7 +43,7 @@ const ClassDetailsForm: React.FunctionComponent<ClassDetailsFormProps> = ({
       {loading && <Spinner fullWidth />}
 
       {!error && !loading && (
-        <Formik<ClassDetailsInput>
+        <Formik
           validationSchema={validationSchema}
           initialValues={initialValues}
           onSubmit={goNext}

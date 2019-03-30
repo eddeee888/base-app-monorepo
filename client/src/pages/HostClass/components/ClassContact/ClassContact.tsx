@@ -28,7 +28,7 @@ const ClassContact: React.FunctionComponent<
   ClassContactProps<ClassContactInput>
 > = ({ initialValues, goNext, goPrevious }) => {
   return (
-    <Formik<ClassContactInput>
+    <Formik
       validationSchema={validationSchema}
       initialValues={initialValues}
       onSubmit={goNext}

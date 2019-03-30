@@ -3,6 +3,7 @@ import { initialValues } from '../constants';
 import {
   ClassContactInput,
   ClassDetailsInput,
+  ClassSessionsInput,
   HostClassFormPart,
   HostClassState,
   SetFormPartValues
@@ -13,6 +14,7 @@ interface Result {
   setPartialValues: {
     details: SetFormPartValues<ClassDetailsInput>;
     contact: SetFormPartValues<ClassContactInput>;
+    sessions: SetFormPartValues<ClassSessionsInput>;
   };
 }
 
@@ -29,7 +31,8 @@ const useHostClassState = (): Result => {
     values,
     setPartialValues: {
       details: createUpdateFn<ClassDetailsInput>('details'),
-      contact: createUpdateFn<ClassContactInput>('contact')
+      contact: createUpdateFn<ClassContactInput>('contact'),
+      sessions: createUpdateFn<ClassSessionsInput>('sessions')
     }
   };
 };
