@@ -1,18 +1,17 @@
 import React from 'react';
-import { GoNextFn } from '../../handlers/createGoNextFn';
+import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassDetailsInput } from '../../types';
 import ClassCategoriesQuery from './ClassCategoriesQuery';
 import ClassDetailsForm from './ClassDetailsForm';
 
-export interface ClassDetailsProps {
-  initialValues: ClassDetailsInput;
-  goNext: GoNextFn<ClassDetailsInput>;
+export interface ClassDetailsProps<I> {
+  initialValues: I;
+  goNext: NavFunctions<I>['goNext'];
 }
 
-const ClassDetails: React.FunctionComponent<ClassDetailsProps> = ({
-  initialValues,
-  goNext
-}) => {
+const ClassDetails: React.FunctionComponent<
+  ClassDetailsProps<ClassDetailsInput>
+> = ({ initialValues, goNext }) => {
   return (
     <ClassCategoriesQuery>
       {result => (

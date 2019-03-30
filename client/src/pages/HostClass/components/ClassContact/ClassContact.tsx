@@ -4,11 +4,14 @@ import React from 'react';
 import FormField from 'src/common/components/FormField';
 import TextInput from 'src/common/components/TextInput';
 import * as Yup from 'yup';
+import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassContactInput } from '../../types';
 import Navigation from '../Navigation';
 
-interface Props {
-  initialValues: ClassContactInput;
+interface Props<I> {
+  initialValues: I;
+  goNext: NavFunctions<I>['goNext'];
+  goPrevious: NavFunctions<I>['goPrevious'];
 }
 
 const validationSchema = Yup.object().shape<ClassContactInput>({
@@ -21,14 +24,18 @@ const validationSchema = Yup.object().shape<ClassContactInput>({
   state: Yup.string().required('State is required')
 });
 
-const ClassContact: React.FunctionComponent<Props> = ({ initialValues }) => {
+const ClassContact: React.FunctionComponent<Props<ClassContactInput>> = ({
+  initialValues,
+  goNext,
+  goPrevious
+}) => {
   return (
     <Formik<ClassContactInput>
       validationSchema={validationSchema}
       initialValues={initialValues}
-      onSubmit={values => {}}
+      onSubmit={goNext}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, values }) => (
         <Form>
           <Grid container>
             <Grid item xs={12}>
@@ -88,7 +95,7 @@ const ClassContact: React.FunctionComponent<Props> = ({ initialValues }) => {
             </Grid>
           </Grid>
 
-          <Navigation />
+          <Navigation goPrevious={() => goPrevious(values)} />
         </Form>
       )}
     </Formik>

@@ -14,7 +14,7 @@ import ClassSessions from 'src/pages/HostClass/components/ClassSessions';
 import ClassSummary from 'src/pages/HostClass/components/ClassSummary';
 import ClassContact from './components/ClassContact';
 import { defaultFormPart } from './constants';
-import createGoNextFn from './handlers/createGoNextFn';
+import createNavFunctions from './handlers/createNavFunctions';
 import linkgenHostClass from './helpers/linkgenHostClass';
 import useHostClassNav from './hooks/useHostClassNav';
 import useHostClassParams from './hooks/useHostClassParams';
@@ -38,7 +38,7 @@ const HostClass: React.FunctionComponent = () => {
   const params = useHostClassParams();
   const { values, setPartialValues } = useHostClassState();
   const history = useHistory();
-  const { next } = useHostClassNav();
+  const { next, previous } = useHostClassNav();
 
   if (!viewer) {
     return (
@@ -61,15 +61,24 @@ const HostClass: React.FunctionComponent = () => {
             {params.formPart === 'details' && (
               <ClassDetails
                 initialValues={values.details}
-                goNext={createGoNextFn({
+                {...createNavFunctions({
                   setFormPartialFn: setPartialValues.details,
                   history,
-                  next
+                  next,
+                  previous
                 })}
               />
             )}
             {params.formPart === 'contact' && (
-              <ClassContact initialValues={values.contact} />
+              <ClassContact
+                initialValues={values.contact}
+                {...createNavFunctions({
+                  setFormPartialFn: setPartialValues.contact,
+                  history,
+                  next,
+                  previous
+                })}
+              />
             )}
             {params.formPart === 'sessions' && <ClassSessions />}
             {params.formPart === 'summary' && <ClassSummary />}

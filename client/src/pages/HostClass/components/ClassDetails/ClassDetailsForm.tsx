@@ -9,7 +9,7 @@ import Text from 'src/common/components/Text';
 import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
 import * as Yup from 'yup';
-import { GoNextFn } from '../../handlers/createGoNextFn';
+import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassDetailsInput } from '../../types';
 import Navigation from '../Navigation';
 import { ClassCategoryData } from './__generated__/ClassCategoryData';
@@ -23,7 +23,7 @@ const validationSchema = Yup.object().shape<ClassDetailsInput>({
 
 export interface ClassDetailsFormProps {
   categoryResult: ClassCategoryQueryResult;
-  goNext: GoNextFn<ClassDetailsInput>;
+  goNext: NavFunctions<ClassDetailsInput>['goNext'];
   initialValues: ClassDetailsInput;
 }
 
