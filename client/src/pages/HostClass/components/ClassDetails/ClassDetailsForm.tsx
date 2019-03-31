@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import FormField from 'src/common/components/FormField';
 import Select from 'src/common/components/Select';
-import { SelectOptions } from 'src/common/components/Select/Select';
+import { SelectOption } from 'src/common/components/Select/Select';
 import Spinner from 'src/common/components/Spinner';
 import Text from 'src/common/components/Text';
 import TextArea from 'src/common/components/TextArea';
@@ -101,7 +101,7 @@ const ClassDetailsForm: React.FunctionComponent<ClassDetailsFormProps> = ({
 
 const generateOptions = (
   data: ClassCategoryData | undefined
-): SelectOptions[] => {
+): SelectOption[] => {
   if (!data || !data.classCategories) {
     return [];
   }

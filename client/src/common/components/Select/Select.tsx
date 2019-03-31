@@ -2,13 +2,13 @@ import TextField from '@material-ui/core/TextField';
 import React from 'react';
 import OmittedTextFieldProps from 'src/common/helpers/typings/OmittedTextFieldProps';
 
-export interface SelectOptions {
-  value: string | number;
-  label: string;
+export interface SelectOption<V = string, L = string> {
+  value: V | '';
+  label: L | '';
 }
 
 interface Props extends OmittedTextFieldProps {
-  options: SelectOptions[];
+  options: SelectOption[];
 }
 
 const Select: React.FunctionComponent<Props> = ({ options, ...props }) => (

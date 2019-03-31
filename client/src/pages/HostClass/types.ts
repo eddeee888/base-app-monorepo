@@ -19,14 +19,16 @@ export interface ClassContactInput {
   unit: string;
 }
 
-export interface Session {
-  day: DayOfTheWeek;
+export interface ClassSession {
+  day: keyof typeof DayOfTheWeek;
   startTime: SessionTime;
   endTime: SessionTime;
   capacity: number;
 }
 
-export type ClassSessionsInput = Session[];
+export interface ClassSessionsInput {
+  sessions: ClassSession[];
+}
 
 export interface HostClassState {
   details: ClassDetailsInput;
@@ -36,7 +38,7 @@ export interface HostClassState {
 
 export type SetFormPartValues<I> = (values: I) => void;
 
-enum DayOfTheWeek {
+export enum DayOfTheWeek {
   mon = 'Monday',
   tue = 'Tuesday',
   wed = 'Wednesday',
