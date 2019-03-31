@@ -48,7 +48,7 @@ export enum DayOfTheWeek {
   sun = 'Sunday'
 }
 
-type SessionTime =
+export type SessionTime =
   | '12:00am'
   | '12:30am'
   | '01:00am'
