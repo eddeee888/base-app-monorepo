@@ -1,6 +1,6 @@
-import { Field, FieldArray, FieldProps, Form, Formik, getIn } from 'formik';
+import { FieldArray, Form, Formik } from 'formik';
 import React from 'react';
-import FormError from 'src/common/components/FormError';
+import FormFieldArray from 'src/common/components/FormFieldArray';
 import Select from 'src/common/components/Select/Select';
 import TextInput from 'src/common/components/TextInput';
 import * as Yup from 'yup';
@@ -12,7 +12,7 @@ import {
 } from '../../constants';
 import { ClassSession, ClassSessionsInput } from '../../types';
 
-interface ClassSessionsProps<I> {
+interface Props<I> {
   initialValues: I;
 }
 
@@ -31,9 +31,9 @@ const validationSchema = Yup.object().shape<ClassSessionsInput>({
 });
 
 // TODO: implement me
-const ClassSessions: React.FunctionComponent<
-  ClassSessionsProps<ClassSessionsInput>
-> = ({ initialValues }) => {
+const ClassSessions: React.FunctionComponent<Props<ClassSessionsInput>> = ({
+  initialValues
+}) => {
   return (
     <Formik<ClassSessionsInput>
       initialValues={initialValues}
@@ -47,69 +47,53 @@ const ClassSessions: React.FunctionComponent<
             render={arrayHelpers => (
               <div>
                 {values.sessions &&
-                  values.sessions.length > 0 &&
                   values.sessions.map((session, index) => (
                     <div key={index}>
-                      <Field name={`sessions.${index}.day`}>
-                        {({ field, form }: FieldProps<ClassSession>) => (
-                          <>
-                            <Select {...field} options={dayOptions} />
-                            {getIn(touched, `sessions.${index}.day`) && (
-                              <FormError
-                                error={getIn(errors, `sessions.${index}.day`)}
-                              />
-                            )}
-                          </>
+                      <FormFieldArray<ClassSessionsInput, ClassSession>
+                        name="sessions"
+                        property="day"
+                        index={index}
+                        errors={errors}
+                        touched={touched}
+                      >
+                        {({ field }) => (
+                          <Select {...field} options={dayOptions} />
                         )}
-                      </Field>
+                      </FormFieldArray>
 
-                      <Field name={`sessions.${index}.startTime`}>
-                        {({ field, form }: FieldProps<ClassSession>) => (
-                          <>
-                            <Select {...field} options={sessionTimeOptions} />
-                            {getIn(touched, `sessions.${index}.startTime`) && (
-                              <FormError
-                                error={getIn(
-                                  errors,
-                                  `sessions.${index}.startTime`
-                                )}
-                              />
-                            )}
-                          </>
+                      <FormFieldArray<ClassSessionsInput, ClassSession>
+                        name="sessions"
+                        property="startTime"
+                        index={index}
+                        errors={errors}
+                        touched={touched}
+                      >
+                        {({ field }) => (
+                          <Select {...field} options={sessionTimeOptions} />
                         )}
-                      </Field>
+                      </FormFieldArray>
 
-                      <Field name={`sessions.${index}.endTime`}>
-                        {({ field, form }: FieldProps<ClassSession>) => (
-                          <>
-                            <Select {...field} options={sessionTimeOptions} />
-                            {getIn(touched, `sessions.${index}.endTime`) && (
-                              <FormError
-                                error={getIn(
-                                  errors,
-                                  `sessions.${index}.endTime`
-                                )}
-                              />
-                            )}
-                          </>
+                      <FormFieldArray<ClassSessionsInput, ClassSession>
+                        name="sessions"
+                        property="endTime"
+                        index={index}
+                        errors={errors}
+                        touched={touched}
+                      >
+                        {({ field }) => (
+                          <Select {...field} options={sessionTimeOptions} />
                         )}
-                      </Field>
+                      </FormFieldArray>
 
-                      <Field name={`sessions.${index}.capacity`}>
-                        {({ field, form }: FieldProps<ClassSession>) => (
-                          <>
-                            <TextInput {...field} type="number" />
-                            {getIn(touched, `sessions.${index}.capacity`) && (
-                              <FormError
-                                error={getIn(
-                                  errors,
-                                  `sessions.${index}.capacity`
-                                )}
-                              />
-                            )}
-                          </>
-                        )}
-                      </Field>
+                      <FormFieldArray<ClassSessionsInput, ClassSession>
+                        name="sessions"
+                        property="capacity"
+                        index={index}
+                        errors={errors}
+                        touched={touched}
+                      >
+                        {({ field }) => <TextInput {...field} type="number" />}
+                      </FormFieldArray>
                     </div>
                   ))}
               </div>
