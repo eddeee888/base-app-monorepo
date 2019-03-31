@@ -4,7 +4,7 @@ import React from 'react';
 import FormField from './FormField';
 
 interface Input {
-  field1: '';
+  field1: string;
 }
 
 interface TestCase {

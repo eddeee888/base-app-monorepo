@@ -1,6 +1,6 @@
 import { remValue } from 'src/common/styles/unit';
 
-interface Breakpoints {
+export interface Breakpoints {
   extraSmall: number;
   small: number;
   medium: number;
