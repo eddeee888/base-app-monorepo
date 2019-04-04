@@ -1,5 +1,6 @@
 import { SelectOption } from 'src/common/components/Select/Select';
 import {
+  ClassSession,
   DayOfTheWeek,
   HostClassFormPart,
   HostClassState,
@@ -30,21 +31,15 @@ export const initialValues: HostClassState = {
     unit: ''
   },
   sessions: {
-    sessions: [
-      {
-        day: 'mon',
-        startTime: '12:00am',
-        endTime: '01:00am',
-        capacity: 0
-      },
-      {
-        day: 'tue',
-        startTime: '02:00am',
-        endTime: '03:00am',
-        capacity: 100
-      }
-    ]
+    sessions: []
   }
+};
+
+export const emptySession: ClassSession = {
+  day: '',
+  startTime: '',
+  endTime: '',
+  capacity: 0
 };
 
 export const dayValues: Array<keyof typeof DayOfTheWeek> = [

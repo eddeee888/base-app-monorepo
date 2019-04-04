@@ -19,6 +19,7 @@
     "@bit/eddeee888.learnd-utils.forms.validations": "^0.1.6",
     "@bit/eddeee888.learnd-utils.graphql": "^0.0.5",
     "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
     "@types/graphql": "^14.0.5",
     "@types/node": "10.12.10",
     "@types/react": "^16.8.2",
