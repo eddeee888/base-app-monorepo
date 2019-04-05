@@ -1,4 +1,5 @@
 import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 import { css } from 'emotion';
 import { FieldArray, Form, Formik } from 'formik';
 import React from 'react';
@@ -72,13 +73,15 @@ const ClassSessions: React.FunctionComponent<Props<ClassSessionsInput>> = ({
                           <Grid item xs={6} sm={12}>
                             <Text>Session #{index + 1}</Text>
                           </Grid>
-                          <Grid item xs={6}>
-                            <Grid container justify="flex-end">
-                              <Grid item>
-                                <DeleteButton onClick={removeSession} />
+                          <Hidden smUp>
+                            <Grid item xs>
+                              <Grid container justify="flex-end">
+                                <Grid item>
+                                  <DeleteButton onClick={removeSession} />
+                                </Grid>
                               </Grid>
                             </Grid>
-                          </Grid>
+                          </Hidden>
                         </Grid>
                         <Grid container justify="space-between" spacing={8}>
                           <Grid item xs={12} sm={3}>
@@ -153,17 +156,20 @@ const ClassSessions: React.FunctionComponent<Props<ClassSessionsInput>> = ({
                             </FormFieldArray>
                           </Grid>
 
-                          <Grid
-                            container
-                            item
-                            xs={12}
-                            sm={1}
-                            alignItems="center"
-                          >
-                            <Grid item>
-                              <DeleteButton onClick={removeSession} />
+                            <Grid
+                              container
+                              item
+                              xs={12}
+                              sm={1}
+                              alignItems="center"
+                            >
+                            <Hidden xsDown>
+                              <Grid item xs>
+                                <DeleteButton onClick={removeSession} />
+                              </Grid>
+                              </Hidden>
                             </Grid>
-                          </Grid>
+
                         </Grid>
                       </div>
                     );
