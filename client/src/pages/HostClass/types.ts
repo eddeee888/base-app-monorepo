@@ -20,9 +20,9 @@ export interface ClassContactInput {
 }
 
 export interface ClassSession {
-  day: keyof typeof DayOfTheWeek;
-  startTime: SessionTime;
-  endTime: SessionTime;
+  day: keyof typeof DayOfTheWeek | '';
+  startTime: SessionTime | '';
+  endTime: SessionTime | '';
   capacity: number;
 }
 
