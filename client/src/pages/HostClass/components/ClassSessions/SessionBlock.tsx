@@ -34,20 +34,20 @@ const SessionBlock: React.FunctionComponent<Props> = ({
 }) => {
   const actionButtons = (
     <>
-      <Tooltip title="Delete session">
-        <IconButton
-          buttonType="button"
-          icon="delete"
-          aria-label="Delete session"
-          onClick={removeSession}
-        />
-      </Tooltip>
       <Tooltip title="Duplicate session">
         <IconButton
           buttonType="button"
           icon="duplicate"
           aria-label="Duplicate session"
           onClick={duplicateSession}
+        />
+      </Tooltip>
+      <Tooltip title="Delete session">
+        <IconButton
+          buttonType="button"
+          icon="delete"
+          aria-label="Delete session"
+          onClick={removeSession}
         />
       </Tooltip>
     </>
