@@ -1,29 +1,30 @@
-import Grid from '@material-ui/core/Grid';
-import { Form, Formik } from 'formik';
-import React from 'react';
-import Block from 'src/common/components/Block';
-import FormField from 'src/common/components/FormField';
-import Paper from 'src/common/components/Paper';
-import TextInput from 'src/common/components/TextInput';
-import * as Yup from 'yup';
-import { NavFunctions } from '../../handlers/createNavFunctions';
-import { ClassContactInput } from '../../types';
-import Navigation from '../Navigation';
+import Grid from "@material-ui/core/Grid";
+import { Form, Formik } from "formik";
+import React from "react";
+import Block from "src/common/components/Block";
+import Divider from "src/common/components/Divider";
+import FormField from "src/common/components/FormField";
+import Paper from "src/common/components/Paper";
+import TextInput from "src/common/components/TextInput";
+import * as Yup from "yup";
+import { NavFunctions } from "../../handlers/createNavFunctions";
+import { ClassContactInput } from "../../types";
+import Navigation from "../Navigation";
 
 export interface ClassContactProps<I> {
   initialValues: I;
-  goNext: NavFunctions<I>['goNext'];
-  goPrevious: NavFunctions<I>['goPrevious'];
+  goNext: NavFunctions<I>["goNext"];
+  goPrevious: NavFunctions<I>["goPrevious"];
 }
 
 const validationSchema = Yup.object().shape<ClassContactInput>({
-  streetAddress: Yup.string().required('Street address is required'),
-  city: Yup.string().required('City is required'),
+  streetAddress: Yup.string().required("Street address is required"),
+  city: Yup.string().required("City is required"),
   postcode: Yup.string(),
-  country: Yup.string().required('Country is required'),
-  contactNumber: Yup.string().required('Contact number is required'),
+  country: Yup.string().required("Country is required"),
+  contactNumber: Yup.string().required("Contact number is required"),
   unit: Yup.string(),
-  state: Yup.string().required('State is required')
+  state: Yup.string().required("State is required")
 });
 
 const ClassContact: React.FunctionComponent<
@@ -90,7 +91,7 @@ const ClassContact: React.FunctionComponent<
               </Grid>
             </Grid>
 
-            <hr />
+            <Divider marginTop={1} />
 
             <Grid container>
               <Grid item xs={12}>
