@@ -6,7 +6,7 @@ describe('<Block />', () => {
   it('should render correctly', () => {
     const wrapper = mount(
       <Block size="xs">
-        <div>CHILDREN CONTENT</div>
+        <span>CHILDREN CONTENT</span>
       </Block>
     );
     expect(wrapper.find('div')).toHaveLength(1);

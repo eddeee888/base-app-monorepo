@@ -3,7 +3,6 @@ import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { Redirect, StaticRouter } from 'react-router';
 import Main from 'src/common/components/Main';
-import Paper from 'src/common/components/Paper';
 import ViewerContext from 'src/common/components/ViewerContext';
 import { Paths } from 'src/common/helpers/pathing';
 import ClassContact from './components/ClassContact';
@@ -133,7 +132,6 @@ describe('<HostClass />: has viewer and has form part', () => {
         wrapper.find('h1').filterWhere(h1 => h1.text() === 'Host a class')
       );
       expect(wrapper.find(Main)).toHaveLength(1);
-      expect(wrapper.find(Paper)).toHaveLength(1);
       expect(wrapper.find(formPartComponents[formPart])).toHaveLength(1);
       Object.keys(formPartComponents)
         .filter(key => key !== formPart)
