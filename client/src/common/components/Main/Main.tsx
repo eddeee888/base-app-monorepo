@@ -17,10 +17,10 @@ const mainTagClassName = css`
 
 const contentClassName = css`
   padding: 0 1rem;
-  max-width: ${breakpoints.large}px;
+  max-width: ${breakpoints.lg}px;
   width: 100%;
 
-  ${mediaQuery.medium} {
+  ${mediaQuery.md} {
     padding: 0 2rem;
   }
 `;

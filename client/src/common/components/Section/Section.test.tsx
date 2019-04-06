@@ -5,7 +5,7 @@ import Section from './Section';
 describe('<Section />', () => {
   it('should render correctly with a <Section />', () => {
     const wrapper = mount(
-      <Section size="small">
+      <Section size="xs">
         <div>CHILDREN CONTENT</div>
       </Section>
     );

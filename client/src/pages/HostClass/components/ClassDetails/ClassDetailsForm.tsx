@@ -52,7 +52,7 @@ const ClassDetailsForm: React.FunctionComponent<ClassDetailsFormProps> = ({
         >
           {({ errors, touched }) => (
             <Form>
-              <Section size="small">
+              <Section size="sm">
                 <Paper>
                   <Grid container>
                     <Grid item xs={12}>

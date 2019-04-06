@@ -36,7 +36,7 @@ const ClassContact: React.FunctionComponent<
   >
     {({ errors, touched, values }) => (
       <Form>
-        <Section size="small">
+        <Section size="sm">
           <Paper>
             <Grid container>
               <Grid item xs={12}>

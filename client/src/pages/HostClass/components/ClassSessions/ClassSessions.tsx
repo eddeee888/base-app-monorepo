@@ -42,7 +42,7 @@ const ClassSessions: React.FunctionComponent<Props<ClassSessionsInput>> = ({
     >
       {({ values, errors, touched }) => (
         <Form>
-          <Section size="medium">
+          <Section size="md">
             <Paper>
               <FieldArray name="sessions">
                 {arrayHelpers => {
