@@ -1,5 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
+import Tooltip from '@material-ui/core/Tooltip';
 import { css } from 'emotion';
 import { FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
@@ -18,6 +19,7 @@ const sessionContainerClassName = css`
 
 interface Props {
   index: number;
+  duplicateSession: () => void;
   removeSession: () => void;
   errors: FormikErrors<ClassSessionsInput>;
   touched: FormikTouched<ClassSessionsInput>;
@@ -25,10 +27,32 @@ interface Props {
 
 const SessionBlock: React.FunctionComponent<Props> = ({
   index,
+  duplicateSession,
   removeSession,
   errors,
   touched
 }) => {
+  const actionButtons = (
+    <>
+      <Tooltip title="Delete session">
+        <IconButton
+          buttonType="button"
+          icon="delete"
+          aria-label="Delete session"
+          onClick={removeSession}
+        />
+      </Tooltip>
+      <Tooltip title="Duplicate session">
+        <IconButton
+          buttonType="button"
+          icon="duplicate"
+          aria-label="Duplicate session"
+          onClick={duplicateSession}
+        />
+      </Tooltip>
+    </>
+  );
+
   return (
     <div className={sessionContainerClassName}>
       <Grid container justify="space-between" alignItems="center">
@@ -38,14 +62,7 @@ const SessionBlock: React.FunctionComponent<Props> = ({
         <Hidden smUp>
           <Grid item xs>
             <Grid container justify="flex-end">
-              <Grid item>
-                <IconButton
-                  buttonType="button"
-                  icon="delete"
-                  aria-label="Delete session"
-                  onClick={removeSession}
-                />
-              </Grid>
+              <Grid item>{actionButtons}</Grid>
             </Grid>
           </Grid>
         </Hidden>
@@ -65,7 +82,7 @@ const SessionBlock: React.FunctionComponent<Props> = ({
           </FormFieldArray>
         </Grid>
 
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={6} sm={2}>
           <FormFieldArray<ClassSessionsInput, ClassSession>
             name="sessions"
             property="startTime"
@@ -83,7 +100,7 @@ const SessionBlock: React.FunctionComponent<Props> = ({
           </FormFieldArray>
         </Grid>
 
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={6} sm={2}>
           <FormFieldArray<ClassSessionsInput, ClassSession>
             name="sessions"
             property="endTime"
@@ -115,15 +132,10 @@ const SessionBlock: React.FunctionComponent<Props> = ({
           </FormFieldArray>
         </Grid>
 
-        <Grid container item xs={12} sm={1} alignItems="center">
+        <Grid container item xs={12} sm={2} alignItems="center">
           <Hidden xsDown>
             <Grid item xs>
-              <IconButton
-                buttonType="button"
-                icon="delete"
-                aria-label="Delete session"
-                onClick={removeSession}
-              />
+              {actionButtons}
             </Grid>
           </Hidden>
         </Grid>

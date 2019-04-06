@@ -5,10 +5,11 @@ import DefaultIconButton, {
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
+import DuplicateIcon from '@material-ui/icons/FileCopy';
 import React from 'react';
 
 interface Icon {
-  icon: 'add' | 'delete';
+  icon: 'add' | 'delete' | 'duplicate';
 }
 
 interface FabType {
@@ -27,7 +28,8 @@ interface ButtonProps extends DefaultIconButtonProps, Icon, ButtonType {
 
 const iconComponents = {
   add: AddIcon,
-  delete: DeleteIcon
+  delete: DeleteIcon,
+  duplicate: DuplicateIcon
 };
 
 const IconButton: React.FunctionComponent<ButtonProps | FabProps> = props => {
