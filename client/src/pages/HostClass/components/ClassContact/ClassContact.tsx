@@ -1,9 +1,9 @@
 import Grid from '@material-ui/core/Grid';
 import { Form, Formik } from 'formik';
 import React from 'react';
+import Block from 'src/common/components/Block';
 import FormField from 'src/common/components/FormField';
 import Paper from 'src/common/components/Paper';
-import Section from 'src/common/components/Section';
 import TextInput from 'src/common/components/TextInput';
 import * as Yup from 'yup';
 import { NavFunctions } from '../../handlers/createNavFunctions';
@@ -36,7 +36,7 @@ const ClassContact: React.FunctionComponent<
   >
     {({ errors, touched, values }) => (
       <Form>
-        <Section size="sm">
+        <Block size="sm">
           <Paper>
             <Grid container>
               <Grid item xs={12}>
@@ -107,7 +107,7 @@ const ClassContact: React.FunctionComponent<
             </Grid>
           </Paper>
           <Navigation goPrevious={() => goPrevious(values)} />
-        </Section>
+        </Block>
       </Form>
     )}
   </Formik>

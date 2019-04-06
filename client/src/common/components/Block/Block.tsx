@@ -2,12 +2,12 @@ import { css } from 'emotion';
 import React from 'react';
 import { Breakpoints, breakpoints } from 'src/common/styles/media';
 
-interface SectionProps {
+interface Block {
   size: keyof Breakpoints;
   children: React.ReactNode;
 }
 
-const Section: React.FunctionComponent<SectionProps> = ({ size, children }) => {
+const Block: React.FunctionComponent<Block> = ({ size, children }) => {
   const paperContainerClassName = css`
     max-width: ${breakpoints[size]}px;
     width: 100%;
@@ -18,7 +18,7 @@ const Section: React.FunctionComponent<SectionProps> = ({ size, children }) => {
     flex-direction: column;
   `;
 
-  return <section className={paperContainerClassName}>{children}</section>;
+  return <div className={paperContainerClassName}>{children}</div>;
 };
 
-export default Section;
+export default Block;

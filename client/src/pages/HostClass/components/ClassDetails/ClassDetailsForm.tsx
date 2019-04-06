@@ -1,9 +1,9 @@
 import Grid from '@material-ui/core/Grid';
 import { Form, Formik } from 'formik';
 import React from 'react';
+import Block from 'src/common/components/Block';
 import FormField from 'src/common/components/FormField';
 import Paper from 'src/common/components/Paper';
-import Section from 'src/common/components/Section';
 import Select from 'src/common/components/Select';
 import { SelectOption } from 'src/common/components/Select/Select';
 import Spinner from 'src/common/components/Spinner';
@@ -52,7 +52,7 @@ const ClassDetailsForm: React.FunctionComponent<ClassDetailsFormProps> = ({
         >
           {({ errors, touched }) => (
             <Form>
-              <Section size="sm">
+              <Block size="sm">
                 <Paper>
                   <Grid container>
                     <Grid item xs={12}>
@@ -100,7 +100,7 @@ const ClassDetailsForm: React.FunctionComponent<ClassDetailsFormProps> = ({
                   </Grid>
                 </Paper>
                 <Navigation />
-              </Section>
+              </Block>
             </Form>
           )}
         </Formik>

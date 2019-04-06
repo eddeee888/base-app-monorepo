@@ -1,7 +1,7 @@
 import { FieldArray, Form, Formik } from 'formik';
 import React from 'react';
+import Block from 'src/common/components/Block';
 import Paper from 'src/common/components/Paper';
-import Section from 'src/common/components/Section';
 import * as Yup from 'yup';
 import { dayValues, sessionTimes } from '../../constants';
 import { NavFunctions } from '../../handlers/createNavFunctions';
@@ -42,7 +42,7 @@ const ClassSessions: React.FunctionComponent<Props<ClassSessionsInput>> = ({
     >
       {({ values, errors, touched }) => (
         <Form>
-          <Section size="md">
+          <Block size="md">
             <Paper>
               <FieldArray name="sessions">
                 {arrayHelpers => {
@@ -59,7 +59,7 @@ const ClassSessions: React.FunctionComponent<Props<ClassSessionsInput>> = ({
             </Paper>
 
             <Navigation goPrevious={() => goPrevious(values)} />
-          </Section>
+          </Block>
         </Form>
       )}
     </Formik>
