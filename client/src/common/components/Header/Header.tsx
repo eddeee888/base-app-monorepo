@@ -20,7 +20,7 @@ const headerClassName = css`
   background-color: ${primaryBackgroundColor};
   border-bottom: 1px solid ${borderColor};
 
-  ${mediaQuery.medium} {
+  ${mediaQuery.md} {
     padding: 0 2rem;
   }
 `;
@@ -31,8 +31,8 @@ const headerContentClassName = css`
   justify-content: space-between;
   align-items: center;
 
-  ${mediaQuery.medium} {
-    max-width: ${breakpoints.large}px;
+  ${mediaQuery.md} {
+    max-width: ${breakpoints.lg}px;
   }
 `;
 

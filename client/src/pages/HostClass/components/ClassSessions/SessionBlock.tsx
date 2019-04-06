@@ -3,8 +3,8 @@ import Hidden from '@material-ui/core/Hidden';
 import { css } from 'emotion';
 import { FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
-import DeleteButton from 'src/common/components/DeleteButton';
 import FormFieldArray from 'src/common/components/FormFieldArray';
+import IconButton from 'src/common/components/IconButton';
 import Select from 'src/common/components/Select';
 import Text from 'src/common/components/Text';
 import TextInput from 'src/common/components/TextInput';
@@ -39,7 +39,12 @@ const SessionBlock: React.FunctionComponent<Props> = ({
           <Grid item xs>
             <Grid container justify="flex-end">
               <Grid item>
-                <DeleteButton onClick={removeSession} />
+                <IconButton
+                  buttonType="button"
+                  icon="delete"
+                  aria-label="Delete session"
+                  onClick={removeSession}
+                />
               </Grid>
             </Grid>
           </Grid>
@@ -113,7 +118,12 @@ const SessionBlock: React.FunctionComponent<Props> = ({
         <Grid container item xs={12} sm={1} alignItems="center">
           <Hidden xsDown>
             <Grid item xs>
-              <DeleteButton onClick={removeSession} />
+              <IconButton
+                buttonType="button"
+                icon="delete"
+                aria-label="Delete session"
+                onClick={removeSession}
+              />
             </Grid>
           </Hidden>
         </Grid>

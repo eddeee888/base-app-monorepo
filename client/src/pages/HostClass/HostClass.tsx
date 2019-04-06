@@ -68,7 +68,15 @@ const HostClass: React.FunctionComponent = () => {
           />
         )}
         {params.formPart === 'sessions' && (
-          <ClassSessions initialValues={values.sessions} />
+          <ClassSessions
+            initialValues={values.sessions}
+            {...createNavFunctions({
+              setFormPartialFn: setPartialValues.sessions,
+              history,
+              next,
+              previous
+            })}
+          />
         )}
         {params.formPart === 'summary' && <ClassSummary />}
       </div>

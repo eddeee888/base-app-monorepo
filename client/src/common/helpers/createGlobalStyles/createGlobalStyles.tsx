@@ -21,7 +21,7 @@ const createGlobalStyles = () => {
       color: ${textColor};
       font-size: ${remValue}px;
       line-height: 1.5em;
-      ${mediaQuery.medium} {
+      ${mediaQuery.md} {
         font-size: 20px;
       }
     }

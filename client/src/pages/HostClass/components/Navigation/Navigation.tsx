@@ -17,11 +17,19 @@ const Navigation: React.FunctionComponent<NavigationProps> = ({
 }) => {
   return (
     <Grid container justify="space-between" className={containerClassName}>
-      <Grid item xs={4}>
-        {goPrevious && <Button onClick={goPrevious}>Previous</Button>}
+      <Grid item xs={6}>
+        {goPrevious && (
+          <Button onClick={goPrevious} fullWidth={false}>
+            Previous
+          </Button>
+        )}
       </Grid>
-      <Grid item xs={4}>
-        <Button type="submit">Next</Button>
+      <Grid item xs={6}>
+        <Grid container justify="flex-end">
+          <Button type="submit" fullWidth={false}>
+            Next
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );

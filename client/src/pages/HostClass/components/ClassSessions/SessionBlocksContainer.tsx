@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid';
 import { FieldArrayRenderProps, FormikErrors, FormikTouched } from 'formik';
 import React, { useEffect } from 'react';
-import Button from 'src/common/components/Button';
+import IconButton from 'src/common/components/IconButton';
 import { ClassSessionsInput } from '../../types';
 import createAddSessionFn from './functionCreators/createAddSessionFn';
 import createRemoveSessionFn from './functionCreators/createRemoveSessionFn';
@@ -46,9 +46,13 @@ const SessionBlocksContainer: React.FunctionComponent<Props> = ({
 
       <Grid container justify="flex-end">
         <Grid item>
-          <Button fullWidth={false} onClick={addSession}>
-            Add session
-          </Button>
+          <IconButton
+            buttonType="fab"
+            icon="add"
+            color="primary"
+            aria-label="Add session"
+            onClick={addSession}
+          />
         </Grid>
       </Grid>
     </>
