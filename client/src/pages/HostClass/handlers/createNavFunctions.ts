@@ -1,7 +1,7 @@
 import * as H from 'history';
 import { SetFormPartValues } from '../types';
 
-export interface NavFunctions<I = any> {
+export interface NavFunctions<I> {
   goNext: (values: I) => void;
   goPrevious: (values: I) => void;
 }

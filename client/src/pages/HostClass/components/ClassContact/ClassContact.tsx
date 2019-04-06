@@ -2,12 +2,13 @@ import Grid from '@material-ui/core/Grid';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import FormField from 'src/common/components/FormField';
+import Paper from 'src/common/components/Paper';
+import Section from 'src/common/components/Section';
 import TextInput from 'src/common/components/TextInput';
 import * as Yup from 'yup';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassContactInput } from '../../types';
 import Navigation from '../Navigation';
-import PaperContainer from '../PaperContainer';
 
 export interface ClassContactProps<I> {
   initialValues: I;
@@ -27,16 +28,16 @@ const validationSchema = Yup.object().shape<ClassContactInput>({
 
 const ClassContact: React.FunctionComponent<
   ClassContactProps<ClassContactInput>
-> = ({ initialValues, goNext, goPrevious }) => {
-  return (
-    <PaperContainer size="small">
-      <Formik
-        validationSchema={validationSchema}
-        initialValues={initialValues}
-        onSubmit={goNext}
-      >
-        {({ errors, touched, values }) => (
-          <Form>
+> = ({ initialValues, goNext, goPrevious }) => (
+  <Formik
+    validationSchema={validationSchema}
+    initialValues={initialValues}
+    onSubmit={goNext}
+  >
+    {({ errors, touched, values }) => (
+      <Form>
+        <Section size="small">
+          <Paper>
             <Grid container>
               <Grid item xs={12}>
                 <FormField name="country" errors={errors} touched={touched}>
@@ -104,13 +105,12 @@ const ClassContact: React.FunctionComponent<
                 </FormField>
               </Grid>
             </Grid>
-
-            <Navigation goPrevious={() => goPrevious(values)} />
-          </Form>
-        )}
-      </Formik>
-    </PaperContainer>
-  );
-};
+          </Paper>
+          <Navigation goPrevious={() => goPrevious(values)} />
+        </Section>
+      </Form>
+    )}
+  </Formik>
+);
 
 export default ClassContact;

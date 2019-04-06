@@ -1,12 +1,18 @@
 import { FieldArray, Form, Formik } from 'formik';
 import React from 'react';
+import Paper from 'src/common/components/Paper';
+import Section from 'src/common/components/Section';
 import * as Yup from 'yup';
 import { dayValues, sessionTimes } from '../../constants';
+import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassSession, ClassSessionsInput } from '../../types';
+import Navigation from '../Navigation';
 import SessionBlocksContainer from './SessionBlocksContainer';
 
 interface Props<I> {
   initialValues: I;
+  goNext: NavFunctions<I>['goNext'];
+  goPrevious: NavFunctions<I>['goPrevious'];
 }
 
 const validationSchema = Yup.object().shape<ClassSessionsInput>({
@@ -24,28 +30,36 @@ const validationSchema = Yup.object().shape<ClassSessionsInput>({
 });
 
 const ClassSessions: React.FunctionComponent<Props<ClassSessionsInput>> = ({
-  initialValues
+  initialValues,
+  goNext,
+  goPrevious
 }) => {
   return (
     <Formik<ClassSessionsInput>
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={() => {}}
+      onSubmit={goNext}
     >
       {({ values, errors, touched }) => (
         <Form>
-          <FieldArray name="sessions">
-            {arrayHelpers => {
-              return (
-                <SessionBlocksContainer
-                  values={values}
-                  arrayHelpers={arrayHelpers}
-                  errors={errors}
-                  touched={touched}
-                />
-              );
-            }}
-          </FieldArray>
+          <Section size="medium">
+            <Paper>
+              <FieldArray name="sessions">
+                {arrayHelpers => {
+                  return (
+                    <SessionBlocksContainer
+                      values={values}
+                      arrayHelpers={arrayHelpers}
+                      errors={errors}
+                      touched={touched}
+                    />
+                  );
+                }}
+              </FieldArray>
+            </Paper>
+
+            <Navigation goPrevious={() => goPrevious(values)} />
+          </Section>
         </Form>
       )}
     </Formik>
