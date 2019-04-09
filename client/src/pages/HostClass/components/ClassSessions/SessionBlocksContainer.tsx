@@ -9,19 +9,16 @@ import createDuplicateSessionFn from './functionCreators/createDuplicateSessionF
 import createRemoveSessionFn from './functionCreators/createRemoveSessionFn';
 import SessionBlock from './SessionBlock';
 
-interface Props {
+export interface SessionBlockContainerProps {
   values: ClassSessionsInput;
   arrayHelpers: FieldArrayRenderProps;
   errors: FormikErrors<ClassSessionsInput>;
   touched: FormikTouched<ClassSessionsInput>;
 }
 
-const SessionBlocksContainer: React.FunctionComponent<Props> = ({
-  values,
-  arrayHelpers,
-  errors,
-  touched
-}) => {
+const SessionBlocksContainer: React.FunctionComponent<
+  SessionBlockContainerProps
+> = ({ values, arrayHelpers, errors, touched }) => {
   const addSession = createAddSessionFn(arrayHelpers);
 
   useEffect(
