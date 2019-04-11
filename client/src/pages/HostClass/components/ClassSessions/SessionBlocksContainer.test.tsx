@@ -1,8 +1,8 @@
 import { mount, ReactWrapper } from 'enzyme';
 import { Formik } from 'formik';
 import React from 'react';
+import IconButton from 'src/common/components/IconButton';
 import { ClassSession, ClassSessionsInput } from '../../types';
-
 import SessionBlock from './SessionBlock';
 import SessionBlocksContainer, {
   SessionBlockContainerProps
@@ -12,9 +12,6 @@ const defaultProps: SessionBlockContainerProps = {
   values: {
     sessions: []
   },
-  arrayHelpers: {
-    push: jest.fn()
-  } as any,
   errors: {} as any,
   touched: {} as any
 };
@@ -65,9 +62,38 @@ describe('<SessionBlocksContainer />', () => {
     ).toHaveLength(1);
   });
 
-  it.skip('should create multiple removeSession functions and pass into each session block', () => {});
+  it('should delete session block at the correct index', () => {
+    const values = createValuesWithSessions(3);
+    const wrapper = mountWithProps({
+      ...defaultProps,
+      values
+    });
 
-  it.skip('should create and call addSession if Fab button is clicked', () => {});
+    const blocks = wrapper.find(SessionBlock);
+    expect(blocks).toHaveLength(3);
+    (blocks.at(2).prop('removeSession') as any)();
 
-  it.skip('should automatically add one session if none given on re-render', () => {});
+    // TODO check these!
+    // const newBlocks = wrapper.find(SessionBlock);
+    // expect(newBlocks).toHaveLength(2);
+  });
+
+  it('should create and call addSession if Fab button is clicked', () => {
+    const wrapper = mountWithProps({
+      ...defaultProps,
+      values: createValuesWithSessions(1)
+    });
+
+    const addSessionButton = wrapper
+      .find(IconButton)
+      .filterWhere(button => button.prop('title') === 'Add session');
+
+    expect(addSessionButton).toHaveLength(1);
+
+    (addSessionButton.prop('onClick') as any)();
+
+    expect(wrapper.find(SessionBlock)).toHaveLength(1);
+  });
+
+  it.skip('should automatically add one session if none given on re-render', () => { });
 });

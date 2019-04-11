@@ -1,4 +1,4 @@
-import { FieldArray, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import React from 'react';
 import Block from 'src/common/components/Block';
 import Paper from 'src/common/components/Paper';
@@ -44,20 +44,12 @@ const ClassSessions: React.FunctionComponent<Props<ClassSessionsInput>> = ({
         <Form>
           <Block size="md">
             <Paper>
-              <FieldArray name="sessions">
-                {arrayHelpers => {
-                  return (
-                    <SessionBlocksContainer
-                      values={values}
-                      arrayHelpers={arrayHelpers}
-                      errors={errors}
-                      touched={touched}
-                    />
-                  );
-                }}
-              </FieldArray>
+              <SessionBlocksContainer
+                values={values}
+                errors={errors}
+                touched={touched}
+              />
             </Paper>
-
             <Navigation goPrevious={() => goPrevious(values)} />
           </Block>
         </Form>
