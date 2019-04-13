@@ -6,33 +6,36 @@ import {
   ClassSessionsInput,
   HostClassFormPart,
   HostClassState,
-  SetFormPartValues
+  SetFormValues
 } from '../types';
 
 interface Result {
   values: HostClassState;
-  setPartialValues: {
-    details: SetFormPartValues<ClassDetailsInput>;
-    contact: SetFormPartValues<ClassContactInput>;
-    sessions: SetFormPartValues<ClassSessionsInput>;
+  setFormValues: SetFormValues<HostClassState>;
+  setSubformValues: {
+    details: SetFormValues<ClassDetailsInput>;
+    contact: SetFormValues<ClassContactInput>;
+    sessions: SetFormValues<ClassSessionsInput>;
   };
 }
+
+type CreateSetSubformValuesFn = <I>(
+  subForm: HostClassFormPart
+) => SetFormValues<I>;
 
 const useHostClassState = (): Result => {
   const [values, setValues] = useState<HostClassState>(initialValues);
 
-  function createUpdateFn<I>(
-    formPart: HostClassFormPart
-  ): SetFormPartValues<I> {
-    return newValues => setValues({ ...values, [formPart]: newValues });
-  }
+  const createSetSubformValuesFn: CreateSetSubformValuesFn = subForm => newValues =>
+    setValues({ ...values, [subForm]: newValues });
 
   return {
     values,
-    setPartialValues: {
-      details: createUpdateFn<ClassDetailsInput>('details'),
-      contact: createUpdateFn<ClassContactInput>('contact'),
-      sessions: createUpdateFn<ClassSessionsInput>('sessions')
+    setFormValues: formValues => setValues({ ...formValues }),
+    setSubformValues: {
+      details: createSetSubformValuesFn<ClassDetailsInput>('details'),
+      contact: createSetSubformValuesFn<ClassContactInput>('contact'),
+      sessions: createSetSubformValuesFn<ClassSessionsInput>('sessions')
     }
   };
 };

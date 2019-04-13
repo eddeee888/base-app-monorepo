@@ -36,7 +36,7 @@ export interface HostClassState {
   sessions: ClassSessionsInput;
 }
 
-export type SetFormPartValues<I> = (values: I) => void;
+export type SetFormValues<I> = (values: I) => void;
 
 export enum DayOfTheWeek {
   mon = 'Monday',

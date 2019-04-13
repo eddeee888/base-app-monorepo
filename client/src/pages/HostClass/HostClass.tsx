@@ -25,7 +25,7 @@ const mainContentClassName = css`
 const HostClass: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
   const params = useHostClassParams();
-  const { values, setPartialValues } = useHostClassState();
+  const { values, setFormValues, setSubformValues } = useHostClassState();
   const history = useHistory();
   const { next, previous } = useHostClassNav();
 
@@ -41,6 +41,29 @@ const HostClass: React.FunctionComponent = () => {
     return <Redirect to={linkgenHostClass(defaultFormPart, params.classId)} />;
   }
 
+  const navFnsCommonParams = {
+    history,
+    next,
+    previous
+  };
+
+  const detailsNavFns = createNavFunctions({
+    setValue: setSubformValues.details,
+    ...navFnsCommonParams
+  });
+  const contactNavFns = createNavFunctions({
+    setValue: setSubformValues.contact,
+    ...navFnsCommonParams
+  });
+  const sessionsNavFns = createNavFunctions({
+    setValue: setSubformValues.sessions,
+    ...navFnsCommonParams
+  });
+  const summaryNavFns = createNavFunctions({
+    setValue: setFormValues,
+    ...navFnsCommonParams
+  });
+
   return (
     <Main>
       <div className={mainContentClassName}>
@@ -48,37 +71,30 @@ const HostClass: React.FunctionComponent = () => {
         {params.formPart === 'details' && (
           <ClassDetails
             initialValues={values.details}
-            {...createNavFunctions({
-              setFormPartialFn: setPartialValues.details,
-              history,
-              next,
-              previous
-            })}
+            goNext={detailsNavFns.goNext}
           />
         )}
         {params.formPart === 'contact' && (
           <ClassContact
             initialValues={values.contact}
-            {...createNavFunctions({
-              setFormPartialFn: setPartialValues.contact,
-              history,
-              next,
-              previous
-            })}
+            goNext={contactNavFns.goNext}
+            goPrevious={contactNavFns.goPrevious}
           />
         )}
         {params.formPart === 'sessions' && (
           <ClassSessions
             initialValues={values.sessions}
-            {...createNavFunctions({
-              setFormPartialFn: setPartialValues.sessions,
-              history,
-              next,
-              previous
-            })}
+            goNext={sessionsNavFns.goNext}
+            goPrevious={sessionsNavFns.goPrevious}
           />
         )}
-        {params.formPart === 'summary' && <ClassSummary values={values} />}
+        {params.formPart === 'summary' && (
+          <ClassSummary
+            initialValues={values}
+            goNext={summaryNavFns.goNext}
+            goPrevious={summaryNavFns.goPrevious}
+          />
+        )}
       </div>
     </Main>
   );
