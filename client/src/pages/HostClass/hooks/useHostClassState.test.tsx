@@ -4,7 +4,7 @@ import HookWrapper from 'src/common/helpers/tests/HookWrapper';
 import useHostClassState from './useHostClassState';
 
 describe('useHostClassState()', () => {
-  it.skip('should call', () => {
+  it.skip('should test state and functions once hook support is in', () => {
     mount(<HookWrapper hook={() => useHostClassState()} />);
   });
 });
