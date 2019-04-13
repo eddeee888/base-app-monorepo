@@ -78,7 +78,7 @@ const HostClass: React.FunctionComponent = () => {
             })}
           />
         )}
-        {params.formPart === 'summary' && <ClassSummary />}
+        {params.formPart === 'summary' && <ClassSummary values={values} />}
       </div>
     </Main>
   );
