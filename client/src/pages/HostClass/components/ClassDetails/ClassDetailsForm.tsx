@@ -13,9 +13,9 @@ import TextInput from 'src/common/components/TextInput';
 import { validationSchemas } from '../../constants';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassDetailsInput } from '../../types';
+import { ClassCategoryQueryResult } from '../ClassCategoriesQuery';
+import { ClassCategoryData } from '../ClassCategoriesQuery/__generated__/ClassCategoryData';
 import Navigation from '../Navigation';
-import { ClassCategoryData } from './__generated__/ClassCategoryData';
-import { ClassCategoryQueryResult } from './ClassCategoriesQuery';
 
 export interface ClassDetailsFormProps {
   categoryResult: ClassCategoryQueryResult;

@@ -6,7 +6,7 @@ import Paper from 'src/common/components/Paper';
 import { validationSchemas } from '../../constants';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { HostClassState } from '../../types';
-import ClassCategoriesQuery from '../ClassDetails/ClassCategoriesQuery';
+import ClassCategoriesQuery from '../ClassCategoriesQuery';
 import Navigation from '../Navigation';
 import ContactSection from './ContactSection';
 import DetailsSection from './DetailsSection';

@@ -3,7 +3,7 @@ import React from 'react';
 import H2 from 'src/common/components/H2';
 import Text from 'src/common/components/Text';
 import { HostClassState } from '../../types';
-import { ClassCategoryQueryResult } from '../ClassDetails/ClassCategoriesQuery';
+import { ClassCategoryQueryResult } from '../ClassCategoriesQuery';
 
 interface Props {
     values: HostClassState['details'];
