@@ -36,7 +36,8 @@ const SessionBlocksContainer: React.FunctionComponent<
                     errors={errors}
                     touched={touched}
                   />
-                ))}
+                ))
+              }
               <Grid container justify="flex-end">
                 <Grid item>
                   <Tooltip title="Add session">

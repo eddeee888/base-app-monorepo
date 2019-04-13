@@ -1,9 +1,37 @@
 import { FieldArrayRenderProps } from 'formik';
 import { useCallback, useEffect } from 'react';
+import React from 'react';
 import { emptySession } from '../../constants';
 import { ClassSession, ClassSessionsInput } from '../../types';
 
-interface LogicContainerProps {
+type AddSessionFn = () => void;
+type CreateAddSessionFn = (arrayHelpers: FieldArrayRenderProps) => AddSessionFn;
+const createAddSessionFn: CreateAddSessionFn = arrayHelpers => () => arrayHelpers.push(emptySession);
+
+type DuplicateSessionFn = () => void;
+type CreateDuplicateSessionFn = (
+    arrayHelpers: FieldArrayRenderProps,
+    session: ClassSession,
+    newIndex: number
+) => DuplicateSessionFn;
+const createDuplicateSessionFn: CreateDuplicateSessionFn = (
+    arrayHelpers,
+    session,
+    newIndex
+) => () => arrayHelpers.insert(newIndex, { ...session });
+
+type RemoveSessionFn = () => void;
+type CreateRemoveSessionFn = (
+    arrayHelpers: FieldArrayRenderProps,
+    index: number
+) => RemoveSessionFn;
+
+const createRemoveSessionFn: CreateRemoveSessionFn = (
+    arrayHelpers,
+    index
+) => () => arrayHelpers.remove(index);
+
+export interface LogicContainerProps {
     values: ClassSessionsInput;
     arrayHelpers: FieldArrayRenderProps;
     children: (props: LogicContainerChildrenProps) => React.ReactNode;
@@ -53,32 +81,5 @@ const SessionBlocksLogic = ({
     </>;
 
 };
-
-type AddSessionFn = () => void;
-type CreateAddSessionFn = (arrayHelpers: FieldArrayRenderProps) => AddSessionFn;
-const createAddSessionFn: CreateAddSessionFn = arrayHelpers => () => arrayHelpers.push(emptySession);
-
-type DuplicateSessionFn = () => void;
-type CreateDuplicateSessionFn = (
-    arrayHelpers: FieldArrayRenderProps,
-    session: ClassSession,
-    newIndex: number
-) => DuplicateSessionFn;
-const createDuplicateSessionFn: CreateDuplicateSessionFn = (
-    arrayHelpers,
-    session,
-    newIndex
-) => () => arrayHelpers.insert(newIndex, { ...session });
-
-type RemoveSessionFn = () => void;
-type CreateRemoveSessionFn = (
-    arrayHelpers: FieldArrayRenderProps,
-    index: number
-) => RemoveSessionFn;
-
-const createRemoveSessionFn: CreateRemoveSessionFn = (
-    arrayHelpers,
-    index
-) => () => arrayHelpers.remove(index);
 
 export default SessionBlocksLogic;
