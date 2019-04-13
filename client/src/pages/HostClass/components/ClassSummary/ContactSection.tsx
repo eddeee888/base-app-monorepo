@@ -23,7 +23,7 @@ const ContactSection: React.FunctionComponent<Props> = ({
             <H2 variant="h5">Contact details</H2>
             <Grid container>
                 <Grid item xs={12} sm={4}>
-                    <Text variant="h6" gutterBottom>Address</Text>
+                    <Text gutterBottom><b>Address</b></Text>
                 </Grid>
                 <Grid item xs={12} sm={8}>
                     <Text gutterBottom>
@@ -38,7 +38,7 @@ const ContactSection: React.FunctionComponent<Props> = ({
 
             <Grid container>
                 <Grid item xs={12} sm={4}>
-                    <Text variant="h6" gutterBottom>Contact number</Text>
+                    <Text gutterBottom><b>Contact number</b></Text>
                 </Grid>
                 <Grid item xs={12} sm={8}>
                     <Text gutterBottom>{contactNumber ? contactNumber : <i>N/A</i>}</Text>

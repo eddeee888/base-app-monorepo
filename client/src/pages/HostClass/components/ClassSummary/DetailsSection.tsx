@@ -15,7 +15,7 @@ const DetailsSection: React.FunctionComponent<Props> = ({ values, classCategorie
         <H2 variant="h5">Class details</H2>
         <Grid container>
             <Grid item xs={12} sm={4}>
-                <Text variant="h6" gutterBottom>Name</Text>
+                <Text gutterBottom><b>Name</b></Text>
             </Grid>
             <Grid item xs={12} sm={8}>
                 <Text gutterBottom>{values.name ? values.name : <i>N/A</i>}</Text>
@@ -24,7 +24,7 @@ const DetailsSection: React.FunctionComponent<Props> = ({ values, classCategorie
 
         <Grid container>
             <Grid item xs={12} sm={4}>
-                <Text variant="h6" gutterBottom>Category</Text>
+                <Text gutterBottom><b>Category</b></Text>
             </Grid>
             <Grid item xs={12} sm={8}>
                 <Text gutterBottom>
@@ -58,7 +58,7 @@ const DetailsSection: React.FunctionComponent<Props> = ({ values, classCategorie
 
         <Grid container>
             <Grid item xs={12} sm={4}>
-                <Text variant="h6" gutterBottom>Description</Text>
+                <Text gutterBottom><b>Description</b></Text>
             </Grid>
             <Grid item xs={12} sm={8}>
                 <Text gutterBottom>{values.description ? values.description : <i>N/A</i>}</Text>
