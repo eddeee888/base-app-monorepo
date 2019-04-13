@@ -13,26 +13,26 @@ interface Param<I> {
   previous?: string;
 }
 
-function createNavFunctions<I>({
+type CreateNavFunctionsFn = <I>(params: Param<I>) => NavFunctions<I>;
+
+const createNavFunctions: CreateNavFunctionsFn = ({
   setFormPartialFn,
   history,
   next,
   previous
-}: Param<I>): NavFunctions<I> {
-  return {
-    goNext: values => {
-      setFormPartialFn(values);
-      if (next) {
-        history.push(next);
-      }
-    },
-    goPrevious: values => {
-      setFormPartialFn(values);
-      if (previous) {
-        history.push(previous);
-      }
+}) => ({
+  goNext: values => {
+    setFormPartialFn(values);
+    if (next) {
+      history.push(next);
     }
-  };
-}
+  },
+  goPrevious: values => {
+    setFormPartialFn(values);
+    if (previous) {
+      history.push(previous);
+    }
+  }
+});
 
 export default createNavFunctions;
