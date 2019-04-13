@@ -80,4 +80,6 @@ describe('<SessionBlocksLogic />', () => {
         expect(defaultProps.arrayHelpers.insert).toHaveBeenCalledTimes(1);
         expect(defaultProps.arrayHelpers.insert).toHaveBeenCalledWith(2, defaultProps.values.sessions[1]);
     });
+
+    it.skip('should test empty session (once useEffect hook is supported)', () => { });
 });
