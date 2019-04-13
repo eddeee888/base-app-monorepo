@@ -39,7 +39,7 @@ const ClassSummary: React.FunctionComponent<ClassSummaryProps<HostClassState>> =
               <Divider marginTop={2} marginBottom={2} />
               <SessionsSection values={values.sessions} />
             </Paper>
-            <Navigation goPrevious={goPrevious} />
+            <Navigation goPrevious={() => goPrevious()} />
           </Block>
         </Form>
       )}

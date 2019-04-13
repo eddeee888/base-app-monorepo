@@ -5,7 +5,7 @@ import Button from 'src/common/components/Button';
 import { spacingRem } from 'src/common/helpers/spacing';
 
 interface NavigationProps {
-  goPrevious?: () => void;
+  goPrevious?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
 const containerClassName = css`
