@@ -1,7 +1,10 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
 import H2 from 'src/common/components/H2';
+import Link from 'src/common/components/Link';
 import Text from 'src/common/components/Text';
+import linkgenHostClass from '../../helpers/linkgenHostClass';
+import useHostClassParams from '../../hooks/useHostClassParams';
 import { HostClassState } from '../../types';
 
 interface Props {
@@ -18,9 +21,22 @@ const ContactSection: React.FunctionComponent<Props> = ({
         state,
         contactNumber
     } }
-) => (
+) => {
+    const params = useHostClassParams();
+    return (
         <>
-            <H2 variant="h5">Contact details</H2>
+            <Grid container alignItems="center">
+                <Grid item xs={6}>
+                    <H2 variant="h5">Contact details</H2>
+                </Grid>
+                <Grid item xs={6}>
+                    <Text align="right">
+                        <Link to={linkgenHostClass('contact', params.classId)}>
+                            edit
+                        </Link>
+                    </Text>
+                </Grid>
+            </Grid>
             <Grid container>
                 <Grid item xs={12} sm={4}>
                     <Text gutterBottom><b>Address</b></Text>
@@ -46,5 +62,6 @@ const ContactSection: React.FunctionComponent<Props> = ({
             </Grid>
         </>
     );
+};
 
 export default ContactSection;

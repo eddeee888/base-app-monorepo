@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassDetailsInput } from '../../types';
-import ClassCategoriesQuery from './ClassCategoriesQuery';
+import ClassCategoriesQuery from '../ClassCategoriesQuery';
 import ClassDetailsForm from './ClassDetailsForm';
 
 export interface ClassDetailsProps<I> {
