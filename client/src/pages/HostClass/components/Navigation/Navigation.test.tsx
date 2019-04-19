@@ -4,35 +4,50 @@ import Navigation from './Navigation';
 
 describe('<Navigation />', () => {
   const goPrevious = jest.fn();
+  const goNext = jest.fn();
 
-  const testCases = [
+  const testCasePrevious = [
     {
       data: { goPrevious: undefined },
       expected: {
         numberOfPreviousButton: 0,
-        nextButtonText: 'Next'
       }
     },
     {
       data: { goPrevious },
       expected: {
         numberOfPreviousButton: 1,
-        nextButtonText: 'Next'
+      }
+    },
+  ];
+
+  const testCasesNext = [
+    {
+      data: {},
+      expected: {
+        nextButtonText: 'Next',
+        nextButtonDisabled: false
       }
     },
     {
-      data: { goPrevious },
+      data: {
+        goNext,
+        goNextText: 'Customised submit text',
+        goNextIsDisabled: true
+      },
       expected: {
-        numberOfPreviousButton: 1,
-        nextButtonText: 'Next'
+        nextButtonText: 'Customised submit text',
+        nextButtonDisabled: true
       }
     }
   ];
 
-  testCases.forEach(
+  testCasePrevious.forEach(
     ({
-      data: { goPrevious: goPreviousFn },
-      expected: { numberOfPreviousButton, nextButtonText }
+      data,
+      expected: {
+        numberOfPreviousButton,
+      }
     }) => {
       afterEach(() => {
         jest.resetAllMocks();
@@ -42,22 +57,54 @@ describe('<Navigation />', () => {
         jest.restoreAllMocks();
       });
 
-      it(`if previous is ${!!goPreviousFn}, previous button is ${
+      it(`Previous button is ${!!data.goPrevious}, previous button is ${
         numberOfPreviousButton > 0 ? 'shown' : 'hidden'
-      } and submit button text is ${nextButtonText}`, () => {
-        const wrapper = mount(<Navigation goPrevious={goPreviousFn} />);
-        expect(
-          wrapper
-            .find('button')
-            .filterWhere(button => button.text() === 'Previous')
-        ).toHaveLength(numberOfPreviousButton);
+        }`, () => {
+          const wrapper = mount(<Navigation {...data} />);
+          expect(
+            wrapper
+              .find('button')
+              .filterWhere(button => button.text() === 'Previous')
+          ).toHaveLength(numberOfPreviousButton);
+        });
+    }
+  );
 
-        expect(
-          wrapper
-            .find('button')
-            .filterWhere(button => button.text() === nextButtonText)
-        ).toHaveLength(1);
+  testCasesNext.forEach(
+    ({
+      data,
+      expected: {
+        nextButtonText,
+        nextButtonDisabled
+      }
+    }) => {
+      afterEach(() => {
+        jest.resetAllMocks();
       });
+
+      afterAll(() => {
+        jest.restoreAllMocks();
+      });
+
+      it(`Next button text is '${nextButtonText}',
+        isDisabled: ${nextButtonDisabled},
+        goNext: ${!!data.goNext}`, () => {
+          const wrapper = mount(<Navigation {...data} />);
+          const goNextButton = wrapper
+            .find('button')
+            .filterWhere(
+              button =>
+                button.prop('type') === 'submit' &&
+                button.text() === nextButtonText &&
+                button.prop('disabled') === nextButtonDisabled
+            );
+          expect(goNextButton).toHaveLength(1);
+
+          if (data.goNext) {
+            (goNextButton.prop('onClick') as any)();
+            expect(data.goNext).toHaveBeenCalledTimes(1);
+          }
+        });
     }
   );
 });
