@@ -90,8 +90,8 @@ const HostClass: React.FunctionComponent = () => {
         )}
         {params.formPart === 'summary' && (
           <ClassSummary
-            initialValues={values}
-            goNext={summaryNavFns.goNext}
+            values={values}
+            goNext={() => { /* TODO: implement this */ }}
             goPrevious={summaryNavFns.goPrevious}
           />
         )}

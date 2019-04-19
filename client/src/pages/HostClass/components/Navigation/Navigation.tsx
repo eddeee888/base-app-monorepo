@@ -6,6 +6,9 @@ import { spacingRem } from 'src/common/helpers/spacing';
 
 interface NavigationProps {
   goPrevious?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  goNext?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  goNextText?: string;
+  goNextIsDisabled?: boolean;
 }
 
 const containerClassName = css`
@@ -13,7 +16,10 @@ const containerClassName = css`
 `;
 
 const Navigation: React.FunctionComponent<NavigationProps> = ({
-  goPrevious
+  goPrevious,
+  goNextIsDisabled,
+  goNextText = 'Next',
+  goNext
 }) => {
   return (
     <Grid container justify="space-between" className={containerClassName}>
@@ -26,8 +32,12 @@ const Navigation: React.FunctionComponent<NavigationProps> = ({
       </Grid>
       <Grid item xs={6}>
         <Grid container justify="flex-end">
-          <Button type="submit" fullWidth={false}>
-            Next
+          <Button type="submit"
+            onClick={goNext}
+            fullWidth={false}
+            disabled={goNextIsDisabled}
+          >
+            {goNextText}
           </Button>
         </Grid>
       </Grid>

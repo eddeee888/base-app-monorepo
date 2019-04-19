@@ -1,8 +1,8 @@
-import { Form, Formik } from 'formik';
 import React from 'react';
 import Block from 'src/common/components/Block';
 import Divider from 'src/common/components/Divider';
 import Paper from 'src/common/components/Paper';
+import Text from 'src/common/components/Text';
 import { validationSchemas } from '../../constants';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { HostClassState } from '../../types';
@@ -13,40 +13,50 @@ import DetailsSection from './DetailsSection';
 import SessionsSection from './SessionsSection';
 
 interface ClassSummaryProps<I> {
-  initialValues: I;
-  goNext: NavFunctions<I>['goNext'];
+  values: I;
+  goNext: () => void;
   goPrevious: NavFunctions<I>['goPrevious'];
 }
 
 const ClassSummary: React.FunctionComponent<ClassSummaryProps<HostClassState>> =
-  ({ initialValues, goPrevious, goNext }) => {
-    const validations = validateValues(initialValues);
-
+  ({ values, goPrevious, goNext }) => {
+    const validated = validateValues(values);
     return (
-      <Formik<HostClassState>
-        initialValues={initialValues}
-        validationSchema={validationSchemas}
-        onSubmit={goNext}
-      >
-        {({ values, errors, touched }) => (
-          <Form>
-            <Block size="sm">
-              <Paper>
-                <ClassCategoriesQuery>
-                  {classCategoriesResult => (
-                    <DetailsSection values={values.details} classCategoriesResult={classCategoriesResult} />
-                  )}
-                </ClassCategoriesQuery>
-                <Divider marginTop={2} marginBottom={2} />
-                <ContactSection values={values.contact} />
-                <Divider marginTop={2} marginBottom={2} />
-                <SessionsSection values={values.sessions} />
-              </Paper>
-              <Navigation goPrevious={() => goPrevious()} />
-            </Block>
-          </Form>
-        )}
-      </Formik>
+      <Block size="sm">
+        <Paper>
+          <ClassCategoriesQuery>
+            {classCategoriesResult => (
+              <DetailsSection
+                values={values.details}
+                classCategoriesResult={classCategoriesResult}
+              />
+            )}
+          </ClassCategoriesQuery>
+          {!validated.details &&
+            <Text error><i>This section must be completed to continue</i></Text>
+          }
+
+          <Divider marginTop={2} marginBottom={2} />
+
+          <ContactSection values={values.contact} />
+          {!validated.contact &&
+            <Text error><i>This section must be completed to continue</i></Text>
+          }
+
+          <Divider marginTop={2} marginBottom={2} />
+
+          <SessionsSection values={values.sessions} />
+          {!validated.sessions &&
+            <Text error><i>There must be at least one valid session</i></Text>
+          }
+
+        </Paper>
+        <Navigation
+          goPrevious={() => goPrevious()}
+          goNext={goNext}
+          goNextText="Confirm"
+          goNextIsDisabled={!validated.details || !validated.contact || !validated.sessions} />
+      </Block>
     );
   };
 
