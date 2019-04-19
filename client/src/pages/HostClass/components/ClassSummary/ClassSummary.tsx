@@ -19,31 +19,49 @@ interface ClassSummaryProps<I> {
 }
 
 const ClassSummary: React.FunctionComponent<ClassSummaryProps<HostClassState>> =
-  ({ initialValues, goPrevious, goNext }) => (
-    <Formik<HostClassState>
-      initialValues={initialValues}
-      validationSchema={validationSchemas}
-      onSubmit={goNext}
-    >
-      {({ values }) => (
-        <Form>
-          <Block size="sm">
-            <Paper>
-              <ClassCategoriesQuery>
-                {classCategoriesResult => (
-                  <DetailsSection values={values.details} classCategoriesResult={classCategoriesResult} />
-                )}
-              </ClassCategoriesQuery>
-              <Divider marginTop={2} marginBottom={2} />
-              <ContactSection values={values.contact} />
-              <Divider marginTop={2} marginBottom={2} />
-              <SessionsSection values={values.sessions} />
-            </Paper>
-            <Navigation goPrevious={() => goPrevious()} />
-          </Block>
-        </Form>
-      )}
-    </Formik>
-  );
+  ({ initialValues, goPrevious, goNext }) => {
+    const validations = validateValues(initialValues);
+
+    return (
+      <Formik<HostClassState>
+        initialValues={initialValues}
+        validationSchema={validationSchemas}
+        onSubmit={goNext}
+      >
+        {({ values, errors, touched }) => (
+          <Form>
+            <Block size="sm">
+              <Paper>
+                <ClassCategoriesQuery>
+                  {classCategoriesResult => (
+                    <DetailsSection values={values.details} classCategoriesResult={classCategoriesResult} />
+                  )}
+                </ClassCategoriesQuery>
+                <Divider marginTop={2} marginBottom={2} />
+                <ContactSection values={values.contact} />
+                <Divider marginTop={2} marginBottom={2} />
+                <SessionsSection values={values.sessions} />
+              </Paper>
+              <Navigation goPrevious={() => goPrevious()} />
+            </Block>
+          </Form>
+        )}
+      </Formik>
+    );
+  };
+
+type Validations = {
+  [key in keyof HostClassState]: boolean;
+};
+
+type ValidateValuesFn = (initialValues: HostClassState) => Validations;
+
+const validateValues: ValidateValuesFn = initialValues => {
+  return {
+    details: validationSchemas.details.isValidSync(initialValues.details),
+    contact: validationSchemas.contact.isValidSync(initialValues.contact),
+    sessions: validationSchemas.sessions.isValidSync(initialValues.sessions),
+  };
+};
 
 export default ClassSummary;
