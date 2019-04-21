@@ -12,7 +12,7 @@ import ContactSection from './ContactSection';
 import DetailsSection from './DetailsSection';
 import SessionsSection from './SessionsSection';
 
-interface ClassSummaryProps<I> {
+export interface ClassSummaryProps<I> {
   values: I;
   goNext: () => void;
   goPrevious: NavFunctions<I>['goPrevious'];
@@ -33,14 +33,14 @@ const ClassSummary: React.FunctionComponent<ClassSummaryProps<HostClassState>> =
             )}
           </ClassCategoriesQuery>
           {!validated.details &&
-            <Text error><i>This section must be completed to continue</i></Text>
+            <Text error><i>Class details must be provided to continue</i></Text>
           }
 
           <Divider marginTop={2} marginBottom={2} />
 
           <ContactSection values={values.contact} />
           {!validated.contact &&
-            <Text error><i>This section must be completed to continue</i></Text>
+            <Text error><i>Contact details must be provided to continue</i></Text>
           }
 
           <Divider marginTop={2} marginBottom={2} />
@@ -64,13 +64,13 @@ type Validations = {
   [key in keyof HostClassState]: boolean;
 };
 
-type ValidateValuesFn = (initialValues: HostClassState) => Validations;
+type ValidateValuesFn = (values: HostClassState) => Validations;
 
-const validateValues: ValidateValuesFn = initialValues => {
+const validateValues: ValidateValuesFn = ({ details, contact, sessions }) => {
   return {
-    details: validationSchemas.details.isValidSync(initialValues.details),
-    contact: validationSchemas.contact.isValidSync(initialValues.contact),
-    sessions: validationSchemas.sessions.isValidSync(initialValues.sessions),
+    details: validationSchemas.details.isValidSync(details),
+    contact: validationSchemas.contact.isValidSync(contact),
+    sessions: validationSchemas.sessions.isValidSync(sessions),
   };
 };
 
