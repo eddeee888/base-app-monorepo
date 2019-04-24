@@ -32,7 +32,8 @@ const Navigation: React.FunctionComponent<NavigationProps> = ({
       </Grid>
       <Grid item xs={6}>
         <Grid container justify="flex-end">
-          <Button type="submit"
+          <Button
+            type="submit"
             onClick={goNextIsDisabled ? undefined : goNext}
             fullWidth={false}
             disabled={goNextIsDisabled}
