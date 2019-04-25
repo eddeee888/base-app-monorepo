@@ -1,15 +1,15 @@
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import Tooltip from '@material-ui/core/Tooltip';
+import FormFieldArray from 'common/components/FormFieldArray';
+import IconButton from 'common/components/IconButton';
+import Select from 'common/components/Select';
+import Text from 'common/components/Text';
+import TextInput from 'common/components/TextInput';
+import { spacingRem } from 'common/helpers/spacing';
 import { css } from 'emotion';
 import { FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
-import FormFieldArray from 'src/common/components/FormFieldArray';
-import IconButton from 'src/common/components/IconButton';
-import Select from 'src/common/components/Select';
-import Text from 'src/common/components/Text';
-import TextInput from 'src/common/components/TextInput';
-import { spacingRem } from 'src/common/helpers/spacing';
 import { dayOptions, sessionTimeOptions } from '../../constants';
 import { ClassSession, ClassSessionsInput } from '../../types';
 

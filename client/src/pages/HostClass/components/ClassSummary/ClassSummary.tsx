@@ -1,8 +1,8 @@
+import Block from 'common/components/Block';
+import Divider from 'common/components/Divider';
+import Paper from 'common/components/Paper';
+import Text from 'common/components/Text';
 import React from 'react';
-import Block from 'src/common/components/Block';
-import Divider from 'src/common/components/Divider';
-import Paper from 'src/common/components/Paper';
-import Text from 'src/common/components/Text';
 import { validationSchemas } from '../../constants';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { HostClassState } from '../../types';

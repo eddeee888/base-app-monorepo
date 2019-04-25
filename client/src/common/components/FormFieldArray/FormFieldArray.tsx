@@ -1,3 +1,4 @@
+import FormError from 'common/components/FormError';
 import {
   Field,
   FieldProps,
@@ -7,7 +8,6 @@ import {
   getIn
 } from 'formik';
 import React from 'react';
-import FormError from 'src/common/components/FormError';
 
 interface FormFieldProps<Element> {
   field: {

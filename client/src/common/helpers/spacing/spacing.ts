@@ -1,4 +1,4 @@
-import { remValue } from 'src/common/styles/unit';
+import { remValue } from 'common/styles/unit';
 
 const spacingUnit = 0.5; // this means 1 spacingUnit = 0.5rem = 8px
 

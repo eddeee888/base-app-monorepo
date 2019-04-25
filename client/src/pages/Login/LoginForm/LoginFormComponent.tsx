@@ -1,15 +1,15 @@
 import Grid from '@material-ui/core/Grid';
+import { LoginInput } from '__generated__/globalTypes';
+import Button from 'common/components/Button';
+import FormError from 'common/components/FormError';
+import FormField from 'common/components/FormField';
+import Link from 'common/components/Link';
+import Text from 'common/components/Text';
+import TextInput from 'common/components/TextInput';
+import { linkgen, Paths } from 'common/helpers/pathing';
+import useUrlQuery from 'common/hooks/useUrlQuery';
 import { Form, Formik, FormikActions } from 'formik';
 import React from 'react';
-import { LoginInput } from 'src/__generated__/globalTypes';
-import Button from 'src/common/components/Button';
-import FormError from 'src/common/components/FormError';
-import FormField from 'src/common/components/FormField';
-import Link from 'src/common/components/Link';
-import Text from 'src/common/components/Text';
-import TextInput from 'src/common/components/TextInput';
-import { linkgen, Paths } from 'src/common/helpers/pathing';
-import useUrlQuery from 'src/common/hooks/useUrlQuery';
 import * as Yup from 'yup';
 
 export type LoginFormikFn = (

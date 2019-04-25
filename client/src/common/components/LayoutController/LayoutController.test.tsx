@@ -1,11 +1,11 @@
+import Header from 'common/components/Header';
+import getLayoutConfig from 'common/components/LayoutController/getLayoutConfig';
 import { mount } from 'enzyme';
 import React from 'react';
 import { StaticRouter } from 'react-router';
-import Header from 'src/common/components/Header';
-import getLayoutConfig from 'src/common/components/LayoutController/getLayoutConfig';
 import LayoutController from './LayoutController';
 
-jest.mock('src/common/components/LayoutController/getLayoutConfig', () => ({
+jest.mock('common/components/LayoutController/getLayoutConfig', () => ({
   __esModule: true,
   default: jest.fn()
 }));

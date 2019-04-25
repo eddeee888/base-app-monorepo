@@ -1,10 +1,10 @@
 import Button from '@material-ui/core/Button';
+import Link from 'common/components/Link';
+import { linkgen, Paths } from 'common/helpers/pathing';
 import { mount, ReactWrapper } from 'enzyme';
 import { Field, Formik } from 'formik';
 import React from 'react';
 import { StaticRouter } from 'react-router';
-import Link from 'src/common/components/Link';
-import { linkgen, Paths } from 'src/common/helpers/pathing';
 import SignupFormComponent from './SignupFormComponent';
 
 const props = {

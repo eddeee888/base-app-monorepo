@@ -1,10 +1,10 @@
+import AppRouter from 'AppRouter';
+import ThemeProvider from 'common/components/ThemeProvider';
+import { ViewerProvider } from 'common/components/ViewerContext';
+import createGlobalStyles from 'common/helpers/createGlobalStyles';
+import graphqlClient from 'common/helpers/graphql/client';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
-import AppRouter from 'src/AppRouter';
-import ThemeProvider from 'src/common/components/ThemeProvider';
-import { ViewerProvider } from 'src/common/components/ViewerContext';
-import createGlobalStyles from 'src/common/helpers/createGlobalStyles';
-import graphqlClient from 'src/common/helpers/graphql/client';
 
 createGlobalStyles();
 

@@ -1,9 +1,9 @@
-import React from 'react';
 import {
   clearViewerId,
   getViewerId,
   setViewerId
-} from 'src/common/helpers/localStorage';
+} from 'common/helpers/localStorage';
+import React from 'react';
 
 export interface Viewer {
   id: string;
@@ -71,14 +71,14 @@ class ViewerProvider extends React.Component<ContextProps, ContextState> {
     this.setState({
       viewer
     });
-  };
+  }
 
   clearViewer: ClearViewerFn = () => {
     clearViewerId();
     this.setState({
       viewer: null
     });
-  };
+  }
 }
 
 export default ViewerContext;

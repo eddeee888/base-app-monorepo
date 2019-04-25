@@ -1,8 +1,4 @@
-import {
-  getPathFromLocation,
-  linkgen,
-  Paths
-} from 'src/common/helpers/pathing';
+import { getPathFromLocation, linkgen, Paths } from 'common/helpers/pathing';
 
 interface LayoutConfig {
   header: { display: boolean };
@@ -33,6 +29,7 @@ const getLayoutConfig: GetLayoutConfigFn = pathname => {
       footer = {
         display: false
       };
+      break;
     default:
       break;
   }

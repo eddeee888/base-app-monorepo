@@ -2,9 +2,9 @@ import {
   CustomGraphQLErrors,
   FormValidationError
 } from '@bit/eddeee888.learnd-utils.graphql';
-import { SignupInput } from 'src/__generated__/globalTypes';
-import createApolloError from 'src/common/helpers/tests/createApolloError';
-import getCustomGraphQLErrorFromErrorName from 'src/common/helpers/tests/getCustomGraphQLErrorFromErrorName';
+import { SignupInput } from '__generated__/globalTypes';
+import createApolloError from 'common/helpers/tests/createApolloError';
+import getCustomGraphQLErrorFromErrorName from 'common/helpers/tests/getCustomGraphQLErrorFromErrorName';
 import createHandleSignupFn from './createHandleSignupFn';
 
 describe('createHandleSignupFn()', () => {

@@ -1,9 +1,9 @@
+import ViewerContext from 'common/components/ViewerContext';
+import { Paths } from 'common/helpers/pathing';
 import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { Redirect, StaticRouter } from 'react-router';
-import ViewerContext from 'src/common/components/ViewerContext';
-import { Paths } from 'src/common/helpers/pathing';
 import Login from './Login';
 import LoginForm from './LoginForm';
 

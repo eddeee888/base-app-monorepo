@@ -1,9 +1,9 @@
 import { injectGlobal } from 'emotion';
 
-import 'src/common/assets/fonts/fonts.css';
-import { primaryBackgroundColor, textColor } from 'src/common/styles/color';
-import { mediaQuery } from 'src/common/styles/media';
-import { remValue } from 'src/common/styles/unit';
+import 'common/assets/fonts/fonts.css';
+import { primaryBackgroundColor, textColor } from 'common/styles/color';
+import { mediaQuery } from 'common/styles/media';
+import { remValue } from 'common/styles/unit';
 
 const createGlobalStyles = () => {
   return injectGlobal`

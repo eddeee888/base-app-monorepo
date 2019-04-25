@@ -68,7 +68,7 @@ const SessionBlocksLogic = ({
         addSession();
       }
     },
-    [values.sessions.length]
+    [values.sessions.length, addSession]
   );
 
   return (

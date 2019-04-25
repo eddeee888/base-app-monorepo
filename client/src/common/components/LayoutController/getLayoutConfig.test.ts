@@ -1,4 +1,4 @@
-import { Paths } from 'src/common/helpers/pathing';
+import { Paths } from 'common/helpers/pathing';
 import getLayoutConfig from './getLayoutConfig';
 
 describe('getLayoutConfig()', () => {

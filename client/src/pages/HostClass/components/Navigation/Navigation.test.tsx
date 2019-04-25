@@ -87,9 +87,11 @@ describe('<Navigation />', () => {
           );
         expect(goNextButton).toHaveLength(1);
 
-        if (data.goNext) {
+        if (data.goNext && !nextButtonDisabled) {
           (goNextButton.prop('onClick') as any)();
           expect(data.goNext).toHaveBeenCalledTimes(1);
+        } else {
+          expect(goNextButton.prop('onClick')).toBeFalsy();
         }
       });
     }

@@ -1,7 +1,7 @@
 import MuiPaper from '@material-ui/core/Paper';
+import { spacingRem } from 'common/helpers/spacing';
 import { css, cx } from 'emotion';
 import React from 'react';
-import { spacingRem } from 'src/common/helpers/spacing';
 
 interface Props {
   children?: React.ReactNode;

@@ -1,4 +1,4 @@
-import { SelectOption } from 'src/common/components/Select/Select';
+import { SelectOption } from 'common/components/Select/Select';
 import * as Yup from 'yup';
 import {
   ClassContactInput,

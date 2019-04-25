@@ -1,8 +1,8 @@
+import ViewerContext from 'common/components/ViewerContext';
+import useFormError from 'common/hooks/useFormError';
+import LoginFormComponent from 'pages/Login/LoginForm/LoginFormComponent';
+import LoginFormMutation from 'pages/Login/LoginForm/LoginFormMutation';
 import React, { useContext } from 'react';
-import ViewerContext from 'src/common/components/ViewerContext';
-import useFormError from 'src/common/hooks/useFormError';
-import LoginFormComponent from 'src/pages/Login/LoginForm/LoginFormComponent';
-import LoginFormMutation from 'src/pages/Login/LoginForm/LoginFormMutation';
 import createHandleLoginFn from './handlers/createHandleLoginFn';
 
 const LoginForm: React.FunctionComponent = () => {

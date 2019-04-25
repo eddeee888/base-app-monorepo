@@ -1,14 +1,14 @@
 import { css } from 'emotion';
 import React, { useContext } from 'react';
 
-import Button from 'src/common/components/Button';
-import Link from 'src/common/components/Link';
-import Logo from 'src/common/components/Logo';
-import ViewerContext from 'src/common/components/ViewerContext';
-import { linkgen, Paths } from 'src/common/helpers/pathing';
-import { borderColor, primaryBackgroundColor } from 'src/common/styles/color';
-import { breakpoints, mediaQuery } from 'src/common/styles/media';
-import { headerHeight } from 'src/common/styles/size';
+import Button from 'common/components/Button';
+import Link from 'common/components/Link';
+import Logo from 'common/components/Logo';
+import ViewerContext from 'common/components/ViewerContext';
+import { linkgen, Paths } from 'common/helpers/pathing';
+import { borderColor, primaryBackgroundColor } from 'common/styles/color';
+import { breakpoints, mediaQuery } from 'common/styles/media';
+import { headerHeight } from 'common/styles/size';
 
 const headerClassName = css`
   width: 100%;

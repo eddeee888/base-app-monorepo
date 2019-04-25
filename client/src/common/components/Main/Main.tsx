@@ -1,6 +1,6 @@
+import { breakpoints, mediaQuery } from 'common/styles/media';
 import { css, cx } from 'emotion';
 import React from 'react';
-import { breakpoints, mediaQuery } from 'src/common/styles/media';
 
 interface Props {
   children: React.ReactNode;

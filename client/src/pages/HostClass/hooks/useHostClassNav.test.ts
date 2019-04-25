@@ -1,12 +1,12 @@
 // @ts-ignore
-import { formOrder } from 'src/pages/HostClass/constants';
-import useHostClassParams from 'src/pages/HostClass/hooks/useHostClassParams';
+import { formOrder } from 'pages/HostClass/constants';
+import useHostClassParams from 'pages/HostClass/hooks/useHostClassParams';
 import useHostClassNav from './useHostClassNav';
 
-jest.mock('src/pages/HostClass/constants', () => ({
+jest.mock('pages/HostClass/constants', () => ({
   formOrder: ['first', 'part2', 'part3', 'last']
 }));
-jest.mock('src/pages/HostClass/hooks/useHostClassParams');
+jest.mock('pages/HostClass/hooks/useHostClassParams');
 
 describe('useHostClassNav()', () => {
   afterEach(() => {

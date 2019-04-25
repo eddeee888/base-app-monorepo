@@ -1,4 +1,4 @@
-import useParams from 'src/common/hooks/useParams';
+import useParams from 'common/hooks/useParams';
 import { HostClassParams } from '../types';
 
 const useHostClassParams = (): HostClassParams => {

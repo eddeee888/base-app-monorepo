@@ -1,4 +1,9 @@
+import MutationProps from 'common/helpers/typings/MutationProps';
 import gql from 'graphql-tag';
+import {
+  Login,
+  LoginVariables
+} from 'pages/Login/LoginForm/__generated__/Login';
 import React from 'react';
 import {
   Mutation,
@@ -6,11 +11,6 @@ import {
   MutationOptions,
   MutationResult
 } from 'react-apollo';
-import MutationProps from 'src/common/helpers/typings/MutationProps';
-import {
-  Login,
-  LoginVariables
-} from 'src/pages/Login/LoginForm/__generated__/Login';
 
 export type LoginMutationFn = MutationFn<Login, LoginVariables>;
 export type LoginMutationResult = MutationResult<Login>;

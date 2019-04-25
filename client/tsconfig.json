@@ -1,13 +1,8 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "es5",
-    "lib": [
-      "es5",
-      "es6",
-      "dom",
-      "esnext.asynciterable"
-    ],
+    "lib": ["es5", "es6", "dom", "esnext.asynciterable"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -23,11 +18,6 @@
     "noUnusedLocals": true,
     "noImplicitAny": true
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "**/node_modules/**/*",
-    "src/**/__generated__/*.ts"
-  ]
+  "include": ["src"],
+  "exclude": ["**/node_modules/**/*", "src/**/__generated__/*.ts"]
 }

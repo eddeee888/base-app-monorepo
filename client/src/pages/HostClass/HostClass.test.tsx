@@ -1,10 +1,10 @@
+import Main from 'common/components/Main';
+import ViewerContext from 'common/components/ViewerContext';
+import { Paths } from 'common/helpers/pathing';
 import { mount } from 'enzyme';
 import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { Redirect, StaticRouter } from 'react-router';
-import Main from 'src/common/components/Main';
-import ViewerContext from 'src/common/components/ViewerContext';
-import { Paths } from 'src/common/helpers/pathing';
 import ClassContact from './components/ClassContact';
 import ClassDetails from './components/ClassDetails';
 import ClassSessions from './components/ClassSessions';
