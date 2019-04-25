@@ -9,7 +9,11 @@ interface DividerProps extends MUIDividerProps {
   marginBottom?: SpacingValue;
 }
 
-const Divider: FunctionComponent<DividerProps> = ({ marginTop, marginBottom, ...props }) => {
+const Divider: FunctionComponent<DividerProps> = ({
+  marginTop,
+  marginBottom,
+  ...props
+}) => {
   const style = {
     marginTop: marginTop ? `${spacingRem(marginTop)}rem` : undefined,
     marginBottom: marginBottom ? `${spacingRem(marginBottom)}rem` : undefined

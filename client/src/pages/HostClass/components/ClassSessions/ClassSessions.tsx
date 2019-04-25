@@ -19,26 +19,26 @@ const ClassSessions: React.FunctionComponent<Props<ClassSessionsInput>> = ({
   goNext,
   goPrevious
 }) => (
-    <Formik<ClassSessionsInput>
-      initialValues={initialValues}
-      validationSchema={validationSchemas.sessions}
-      onSubmit={goNext}
-    >
-      {({ values, errors, touched }) => (
-        <Form>
-          <Block size="md">
-            <Paper>
-              <SessionBlocksContainer
-                values={values}
-                errors={errors}
-                touched={touched}
-              />
-            </Paper>
-            <Navigation goPrevious={() => goPrevious(values)} />
-          </Block>
-        </Form>
-      )}
-    </Formik>
-  );
+  <Formik<ClassSessionsInput>
+    initialValues={initialValues}
+    validationSchema={validationSchemas.sessions}
+    onSubmit={goNext}
+  >
+    {({ values, errors, touched }) => (
+      <Form>
+        <Block size="md">
+          <Paper>
+            <SessionBlocksContainer
+              values={values}
+              errors={errors}
+              touched={touched}
+            />
+          </Paper>
+          <Navigation goPrevious={() => goPrevious(values)} />
+        </Block>
+      </Form>
+    )}
+  </Formik>
+);
 
 export default ClassSessions;

@@ -1,10 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
-import {
-  FieldArray,
-  FormikErrors,
-  FormikTouched
-} from 'formik';
+import { FieldArray, FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
 import IconButton from 'src/common/components/IconButton';
 import { ClassSessionsInput } from '../../types';
@@ -36,8 +32,7 @@ const SessionBlocksContainer: React.FunctionComponent<
                     errors={errors}
                     touched={touched}
                   />
-                ))
-              }
+                ))}
               <Grid container justify="flex-end">
                 <Grid item>
                   <Tooltip title="Add session">
