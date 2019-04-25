@@ -15,16 +15,19 @@ const defaultProps: SessionBlockContainerProps = {
   touched: {} as any
 };
 
-const mountWithProps = (props: any) => (
+const mountWithProps = (props: any) =>
   mount(
     <Formik<ClassSessionsInput>
       initialValues={props.values}
       onSubmit={() => jest.fn()}
     >
-      {() => <Form><SessionBlocksContainer {...props} /></Form>}
+      {() => (
+        <Form>
+          <SessionBlocksContainer {...props} />
+        </Form>
+      )}
     </Formik>
-  )
-);
+  );
 
 const createValuesWithSessions = (numberOfSessions: number) => ({
   sessions: [...Array(numberOfSessions)].map(() => ({

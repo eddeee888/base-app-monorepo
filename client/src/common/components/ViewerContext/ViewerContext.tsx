@@ -71,14 +71,14 @@ class ViewerProvider extends React.Component<ContextProps, ContextState> {
     this.setState({
       viewer
     });
-  }
+  };
 
   clearViewer: ClearViewerFn = () => {
     clearViewerId();
     this.setState({
       viewer: null
     });
-  }
+  };
 }
 
 export default ViewerContext;
