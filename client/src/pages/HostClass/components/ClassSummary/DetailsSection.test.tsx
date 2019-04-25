@@ -89,9 +89,9 @@ describe('<DetailsSection /> data values', () => {
         </StaticRouter>
       );
 
-      expected.forEach(result => {
+      expected.forEach(expectedValue => {
         expect(
-          wrapper.find(Grid).filterWhere(grid => grid.text() === result)
+          wrapper.find(Grid).filterWhere(grid => grid.text() === expectedValue)
         ).toHaveLength(1);
       });
     });
