@@ -1,7 +1,7 @@
+import Text from 'common/components/Text';
 import { mount } from 'enzyme';
 import React from 'react';
 import { StaticRouter } from 'react-router';
-import Text from 'src/common/components/Text';
 import SessionsSection, { SessionsSectionProps } from './SessionsSection';
 
 describe('<SessionsSection />', () => {

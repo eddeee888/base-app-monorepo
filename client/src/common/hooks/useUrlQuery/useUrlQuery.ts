@@ -1,4 +1,4 @@
-import { getUrlQuery, UrlQuery } from 'src/common/helpers/pathing';
+import { getUrlQuery, UrlQuery } from 'common/helpers/pathing';
 import useReactRouter from 'use-react-router';
 
 const useUrlQuery: () => UrlQuery = () => {

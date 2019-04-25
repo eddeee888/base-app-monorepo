@@ -1,7 +1,7 @@
+import QueryProps from 'common/helpers/typings/QueryProps';
 import gql from 'graphql-tag';
 import React from 'react';
 import { Query, QueryResult } from 'react-apollo';
-import QueryProps from 'src/common/helpers/typings/QueryProps';
 import { ClassCategoryData } from './__generated__/ClassCategoryData';
 
 const GET_CLASS_CATEGORIES = gql`

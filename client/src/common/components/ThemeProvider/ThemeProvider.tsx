@@ -1,12 +1,12 @@
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import React from 'react';
 import {
   primaryColor,
   secondaryColor,
   textOnPrimaryColor,
   textOnSecondaryColor
-} from 'src/common/styles/color';
-import { primaryFont } from 'src/common/styles/fonts';
+} from 'common/styles/color';
+import { primaryFont } from 'common/styles/fonts';
+import React from 'react';
 
 const theme = createMuiTheme({
   palette: {

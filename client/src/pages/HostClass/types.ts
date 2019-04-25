@@ -1,3 +1,13 @@
+export enum DayOfTheWeek {
+  mon = 'Monday',
+  tue = 'Tuesday',
+  wed = 'Wednesday',
+  thu = 'Thursday',
+  fri = 'Friday',
+  sat = 'Saturday',
+  sun = 'Sunday'
+}
+
 export type HostClassFormPart = 'details' | 'contact' | 'sessions' | 'summary';
 export interface HostClassParams {
   classId?: string;
@@ -37,16 +47,6 @@ export interface HostClassState {
 }
 
 export type SetFormValues<I> = (values: I) => void;
-
-export enum DayOfTheWeek {
-  mon = 'Monday',
-  tue = 'Tuesday',
-  wed = 'Wednesday',
-  thu = 'Thursday',
-  fri = 'Friday',
-  sat = 'Saturday',
-  sun = 'Sunday'
-}
 
 export type SessionTime =
   | '12:00am'

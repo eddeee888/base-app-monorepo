@@ -1,14 +1,14 @@
+import Spinner from 'common/components/Spinner';
 import { mount } from 'enzyme';
 import { Formik } from 'formik';
+// @ts-ignore
+import useHostClassNav from 'pages/HostClass/hooks/useHostClassNav';
 import React from 'react';
 import { StaticRouter } from 'react-router';
-import Spinner from 'src/common/components/Spinner';
-// @ts-ignore
-import useHostClassNav from 'src/pages/HostClass/hooks/useHostClassNav';
 import Navigation from '../Navigation';
 import ClassDetailsForm, { ClassDetailsFormProps } from './ClassDetailsForm';
 
-jest.mock('src/pages/HostClass/hooks/useHostClassNav', () => ({
+jest.mock('pages/HostClass/hooks/useHostClassNav', () => ({
   __esModule: true,
   default: () => ({
     next: '/link-to-next'

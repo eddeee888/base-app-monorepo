@@ -3,10 +3,10 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Logout from './Logout';
 
-import ViewerContext from 'src/common/components/ViewerContext';
-import { linkgen, Paths } from 'src/common/helpers/pathing';
+import ViewerContext from 'common/components/ViewerContext';
+import { linkgen, Paths } from 'common/helpers/pathing';
 
-jest.mock('src/common/components/ViewerContext', () => {
+jest.mock('common/components/ViewerContext', () => {
   return {
     _currentValue: {
       clearViewer: jest.fn()

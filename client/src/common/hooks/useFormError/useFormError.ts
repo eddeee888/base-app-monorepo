@@ -2,18 +2,24 @@ import { useState } from 'react';
 
 export interface FormErrorObject {
   error: string;
-  setError: React.Dispatch<React.SetStateAction<string>>;
+  setError: (newValue: string) => void;
 }
 
 type UseFormErrorFn = (numberOfErrors: number) => FormErrorObject[];
 
 const useFormError: UseFormErrorFn = numberOfErrors => {
-  const result: FormErrorObject[] = [...Array(numberOfErrors)].map(() => {
-    const [error, setError] = useState<string>('');
+  const defaultArray = [...Array(numberOfErrors)].map(() => '');
 
+  const [errorArray, setErrorFn] = useState<string[]>(defaultArray);
+
+  const result: FormErrorObject[] = errorArray.map((errorValue, index) => {
     const object: FormErrorObject = {
-      error,
-      setError
+      error: errorArray[index],
+      setError: (newValue: string) => {
+        const newArray = [...errorArray];
+        newArray[index] = newValue;
+        setErrorFn(newArray);
+      }
     };
 
     return object;

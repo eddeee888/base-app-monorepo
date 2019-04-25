@@ -1,8 +1,8 @@
 import Grid from '@material-ui/core/Grid';
+import Button from 'common/components/Button';
+import { spacingRem } from 'common/helpers/spacing';
 import { css } from 'emotion';
 import React from 'react';
-import Button from 'src/common/components/Button';
-import { spacingRem } from 'src/common/helpers/spacing';
 
 interface NavigationProps {
   goPrevious?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;

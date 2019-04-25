@@ -1,6 +1,6 @@
 import TextField from '@material-ui/core/TextField';
+import OmittedTextFieldProps from 'common/helpers/typings/OmittedTextFieldProps';
 import React from 'react';
-import OmittedTextFieldProps from 'src/common/helpers/typings/OmittedTextFieldProps';
 
 const TextArea: React.FunctionComponent<OmittedTextFieldProps> = props => (
   <TextField

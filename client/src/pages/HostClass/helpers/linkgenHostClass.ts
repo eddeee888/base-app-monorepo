@@ -1,4 +1,4 @@
-import { linkgen, Paths } from 'src/common/helpers/pathing';
+import { linkgen, Paths } from 'common/helpers/pathing';
 import { HostClassFormPart } from '../types';
 
 interface LinkgenHostClassFn {

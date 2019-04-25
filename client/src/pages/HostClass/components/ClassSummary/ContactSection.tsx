@@ -1,8 +1,8 @@
 import { Grid } from '@material-ui/core';
+import H2 from 'common/components/H2';
+import Link from 'common/components/Link';
+import Text from 'common/components/Text';
 import React from 'react';
-import H2 from 'src/common/components/H2';
-import Link from 'src/common/components/Link';
-import Text from 'src/common/components/Text';
 import linkgenHostClass from '../../helpers/linkgenHostClass';
 import useHostClassParams from '../../hooks/useHostClassParams';
 import { HostClassState } from '../../types';

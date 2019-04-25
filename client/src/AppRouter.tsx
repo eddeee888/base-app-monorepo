@@ -1,12 +1,12 @@
+import LayoutController from 'common/components/LayoutController';
+import { linkgen, Paths } from 'common/helpers/pathing';
+import Home from 'pages/Home';
+import HostClass from 'pages/HostClass';
+import Login from 'pages/Login';
+import Logout from 'pages/Logout';
+import Signup from 'pages/Signup';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import LayoutController from 'src/common/components/LayoutController';
-import { linkgen, Paths } from 'src/common/helpers/pathing';
-import Home from 'src/pages/Home';
-import HostClass from 'src/pages/HostClass';
-import Login from 'src/pages/Login';
-import Logout from 'src/pages/Logout';
-import Signup from 'src/pages/Signup';
 
 const AppRouter = () => (
   <BrowserRouter>

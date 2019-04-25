@@ -1,4 +1,9 @@
+import MutationProps from 'common/helpers/typings/MutationProps';
 import gql from 'graphql-tag';
+import {
+  Signup,
+  SignupVariables
+} from 'pages/Signup/SignupForm/__generated__/Signup';
 import React from 'react';
 import {
   Mutation,
@@ -6,11 +11,6 @@ import {
   MutationOptions,
   MutationResult
 } from 'react-apollo';
-import MutationProps from 'src/common/helpers/typings/MutationProps';
-import {
-  Signup,
-  SignupVariables
-} from 'src/pages/Signup/SignupForm/__generated__/Signup';
 
 export type SignupMutationFn = MutationFn<Signup, SignupVariables>;
 export type SignupMutationOptions = MutationOptions<Signup, SignupVariables>;

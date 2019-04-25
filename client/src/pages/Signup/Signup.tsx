@@ -1,16 +1,16 @@
+import H1 from 'common/components/H1';
+import H2 from 'common/components/H2';
+import Link from 'common/components/Link';
+import Logo from 'common/components/Logo';
+import Main from 'common/components/Main';
+import Paper from 'common/components/Paper';
+import ViewerContext from 'common/components/ViewerContext';
+import { linkgen, Paths } from 'common/helpers/pathing';
+import useUrlQuery from 'common/hooks/useUrlQuery';
+import { breakpoints } from 'common/styles/media';
 import { css } from 'emotion';
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router';
-import H1 from 'src/common/components/H1';
-import H2 from 'src/common/components/H2';
-import Link from 'src/common/components/Link';
-import Logo from 'src/common/components/Logo';
-import Main from 'src/common/components/Main';
-import Paper from 'src/common/components/Paper';
-import ViewerContext from 'src/common/components/ViewerContext';
-import { linkgen, Paths } from 'src/common/helpers/pathing';
-import useUrlQuery from 'src/common/hooks/useUrlQuery';
-import { breakpoints } from 'src/common/styles/media';
 import SignupForm from './SignupForm';
 
 const mainClassName = css`

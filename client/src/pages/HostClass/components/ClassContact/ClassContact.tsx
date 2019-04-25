@@ -1,11 +1,11 @@
 import Grid from '@material-ui/core/Grid';
+import Block from 'common/components/Block';
+import Divider from 'common/components/Divider';
+import FormField from 'common/components/FormField';
+import Paper from 'common/components/Paper';
+import TextInput from 'common/components/TextInput';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import Block from 'src/common/components/Block';
-import Divider from 'src/common/components/Divider';
-import FormField from 'src/common/components/FormField';
-import Paper from 'src/common/components/Paper';
-import TextInput from 'src/common/components/TextInput';
 import { validationSchemas } from '../../constants';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassContactInput } from '../../types';

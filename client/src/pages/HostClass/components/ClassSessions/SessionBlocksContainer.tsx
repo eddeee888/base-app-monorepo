@@ -1,8 +1,8 @@
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from 'common/components/IconButton';
 import { FieldArray, FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
-import IconButton from 'src/common/components/IconButton';
 import { ClassSessionsInput } from '../../types';
 import SessionBlock from './SessionBlock';
 import SessionBlocksLogic from './SessionBlocksLogic';

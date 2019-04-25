@@ -1,6 +1,6 @@
+import HookWrapper from 'common/helpers/tests/HookWrapper';
 import { mount } from 'enzyme';
 import React from 'react';
-import HookWrapper from 'src/common/helpers/tests/HookWrapper';
 import useFormError from './useFormError';
 
 describe('useFormError()', () => {

@@ -1,10 +1,10 @@
-import { css, cx } from 'emotion';
-import React from 'react';
 import {
   primaryColor,
   secondaryColor,
   textOnPrimaryColor
-} from 'src/common/styles/color';
+} from 'common/styles/color';
+import { css, cx } from 'emotion';
+import React from 'react';
 
 type AnchorThemeColor = 'primary' | 'primaryInverted' | 'secondary';
 

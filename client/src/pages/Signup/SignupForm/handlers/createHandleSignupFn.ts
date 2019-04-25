@@ -2,17 +2,18 @@ import {
   checkError,
   CustomGraphQLErrors
 } from '@bit/eddeee888.learnd-utils.graphql';
-import { SetViewerFn } from 'src/common/components/ViewerContext';
-import { SignupFormikFn } from 'src/pages/Signup/SignupForm/SignupFormComponent';
+import { SetViewerFn } from 'common/components/ViewerContext';
+import { FormErrorObject } from 'common/hooks/useFormError/useFormError';
+import { SignupFormikFn } from 'pages/Signup/SignupForm/SignupFormComponent';
 import {
   SignupMutationFn,
   SignupMutationOptions
-} from 'src/pages/Signup/SignupForm/SignupFormMutation';
+} from 'pages/Signup/SignupForm/SignupFormMutation';
 
 type CreateHandleSignupFn = (
   signup: SignupMutationFn,
   setViewer: SetViewerFn,
-  setGeneralError: React.Dispatch<React.SetStateAction<string>>
+  setGeneralError: FormErrorObject['setError']
 ) => SignupFormikFn;
 
 const createHandleSignupFn: CreateHandleSignupFn = (

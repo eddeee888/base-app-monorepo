@@ -1,4 +1,4 @@
-import { Paths } from 'src/common/helpers/pathing';
+import { Paths } from 'common/helpers/pathing';
 import linkgenHostClass from './linkgenHostClass';
 
 describe('linkgenHostClass()', () => {

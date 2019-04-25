@@ -1,5 +1,5 @@
+import Text from 'common/components/Text';
 import React from 'react';
-import Text from 'src/common/components/Text';
 
 export interface FormErrorProps {
   error: React.ReactNode;

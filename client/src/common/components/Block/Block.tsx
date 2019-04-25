@@ -1,6 +1,6 @@
+import { Breakpoints, breakpoints } from 'common/styles/media';
 import { css } from 'emotion';
 import React from 'react';
-import { Breakpoints, breakpoints } from 'src/common/styles/media';
 
 interface Block {
   size: keyof Breakpoints;

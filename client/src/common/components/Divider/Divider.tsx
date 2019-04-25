@@ -1,8 +1,8 @@
 import MUIDivider, {
   DividerProps as MUIDividerProps
 } from '@material-ui/core/Divider';
+import { spacingRem, SpacingValue } from 'common/helpers/spacing';
 import React, { FunctionComponent } from 'react';
-import { spacingRem, SpacingValue } from 'src/common/helpers/spacing';
 
 interface DividerProps extends MUIDividerProps {
   marginTop?: SpacingValue;

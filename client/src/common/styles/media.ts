@@ -1,4 +1,4 @@
-import { remValue } from 'src/common/styles/unit';
+import { remValue } from 'common/styles/unit';
 
 type ScreenSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 

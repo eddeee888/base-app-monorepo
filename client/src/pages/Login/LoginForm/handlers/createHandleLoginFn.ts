@@ -1,14 +1,15 @@
-import { SetViewerFn } from 'src/common/components/ViewerContext';
-import { LoginFormikFn } from 'src/pages/Login/LoginForm/LoginFormComponent';
+import { SetViewerFn } from 'common/components/ViewerContext';
+import { FormErrorObject } from 'common/hooks/useFormError/useFormError';
+import { LoginFormikFn } from 'pages/Login/LoginForm/LoginFormComponent';
 import {
   LoginMutationFn,
   LoginMutationOptions
-} from 'src/pages/Login/LoginForm/LoginFormMutation';
+} from 'pages/Login/LoginForm/LoginFormMutation';
 
 type CreateHandleLoginFn = (
   login: LoginMutationFn,
   setViewer: SetViewerFn,
-  setGeneralError: React.Dispatch<React.SetStateAction<string>>
+  setGeneralError: FormErrorObject['setError']
 ) => LoginFormikFn;
 
 const createHandleLoginFn: CreateHandleLoginFn = (

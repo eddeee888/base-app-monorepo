@@ -1,8 +1,8 @@
+import { Paths } from 'common/helpers/pathing';
 import { mount, ReactWrapper } from 'enzyme';
 import { Formik } from 'formik';
 import React from 'react';
 import { StaticRouter } from 'react-router';
-import { Paths } from 'src/common/helpers/pathing';
 import LoginFormComponent from './LoginFormComponent';
 
 describe('<LoginFormComponent />', () => {

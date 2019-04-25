@@ -1,7 +1,7 @@
+import Block from 'common/components/Block';
+import Paper from 'common/components/Paper';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import Block from 'src/common/components/Block';
-import Paper from 'src/common/components/Paper';
 import { validationSchemas } from '../../constants';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassSessionsInput } from '../../types';
