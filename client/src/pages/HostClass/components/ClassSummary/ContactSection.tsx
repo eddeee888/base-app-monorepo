@@ -7,61 +7,55 @@ import linkgenHostClass from '../../helpers/linkgenHostClass';
 import useHostClassParams from '../../hooks/useHostClassParams';
 import { HostClassState } from '../../types';
 
-interface Props {
-    values: HostClassState['contact'];
+export interface ContactSectionProps {
+  values: HostClassState['contact'];
 }
 
-const ContactSection: React.FunctionComponent<Props> = ({
-    values: {
-        unit,
-        streetAddress,
-        city,
-        country,
-        postcode,
-        state,
-        contactNumber
-    } }
-) => {
-    const params = useHostClassParams();
-    return (
-        <>
-            <Grid container alignItems="center">
-                <Grid item xs={6}>
-                    <H2 variant="h5">Contact details</H2>
-                </Grid>
-                <Grid item xs={6}>
-                    <Text align="right">
-                        <Link to={linkgenHostClass('contact', params.classId)}>
-                            edit
-                        </Link>
-                    </Text>
-                </Grid>
-            </Grid>
-            <Grid container>
-                <Grid item xs={12} sm={4}>
-                    <Text gutterBottom><b>Address</b></Text>
-                </Grid>
-                <Grid item xs={12} sm={8}>
-                    <Text gutterBottom>
-                        {unit ? unit + ', ' : ''}
-                        {streetAddress ? streetAddress : <i>N/A</i>}
-                    </Text>
-                    <Text gutterBottom>
-                        {city} {state} {postcode} {country}
-                    </Text>
-                </Grid>
-            </Grid>
+const ContactSection: React.FunctionComponent<ContactSectionProps> = ({
+  values: { unit, streetAddress, city, country, postcode, state, contactNumber }
+}) => {
+  const params = useHostClassParams();
+  return (
+    <>
+      <Grid container alignItems="center">
+        <Grid item xs={6}>
+          <H2 variant="h5">Contact details</H2>
+        </Grid>
+        <Grid item xs={6}>
+          <Text align="right">
+            <Link to={linkgenHostClass('contact', params.classId)}>edit</Link>
+          </Text>
+        </Grid>
+      </Grid>
+      <Grid container>
+        <Grid item xs={12} sm={4}>
+          <Text gutterBottom>
+            <b>Address</b>
+          </Text>
+        </Grid>
+        <Grid item xs={12} sm={8}>
+          <Text gutterBottom>
+            {unit ? unit + ', ' : ''}
+            {streetAddress ? streetAddress : <i>N/A</i>}
+          </Text>
+          <Text gutterBottom>
+            {city} {state} {postcode} {country}
+          </Text>
+        </Grid>
+      </Grid>
 
-            <Grid container>
-                <Grid item xs={12} sm={4}>
-                    <Text gutterBottom><b>Contact number</b></Text>
-                </Grid>
-                <Grid item xs={12} sm={8}>
-                    <Text gutterBottom>{contactNumber ? contactNumber : <i>N/A</i>}</Text>
-                </Grid>
-            </Grid>
-        </>
-    );
+      <Grid container>
+        <Grid item xs={12} sm={4}>
+          <Text gutterBottom>
+            <b>Contact number</b>
+          </Text>
+        </Grid>
+        <Grid item xs={12} sm={8}>
+          <Text gutterBottom>{contactNumber ? contactNumber : <i>N/A</i>}</Text>
+        </Grid>
+      </Grid>
+    </>
+  );
 };
 
 export default ContactSection;
