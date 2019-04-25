@@ -6,7 +6,7 @@ import Divider from 'src/common/components/Divider';
 import FormField from 'src/common/components/FormField';
 import Paper from 'src/common/components/Paper';
 import TextInput from 'src/common/components/TextInput';
-import * as Yup from 'yup';
+import { validationSchemas } from '../../constants';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassContactInput } from '../../types';
 import Navigation from '../Navigation';
@@ -17,21 +17,11 @@ export interface ClassContactProps<I> {
   goPrevious: NavFunctions<I>['goPrevious'];
 }
 
-const validationSchema = Yup.object().shape<ClassContactInput>({
-  streetAddress: Yup.string().required('Street address is required'),
-  city: Yup.string().required('City is required'),
-  postcode: Yup.string(),
-  country: Yup.string().required('Country is required'),
-  contactNumber: Yup.string().required('Contact number is required'),
-  unit: Yup.string(),
-  state: Yup.string().required('State is required')
-});
-
 const ClassContact: React.FunctionComponent<
   ClassContactProps<ClassContactInput>
 > = ({ initialValues, goNext, goPrevious }) => (
   <Formik
-    validationSchema={validationSchema}
+    validationSchema={validationSchemas.contact}
     initialValues={initialValues}
     onSubmit={goNext}
   >

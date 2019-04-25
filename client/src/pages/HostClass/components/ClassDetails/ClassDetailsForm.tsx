@@ -10,18 +10,12 @@ import Spinner from 'src/common/components/Spinner';
 import Text from 'src/common/components/Text';
 import TextArea from 'src/common/components/TextArea';
 import TextInput from 'src/common/components/TextInput';
-import * as Yup from 'yup';
+import { validationSchemas } from '../../constants';
 import { NavFunctions } from '../../handlers/createNavFunctions';
 import { ClassDetailsInput } from '../../types';
+import { ClassCategoryQueryResult } from '../ClassCategoriesQuery';
+import { ClassCategoryData } from '../ClassCategoriesQuery/__generated__/ClassCategoryData';
 import Navigation from '../Navigation';
-import { ClassCategoryData } from './__generated__/ClassCategoryData';
-import { ClassCategoryQueryResult } from './ClassCategoriesQuery';
-
-const validationSchema = Yup.object().shape<ClassDetailsInput>({
-  name: Yup.string().required('Class name is required'),
-  category: Yup.string().required('Class category is required'),
-  description: Yup.string()
-});
 
 export interface ClassDetailsFormProps {
   categoryResult: ClassCategoryQueryResult;
@@ -46,7 +40,7 @@ const ClassDetailsForm: React.FunctionComponent<ClassDetailsFormProps> = ({
 
       {!error && !loading && (
         <Formik
-          validationSchema={validationSchema}
+          validationSchema={validationSchemas.details}
           initialValues={initialValues}
           onSubmit={goNext}
         >

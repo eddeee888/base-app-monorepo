@@ -8,7 +8,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "check:ts": "tsc -p tsconfig.json",
-    "format:prettier": "prettier --config prettier.json --write \"src/**/*.tsx\"",
+    "format:prettier": "prettier --config .prettierrc.json --write \"src/**/*.tsx\"",
     "format:tslint": "tslint --fix 'src/**/*.{ts,tsx}'",
     "format": "yarn format:prettier && yarn format:tslint",
     "graphql-types": "yarn graphql:download && yarn graphql:codegen",

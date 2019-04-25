@@ -2,7 +2,7 @@ import { mount } from 'enzyme';
 import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { ClassDetailsInput } from '../../types';
-import ClassCategoriesQuery from './ClassCategoriesQuery';
+import ClassCategoriesQuery from '../ClassCategoriesQuery';
 import ClassDetails, { ClassDetailsProps } from './ClassDetails';
 import ClassDetailsForm from './ClassDetailsForm';
 

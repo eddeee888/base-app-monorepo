@@ -1,38 +1,41 @@
 import * as H from 'history';
-import { SetFormPartValues } from '../types';
+import { SetFormValues } from '../types';
 
 export interface NavFunctions<I> {
   goNext: (values: I) => void;
-  goPrevious: (values: I) => void;
+  goPrevious: (values?: I) => void;
 }
 
 interface Param<I> {
-  setFormPartialFn: SetFormPartValues<I>;
+  setValue: SetFormValues<I>;
   history: H.History;
   next?: string;
   previous?: string;
 }
 
-function createNavFunctions<I>({
-  setFormPartialFn,
+type CreateNavFunctionsFn = <I>(params: Param<I>) => NavFunctions<I>;
+
+const createNavFunctions: CreateNavFunctionsFn = ({
+  setValue,
   history,
   next,
   previous
-}: Param<I>): NavFunctions<I> {
-  return {
-    goNext: values => {
-      setFormPartialFn(values);
-      if (next) {
-        history.push(next);
-      }
-    },
-    goPrevious: values => {
-      setFormPartialFn(values);
-      if (previous) {
-        history.push(previous);
-      }
+}) => ({
+  goNext: values => {
+    setValue(values);
+    if (next) {
+      history.push(next);
     }
-  };
-}
+  },
+  goPrevious: values => {
+    if (values) {
+      setValue(values);
+    }
+
+    if (previous) {
+      history.push(previous);
+    }
+  }
+});
 
 export default createNavFunctions;
