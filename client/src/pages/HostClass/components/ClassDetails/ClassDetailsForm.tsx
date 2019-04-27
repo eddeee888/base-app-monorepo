@@ -11,7 +11,7 @@ import TextInput from 'common/components/TextInput';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { validationSchemas } from '../../constants';
-import { NavFunctions } from '../../handlers/createNavFunctions';
+import { NavFns } from '../../handlers/createNavFns';
 import { ClassDetailsInput } from '../../types';
 import { ClassCategoryQueryResult } from '../ClassCategoriesQuery';
 import { ClassCategoryData } from '../ClassCategoriesQuery/__generated__/ClassCategoryData';
@@ -19,7 +19,7 @@ import Navigation from '../Navigation';
 
 export interface ClassDetailsFormProps {
   categoryResult: ClassCategoryQueryResult;
-  goNext: NavFunctions<ClassDetailsInput>['goNext'];
+  goNext: NavFns<ClassDetailsInput>['goNext'];
   initialValues: ClassDetailsInput;
 }
 

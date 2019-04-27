@@ -14,7 +14,7 @@ import { Redirect } from 'react-router';
 import ClassContact from './components/ClassContact';
 import { defaultFormPart } from './constants';
 import createHostClassSubmitFn from './handlers/createHostClassSubmitFn';
-import createNavFunctions from './handlers/createNavFunctions';
+import createNavFns from './handlers/createNavFns';
 import linkgenHostClass from './helpers/linkgenHostClass';
 import useHostClassNav from './hooks/useHostClassNav';
 import useHostClassParams from './hooks/useHostClassParams';
@@ -49,19 +49,19 @@ const HostClass: React.FunctionComponent = () => {
     previous
   };
 
-  const detailsNavFns = createNavFunctions({
+  const detailsNavFns = createNavFns({
     setValue: setSubformValues.details,
     ...navFnsCommonParams
   });
-  const contactNavFns = createNavFunctions({
+  const contactNavFns = createNavFns({
     setValue: setSubformValues.contact,
     ...navFnsCommonParams
   });
-  const sessionsNavFns = createNavFunctions({
+  const sessionsNavFns = createNavFns({
     setValue: setSubformValues.sessions,
     ...navFnsCommonParams
   });
-  const summaryNavFns = createNavFunctions({
+  const summaryNavFns = createNavFns({
     setValue: setFormValues,
     ...navFnsCommonParams
   });

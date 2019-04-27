@@ -7,14 +7,14 @@ import TextInput from 'common/components/TextInput';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { validationSchemas } from '../../constants';
-import { NavFunctions } from '../../handlers/createNavFunctions';
+import { NavFns } from '../../handlers/createNavFns';
 import { ClassContactInput } from '../../types';
 import Navigation from '../Navigation';
 
 export interface ClassContactProps<I> {
   initialValues: I;
-  goNext: NavFunctions<I>['goNext'];
-  goPrevious: NavFunctions<I>['goPrevious'];
+  goNext: NavFns<I>['goNext'];
+  goPrevious: NavFns<I>['goPrevious'];
 }
 
 const ClassContact: React.FunctionComponent<

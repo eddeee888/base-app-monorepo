@@ -3,15 +3,15 @@ import Paper from 'common/components/Paper';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { validationSchemas } from '../../constants';
-import { NavFunctions } from '../../handlers/createNavFunctions';
+import { NavFns } from '../../handlers/createNavFns';
 import { ClassSessionsInput } from '../../types';
 import Navigation from '../Navigation';
 import SessionBlocksContainer from './SessionBlocksContainer';
 
 interface Props<I> {
   initialValues: I;
-  goNext: NavFunctions<I>['goNext'];
-  goPrevious: NavFunctions<I>['goPrevious'];
+  goNext: NavFns<I>['goNext'];
+  goPrevious: NavFns<I>['goPrevious'];
 }
 
 const ClassSessions: React.FunctionComponent<Props<ClassSessionsInput>> = ({

@@ -1,12 +1,12 @@
 import React from 'react';
-import { NavFunctions } from '../../handlers/createNavFunctions';
+import { NavFns } from '../../handlers/createNavFns';
 import { ClassDetailsInput } from '../../types';
 import ClassCategoriesQuery from '../ClassCategoriesQuery';
 import ClassDetailsForm from './ClassDetailsForm';
 
 export interface ClassDetailsProps<I> {
   initialValues: I;
-  goNext: NavFunctions<I>['goNext'];
+  goNext: NavFns<I>['goNext'];
 }
 
 const ClassDetails: React.FunctionComponent<
