@@ -6,6 +6,7 @@ type Query {
 type Mutation {
   signup(input: SignupInput!): SignupPayload!
   login(input: LoginInput!): LoginPayload
+  saveClass(input: SaveClassInput!): SaveClassPayload!
   createClassCategory(
     input: CreateClassCategoryInput!
   ): CreateClassCategoryPayload!

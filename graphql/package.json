@@ -12,7 +12,10 @@
     "test": "yarn test:prisma-delete && yarn test:prisma-setup && yarn test:jest",
     "test:jest": "jest -i",
     "test:prisma-setup": "prisma deploy --env-file .env.test",
-    "test:prisma-delete": "prisma delete --force --env-file .env.test"
+    "test:prisma-delete": "prisma delete --force --env-file .env.test",
+    "format:prettier": "prettier --config .prettierrc.json --write \"src/**/*.ts*\"",
+    "format:tslint": "tslint --fix 'src/**/*.{ts,tsx}'",
+    "format": "yarn format:prettier && yarn format:tslint"
   },
   "author": "Eddy Nguyen",
   "license": "ISC",
