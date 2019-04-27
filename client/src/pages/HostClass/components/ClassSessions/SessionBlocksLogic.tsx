@@ -5,32 +5,29 @@ import { emptySession } from '../../constants';
 import { ClassSession, ClassSessionsInput } from '../../types';
 
 type AddSessionFn = () => void;
-type CreateAddSessionFn = (arrayHelpers: FieldArrayRenderProps) => AddSessionFn;
-const createAddSessionFn: CreateAddSessionFn = arrayHelpers => () =>
-  arrayHelpers.push(emptySession);
+type CreateAddSessionFn = (push: FieldArrayRenderProps['push']) => AddSessionFn;
+const createAddSessionFn: CreateAddSessionFn = push => () => push(emptySession);
 
 type DuplicateSessionFn = () => void;
 type CreateDuplicateSessionFn = (
-  arrayHelpers: FieldArrayRenderProps,
+  insert: FieldArrayRenderProps['insert'],
   session: ClassSession,
   newIndex: number
 ) => DuplicateSessionFn;
 const createDuplicateSessionFn: CreateDuplicateSessionFn = (
-  arrayHelpers,
+  insert,
   session,
   newIndex
-) => () => arrayHelpers.insert(newIndex, { ...session });
+) => () => insert(newIndex, { ...session });
 
 type RemoveSessionFn = () => void;
 type CreateRemoveSessionFn = (
-  arrayHelpers: FieldArrayRenderProps,
+  remove: FieldArrayRenderProps['remove'],
   index: number
 ) => RemoveSessionFn;
 
-const createRemoveSessionFn: CreateRemoveSessionFn = (
-  arrayHelpers,
-  index
-) => () => arrayHelpers.remove(index);
+const createRemoveSessionFn: CreateRemoveSessionFn = (remove, index) => () =>
+  remove(index);
 
 export interface LogicContainerProps {
   values: ClassSessionsInput;
@@ -49,16 +46,16 @@ const SessionBlocksLogic = ({
   arrayHelpers,
   children
 }: LogicContainerProps) => {
-  const addSession = useCallback(createAddSessionFn(arrayHelpers), [
-    arrayHelpers
+  const addSession = useCallback(createAddSessionFn(arrayHelpers.push), [
+    arrayHelpers.push
   ]);
 
   const removeSessionFns: RemoveSessionFn[] = [];
   const duplicateSessionFns: DuplicateSessionFn[] = [];
   values.sessions.forEach((session, index) => {
-    removeSessionFns.push(createRemoveSessionFn(arrayHelpers, index));
+    removeSessionFns.push(createRemoveSessionFn(arrayHelpers.remove, index));
     duplicateSessionFns.push(
-      createDuplicateSessionFn(arrayHelpers, session, index + 1)
+      createDuplicateSessionFn(arrayHelpers.insert, session, index + 1)
     );
   });
 
