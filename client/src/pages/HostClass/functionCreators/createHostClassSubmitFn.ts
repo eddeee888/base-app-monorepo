@@ -1,3 +1,4 @@
+import { ClassSessionDay, ClassSessionInput } from '__generated__/globalTypes';
 import { ClassSaveMutationFn } from '../components/ClassSaveMutation';
 import { HostClassState } from '../types';
 
@@ -13,7 +14,18 @@ const createHostClassSubmitFn: CreateHostClassSaveFn = (saveFn, values) => {
         input: {
           ...values.details,
           ...values.contact,
-          sessions: values.sessions.sessions
+          sessions: values.sessions.sessions.reduce<ClassSessionInput[]>(
+            (result, nextSession) => {
+              if (!!nextSession.day) {
+                result.push({
+                  ...nextSession,
+                  day: ClassSessionDay[nextSession.day]
+                });
+              }
+              return result;
+            },
+            []
+          )
         }
       }
     })
