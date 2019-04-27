@@ -12,7 +12,15 @@ export interface ContactSectionProps {
 }
 
 const ContactSection: React.FunctionComponent<ContactSectionProps> = ({
-  values: { unit, streetAddress, city, country, postcode, state, contactNumber }
+  values: {
+    streetUnit,
+    streetAddress,
+    city,
+    country,
+    postcode,
+    state,
+    contactNumber
+  }
 }) => {
   const params = useHostClassParams();
   return (
@@ -35,7 +43,7 @@ const ContactSection: React.FunctionComponent<ContactSectionProps> = ({
         </Grid>
         <Grid item xs={12} sm={8}>
           <Text gutterBottom>
-            {unit ? unit + ', ' : ''}
+            {streetUnit ? streetUnit + ', ' : ''}
             {streetAddress ? streetAddress : <i>N/A</i>}
           </Text>
           <Text gutterBottom>

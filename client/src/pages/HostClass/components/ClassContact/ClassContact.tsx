@@ -7,18 +7,18 @@ import TextInput from 'common/components/TextInput';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { validationSchemas } from '../../constants';
-import { NavFunctions } from '../../handlers/createNavFunctions';
-import { ClassContactInput } from '../../types';
+import { NavFns } from '../../functionCreators/createNavFns';
+import { FormClassContactInput } from '../../types';
 import Navigation from '../Navigation';
 
 export interface ClassContactProps<I> {
   initialValues: I;
-  goNext: NavFunctions<I>['goNext'];
-  goPrevious: NavFunctions<I>['goPrevious'];
+  goNext: NavFns<I>['goNext'];
+  goPrevious: NavFns<I>['goPrevious'];
 }
 
 const ClassContact: React.FunctionComponent<
-  ClassContactProps<ClassContactInput>
+  ClassContactProps<FormClassContactInput>
 > = ({ initialValues, goNext, goPrevious }) => (
   <Formik
     validationSchema={validationSchemas.contact}
@@ -49,7 +49,7 @@ const ClassContact: React.FunctionComponent<
                   )}
                 </FormField>
 
-                <FormField name="unit" errors={errors} touched={touched}>
+                <FormField name="streetUnit" errors={errors} touched={touched}>
                   {({ field }) => (
                     <TextInput
                       {...field}

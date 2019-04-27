@@ -9,7 +9,7 @@ import { resolvers } from 'src/web/graphql/resolvers';
 const PORT = process.env.PORT || 8000;
 
 const server = new GraphQLServer({
-  typeDefs: './schema.graphql',
+  typeDefs: './schemas/schema.graphql',
   resolvers: resolvers as any, // https://github.com/prisma/graphql-yoga/issues/379
   context: contextParms => ({
     ...contextParms,

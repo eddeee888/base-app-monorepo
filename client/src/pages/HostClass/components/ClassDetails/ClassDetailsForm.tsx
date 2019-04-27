@@ -11,16 +11,16 @@ import TextInput from 'common/components/TextInput';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { validationSchemas } from '../../constants';
-import { NavFunctions } from '../../handlers/createNavFunctions';
-import { ClassDetailsInput } from '../../types';
+import { NavFns } from '../../functionCreators/createNavFns';
+import { FormClassDetailsInput } from '../../types';
 import { ClassCategoryQueryResult } from '../ClassCategoriesQuery';
 import { ClassCategoryData } from '../ClassCategoriesQuery/__generated__/ClassCategoryData';
 import Navigation from '../Navigation';
 
 export interface ClassDetailsFormProps {
   categoryResult: ClassCategoryQueryResult;
-  goNext: NavFunctions<ClassDetailsInput>['goNext'];
-  initialValues: ClassDetailsInput;
+  goNext: NavFns<FormClassDetailsInput>['goNext'];
+  initialValues: FormClassDetailsInput;
 }
 
 const ClassDetailsForm: React.FunctionComponent<ClassDetailsFormProps> = ({

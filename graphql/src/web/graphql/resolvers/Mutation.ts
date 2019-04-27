@@ -1,11 +1,13 @@
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
-import login from 'src/web/graphql/resolvers/mutations/login';
-import signup from 'src/web/graphql/resolvers/mutations/signup';
+import classSave from './mutations/classSave';
 import createClassCategory from './mutations/createClassCategory';
+import login from './mutations/login';
+import signup from './mutations/signup';
 
 export const Mutation: MutationResolvers.Type = {
   ...MutationResolvers.defaultResolvers,
   signup,
   login,
-  createClassCategory
+  createClassCategory,
+  classSave
 };

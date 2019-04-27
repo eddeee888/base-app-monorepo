@@ -3,7 +3,7 @@ import useFormError from 'common/hooks/useFormError';
 import SignupFormComponent from 'pages/Signup/SignupForm/SignupFormComponent';
 import SignupFormMutation from 'pages/Signup/SignupForm/SignupFormMutation';
 import React, { useContext } from 'react';
-import createHandleSignupFn from './handlers/createHandleSignupFn';
+import createHandleSignupFn from './functionCreators/createHandleSignupFn';
 
 const SignupForm: React.FunctionComponent = () => {
   const { setViewer } = useContext(ViewerContext);

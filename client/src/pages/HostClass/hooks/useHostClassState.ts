@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { initialValues } from '../constants';
 import {
-  ClassContactInput,
-  ClassDetailsInput,
-  ClassSessionsInput,
+  FormClassContactInput,
+  FormClassDetailsInput,
+  FormClassSessionInput,
   HostClassFormPart,
   HostClassState,
   SetFormValues
@@ -13,9 +13,9 @@ interface Result {
   values: HostClassState;
   setFormValues: SetFormValues<HostClassState>;
   setSubformValues: {
-    details: SetFormValues<ClassDetailsInput>;
-    contact: SetFormValues<ClassContactInput>;
-    sessions: SetFormValues<ClassSessionsInput>;
+    details: SetFormValues<FormClassDetailsInput>;
+    contact: SetFormValues<FormClassContactInput>;
+    sessions: SetFormValues<FormClassSessionInput>;
   };
 }
 
@@ -33,9 +33,9 @@ const useHostClassState = (): Result => {
     values,
     setFormValues: formValues => setValues({ ...formValues }),
     setSubformValues: {
-      details: createSetSubformValuesFn<ClassDetailsInput>('details'),
-      contact: createSetSubformValuesFn<ClassContactInput>('contact'),
-      sessions: createSetSubformValuesFn<ClassSessionsInput>('sessions')
+      details: createSetSubformValuesFn<FormClassDetailsInput>('details'),
+      contact: createSetSubformValuesFn<FormClassContactInput>('contact'),
+      sessions: createSetSubformValuesFn<FormClassSessionInput>('sessions')
     }
   };
 };

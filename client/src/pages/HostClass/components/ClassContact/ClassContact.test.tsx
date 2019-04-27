@@ -1,10 +1,10 @@
 import { mount, ReactWrapper } from 'enzyme';
 import { Formik } from 'formik';
 import React from 'react';
-import { ClassContactInput } from '../../types';
+import { FormClassContactInput } from '../../types';
 import ClassContact, { ClassContactProps } from './ClassContact';
 
-const props: ClassContactProps<ClassContactInput> = {
+const props: ClassContactProps<FormClassContactInput> = {
   initialValues: {
     streetAddress: '',
     city: '',
@@ -12,7 +12,7 @@ const props: ClassContactProps<ClassContactInput> = {
     country: '',
     contactNumber: '',
     state: '',
-    unit: ''
+    streetUnit: ''
   },
   goNext: jest.fn(),
   goPrevious: jest.fn()
@@ -40,7 +40,7 @@ describe('<ClassContact />', () => {
     expect(wrapper.find(`input[name='country']`)).toHaveLength(1);
     expect(wrapper.find(`input[name='contactNumber']`)).toHaveLength(1);
     expect(wrapper.find(`input[name='state']`)).toHaveLength(1);
-    expect(wrapper.find(`input[name='unit']`)).toHaveLength(1);
+    expect(wrapper.find(`input[name='streetUnit']`)).toHaveLength(1);
     expect(getPreviousButton(wrapper)).toHaveLength(1);
     expect(
       wrapper.find('button').filterWhere(button => button.text() === 'Next')
@@ -48,14 +48,14 @@ describe('<ClassContact />', () => {
   });
 
   it('should goNext should be called if form is submitted', () => {
-    const formValues: ClassContactInput = {
+    const formValues: FormClassContactInput = {
       streetAddress: '120 ABC street',
       city: 'Melbest',
       postcode: '3010',
       country: 'Australia',
       contactNumber: '0400123123',
       state: 'VIC',
-      unit: '90'
+      streetUnit: '90'
     };
     const wrapper = mount(<ClassContact {...props} />);
 

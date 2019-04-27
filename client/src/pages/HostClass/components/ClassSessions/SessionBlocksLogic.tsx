@@ -2,7 +2,7 @@ import { FieldArrayRenderProps } from 'formik';
 import { useCallback, useEffect } from 'react';
 import React from 'react';
 import { emptySession } from '../../constants';
-import { ClassSession, ClassSessionsInput } from '../../types';
+import { ClassSession, FormClassSessionInput } from '../../types';
 
 type AddSessionFn = () => void;
 type CreateAddSessionFn = (push: FieldArrayRenderProps['push']) => AddSessionFn;
@@ -30,7 +30,7 @@ const createRemoveSessionFn: CreateRemoveSessionFn = (remove, index) => () =>
   remove(index);
 
 export interface LogicContainerProps {
-  values: ClassSessionsInput;
+  values: FormClassSessionInput;
   arrayHelpers: FieldArrayRenderProps;
   children: (props: LogicContainerChildrenProps) => React.ReactNode;
 }

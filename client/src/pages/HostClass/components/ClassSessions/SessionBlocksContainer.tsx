@@ -3,14 +3,14 @@ import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from 'common/components/IconButton';
 import { FieldArray, FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
-import { ClassSessionsInput } from '../../types';
+import { FormClassSessionInput } from '../../types';
 import SessionBlock from './SessionBlock';
 import SessionBlocksLogic from './SessionBlocksLogic';
 
 export interface SessionBlockContainerProps {
-  values: ClassSessionsInput;
-  errors: FormikErrors<ClassSessionsInput>;
-  touched: FormikTouched<ClassSessionsInput>;
+  values: FormClassSessionInput;
+  errors: FormikErrors<FormClassSessionInput>;
+  touched: FormikTouched<FormClassSessionInput>;
 }
 
 const SessionBlocksContainer: React.FunctionComponent<

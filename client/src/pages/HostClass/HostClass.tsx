@@ -6,13 +6,15 @@ import { spacingRem } from 'common/helpers/spacing';
 import useHistory from 'common/hooks/useHistory';
 import { css } from 'emotion';
 import ClassDetails from 'pages/HostClass/components/ClassDetails';
+import ClassSaveMutation from 'pages/HostClass/components/ClassSaveMutation';
 import ClassSessions from 'pages/HostClass/components/ClassSessions';
 import ClassSummary from 'pages/HostClass/components/ClassSummary';
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router';
 import ClassContact from './components/ClassContact';
 import { defaultFormPart } from './constants';
-import createNavFunctions from './handlers/createNavFunctions';
+import createHostClassSubmitFn from './functionCreators/createHostClassSubmitFn';
+import createNavFns from './functionCreators/createNavFns';
 import linkgenHostClass from './helpers/linkgenHostClass';
 import useHostClassNav from './hooks/useHostClassNav';
 import useHostClassParams from './hooks/useHostClassParams';
@@ -47,19 +49,19 @@ const HostClass: React.FunctionComponent = () => {
     previous
   };
 
-  const detailsNavFns = createNavFunctions({
+  const detailsNavFns = createNavFns({
     setValue: setSubformValues.details,
     ...navFnsCommonParams
   });
-  const contactNavFns = createNavFunctions({
+  const contactNavFns = createNavFns({
     setValue: setSubformValues.contact,
     ...navFnsCommonParams
   });
-  const sessionsNavFns = createNavFunctions({
+  const sessionsNavFns = createNavFns({
     setValue: setSubformValues.sessions,
     ...navFnsCommonParams
   });
-  const summaryNavFns = createNavFunctions({
+  const summaryNavFns = createNavFns({
     setValue: setFormValues,
     ...navFnsCommonParams
   });
@@ -89,13 +91,15 @@ const HostClass: React.FunctionComponent = () => {
           />
         )}
         {params.formPart === 'summary' && (
-          <ClassSummary
-            values={values}
-            goNext={() => {
-              /* TODO: implement this */
-            }}
-            goPrevious={summaryNavFns.goPrevious}
-          />
+          <ClassSaveMutation>
+            {(saveFn, result) => (
+              <ClassSummary
+                values={values}
+                goNext={createHostClassSubmitFn(saveFn, values)}
+                goPrevious={summaryNavFns.goPrevious}
+              />
+            )}
+          </ClassSaveMutation>
         )}
       </div>
     </Main>

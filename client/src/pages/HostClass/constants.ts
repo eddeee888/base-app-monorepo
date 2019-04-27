@@ -1,11 +1,11 @@
+import { ClassSessionDay } from '__generated__/globalTypes';
 import { SelectOption } from 'common/components/Select/Select';
 import * as Yup from 'yup';
 import {
-  ClassContactInput,
-  ClassDetailsInput,
   ClassSession,
-  ClassSessionsInput,
-  DayOfTheWeek,
+  FormClassContactInput,
+  FormClassDetailsInput,
+  FormClassSessionInput,
   HostClassFormPart,
   HostClassState,
   SessionTime
@@ -32,7 +32,7 @@ export const initialValues: HostClassState = {
     country: '',
     contactNumber: '',
     state: '',
-    unit: ''
+    streetUnit: ''
   },
   sessions: {
     sessions: []
@@ -46,21 +46,32 @@ export const emptySession: ClassSession = {
   capacity: 0
 };
 
-export const dayValues: Array<keyof typeof DayOfTheWeek> = [
-  'mon',
-  'tue',
-  'wed',
-  'thu',
-  'fri',
-  'sat',
-  'sun'
+const dayArray: Array<keyof typeof ClassSessionDay> = [
+  'MONDAY',
+  'TUESDAY',
+  'WEDNESDAY',
+  'THURSDAY',
+  'FRIDAY',
+  'SATURDAY',
+  'SUNDAY'
 ];
 
+type DayMap = { [key in ClassSessionDay]: string };
+export const dayMap: DayMap = {
+  MONDAY: 'Monday',
+  TUESDAY: 'Tuesday',
+  WEDNESDAY: 'Wednesday',
+  THURSDAY: 'Thursday',
+  FRIDAY: 'Friday',
+  SATURDAY: 'Saturday',
+  SUNDAY: 'Sunday'
+};
+
 const dayOptions: Array<
-  SelectOption<keyof typeof DayOfTheWeek, DayOfTheWeek>
-> = dayValues.map(value => ({
+  SelectOption<keyof typeof ClassSessionDay, string>
+> = dayArray.map(value => ({
   value,
-  label: DayOfTheWeek[value]
+  label: dayMap[value]
 }));
 dayOptions.unshift({ value: '', label: '' });
 export { dayOptions };
@@ -125,25 +136,25 @@ sessionTimeOptions.unshift({ value: '', label: '' });
 export { sessionTimeOptions };
 
 export const validationSchemas = {
-  details: Yup.object().shape<ClassDetailsInput>({
+  details: Yup.object().shape<FormClassDetailsInput>({
     name: Yup.string().required('Class name is required'),
     category: Yup.string().required('Class category is required'),
     description: Yup.string()
   }),
-  contact: Yup.object().shape<ClassContactInput>({
+  contact: Yup.object().shape<FormClassContactInput>({
     streetAddress: Yup.string().required('Street address is required'),
     city: Yup.string().required('City is required'),
     postcode: Yup.string(),
     country: Yup.string().required('Country is required'),
     contactNumber: Yup.string().required('Contact number is required'),
-    unit: Yup.string(),
+    streetUnit: Yup.string(),
     state: Yup.string().required('State is required')
   }),
-  sessions: Yup.object().shape<ClassSessionsInput>({
+  sessions: Yup.object().shape<FormClassSessionInput>({
     sessions: Yup.array()
       .of(
         Yup.object().shape<ClassSession>({
-          day: Yup.mixed().oneOf(dayValues, 'Day is required'),
+          day: Yup.mixed().oneOf(dayArray, 'Day is required'),
           startTime: Yup.mixed().oneOf(sessionTimes, 'Start time is required'),
           endTime: Yup.mixed().oneOf(sessionTimes, 'End time is required'),
           capacity: Yup.number()

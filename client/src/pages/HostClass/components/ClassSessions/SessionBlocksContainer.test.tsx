@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import { ClassSessionsInput } from '../../types';
+import { FormClassSessionInput } from '../../types';
 import SessionBlock from './SessionBlock';
 import SessionBlocksContainer, {
   SessionBlockContainerProps
@@ -17,7 +17,7 @@ const defaultProps: SessionBlockContainerProps = {
 
 const mountWithProps = (props: any) =>
   mount(
-    <Formik<ClassSessionsInput>
+    <Formik<FormClassSessionInput>
       initialValues={props.values}
       onSubmit={() => jest.fn()}
     >

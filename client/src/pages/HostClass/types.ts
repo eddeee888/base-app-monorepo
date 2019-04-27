@@ -1,49 +1,41 @@
-export enum DayOfTheWeek {
-  mon = 'Monday',
-  tue = 'Tuesday',
-  wed = 'Wednesday',
-  thu = 'Thursday',
-  fri = 'Friday',
-  sat = 'Saturday',
-  sun = 'Sunday'
-}
+import { ClassSessionDay } from '__generated__/globalTypes';
 
 export type HostClassFormPart = 'details' | 'contact' | 'sessions' | 'summary';
 export interface HostClassParams {
   classId?: string;
   formPart?: HostClassFormPart;
 }
-export interface ClassDetailsInput {
+export interface FormClassDetailsInput {
   name: string;
   category: string;
   description: string;
 }
 
-export interface ClassContactInput {
+export interface FormClassContactInput {
+  streetUnit: string;
   streetAddress: string;
   city: string;
   postcode: string;
   country: string;
   contactNumber: string;
   state: string;
-  unit: string;
 }
 
 export interface ClassSession {
-  day: keyof typeof DayOfTheWeek | '';
+  day: keyof typeof ClassSessionDay | '';
   startTime: SessionTime | '';
   endTime: SessionTime | '';
   capacity: number;
 }
 
-export interface ClassSessionsInput {
+export interface FormClassSessionInput {
   sessions: ClassSession[];
 }
 
 export interface HostClassState {
-  details: ClassDetailsInput;
-  contact: ClassContactInput;
-  sessions: ClassSessionsInput;
+  details: FormClassDetailsInput;
+  contact: FormClassContactInput;
+  sessions: FormClassSessionInput;
 }
 
 export type SetFormValues<I> = (values: I) => void;

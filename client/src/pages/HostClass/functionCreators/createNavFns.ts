@@ -1,7 +1,7 @@
 import * as H from 'history';
 import { SetFormValues } from '../types';
 
-export interface NavFunctions<I> {
+export interface NavFns<I> {
   goNext: (values: I) => void;
   goPrevious: (values?: I) => void;
 }
@@ -13,14 +13,9 @@ interface Param<I> {
   previous?: string;
 }
 
-type CreateNavFunctionsFn = <I>(params: Param<I>) => NavFunctions<I>;
+type CreateNavFns = <I>(params: Param<I>) => NavFns<I>;
 
-const createNavFunctions: CreateNavFunctionsFn = ({
-  setValue,
-  history,
-  next,
-  previous
-}) => ({
+const createNavFns: CreateNavFns = ({ setValue, history, next, previous }) => ({
   goNext: values => {
     setValue(values);
     if (next) {
@@ -38,4 +33,4 @@ const createNavFunctions: CreateNavFunctionsFn = ({
   }
 });
 
-export default createNavFunctions;
+export default createNavFns;
