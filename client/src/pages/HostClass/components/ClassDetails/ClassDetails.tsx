@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavFns } from '../../handlers/createNavFns';
+import { NavFns } from '../../functionCreators/createNavFns';
 import { ClassDetailsInput } from '../../types';
 import ClassCategoriesQuery from '../ClassCategoriesQuery';
 import ClassDetailsForm from './ClassDetailsForm';

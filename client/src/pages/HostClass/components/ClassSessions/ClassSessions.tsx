@@ -3,7 +3,7 @@ import Paper from 'common/components/Paper';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { validationSchemas } from '../../constants';
-import { NavFns } from '../../handlers/createNavFns';
+import { NavFns } from '../../functionCreators/createNavFns';
 import { ClassSessionsInput } from '../../types';
 import Navigation from '../Navigation';
 import SessionBlocksContainer from './SessionBlocksContainer';

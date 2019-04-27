@@ -11,7 +11,7 @@ import TextInput from 'common/components/TextInput';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { validationSchemas } from '../../constants';
-import { NavFns } from '../../handlers/createNavFns';
+import { NavFns } from '../../functionCreators/createNavFns';
 import { ClassDetailsInput } from '../../types';
 import { ClassCategoryQueryResult } from '../ClassCategoriesQuery';
 import { ClassCategoryData } from '../ClassCategoriesQuery/__generated__/ClassCategoryData';

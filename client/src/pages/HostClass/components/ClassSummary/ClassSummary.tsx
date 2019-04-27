@@ -4,7 +4,7 @@ import Paper from 'common/components/Paper';
 import Text from 'common/components/Text';
 import React from 'react';
 import { validationSchemas } from '../../constants';
-import { NavFns } from '../../handlers/createNavFns';
+import { NavFns } from '../../functionCreators/createNavFns';
 import { HostClassState } from '../../types';
 import ClassCategoriesQuery from '../ClassCategoriesQuery';
 import Navigation from '../Navigation';

@@ -3,7 +3,7 @@ import useFormError from 'common/hooks/useFormError';
 import LoginFormComponent from 'pages/Login/LoginForm/LoginFormComponent';
 import LoginFormMutation from 'pages/Login/LoginForm/LoginFormMutation';
 import React, { useContext } from 'react';
-import createHandleLoginFn from './handlers/createHandleLoginFn';
+import createHandleLoginFn from './functionCreators/createHandleLoginFn';
 
 const LoginForm: React.FunctionComponent = () => {
   const { setViewer } = useContext(ViewerContext);
