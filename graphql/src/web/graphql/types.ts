@@ -27,3 +27,27 @@ export interface LoginPayload {
 export interface CreateClassCategoryPayload {
   classCategory: ClassCategory;
 }
+
+export interface Class {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  streetAddress: string;
+  city: string;
+  postcode: string;
+  country: string;
+  contactNumber: string;
+  state: string;
+  streetUnit: string;
+}
+
+export interface ClassSession {
+  startTime: string;
+  endTime: string;
+  capacity: number;
+}
+
+export interface ClassSavePayload {
+  class: Class;
+}

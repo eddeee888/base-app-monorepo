@@ -4,7 +4,7 @@ schema: ./schemas/schema.graphql
 context: ./src/types/index.ts:ResolverContext
 models:
   files:
-    - ./src/web/graphql/types/index.ts
+    - ./src/web/graphql/types.ts
 
 output: ./src/web/graphql/generated/graphqlgen.ts
 
