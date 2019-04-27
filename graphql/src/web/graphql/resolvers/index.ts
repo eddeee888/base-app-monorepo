@@ -3,7 +3,7 @@ import { Resolvers } from 'src/web/graphql/generated/graphqlgen';
 import { Class } from 'src/web/graphql/resolvers/Class';
 import { ClassCategory } from 'src/web/graphql/resolvers/ClassCategory';
 import { ClassSavePayload } from 'src/web/graphql/resolvers/ClassSavePayload';
-import { ClassSession } from 'src/web/graphql/resolvers/ClassSession';
+// import { ClassSession } from 'src/web/graphql/resolvers/ClassSession';
 import { CreateClassCategoryPayload } from 'src/web/graphql/resolvers/CreateClassCategoryPayload';
 import { LoginPayload } from 'src/web/graphql/resolvers/LoginPayload';
 import { Mutation } from 'src/web/graphql/resolvers/Mutation';
@@ -20,6 +20,6 @@ export const resolvers: Resolvers = {
   LoginPayload,
   CreateClassCategoryPayload,
   Class,
-  ClassSavePayload,
-  ClassSession
+  ClassSavePayload
+  // ClassSession
 };

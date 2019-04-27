@@ -7,7 +7,7 @@
     "start": "nodemon",
     "serve": "ts-node -r tsconfig-paths/register src/server.ts",
     "prisma:deploy": "prisma deploy --env-file .env.dev",
-    "graphqlgen": "graphqlgen",
+    "gg": "graphqlgen",
     "check:ts": "tsc -p tsconfig.json",
     "test": "yarn test:prisma-delete && yarn test:prisma-setup && yarn test:jest",
     "test:jest": "jest -i",

@@ -72,7 +72,7 @@ type Class {
   contactNumber: String!
   state: String!
   streetUnit: String!
-  sessions: [ClassSession!]!
+  # sessions: [ClassSession!]!
 }
 
 input ClassSaveInput {
@@ -86,27 +86,35 @@ input ClassSaveInput {
   contactNumber: String!
   state: String!
   streetUnit: String!
-  sessions: [ClassSession!]!
+  # sessions: [ClassSessionInput!]!
 }
+
+# input ClassSessionInput {
+#   day: ClassDay!
+#   startTime: String!
+#   endTime: String!
+#   capacity: Int!
+# }
 
 type ClassSavePayload {
   class: Class!
 }
 
-type ClassSession {
-  day: ClassDay!
-  startTime: String!
-  endTime: String!
-  capacity: Int!
-}
+# type ClassSession {
+#   id: ID!
+#   day: ClassDay!
+#   startTime: String!
+#   endTime: String!
+#   capacity: Int!
+# }
 
-enum ClassDay {
-  MONDAY
-  TUESDAY
-  WEDNESDAY
-  THURSDAY
-  FRIDAY
-  SATURDAY
-  SUNDAY
-}
+# enum ClassDay {
+#   MONDAY
+#   TUESDAY
+#   WEDNESDAY
+#   THURSDAY
+#   FRIDAY
+#   SATURDAY
+#   SUNDAY
+# }
 # End `Class`

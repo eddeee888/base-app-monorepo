@@ -43,6 +43,7 @@ export interface Class {
 }
 
 export interface ClassSession {
+  id: string;
   startTime: string;
   endTime: string;
   capacity: number;
