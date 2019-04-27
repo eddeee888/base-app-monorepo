@@ -90,7 +90,7 @@ input ClassSaveInput {
 }
 
 input ClassSessionInput {
-  day: ClassDay!
+  day: ClassSessionDay!
   startTime: String!
   endTime: String!
   capacity: Int!
@@ -102,13 +102,13 @@ type ClassSavePayload {
 
 type ClassSession {
   id: ID!
-  day: ClassDay!
+  day: ClassSessionDay!
   startTime: String!
   endTime: String!
   capacity: Int!
 }
 
-enum ClassDay {
+enum ClassSessionDay {
   MONDAY
   TUESDAY
   WEDNESDAY

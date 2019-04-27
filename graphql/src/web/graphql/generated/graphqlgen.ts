@@ -13,7 +13,7 @@ import {
 } from '../types';
 import { ResolverContext } from '../../../types';
 
-type ClassDay =
+type ClassSessionDay =
   | 'MONDAY'
   | 'TUESDAY'
   | 'WEDNESDAY'
@@ -210,7 +210,7 @@ export namespace MutationResolvers {
     sessions: ClassSessionInput[];
   }
   export interface ClassSessionInput {
-    day: ClassDay;
+    day: ClassSessionDay;
     startTime: string;
     endTime: string;
     capacity: number;
@@ -391,7 +391,8 @@ export namespace ClassResolvers {
     country: (parent: Class) => parent.country,
     contactNumber: (parent: Class) => parent.contactNumber,
     state: (parent: Class) => parent.state,
-    streetUnit: (parent: Class) => parent.streetUnit
+    streetUnit: (parent: Class) => parent.streetUnit,
+    sessions: (parent: Class) => parent.sessions
   };
 
   export type IdResolver = (
@@ -585,7 +586,7 @@ export namespace ClassSessionResolvers {
     args: {},
     ctx: ResolverContext,
     info: GraphQLResolveInfo
-  ) => ClassDay | Promise<ClassDay>;
+  ) => ClassSessionDay | Promise<ClassSessionDay>;
 
   export type StartTimeResolver = (
     parent: ClassSession,
@@ -621,7 +622,7 @@ export namespace ClassSessionResolvers {
       args: {},
       ctx: ResolverContext,
       info: GraphQLResolveInfo
-    ) => ClassDay | Promise<ClassDay>;
+    ) => ClassSessionDay | Promise<ClassSessionDay>;
 
     startTime: (
       parent: ClassSession,
