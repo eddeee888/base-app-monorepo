@@ -17,7 +17,7 @@ const invalidSession: ClassSession = {
   capacity: 5
 };
 const validSession: ClassSession = {
-  day: 'mon',
+  day: 'MONDAY',
   startTime: '12:30am',
   endTime: '01:30am',
   capacity: 5
