@@ -1,17 +1,23 @@
 type Query {
+  # General
   user(id: ID!): User
   classCategories: [ClassCategory!]!
 }
 
 type Mutation {
+  # General
   signup(input: SignupInput!): SignupPayload!
   login(input: LoginInput!): LoginPayload
   saveClass(input: SaveClassInput!): SaveClassPayload!
   createClassCategory(
     input: CreateClassCategoryInput!
   ): CreateClassCategoryPayload!
+
+  # Class
+  classSave: (input: ClassSaveInput!) ClassSavePayload
 }
 
+# Start General
 type User {
   id: ID!
   email: String!
@@ -52,3 +58,56 @@ type SignupPayload {
 type LoginPayload {
   user: User!
 }
+# End General
+
+# Start `Class`
+type Class {
+  id: ID!
+  name: String!
+  category: String!
+  description: String!
+  streetAddress: String!
+  city: String!
+  postcode: String!
+  country: String!
+  contactNumber: String!
+  state: String!
+  streetUnit: String!
+  sessions: [ClassSession!]!
+}
+
+input ClassSaveInput {
+  name: String!
+  category: String!
+  description: String!
+  streetAddress: String!
+  city: String!
+  postcode: String!
+  country: String!
+  contactNumber: String!
+  state: String!
+  streetUnit: String!
+  sessions: [ClassSession!]!
+}
+
+type ClassSavePayload {
+  class: Class!
+}
+
+type ClassSession {
+  day: ClassDay!
+  startTime: String!
+  endTime: String!
+  capacity: Int!
+}
+
+enum ClassDay {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+# End `Class`
