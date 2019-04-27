@@ -8,9 +8,19 @@ import {
   LoginPayload,
   CreateClassCategoryPayload,
   ClassSavePayload,
-  Class
+  Class,
+  ClassSession
 } from '../types';
 import { ResolverContext } from '../../../types';
+
+type ClassDay =
+  | 'MONDAY'
+  | 'TUESDAY'
+  | 'WEDNESDAY'
+  | 'THURSDAY'
+  | 'FRIDAY'
+  | 'SATURDAY'
+  | 'SUNDAY';
 
 export namespace QueryResolvers {
   export const defaultResolvers = {};
@@ -197,6 +207,13 @@ export namespace MutationResolvers {
     contactNumber: string;
     state: string;
     streetUnit: string;
+    sessions: ClassSessionInput[];
+  }
+  export interface ClassSessionInput {
+    day: ClassDay;
+    startTime: string;
+    endTime: string;
+    capacity: number;
   }
 
   export interface ArgsSignup {
@@ -454,6 +471,13 @@ export namespace ClassResolvers {
     info: GraphQLResolveInfo
   ) => string | Promise<string>;
 
+  export type SessionsResolver = (
+    parent: Class,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => ClassSession[] | Promise<ClassSession[]>;
+
   export interface Type {
     id: (
       parent: Class,
@@ -531,6 +555,94 @@ export namespace ClassResolvers {
       ctx: ResolverContext,
       info: GraphQLResolveInfo
     ) => string | Promise<string>;
+
+    sessions: (
+      parent: Class,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => ClassSession[] | Promise<ClassSession[]>;
+  }
+}
+
+export namespace ClassSessionResolvers {
+  export const defaultResolvers = {
+    id: (parent: ClassSession) => parent.id,
+    startTime: (parent: ClassSession) => parent.startTime,
+    endTime: (parent: ClassSession) => parent.endTime,
+    capacity: (parent: ClassSession) => parent.capacity
+  };
+
+  export type IdResolver = (
+    parent: ClassSession,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => string | Promise<string>;
+
+  export type DayResolver = (
+    parent: ClassSession,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => ClassDay | Promise<ClassDay>;
+
+  export type StartTimeResolver = (
+    parent: ClassSession,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => string | Promise<string>;
+
+  export type EndTimeResolver = (
+    parent: ClassSession,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => string | Promise<string>;
+
+  export type CapacityResolver = (
+    parent: ClassSession,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => number | Promise<number>;
+
+  export interface Type {
+    id: (
+      parent: ClassSession,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => string | Promise<string>;
+
+    day: (
+      parent: ClassSession,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => ClassDay | Promise<ClassDay>;
+
+    startTime: (
+      parent: ClassSession,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => string | Promise<string>;
+
+    endTime: (
+      parent: ClassSession,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => string | Promise<string>;
+
+    capacity: (
+      parent: ClassSession,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => number | Promise<number>;
   }
 }
 
@@ -544,4 +656,5 @@ export interface Resolvers {
   CreateClassCategoryPayload: CreateClassCategoryPayloadResolvers.Type;
   ClassSavePayload: ClassSavePayloadResolvers.Type;
   Class: ClassResolvers.Type;
+  ClassSession: ClassSessionResolvers.Type;
 }

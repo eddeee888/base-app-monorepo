@@ -40,6 +40,7 @@ export interface Class {
   contactNumber: string;
   state: string;
   streetUnit: string;
+  sessions: ClassSession[];
 }
 
 export interface ClassSession {

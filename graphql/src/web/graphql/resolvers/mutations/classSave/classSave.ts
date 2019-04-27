@@ -20,7 +20,8 @@ const classSave: MutationResolvers.ClassSaveResolver = async (
       country: '',
       contactNumber: '',
       state: '',
-      streetUnit: ''
+      streetUnit: '',
+      sessions: []
     }
   };
   return result;
