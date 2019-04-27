@@ -26,5 +26,7 @@ describe('useFormError()', () => {
     });
   });
 
-  it.skip('should update error at correct index if setError is called (waiting for hook support)', () => {});
+  it.todo(
+    'should update error at correct index if setError is called (waiting for hook support)'
+  );
 });

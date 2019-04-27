@@ -95,5 +95,5 @@ describe('<SessionBlocksLogic />', () => {
     );
   });
 
-  it.skip('should test empty session (once useEffect hook is supported)', () => {});
+  it.todo('should test empty session (once useEffect hook is supported)');
 });
