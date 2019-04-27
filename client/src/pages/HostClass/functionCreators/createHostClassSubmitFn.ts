@@ -13,7 +13,7 @@ const createHostClassSubmitFn: CreateHostClassSaveFn = (saveFn, values) => {
         input: {
           ...values.details,
           ...values.contact,
-          sessions: []
+          sessions: values.sessions.sessions
         }
       }
     })

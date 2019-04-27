@@ -2,10 +2,11 @@ import { Grid } from '@material-ui/core';
 import H2 from 'common/components/H2';
 import Link from 'common/components/Link';
 import Text from 'common/components/Text';
+import { dayMap } from 'pages/HostClass/constants';
 import React from 'react';
 import linkgenHostClass from '../../helpers/linkgenHostClass';
 import useHostClassParams from '../../hooks/useHostClassParams';
-import { DayOfTheWeek, HostClassState } from '../../types';
+import { HostClassState } from '../../types';
 
 export interface SessionsSectionProps {
   values: HostClassState['sessions'];
@@ -38,7 +39,7 @@ const SessionsSection: React.FunctionComponent<SessionsSectionProps> = ({
         <Grid key={index} container>
           <Grid item xs={12}>
             <Text gutterBottom>
-              Every {day !== '' ? <b>{DayOfTheWeek[day]}</b> : ''}, from{' '}
+              Every {day !== '' ? <b>{dayMap[day]}</b> : ''}, from{' '}
               <b>{startTime}</b> until <b>{endTime}</b> for <b>{capacity}</b>{' '}
               learners
             </Text>

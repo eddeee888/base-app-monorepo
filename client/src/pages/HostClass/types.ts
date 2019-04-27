@@ -1,12 +1,4 @@
-export enum DayOfTheWeek {
-  mon = 'Monday',
-  tue = 'Tuesday',
-  wed = 'Wednesday',
-  thu = 'Thursday',
-  fri = 'Friday',
-  sat = 'Saturday',
-  sun = 'Sunday'
-}
+import { ClassSessionDay } from '__generated__/globalTypes';
 
 export type HostClassFormPart = 'details' | 'contact' | 'sessions' | 'summary';
 export interface HostClassParams {
@@ -30,7 +22,7 @@ export interface ClassContactInput {
 }
 
 export interface ClassSession {
-  day: keyof typeof DayOfTheWeek | '';
+  day: keyof typeof ClassSessionDay | '';
   startTime: SessionTime | '';
   endTime: SessionTime | '';
   capacity: number;

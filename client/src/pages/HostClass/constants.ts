@@ -1,3 +1,4 @@
+import { ClassSessionDay } from '__generated__/globalTypes';
 import { SelectOption } from 'common/components/Select/Select';
 import * as Yup from 'yup';
 import {
@@ -5,7 +6,6 @@ import {
   ClassDetailsInput,
   ClassSession,
   ClassSessionsInput,
-  DayOfTheWeek,
   HostClassFormPart,
   HostClassState,
   SessionTime
@@ -46,21 +46,32 @@ export const emptySession: ClassSession = {
   capacity: 0
 };
 
-export const dayValues: Array<keyof typeof DayOfTheWeek> = [
-  'mon',
-  'tue',
-  'wed',
-  'thu',
-  'fri',
-  'sat',
-  'sun'
+const dayArray: Array<keyof typeof ClassSessionDay> = [
+  'MONDAY',
+  'TUESDAY',
+  'WEDNESDAY',
+  'THURSDAY',
+  'FRIDAY',
+  'SATURDAY',
+  'SUNDAY'
 ];
 
+type DayMap = { [key in ClassSessionDay]: string };
+export const dayMap: DayMap = {
+  MONDAY: 'Monday',
+  TUESDAY: 'Tuesday',
+  WEDNESDAY: 'Wednesday',
+  THURSDAY: 'Thursday',
+  FRIDAY: 'Friday',
+  SATURDAY: 'Saturday',
+  SUNDAY: 'Sunday'
+};
+
 const dayOptions: Array<
-  SelectOption<keyof typeof DayOfTheWeek, DayOfTheWeek>
-> = dayValues.map(value => ({
+  SelectOption<keyof typeof ClassSessionDay, string>
+> = dayArray.map(value => ({
   value,
-  label: DayOfTheWeek[value]
+  label: dayMap[value]
 }));
 dayOptions.unshift({ value: '', label: '' });
 export { dayOptions };
@@ -143,7 +154,7 @@ export const validationSchemas = {
     sessions: Yup.array()
       .of(
         Yup.object().shape<ClassSession>({
-          day: Yup.mixed().oneOf(dayValues, 'Day is required'),
+          day: Yup.mixed().oneOf(dayArray, 'Day is required'),
           startTime: Yup.mixed().oneOf(sessionTimes, 'Start time is required'),
           endTime: Yup.mixed().oneOf(sessionTimes, 'End time is required'),
           capacity: Yup.number()
