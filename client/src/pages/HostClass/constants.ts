@@ -32,7 +32,7 @@ export const initialValues: HostClassState = {
     country: '',
     contactNumber: '',
     state: '',
-    unit: ''
+    streetUnit: ''
   },
   sessions: {
     sessions: []
@@ -136,7 +136,7 @@ export const validationSchemas = {
     postcode: Yup.string(),
     country: Yup.string().required('Country is required'),
     contactNumber: Yup.string().required('Contact number is required'),
-    unit: Yup.string(),
+    streetUnit: Yup.string(),
     state: Yup.string().required('State is required')
   }),
   sessions: Yup.object().shape<ClassSessionsInput>({

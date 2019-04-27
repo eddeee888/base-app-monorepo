@@ -20,13 +20,13 @@ export interface ClassDetailsInput {
 }
 
 export interface ClassContactInput {
+  streetUnit: string;
   streetAddress: string;
   city: string;
   postcode: string;
   country: string;
   contactNumber: string;
   state: string;
-  unit: string;
 }
 
 export interface ClassSession {

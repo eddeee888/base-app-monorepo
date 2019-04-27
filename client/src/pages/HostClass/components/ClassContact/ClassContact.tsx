@@ -49,7 +49,7 @@ const ClassContact: React.FunctionComponent<
                   )}
                 </FormField>
 
-                <FormField name="unit" errors={errors} touched={touched}>
+                <FormField name="streetUnit" errors={errors} touched={touched}>
                   {({ field }) => (
                     <TextInput
                       {...field}

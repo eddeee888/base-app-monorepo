@@ -12,7 +12,7 @@ const props: ClassContactProps<ClassContactInput> = {
     country: '',
     contactNumber: '',
     state: '',
-    unit: ''
+    streetUnit: ''
   },
   goNext: jest.fn(),
   goPrevious: jest.fn()
@@ -40,7 +40,7 @@ describe('<ClassContact />', () => {
     expect(wrapper.find(`input[name='country']`)).toHaveLength(1);
     expect(wrapper.find(`input[name='contactNumber']`)).toHaveLength(1);
     expect(wrapper.find(`input[name='state']`)).toHaveLength(1);
-    expect(wrapper.find(`input[name='unit']`)).toHaveLength(1);
+    expect(wrapper.find(`input[name='streetUnit']`)).toHaveLength(1);
     expect(getPreviousButton(wrapper)).toHaveLength(1);
     expect(
       wrapper.find('button').filterWhere(button => button.text() === 'Next')
@@ -55,7 +55,7 @@ describe('<ClassContact />', () => {
       country: 'Australia',
       contactNumber: '0400123123',
       state: 'VIC',
-      unit: '90'
+      streetUnit: '90'
     };
     const wrapper = mount(<ClassContact {...props} />);
 

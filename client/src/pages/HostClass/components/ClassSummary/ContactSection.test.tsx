@@ -6,7 +6,7 @@ import ContactSection, { ContactSectionProps } from './ContactSection';
 
 const defaultProps = {
   values: {
-    unit: '',
+    streetUnit: '',
     streetAddress: '',
     city: '',
     country: '',
@@ -50,7 +50,7 @@ describe('<ContactSection />', () => {
     {
       description: 'should show full values correctly',
       values: {
-        unit: '1',
+        streetUnit: '1',
         streetAddress: '120 Street address',
         city: 'City of LA',
         country: 'Australia',
@@ -64,9 +64,9 @@ describe('<ContactSection />', () => {
       ]
     },
     {
-      description: 'should show address without unit correctly',
+      description: 'should show address without streetUnit correctly',
       values: {
-        unit: '',
+        streetUnit: '',
         streetAddress: '120 Street address',
         city: 'City of LA',
         country: 'Australia',

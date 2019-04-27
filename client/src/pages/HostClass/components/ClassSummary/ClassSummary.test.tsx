@@ -36,7 +36,7 @@ const invalidValues: ClassSummaryProps<HostClassState>['values'] = {
     country: '',
     contactNumber: '',
     state: '',
-    unit: ''
+    streetUnit: ''
   },
   sessions: {
     sessions: []
@@ -56,7 +56,7 @@ const validValues: ClassSummaryProps<HostClassState>['values'] = {
     country: 'Australia',
     contactNumber: '1234567890',
     state: 'VIC',
-    unit: ''
+    streetUnit: ''
   },
   sessions: {
     sessions: [validSession]
@@ -193,7 +193,7 @@ describe('<ClassSummary /> -> <ContactSection /> ', () => {
         country: 'Australia',
         contactNumber: '',
         state: '',
-        unit: ''
+        streetUnit: ''
       },
       expected: false,
       description: 'should fail if not enough data'

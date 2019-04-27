@@ -6,12 +6,14 @@ import { spacingRem } from 'common/helpers/spacing';
 import useHistory from 'common/hooks/useHistory';
 import { css } from 'emotion';
 import ClassDetails from 'pages/HostClass/components/ClassDetails';
+import ClassSaveMutation from 'pages/HostClass/components/ClassSaveMutation';
 import ClassSessions from 'pages/HostClass/components/ClassSessions';
 import ClassSummary from 'pages/HostClass/components/ClassSummary';
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router';
 import ClassContact from './components/ClassContact';
 import { defaultFormPart } from './constants';
+import createHostClassSubmitFn from './handlers/createHostClassSubmitFn';
 import createNavFunctions from './handlers/createNavFunctions';
 import linkgenHostClass from './helpers/linkgenHostClass';
 import useHostClassNav from './hooks/useHostClassNav';
@@ -89,13 +91,15 @@ const HostClass: React.FunctionComponent = () => {
           />
         )}
         {params.formPart === 'summary' && (
-          <ClassSummary
-            values={values}
-            goNext={() => {
-              /* TODO: implement this */
-            }}
-            goPrevious={summaryNavFns.goPrevious}
-          />
+          <ClassSaveMutation>
+            {(saveFn, result) => (
+              <ClassSummary
+                values={values}
+                goNext={createHostClassSubmitFn(saveFn, values)}
+                goPrevious={summaryNavFns.goPrevious}
+              />
+            )}
+          </ClassSaveMutation>
         )}
       </div>
     </Main>
