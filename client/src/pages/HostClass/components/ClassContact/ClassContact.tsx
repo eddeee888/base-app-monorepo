@@ -8,7 +8,7 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import { validationSchemas } from '../../constants';
 import { NavFns } from '../../functionCreators/createNavFns';
-import { ClassContactInput } from '../../types';
+import { FormClassContactInput } from '../../types';
 import Navigation from '../Navigation';
 
 export interface ClassContactProps<I> {
@@ -18,7 +18,7 @@ export interface ClassContactProps<I> {
 }
 
 const ClassContact: React.FunctionComponent<
-  ClassContactProps<ClassContactInput>
+  ClassContactProps<FormClassContactInput>
 > = ({ initialValues, goNext, goPrevious }) => (
   <Formik
     validationSchema={validationSchemas.contact}

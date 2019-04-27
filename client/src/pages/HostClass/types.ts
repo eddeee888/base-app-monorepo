@@ -5,13 +5,13 @@ export interface HostClassParams {
   classId?: string;
   formPart?: HostClassFormPart;
 }
-export interface ClassDetailsInput {
+export interface FormClassDetailsInput {
   name: string;
   category: string;
   description: string;
 }
 
-export interface ClassContactInput {
+export interface FormClassContactInput {
   streetUnit: string;
   streetAddress: string;
   city: string;
@@ -28,14 +28,14 @@ export interface ClassSession {
   capacity: number;
 }
 
-export interface ClassSessionsInput {
+export interface FormClassSessionInput {
   sessions: ClassSession[];
 }
 
 export interface HostClassState {
-  details: ClassDetailsInput;
-  contact: ClassContactInput;
-  sessions: ClassSessionsInput;
+  details: FormClassDetailsInput;
+  contact: FormClassContactInput;
+  sessions: FormClassSessionInput;
 }
 
 export type SetFormValues<I> = (values: I) => void;

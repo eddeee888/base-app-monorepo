@@ -2,10 +2,10 @@ import { ClassSessionDay } from '__generated__/globalTypes';
 import { SelectOption } from 'common/components/Select/Select';
 import * as Yup from 'yup';
 import {
-  ClassContactInput,
-  ClassDetailsInput,
   ClassSession,
-  ClassSessionsInput,
+  FormClassContactInput,
+  FormClassDetailsInput,
+  FormClassSessionInput,
   HostClassFormPart,
   HostClassState,
   SessionTime
@@ -136,12 +136,12 @@ sessionTimeOptions.unshift({ value: '', label: '' });
 export { sessionTimeOptions };
 
 export const validationSchemas = {
-  details: Yup.object().shape<ClassDetailsInput>({
+  details: Yup.object().shape<FormClassDetailsInput>({
     name: Yup.string().required('Class name is required'),
     category: Yup.string().required('Class category is required'),
     description: Yup.string()
   }),
-  contact: Yup.object().shape<ClassContactInput>({
+  contact: Yup.object().shape<FormClassContactInput>({
     streetAddress: Yup.string().required('Street address is required'),
     city: Yup.string().required('City is required'),
     postcode: Yup.string(),
@@ -150,7 +150,7 @@ export const validationSchemas = {
     streetUnit: Yup.string(),
     state: Yup.string().required('State is required')
   }),
-  sessions: Yup.object().shape<ClassSessionsInput>({
+  sessions: Yup.object().shape<FormClassSessionInput>({
     sessions: Yup.array()
       .of(
         Yup.object().shape<ClassSession>({

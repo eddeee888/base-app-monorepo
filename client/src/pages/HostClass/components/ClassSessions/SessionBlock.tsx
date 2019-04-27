@@ -11,7 +11,7 @@ import { css } from 'emotion';
 import { FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
 import { dayOptions, sessionTimeOptions } from '../../constants';
-import { ClassSession, ClassSessionsInput } from '../../types';
+import { ClassSession, FormClassSessionInput } from '../../types';
 
 const sessionContainerClassName = css`
   margin-bottom: ${spacingRem(2)}rem;
@@ -21,8 +21,8 @@ interface Props {
   index: number;
   duplicateSession: () => void;
   removeSession: () => void;
-  errors: FormikErrors<ClassSessionsInput>;
-  touched: FormikTouched<ClassSessionsInput>;
+  errors: FormikErrors<FormClassSessionInput>;
+  touched: FormikTouched<FormClassSessionInput>;
 }
 
 const SessionBlock: React.FunctionComponent<Props> = ({
@@ -69,7 +69,7 @@ const SessionBlock: React.FunctionComponent<Props> = ({
       </Grid>
       <Grid container justify="space-between" spacing={8}>
         <Grid item xs={12} sm={3}>
-          <FormFieldArray<ClassSessionsInput, ClassSession>
+          <FormFieldArray<FormClassSessionInput, ClassSession>
             name="sessions"
             property="day"
             index={index}
@@ -83,7 +83,7 @@ const SessionBlock: React.FunctionComponent<Props> = ({
         </Grid>
 
         <Grid item xs={6} sm={2}>
-          <FormFieldArray<ClassSessionsInput, ClassSession>
+          <FormFieldArray<FormClassSessionInput, ClassSession>
             name="sessions"
             property="startTime"
             index={index}
@@ -101,7 +101,7 @@ const SessionBlock: React.FunctionComponent<Props> = ({
         </Grid>
 
         <Grid item xs={6} sm={2}>
-          <FormFieldArray<ClassSessionsInput, ClassSession>
+          <FormFieldArray<FormClassSessionInput, ClassSession>
             name="sessions"
             property="endTime"
             index={index}
@@ -119,7 +119,7 @@ const SessionBlock: React.FunctionComponent<Props> = ({
         </Grid>
 
         <Grid item xs={12} sm={2}>
-          <FormFieldArray<ClassSessionsInput, ClassSession>
+          <FormFieldArray<FormClassSessionInput, ClassSession>
             name="sessions"
             property="capacity"
             index={index}

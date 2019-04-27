@@ -1,10 +1,10 @@
 import { mount, ReactWrapper } from 'enzyme';
 import { Formik } from 'formik';
 import React from 'react';
-import { ClassContactInput } from '../../types';
+import { FormClassContactInput } from '../../types';
 import ClassContact, { ClassContactProps } from './ClassContact';
 
-const props: ClassContactProps<ClassContactInput> = {
+const props: ClassContactProps<FormClassContactInput> = {
   initialValues: {
     streetAddress: '',
     city: '',
@@ -48,7 +48,7 @@ describe('<ClassContact />', () => {
   });
 
   it('should goNext should be called if form is submitted', () => {
-    const formValues: ClassContactInput = {
+    const formValues: FormClassContactInput = {
       streetAddress: '120 ABC street',
       city: 'Melbest',
       postcode: '3010',

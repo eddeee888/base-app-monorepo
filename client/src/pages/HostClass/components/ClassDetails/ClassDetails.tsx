@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavFns } from '../../functionCreators/createNavFns';
-import { ClassDetailsInput } from '../../types';
+import { FormClassDetailsInput } from '../../types';
 import ClassCategoriesQuery from '../ClassCategoriesQuery';
 import ClassDetailsForm from './ClassDetailsForm';
 
@@ -10,7 +10,7 @@ export interface ClassDetailsProps<I> {
 }
 
 const ClassDetails: React.FunctionComponent<
-  ClassDetailsProps<ClassDetailsInput>
+  ClassDetailsProps<FormClassDetailsInput>
 > = ({ initialValues, goNext }) => (
   <ClassCategoriesQuery>
     {result => (

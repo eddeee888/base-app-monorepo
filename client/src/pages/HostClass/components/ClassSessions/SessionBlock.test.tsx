@@ -1,7 +1,7 @@
 import { mount, ReactWrapper } from 'enzyme';
 import { Formik } from 'formik';
 import React from 'react';
-import { ClassSessionsInput } from '../../types';
+import { FormClassSessionInput } from '../../types';
 import SessionBlock from './SessionBlock';
 
 const findElementWithName = (
@@ -27,11 +27,11 @@ describe('<SessionBlock />', () => {
     touched: {}
   };
 
-  const mockInput: ClassSessionsInput = { sessions: [] };
+  const mockInput: FormClassSessionInput = { sessions: [] };
 
   it('should render fields and action buttons', () => {
     const wrapper = mount(
-      <Formik<ClassSessionsInput>
+      <Formik<FormClassSessionInput>
         initialValues={mockInput}
         onSubmit={() => jest.fn()}
       >

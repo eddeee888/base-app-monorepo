@@ -4,7 +4,7 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import { validationSchemas } from '../../constants';
 import { NavFns } from '../../functionCreators/createNavFns';
-import { ClassSessionsInput } from '../../types';
+import { FormClassSessionInput } from '../../types';
 import Navigation from '../Navigation';
 import SessionBlocksContainer from './SessionBlocksContainer';
 
@@ -14,12 +14,12 @@ interface Props<I> {
   goPrevious: NavFns<I>['goPrevious'];
 }
 
-const ClassSessions: React.FunctionComponent<Props<ClassSessionsInput>> = ({
+const ClassSessions: React.FunctionComponent<Props<FormClassSessionInput>> = ({
   initialValues,
   goNext,
   goPrevious
 }) => (
-  <Formik<ClassSessionsInput>
+  <Formik<FormClassSessionInput>
     initialValues={initialValues}
     validationSchema={validationSchemas.sessions}
     onSubmit={goNext}
