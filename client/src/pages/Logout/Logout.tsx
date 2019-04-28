@@ -1,14 +1,24 @@
 import ViewerContext from 'common/components/ViewerContext';
-import { linkgen, Paths } from 'common/helpers/pathing';
+import gql from 'graphql-tag';
 import React, { useContext } from 'react';
-import { Redirect } from 'react-router';
+import { Mutation } from 'react-apollo';
+import { Logout as LogoutData } from './__generated__/Logout';
+import LogoutLogic from './LogoutLogic';
 
-const Logout = () => {
+const LOGOUT = gql`
+  mutation Logout {
+    logout
+  }
+`;
+
+const Logout: React.FunctionComponent = () => {
   const { clearViewer } = useContext(ViewerContext);
 
-  clearViewer();
-
-  return <Redirect to={linkgen(Paths.home)} />;
+  return (
+    <Mutation<LogoutData> mutation={LOGOUT}>
+      {logout => <LogoutLogic logout={logout} clearViewer={clearViewer} />}
+    </Mutation>
+  );
 };
 
 export default Logout;
