@@ -40,9 +40,9 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@bit/eddeee888.learnd-utils.forms.validations@^0.1.6":
-  version "0.1.6"
-  resolved "https://node.bitsrc.io/eddeee888.learnd-utils.forms.validations/-/eddeee888.learnd-utils.forms.validations-0.1.6.tgz#dc08e70d17e8d8987ed87c3cfbfa64735f7a55e2"
+"@bit/eddeee888.learnd-utils.forms.validations@^0.2.0":
+  version "0.2.0"
+  resolved "https://node.bitsrc.io/eddeee888.learnd-utils.forms.validations/-/eddeee888.learnd-utils.forms.validations-0.2.0.tgz#06eceaf4595697f64d2ecd352d9048ca8d958861"
   dependencies:
     yup "^0.26.7"
 
