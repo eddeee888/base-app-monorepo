@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { and, not, rule, shield } from 'graphql-shield';
+import { not, or, rule, shield } from 'graphql-shield';
 import { getTokenFromRequest } from 'src/helpers/headers';
 import { verify } from 'src/helpers/utils/jwt';
 import { ResolverContext } from 'src/types';
@@ -43,6 +43,6 @@ export default shield({
     signup: not(isAuthenticated),
     login: not(isAuthenticated),
     createClassCategory: isAdmin,
-    classSave: and(isUser, isAdmin)
+    classSave: or(isUser, isAdmin)
   }
 });
