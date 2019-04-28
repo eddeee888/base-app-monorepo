@@ -1036,7 +1036,7 @@ type User {
   firstName: String!
   lastName: String!
   password: String!
-  userGroup: String
+  userGroup: String!
   classes(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Class!]
 }
 
@@ -1052,7 +1052,7 @@ input UserCreateInput {
   firstName: String!
   lastName: String!
   password: String!
-  userGroup: String
+  userGroup: String!
   classes: ClassCreateManyWithoutCreatorInput
 }
 
@@ -1067,7 +1067,7 @@ input UserCreateWithoutClassesInput {
   firstName: String!
   lastName: String!
   password: String!
-  userGroup: String
+  userGroup: String!
 }
 
 type UserEdge {
@@ -1103,7 +1103,7 @@ type UserPreviousValues {
   firstName: String!
   lastName: String!
   password: String!
-  userGroup: String
+  userGroup: String!
 }
 
 type UserSubscriptionPayload {

@@ -7,7 +7,7 @@ type User {
   firstName: String!
   lastName: String!
   password: String!
-  userGroup: String
+  userGroup: String!
   classes: [Class!]! @relation(name: "UserCreatedClasses")
 }
 

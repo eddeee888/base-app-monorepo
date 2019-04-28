@@ -2,6 +2,7 @@ import { formatError } from '@bit/eddeee888.learnd-utils.graphql';
 import cookieParser = require('cookie-parser');
 import { GraphQLServer } from 'graphql-yoga';
 
+import shield, { getViewerFromRequest } from 'src/middleware/shield';
 import tokenChecker from 'src/middleware/tokenChecker';
 import { prisma } from 'src/web/graphql/generated/prisma-client';
 import { resolvers } from 'src/web/graphql/resolvers';
@@ -11,9 +12,11 @@ const PORT = process.env.PORT || 8000;
 const server = new GraphQLServer({
   typeDefs: './schemas/schema.graphql',
   resolvers: resolvers as any, // https://github.com/prisma/graphql-yoga/issues/379
-  context: contextParams => ({
+  middlewares: [shield],
+  context: async contextParams => ({
     ...contextParams,
-    prisma
+    prisma,
+    viewer: await getViewerFromRequest(contextParams.request, prisma)
   })
 });
 

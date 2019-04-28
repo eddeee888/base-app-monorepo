@@ -1,36 +1,36 @@
-import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
-import { throwFormValidationError } from 'src/web/graphql/errors';
+// import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
+// import { throwFormValidationError } from 'src/web/graphql/errors';
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
 import { ClassSavePayload } from 'src/web/graphql/types';
 
 const classSave: MutationResolvers.ClassSaveResolver = async (
   parent,
   { input },
-  { prisma }
+  { prisma, viewer }
 ) => {
-  try {
-    await hostAClassValidation.details.validate({
-      name: input.name,
-      category: input.category,
-      description: input.description
-    });
+  // try {
+  //   await hostAClassValidation.details.validate({
+  //     name: input.name,
+  //     category: input.category,
+  //     description: input.description
+  //   });
 
-    await hostAClassValidation.contact.validate({
-      streetUnit: input.streetUnit,
-      streetAddress: input.streetAddress,
-      city: input.city,
-      postcode: input.postcode,
-      state: input.state,
-      country: input.country,
-      contactNumber: input.contactNumber
-    });
+  //   await hostAClassValidation.contact.validate({
+  //     streetUnit: input.streetUnit,
+  //     streetAddress: input.streetAddress,
+  //     city: input.city,
+  //     postcode: input.postcode,
+  //     state: input.state,
+  //     country: input.country,
+  //     contactNumber: input.contactNumber
+  //   });
 
-    await hostAClassValidation.contact.validate({
-      sessions: [...input.sessions]
-    });
-  } catch (err) {
-    throwFormValidationError();
-  }
+  //   await hostAClassValidation.contact.validate({
+  //     sessions: [...input.sessions]
+  //   });
+  // } catch (err) {
+  //   throwFormValidationError();
+  // }
 
   throw new Error('OMG');
 

@@ -31,6 +31,7 @@
     "dotenv": "^6.2.0",
     "esm": "^3.2.14",
     "graphql": "^14.0.2",
+    "graphql-shield": "^5.3.4",
     "graphql-yoga": "^1.16.7",
     "graphqlgen": "^0.4.0",
     "jsonwebtoken": "^8.4.0",

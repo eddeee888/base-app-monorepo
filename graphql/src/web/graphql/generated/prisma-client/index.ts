@@ -463,7 +463,7 @@ export interface UserCreateWithoutClassesInput {
   firstName: String;
   lastName: String;
   password: String;
-  userGroup?: String;
+  userGroup: String;
 }
 
 export interface ClassCategoryUpdateManyWithWhereNestedInput {
@@ -622,7 +622,7 @@ export interface UserCreateInput {
   firstName: String;
   lastName: String;
   password: String;
-  userGroup?: String;
+  userGroup: String;
   classes?: ClassCreateManyWithoutCreatorInput;
 }
 
@@ -1328,7 +1328,7 @@ export interface UserPreviousValues {
   firstName: String;
   lastName: String;
   password: String;
-  userGroup?: String;
+  userGroup: String;
 }
 
 export interface UserPreviousValuesPromise
@@ -1864,7 +1864,7 @@ export interface User {
   firstName: String;
   lastName: String;
   password: String;
-  userGroup?: String;
+  userGroup: String;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
