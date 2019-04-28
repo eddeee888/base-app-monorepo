@@ -6,6 +6,10 @@ type AggregateClassCategory {
   count: Int!
 }
 
+type AggregateClassSession {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -20,6 +24,14 @@ type Class {
   name: String!
   description: String!
   categories(where: ClassCategoryWhereInput, orderBy: ClassCategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClassCategory!]
+  streetUnit: String!
+  streetAddress: String!
+  city: String!
+  postcode: String!
+  state: String!
+  country: String!
+  contactNumber: String!
+  sessions(where: ClassSessionWhereInput, orderBy: ClassSessionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClassSession!]
 }
 
 type ClassCategory {
@@ -208,6 +220,14 @@ input ClassCreateInput {
   name: String!
   description: String!
   categories: ClassCategoryCreateManyInput
+  streetUnit: String!
+  streetAddress: String!
+  city: String!
+  postcode: String!
+  state: String!
+  country: String!
+  contactNumber: String!
+  sessions: ClassSessionCreateManyInput
 }
 
 input ClassCreateManyWithoutCreatorInput {
@@ -219,6 +239,14 @@ input ClassCreateWithoutCreatorInput {
   name: String!
   description: String!
   categories: ClassCategoryCreateManyInput
+  streetUnit: String!
+  streetAddress: String!
+  city: String!
+  postcode: String!
+  state: String!
+  country: String!
+  contactNumber: String!
+  sessions: ClassSessionCreateManyInput
 }
 
 type ClassEdge {
@@ -233,6 +261,20 @@ enum ClassOrderByInput {
   name_DESC
   description_ASC
   description_DESC
+  streetUnit_ASC
+  streetUnit_DESC
+  streetAddress_ASC
+  streetAddress_DESC
+  city_ASC
+  city_DESC
+  postcode_ASC
+  postcode_DESC
+  state_ASC
+  state_DESC
+  country_ASC
+  country_DESC
+  contactNumber_ASC
+  contactNumber_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -243,6 +285,13 @@ type ClassPreviousValues {
   id: ID!
   name: String!
   description: String!
+  streetUnit: String!
+  streetAddress: String!
+  city: String!
+  postcode: String!
+  state: String!
+  country: String!
+  contactNumber: String!
 }
 
 input ClassScalarWhereInput {
@@ -288,9 +337,371 @@ input ClassScalarWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  streetUnit: String
+  streetUnit_not: String
+  streetUnit_in: [String!]
+  streetUnit_not_in: [String!]
+  streetUnit_lt: String
+  streetUnit_lte: String
+  streetUnit_gt: String
+  streetUnit_gte: String
+  streetUnit_contains: String
+  streetUnit_not_contains: String
+  streetUnit_starts_with: String
+  streetUnit_not_starts_with: String
+  streetUnit_ends_with: String
+  streetUnit_not_ends_with: String
+  streetAddress: String
+  streetAddress_not: String
+  streetAddress_in: [String!]
+  streetAddress_not_in: [String!]
+  streetAddress_lt: String
+  streetAddress_lte: String
+  streetAddress_gt: String
+  streetAddress_gte: String
+  streetAddress_contains: String
+  streetAddress_not_contains: String
+  streetAddress_starts_with: String
+  streetAddress_not_starts_with: String
+  streetAddress_ends_with: String
+  streetAddress_not_ends_with: String
+  city: String
+  city_not: String
+  city_in: [String!]
+  city_not_in: [String!]
+  city_lt: String
+  city_lte: String
+  city_gt: String
+  city_gte: String
+  city_contains: String
+  city_not_contains: String
+  city_starts_with: String
+  city_not_starts_with: String
+  city_ends_with: String
+  city_not_ends_with: String
+  postcode: String
+  postcode_not: String
+  postcode_in: [String!]
+  postcode_not_in: [String!]
+  postcode_lt: String
+  postcode_lte: String
+  postcode_gt: String
+  postcode_gte: String
+  postcode_contains: String
+  postcode_not_contains: String
+  postcode_starts_with: String
+  postcode_not_starts_with: String
+  postcode_ends_with: String
+  postcode_not_ends_with: String
+  state: String
+  state_not: String
+  state_in: [String!]
+  state_not_in: [String!]
+  state_lt: String
+  state_lte: String
+  state_gt: String
+  state_gte: String
+  state_contains: String
+  state_not_contains: String
+  state_starts_with: String
+  state_not_starts_with: String
+  state_ends_with: String
+  state_not_ends_with: String
+  country: String
+  country_not: String
+  country_in: [String!]
+  country_not_in: [String!]
+  country_lt: String
+  country_lte: String
+  country_gt: String
+  country_gte: String
+  country_contains: String
+  country_not_contains: String
+  country_starts_with: String
+  country_not_starts_with: String
+  country_ends_with: String
+  country_not_ends_with: String
+  contactNumber: String
+  contactNumber_not: String
+  contactNumber_in: [String!]
+  contactNumber_not_in: [String!]
+  contactNumber_lt: String
+  contactNumber_lte: String
+  contactNumber_gt: String
+  contactNumber_gte: String
+  contactNumber_contains: String
+  contactNumber_not_contains: String
+  contactNumber_starts_with: String
+  contactNumber_not_starts_with: String
+  contactNumber_ends_with: String
+  contactNumber_not_ends_with: String
   AND: [ClassScalarWhereInput!]
   OR: [ClassScalarWhereInput!]
   NOT: [ClassScalarWhereInput!]
+}
+
+type ClassSession {
+  id: ID!
+  day: ClassSessionDay!
+  startTime: String!
+  endTime: String!
+  capacity: Int!
+}
+
+type ClassSessionConnection {
+  pageInfo: PageInfo!
+  edges: [ClassSessionEdge]!
+  aggregate: AggregateClassSession!
+}
+
+input ClassSessionCreateInput {
+  day: ClassSessionDay!
+  startTime: String!
+  endTime: String!
+  capacity: Int!
+}
+
+input ClassSessionCreateManyInput {
+  create: [ClassSessionCreateInput!]
+  connect: [ClassSessionWhereUniqueInput!]
+}
+
+enum ClassSessionDay {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+type ClassSessionEdge {
+  node: ClassSession!
+  cursor: String!
+}
+
+enum ClassSessionOrderByInput {
+  id_ASC
+  id_DESC
+  day_ASC
+  day_DESC
+  startTime_ASC
+  startTime_DESC
+  endTime_ASC
+  endTime_DESC
+  capacity_ASC
+  capacity_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ClassSessionPreviousValues {
+  id: ID!
+  day: ClassSessionDay!
+  startTime: String!
+  endTime: String!
+  capacity: Int!
+}
+
+input ClassSessionScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  day: ClassSessionDay
+  day_not: ClassSessionDay
+  day_in: [ClassSessionDay!]
+  day_not_in: [ClassSessionDay!]
+  startTime: String
+  startTime_not: String
+  startTime_in: [String!]
+  startTime_not_in: [String!]
+  startTime_lt: String
+  startTime_lte: String
+  startTime_gt: String
+  startTime_gte: String
+  startTime_contains: String
+  startTime_not_contains: String
+  startTime_starts_with: String
+  startTime_not_starts_with: String
+  startTime_ends_with: String
+  startTime_not_ends_with: String
+  endTime: String
+  endTime_not: String
+  endTime_in: [String!]
+  endTime_not_in: [String!]
+  endTime_lt: String
+  endTime_lte: String
+  endTime_gt: String
+  endTime_gte: String
+  endTime_contains: String
+  endTime_not_contains: String
+  endTime_starts_with: String
+  endTime_not_starts_with: String
+  endTime_ends_with: String
+  endTime_not_ends_with: String
+  capacity: Int
+  capacity_not: Int
+  capacity_in: [Int!]
+  capacity_not_in: [Int!]
+  capacity_lt: Int
+  capacity_lte: Int
+  capacity_gt: Int
+  capacity_gte: Int
+  AND: [ClassSessionScalarWhereInput!]
+  OR: [ClassSessionScalarWhereInput!]
+  NOT: [ClassSessionScalarWhereInput!]
+}
+
+type ClassSessionSubscriptionPayload {
+  mutation: MutationType!
+  node: ClassSession
+  updatedFields: [String!]
+  previousValues: ClassSessionPreviousValues
+}
+
+input ClassSessionSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ClassSessionWhereInput
+  AND: [ClassSessionSubscriptionWhereInput!]
+  OR: [ClassSessionSubscriptionWhereInput!]
+  NOT: [ClassSessionSubscriptionWhereInput!]
+}
+
+input ClassSessionUpdateDataInput {
+  day: ClassSessionDay
+  startTime: String
+  endTime: String
+  capacity: Int
+}
+
+input ClassSessionUpdateInput {
+  day: ClassSessionDay
+  startTime: String
+  endTime: String
+  capacity: Int
+}
+
+input ClassSessionUpdateManyDataInput {
+  day: ClassSessionDay
+  startTime: String
+  endTime: String
+  capacity: Int
+}
+
+input ClassSessionUpdateManyInput {
+  create: [ClassSessionCreateInput!]
+  update: [ClassSessionUpdateWithWhereUniqueNestedInput!]
+  upsert: [ClassSessionUpsertWithWhereUniqueNestedInput!]
+  delete: [ClassSessionWhereUniqueInput!]
+  connect: [ClassSessionWhereUniqueInput!]
+  set: [ClassSessionWhereUniqueInput!]
+  disconnect: [ClassSessionWhereUniqueInput!]
+  deleteMany: [ClassSessionScalarWhereInput!]
+  updateMany: [ClassSessionUpdateManyWithWhereNestedInput!]
+}
+
+input ClassSessionUpdateManyMutationInput {
+  day: ClassSessionDay
+  startTime: String
+  endTime: String
+  capacity: Int
+}
+
+input ClassSessionUpdateManyWithWhereNestedInput {
+  where: ClassSessionScalarWhereInput!
+  data: ClassSessionUpdateManyDataInput!
+}
+
+input ClassSessionUpdateWithWhereUniqueNestedInput {
+  where: ClassSessionWhereUniqueInput!
+  data: ClassSessionUpdateDataInput!
+}
+
+input ClassSessionUpsertWithWhereUniqueNestedInput {
+  where: ClassSessionWhereUniqueInput!
+  update: ClassSessionUpdateDataInput!
+  create: ClassSessionCreateInput!
+}
+
+input ClassSessionWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  day: ClassSessionDay
+  day_not: ClassSessionDay
+  day_in: [ClassSessionDay!]
+  day_not_in: [ClassSessionDay!]
+  startTime: String
+  startTime_not: String
+  startTime_in: [String!]
+  startTime_not_in: [String!]
+  startTime_lt: String
+  startTime_lte: String
+  startTime_gt: String
+  startTime_gte: String
+  startTime_contains: String
+  startTime_not_contains: String
+  startTime_starts_with: String
+  startTime_not_starts_with: String
+  startTime_ends_with: String
+  startTime_not_ends_with: String
+  endTime: String
+  endTime_not: String
+  endTime_in: [String!]
+  endTime_not_in: [String!]
+  endTime_lt: String
+  endTime_lte: String
+  endTime_gt: String
+  endTime_gte: String
+  endTime_contains: String
+  endTime_not_contains: String
+  endTime_starts_with: String
+  endTime_not_starts_with: String
+  endTime_ends_with: String
+  endTime_not_ends_with: String
+  capacity: Int
+  capacity_not: Int
+  capacity_in: [Int!]
+  capacity_not_in: [Int!]
+  capacity_lt: Int
+  capacity_lte: Int
+  capacity_gt: Int
+  capacity_gte: Int
+  AND: [ClassSessionWhereInput!]
+  OR: [ClassSessionWhereInput!]
+  NOT: [ClassSessionWhereInput!]
+}
+
+input ClassSessionWhereUniqueInput {
+  id: ID
 }
 
 type ClassSubscriptionPayload {
@@ -316,16 +727,38 @@ input ClassUpdateInput {
   name: String
   description: String
   categories: ClassCategoryUpdateManyInput
+  streetUnit: String
+  streetAddress: String
+  city: String
+  postcode: String
+  state: String
+  country: String
+  contactNumber: String
+  sessions: ClassSessionUpdateManyInput
 }
 
 input ClassUpdateManyDataInput {
   name: String
   description: String
+  streetUnit: String
+  streetAddress: String
+  city: String
+  postcode: String
+  state: String
+  country: String
+  contactNumber: String
 }
 
 input ClassUpdateManyMutationInput {
   name: String
   description: String
+  streetUnit: String
+  streetAddress: String
+  city: String
+  postcode: String
+  state: String
+  country: String
+  contactNumber: String
 }
 
 input ClassUpdateManyWithoutCreatorInput {
@@ -349,6 +782,14 @@ input ClassUpdateWithoutCreatorDataInput {
   name: String
   description: String
   categories: ClassCategoryUpdateManyInput
+  streetUnit: String
+  streetAddress: String
+  city: String
+  postcode: String
+  state: String
+  country: String
+  contactNumber: String
+  sessions: ClassSessionUpdateManyInput
 }
 
 input ClassUpdateWithWhereUniqueWithoutCreatorInput {
@@ -409,6 +850,107 @@ input ClassWhereInput {
   categories_every: ClassCategoryWhereInput
   categories_some: ClassCategoryWhereInput
   categories_none: ClassCategoryWhereInput
+  streetUnit: String
+  streetUnit_not: String
+  streetUnit_in: [String!]
+  streetUnit_not_in: [String!]
+  streetUnit_lt: String
+  streetUnit_lte: String
+  streetUnit_gt: String
+  streetUnit_gte: String
+  streetUnit_contains: String
+  streetUnit_not_contains: String
+  streetUnit_starts_with: String
+  streetUnit_not_starts_with: String
+  streetUnit_ends_with: String
+  streetUnit_not_ends_with: String
+  streetAddress: String
+  streetAddress_not: String
+  streetAddress_in: [String!]
+  streetAddress_not_in: [String!]
+  streetAddress_lt: String
+  streetAddress_lte: String
+  streetAddress_gt: String
+  streetAddress_gte: String
+  streetAddress_contains: String
+  streetAddress_not_contains: String
+  streetAddress_starts_with: String
+  streetAddress_not_starts_with: String
+  streetAddress_ends_with: String
+  streetAddress_not_ends_with: String
+  city: String
+  city_not: String
+  city_in: [String!]
+  city_not_in: [String!]
+  city_lt: String
+  city_lte: String
+  city_gt: String
+  city_gte: String
+  city_contains: String
+  city_not_contains: String
+  city_starts_with: String
+  city_not_starts_with: String
+  city_ends_with: String
+  city_not_ends_with: String
+  postcode: String
+  postcode_not: String
+  postcode_in: [String!]
+  postcode_not_in: [String!]
+  postcode_lt: String
+  postcode_lte: String
+  postcode_gt: String
+  postcode_gte: String
+  postcode_contains: String
+  postcode_not_contains: String
+  postcode_starts_with: String
+  postcode_not_starts_with: String
+  postcode_ends_with: String
+  postcode_not_ends_with: String
+  state: String
+  state_not: String
+  state_in: [String!]
+  state_not_in: [String!]
+  state_lt: String
+  state_lte: String
+  state_gt: String
+  state_gte: String
+  state_contains: String
+  state_not_contains: String
+  state_starts_with: String
+  state_not_starts_with: String
+  state_ends_with: String
+  state_not_ends_with: String
+  country: String
+  country_not: String
+  country_in: [String!]
+  country_not_in: [String!]
+  country_lt: String
+  country_lte: String
+  country_gt: String
+  country_gte: String
+  country_contains: String
+  country_not_contains: String
+  country_starts_with: String
+  country_not_starts_with: String
+  country_ends_with: String
+  country_not_ends_with: String
+  contactNumber: String
+  contactNumber_not: String
+  contactNumber_in: [String!]
+  contactNumber_not_in: [String!]
+  contactNumber_lt: String
+  contactNumber_lte: String
+  contactNumber_gt: String
+  contactNumber_gte: String
+  contactNumber_contains: String
+  contactNumber_not_contains: String
+  contactNumber_starts_with: String
+  contactNumber_not_starts_with: String
+  contactNumber_ends_with: String
+  contactNumber_not_ends_with: String
+  sessions_every: ClassSessionWhereInput
+  sessions_some: ClassSessionWhereInput
+  sessions_none: ClassSessionWhereInput
   AND: [ClassWhereInput!]
   OR: [ClassWhereInput!]
   NOT: [ClassWhereInput!]
@@ -433,6 +975,12 @@ type Mutation {
   upsertClassCategory(where: ClassCategoryWhereUniqueInput!, create: ClassCategoryCreateInput!, update: ClassCategoryUpdateInput!): ClassCategory!
   deleteClassCategory(where: ClassCategoryWhereUniqueInput!): ClassCategory
   deleteManyClassCategories(where: ClassCategoryWhereInput): BatchPayload!
+  createClassSession(data: ClassSessionCreateInput!): ClassSession!
+  updateClassSession(data: ClassSessionUpdateInput!, where: ClassSessionWhereUniqueInput!): ClassSession
+  updateManyClassSessions(data: ClassSessionUpdateManyMutationInput!, where: ClassSessionWhereInput): BatchPayload!
+  upsertClassSession(where: ClassSessionWhereUniqueInput!, create: ClassSessionCreateInput!, update: ClassSessionUpdateInput!): ClassSession!
+  deleteClassSession(where: ClassSessionWhereUniqueInput!): ClassSession
+  deleteManyClassSessions(where: ClassSessionWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -465,6 +1013,9 @@ type Query {
   classCategory(where: ClassCategoryWhereUniqueInput!): ClassCategory
   classCategories(where: ClassCategoryWhereInput, orderBy: ClassCategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClassCategory]!
   classCategoriesConnection(where: ClassCategoryWhereInput, orderBy: ClassCategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassCategoryConnection!
+  classSession(where: ClassSessionWhereUniqueInput!): ClassSession
+  classSessions(where: ClassSessionWhereInput, orderBy: ClassSessionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClassSession]!
+  classSessionsConnection(where: ClassSessionWhereInput, orderBy: ClassSessionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassSessionConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -474,6 +1025,7 @@ type Query {
 type Subscription {
   class(where: ClassSubscriptionWhereInput): ClassSubscriptionPayload
   classCategory(where: ClassCategorySubscriptionWhereInput): ClassCategorySubscriptionPayload
+  classSession(where: ClassSessionSubscriptionWhereInput): ClassSessionSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 

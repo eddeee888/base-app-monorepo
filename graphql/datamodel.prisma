@@ -17,9 +17,35 @@ type Class {
   name: String!
   description: String!
   categories: [ClassCategory!]!
+  streetUnit: String!
+  streetAddress: String!
+  city: String!
+  postcode: String!
+  state: String!
+  country: String!
+  contactNumber: String!
+  sessions: [ClassSession!]!
 }
 
 type ClassCategory {
   id: ID! @unique
   name: String!
+}
+
+type ClassSession {
+  id: ID! @unique
+  day: ClassSessionDay!
+  startTime: String!
+  endTime: String!
+  capacity: Int!
+}
+
+enum ClassSessionDay {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
 }
