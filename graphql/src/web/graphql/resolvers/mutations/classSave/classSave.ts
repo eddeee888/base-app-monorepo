@@ -6,7 +6,7 @@ import { ClassSavePayload } from 'src/web/graphql/types';
 const classSave: MutationResolvers.ClassSaveResolver = async (
   parent,
   { input },
-  ctx
+  { prisma }
 ) => {
   try {
     await hostAClassValidation.details.validate({
@@ -31,6 +31,27 @@ const classSave: MutationResolvers.ClassSaveResolver = async (
   } catch (err) {
     throwFormValidationError();
   }
+
+  throw new Error('OMG');
+
+  // const newClass = await prisma.createClass({
+  //   creator: null,
+  //   name: input.name,
+  //   description: input.description,
+  //   categories: {
+  //     create: [{ name: input.category }]
+  //   },
+  //   streetUnit: input.streetUnit,
+  //   streetAddress: input.streetAddress,
+  //   city: input.city,
+  //   postcode: input.postcode,
+  //   state: input.state,
+  //   country: input.country,
+  //   contactNumber: input.contactNumber,
+  //   sessions: {
+  //     create: [...input.sessions]
+  //   }
+  // });
 
   const result: ClassSavePayload = {
     class: {

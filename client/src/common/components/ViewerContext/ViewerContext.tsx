@@ -2,7 +2,7 @@ import {
   clearViewerId,
   getViewerId,
   setViewerId
-} from 'common/helpers/localStorage';
+} from 'common/helpers/sessions';
 import React from 'react';
 
 export interface Viewer {

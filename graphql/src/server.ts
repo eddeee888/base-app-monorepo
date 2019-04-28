@@ -11,8 +11,8 @@ const PORT = process.env.PORT || 8000;
 const server = new GraphQLServer({
   typeDefs: './schemas/schema.graphql',
   resolvers: resolvers as any, // https://github.com/prisma/graphql-yoga/issues/379
-  context: contextParms => ({
-    ...contextParms,
+  context: contextParams => ({
+    ...contextParams,
     prisma
   })
 });
