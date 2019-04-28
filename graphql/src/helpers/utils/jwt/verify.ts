@@ -2,9 +2,9 @@ import { verify as jwtVerify, VerifyErrors, VerifyOptions } from 'jsonwebtoken';
 import { JWT } from 'src/types';
 import { JWTObject } from './options';
 
-type VerifyFn = (token: JWT, subject?: string) => JWTObject | null | never;
+export type Verify = (token: JWT, subject?: string) => JWTObject | null | never;
 
-const verify: VerifyFn = (token, subject) => {
+const verify: Verify = (token, subject) => {
   let result = null;
 
   const verifyOptions: VerifyOptions = {

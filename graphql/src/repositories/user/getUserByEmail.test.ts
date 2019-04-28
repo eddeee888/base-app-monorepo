@@ -15,7 +15,8 @@ describe('validateEmailExists()', () => {
       firstName: 'John',
       lastName: 'Doe',
       email: 'iamjohndoe@gmail.com',
-      password: 'password'
+      password: 'password',
+      userGroup: JSON.stringify({ user: true })
     };
     await prisma.createUser(userInput);
 

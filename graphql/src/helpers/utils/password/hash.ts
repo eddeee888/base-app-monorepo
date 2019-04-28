@@ -1,10 +1,10 @@
 import { hash as hashPassword } from 'bcryptjs';
 
-type HashPasswordFn = (password: string) => Promise<string>;
+export type HashPassword = (password: string) => Promise<string>;
 
 const saltRounds = 10;
 
-const hash: HashPasswordFn = async password => {
+const hash: HashPassword = async password => {
   return await hashPassword(password, saltRounds);
 };
 

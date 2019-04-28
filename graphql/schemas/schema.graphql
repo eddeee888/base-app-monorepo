@@ -8,6 +8,7 @@ type Mutation {
   # `General`
   signup(input: SignupInput!): SignupPayload!
   login(input: LoginInput!): LoginPayload
+  logout: Boolean!
   createClassCategory(
     input: CreateClassCategoryInput!
   ): CreateClassCategoryPayload!

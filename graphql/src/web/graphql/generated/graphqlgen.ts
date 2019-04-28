@@ -246,6 +246,13 @@ export namespace MutationResolvers {
     info: GraphQLResolveInfo
   ) => LoginPayload | null | Promise<LoginPayload | null>;
 
+  export type LogoutResolver = (
+    parent: undefined,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => boolean | Promise<boolean>;
+
   export type CreateClassCategoryResolver = (
     parent: undefined,
     args: ArgsCreateClassCategory,
@@ -274,6 +281,13 @@ export namespace MutationResolvers {
       ctx: ResolverContext,
       info: GraphQLResolveInfo
     ) => LoginPayload | null | Promise<LoginPayload | null>;
+
+    logout: (
+      parent: undefined,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => boolean | Promise<boolean>;
 
     createClassCategory: (
       parent: undefined,

@@ -1,8 +1,11 @@
 import { compare as comparePassword } from 'bcryptjs';
 
-type ComparePasswordFn = (password: string, hashed: string) => Promise<boolean>;
+export type ComparePassword = (
+  password: string,
+  hashed: string
+) => Promise<boolean>;
 
-const compare: ComparePasswordFn = async (password, hashed) => {
+const compare: ComparePassword = async (password, hashed) => {
   return await comparePassword(password, hashed);
 };
 

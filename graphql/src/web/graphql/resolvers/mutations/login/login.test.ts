@@ -6,16 +6,18 @@ import signup from '../signup';
 import login from './login';
 
 describe('login()', () => {
-  const graphqlResolveInfo: any = {};
-
-  const response = new Response();
-
   const ctx: any = {
-    response,
+    response: new Response(),
     request: new Request(),
     prisma,
-    connection: null,
-    fragmentReplacements: null
+    utils: {
+      headers: { setTokenToResponse: jest.fn() },
+      jwt: { sign: jest.fn() },
+      password: {
+        compare: jest.fn(),
+        hash: jest.fn()
+      }
+    }
   };
 
   const signupUser = async () => {
@@ -30,7 +32,7 @@ describe('login()', () => {
         }
       },
       ctx,
-      graphqlResolveInfo
+      {} as any
     );
   };
 
@@ -41,18 +43,28 @@ describe('login()', () => {
         input
       },
       ctx,
-      graphqlResolveInfo
+      {} as any
     );
   };
 
   beforeEach(async () => {
     await setupTestDatabase();
+
+    ctx.utils.password.hash.mockResolvedValue('hashed_password');
+    ctx.utils.password.compare.mockResolvedValue(true);
+
     await signupUser();
-    response.resetMocked();
+  });
+
+  afterEach(() => {
+    ctx.utils.jwt.sign.mockReset();
+    ctx.utils.headers.setTokenToResponse.mockReset();
+    ctx.utils.password.compare.mockReset();
+    ctx.utils.password.hash.mockReset();
   });
 
   it('should return user if correct credentials', async () => {
-    expect.assertions(5);
+    expect.assertions(6);
 
     const payload = await loginUser({
       email: 'bartsimpson@gmail.com',
@@ -63,11 +75,12 @@ describe('login()', () => {
     expect(payload!.user.email).toBe('bartsimpson@gmail.com');
     expect(payload!.user.firstName).toBe('Bart');
     expect(payload!.user.lastName).toBe('Simpson');
-    expect(response.cookie).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(2);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(2);
   });
 
   it('should return null if wrong email', async () => {
-    expect.assertions(2);
+    expect.assertions(3);
 
     const payload = await loginUser({
       email: 'lisasimpson@gmail.com',
@@ -75,11 +88,14 @@ describe('login()', () => {
     });
 
     expect(payload).toBe(null);
-    expect(response.cookie).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
   });
 
   it('should return null if wrong password', async () => {
-    expect.assertions(2);
+    expect.assertions(3);
+
+    ctx.utils.password.compare.mockResolvedValueOnce(false);
 
     const payload = await loginUser({
       email: 'bartsimpson@gmail.com',
@@ -87,11 +103,12 @@ describe('login()', () => {
     });
 
     expect(payload).toBe(null);
-    expect(response.cookie).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
   });
 
   it('should return null if no email', async () => {
-    expect.assertions(2);
+    expect.assertions(3);
 
     const payload = await loginUser({
       email: '',
@@ -99,11 +116,14 @@ describe('login()', () => {
     });
 
     expect(payload).toBe(null);
-    expect(response.cookie).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
   });
 
   it('should return null if no password', async () => {
-    expect.assertions(2);
+    expect.assertions(3);
+
+    ctx.utils.password.compare.mockResolvedValueOnce(false);
 
     const payload = await loginUser({
       email: 'bartsimpson@gmail.com',
@@ -111,11 +131,12 @@ describe('login()', () => {
     });
 
     expect(payload).toBe(null);
-    expect(response.cookie).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
   });
 
   it('should return null if SQL injection-ish', async () => {
-    expect.assertions(2);
+    expect.assertions(3);
 
     const payload = await loginUser({
       email: `bartsimpson@gmail.com' OR 1=1`,
@@ -123,6 +144,7 @@ describe('login()', () => {
     });
 
     expect(payload).toBe(null);
-    expect(response.cookie).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
   });
 });
