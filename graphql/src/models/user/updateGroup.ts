@@ -6,8 +6,7 @@ type UpdateGroupFn = (
 ) => UserGroupMap;
 
 const updateGroup: UpdateGroupFn = (newGroup, existingGroups = {}) => {
-  existingGroups = { ...existingGroups, ...newGroup };
-  return existingGroups;
+  return { ...existingGroups, ...newGroup };
 };
 
 export default updateGroup;

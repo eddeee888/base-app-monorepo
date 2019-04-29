@@ -20,7 +20,7 @@
   "author": "Eddy Nguyen",
   "license": "ISC",
   "dependencies": {
-    "@bit/eddeee888.learnd-utils.forms.validations": "^0.1.6",
+    "@bit/eddeee888.learnd-utils.forms.validations": "^0.2.0",
     "@bit/eddeee888.learnd-utils.graphql": "^0.0.5",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.1",
@@ -31,6 +31,7 @@
     "dotenv": "^6.2.0",
     "esm": "^3.2.14",
     "graphql": "^14.0.2",
+    "graphql-shield": "^5.3.4",
     "graphql-yoga": "^1.16.7",
     "graphqlgen": "^0.4.0",
     "jsonwebtoken": "^8.4.0",

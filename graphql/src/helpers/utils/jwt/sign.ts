@@ -3,12 +3,12 @@ import { sign as jwtSign, SignOptions } from 'jsonwebtoken';
 import { JWT } from 'src/types';
 import { expiresIn as defaultExpiresIn, JWTPayload } from './options';
 
-type SignFn = (payload: JWTPayload, expiresIn?: number) => JWT | never;
+export type Sign = (payload: JWTPayload, expiresIn?: number) => JWT | never;
 interface CustomClaim {
   viewer: JWTPayload;
 }
 
-const sign: SignFn = (payload, expiresIn = defaultExpiresIn) => {
+const sign: Sign = (payload, expiresIn = defaultExpiresIn) => {
   const signOptions: SignOptions = {
     issuer: process.env.SERVER_NAME,
     audience: `${process.env.SERVER_NAME}/graphql`,

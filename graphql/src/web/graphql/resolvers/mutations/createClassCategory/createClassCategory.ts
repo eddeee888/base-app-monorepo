@@ -5,8 +5,6 @@ const createClassCategory: MutationResolvers.CreateClassCategoryResolver = async
   args,
   ctx
 ) => {
-  // TODO: check that only certain users can perform this action
-
   const { name } = args.input;
   return {
     classCategory: await ctx.prisma.createClassCategory({ name })

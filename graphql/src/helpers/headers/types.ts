@@ -1,10 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
 import { JWTPayload } from 'src/helpers/utils/jwt/options';
+import { JWT } from 'src/types';
 
-type CustomResponse = Response;
-interface CustomRequest extends Request {
+export type CustomResponse = Response;
+
+export interface CustomRequest extends Request {
   viewer?: JWTPayload;
 }
-type CustomNextFuntion = NextFunction;
+export type CustomNextFuntion = NextFunction;
 
-export { CustomResponse, CustomRequest, CustomNextFuntion };
+export type GetTokenFromRequest = (request: CustomRequest) => JWT;
+
+export type SetTokenToResponse = (
+  response: CustomResponse,
+  accessToken: JWT
+) => CustomResponse;

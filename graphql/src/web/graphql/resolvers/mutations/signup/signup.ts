@@ -1,6 +1,3 @@
-import { setTokenToResponse } from 'src/helpers/headers';
-import { sign } from 'src/helpers/utils/jwt';
-import { hash } from 'src/helpers/utils/password';
 import { updateGroup, UserGroup } from 'src/models/user';
 import { getUserByEmail } from 'src/repositories/user';
 import { ResolverContext } from 'src/types';
@@ -29,10 +26,10 @@ const signup: MutationResolvers.SignupResolver = async (parent, args, ctx) => {
   }
 
   try {
-    const token = sign({
+    const token = ctx.utils.jwt.sign({
       id: newUser.id
     });
-    setTokenToResponse(ctx.response, token);
+    ctx.utils.headers.setTokenToResponse(ctx.response, token);
   } catch (e) {
     return throwAuthenticationError('Unable to sign token');
   }
@@ -71,8 +68,7 @@ const createUser: CreateUserFn = async (
   { password, email, firstName, lastName }
 ) => {
   try {
-    const hashedPassword = await hash(password);
-
+    const hashedPassword = await ctx.utils.password.hash(password);
     const result = await ctx.prisma.createUser({
       email,
       firstName,

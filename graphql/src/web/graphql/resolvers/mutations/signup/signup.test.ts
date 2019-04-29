@@ -5,10 +5,7 @@ import {
 } from '@bit/eddeee888.learnd-utils.graphql';
 import { Request } from 'jest-express/lib/request';
 import { Response } from 'jest-express/lib/response';
-
 import { setupTestDatabase } from 'src/helpers/tests';
-import * as jwt from 'src/helpers/utils/jwt';
-import { compare } from 'src/helpers/utils/password';
 import { getUserByEmail } from 'src/repositories/user';
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
 import { prisma } from 'src/web/graphql/generated/prisma-client';
@@ -25,11 +22,14 @@ describe('signup()', async () => {
   };
   const graphqlResolveInfo: any = {};
 
-  const response = new Response();
-
   const ctx: any = {
-    response,
+    response: new Response(),
     request: new Request(),
+    utils: {
+      headers: { setTokenToResponse: jest.fn() },
+      jwt: { sign: jest.fn() },
+      password: { hash: jest.fn() }
+    },
     prisma,
     connection: null,
     fragmentReplacements: null
@@ -37,10 +37,11 @@ describe('signup()', async () => {
 
   beforeEach(async () => {
     await setupTestDatabase();
-  });
+    ctx.utils.jwt.sign.mockReset();
+    ctx.utils.headers.setTokenToResponse.mockReset();
+    ctx.utils.password.hash.mockReset();
 
-  afterEach(() => {
-    response.resetMocked();
+    ctx.utils.password.hash.mockResolvedValueOnce('hashed_password');
   });
 
   it('should create new record if valid input', async () => {
@@ -50,13 +51,11 @@ describe('signup()', async () => {
 
     const savedUser = await getUserByEmail('bartsimpson@gmail.com');
 
-    const correctPassword = await compare('password', savedUser.password);
-
     expect(savedUser.email).toEqual('bartsimpson@gmail.com');
     expect(savedUser.firstName).toEqual('Bart');
     expect(savedUser.lastName).toEqual('Simpson');
-    expect(correctPassword).toEqual(true);
-    expect(response.cookie).toHaveBeenCalledTimes(1);
+    expect(savedUser.password).toEqual('hashed_password');
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
   });
 
   it('should throw if empty string values', async () => {
@@ -74,7 +73,7 @@ describe('signup()', async () => {
     await expect(
       signup(undefined, args, ctx, graphqlResolveInfo)
     ).rejects.toThrowError(new FormValidationError());
-    expect(response.cookie).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(0);
   });
 
   it('should throw if email already exists', async () => {
@@ -85,7 +84,7 @@ describe('signup()', async () => {
     await expect(
       signup(undefined, validArgs, ctx, graphqlResolveInfo)
     ).rejects.toThrowError(new FormValidationError());
-    expect(response.cookie).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
   });
 
   it('should throw if unable to connect to database to check user', async () => {
@@ -100,7 +99,7 @@ describe('signup()', async () => {
     ).rejects.toThrowError(
       new DatabaseError({ message: 'Unable to check user email' })
     );
-    expect(response.cookie).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(0);
   });
 
   it('should throw if unable to connect to database to create user', async () => {
@@ -115,13 +114,13 @@ describe('signup()', async () => {
     ).rejects.toThrowError(
       new DatabaseError({ message: 'Unable to create new user' })
     );
-    expect(response.cookie).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(0);
   });
 
   it('should throw if unable to sign token', async () => {
     expect.assertions(2);
 
-    jest.spyOn(jwt, 'sign').mockImplementationOnce(() => {
+    ctx.utils.jwt.sign.mockImplementationOnce(() => {
       throw new Error();
     });
 
@@ -130,6 +129,6 @@ describe('signup()', async () => {
     ).rejects.toThrowError(
       new AuthenticationError({ message: 'Unable to sign token' })
     );
-    expect(response.cookie).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(0);
   });
 });
