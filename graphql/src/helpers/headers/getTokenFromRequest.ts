@@ -1,5 +1,8 @@
+import { Request } from 'express';
+import { JWT } from 'src/types';
 import TokenType from './TokenType';
-import { GetTokenFromRequest } from './types';
+
+export type GetTokenFromRequest = (request: Request) => JWT;
 
 const getTokenFromRequest: GetTokenFromRequest = request =>
   request.cookies[TokenType.accessToken];
