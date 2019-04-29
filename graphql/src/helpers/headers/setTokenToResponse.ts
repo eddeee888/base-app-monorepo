@@ -1,6 +1,12 @@
+import { Response } from 'express';
 import { expiresIn } from 'src/helpers/utils/jwt/options';
+import { JWT } from 'src/types';
 import TokenType from './TokenType';
-import { SetTokenToResponse } from './types';
+
+export type SetTokenToResponse = (
+  response: Response,
+  accessToken: JWT
+) => Response;
 
 const setTokenToResponse: SetTokenToResponse = (response, accessToken) => {
   return response.cookie(TokenType.accessToken, accessToken, {

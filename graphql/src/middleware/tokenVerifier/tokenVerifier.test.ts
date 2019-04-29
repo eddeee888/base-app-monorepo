@@ -3,9 +3,9 @@ import { Response } from 'jest-express/lib/response';
 import { TokenType } from 'src/helpers/headers';
 import { sign, verify } from 'src/helpers/utils/jwt';
 import { JWTPayload } from 'src/helpers/utils/jwt/options';
-import tokenChecker from './tokenChecker';
+import tokenVerifier from './tokenVerifier';
 
-describe('tokenChecker middleware', () => {
+describe('tokenVerifier middleware', () => {
   const request = new Request() as any;
   const response = new Response() as any;
   const next = jest.fn();
@@ -30,7 +30,7 @@ describe('tokenChecker middleware', () => {
       [TokenType.accessToken]: token
     });
 
-    await tokenChecker(request, response, next);
+    await tokenVerifier(request, response, next);
 
     expect(verifiedToken).toBeTruthy();
     if (verifiedToken) {
@@ -43,7 +43,7 @@ describe('tokenChecker middleware', () => {
   it('should not reset token if no token given', async () => {
     expect.assertions(2);
 
-    await tokenChecker(request, response, next);
+    await tokenVerifier(request, response, next);
 
     expect(response.cookie).toHaveBeenCalledTimes(0);
     expect(next).toHaveBeenCalledTimes(1);
@@ -56,7 +56,7 @@ describe('tokenChecker middleware', () => {
       [TokenType.accessToken]: 'RANDOM TOKEN'
     });
 
-    await tokenChecker(request, response, next);
+    await tokenVerifier(request, response, next);
 
     expect(response.cookie).toHaveBeenCalledTimes(0);
     expect(next).toHaveBeenCalledTimes(1);

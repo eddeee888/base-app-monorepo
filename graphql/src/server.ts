@@ -6,7 +6,7 @@ import { getTokenFromRequest, setTokenToResponse } from 'src/helpers/headers';
 import { sign, verify } from 'src/helpers/utils/jwt';
 import { compare, hash } from 'src/helpers/utils/password';
 import shield, { getViewerFromRequest } from 'src/middleware/shield';
-import tokenChecker from 'src/middleware/tokenChecker';
+import tokenVerifier from 'src/middleware/tokenVerifier';
 import { prisma } from 'src/web/graphql/generated/prisma-client';
 import { resolvers } from 'src/web/graphql/resolvers';
 
@@ -38,7 +38,7 @@ const server = new GraphQLServer({
 });
 
 server.express.use(cookieParser());
-server.express.use(tokenChecker);
+server.express.use(tokenVerifier);
 
 server.start(
   {
