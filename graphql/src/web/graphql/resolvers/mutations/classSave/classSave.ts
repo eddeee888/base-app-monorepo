@@ -5,7 +5,7 @@ import {
   throwFormValidationError
 } from 'src/web/graphql/errors';
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
-import { ClassSavePayload } from 'src/web/graphql/types';
+import { ClassSavePayload } from 'src/web/graphql/models';
 
 const classSave: MutationResolvers.ClassSaveResolver = async (
   parent,

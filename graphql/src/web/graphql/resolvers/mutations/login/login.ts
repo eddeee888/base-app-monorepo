@@ -1,6 +1,6 @@
 import { throwAuthenticationError } from 'src/web/graphql/errors';
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
-import { LoginPayload } from 'src/web/graphql/types';
+import { LoginPayload } from 'src/web/graphql/models';
 
 const login: MutationResolvers.LoginResolver = async (parent, args, ctx) => {
   const { email, password } = args.input;

@@ -10,7 +10,7 @@ import {
   ClassSavePayload,
   Class,
   ClassSession
-} from '../types';
+} from '../models';
 import { ResolverContext } from '../../../types';
 
 type ClassSessionDay =
@@ -583,6 +583,7 @@ export namespace ClassResolvers {
 export namespace ClassSessionResolvers {
   export const defaultResolvers = {
     id: (parent: ClassSession) => parent.id,
+    day: (parent: ClassSession) => parent.day,
     startTime: (parent: ClassSession) => parent.startTime,
     endTime: (parent: ClassSession) => parent.endTime,
     capacity: (parent: ClassSession) => parent.capacity

@@ -45,6 +45,7 @@ export interface Class {
 
 export interface ClassSession {
   id: string;
+  day: ClassSessionDay;
   startTime: string;
   endTime: string;
   capacity: number;
@@ -53,3 +54,12 @@ export interface ClassSession {
 export interface ClassSavePayload {
   class: Class;
 }
+
+type ClassSessionDay =
+  | 'MONDAY'
+  | 'TUESDAY'
+  | 'WEDNESDAY'
+  | 'THURSDAY'
+  | 'FRIDAY'
+  | 'SATURDAY'
+  | 'SUNDAY';

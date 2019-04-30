@@ -118,4 +118,5 @@ enum ClassSessionDay {
   SATURDAY
   SUNDAY
 }
+
 # End `Class`
