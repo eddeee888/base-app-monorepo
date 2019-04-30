@@ -44,5 +44,7 @@ export default shield({
     login: not(isAuthenticated),
     createClassCategory: isAdmin,
     classSave: or(isUser, isAdmin)
-  }
+  },
+  ClassCategory: or(isUser, isAdmin),
+  ClassSession: or(isUser, isAdmin)
 });
