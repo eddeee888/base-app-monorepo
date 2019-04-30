@@ -64,7 +64,7 @@ type LoginPayload {
 type Class {
   id: ID!
   name: String!
-  category: String!
+  category: ClassCategory!
   description: String!
   streetAddress: String!
   city: String!

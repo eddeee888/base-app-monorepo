@@ -428,7 +428,7 @@ export namespace ClassResolvers {
     args: {},
     ctx: ResolverContext,
     info: GraphQLResolveInfo
-  ) => string | Promise<string>;
+  ) => ClassCategory | Promise<ClassCategory>;
 
   export type DescriptionResolver = (
     parent: Class,
@@ -513,7 +513,7 @@ export namespace ClassResolvers {
       args: {},
       ctx: ResolverContext,
       info: GraphQLResolveInfo
-    ) => string | Promise<string>;
+    ) => ClassCategory | Promise<ClassCategory>;
 
     description: (
       parent: Class,

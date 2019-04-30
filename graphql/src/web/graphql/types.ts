@@ -31,7 +31,7 @@ export interface CreateClassCategoryPayload {
 export interface Class {
   id: string;
   name: string;
-  category: string;
+  category: ClassCategory;
   description: string;
   streetAddress: string;
   city: string;
