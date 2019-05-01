@@ -1,20 +1,36 @@
 import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
+import { ResolverContext } from 'src/types';
 import {
   throwAuthenticationError,
   throwDatabaseError,
   throwFormValidationError
 } from 'src/web/graphql/errors';
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
+import { ClassSavePayload, User } from 'src/web/graphql/models';
 
 const classSave: MutationResolvers.ClassSaveResolver = async (
   parent,
-  { input },
-  { prisma, viewer }
+  args,
+  ctx
 ) => {
-  if (viewer === null) {
+  if (ctx.viewer === null) {
     return throwAuthenticationError();
   }
 
+  const isValidated = await validateInput(args.input);
+  if (!isValidated) {
+    return throwFormValidationError();
+  }
+
+  const { result, error } = await createClass(ctx.viewer.id, args, ctx);
+  if (error || !result) {
+    return throwDatabaseError();
+  }
+
+  return result;
+};
+
+const validateInput = async (input: MutationResolvers.ClassSaveInput) => {
   try {
     await hostAClassValidation.details.validate({
       name: input.name,
@@ -35,13 +51,21 @@ const classSave: MutationResolvers.ClassSaveResolver = async (
     await hostAClassValidation.sessions.validate({
       sessions: [...input.sessions]
     });
-  } catch (err) {
-    return throwFormValidationError();
-  }
 
+    return true;
+  } catch (err) {
+    return false;
+  }
+};
+
+const createClass = async (
+  viewerId: User['id'],
+  { input }: MutationResolvers.ArgsClassSave,
+  { prisma }: ResolverContext
+): Promise<{ result?: ClassSavePayload; error?: Error }> => {
   try {
     const newClass = await prisma.createClass({
-      creator: { connect: { id: viewer.id } },
+      creator: { connect: { id: viewerId } },
       name: input.name,
       description: input.description,
       categories: {
@@ -63,14 +87,16 @@ const classSave: MutationResolvers.ClassSaveResolver = async (
     const sessionsPromise = prisma.class({ id: newClass.id }).sessions();
 
     return {
-      class: {
-        ...newClass,
-        category: (await categoriesPromise)[0],
-        sessions: await sessionsPromise
+      result: {
+        class: {
+          ...newClass,
+          category: (await categoriesPromise)[0],
+          sessions: await sessionsPromise
+        }
       }
     };
-  } catch (err) {
-    return throwDatabaseError(err);
+  } catch (error) {
+    return { error };
   }
 };
 
