@@ -11,7 +11,7 @@ import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
 import { prisma } from 'src/web/graphql/generated/prisma-client';
 import signup from './signup';
 
-describe('signup()', async () => {
+describe('signup()', () => {
   const validArgs: MutationResolvers.ArgsSignup = {
     input: {
       email: 'bartsimpson@gmail.com',
