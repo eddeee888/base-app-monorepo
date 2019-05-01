@@ -5,7 +5,6 @@ import {
   throwFormValidationError
 } from 'src/web/graphql/errors';
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
-import { ClassSavePayload } from 'src/web/graphql/models';
 
 const classSave: MutationResolvers.ClassSaveResolver = async (
   parent,
@@ -37,28 +36,8 @@ const classSave: MutationResolvers.ClassSaveResolver = async (
       sessions: [...input.sessions]
     });
   } catch (err) {
-    throwFormValidationError();
+    return throwFormValidationError();
   }
-
-  const result: ClassSavePayload = {
-    class: {
-      id: '',
-      name: '',
-      category: {
-        id: '',
-        name: ''
-      },
-      description: '',
-      streetAddress: '',
-      city: '',
-      postcode: '',
-      country: '',
-      contactNumber: '',
-      state: '',
-      streetUnit: '',
-      sessions: []
-    }
-  };
 
   try {
     const newClass = await prisma.createClass({
@@ -83,16 +62,16 @@ const classSave: MutationResolvers.ClassSaveResolver = async (
     const categoriesPromise = prisma.class({ id: newClass.id }).categories();
     const sessionsPromise = prisma.class({ id: newClass.id }).sessions();
 
-    result.class = {
-      ...newClass,
-      category: (await categoriesPromise)[0],
-      sessions: await sessionsPromise
+    return {
+      class: {
+        ...newClass,
+        category: (await categoriesPromise)[0],
+        sessions: await sessionsPromise
+      }
     };
   } catch (err) {
-    throwDatabaseError(err);
+    return throwDatabaseError(err);
   }
-
-  return result;
 };
 
 export default classSave;
