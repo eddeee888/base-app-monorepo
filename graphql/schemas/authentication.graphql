@@ -1,0 +1,46 @@
+type Mutation {
+  signup(input: SignupInput!): SignupPayload!
+  login(input: LoginInput!): LoginPayload
+  logout: Boolean!
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  displayName: String
+}
+
+type ClassCategory {
+  id: ID!
+  name: String!
+}
+
+input SignupInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input CreateClassCategoryInput {
+  name: String!
+}
+
+type CreateClassCategoryPayload {
+  classCategory: ClassCategory!
+}
+
+type SignupPayload {
+  user: User!
+}
+
+type LoginPayload {
+  user: User!
+}

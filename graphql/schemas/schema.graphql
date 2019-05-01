@@ -1,122 +1,13 @@
+# import Mutation.* from "admin.graphql"
+# import Mutation.* from "authentication.graphql"
+# import Mutation.* from "class.graphql"
+
 type Query {
-  # `General`
   user(id: ID!): User
   classCategories: [ClassCategory!]!
-}
-
-type Mutation {
-  # `General`
-  signup(input: SignupInput!): SignupPayload!
-  login(input: LoginInput!): LoginPayload
-  logout: Boolean!
-  createClassCategory(
-    input: CreateClassCategoryInput!
-  ): CreateClassCategoryPayload!
-
-  # `Class`
-  classSave(input: ClassSaveInput!): ClassSavePayload!
-}
-
-# Start `General`
-type User {
-  id: ID!
-  email: String!
-  firstName: String!
-  lastName: String!
-  displayName: String
 }
 
 type ClassCategory {
   id: ID!
   name: String!
 }
-
-input SignupInput {
-  email: String!
-  firstName: String!
-  lastName: String!
-  password: String!
-}
-
-input LoginInput {
-  email: String!
-  password: String!
-}
-
-input CreateClassCategoryInput {
-  name: String!
-}
-
-type CreateClassCategoryPayload {
-  classCategory: ClassCategory!
-}
-
-type SignupPayload {
-  user: User!
-}
-
-type LoginPayload {
-  user: User!
-}
-# End `General`
-
-# Start `Class`
-type Class {
-  id: ID!
-  name: String!
-  category: ClassCategory!
-  description: String!
-  streetAddress: String!
-  city: String!
-  postcode: String!
-  country: String!
-  contactNumber: String!
-  state: String!
-  streetUnit: String!
-  sessions: [ClassSession!]!
-}
-
-input ClassSaveInput {
-  name: String!
-  category: String!
-  description: String!
-  streetAddress: String!
-  city: String!
-  postcode: String!
-  country: String!
-  contactNumber: String!
-  state: String!
-  streetUnit: String!
-  sessions: [ClassSessionInput!]!
-}
-
-input ClassSessionInput {
-  day: ClassSessionDay!
-  startTime: String!
-  endTime: String!
-  capacity: Int!
-}
-
-type ClassSavePayload {
-  class: Class!
-}
-
-type ClassSession {
-  id: ID!
-  day: ClassSessionDay!
-  startTime: String!
-  endTime: String!
-  capacity: Int!
-}
-
-enum ClassSessionDay {
-  MONDAY
-  TUESDAY
-  WEDNESDAY
-  THURSDAY
-  FRIDAY
-  SATURDAY
-  SUNDAY
-}
-
-# End `Class`
