@@ -7,6 +7,7 @@ import { validationSchemas } from '../../constants';
 import { NavFns } from '../../functionCreators/createNavFns';
 import { HostClassState } from '../../types';
 import ClassCategoriesQuery from '../ClassCategoriesQuery';
+import { ClassSaveMutationResult } from '../ClassSaveMutation';
 import Navigation from '../Navigation';
 import ContactSection from './ContactSection';
 import DetailsSection from './DetailsSection';
@@ -14,14 +15,18 @@ import SessionsSection from './SessionsSection';
 
 export interface ClassSummaryProps<I> {
   values: I;
+  classSaveResult: ClassSaveMutationResult;
   goNext: () => void;
   goPrevious: NavFns<I>['goPrevious'];
 }
 
 const ClassSummary: React.FunctionComponent<
   ClassSummaryProps<HostClassState>
-> = ({ values, goPrevious, goNext }) => {
+> = ({ values, goPrevious, goNext, classSaveResult: { loading, error } }) => {
   const validated = validateValues(values);
+  const goNextIsDisabled =
+    !validated.details || !validated.contact || !validated.sessions || loading;
+
   return (
     <Block size="sm">
       <Paper>
@@ -61,9 +66,8 @@ const ClassSummary: React.FunctionComponent<
         goPrevious={() => goPrevious()}
         goNext={goNext}
         goNextText="Confirm"
-        goNextIsDisabled={
-          !validated.details || !validated.contact || !validated.sessions
-        }
+        goNextIsDisabled={goNextIsDisabled}
+        goNextIsLoading={loading}
       />
     </Block>
   );
