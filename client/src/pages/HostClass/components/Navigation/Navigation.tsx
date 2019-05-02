@@ -35,7 +35,6 @@ const Navigation: React.FunctionComponent<NavigationProps> = ({
           <Button
             type="submit"
             onClick={goNextIsDisabled ? undefined : goNext}
-            // onClick={goNext}
             fullWidth={false}
             disabled={goNextIsDisabled}
           >

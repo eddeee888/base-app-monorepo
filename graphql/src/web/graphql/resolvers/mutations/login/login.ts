@@ -1,6 +1,5 @@
 import { throwAuthenticationError } from 'src/web/graphql/errors';
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
-import { LoginPayload } from 'src/web/graphql/types';
 
 const login: MutationResolvers.LoginResolver = async (parent, args, ctx) => {
   const { email, password } = args.input;
@@ -31,17 +30,9 @@ const login: MutationResolvers.LoginResolver = async (parent, args, ctx) => {
     return throwAuthenticationError('Unable to sign token');
   }
 
-  const result: LoginPayload = {
-    user: {
-      id: user.id,
-      lastName: user.lastName,
-      firstName: user.firstName,
-      email: user.email,
-      displayName: user.displayName
-    }
+  return {
+    user: { ...user }
   };
-
-  return result;
 };
 
 export default login;

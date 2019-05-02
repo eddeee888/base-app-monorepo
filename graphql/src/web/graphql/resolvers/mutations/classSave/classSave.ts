@@ -1,75 +1,103 @@
-// import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
-// import { throwFormValidationError } from 'src/web/graphql/errors';
+import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
+import { ResolverContext } from 'src/types';
+import {
+  throwAuthenticationError,
+  throwDatabaseError,
+  throwFormValidationError
+} from 'src/web/graphql/errors';
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
-import { ClassSavePayload } from 'src/web/graphql/types';
+import { ClassSavePayload, User } from 'src/web/graphql/models';
 
 const classSave: MutationResolvers.ClassSaveResolver = async (
   parent,
-  { input },
-  { prisma, viewer }
+  args,
+  ctx
 ) => {
-  // try {
-  //   await hostAClassValidation.details.validate({
-  //     name: input.name,
-  //     category: input.category,
-  //     description: input.description
-  //   });
+  if (ctx.viewer === null) {
+    return throwAuthenticationError();
+  }
 
-  //   await hostAClassValidation.contact.validate({
-  //     streetUnit: input.streetUnit,
-  //     streetAddress: input.streetAddress,
-  //     city: input.city,
-  //     postcode: input.postcode,
-  //     state: input.state,
-  //     country: input.country,
-  //     contactNumber: input.contactNumber
-  //   });
+  const isValidated = await validateInput(args.input);
+  if (!isValidated) {
+    return throwFormValidationError();
+  }
 
-  //   await hostAClassValidation.contact.validate({
-  //     sessions: [...input.sessions]
-  //   });
-  // } catch (err) {
-  //   throwFormValidationError();
-  // }
+  const { result, error } = await createClass(ctx.viewer.id, args, ctx);
+  if (error || !result) {
+    return throwDatabaseError();
+  }
 
-  throw new Error('OMG');
-
-  // const newClass = await prisma.createClass({
-  //   creator: null,
-  //   name: input.name,
-  //   description: input.description,
-  //   categories: {
-  //     create: [{ name: input.category }]
-  //   },
-  //   streetUnit: input.streetUnit,
-  //   streetAddress: input.streetAddress,
-  //   city: input.city,
-  //   postcode: input.postcode,
-  //   state: input.state,
-  //   country: input.country,
-  //   contactNumber: input.contactNumber,
-  //   sessions: {
-  //     create: [...input.sessions]
-  //   }
-  // });
-
-  const result: ClassSavePayload = {
-    class: {
-      id: '',
-      name: '',
-      category: '',
-      description: '',
-      streetAddress: '',
-      city: '',
-      postcode: '',
-      country: '',
-      contactNumber: '',
-      state: '',
-      streetUnit: '',
-      sessions: []
-    }
-  };
   return result;
+};
+
+const validateInput = async (input: MutationResolvers.ClassSaveInput) => {
+  try {
+    await hostAClassValidation.details.validate({
+      name: input.name,
+      category: input.category,
+      description: input.description
+    });
+
+    await hostAClassValidation.contact.validate({
+      streetUnit: input.streetUnit,
+      streetAddress: input.streetAddress,
+      city: input.city,
+      postcode: input.postcode,
+      state: input.state,
+      country: input.country,
+      contactNumber: input.contactNumber
+    });
+
+    await hostAClassValidation.sessions.validate({
+      sessions: [...input.sessions]
+    });
+
+    return true;
+  } catch (err) {
+    return false;
+  }
+};
+
+const createClass = async (
+  viewerId: User['id'],
+  { input }: MutationResolvers.ArgsClassSave,
+  { prisma }: ResolverContext
+): Promise<{ result?: ClassSavePayload; error?: Error }> => {
+  try {
+    const newClass = await prisma.createClass({
+      creator: { connect: { id: viewerId } },
+      name: input.name,
+      description: input.description,
+      categories: {
+        connect: { id: input.category }
+      },
+      streetUnit: input.streetUnit,
+      streetAddress: input.streetAddress,
+      city: input.city,
+      postcode: input.postcode,
+      state: input.state,
+      country: input.country,
+      contactNumber: input.contactNumber,
+      sessions: {
+        create: [...input.sessions]
+      }
+    });
+
+    const categoriesPromise = prisma.class({ id: newClass.id }).categories();
+    const sessionsPromise = prisma.class({ id: newClass.id }).sessions();
+
+    return {
+      result: {
+        class: {
+          ...newClass,
+          category: (await categoriesPromise)[0],
+          sessions: await sessionsPromise
+        }
+      }
+    };
+  } catch (error) {
+    return { error };
+  }
 };
 
 export default classSave;

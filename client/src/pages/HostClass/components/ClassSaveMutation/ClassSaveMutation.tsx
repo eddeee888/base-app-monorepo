@@ -18,7 +18,10 @@ const CLASS_SAVE = gql`
       class {
         id
         name
-        category
+        category {
+          id
+          name
+        }
         description
         streetAddress
         city

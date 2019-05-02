@@ -1,0 +1,13 @@
+type Mutation {
+  createClassCategory(
+    input: CreateClassCategoryInput!
+  ): CreateClassCategoryPayload!
+}
+
+input CreateClassCategoryInput {
+  name: String!
+}
+
+type CreateClassCategoryPayload {
+  classCategory: ClassCategory!
+}

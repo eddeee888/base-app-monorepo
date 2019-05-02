@@ -1,0 +1,61 @@
+type Mutation {
+  classSave(input: ClassSaveInput!): ClassSavePayload!
+}
+
+type Class {
+  id: ID!
+  name: String!
+  category: ClassCategory!
+  description: String!
+  streetAddress: String!
+  city: String!
+  postcode: String!
+  country: String!
+  contactNumber: String!
+  state: String!
+  streetUnit: String!
+  sessions: [ClassSession!]!
+}
+
+input ClassSaveInput {
+  name: String!
+  category: String!
+  description: String!
+  streetAddress: String!
+  city: String!
+  postcode: String!
+  country: String!
+  contactNumber: String!
+  state: String!
+  streetUnit: String!
+  sessions: [ClassSessionInput!]!
+}
+
+input ClassSessionInput {
+  day: ClassSessionDay!
+  startTime: String!
+  endTime: String!
+  capacity: Int!
+}
+
+type ClassSavePayload {
+  class: Class!
+}
+
+type ClassSession {
+  id: ID!
+  day: ClassSessionDay!
+  startTime: String!
+  endTime: String!
+  capacity: Int!
+}
+
+enum ClassSessionDay {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
