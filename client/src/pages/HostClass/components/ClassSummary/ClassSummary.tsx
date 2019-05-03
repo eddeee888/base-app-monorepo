@@ -1,5 +1,7 @@
+import Box from '@material-ui/core/Box';
 import Block from 'common/components/Block';
 import Divider from 'common/components/Divider';
+import FormError from 'common/components/FormError';
 import Paper from 'common/components/Paper';
 import Text from 'common/components/Text';
 import React from 'react';
@@ -22,7 +24,12 @@ export interface ClassSummaryProps<I> {
 
 const ClassSummary: React.FunctionComponent<
   ClassSummaryProps<HostClassState>
-> = ({ values, goPrevious, goNext, classSaveResult: { loading, error } }) => {
+> = ({
+  values,
+  goPrevious,
+  goNext,
+  classSaveResult: { loading, error, data }
+}) => {
   const validated = validateValues(values);
   const goNextIsDisabled =
     !validated.details || !validated.contact || !validated.sessions || loading;
@@ -69,6 +76,12 @@ const ClassSummary: React.FunctionComponent<
         goNextIsDisabled={goNextIsDisabled}
         goNextIsLoading={loading}
       />
+      {error && (
+        <>
+          <Box mt={1} />
+          <FormError error="Something went wrong! Check your details and try again." />
+        </>
+      )}
     </Block>
   );
 };
