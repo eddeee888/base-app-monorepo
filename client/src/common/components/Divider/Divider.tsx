@@ -1,7 +1,8 @@
+import Box from '@material-ui/core/Box';
 import MUIDivider, {
   DividerProps as MUIDividerProps
 } from '@material-ui/core/Divider';
-import { spacingRem, SpacingValue } from 'common/helpers/spacing';
+import { SpacingValue } from 'common/helpers/spacing';
 import React, { FunctionComponent } from 'react';
 
 interface DividerProps extends MUIDividerProps {
@@ -14,11 +15,13 @@ const Divider: FunctionComponent<DividerProps> = ({
   marginBottom,
   ...props
 }) => {
-  const style = {
-    marginTop: marginTop ? `${spacingRem(marginTop)}rem` : undefined,
-    marginBottom: marginBottom ? `${spacingRem(marginBottom)}rem` : undefined
-  };
-  return <MUIDivider {...props} style={style} />;
+  return (
+    <>
+      <Box mt={marginTop} />
+      <MUIDivider {...props} />
+      <Box mb={marginBottom} />
+    </>
+  );
 };
 
 export default Divider;

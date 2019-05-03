@@ -353,3 +353,9 @@ describe('<ClassSummary /> -> <Navigation /> ', () => {
     }
   );
 });
+
+describe('<ClassSummary /> -> ClassSaveMutation states', () => {
+  it.todo('should handle loading state');
+  it.todo('should handle error state');
+  it.todo('should handle success state');
+});
