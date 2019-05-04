@@ -60,13 +60,13 @@ const SessionBlock: React.FunctionComponent<Props> = ({
         <Hidden smUp>
           <Grid item xs>
             <Grid container justify="flex-end">
-              <Grid item>{actionButtons}</Grid>
+              {actionButtons}
             </Grid>
           </Grid>
         </Hidden>
       </Grid>
-      <Grid container justify="space-between" spacing={8}>
-        <Grid item xs={12} sm={3}>
+      <Grid container justify="space-between" alignItems="center" spacing={1}>
+        <Grid item xs={12} sm={4}>
           <FormFieldArray<FormClassSessionInput, ClassSession>
             name="sessions"
             property="day"
@@ -130,13 +130,13 @@ const SessionBlock: React.FunctionComponent<Props> = ({
           </FormFieldArray>
         </Grid>
 
-        <Grid container item xs={12} sm={2} alignItems="center">
-          <Hidden xsDown>
-            <Grid item xs>
+        <Hidden xsDown>
+          <Grid item sm={2}>
+            <Grid container justify="flex-end">
               {actionButtons}
             </Grid>
-          </Hidden>
-        </Grid>
+          </Grid>
+        </Hidden>
       </Grid>
     </div>
   );

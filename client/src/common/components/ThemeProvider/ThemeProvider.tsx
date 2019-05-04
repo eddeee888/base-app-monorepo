@@ -1,4 +1,5 @@
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles';
 import {
   primaryColor,
   secondaryColor,
@@ -23,7 +24,6 @@ const theme = createMuiTheme({
     fontFamily: [primaryFont, '"Helvetica Neue"', 'Arial', 'sans-serif'].join(
       ','
     ),
-    useNextVariants: true,
     h1: {
       fontSize: '4.25rem'
     }
