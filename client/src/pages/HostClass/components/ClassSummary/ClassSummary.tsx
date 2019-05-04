@@ -1,5 +1,7 @@
+import Box from '@material-ui/core/Box';
 import Block from 'common/components/Block';
 import Divider from 'common/components/Divider';
+import FormError from 'common/components/FormError';
 import Paper from 'common/components/Paper';
 import Text from 'common/components/Text';
 import React from 'react';
@@ -7,6 +9,7 @@ import { validationSchemas } from '../../constants';
 import { NavFns } from '../../functionCreators/createNavFns';
 import { HostClassState } from '../../types';
 import ClassCategoriesQuery from '../ClassCategoriesQuery';
+import { ClassSaveMutationResult } from '../ClassSaveMutation';
 import Navigation from '../Navigation';
 import ContactSection from './ContactSection';
 import DetailsSection from './DetailsSection';
@@ -14,14 +17,23 @@ import SessionsSection from './SessionsSection';
 
 export interface ClassSummaryProps<I> {
   values: I;
+  classSaveResult: ClassSaveMutationResult;
   goNext: () => void;
   goPrevious: NavFns<I>['goPrevious'];
 }
 
 const ClassSummary: React.FunctionComponent<
   ClassSummaryProps<HostClassState>
-> = ({ values, goPrevious, goNext }) => {
+> = ({
+  values,
+  goPrevious,
+  goNext,
+  classSaveResult: { loading, error, data }
+}) => {
   const validated = validateValues(values);
+  const goNextIsDisabled =
+    !validated.details || !validated.contact || !validated.sessions || loading;
+
   return (
     <Block size="sm">
       <Paper>
@@ -61,10 +73,15 @@ const ClassSummary: React.FunctionComponent<
         goPrevious={() => goPrevious()}
         goNext={goNext}
         goNextText="Confirm"
-        goNextIsDisabled={
-          !validated.details || !validated.contact || !validated.sessions
-        }
+        goNextIsDisabled={goNextIsDisabled}
+        goNextIsLoading={loading}
       />
+      {error && (
+        <>
+          <Box mt={1} />
+          <FormError error="Something went wrong! Check your details and try again." />
+        </>
+      )}
     </Block>
   );
 };

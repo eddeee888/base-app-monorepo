@@ -92,10 +92,11 @@ const HostClass: React.FunctionComponent = () => {
         )}
         {params.formPart === 'summary' && (
           <ClassSaveMutation>
-            {(saveFn, result) => (
+            {(classSaveFn, classSaveResult) => (
               <ClassSummary
                 values={values}
-                goNext={createHostClassSubmitFn(saveFn, values)}
+                classSaveResult={classSaveResult}
+                goNext={createHostClassSubmitFn(classSaveFn, values)}
                 goPrevious={summaryNavFns.goPrevious}
               />
             )}

@@ -1,19 +1,21 @@
+import Button from 'common/components/Button';
 import { mount } from 'enzyme';
 import React from 'react';
 import Navigation from './Navigation';
 
-describe('<Navigation />', () => {
+describe('<Navigation /> -> previous button', () => {
   const goPrevious = jest.fn();
-  const goNext = jest.fn();
 
   const testCasePrevious = [
     {
+      description: 'show show pervious button',
       data: { goPrevious: undefined },
       expected: {
         numberOfPreviousButton: 0
       }
     },
     {
+      description: 'should show previous button',
       data: { goPrevious },
       expected: {
         numberOfPreviousButton: 1
@@ -21,8 +23,30 @@ describe('<Navigation />', () => {
     }
   ];
 
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+  testCasePrevious.forEach(
+    ({ description, data, expected: { numberOfPreviousButton } }) => {
+      it(description, () => {
+        const wrapper = mount(<Navigation {...data} />);
+        expect(
+          wrapper
+            .find('button')
+            .filterWhere(button => button.text() === 'Previous')
+        ).toHaveLength(numberOfPreviousButton);
+      });
+    }
+  );
+});
+
+describe('<Navigation /> -> next button', () => {
+  const goNext = jest.fn();
+
   const testCasesNext = [
     {
+      description: 'should show default value',
       data: {},
       expected: {
         nextButtonText: 'Next',
@@ -30,6 +54,7 @@ describe('<Navigation />', () => {
       }
     },
     {
+      description: 'should show disabled custom text',
       data: {
         goNext,
         goNextText: 'Customised submit text',
@@ -39,43 +64,34 @@ describe('<Navigation />', () => {
         nextButtonText: 'Customised submit text',
         nextButtonDisabled: true
       }
+    },
+    {
+      description: 'should show spinner',
+      data: {
+        goNext,
+        goNextText: 'Customised submit text',
+        goNextIsDisabled: true,
+        goNextIsLoading: true
+      },
+      expected: {
+        nextButtonText: 'Customised submit text',
+        nextButtonDisabled: true,
+        goNextIsLoading: true
+      }
     }
   ];
 
-  testCasePrevious.forEach(({ data, expected: { numberOfPreviousButton } }) => {
-    afterEach(() => {
-      jest.resetAllMocks();
-    });
-
-    afterAll(() => {
-      jest.restoreAllMocks();
-    });
-
-    it(`Previous button is ${!!data.goPrevious}, previous button is ${
-      numberOfPreviousButton > 0 ? 'shown' : 'hidden'
-    }`, () => {
-      const wrapper = mount(<Navigation {...data} />);
-      expect(
-        wrapper
-          .find('button')
-          .filterWhere(button => button.text() === 'Previous')
-      ).toHaveLength(numberOfPreviousButton);
-    });
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
   testCasesNext.forEach(
-    ({ data, expected: { nextButtonText, nextButtonDisabled } }) => {
-      afterEach(() => {
-        jest.resetAllMocks();
-      });
-
-      afterAll(() => {
-        jest.restoreAllMocks();
-      });
-
-      it(`Next button text is '${nextButtonText}',
-        isDisabled: ${nextButtonDisabled},
-        goNext: ${!!data.goNext}`, () => {
+    ({
+      description,
+      data,
+      expected: { nextButtonText, nextButtonDisabled, goNextIsLoading }
+    }) => {
+      it(description, () => {
         const wrapper = mount(<Navigation {...data} />);
         const goNextButton = wrapper
           .find('button')
@@ -86,6 +102,9 @@ describe('<Navigation />', () => {
               button.prop('disabled') === nextButtonDisabled
           );
         expect(goNextButton).toHaveLength(1);
+
+        // this loading prop does not exist natively on a button so we should check it here
+        expect(wrapper.find(Button).prop('loading')).toBe(goNextIsLoading);
 
         if (data.goNext && !nextButtonDisabled) {
           (goNextButton.prop('onClick') as any)();

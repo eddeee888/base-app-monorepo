@@ -66,7 +66,11 @@ const validValues: ClassSummaryProps<HostClassState>['values'] = {
 const defaultProps: ClassSummaryProps<HostClassState> = {
   values: { ...invalidValues },
   goNext: jest.fn(),
-  goPrevious: jest.fn()
+  goPrevious: jest.fn(),
+  classSaveResult: {
+    error: false,
+    loading: false
+  } as any
 };
 
 const detailsErrorRegex = /Class details must be provided to continue/;
@@ -237,27 +241,27 @@ describe('<ClassSummary /> -> <SessionsSection /> ', () => {
       description: 'should fail if no sessions'
     },
     {
-      values: [invalidSession],
+      values: [{ ...invalidSession }],
       expected: false,
       description: 'should fail if 1 invalid sessions'
     },
     {
-      values: [invalidSession, invalidSession],
+      values: [{ ...invalidSession }, { ...invalidSession }],
       expected: false,
       description: 'should fail if multiple invalid sessions'
     },
     {
-      values: [invalidSession, validSession],
+      values: [{ ...invalidSession }, { ...validSession }],
       expected: false,
       description: 'should fail if mixed valid and invalid sessions'
     },
     {
-      values: [validSession],
+      values: [{ ...validSession }],
       expected: true,
       description: 'should fail if 1 invalid session'
     },
     {
-      values: [validSession, validSession],
+      values: [{ ...validSession }, { ...validSession }],
       expected: true,
       description: 'should fail if multiple valid sessions'
     }
@@ -288,16 +292,25 @@ describe('<ClassSummary /> -> <SessionsSection /> ', () => {
 describe('<ClassSummary /> -> <Navigation /> ', () => {
   const navigationTestCases = [
     {
-      values: invalidValues,
-      expected: false,
       description:
-        'should have correct previous button and submit button is disabled'
+        'should have correct previous button and submit button is disabled',
+      props: { ...defaultProps, values: { ...invalidValues } },
+      expected: { submittable: false, isLoading: false }
     },
     {
-      values: validValues,
-      expected: true,
       description:
-        'should have correct previous button and submit button is enabled'
+        'should have correct previous button and submit button is enabled',
+      props: { ...defaultProps, values: { ...validValues } },
+      expected: { submittable: true, isLoading: false }
+    },
+    {
+      description: 'should pass loading to Navigation',
+      props: {
+        ...defaultProps,
+        values: { ...validValues },
+        classSaveResult: { loading: true } as any
+      },
+      expected: { submittable: false, isLoading: true }
     }
   ];
 
@@ -305,36 +318,44 @@ describe('<ClassSummary /> -> <Navigation /> ', () => {
     jest.resetAllMocks();
   });
 
-  navigationTestCases.forEach(({ values, expected, description }) => {
-    it(description, () => {
-      const wrapper = mountWithMockedProviders({
-        ...defaultProps,
-        values: { ...values }
-      });
+  navigationTestCases.forEach(
+    ({ props, expected: { submittable, isLoading }, description }) => {
+      it(description, () => {
+        const wrapper = mountWithMockedProviders({ ...props });
 
-      const previousButton = wrapper
-        .find('button')
-        .filterWhere(button => button.text() === 'Previous');
-      const submitButton = wrapper
-        .find('button')
-        .filterWhere(
-          button =>
-            button.text() === 'Confirm' && button.prop('type') === 'submit'
+        const previousButton = wrapper
+          .find('button')
+          .filterWhere(button => button.text() === 'Previous');
+        const submitButton = wrapper
+          .find('button')
+          .filterWhere(
+            button =>
+              button.text() === 'Confirm' && button.prop('type') === 'submit'
+          );
+
+        expect(wrapper.find(Navigation)).toHaveLength(1);
+        expect(wrapper.find(Navigation).prop('goNextIsLoading')).toBe(
+          isLoading
         );
 
-      expect(wrapper.find(Navigation)).toHaveLength(1);
+        (previousButton.prop('onClick') as any)();
+        expect(defaultProps.goPrevious).toHaveBeenCalledTimes(1);
 
-      (previousButton.prop('onClick') as any)();
-      expect(defaultProps.goPrevious).toHaveBeenCalledTimes(1);
+        if (submittable) {
+          expect(submitButton.prop('disabled')).toBe(false);
+          (submitButton.prop('onClick') as any)();
+          expect(defaultProps.goNext).toHaveBeenCalledTimes(1);
+        } else {
+          expect(submitButton.prop('disabled')).toBe(true);
+          expect(submitButton.prop('onClick')).toBe(undefined);
+        }
+      });
+    }
+  );
+});
 
-      if (expected) {
-        expect(submitButton.prop('disabled')).toBe(false);
-        (submitButton.prop('onClick') as any)();
-        expect(defaultProps.goNext).toHaveBeenCalledTimes(1);
-      } else {
-        expect(submitButton.prop('disabled')).toBe(true);
-        expect(submitButton.prop('onClick')).toBe(undefined);
-      }
-    });
-  });
+describe('<ClassSummary /> -> ClassSaveMutation states', () => {
+  it.todo('should handle loading state');
+  it.todo('should handle error state');
+  it.todo('should handle success state');
 });

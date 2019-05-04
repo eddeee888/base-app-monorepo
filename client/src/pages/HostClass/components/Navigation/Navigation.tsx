@@ -9,6 +9,7 @@ interface NavigationProps {
   goNext?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   goNextText?: string;
   goNextIsDisabled?: boolean;
+  goNextIsLoading?: boolean;
 }
 
 const containerClassName = css`
@@ -19,7 +20,8 @@ const Navigation: React.FunctionComponent<NavigationProps> = ({
   goPrevious,
   goNextIsDisabled,
   goNextText = 'Next',
-  goNext
+  goNext,
+  goNextIsLoading
 }) => {
   return (
     <Grid container justify="space-between" className={containerClassName}>
@@ -37,6 +39,7 @@ const Navigation: React.FunctionComponent<NavigationProps> = ({
             onClick={goNextIsDisabled ? undefined : goNext}
             fullWidth={false}
             disabled={goNextIsDisabled}
+            loading={goNextIsLoading}
           >
             {goNextText}
           </Button>

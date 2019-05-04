@@ -17,7 +17,7 @@ describe('<Logout />', () => {
     expect(wrapper.find(Redirect)).toHaveLength(1);
     expect(wrapper.find(Redirect).props().to).toBe(linkgen(Paths.home));
 
-    // TODO: update to test useEffect once it's implemented in enzyme
+    // TOTEST: update to test useEffect once it's implemented in enzyme
     // expect(clearViewer).toHaveBeenCalledTimes(1);
     // expect(logout).toHaveBeenCalledTimes(1);
   });

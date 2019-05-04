@@ -60,21 +60,21 @@ const ClassContact: React.FunctionComponent<
                 </FormField>
               </Grid>
             </Grid>
-            <Grid container justify="space-between">
-              <Grid item xs={12} md={5}>
+            <Grid container justify="space-between" spacing={1}>
+              <Grid item xs={12} md={6}>
                 <FormField name="city" errors={errors} touched={touched}>
                   {({ field }) => (
                     <TextInput {...field} label="Suburb / Town*" />
                   )}
                 </FormField>
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={6}>
                 <FormField name="state" errors={errors} touched={touched}>
                   {({ field }) => <TextInput {...field} label="State" />}
                 </FormField>
               </Grid>
 
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={6}>
                 <FormField name="postcode" errors={errors} touched={touched}>
                   {({ field }) => <TextInput {...field} label="Postcode" />}
                 </FormField>

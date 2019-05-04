@@ -12,7 +12,6 @@ import Link from 'common/components/Link';
 import Text from 'common/components/Text';
 import TextInput from 'common/components/TextInput';
 import { linkgen, Paths } from 'common/helpers/pathing';
-import { spacingPx } from 'common/helpers/spacing';
 import useUrlQuery from 'common/hooks/useUrlQuery';
 import { Form, Formik, FormikActions } from 'formik';
 import React from 'react';
@@ -63,7 +62,7 @@ const SignupFormComponent = ({
             </Grid>
           </Grid>
 
-          <Grid container spacing={spacingPx(2)}>
+          <Grid container spacing={1}>
             <Grid item xs={12} md={6}>
               <FormField name="firstName" errors={errors} touched={touched}>
                 {({ field }) => <TextInput {...field} label="First name" />}
