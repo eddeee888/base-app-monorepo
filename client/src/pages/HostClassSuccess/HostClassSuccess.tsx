@@ -11,7 +11,7 @@ interface HostClassSuccessParams {
 const HostClassSuccess: React.FunctionComponent = () => {
   const { classId } = useParams<HostClassSuccessParams>();
   return (
-    <Main fullHeight>
+    <Main fullViewPortHeight>
       <Block size="sm" fullHeight>
         <Paper>YO! tabjs! {classId}</Paper>
       </Block>

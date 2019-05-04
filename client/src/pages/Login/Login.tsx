@@ -22,7 +22,7 @@ const Login: React.FunctionComponent = () => {
   }
 
   return (
-    <Main fullHeight>
+    <Main fullViewPortHeight>
       <Block size="sm" fullHeight>
         <Paper>
           <Grid container justify="center">

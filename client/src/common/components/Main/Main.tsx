@@ -6,7 +6,7 @@ import React from 'react';
 interface Props {
   children: React.ReactNode;
   className?: string;
-  fullHeight?: boolean;
+  fullViewPortHeight?: boolean;
 }
 
 const mainTagClassName = css`
@@ -17,9 +17,9 @@ const mainTagClassName = css`
   flex: 1;
 `;
 
-const fullHeightClassName = css`
+const fullViewPortHeightClassName = css`
   margin-top: 0px;
-  height: calc(100vh - ${headerHeight});
+  height: 100vh;
 `;
 
 const contentClassName = css`
@@ -35,15 +35,16 @@ const contentClassName = css`
 const Main: React.FunctionComponent<Props> = ({
   children,
   className,
-  fullHeight
+  fullViewPortHeight
 }) => {
-  const defaultClassNames = [mainTagClassName];
-  if (fullHeight) {
-    defaultClassNames.push(fullHeightClassName);
+  const classNames = [mainTagClassName];
+
+  if (fullViewPortHeight) {
+    classNames.push(fullViewPortHeightClassName);
   }
 
   return (
-    <main className={cx([...defaultClassNames, className])}>
+    <main className={cx([...classNames, className])}>
       <div className={contentClassName}>{children}</div>
     </main>
   );
