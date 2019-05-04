@@ -1,12 +1,14 @@
 import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';
-import SessionBlocksLogic, { LogicContainerProps } from './SessionBlocksLogic';
+import SessionBlocksLogic, {
+  SessionBlocksLogicProps
+} from './SessionBlocksLogic';
 
-const defaultProps: LogicContainerProps = {
+const defaultProps: SessionBlocksLogicProps = {
   values: {
     sessions: [
-      { day: 'mon', startTime: '01:00am', endTime: '01:30am', capacity: 1 },
-      { day: 'tue', startTime: '02:00am', endTime: '02:30am', capacity: 2 }
+      { day: 'MONDAY', startTime: '01:00am', endTime: '01:30am', capacity: 1 },
+      { day: 'TUESDAY', startTime: '02:00am', endTime: '02:30am', capacity: 2 }
     ]
   },
   arrayHelpers: {
@@ -17,7 +19,7 @@ const defaultProps: LogicContainerProps = {
   children: jest.fn()
 };
 
-const mountWrapper = (props: LogicContainerProps) =>
+const mountWrapper = (props: SessionBlocksLogicProps) =>
   mount(
     <SessionBlocksLogic {...props}>
       {({ addSession, removeSessionFns, duplicateSessionFns }) => (

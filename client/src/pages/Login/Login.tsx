@@ -1,3 +1,5 @@
+import { Grid } from '@material-ui/core';
+import Block from 'common/components/Block';
 import H1 from 'common/components/H1';
 import H2 from 'common/components/H2';
 import Link from 'common/components/Link';
@@ -7,29 +9,9 @@ import Paper from 'common/components/Paper';
 import ViewerContext from 'common/components/ViewerContext';
 import { linkgen, Paths } from 'common/helpers/pathing';
 import useUrlQuery from 'common/hooks/useUrlQuery';
-import { breakpoints } from 'common/styles/media';
-import { css } from 'emotion';
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router';
 import LoginForm from './LoginForm';
-
-const mainClassName = css`
-  height: 100vh;
-`;
-
-const logoContainerClassName = css`
-  text-align: center;
-`;
-
-const paperContainerClassName = css`
-  max-width: ${breakpoints.sm}px;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 const Login: React.FunctionComponent = () => {
   const { viewer } = useContext(ViewerContext);
@@ -40,21 +22,22 @@ const Login: React.FunctionComponent = () => {
   }
 
   return (
-    <Main className={mainClassName}>
-      <div className={paperContainerClassName}>
+    <Main fullHeight>
+      <Block size="sm">
         <Paper>
-          <div className={logoContainerClassName}>
+          <Grid container justify="center">
             <Link to={linkgen(Paths.home)}>
               <Logo />
             </Link>
-          </div>
+          </Grid>
+
           <H1 align="center" variant="h2">
             Log in
           </H1>
           {redirect && <H2 align="center">to continue</H2>}
           <LoginForm />
         </Paper>
-      </div>
+      </Block>
     </Main>
   );
 };

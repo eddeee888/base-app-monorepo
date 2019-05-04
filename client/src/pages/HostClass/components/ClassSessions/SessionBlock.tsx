@@ -1,3 +1,4 @@
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -6,16 +7,10 @@ import { IconButton } from 'common/components/IconButton';
 import Select from 'common/components/Select';
 import Text from 'common/components/Text';
 import TextInput from 'common/components/TextInput';
-import { spacingRem } from 'common/helpers/spacing';
-import { css } from 'emotion';
 import { FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
 import { dayOptions, sessionTimeOptions } from '../../constants';
 import { ClassSession, FormClassSessionInput } from '../../types';
-
-const sessionContainerClassName = css`
-  margin-bottom: ${spacingRem(2)}rem;
-`;
 
 interface Props {
   index: number;
@@ -52,7 +47,7 @@ const SessionBlock: React.FunctionComponent<Props> = ({
   );
 
   return (
-    <div className={sessionContainerClassName}>
+    <div>
       <Grid container justify="space-between" alignItems="center">
         <Grid item xs={6} sm={12}>
           <Text>Session #{index + 1}</Text>
@@ -138,6 +133,7 @@ const SessionBlock: React.FunctionComponent<Props> = ({
           </Grid>
         </Hidden>
       </Grid>
+      <Box mb={1} />
     </div>
   );
 };

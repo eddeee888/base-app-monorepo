@@ -29,13 +29,13 @@ type CreateRemoveSessionFn = (
 const createRemoveSessionFn: CreateRemoveSessionFn = (remove, index) => () =>
   remove(index);
 
-export interface LogicContainerProps {
+export interface SessionBlocksLogicProps {
   values: FormClassSessionInput;
   arrayHelpers: FieldArrayRenderProps;
-  children: (props: LogicContainerChildrenProps) => React.ReactNode;
+  children: (props: ChildrenProps) => React.ReactNode;
 }
 
-interface LogicContainerChildrenProps {
+interface ChildrenProps {
   addSession: AddSessionFn;
   removeSessionFns: RemoveSessionFn[];
   duplicateSessionFns: DuplicateSessionFn[];
@@ -45,7 +45,7 @@ const SessionBlocksLogic = ({
   values,
   arrayHelpers,
   children
-}: LogicContainerProps) => {
+}: SessionBlocksLogicProps) => {
   const addSession = useCallback(createAddSessionFn(arrayHelpers.push), [
     arrayHelpers.push
   ]);

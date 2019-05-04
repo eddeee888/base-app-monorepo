@@ -2,15 +2,16 @@ import { Breakpoints, breakpoints } from 'common/styles/media';
 import { css } from 'emotion';
 import React from 'react';
 
-interface Block {
+interface Props {
   size: keyof Breakpoints;
   children: React.ReactNode;
 }
 
-const Block: React.FunctionComponent<Block> = ({ size, children }) => {
-  const paperContainerClassName = css`
+const Block: React.FunctionComponent<Props> = ({ size, children }) => {
+  const blockClassName = css`
     max-width: ${breakpoints[size]}px;
     width: 100%;
+    height: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -18,7 +19,7 @@ const Block: React.FunctionComponent<Block> = ({ size, children }) => {
     flex-direction: column;
   `;
 
-  return <div className={paperContainerClassName}>{children}</div>;
+  return <div className={blockClassName}>{children}</div>;
 };
 
 export default Block;
