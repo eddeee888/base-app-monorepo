@@ -7,15 +7,17 @@ import { FormClassSessionInput } from '../../types';
 import SessionBlock from './SessionBlock';
 import SessionBlocksLogic from './SessionBlocksLogic';
 
-export interface SessionBlockContainerProps {
+export interface SessionBlocksProps {
   values: FormClassSessionInput;
   errors: FormikErrors<FormClassSessionInput>;
   touched: FormikTouched<FormClassSessionInput>;
 }
 
-const SessionBlocksContainer: React.FunctionComponent<
-  SessionBlockContainerProps
-> = ({ values, errors, touched }) => {
+const SessionBlocks: React.FunctionComponent<SessionBlocksProps> = ({
+  values,
+  errors,
+  touched
+}) => {
   return (
     <FieldArray name="sessions">
       {arrayHelpers => (
@@ -53,4 +55,4 @@ const SessionBlocksContainer: React.FunctionComponent<
   );
 };
 
-export default SessionBlocksContainer;
+export default SessionBlocks;

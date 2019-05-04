@@ -3,11 +3,9 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import { FormClassSessionInput } from '../../types';
 import SessionBlock from './SessionBlock';
-import SessionBlocksContainer, {
-  SessionBlockContainerProps
-} from './SessionBlocksContainer';
+import SessionBlocks, { SessionBlocksProps } from './SessionBlocks';
 
-const defaultProps: SessionBlockContainerProps = {
+const defaultProps: SessionBlocksProps = {
   values: {
     sessions: []
   },
@@ -23,7 +21,7 @@ const mountWithProps = (props: any) =>
     >
       {() => (
         <Form>
-          <SessionBlocksContainer {...props} />
+          <SessionBlocks {...props} />
         </Form>
       )}
     </Formik>
@@ -40,7 +38,7 @@ const createValuesWithSessions = (numberOfSessions: number) => ({
 
 const numberOfSessionsToTest = [0, 1, 3];
 
-describe('<SessionBlocksContainer />', () => {
+describe('<SessionBlocks />', () => {
   numberOfSessionsToTest.forEach(numberOfSessions => {
     it(`should render ${numberOfSessions} SessionBlock if theres's ${numberOfSessions} session`, () => {
       const wrapper = mountWithProps({
