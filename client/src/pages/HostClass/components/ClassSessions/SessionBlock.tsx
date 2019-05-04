@@ -2,7 +2,7 @@ import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormFieldArray from 'common/components/FormFieldArray';
-import IconButton from 'common/components/IconButton';
+import { IconButton } from 'common/components/IconButton';
 import Select from 'common/components/Select';
 import Text from 'common/components/Text';
 import TextInput from 'common/components/TextInput';
@@ -36,7 +36,6 @@ const SessionBlock: React.FunctionComponent<Props> = ({
     <>
       <Tooltip title="Duplicate session">
         <IconButton
-          buttonType="button"
           icon="duplicate"
           aria-label="Duplicate session"
           onClick={duplicateSession}
@@ -44,7 +43,6 @@ const SessionBlock: React.FunctionComponent<Props> = ({
       </Tooltip>
       <Tooltip title="Delete session">
         <IconButton
-          buttonType="button"
           icon="delete"
           aria-label="Delete session"
           onClick={removeSession}

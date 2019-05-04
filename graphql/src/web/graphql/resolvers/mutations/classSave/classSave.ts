@@ -8,11 +8,21 @@ import {
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
 import { ClassSavePayload, User } from 'src/web/graphql/models';
 
+function sleep(ms: number) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
+
 const classSave: MutationResolvers.ClassSaveResolver = async (
   parent,
   args,
   ctx
 ) => {
+  await sleep(5000);
+  return throwDatabaseError();
+  console.log(createClass);
+
   if (ctx.viewer === null) {
     return throwAuthenticationError();
   }
@@ -22,12 +32,12 @@ const classSave: MutationResolvers.ClassSaveResolver = async (
     return throwFormValidationError();
   }
 
-  const { result, error } = await createClass(ctx.viewer.id, args, ctx);
-  if (error || !result) {
-    return throwDatabaseError();
-  }
+  // // const { result, error } = await createClass(ctx.viewer.id, args, ctx);
+  // if (error || !result) {
+  //   return throwDatabaseError();
+  // }
 
-  return result;
+  // return result;
 };
 
 const validateInput = async (input: MutationResolvers.ClassSaveInput) => {

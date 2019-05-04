@@ -1,6 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from 'common/components/IconButton';
+import { IconButtonFab } from 'common/components/IconButton';
 import { FieldArray, FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
 import { FormClassSessionInput } from '../../types';
@@ -36,8 +36,7 @@ const SessionBlocksContainer: React.FunctionComponent<
               <Grid container justify="flex-end">
                 <Grid item>
                   <Tooltip title="Add session">
-                    <IconButton
-                      buttonType="fab"
+                    <IconButtonFab
                       icon="add"
                       color="primary"
                       aria-label="Add session"
