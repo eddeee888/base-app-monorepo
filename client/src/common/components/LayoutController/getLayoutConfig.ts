@@ -16,18 +16,18 @@ const getLayoutConfig: GetLayoutConfigFn = pathname => {
   switch (path) {
     case linkgen(Paths.signup):
       header = {
-        display: false
+        display: true
       };
       footer = {
-        display: false
+        display: true
       };
       break;
     case linkgen(Paths.login):
       header = {
-        display: false
+        display: true
       };
       footer = {
-        display: false
+        display: true
       };
       break;
     default:

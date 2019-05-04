@@ -34,6 +34,7 @@ const HostClass: React.FunctionComponent = () => {
     );
   }
 
+  // TODO: check that classId is valid by querying the graph. If not valid / not found, show 404
   if (!params.formPart) {
     return <Redirect to={linkgenHostClass(defaultFormPart, params.classId)} />;
   }

@@ -1,5 +1,22 @@
+import Block from 'common/components/Block';
+import Main from 'common/components/Main';
+import Paper from 'common/components/Paper';
+import useParams from 'common/hooks/useParams';
 import React from 'react';
 
-const HostClassSuccess: React.FunctionComponent = () => <div>SUCCESS!</div>;
+interface HostClassSuccessParams {
+  classId: string;
+}
+
+const HostClassSuccess: React.FunctionComponent = () => {
+  const { classId } = useParams<HostClassSuccessParams>();
+  return (
+    <Main fullHeight>
+      <Block size="sm" fullHeight>
+        <Paper>YO! tabjs! {classId}</Paper>
+      </Block>
+    </Main>
+  );
+};
 
 export default HostClassSuccess;

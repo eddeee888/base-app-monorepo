@@ -13,6 +13,8 @@ import { headerHeight } from 'common/styles/size';
 const headerClassName = css`
   width: 100%;
   padding: 0 1rem;
+  position: fixed;
+  top: 0px;
   height: ${headerHeight};
   display: flex;
   align-items: center;

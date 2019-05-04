@@ -1,4 +1,5 @@
 import { breakpoints, mediaQuery } from 'common/styles/media';
+import { headerHeight } from 'common/styles/size';
 import { css, cx } from 'emotion';
 import React from 'react';
 
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const mainTagClassName = css`
+  margin-top: ${headerHeight};
   width: 100%;
   display: flex;
   justify-content: center;
@@ -16,7 +18,8 @@ const mainTagClassName = css`
 `;
 
 const fullHeightClassName = css`
-  height: 100vh;
+  margin-top: 0px;
+  height: calc(100vh - ${headerHeight});
 `;
 
 const contentClassName = css`
