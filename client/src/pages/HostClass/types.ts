@@ -1,6 +1,11 @@
 import { ClassSessionDay } from '__generated__/globalTypes';
 
-export type HostClassFormPart = 'details' | 'contact' | 'sessions' | 'summary';
+export type HostClassFormPart =
+  | 'details'
+  | 'contact'
+  | 'sessions'
+  | 'summary'
+  | 'success';
 export interface HostClassParams {
   classId?: string;
   formPart?: HostClassFormPart;

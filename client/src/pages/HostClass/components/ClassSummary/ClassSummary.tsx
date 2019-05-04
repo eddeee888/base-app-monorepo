@@ -24,12 +24,7 @@ export interface ClassSummaryProps<I> {
 
 const ClassSummary: React.FunctionComponent<
   ClassSummaryProps<HostClassState>
-> = ({
-  values,
-  goPrevious,
-  goNext,
-  classSaveResult: { loading, error, data }
-}) => {
+> = ({ values, goPrevious, goNext, classSaveResult: { loading, error } }) => {
   const validated = validateValues(values);
   const goNextIsDisabled =
     !validated.details || !validated.contact || !validated.sessions || loading;

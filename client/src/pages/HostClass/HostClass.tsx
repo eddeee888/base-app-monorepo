@@ -92,7 +92,7 @@ const HostClass: React.FunctionComponent = () => {
             <ClassSummary
               values={values}
               classSaveResult={classSaveResult}
-              goNext={createHostClassSubmitFn(classSaveFn, values)}
+              goNext={createHostClassSubmitFn(classSaveFn, values, history)}
               goPrevious={summaryNavFns.goPrevious}
             />
           )}
