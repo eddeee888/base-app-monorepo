@@ -20,35 +20,33 @@ const createHandleSignupFn: CreateHandleSignupFn = (
   signup,
   setViewer,
   setGeneralError
-) => {
-  return async (values, actions) => {
-    const options: SignupMutationOptions = {
-      variables: {
-        input: {
-          ...values
-        }
-      }
-    };
-
-    try {
-      const result = await signup(options);
-      if (result && result.data) {
-        setViewer({
-          id: result.data.signup.user.id
-        });
-      } else {
-        setGeneralError('Unexpected error occurred!');
-      }
-    } catch (error) {
-      const checkedError = checkError(error);
-
-      if (checkedError.name === CustomGraphQLErrors.FormValidationError) {
-        actions.setErrors(checkedError.data);
-      } else {
-        setGeneralError('Unexpected error occurred!');
+) => async (values, actions) => {
+  const options: SignupMutationOptions = {
+    variables: {
+      input: {
+        ...values
       }
     }
   };
+
+  try {
+    const result = await signup(options);
+    if (result && result.data) {
+      setViewer({
+        id: result.data.signup.user.id
+      });
+    } else {
+      setGeneralError('Unexpected error occurred!');
+    }
+  } catch (error) {
+    const checkedError = checkError(error);
+
+    if (checkedError.name === CustomGraphQLErrors.FormValidationError) {
+      actions.setErrors(checkedError.data);
+    } else {
+      setGeneralError('Unexpected error occurred!');
+    }
+  }
 };
 
 export default createHandleSignupFn;
