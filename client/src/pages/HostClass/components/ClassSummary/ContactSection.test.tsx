@@ -37,7 +37,7 @@ describe('<ContactSection />', () => {
         .find(Grid)
         .filterWhere(
           container =>
-            container.prop('item') && !!container.text().match(/N\/A/)
+            !!container.prop('item') && !!container.text().match(/N\/A/)
         )
     ).toHaveLength(2);
   });
