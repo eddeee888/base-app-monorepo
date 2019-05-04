@@ -355,7 +355,34 @@ describe('<ClassSummary /> -> <Navigation /> ', () => {
 });
 
 describe('<ClassSummary /> -> ClassSaveMutation states', () => {
-  it.todo('should handle loading state');
-  it.todo('should handle error state');
-  it.todo('should handle success state');
+  const props = {
+    values: { ...validValues },
+    goPrevious: jest.fn(),
+    goNext: jest.fn(),
+    classSaveResult: { loading: false, error: undefined } as any
+  };
+
+  it('should handle loading state', () => {
+    const wrapper = mountWithMockedProviders({
+      ...props,
+      classSaveResult: { ...props.classSaveResult, loading: true }
+    });
+
+    expect(wrapper.find(Navigation).prop('goNextIsLoading')).toBe(true);
+  });
+
+  it('should handle error state', () => {
+    const wrapper = mountWithMockedProviders({
+      ...props,
+      classSaveResult: {
+        ...props.classSaveResult,
+        loading: false,
+        error: Error('This should be ApolloError')
+      }
+    });
+
+    expect(wrapper.text()).toMatch(
+      /Something went wrong! Check your details and try again./
+    );
+  });
 });

@@ -1,4 +1,4 @@
-import * as H from 'history';
+import { RouteComponentProps } from 'react-router';
 import { SetFormValues } from '../types';
 
 export interface NavFns<I> {
@@ -8,7 +8,7 @@ export interface NavFns<I> {
 
 interface Param<I> {
   setValue: SetFormValues<I>;
-  history: H.History;
+  history: RouteComponentProps['history'];
   next?: string;
   previous?: string;
 }

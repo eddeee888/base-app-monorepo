@@ -92,7 +92,7 @@ const SignupFormComponent = ({
             <Link to={linkgen(Paths.login, { query })}>Log in</Link>
           </Text>
 
-          <Button type="submit" disabled={loading}>
+          <Button type="submit" disabled={loading} showSpinner={loading}>
             Submit
           </Button>
         </Form>

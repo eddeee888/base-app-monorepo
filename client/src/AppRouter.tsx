@@ -2,6 +2,7 @@ import LayoutController from 'common/components/LayoutController';
 import { linkgen, Paths } from 'common/helpers/pathing';
 import Home from 'pages/Home';
 import HostClass from 'pages/HostClass';
+import HostClassSuccess from 'pages/HostClassSuccess';
 import Login from 'pages/Login';
 import Logout from 'pages/Logout';
 import Signup from 'pages/Signup';
@@ -26,6 +27,11 @@ const AppRouter = () => (
               '/:classId?/:formPart(details|contact|sessions|summary)?'
           ]}
           component={HostClass}
+        />
+        <Route
+          exact
+          path={linkgen(Paths.hostClass) + '/:classId?/success'}
+          component={HostClassSuccess}
         />
       </Switch>
     </LayoutController>

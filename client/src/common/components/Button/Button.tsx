@@ -7,18 +7,18 @@ import { spacingRem } from 'common/helpers/spacing';
 import React from 'react';
 
 interface ButtonProps extends MuiButtonProps {
-  loading?: boolean;
+  showSpinner?: boolean;
 }
 
 const Button: React.FunctionComponent<ButtonProps> = ({
   children,
-  loading,
+  showSpinner,
   ...props
 }) => {
   return (
     <MuiButton color="primary" variant="contained" fullWidth {...props}>
       {children}
-      {loading && (
+      {showSpinner && (
         <>
           <Box ml={1} />
           <CircularProgress size={`${spacingRem(2)}rem`} />

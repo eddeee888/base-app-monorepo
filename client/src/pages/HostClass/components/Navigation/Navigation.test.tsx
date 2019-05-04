@@ -50,7 +50,8 @@ describe('<Navigation /> -> next button', () => {
       data: {},
       expected: {
         nextButtonText: 'Next',
-        nextButtonDisabled: false
+        nextButtonDisabled: undefined,
+        nextButtonShowSpinner: undefined
       }
     },
     {
@@ -58,11 +59,13 @@ describe('<Navigation /> -> next button', () => {
       data: {
         goNext,
         goNextText: 'Customised submit text',
-        goNextIsDisabled: true
+        goNextIsDisabled: true,
+        goNextIsLoading: false
       },
       expected: {
         nextButtonText: 'Customised submit text',
-        nextButtonDisabled: true
+        nextButtonDisabled: true,
+        nextButtonShowSpinner: false
       }
     },
     {
@@ -76,7 +79,7 @@ describe('<Navigation /> -> next button', () => {
       expected: {
         nextButtonText: 'Customised submit text',
         nextButtonDisabled: true,
-        goNextIsLoading: true
+        nextButtonShowSpinner: true
       }
     }
   ];
@@ -89,24 +92,23 @@ describe('<Navigation /> -> next button', () => {
     ({
       description,
       data,
-      expected: { nextButtonText, nextButtonDisabled, goNextIsLoading }
+      expected: { nextButtonText, nextButtonDisabled, nextButtonShowSpinner }
     }) => {
       it(description, () => {
         const wrapper = mount(<Navigation {...data} />);
         const goNextButton = wrapper
-          .find('button')
+          .find(Button)
           .filterWhere(
             button =>
               button.prop('type') === 'submit' &&
-              button.text() === nextButtonText &&
-              button.prop('disabled') === nextButtonDisabled
+              button.text() === nextButtonText
           );
+
+        expect(goNextButton.prop('disabled')).toBe(nextButtonDisabled);
+        expect(goNextButton.prop('showSpinner')).toBe(nextButtonShowSpinner);
         expect(goNextButton).toHaveLength(1);
 
-        // this loading prop does not exist natively on a button so we should check it here
-        expect(wrapper.find(Button).prop('loading')).toBe(goNextIsLoading);
-
-        if (data.goNext && !nextButtonDisabled) {
+        if (data.goNext && !nextButtonDisabled && !nextButtonShowSpinner) {
           (goNextButton.prop('onClick') as any)();
           expect(data.goNext).toHaveBeenCalledTimes(1);
         } else {
