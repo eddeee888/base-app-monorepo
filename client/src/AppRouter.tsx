@@ -30,7 +30,7 @@ const AppRouter = () => (
         />
         <Route
           exact
-          path={linkgen(Paths.hostClass) + '/:classId?/success'}
+          path={linkgen(Paths.hostClassSuccess) + '/:classId'}
           component={HostClassSuccess}
         />
       </Switch>

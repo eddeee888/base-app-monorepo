@@ -129,7 +129,7 @@ describe('createHostClassSubmitFn() -> handle return', () => {
 
     expect(history.push).toHaveBeenCalledTimes(1);
     expect(history.push).toHaveBeenCalledWith(
-      '/host-a-class/abcthisishashedid/success'
+      '/host-a-class-success/abcthisishashedid'
     );
   });
 });

@@ -1,7 +1,7 @@
 import { ClassSessionDay, ClassSessionInput } from '__generated__/globalTypes';
+import { linkgen, Paths } from 'common/helpers/pathing';
 import { RouteComponentProps } from 'react-router';
 import { ClassSaveMutationFn } from '../components/ClassSaveMutation';
-import linkgenHostClass from '../helpers/linkgenHostClass';
 import { HostClassState } from '../types';
 
 type CreateHostClassSaveFn = (
@@ -38,7 +38,11 @@ const createHostClassSubmitFn: CreateHostClassSaveFn = (
     });
 
     if (result && result.data) {
-      history.push(linkgenHostClass('success', result.data.classSave.class.id));
+      history.push(
+        linkgen(Paths.hostClassSuccess, {
+          params: [result.data.classSave.class.id]
+        })
+      );
     } else {
       console.warn('Unexpected result in createHostClassSubmitFn');
     }

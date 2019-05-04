@@ -33,13 +33,24 @@ Object {
 }
 `;
 
+exports[`getLayoutConfig() should match snapshot for '/host-a-class-success' path 1`] = `
+Object {
+  "footer": Object {
+    "display": true,
+  },
+  "header": Object {
+    "display": true,
+  },
+}
+`;
+
 exports[`getLayoutConfig() should match snapshot for '/login' path 1`] = `
 Object {
   "footer": Object {
-    "display": false,
+    "display": true,
   },
   "header": Object {
-    "display": false,
+    "display": true,
   },
 }
 `;
@@ -58,10 +69,10 @@ Object {
 exports[`getLayoutConfig() should match snapshot for '/signup' path 1`] = `
 Object {
   "footer": Object {
-    "display": false,
+    "display": true,
   },
   "header": Object {
-    "display": false,
+    "display": true,
   },
 }
 `;
