@@ -23,7 +23,7 @@ const Login: React.FunctionComponent = () => {
 
   return (
     <Main fullHeight>
-      <Block size="sm">
+      <Block size="sm" fullHeight>
         <Paper>
           <Grid container justify="center">
             <Link to={linkgen(Paths.home)}>

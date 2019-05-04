@@ -23,13 +23,14 @@ const Signup: React.FunctionComponent = () => {
 
   return (
     <Main fullHeight>
-      <Block size="sm">
+      <Block size="sm" fullHeight>
         <Paper>
           <Grid container justify="center">
             <Link to={linkgen(Paths.home)}>
               <Logo />
             </Link>
           </Grid>
+
           <H1 align="center" variant="h2">
             Sign up
           </H1>
