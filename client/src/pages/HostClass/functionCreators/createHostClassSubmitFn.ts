@@ -15,29 +15,35 @@ const createHostClassSubmitFn: CreateHostClassSaveFn = (
   values,
   history
 ) => async () => {
-  const result = await saveFn({
-    variables: {
-      input: {
-        ...values.details,
-        ...values.contact,
-        sessions: values.sessions.sessions.reduce<ClassSessionInput[]>(
-          (sessionsArray, nextSession) => {
-            if (!!nextSession.day) {
-              sessionsArray.push({
-                ...nextSession,
-                day: ClassSessionDay[nextSession.day]
-              });
-            }
-            return sessionsArray;
-          },
-          []
-        )
+  try {
+    const result = await saveFn({
+      variables: {
+        input: {
+          ...values.details,
+          ...values.contact,
+          sessions: values.sessions.sessions.reduce<ClassSessionInput[]>(
+            (sessionsArray, nextSession) => {
+              if (!!nextSession.day) {
+                sessionsArray.push({
+                  ...nextSession,
+                  day: ClassSessionDay[nextSession.day]
+                });
+              }
+              return sessionsArray;
+            },
+            []
+          )
+        }
       }
-    }
-  });
+    });
 
-  if (result && result.data) {
-    history.push(linkgenHostClass('success', result.data.classSave.class.id));
+    if (result && result.data) {
+      history.push(linkgenHostClass('success', result.data.classSave.class.id));
+    } else {
+      console.warn('Unexpected result in createHostClassSubmitFn');
+    }
+  } catch (e) {
+    console.warn('Error in createHostClassSubmitFn');
   }
 };
 

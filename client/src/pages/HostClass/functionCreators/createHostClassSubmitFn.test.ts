@@ -34,8 +34,16 @@ const validValues: HostClassState = {
 };
 
 describe('createHostClassSubmitFn() -> call with correct param', () => {
+  beforeAll(() => {
+    console.warn = jest.fn();
+  });
+
   afterEach(() => {
     jest.resetAllMocks();
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
   });
 
   it('should be called with correct variables', () => {
@@ -98,7 +106,7 @@ describe('createHostClassSubmitFn() -> handle return', () => {
     jest.resetAllMocks();
   });
 
-  it('should call window.location.assign() and redirect user to correct URL', async () => {
+  it('should call history.push() and redirect user to correct URL', async () => {
     expect.assertions(2);
 
     saveFn.mockResolvedValue({
