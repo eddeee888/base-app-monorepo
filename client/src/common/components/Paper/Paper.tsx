@@ -8,16 +8,15 @@ interface Props {
   className?: string;
 }
 
+const spacingClassName = css`
+  padding: ${spacingRem(2)}rem ${spacingRem(3)}rem;
+  width: 100%;
+`;
+
 const Paper: React.FunctionComponent<Props> = ({ className, children }) => {
   return (
     <MuiPaper
-      className={cx([
-        className,
-        css`
-          padding: ${spacingRem(2)}rem ${spacingRem(3)}rem;
-          width: 100%;
-        `
-      ])}
+      className={cx([className, spacingClassName])}
       elevation={1}
       square
     >

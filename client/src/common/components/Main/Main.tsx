@@ -5,7 +5,7 @@ import React from 'react';
 interface Props {
   children: React.ReactNode;
   className?: string;
-  fullWidth?: boolean;
+  fullHeight?: boolean;
 }
 
 const mainTagClassName = css`
@@ -13,6 +13,10 @@ const mainTagClassName = css`
   display: flex;
   justify-content: center;
   flex: 1;
+`;
+
+const fullHeightClassName = css`
+  height: 100vh;
 `;
 
 const contentClassName = css`
@@ -25,10 +29,21 @@ const contentClassName = css`
   }
 `;
 
-const Main: React.FunctionComponent<Props> = ({ children, className }) => (
-  <main className={cx([mainTagClassName, className])}>
-    <div className={contentClassName}>{children}</div>
-  </main>
-);
+const Main: React.FunctionComponent<Props> = ({
+  children,
+  className,
+  fullHeight
+}) => {
+  const defaultClassNames = [mainTagClassName];
+  if (fullHeight) {
+    defaultClassNames.push(fullHeightClassName);
+  }
+
+  return (
+    <main className={cx([...defaultClassNames, className])}>
+      <div className={contentClassName}>{children}</div>
+    </main>
+  );
+};
 
 export default Main;

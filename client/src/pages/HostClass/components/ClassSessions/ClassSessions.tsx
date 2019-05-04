@@ -6,7 +6,7 @@ import { validationSchemas } from '../../constants';
 import { NavFns } from '../../functionCreators/createNavFns';
 import { FormClassSessionInput } from '../../types';
 import Navigation from '../Navigation';
-import SessionBlocksContainer from './SessionBlocksContainer';
+import SessionBlocks from './SessionBlocks';
 
 interface Props<I> {
   initialValues: I;
@@ -28,11 +28,7 @@ const ClassSessions: React.FunctionComponent<Props<FormClassSessionInput>> = ({
       <Form>
         <Block size="md">
           <Paper>
-            <SessionBlocksContainer
-              values={values}
-              errors={errors}
-              touched={touched}
-            />
+            <SessionBlocks values={values} errors={errors} touched={touched} />
           </Paper>
           <Navigation goPrevious={() => goPrevious(values)} />
         </Block>
