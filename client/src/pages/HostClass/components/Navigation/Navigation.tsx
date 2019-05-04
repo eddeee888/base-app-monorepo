@@ -36,7 +36,7 @@ const Navigation: React.FunctionComponent<NavigationProps> = ({
               onClick={goNextIsDisabled ? undefined : goNext}
               fullWidth={false}
               disabled={goNextIsDisabled}
-              loading={goNextIsLoading}
+              showSpinner={goNextIsLoading}
             >
               {goNextText}
             </Button>

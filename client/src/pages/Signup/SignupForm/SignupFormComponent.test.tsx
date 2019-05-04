@@ -1,4 +1,4 @@
-import Button from '@material-ui/core/Button';
+import Button from 'common/components/Button';
 import Link from 'common/components/Link';
 import { linkgen, Paths } from 'common/helpers/pathing';
 import { mount, ReactWrapper } from 'enzyme';
@@ -34,7 +34,11 @@ const assertCommonElements = (wrapper: ReactWrapper) => {
   assertFieldName(wrapper, 'password', 1);
 
   expect(
-    wrapper.find(Button).filterWhere(button => button.prop('type') === 'submit')
+    wrapper
+      .find(Button)
+      .filterWhere(
+        button => button.prop('type') === 'submit' && button.text() === 'Submit'
+      )
   ).toHaveLength(1);
 
   expect(wrapper.find(Link)).toHaveLength(1);
@@ -86,10 +90,16 @@ describe('<SignupFormComponent />', () => {
       </StaticRouter>
     );
 
+    assertCommonElements(wrapper);
+
     expect(
-      wrapper.find(`button[type='submit']`).filterWhere(button => {
-        return button.prop('disabled') === true;
-      })
+      wrapper
+        .find(Button)
+        .filterWhere(
+          button =>
+            button.prop('disabled') === true &&
+            button.prop('showSpinner') === true
+        )
     ).toHaveLength(1);
   });
 });

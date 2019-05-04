@@ -67,7 +67,11 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({
             <Link to={linkgen(Paths.signup, { query })}>Sign up</Link>
           </Text>
 
-          <Button type="submit" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            showSpinner={isSubmitting}
+          >
             Log in
           </Button>
         </Form>

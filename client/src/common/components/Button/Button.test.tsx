@@ -13,7 +13,7 @@ describe('<Button />', () => {
   });
 
   it('should mount correctly with loading', () => {
-    const wrapper = mount(<Button loading>Test button</Button>);
+    const wrapper = mount(<Button showSpinner>Test button</Button>);
     expect(wrapper.html()).toMatch(/Test button/);
     expect(wrapper.find('button')).toHaveLength(1);
     expect(wrapper.find('button').props().className).toBeTruthy();

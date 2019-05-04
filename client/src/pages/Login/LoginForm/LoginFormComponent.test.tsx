@@ -1,3 +1,4 @@
+import Button from 'common/components/Button';
 import { Paths } from 'common/helpers/pathing';
 import { mount, ReactWrapper } from 'enzyme';
 import { Formik } from 'formik';
@@ -15,11 +16,16 @@ describe('<LoginFormComponent />', () => {
 
   const assertButton = (wrapper: ReactWrapper, isDisabled: boolean) => {
     expect(
-      wrapper.find(`button[type='submit']`).filterWhere(button => {
-        return button.prop('disabled') === isDisabled;
-      })
+      wrapper
+        .find(Button)
+        .filterWhere(
+          button =>
+            button.prop('type') === 'submit' &&
+            button.prop('disabled') === isDisabled &&
+            button.prop('showSpinner') === isDisabled &&
+            button.text() === 'Log in'
+        )
     ).toHaveLength(1);
-    expect(wrapper.find(`button[type='submit']`).text()).toBe('Log in');
   };
   const assertCommonElements = (wrapper: ReactWrapper) => {
     expect(wrapper.find(Formik).props().onSubmit).toBe(onSubmit);
