@@ -5,7 +5,8 @@ export enum Paths {
   logout = '/logout',
   dashboard = '/dashboard',
   hostClass = '/host-a-class',
-  hostClassSuccess = '/host-a-class-success'
+  hostClassSuccess = '/host-a-class-success',
+  classes = '/classes'
 }
 
 export enum UrlQueryKeys {
