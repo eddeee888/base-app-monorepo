@@ -1,3 +1,4 @@
+import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
 import Box from '@material-ui/core/Box';
 import Block from 'common/components/Block';
 import Divider from 'common/components/Divider';
@@ -5,7 +6,6 @@ import FormError from 'common/components/FormError';
 import Paper from 'common/components/Paper';
 import Text from 'common/components/Text';
 import React from 'react';
-import { validationSchemas } from '../../constants';
 import { NavFns } from '../../functionCreators/createNavFns';
 import { HostClassState } from '../../types';
 import ClassCategoriesQuery from '../ClassCategoriesQuery';
@@ -87,9 +87,9 @@ type ValidateValuesFn = (values: HostClassState) => Validations;
 
 const validateValues: ValidateValuesFn = ({ details, contact, sessions }) => {
   return {
-    details: validationSchemas.details.isValidSync(details),
-    contact: validationSchemas.contact.isValidSync(contact),
-    sessions: validationSchemas.sessions.isValidSync(sessions)
+    details: hostAClassValidation.details.isValidSync(details),
+    contact: hostAClassValidation.contact.isValidSync(contact),
+    sessions: hostAClassValidation.sessions.isValidSync(sessions)
   };
 };
 

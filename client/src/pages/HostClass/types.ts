@@ -14,6 +14,7 @@ export interface FormClassDetailsInput {
   name: string;
   category: string;
   description: string;
+  price: number | '';
 }
 
 export interface FormClassContactInput {

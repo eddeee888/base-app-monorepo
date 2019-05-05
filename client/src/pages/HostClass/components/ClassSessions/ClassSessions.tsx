@@ -1,8 +1,8 @@
+import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
 import Block from 'common/components/Block';
 import Paper from 'common/components/Paper';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import { validationSchemas } from '../../constants';
 import { NavFns } from '../../functionCreators/createNavFns';
 import { FormClassSessionInput } from '../../types';
 import Navigation from '../Navigation';
@@ -21,7 +21,7 @@ const ClassSessions: React.FunctionComponent<Props<FormClassSessionInput>> = ({
 }) => (
   <Formik<FormClassSessionInput>
     initialValues={initialValues}
-    validationSchema={validationSchemas.sessions}
+    validationSchema={hostAClassValidation.sessions}
     onSubmit={goNext}
   >
     {({ values, errors, touched }) => (

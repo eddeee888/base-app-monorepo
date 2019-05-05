@@ -1,11 +1,7 @@
 import { ClassSessionDay } from '__generated__/globalTypes';
 import { SelectOption } from 'common/components/Select/Select';
-import * as Yup from 'yup';
 import {
   ClassSession,
-  FormClassContactInput,
-  FormClassDetailsInput,
-  FormClassSessionInput,
   HostClassFormPart,
   HostClassState,
   SessionTime
@@ -23,7 +19,8 @@ export const initialValues: HostClassState = {
   details: {
     name: '',
     category: '',
-    description: ''
+    description: '',
+    price: ''
   },
   contact: {
     streetAddress: '',
@@ -134,35 +131,3 @@ const sessionTimeOptions: Array<
 }));
 sessionTimeOptions.unshift({ value: '', label: '' });
 export { sessionTimeOptions };
-
-export const validationSchemas = {
-  details: Yup.object().shape<FormClassDetailsInput>({
-    name: Yup.string().required('Class name is required'),
-    category: Yup.string().required('Class category is required'),
-    description: Yup.string()
-  }),
-  contact: Yup.object().shape<FormClassContactInput>({
-    streetAddress: Yup.string().required('Street address is required'),
-    city: Yup.string().required('City is required'),
-    postcode: Yup.string(),
-    country: Yup.string().required('Country is required'),
-    contactNumber: Yup.string().required('Contact number is required'),
-    streetUnit: Yup.string(),
-    state: Yup.string().required('State is required')
-  }),
-  sessions: Yup.object().shape<FormClassSessionInput>({
-    sessions: Yup.array()
-      .of(
-        Yup.object().shape<ClassSession>({
-          day: Yup.mixed().oneOf(dayArray, 'Day is required'),
-          startTime: Yup.mixed().oneOf(sessionTimes, 'Start time is required'),
-          endTime: Yup.mixed().oneOf(sessionTimes, 'End time is required'),
-          capacity: Yup.number()
-            .required('Capacity is required')
-            .typeError('Must be a valid number')
-            .min(1, 'Must be at least 1')
-        })
-      )
-      .min(1, 'Must be at least 1')
-  })
-};

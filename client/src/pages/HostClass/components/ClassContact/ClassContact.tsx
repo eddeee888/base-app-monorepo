@@ -1,3 +1,4 @@
+import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
 import Grid from '@material-ui/core/Grid';
 import Block from 'common/components/Block';
 import Divider from 'common/components/Divider';
@@ -6,7 +7,6 @@ import Paper from 'common/components/Paper';
 import TextInput from 'common/components/TextInput';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import { validationSchemas } from '../../constants';
 import { NavFns } from '../../functionCreators/createNavFns';
 import { FormClassContactInput } from '../../types';
 import Navigation from '../Navigation';
@@ -21,7 +21,7 @@ const ClassContact: React.FunctionComponent<
   ClassContactProps<FormClassContactInput>
 > = ({ initialValues, goNext, goPrevious }) => (
   <Formik
-    validationSchema={validationSchemas.contact}
+    validationSchema={hostAClassValidation.contact}
     initialValues={initialValues}
     onSubmit={goNext}
   >

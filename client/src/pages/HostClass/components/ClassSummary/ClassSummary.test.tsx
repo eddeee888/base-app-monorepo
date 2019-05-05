@@ -1,8 +1,8 @@
+import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
 import { mount } from 'enzyme';
 import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { StaticRouter } from 'react-router';
-import { validationSchemas } from '../../constants';
 import { ClassSession, HostClassState } from '../../types';
 import Navigation from '../Navigation';
 import ClassSummary, { ClassSummaryProps } from './ClassSummary';
@@ -27,7 +27,8 @@ const invalidValues: ClassSummaryProps<HostClassState>['values'] = {
   details: {
     name: '',
     category: '',
-    description: ''
+    description: '',
+    price: ''
   },
   contact: {
     streetAddress: '',
@@ -47,7 +48,8 @@ const validValues: ClassSummaryProps<HostClassState>['values'] = {
   details: {
     name: 'Class name',
     category: 'Class category',
-    description: 'Class description'
+    description: 'Class description',
+    price: 10
   },
   contact: {
     streetAddress: '123 street',
@@ -95,15 +97,15 @@ describe('<ClassSummary /> with default props', () => {
 
   it('should have DetailsSection, ContactSection, SessionsSection and failure messages by default ', () => {
     const detailsValidationSpy = jest.spyOn(
-      validationSchemas.details,
+      hostAClassValidation.details,
       'isValidSync'
     );
     const contactValidationSpy = jest.spyOn(
-      validationSchemas.contact,
+      hostAClassValidation.contact,
       'isValidSync'
     );
     const sessionsValidationSpy = jest.spyOn(
-      validationSchemas.sessions,
+      hostAClassValidation.sessions,
       'isValidSync'
     );
 
@@ -150,15 +152,52 @@ describe('<ClassSummary /> with default props', () => {
 });
 
 describe('<ClassSummary /> -> <DetailsSection /> ', () => {
+  const validDetails = {
+    name: 'Class name!',
+    category: 'Class categgory!',
+    description: 'Class description',
+    price: 10
+  };
   const detailsSectionTestCases = [
     {
       values: {
-        name: 'Class name!',
-        category: '',
-        description: ''
+        ...validDetails,
+        name: ''
       },
       expected: false,
-      description: 'should fail if not enough data'
+      description: 'should fail if missing class name'
+    },
+    {
+      values: {
+        ...validDetails,
+        category: ''
+      },
+      expected: false,
+      description: 'should fail if missing category'
+    },
+    {
+      values: {
+        ...validDetails,
+        description: ''
+      },
+      expected: true,
+      description: 'should pass if missing description'
+    },
+    {
+      values: {
+        ...validDetails,
+        price: '' as any
+      },
+      expected: false,
+      description: 'should fail if price is empty string'
+    },
+    {
+      values: {
+        ...validDetails,
+        price: 0
+      },
+      expected: true,
+      description: 'should pass if price is 0'
     },
     {
       values: validValues.details,
