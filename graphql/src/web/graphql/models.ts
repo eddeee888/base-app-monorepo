@@ -32,7 +32,6 @@ export interface Class {
   id: string;
   name: string;
   price: number;
-  category: ClassCategory;
   description: string;
   streetAddress: string;
   city: string;
@@ -41,7 +40,8 @@ export interface Class {
   contactNumber: string;
   state: string;
   streetUnit: string;
-  sessions: ClassSession[];
+  category?: ClassCategory;
+  sessions?: ClassSession[];
 }
 
 export interface ClassSession {

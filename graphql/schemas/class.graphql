@@ -1,3 +1,7 @@
+type Query {
+  class(id: ID!): Class
+}
+
 type Mutation {
   classSave(input: ClassSaveInput!): ClassSavePayload!
 }

@@ -4,12 +4,12 @@ import { GraphQLResolveInfo } from 'graphql';
 import {
   User,
   ClassCategory,
+  Class,
+  ClassSession,
   CreateClassCategoryPayload,
   SignupPayload,
   LoginPayload,
-  ClassSavePayload,
-  Class,
-  ClassSession
+  ClassSavePayload
 } from '../models';
 import { ResolverContext } from '../../../types';
 
@@ -29,6 +29,10 @@ export namespace QueryResolvers {
     id: string;
   }
 
+  export interface ArgsClass {
+    id: string;
+  }
+
   export type UserResolver = (
     parent: undefined,
     args: ArgsUser,
@@ -42,6 +46,13 @@ export namespace QueryResolvers {
     ctx: ResolverContext,
     info: GraphQLResolveInfo
   ) => ClassCategory[] | Promise<ClassCategory[]>;
+
+  export type ClassResolver = (
+    parent: undefined,
+    args: ArgsClass,
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => Class | null | Promise<Class | null>;
 
   export interface Type {
     user: (
@@ -57,6 +68,13 @@ export namespace QueryResolvers {
       ctx: ResolverContext,
       info: GraphQLResolveInfo
     ) => ClassCategory[] | Promise<ClassCategory[]>;
+
+    class: (
+      parent: undefined,
+      args: ArgsClass,
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => Class | null | Promise<Class | null>;
   }
 }
 
@@ -180,226 +198,11 @@ export namespace ClassCategoryResolvers {
   }
 }
 
-export namespace MutationResolvers {
-  export const defaultResolvers = {};
-
-  export interface CreateClassCategoryInput {
-    name: string;
-  }
-  export interface SignupInput {
-    email: string;
-    firstName: string;
-    lastName: string;
-    password: string;
-  }
-  export interface LoginInput {
-    email: string;
-    password: string;
-  }
-  export interface ClassSaveInput {
-    name: string;
-    price: number;
-    category: string;
-    description: string;
-    streetAddress: string;
-    city: string;
-    postcode: string;
-    country: string;
-    contactNumber: string;
-    state: string;
-    streetUnit: string;
-    sessions: ClassSessionInput[];
-  }
-  export interface ClassSessionInput {
-    day: ClassSessionDay;
-    startTime: string;
-    endTime: string;
-    capacity: number;
-  }
-
-  export interface ArgsCreateClassCategory {
-    input: CreateClassCategoryInput;
-  }
-
-  export interface ArgsSignup {
-    input: SignupInput;
-  }
-
-  export interface ArgsLogin {
-    input: LoginInput;
-  }
-
-  export interface ArgsClassSave {
-    input: ClassSaveInput;
-  }
-
-  export type CreateClassCategoryResolver = (
-    parent: undefined,
-    args: ArgsCreateClassCategory,
-    ctx: ResolverContext,
-    info: GraphQLResolveInfo
-  ) => CreateClassCategoryPayload | Promise<CreateClassCategoryPayload>;
-
-  export type SignupResolver = (
-    parent: undefined,
-    args: ArgsSignup,
-    ctx: ResolverContext,
-    info: GraphQLResolveInfo
-  ) => SignupPayload | Promise<SignupPayload>;
-
-  export type LoginResolver = (
-    parent: undefined,
-    args: ArgsLogin,
-    ctx: ResolverContext,
-    info: GraphQLResolveInfo
-  ) => LoginPayload | null | Promise<LoginPayload | null>;
-
-  export type LogoutResolver = (
-    parent: undefined,
-    args: {},
-    ctx: ResolverContext,
-    info: GraphQLResolveInfo
-  ) => boolean | Promise<boolean>;
-
-  export type ClassSaveResolver = (
-    parent: undefined,
-    args: ArgsClassSave,
-    ctx: ResolverContext,
-    info: GraphQLResolveInfo
-  ) => ClassSavePayload | Promise<ClassSavePayload>;
-
-  export interface Type {
-    createClassCategory: (
-      parent: undefined,
-      args: ArgsCreateClassCategory,
-      ctx: ResolverContext,
-      info: GraphQLResolveInfo
-    ) => CreateClassCategoryPayload | Promise<CreateClassCategoryPayload>;
-
-    signup: (
-      parent: undefined,
-      args: ArgsSignup,
-      ctx: ResolverContext,
-      info: GraphQLResolveInfo
-    ) => SignupPayload | Promise<SignupPayload>;
-
-    login: (
-      parent: undefined,
-      args: ArgsLogin,
-      ctx: ResolverContext,
-      info: GraphQLResolveInfo
-    ) => LoginPayload | null | Promise<LoginPayload | null>;
-
-    logout: (
-      parent: undefined,
-      args: {},
-      ctx: ResolverContext,
-      info: GraphQLResolveInfo
-    ) => boolean | Promise<boolean>;
-
-    classSave: (
-      parent: undefined,
-      args: ArgsClassSave,
-      ctx: ResolverContext,
-      info: GraphQLResolveInfo
-    ) => ClassSavePayload | Promise<ClassSavePayload>;
-  }
-}
-
-export namespace CreateClassCategoryPayloadResolvers {
-  export const defaultResolvers = {
-    classCategory: (parent: CreateClassCategoryPayload) => parent.classCategory
-  };
-
-  export type ClassCategoryResolver = (
-    parent: CreateClassCategoryPayload,
-    args: {},
-    ctx: ResolverContext,
-    info: GraphQLResolveInfo
-  ) => ClassCategory | Promise<ClassCategory>;
-
-  export interface Type {
-    classCategory: (
-      parent: CreateClassCategoryPayload,
-      args: {},
-      ctx: ResolverContext,
-      info: GraphQLResolveInfo
-    ) => ClassCategory | Promise<ClassCategory>;
-  }
-}
-
-export namespace SignupPayloadResolvers {
-  export const defaultResolvers = {
-    user: (parent: SignupPayload) => parent.user
-  };
-
-  export type UserResolver = (
-    parent: SignupPayload,
-    args: {},
-    ctx: ResolverContext,
-    info: GraphQLResolveInfo
-  ) => User | Promise<User>;
-
-  export interface Type {
-    user: (
-      parent: SignupPayload,
-      args: {},
-      ctx: ResolverContext,
-      info: GraphQLResolveInfo
-    ) => User | Promise<User>;
-  }
-}
-
-export namespace LoginPayloadResolvers {
-  export const defaultResolvers = {
-    user: (parent: LoginPayload) => parent.user
-  };
-
-  export type UserResolver = (
-    parent: LoginPayload,
-    args: {},
-    ctx: ResolverContext,
-    info: GraphQLResolveInfo
-  ) => User | Promise<User>;
-
-  export interface Type {
-    user: (
-      parent: LoginPayload,
-      args: {},
-      ctx: ResolverContext,
-      info: GraphQLResolveInfo
-    ) => User | Promise<User>;
-  }
-}
-
-export namespace ClassSavePayloadResolvers {
-  export const defaultResolvers = {
-    class: (parent: ClassSavePayload) => parent.class
-  };
-
-  export type ClassResolver = (
-    parent: ClassSavePayload,
-    args: {},
-    ctx: ResolverContext,
-    info: GraphQLResolveInfo
-  ) => Class | Promise<Class>;
-
-  export interface Type {
-    class: (
-      parent: ClassSavePayload,
-      args: {},
-      ctx: ResolverContext,
-      info: GraphQLResolveInfo
-    ) => Class | Promise<Class>;
-  }
-}
-
 export namespace ClassResolvers {
   export const defaultResolvers = {
     id: (parent: Class) => parent.id,
     name: (parent: Class) => parent.name,
     price: (parent: Class) => parent.price,
-    category: (parent: Class) => parent.category,
     description: (parent: Class) => parent.description,
     streetAddress: (parent: Class) => parent.streetAddress,
     city: (parent: Class) => parent.city,
@@ -407,8 +210,7 @@ export namespace ClassResolvers {
     country: (parent: Class) => parent.country,
     contactNumber: (parent: Class) => parent.contactNumber,
     state: (parent: Class) => parent.state,
-    streetUnit: (parent: Class) => parent.streetUnit,
-    sessions: (parent: Class) => parent.sessions
+    streetUnit: (parent: Class) => parent.streetUnit
   };
 
   export type IdResolver = (
@@ -678,15 +480,229 @@ export namespace ClassSessionResolvers {
   }
 }
 
+export namespace MutationResolvers {
+  export const defaultResolvers = {};
+
+  export interface CreateClassCategoryInput {
+    name: string;
+  }
+  export interface SignupInput {
+    email: string;
+    firstName: string;
+    lastName: string;
+    password: string;
+  }
+  export interface LoginInput {
+    email: string;
+    password: string;
+  }
+  export interface ClassSaveInput {
+    name: string;
+    price: number;
+    category: string;
+    description: string;
+    streetAddress: string;
+    city: string;
+    postcode: string;
+    country: string;
+    contactNumber: string;
+    state: string;
+    streetUnit: string;
+    sessions: ClassSessionInput[];
+  }
+  export interface ClassSessionInput {
+    day: ClassSessionDay;
+    startTime: string;
+    endTime: string;
+    capacity: number;
+  }
+
+  export interface ArgsCreateClassCategory {
+    input: CreateClassCategoryInput;
+  }
+
+  export interface ArgsSignup {
+    input: SignupInput;
+  }
+
+  export interface ArgsLogin {
+    input: LoginInput;
+  }
+
+  export interface ArgsClassSave {
+    input: ClassSaveInput;
+  }
+
+  export type CreateClassCategoryResolver = (
+    parent: undefined,
+    args: ArgsCreateClassCategory,
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => CreateClassCategoryPayload | Promise<CreateClassCategoryPayload>;
+
+  export type SignupResolver = (
+    parent: undefined,
+    args: ArgsSignup,
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => SignupPayload | Promise<SignupPayload>;
+
+  export type LoginResolver = (
+    parent: undefined,
+    args: ArgsLogin,
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => LoginPayload | null | Promise<LoginPayload | null>;
+
+  export type LogoutResolver = (
+    parent: undefined,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => boolean | Promise<boolean>;
+
+  export type ClassSaveResolver = (
+    parent: undefined,
+    args: ArgsClassSave,
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => ClassSavePayload | Promise<ClassSavePayload>;
+
+  export interface Type {
+    createClassCategory: (
+      parent: undefined,
+      args: ArgsCreateClassCategory,
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => CreateClassCategoryPayload | Promise<CreateClassCategoryPayload>;
+
+    signup: (
+      parent: undefined,
+      args: ArgsSignup,
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => SignupPayload | Promise<SignupPayload>;
+
+    login: (
+      parent: undefined,
+      args: ArgsLogin,
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => LoginPayload | null | Promise<LoginPayload | null>;
+
+    logout: (
+      parent: undefined,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => boolean | Promise<boolean>;
+
+    classSave: (
+      parent: undefined,
+      args: ArgsClassSave,
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => ClassSavePayload | Promise<ClassSavePayload>;
+  }
+}
+
+export namespace CreateClassCategoryPayloadResolvers {
+  export const defaultResolvers = {
+    classCategory: (parent: CreateClassCategoryPayload) => parent.classCategory
+  };
+
+  export type ClassCategoryResolver = (
+    parent: CreateClassCategoryPayload,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => ClassCategory | Promise<ClassCategory>;
+
+  export interface Type {
+    classCategory: (
+      parent: CreateClassCategoryPayload,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => ClassCategory | Promise<ClassCategory>;
+  }
+}
+
+export namespace SignupPayloadResolvers {
+  export const defaultResolvers = {
+    user: (parent: SignupPayload) => parent.user
+  };
+
+  export type UserResolver = (
+    parent: SignupPayload,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => User | Promise<User>;
+
+  export interface Type {
+    user: (
+      parent: SignupPayload,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => User | Promise<User>;
+  }
+}
+
+export namespace LoginPayloadResolvers {
+  export const defaultResolvers = {
+    user: (parent: LoginPayload) => parent.user
+  };
+
+  export type UserResolver = (
+    parent: LoginPayload,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => User | Promise<User>;
+
+  export interface Type {
+    user: (
+      parent: LoginPayload,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => User | Promise<User>;
+  }
+}
+
+export namespace ClassSavePayloadResolvers {
+  export const defaultResolvers = {
+    class: (parent: ClassSavePayload) => parent.class
+  };
+
+  export type ClassResolver = (
+    parent: ClassSavePayload,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => Class | Promise<Class>;
+
+  export interface Type {
+    class: (
+      parent: ClassSavePayload,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => Class | Promise<Class>;
+  }
+}
+
 export interface Resolvers {
   Query: QueryResolvers.Type;
   User: UserResolvers.Type;
   ClassCategory: ClassCategoryResolvers.Type;
+  Class: ClassResolvers.Type;
+  ClassSession: ClassSessionResolvers.Type;
   Mutation: MutationResolvers.Type;
   CreateClassCategoryPayload: CreateClassCategoryPayloadResolvers.Type;
   SignupPayload: SignupPayloadResolvers.Type;
   LoginPayload: LoginPayloadResolvers.Type;
   ClassSavePayload: ClassSavePayloadResolvers.Type;
-  Class: ClassResolvers.Type;
-  ClassSession: ClassSessionResolvers.Type;
 }
