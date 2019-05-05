@@ -39,6 +39,9 @@ const isUser = rule()(
 );
 
 export default shield({
+  Query: {
+    class: or(isAuthenticated, not(isAuthenticated))
+  },
   Mutation: {
     signup: not(isAuthenticated),
     login: not(isAuthenticated),

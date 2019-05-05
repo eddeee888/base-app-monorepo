@@ -17,9 +17,7 @@ const ClassesDisplay: React.FunctionComponent<Props> = ({
     return <div>Loading ... </div>;
   }
 
-  console.warn(data);
-
-  return <H1>HELLO!</H1>;
+  return <H1>{JSON.stringify(data)}</H1>;
 };
 
 export default ClassesDisplay;

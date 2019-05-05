@@ -1,5 +1,6 @@
 import LayoutController from 'common/components/LayoutController';
 import { linkgen, Paths } from 'common/helpers/pathing';
+import Classes from 'pages/Classes';
 import Home from 'pages/Home';
 import HostClass from 'pages/HostClass';
 import HostClassSuccess from 'pages/HostClassSuccess';
@@ -32,6 +33,11 @@ const AppRouter = () => (
           exact
           path={linkgen(Paths.hostClassSuccess) + '/:classId'}
           component={HostClassSuccess}
+        />
+        <Route
+          exact
+          path={linkgen(Paths.classes) + '/:classId'}
+          component={Classes}
         />
       </Switch>
     </LayoutController>
