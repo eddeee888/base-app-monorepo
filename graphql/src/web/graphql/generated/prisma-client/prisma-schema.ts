@@ -21,6 +21,7 @@ type BatchPayload {
 type Class {
   id: ID!
   creator: User!
+  price: Int!
   name: String!
   description: String!
   categories(where: ClassCategoryWhereInput, orderBy: ClassCategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClassCategory!]
@@ -217,6 +218,7 @@ type ClassConnection {
 
 input ClassCreateInput {
   creator: UserCreateOneWithoutClassesInput!
+  price: Int!
   name: String!
   description: String!
   categories: ClassCategoryCreateManyInput
@@ -236,6 +238,7 @@ input ClassCreateManyWithoutCreatorInput {
 }
 
 input ClassCreateWithoutCreatorInput {
+  price: Int!
   name: String!
   description: String!
   categories: ClassCategoryCreateManyInput
@@ -257,6 +260,8 @@ type ClassEdge {
 enum ClassOrderByInput {
   id_ASC
   id_DESC
+  price_ASC
+  price_DESC
   name_ASC
   name_DESC
   description_ASC
@@ -283,6 +288,7 @@ enum ClassOrderByInput {
 
 type ClassPreviousValues {
   id: ID!
+  price: Int!
   name: String!
   description: String!
   streetUnit: String!
@@ -309,6 +315,14 @@ input ClassScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
   name: String
   name_not: String
   name_in: [String!]
@@ -724,6 +738,7 @@ input ClassSubscriptionWhereInput {
 
 input ClassUpdateInput {
   creator: UserUpdateOneRequiredWithoutClassesInput
+  price: Int
   name: String
   description: String
   categories: ClassCategoryUpdateManyInput
@@ -738,6 +753,7 @@ input ClassUpdateInput {
 }
 
 input ClassUpdateManyDataInput {
+  price: Int
   name: String
   description: String
   streetUnit: String
@@ -750,6 +766,7 @@ input ClassUpdateManyDataInput {
 }
 
 input ClassUpdateManyMutationInput {
+  price: Int
   name: String
   description: String
   streetUnit: String
@@ -779,6 +796,7 @@ input ClassUpdateManyWithWhereNestedInput {
 }
 
 input ClassUpdateWithoutCreatorDataInput {
+  price: Int
   name: String
   description: String
   categories: ClassCategoryUpdateManyInput
@@ -819,6 +837,14 @@ input ClassWhereInput {
   id_ends_with: ID
   id_not_ends_with: ID
   creator: UserWhereInput
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
   name: String
   name_not: String
   name_in: [String!]

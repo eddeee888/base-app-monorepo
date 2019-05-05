@@ -90,6 +90,19 @@ const DetailsSection: React.FunctionComponent<DetailsSectionProps> = ({
           </Text>
         </Grid>
       </Grid>
+
+      <Grid container>
+        <Grid item xs={12} sm={4}>
+          <Text gutterBottom>
+            <b>Price</b>
+          </Text>
+        </Grid>
+        <Grid item xs={12} sm={8}>
+          <Text gutterBottom>
+            {values.price ? `$ ${values.price}` : <i>N/A</i>}
+          </Text>
+        </Grid>
+      </Grid>
     </>
   );
 };

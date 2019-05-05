@@ -1,3 +1,4 @@
+import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
 import Grid from '@material-ui/core/Grid';
 import Block from 'common/components/Block';
 import FormField from 'common/components/FormField';
@@ -10,7 +11,6 @@ import TextArea from 'common/components/TextArea';
 import TextInput from 'common/components/TextInput';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import { validationSchemas } from '../../constants';
 import { NavFns } from '../../functionCreators/createNavFns';
 import { FormClassDetailsInput } from '../../types';
 import { ClassCategoryQueryResult } from '../ClassCategoriesQuery';
@@ -27,81 +27,90 @@ const ClassDetailsForm: React.FunctionComponent<ClassDetailsFormProps> = ({
   categoryResult: { error, loading, data },
   goNext,
   initialValues
-}) => {
-  return (
-    <>
-      {error && (
-        <Text align="center">
-          Unexpected error occurred. Please try again later.
-        </Text>
-      )}
+}) => (
+  <>
+    {error && (
+      <Text align="center">
+        Unexpected error occurred. Please try again later.
+      </Text>
+    )}
 
-      {loading && <Spinner fullWidth />}
+    {loading && <Spinner fullWidth />}
 
-      {!error && !loading && (
-        <Formik
-          validationSchema={validationSchemas.details}
-          initialValues={initialValues}
-          onSubmit={goNext}
-        >
-          {({ errors, touched }) => (
-            <Form>
-              <Block size="sm">
-                <Paper>
-                  <Grid container>
-                    <Grid item xs={12}>
-                      <FormField name="name" errors={errors} touched={touched}>
-                        {({ field }) => (
-                          <TextInput
-                            {...field}
-                            label="Class name*"
-                            placeholder="Choose your class name. e.g. Piano lession, Yoga class, etc."
-                          />
-                        )}
-                      </FormField>
+    {!error && !loading && (
+      <Formik
+        validationSchema={hostAClassValidation.details}
+        initialValues={initialValues}
+        onSubmit={goNext}
+      >
+        {({ errors, touched }) => (
+          <Form>
+            <Block size="sm">
+              <Paper>
+                <Grid container>
+                  <Grid item xs={12}>
+                    <FormField name="name" errors={errors} touched={touched}>
+                      {({ field }) => (
+                        <TextInput
+                          {...field}
+                          label="Class name*"
+                          placeholder="Choose your class name. e.g. Piano lession, Yoga class, etc."
+                        />
+                      )}
+                    </FormField>
 
-                      <FormField
-                        name="category"
-                        errors={errors}
-                        touched={touched}
-                      >
-                        {({ field }) => (
-                          <Select
-                            {...field}
-                            label="Class category*"
-                            options={generateOptions(data)}
-                          />
-                        )}
-                      </FormField>
+                    <FormField
+                      name="category"
+                      errors={errors}
+                      touched={touched}
+                    >
+                      {({ field }) => (
+                        <Select
+                          {...field}
+                          label="Class category*"
+                          options={generateOptions(data)}
+                        />
+                      )}
+                    </FormField>
 
-                      <FormField
-                        name="description"
-                        errors={errors}
-                        touched={touched}
-                      >
-                        {({ field }) => (
-                          <TextArea
-                            label="Class description"
-                            rows={5}
-                            placeholder={
-                              'Tell the learners what your class is about'
-                            }
-                            {...field}
-                          />
-                        )}
-                      </FormField>
-                    </Grid>
+                    <FormField name="price" errors={errors} touched={touched}>
+                      {({ field }) => (
+                        <TextInput
+                          {...field}
+                          type="number"
+                          label="Price*"
+                          placeholder="How much it costs to join your class"
+                        />
+                      )}
+                    </FormField>
+
+                    <FormField
+                      name="description"
+                      errors={errors}
+                      touched={touched}
+                    >
+                      {({ field }) => (
+                        <TextArea
+                          label="Class description"
+                          rows={5}
+                          placeholder={
+                            'Tell the learners what your class is about'
+                          }
+                          {...field}
+                        />
+                      )}
+                    </FormField>
                   </Grid>
-                </Paper>
-                <Navigation />
-              </Block>
-            </Form>
-          )}
-        </Formik>
-      )}
-    </>
-  );
-};
+                </Grid>
+              </Paper>
+              <Navigation />
+            </Block>
+          </Form>
+        )}
+      </Formik>
+    )}
+  </>
+);
 
 const generateOptions = (
   data: ClassCategoryData | undefined

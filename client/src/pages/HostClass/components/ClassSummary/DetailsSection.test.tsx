@@ -10,7 +10,8 @@ describe('<DetailsSection />', () => {
       values: {
         name: '',
         category: '',
-        description: ''
+        description: '',
+        price: ''
       },
       classCategoriesResult: {} as any
     };
@@ -37,9 +38,9 @@ describe('<DetailsSection />', () => {
         .find(Grid)
         .filterWhere(
           container =>
-            container.prop('item') && !!container.text().match(/N\/A/)
+            !!container.prop('item') && !!container.text().match(/N\/A/)
         )
-    ).toHaveLength(3);
+    ).toHaveLength(4);
   });
 });
 
@@ -47,9 +48,10 @@ describe('<DetailsSection /> data values', () => {
   const defaultValues = {
     name: 'Class name',
     category: 'category1',
-    description: 'Class description'
+    description: 'Class description',
+    price: 10
   };
-  const defaulltClassCategoriesResult = {
+  const defaultClassCategoriesResult = {
     error: false,
     loading: false,
     data: {
@@ -64,7 +66,7 @@ describe('<DetailsSection /> data values', () => {
       description: 'should show data correctly',
       testValue: {
         values: { ...defaultValues },
-        classCategoriesResult: { ...defaulltClassCategoriesResult }
+        classCategoriesResult: { ...defaultClassCategoriesResult }
       },
       expected: ['Class details', 'Category one', 'Class description']
     },
@@ -73,7 +75,7 @@ describe('<DetailsSection /> data values', () => {
       testValue: {
         values: { ...defaultValues },
         classCategoriesResult: {
-          ...defaulltClassCategoriesResult,
+          ...defaultClassCategoriesResult,
           error: true
         }
       },

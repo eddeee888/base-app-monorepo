@@ -30,6 +30,7 @@ const validInput: MutationResolvers.ClassSaveInput = {
   name: 'Class name',
   category: 'hashed_category_id',
   description: 'Class description',
+  price: 10,
   streetAddress: '120 ABC street',
   city: 'City',
   postcode: '3000',

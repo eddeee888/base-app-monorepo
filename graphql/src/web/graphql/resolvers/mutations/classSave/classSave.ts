@@ -35,7 +35,8 @@ const validateInput = async (input: MutationResolvers.ClassSaveInput) => {
     await hostAClassValidation.details.validate({
       name: input.name,
       category: input.category,
-      description: input.description
+      description: input.description,
+      price: input.price
     });
 
     await hostAClassValidation.contact.validate({
@@ -71,6 +72,7 @@ const createClass = async (
       categories: {
         connect: { id: input.category }
       },
+      price: input.price,
       streetUnit: input.streetUnit,
       streetAddress: input.streetAddress,
       city: input.city,
