@@ -198,6 +198,7 @@ export namespace MutationResolvers {
   }
   export interface ClassSaveInput {
     name: string;
+    price: number;
     category: string;
     description: string;
     streetAddress: string;
@@ -397,6 +398,7 @@ export namespace ClassResolvers {
   export const defaultResolvers = {
     id: (parent: Class) => parent.id,
     name: (parent: Class) => parent.name,
+    price: (parent: Class) => parent.price,
     category: (parent: Class) => parent.category,
     description: (parent: Class) => parent.description,
     streetAddress: (parent: Class) => parent.streetAddress,
@@ -422,6 +424,13 @@ export namespace ClassResolvers {
     ctx: ResolverContext,
     info: GraphQLResolveInfo
   ) => string | Promise<string>;
+
+  export type PriceResolver = (
+    parent: Class,
+    args: {},
+    ctx: ResolverContext,
+    info: GraphQLResolveInfo
+  ) => number | Promise<number>;
 
   export type CategoryResolver = (
     parent: Class,
@@ -507,6 +516,13 @@ export namespace ClassResolvers {
       ctx: ResolverContext,
       info: GraphQLResolveInfo
     ) => string | Promise<string>;
+
+    price: (
+      parent: Class,
+      args: {},
+      ctx: ResolverContext,
+      info: GraphQLResolveInfo
+    ) => number | Promise<number>;
 
     category: (
       parent: Class,

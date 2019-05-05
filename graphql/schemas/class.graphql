@@ -5,6 +5,7 @@ type Mutation {
 type Class {
   id: ID!
   name: String!
+  price: Int!
   category: ClassCategory!
   description: String!
   streetAddress: String!
@@ -19,6 +20,7 @@ type Class {
 
 input ClassSaveInput {
   name: String!
+  price: Int!
   category: String!
   description: String!
   streetAddress: String!

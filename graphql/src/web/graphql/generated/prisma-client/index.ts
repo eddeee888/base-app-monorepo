@@ -261,6 +261,8 @@ export type ClassSessionDay =
 export type ClassOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "price_ASC"
+  | "price_DESC"
   | "name_ASC"
   | "name_DESC"
   | "description_ASC"
@@ -388,7 +390,7 @@ export interface ClassCategoryScalarWhereInput {
   NOT?: ClassCategoryScalarWhereInput[] | ClassCategoryScalarWhereInput;
 }
 
-export interface ClassSessionWhereInput {
+export interface ClassCategoryWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -403,49 +405,23 @@ export interface ClassSessionWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  day?: ClassSessionDay;
-  day_not?: ClassSessionDay;
-  day_in?: ClassSessionDay[] | ClassSessionDay;
-  day_not_in?: ClassSessionDay[] | ClassSessionDay;
-  startTime?: String;
-  startTime_not?: String;
-  startTime_in?: String[] | String;
-  startTime_not_in?: String[] | String;
-  startTime_lt?: String;
-  startTime_lte?: String;
-  startTime_gt?: String;
-  startTime_gte?: String;
-  startTime_contains?: String;
-  startTime_not_contains?: String;
-  startTime_starts_with?: String;
-  startTime_not_starts_with?: String;
-  startTime_ends_with?: String;
-  startTime_not_ends_with?: String;
-  endTime?: String;
-  endTime_not?: String;
-  endTime_in?: String[] | String;
-  endTime_not_in?: String[] | String;
-  endTime_lt?: String;
-  endTime_lte?: String;
-  endTime_gt?: String;
-  endTime_gte?: String;
-  endTime_contains?: String;
-  endTime_not_contains?: String;
-  endTime_starts_with?: String;
-  endTime_not_starts_with?: String;
-  endTime_ends_with?: String;
-  endTime_not_ends_with?: String;
-  capacity?: Int;
-  capacity_not?: Int;
-  capacity_in?: Int[] | Int;
-  capacity_not_in?: Int[] | Int;
-  capacity_lt?: Int;
-  capacity_lte?: Int;
-  capacity_gt?: Int;
-  capacity_gte?: Int;
-  AND?: ClassSessionWhereInput[] | ClassSessionWhereInput;
-  OR?: ClassSessionWhereInput[] | ClassSessionWhereInput;
-  NOT?: ClassSessionWhereInput[] | ClassSessionWhereInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  AND?: ClassCategoryWhereInput[] | ClassCategoryWhereInput;
+  OR?: ClassCategoryWhereInput[] | ClassCategoryWhereInput;
+  NOT?: ClassCategoryWhereInput[] | ClassCategoryWhereInput;
 }
 
 export interface UserCreateOneWithoutClassesInput {
@@ -536,6 +512,7 @@ export interface ClassUpdateManyWithWhereNestedInput {
 
 export interface ClassUpdateInput {
   creator?: UserUpdateOneRequiredWithoutClassesInput;
+  price?: Int;
   name?: String;
   description?: String;
   categories?: ClassCategoryUpdateManyInput;
@@ -561,6 +538,7 @@ export interface UserUpdateOneRequiredWithoutClassesInput {
 }
 
 export interface ClassUpdateWithoutCreatorDataInput {
+  price?: Int;
   name?: String;
   description?: String;
   categories?: ClassCategoryUpdateManyInput;
@@ -645,6 +623,7 @@ export interface ClassCategoryUpsertWithWhereUniqueNestedInput {
 
 export interface ClassCreateInput {
   creator: UserCreateOneWithoutClassesInput;
+  price: Int;
   name: String;
   description: String;
   categories?: ClassCategoryCreateManyInput;
@@ -658,7 +637,7 @@ export interface ClassCreateInput {
   sessions?: ClassSessionCreateManyInput;
 }
 
-export interface ClassCategoryWhereInput {
+export interface ClassSessionWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -673,23 +652,49 @@ export interface ClassCategoryWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  AND?: ClassCategoryWhereInput[] | ClassCategoryWhereInput;
-  OR?: ClassCategoryWhereInput[] | ClassCategoryWhereInput;
-  NOT?: ClassCategoryWhereInput[] | ClassCategoryWhereInput;
+  day?: ClassSessionDay;
+  day_not?: ClassSessionDay;
+  day_in?: ClassSessionDay[] | ClassSessionDay;
+  day_not_in?: ClassSessionDay[] | ClassSessionDay;
+  startTime?: String;
+  startTime_not?: String;
+  startTime_in?: String[] | String;
+  startTime_not_in?: String[] | String;
+  startTime_lt?: String;
+  startTime_lte?: String;
+  startTime_gt?: String;
+  startTime_gte?: String;
+  startTime_contains?: String;
+  startTime_not_contains?: String;
+  startTime_starts_with?: String;
+  startTime_not_starts_with?: String;
+  startTime_ends_with?: String;
+  startTime_not_ends_with?: String;
+  endTime?: String;
+  endTime_not?: String;
+  endTime_in?: String[] | String;
+  endTime_not_in?: String[] | String;
+  endTime_lt?: String;
+  endTime_lte?: String;
+  endTime_gt?: String;
+  endTime_gte?: String;
+  endTime_contains?: String;
+  endTime_not_contains?: String;
+  endTime_starts_with?: String;
+  endTime_not_starts_with?: String;
+  endTime_ends_with?: String;
+  endTime_not_ends_with?: String;
+  capacity?: Int;
+  capacity_not?: Int;
+  capacity_in?: Int[] | Int;
+  capacity_not_in?: Int[] | Int;
+  capacity_lt?: Int;
+  capacity_lte?: Int;
+  capacity_gt?: Int;
+  capacity_gte?: Int;
+  AND?: ClassSessionWhereInput[] | ClassSessionWhereInput;
+  OR?: ClassSessionWhereInput[] | ClassSessionWhereInput;
+  NOT?: ClassSessionWhereInput[] | ClassSessionWhereInput;
 }
 
 export interface ClassSessionSubscriptionWhereInput {
@@ -817,6 +822,7 @@ export interface UserWhereInput {
 }
 
 export interface ClassUpdateManyDataInput {
+  price?: Int;
   name?: String;
   description?: String;
   streetUnit?: String;
@@ -914,6 +920,7 @@ export interface ClassUpdateWithWhereUniqueWithoutCreatorInput {
 }
 
 export interface ClassUpdateManyMutationInput {
+  price?: Int;
   name?: String;
   description?: String;
   streetUnit?: String;
@@ -998,6 +1005,7 @@ export interface ClassSessionScalarWhereInput {
 }
 
 export interface ClassCreateWithoutCreatorInput {
+  price: Int;
   name: String;
   description: String;
   categories?: ClassCategoryCreateManyInput;
@@ -1026,6 +1034,14 @@ export interface ClassScalarWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
+  price?: Int;
+  price_not?: Int;
+  price_in?: Int[] | Int;
+  price_not_in?: Int[] | Int;
+  price_lt?: Int;
+  price_lte?: Int;
+  price_gt?: Int;
+  price_gte?: Int;
   name?: String;
   name_not?: String;
   name_in?: String[] | String;
@@ -1173,6 +1189,14 @@ export interface ClassWhereInput {
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
   creator?: UserWhereInput;
+  price?: Int;
+  price_not?: Int;
+  price_in?: Int[] | Int;
+  price_not_in?: Int[] | Int;
+  price_lt?: Int;
+  price_lte?: Int;
+  price_gt?: Int;
+  price_gte?: Int;
   name?: String;
   name_not?: String;
   name_in?: String[] | String;
@@ -1515,6 +1539,7 @@ export interface AggregateClassSessionSubscription
 
 export interface Class {
   id: ID_Output;
+  price: Int;
   name: String;
   description: String;
   streetUnit: String;
@@ -1529,6 +1554,7 @@ export interface Class {
 export interface ClassPromise extends Promise<Class>, Fragmentable {
   id: () => Promise<ID_Output>;
   creator: <T = UserPromise>() => T;
+  price: () => Promise<Int>;
   name: () => Promise<String>;
   description: () => Promise<String>;
   categories: <T = FragmentableArray<ClassCategory>>(
@@ -1567,6 +1593,7 @@ export interface ClassSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   creator: <T = UserSubscription>() => T;
+  price: () => Promise<AsyncIterator<Int>>;
   name: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   categories: <T = Promise<AsyncIterator<ClassCategorySubscription>>>(
@@ -1667,6 +1694,7 @@ export interface ClassCategoryEdgeSubscription
 
 export interface ClassPreviousValues {
   id: ID_Output;
+  price: Int;
   name: String;
   description: String;
   streetUnit: String;
@@ -1682,6 +1710,7 @@ export interface ClassPreviousValuesPromise
   extends Promise<ClassPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  price: () => Promise<Int>;
   name: () => Promise<String>;
   description: () => Promise<String>;
   streetUnit: () => Promise<String>;
@@ -1697,6 +1726,7 @@ export interface ClassPreviousValuesSubscription
   extends Promise<AsyncIterator<ClassPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  price: () => Promise<AsyncIterator<Int>>;
   name: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   streetUnit: () => Promise<AsyncIterator<String>>;
