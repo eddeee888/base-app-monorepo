@@ -8,6 +8,12 @@ import { ClassSaveInput, ClassSessionDay } from "./../../../../../__generated__/
 // GraphQL mutation operation: HostClassSave
 // ====================================================
 
+export interface HostClassSave_classSave_class_category {
+  __typename: "ClassCategory";
+  id: string;
+  name: string;
+}
+
 export interface HostClassSave_classSave_class_sessions {
   __typename: "ClassSession";
   id: string;
@@ -21,7 +27,7 @@ export interface HostClassSave_classSave_class {
   __typename: "Class";
   id: string;
   name: string;
-  category: string;
+  category: HostClassSave_classSave_class_category;
   description: string;
   streetAddress: string;
   city: string;

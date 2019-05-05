@@ -1,18 +1,25 @@
 import Block from 'common/components/Block';
-import H1 from 'common/components/H1';
 import Main from 'common/components/Main';
+import useParams from 'common/hooks/useParams';
 import React from 'react';
+import ClassesDisplay from './components/ClassesDisplay';
+import ClassQuery from './components/ClassQuery';
 
-interface Props {
-  name: string;
+interface ClassesParams {
+  classId: string;
 }
 
-const Classes: React.FunctionComponent<Props> = ({ name }) => (
-  <Main>
-    <Block size="md">
-      <H1>{name}</H1>
-    </Block>
-  </Main>
-);
+const Classes: React.FunctionComponent = () => {
+  const { classId } = useParams<ClassesParams>();
+  return (
+    <Main>
+      <Block size="md">
+        <ClassQuery variables={{ classId }}>
+          {result => <ClassesDisplay classQueryResult={result} />}
+        </ClassQuery>
+      </Block>
+    </Main>
+  );
+};
 
 export default Classes;
