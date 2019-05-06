@@ -85,15 +85,10 @@ const createClass = async (
       }
     });
 
-    const categoriesPromise = prisma.class({ id: newClass.id }).categories();
-    const sessionsPromise = prisma.class({ id: newClass.id }).sessions();
-
     return {
       result: {
         class: {
-          ...newClass,
-          category: (await categoriesPromise)[0],
-          sessions: await sessionsPromise
+          ...newClass
         }
       }
     };

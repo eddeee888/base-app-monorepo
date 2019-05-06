@@ -1,4 +1,3 @@
-import { ClassSessionDay, ClassSessionInput } from '__generated__/globalTypes';
 import { linkgen, Paths } from 'common/helpers/pathing';
 import { RouteComponentProps } from 'react-router';
 import { ClassSaveMutationFn } from '../components/ClassSaveMutation';
@@ -20,19 +19,9 @@ const createHostClassSubmitFn: CreateHostClassSaveFn = (
       variables: {
         input: {
           ...values.details,
+          price: values.details.price as number, // We need this here because input is `number | ''`
           ...values.contact,
-          sessions: values.sessions.sessions.reduce<ClassSessionInput[]>(
-            (sessionsArray, nextSession) => {
-              if (!!nextSession.day) {
-                sessionsArray.push({
-                  ...nextSession,
-                  day: ClassSessionDay[nextSession.day]
-                });
-              }
-              return sessionsArray;
-            },
-            []
-          )
+          sessions: values.sessions.sessions as any // Day input is `ClassSessionDay | ''`
         }
       }
     });

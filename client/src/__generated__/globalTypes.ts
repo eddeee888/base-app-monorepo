@@ -18,6 +18,7 @@ export enum ClassSessionDay {
 
 export interface ClassSaveInput {
   name: string;
+  price: number;
   category: string;
   description: string;
   streetAddress: string;

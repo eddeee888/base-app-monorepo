@@ -1,5 +1,6 @@
 # import Mutation.* from "admin.graphql"
 # import Mutation.* from "authentication.graphql"
+# import Query.* from "class.graphql"
 # import Mutation.* from "class.graphql"
 
 type Query {
