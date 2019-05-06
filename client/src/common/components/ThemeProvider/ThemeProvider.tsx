@@ -25,7 +25,10 @@ const theme = createMuiTheme({
       ','
     ),
     h1: {
-      fontSize: '4.25rem'
+      fontSize: '2.5rem'
+    },
+    h2: {
+      fontSize: '2rem'
     }
   }
 });

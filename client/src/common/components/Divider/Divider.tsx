@@ -17,9 +17,9 @@ const Divider: FunctionComponent<DividerProps> = ({
 }) => {
   return (
     <>
-      <Box mt={marginTop} />
+      {marginTop && <Box mt={marginTop} />}
       <MUIDivider {...props} />
-      <Box mb={marginBottom} />
+      {marginBottom && <Box mb={marginBottom} />}
     </>
   );
 };
