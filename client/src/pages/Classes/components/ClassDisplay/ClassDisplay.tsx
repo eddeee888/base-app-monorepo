@@ -11,7 +11,7 @@ interface Props {
   classQueryResult: ClassQueryResult;
 }
 
-const ClassesDisplay: React.FunctionComponent<Props> = ({
+const ClassDisplay: React.FunctionComponent<Props> = ({
   classQueryResult: { data, loading, error }
 }) => {
   if (error) {
@@ -22,15 +22,22 @@ const ClassesDisplay: React.FunctionComponent<Props> = ({
     return <div>Loading ... </div>;
   }
 
-  if (!data) {
+  if (!data || !data.class) {
     return <div>No data...</div>;
   }
 
-  if (!data.class) {
-    return <div>No data...</div>;
-  }
-
-  const { name, category, description, price } = data.class;
+  const {
+    name,
+    category,
+    description,
+    price,
+    streetAddress,
+    streetUnit,
+    city,
+    state,
+    postcode,
+    country
+  } = data.class;
 
   return (
     <>
@@ -43,25 +50,45 @@ const ClassesDisplay: React.FunctionComponent<Props> = ({
           <H2>$ {price}</H2>
         </Grid>
       </Grid>
-
       <Grid container>
         <Text>{category.name}</Text>
       </Grid>
 
       <Grid container>
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <Divider marginTop={2} marginBottom={2} />
         </Grid>
       </Grid>
 
       <Grid container direction="column">
-        <Text>
-          <b>About this class:</b>
-        </Text>
+        <H2 variant="body1">
+          <b>About this class</b>
+        </H2>
         <Text>{description}</Text>
+      </Grid>
+      <Box mt={2} />
+      <Grid container direction="column">
+        <H2 variant="body1">
+          <b>Address</b>
+        </H2>
+        <Grid item xs={12} sm={8}>
+          <Text>
+            {streetUnit ? streetUnit + ', ' : ''}
+            {streetAddress}
+          </Text>
+          <Text>
+            {city} {state} {postcode} {country}
+          </Text>
+        </Grid>
+      </Grid>
+
+      <Grid container>
+        <Grid item xs={12}>
+          <Divider marginTop={2} marginBottom={2} />
+        </Grid>
       </Grid>
     </>
   );
 };
 
-export default ClassesDisplay;
+export default ClassDisplay;

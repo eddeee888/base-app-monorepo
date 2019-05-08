@@ -1,1 +1,1 @@
-export { default } from './ClassesDisplay';
+export { default } from './ClassDisplay';
