@@ -1,5 +1,6 @@
 import { ClassSessionDay } from '__generated__/globalTypes';
 import { SelectOption } from 'common/components/Select/Select';
+import { dayMap } from 'common/constants/dayMap';
 import {
   ClassSession,
   HostClassFormPart,
@@ -52,17 +53,6 @@ const dayArray: Array<keyof typeof ClassSessionDay> = [
   'SATURDAY',
   'SUNDAY'
 ];
-
-type DayMap = { [key in ClassSessionDay]: string };
-export const dayMap: DayMap = {
-  MONDAY: 'Monday',
-  TUESDAY: 'Tuesday',
-  WEDNESDAY: 'Wednesday',
-  THURSDAY: 'Thursday',
-  FRIDAY: 'Friday',
-  SATURDAY: 'Saturday',
-  SUNDAY: 'Sunday'
-};
 
 const dayOptions: Array<
   SelectOption<keyof typeof ClassSessionDay, string>

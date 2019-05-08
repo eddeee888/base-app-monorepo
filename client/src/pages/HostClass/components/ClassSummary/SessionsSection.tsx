@@ -2,7 +2,7 @@ import { Grid } from '@material-ui/core';
 import H2 from 'common/components/H2';
 import Link from 'common/components/Link';
 import Text from 'common/components/Text';
-import { dayMap } from 'pages/HostClass/constants';
+import { dayMap } from 'common/constants/dayMap';
 import React from 'react';
 import linkgenHostClass from '../../helpers/linkgenHostClass';
 import useHostClassParams from '../../hooks/useHostClassParams';
