@@ -1,4 +1,4 @@
-# @bit/eddeee888.base-react-app-utils.graphql
+# Base React App
 
 ## CLI & containers
 
@@ -8,30 +8,30 @@ To start on MacOS, install the CLI command to make development easier. Go to the
 ./bin/init.sh
 ```
 
-This will create allow you to use `@bit/eddeee888.base-react-app-utils.graphql` in the CLI to control the project from anywhere, not just in the project folder. Typing `@bit/eddeee888.base-react-app-utils.graphql` in the CLI will show options. For example:
+This will create allow you to use `bra` in the CLI to control the project from anywhere, not just in the project folder. Typing `bra` in the CLI will show options. For example:
 
-To build/rebuild:
-
-```
-@bit/eddeee888.base-react-app-utils.graphql rebuild
-```
-
-To start the project:
+To build/rebuild (`service_name` is optional):
 
 ```
-@bit/eddeee888.base-react-app-utils.graphql start
+bra build <service_name>
 ```
 
-To stop the project:
+To start the project (`service_name` is optional):
 
 ```
-@bit/eddeee888.base-react-app-utils.graphql stop
+bra start <service_name>
 ```
 
-The project should be accessible on http://localhost. It is recommended to add the dev base URL to your hosts file. The default is `http://@bit/eddeee888.base-react-app-utils.graphql.com.dockervm`. It should look something like this:
+To stop the project (`service_name` is optional):
 
 ```
-127.0.0.1   @bit/eddeee888.base-react-app-utils.graphql.com.dockervm
+bra stop <service_name>
+```
+
+The project should be accessible on http://localhost. It is recommended to add the dev base URL to your hosts file. The default is `http://bra.com.dockervm`. It should look something like this:
+
+```
+127.0.0.1   bra.com.dockervm
 ```
 
 This setup step is optional. You can use `docker-compose` from the root of the project as an alternative.
@@ -41,16 +41,6 @@ This setup step is optional. You can use `docker-compose` from the root of the p
 Endpoint + subscription: `/graphql`
 
 Interactive endpoint (graphiql): `/graphql/interactive`
-
-## Bit
-
-We are using bit as our shared utils repository. To be able to download the packages:
-
-- Create an account on https://bitsrc.io
-- Install bit cli
-- Login via bit cli
-- Run `bit config` and get the token
-- Put that token into `BIT_NPM_TOKEN` in `.env`
 
 ## Prisma
 
