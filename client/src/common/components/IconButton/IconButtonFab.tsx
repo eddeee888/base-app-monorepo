@@ -7,14 +7,15 @@ interface FabProps extends DefaultFabProps, Icon {
   fontSize?: SvgIconProps['fontSize'];
 }
 
-const IconButtonFab: React.FunctionComponent<FabProps> = forwardRef(
-  ({ icon, fontSize, ...props }, ref) => {
-    return (
-      <DefaultFab {...props} ref={ref}>
-        {createIcon(icon, { fontSize })}
-      </DefaultFab>
-    );
-  }
-);
+const IconButtonFab: React.FunctionComponent<FabProps> = forwardRef<
+  any,
+  FabProps
+>(({ icon, fontSize, ...props }, ref) => {
+  return (
+    <DefaultFab {...props} ref={ref}>
+      {createIcon(icon, { fontSize })}
+    </DefaultFab>
+  );
+});
 
 export default IconButtonFab;
