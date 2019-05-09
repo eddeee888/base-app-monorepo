@@ -3,10 +3,7 @@ export enum Paths {
   login = '/login',
   signup = '/signup',
   logout = '/logout',
-  dashboard = '/dashboard',
-  hostClass = '/host-a-class',
-  hostClassSuccess = '/host-a-class-success',
-  classes = '/classes'
+  dashboard = '/dashboard'
 }
 
 export enum UrlQueryKeys {
