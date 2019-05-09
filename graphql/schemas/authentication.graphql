@@ -1,3 +1,7 @@
+type Query {
+  user(id: ID!): User
+}
+
 type Mutation {
   signup(input: SignupInput!): SignupPayload!
   login(input: LoginInput!): LoginPayload
@@ -12,11 +16,6 @@ type User {
   displayName: String
 }
 
-type ClassCategory {
-  id: ID!
-  name: String!
-}
-
 input SignupInput {
   email: String!
   firstName: String!
@@ -27,14 +26,6 @@ input SignupInput {
 input LoginInput {
   email: String!
   password: String!
-}
-
-input CreateClassCategoryInput {
-  name: String!
-}
-
-type CreateClassCategoryPayload {
-  classCategory: ClassCategory!
 }
 
 type SignupPayload {

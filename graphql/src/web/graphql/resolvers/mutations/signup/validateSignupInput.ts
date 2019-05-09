@@ -2,7 +2,7 @@ import {
   emailValidation,
   nameValidation,
   passwordValidation
-} from '@bit/eddeee888.learnd-utils.forms.validations';
+} from '@bit/eddeee888.base-react-app-utils.validations';
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
 
 interface ValidationData {

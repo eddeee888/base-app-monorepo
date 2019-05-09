@@ -14,9 +14,6 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U];
 
 export interface Exists {
-  class: (where?: ClassWhereInput) => Promise<boolean>;
-  classCategory: (where?: ClassCategoryWhereInput) => Promise<boolean>;
-  classSession: (where?: ClassSessionWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -39,75 +36,6 @@ export interface Prisma {
    * Queries
    */
 
-  class: (where: ClassWhereUniqueInput) => ClassPromise;
-  classes: (
-    args?: {
-      where?: ClassWhereInput;
-      orderBy?: ClassOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<Class>;
-  classesConnection: (
-    args?: {
-      where?: ClassWhereInput;
-      orderBy?: ClassOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => ClassConnectionPromise;
-  classCategory: (where: ClassCategoryWhereUniqueInput) => ClassCategoryPromise;
-  classCategories: (
-    args?: {
-      where?: ClassCategoryWhereInput;
-      orderBy?: ClassCategoryOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<ClassCategory>;
-  classCategoriesConnection: (
-    args?: {
-      where?: ClassCategoryWhereInput;
-      orderBy?: ClassCategoryOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => ClassCategoryConnectionPromise;
-  classSession: (where: ClassSessionWhereUniqueInput) => ClassSessionPromise;
-  classSessions: (
-    args?: {
-      where?: ClassSessionWhereInput;
-      orderBy?: ClassSessionOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<ClassSession>;
-  classSessionsConnection: (
-    args?: {
-      where?: ClassSessionWhereInput;
-      orderBy?: ClassSessionOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => ClassSessionConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserPromise;
   users: (
     args?: {
@@ -137,71 +65,6 @@ export interface Prisma {
    * Mutations
    */
 
-  createClass: (data: ClassCreateInput) => ClassPromise;
-  updateClass: (
-    args: { data: ClassUpdateInput; where: ClassWhereUniqueInput }
-  ) => ClassPromise;
-  updateManyClasses: (
-    args: { data: ClassUpdateManyMutationInput; where?: ClassWhereInput }
-  ) => BatchPayloadPromise;
-  upsertClass: (
-    args: {
-      where: ClassWhereUniqueInput;
-      create: ClassCreateInput;
-      update: ClassUpdateInput;
-    }
-  ) => ClassPromise;
-  deleteClass: (where: ClassWhereUniqueInput) => ClassPromise;
-  deleteManyClasses: (where?: ClassWhereInput) => BatchPayloadPromise;
-  createClassCategory: (data: ClassCategoryCreateInput) => ClassCategoryPromise;
-  updateClassCategory: (
-    args: {
-      data: ClassCategoryUpdateInput;
-      where: ClassCategoryWhereUniqueInput;
-    }
-  ) => ClassCategoryPromise;
-  updateManyClassCategories: (
-    args: {
-      data: ClassCategoryUpdateManyMutationInput;
-      where?: ClassCategoryWhereInput;
-    }
-  ) => BatchPayloadPromise;
-  upsertClassCategory: (
-    args: {
-      where: ClassCategoryWhereUniqueInput;
-      create: ClassCategoryCreateInput;
-      update: ClassCategoryUpdateInput;
-    }
-  ) => ClassCategoryPromise;
-  deleteClassCategory: (
-    where: ClassCategoryWhereUniqueInput
-  ) => ClassCategoryPromise;
-  deleteManyClassCategories: (
-    where?: ClassCategoryWhereInput
-  ) => BatchPayloadPromise;
-  createClassSession: (data: ClassSessionCreateInput) => ClassSessionPromise;
-  updateClassSession: (
-    args: { data: ClassSessionUpdateInput; where: ClassSessionWhereUniqueInput }
-  ) => ClassSessionPromise;
-  updateManyClassSessions: (
-    args: {
-      data: ClassSessionUpdateManyMutationInput;
-      where?: ClassSessionWhereInput;
-    }
-  ) => BatchPayloadPromise;
-  upsertClassSession: (
-    args: {
-      where: ClassSessionWhereUniqueInput;
-      create: ClassSessionCreateInput;
-      update: ClassSessionUpdateInput;
-    }
-  ) => ClassSessionPromise;
-  deleteClassSession: (
-    where: ClassSessionWhereUniqueInput
-  ) => ClassSessionPromise;
-  deleteManyClassSessions: (
-    where?: ClassSessionWhereInput
-  ) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (
     args: { data: UserUpdateInput; where: UserWhereUniqueInput }
@@ -227,15 +90,6 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  class: (
-    where?: ClassSubscriptionWhereInput
-  ) => ClassSubscriptionPayloadSubscription;
-  classCategory: (
-    where?: ClassCategorySubscriptionWhereInput
-  ) => ClassCategorySubscriptionPayloadSubscription;
-  classSession: (
-    where?: ClassSessionSubscriptionWhereInput
-  ) => ClassSessionSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -248,69 +102,6 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
-
-export type ClassSessionDay =
-  | "MONDAY"
-  | "TUESDAY"
-  | "WEDNESDAY"
-  | "THURSDAY"
-  | "FRIDAY"
-  | "SATURDAY"
-  | "SUNDAY";
-
-export type ClassOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "price_ASC"
-  | "price_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "streetUnit_ASC"
-  | "streetUnit_DESC"
-  | "streetAddress_ASC"
-  | "streetAddress_DESC"
-  | "city_ASC"
-  | "city_DESC"
-  | "postcode_ASC"
-  | "postcode_DESC"
-  | "state_ASC"
-  | "state_DESC"
-  | "country_ASC"
-  | "country_DESC"
-  | "contactNumber_ASC"
-  | "contactNumber_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type ClassCategoryOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type ClassSessionOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "day_ASC"
-  | "day_DESC"
-  | "startTime_ASC"
-  | "startTime_DESC"
-  | "endTime_ASC"
-  | "endTime_DESC"
-  | "capacity_ASC"
-  | "capacity_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -334,240 +125,13 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface ClassCategoryUpdateManyInput {
-  create?: ClassCategoryCreateInput[] | ClassCategoryCreateInput;
-  update?:
-    | ClassCategoryUpdateWithWhereUniqueNestedInput[]
-    | ClassCategoryUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | ClassCategoryUpsertWithWhereUniqueNestedInput[]
-    | ClassCategoryUpsertWithWhereUniqueNestedInput;
-  delete?: ClassCategoryWhereUniqueInput[] | ClassCategoryWhereUniqueInput;
-  connect?: ClassCategoryWhereUniqueInput[] | ClassCategoryWhereUniqueInput;
-  set?: ClassCategoryWhereUniqueInput[] | ClassCategoryWhereUniqueInput;
-  disconnect?: ClassCategoryWhereUniqueInput[] | ClassCategoryWhereUniqueInput;
-  deleteMany?: ClassCategoryScalarWhereInput[] | ClassCategoryScalarWhereInput;
-  updateMany?:
-    | ClassCategoryUpdateManyWithWhereNestedInput[]
-    | ClassCategoryUpdateManyWithWhereNestedInput;
-}
-
-export type ClassWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface ClassCategoryScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  AND?: ClassCategoryScalarWhereInput[] | ClassCategoryScalarWhereInput;
-  OR?: ClassCategoryScalarWhereInput[] | ClassCategoryScalarWhereInput;
-  NOT?: ClassCategoryScalarWhereInput[] | ClassCategoryScalarWhereInput;
-}
-
-export interface ClassCategoryWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  AND?: ClassCategoryWhereInput[] | ClassCategoryWhereInput;
-  OR?: ClassCategoryWhereInput[] | ClassCategoryWhereInput;
-  NOT?: ClassCategoryWhereInput[] | ClassCategoryWhereInput;
-}
-
-export interface UserCreateOneWithoutClassesInput {
-  create?: UserCreateWithoutClassesInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface ClassCategoryUpdateInput {
-  name?: String;
-}
-
-export interface UserCreateWithoutClassesInput {
+export interface UserCreateInput {
   email: String;
   displayName?: String;
   firstName: String;
   lastName: String;
   password: String;
   userGroup: String;
-}
-
-export interface ClassCategoryUpdateManyWithWhereNestedInput {
-  where: ClassCategoryScalarWhereInput;
-  data: ClassCategoryUpdateManyDataInput;
-}
-
-export interface ClassCategoryCreateManyInput {
-  create?: ClassCategoryCreateInput[] | ClassCategoryCreateInput;
-  connect?: ClassCategoryWhereUniqueInput[] | ClassCategoryWhereUniqueInput;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: UserWhereInput;
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-}
-
-export interface ClassCategoryCreateInput {
-  name: String;
-}
-
-export interface ClassCategorySubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: ClassCategoryWhereInput;
-  AND?:
-    | ClassCategorySubscriptionWhereInput[]
-    | ClassCategorySubscriptionWhereInput;
-  OR?:
-    | ClassCategorySubscriptionWhereInput[]
-    | ClassCategorySubscriptionWhereInput;
-  NOT?:
-    | ClassCategorySubscriptionWhereInput[]
-    | ClassCategorySubscriptionWhereInput;
-}
-
-export interface ClassSessionCreateManyInput {
-  create?: ClassSessionCreateInput[] | ClassSessionCreateInput;
-  connect?: ClassSessionWhereUniqueInput[] | ClassSessionWhereUniqueInput;
-}
-
-export interface UserUpdateManyMutationInput {
-  email?: String;
-  displayName?: String;
-  firstName?: String;
-  lastName?: String;
-  password?: String;
-  userGroup?: String;
-}
-
-export interface ClassSessionCreateInput {
-  day: ClassSessionDay;
-  startTime: String;
-  endTime: String;
-  capacity: Int;
-}
-
-export interface ClassUpdateManyWithWhereNestedInput {
-  where: ClassScalarWhereInput;
-  data: ClassUpdateManyDataInput;
-}
-
-export interface ClassUpdateInput {
-  creator?: UserUpdateOneRequiredWithoutClassesInput;
-  price?: Int;
-  name?: String;
-  description?: String;
-  categories?: ClassCategoryUpdateManyInput;
-  streetUnit?: String;
-  streetAddress?: String;
-  city?: String;
-  postcode?: String;
-  state?: String;
-  country?: String;
-  contactNumber?: String;
-  sessions?: ClassSessionUpdateManyInput;
-}
-
-export type ClassCategoryWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface UserUpdateOneRequiredWithoutClassesInput {
-  create?: UserCreateWithoutClassesInput;
-  update?: UserUpdateWithoutClassesDataInput;
-  upsert?: UserUpsertWithoutClassesInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface ClassUpdateWithoutCreatorDataInput {
-  price?: Int;
-  name?: String;
-  description?: String;
-  categories?: ClassCategoryUpdateManyInput;
-  streetUnit?: String;
-  streetAddress?: String;
-  city?: String;
-  postcode?: String;
-  state?: String;
-  country?: String;
-  contactNumber?: String;
-  sessions?: ClassSessionUpdateManyInput;
-}
-
-export interface UserUpdateWithoutClassesDataInput {
-  email?: String;
-  displayName?: String;
-  firstName?: String;
-  lastName?: String;
-  password?: String;
-  userGroup?: String;
-}
-
-export type ClassSessionWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface UserUpsertWithoutClassesInput {
-  update: UserUpdateWithoutClassesDataInput;
-  create: UserCreateWithoutClassesInput;
 }
 
 export interface UserUpdateInput {
@@ -577,141 +141,15 @@ export interface UserUpdateInput {
   lastName?: String;
   password?: String;
   userGroup?: String;
-  classes?: ClassUpdateManyWithoutCreatorInput;
 }
 
-export interface ClassCategoryUpdateManyMutationInput {
-  name?: String;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
+export interface UserUpdateManyMutationInput {
   email?: String;
-}>;
-
-export interface ClassCategoryUpdateWithWhereUniqueNestedInput {
-  where: ClassCategoryWhereUniqueInput;
-  data: ClassCategoryUpdateDataInput;
-}
-
-export interface UserCreateInput {
-  email: String;
   displayName?: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  userGroup: String;
-  classes?: ClassCreateManyWithoutCreatorInput;
-}
-
-export interface ClassCategoryUpdateDataInput {
-  name?: String;
-}
-
-export interface ClassSessionUpdateInput {
-  day?: ClassSessionDay;
-  startTime?: String;
-  endTime?: String;
-  capacity?: Int;
-}
-
-export interface ClassCategoryUpsertWithWhereUniqueNestedInput {
-  where: ClassCategoryWhereUniqueInput;
-  update: ClassCategoryUpdateDataInput;
-  create: ClassCategoryCreateInput;
-}
-
-export interface ClassCreateInput {
-  creator: UserCreateOneWithoutClassesInput;
-  price: Int;
-  name: String;
-  description: String;
-  categories?: ClassCategoryCreateManyInput;
-  streetUnit: String;
-  streetAddress: String;
-  city: String;
-  postcode: String;
-  state: String;
-  country: String;
-  contactNumber: String;
-  sessions?: ClassSessionCreateManyInput;
-}
-
-export interface ClassSessionWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  day?: ClassSessionDay;
-  day_not?: ClassSessionDay;
-  day_in?: ClassSessionDay[] | ClassSessionDay;
-  day_not_in?: ClassSessionDay[] | ClassSessionDay;
-  startTime?: String;
-  startTime_not?: String;
-  startTime_in?: String[] | String;
-  startTime_not_in?: String[] | String;
-  startTime_lt?: String;
-  startTime_lte?: String;
-  startTime_gt?: String;
-  startTime_gte?: String;
-  startTime_contains?: String;
-  startTime_not_contains?: String;
-  startTime_starts_with?: String;
-  startTime_not_starts_with?: String;
-  startTime_ends_with?: String;
-  startTime_not_ends_with?: String;
-  endTime?: String;
-  endTime_not?: String;
-  endTime_in?: String[] | String;
-  endTime_not_in?: String[] | String;
-  endTime_lt?: String;
-  endTime_lte?: String;
-  endTime_gt?: String;
-  endTime_gte?: String;
-  endTime_contains?: String;
-  endTime_not_contains?: String;
-  endTime_starts_with?: String;
-  endTime_not_starts_with?: String;
-  endTime_ends_with?: String;
-  endTime_not_ends_with?: String;
-  capacity?: Int;
-  capacity_not?: Int;
-  capacity_in?: Int[] | Int;
-  capacity_not_in?: Int[] | Int;
-  capacity_lt?: Int;
-  capacity_lte?: Int;
-  capacity_gt?: Int;
-  capacity_gte?: Int;
-  AND?: ClassSessionWhereInput[] | ClassSessionWhereInput;
-  OR?: ClassSessionWhereInput[] | ClassSessionWhereInput;
-  NOT?: ClassSessionWhereInput[] | ClassSessionWhereInput;
-}
-
-export interface ClassSessionSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: ClassSessionWhereInput;
-  AND?:
-    | ClassSessionSubscriptionWhereInput[]
-    | ClassSessionSubscriptionWhereInput;
-  OR?:
-    | ClassSessionSubscriptionWhereInput[]
-    | ClassSessionSubscriptionWhereInput;
-  NOT?:
-    | ClassSessionSubscriptionWhereInput[]
-    | ClassSessionSubscriptionWhereInput;
+  firstName?: String;
+  lastName?: String;
+  password?: String;
+  userGroup?: String;
 }
 
 export interface UserWhereInput {
@@ -813,536 +251,61 @@ export interface UserWhereInput {
   userGroup_not_starts_with?: String;
   userGroup_ends_with?: String;
   userGroup_not_ends_with?: String;
-  classes_every?: ClassWhereInput;
-  classes_some?: ClassWhereInput;
-  classes_none?: ClassWhereInput;
   AND?: UserWhereInput[] | UserWhereInput;
   OR?: UserWhereInput[] | UserWhereInput;
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface ClassUpdateManyDataInput {
-  price?: Int;
-  name?: String;
-  description?: String;
-  streetUnit?: String;
-  streetAddress?: String;
-  city?: String;
-  postcode?: String;
-  state?: String;
-  country?: String;
-  contactNumber?: String;
-}
-
-export interface ClassCategoryUpdateManyDataInput {
-  name?: String;
-}
-
-export interface ClassUpsertWithWhereUniqueWithoutCreatorInput {
-  where: ClassWhereUniqueInput;
-  update: ClassUpdateWithoutCreatorDataInput;
-  create: ClassCreateWithoutCreatorInput;
-}
-
-export interface ClassSessionUpdateManyInput {
-  create?: ClassSessionCreateInput[] | ClassSessionCreateInput;
-  update?:
-    | ClassSessionUpdateWithWhereUniqueNestedInput[]
-    | ClassSessionUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | ClassSessionUpsertWithWhereUniqueNestedInput[]
-    | ClassSessionUpsertWithWhereUniqueNestedInput;
-  delete?: ClassSessionWhereUniqueInput[] | ClassSessionWhereUniqueInput;
-  connect?: ClassSessionWhereUniqueInput[] | ClassSessionWhereUniqueInput;
-  set?: ClassSessionWhereUniqueInput[] | ClassSessionWhereUniqueInput;
-  disconnect?: ClassSessionWhereUniqueInput[] | ClassSessionWhereUniqueInput;
-  deleteMany?: ClassSessionScalarWhereInput[] | ClassSessionScalarWhereInput;
-  updateMany?:
-    | ClassSessionUpdateManyWithWhereNestedInput[]
-    | ClassSessionUpdateManyWithWhereNestedInput;
-}
-
-export interface ClassUpdateManyWithoutCreatorInput {
-  create?: ClassCreateWithoutCreatorInput[] | ClassCreateWithoutCreatorInput;
-  delete?: ClassWhereUniqueInput[] | ClassWhereUniqueInput;
-  connect?: ClassWhereUniqueInput[] | ClassWhereUniqueInput;
-  set?: ClassWhereUniqueInput[] | ClassWhereUniqueInput;
-  disconnect?: ClassWhereUniqueInput[] | ClassWhereUniqueInput;
-  update?:
-    | ClassUpdateWithWhereUniqueWithoutCreatorInput[]
-    | ClassUpdateWithWhereUniqueWithoutCreatorInput;
-  upsert?:
-    | ClassUpsertWithWhereUniqueWithoutCreatorInput[]
-    | ClassUpsertWithWhereUniqueWithoutCreatorInput;
-  deleteMany?: ClassScalarWhereInput[] | ClassScalarWhereInput;
-  updateMany?:
-    | ClassUpdateManyWithWhereNestedInput[]
-    | ClassUpdateManyWithWhereNestedInput;
-}
-
-export interface ClassSessionUpdateWithWhereUniqueNestedInput {
-  where: ClassSessionWhereUniqueInput;
-  data: ClassSessionUpdateDataInput;
-}
-
-export interface ClassCreateManyWithoutCreatorInput {
-  create?: ClassCreateWithoutCreatorInput[] | ClassCreateWithoutCreatorInput;
-  connect?: ClassWhereUniqueInput[] | ClassWhereUniqueInput;
-}
-
-export interface ClassSessionUpdateDataInput {
-  day?: ClassSessionDay;
-  startTime?: String;
-  endTime?: String;
-  capacity?: Int;
-}
-
-export interface ClassSubscriptionWhereInput {
+export interface UserSubscriptionWhereInput {
   mutation_in?: MutationType[] | MutationType;
   updatedFields_contains?: String;
   updatedFields_contains_every?: String[] | String;
   updatedFields_contains_some?: String[] | String;
-  node?: ClassWhereInput;
-  AND?: ClassSubscriptionWhereInput[] | ClassSubscriptionWhereInput;
-  OR?: ClassSubscriptionWhereInput[] | ClassSubscriptionWhereInput;
-  NOT?: ClassSubscriptionWhereInput[] | ClassSubscriptionWhereInput;
+  node?: UserWhereInput;
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
 }
 
-export interface ClassSessionUpsertWithWhereUniqueNestedInput {
-  where: ClassSessionWhereUniqueInput;
-  update: ClassSessionUpdateDataInput;
-  create: ClassSessionCreateInput;
-}
-
-export interface ClassUpdateWithWhereUniqueWithoutCreatorInput {
-  where: ClassWhereUniqueInput;
-  data: ClassUpdateWithoutCreatorDataInput;
-}
-
-export interface ClassUpdateManyMutationInput {
-  price?: Int;
-  name?: String;
-  description?: String;
-  streetUnit?: String;
-  streetAddress?: String;
-  city?: String;
-  postcode?: String;
-  state?: String;
-  country?: String;
-  contactNumber?: String;
-}
-
-export interface ClassSessionUpdateManyDataInput {
-  day?: ClassSessionDay;
-  startTime?: String;
-  endTime?: String;
-  capacity?: Int;
-}
-
-export interface ClassSessionUpdateManyWithWhereNestedInput {
-  where: ClassSessionScalarWhereInput;
-  data: ClassSessionUpdateManyDataInput;
-}
-
-export interface ClassSessionScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  day?: ClassSessionDay;
-  day_not?: ClassSessionDay;
-  day_in?: ClassSessionDay[] | ClassSessionDay;
-  day_not_in?: ClassSessionDay[] | ClassSessionDay;
-  startTime?: String;
-  startTime_not?: String;
-  startTime_in?: String[] | String;
-  startTime_not_in?: String[] | String;
-  startTime_lt?: String;
-  startTime_lte?: String;
-  startTime_gt?: String;
-  startTime_gte?: String;
-  startTime_contains?: String;
-  startTime_not_contains?: String;
-  startTime_starts_with?: String;
-  startTime_not_starts_with?: String;
-  startTime_ends_with?: String;
-  startTime_not_ends_with?: String;
-  endTime?: String;
-  endTime_not?: String;
-  endTime_in?: String[] | String;
-  endTime_not_in?: String[] | String;
-  endTime_lt?: String;
-  endTime_lte?: String;
-  endTime_gt?: String;
-  endTime_gte?: String;
-  endTime_contains?: String;
-  endTime_not_contains?: String;
-  endTime_starts_with?: String;
-  endTime_not_starts_with?: String;
-  endTime_ends_with?: String;
-  endTime_not_ends_with?: String;
-  capacity?: Int;
-  capacity_not?: Int;
-  capacity_in?: Int[] | Int;
-  capacity_not_in?: Int[] | Int;
-  capacity_lt?: Int;
-  capacity_lte?: Int;
-  capacity_gt?: Int;
-  capacity_gte?: Int;
-  AND?: ClassSessionScalarWhereInput[] | ClassSessionScalarWhereInput;
-  OR?: ClassSessionScalarWhereInput[] | ClassSessionScalarWhereInput;
-  NOT?: ClassSessionScalarWhereInput[] | ClassSessionScalarWhereInput;
-}
-
-export interface ClassCreateWithoutCreatorInput {
-  price: Int;
-  name: String;
-  description: String;
-  categories?: ClassCategoryCreateManyInput;
-  streetUnit: String;
-  streetAddress: String;
-  city: String;
-  postcode: String;
-  state: String;
-  country: String;
-  contactNumber: String;
-  sessions?: ClassSessionCreateManyInput;
-}
-
-export interface ClassScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  price?: Int;
-  price_not?: Int;
-  price_in?: Int[] | Int;
-  price_not_in?: Int[] | Int;
-  price_lt?: Int;
-  price_lte?: Int;
-  price_gt?: Int;
-  price_gte?: Int;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  description?: String;
-  description_not?: String;
-  description_in?: String[] | String;
-  description_not_in?: String[] | String;
-  description_lt?: String;
-  description_lte?: String;
-  description_gt?: String;
-  description_gte?: String;
-  description_contains?: String;
-  description_not_contains?: String;
-  description_starts_with?: String;
-  description_not_starts_with?: String;
-  description_ends_with?: String;
-  description_not_ends_with?: String;
-  streetUnit?: String;
-  streetUnit_not?: String;
-  streetUnit_in?: String[] | String;
-  streetUnit_not_in?: String[] | String;
-  streetUnit_lt?: String;
-  streetUnit_lte?: String;
-  streetUnit_gt?: String;
-  streetUnit_gte?: String;
-  streetUnit_contains?: String;
-  streetUnit_not_contains?: String;
-  streetUnit_starts_with?: String;
-  streetUnit_not_starts_with?: String;
-  streetUnit_ends_with?: String;
-  streetUnit_not_ends_with?: String;
-  streetAddress?: String;
-  streetAddress_not?: String;
-  streetAddress_in?: String[] | String;
-  streetAddress_not_in?: String[] | String;
-  streetAddress_lt?: String;
-  streetAddress_lte?: String;
-  streetAddress_gt?: String;
-  streetAddress_gte?: String;
-  streetAddress_contains?: String;
-  streetAddress_not_contains?: String;
-  streetAddress_starts_with?: String;
-  streetAddress_not_starts_with?: String;
-  streetAddress_ends_with?: String;
-  streetAddress_not_ends_with?: String;
-  city?: String;
-  city_not?: String;
-  city_in?: String[] | String;
-  city_not_in?: String[] | String;
-  city_lt?: String;
-  city_lte?: String;
-  city_gt?: String;
-  city_gte?: String;
-  city_contains?: String;
-  city_not_contains?: String;
-  city_starts_with?: String;
-  city_not_starts_with?: String;
-  city_ends_with?: String;
-  city_not_ends_with?: String;
-  postcode?: String;
-  postcode_not?: String;
-  postcode_in?: String[] | String;
-  postcode_not_in?: String[] | String;
-  postcode_lt?: String;
-  postcode_lte?: String;
-  postcode_gt?: String;
-  postcode_gte?: String;
-  postcode_contains?: String;
-  postcode_not_contains?: String;
-  postcode_starts_with?: String;
-  postcode_not_starts_with?: String;
-  postcode_ends_with?: String;
-  postcode_not_ends_with?: String;
-  state?: String;
-  state_not?: String;
-  state_in?: String[] | String;
-  state_not_in?: String[] | String;
-  state_lt?: String;
-  state_lte?: String;
-  state_gt?: String;
-  state_gte?: String;
-  state_contains?: String;
-  state_not_contains?: String;
-  state_starts_with?: String;
-  state_not_starts_with?: String;
-  state_ends_with?: String;
-  state_not_ends_with?: String;
-  country?: String;
-  country_not?: String;
-  country_in?: String[] | String;
-  country_not_in?: String[] | String;
-  country_lt?: String;
-  country_lte?: String;
-  country_gt?: String;
-  country_gte?: String;
-  country_contains?: String;
-  country_not_contains?: String;
-  country_starts_with?: String;
-  country_not_starts_with?: String;
-  country_ends_with?: String;
-  country_not_ends_with?: String;
-  contactNumber?: String;
-  contactNumber_not?: String;
-  contactNumber_in?: String[] | String;
-  contactNumber_not_in?: String[] | String;
-  contactNumber_lt?: String;
-  contactNumber_lte?: String;
-  contactNumber_gt?: String;
-  contactNumber_gte?: String;
-  contactNumber_contains?: String;
-  contactNumber_not_contains?: String;
-  contactNumber_starts_with?: String;
-  contactNumber_not_starts_with?: String;
-  contactNumber_ends_with?: String;
-  contactNumber_not_ends_with?: String;
-  AND?: ClassScalarWhereInput[] | ClassScalarWhereInput;
-  OR?: ClassScalarWhereInput[] | ClassScalarWhereInput;
-  NOT?: ClassScalarWhereInput[] | ClassScalarWhereInput;
-}
-
-export interface ClassWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  creator?: UserWhereInput;
-  price?: Int;
-  price_not?: Int;
-  price_in?: Int[] | Int;
-  price_not_in?: Int[] | Int;
-  price_lt?: Int;
-  price_lte?: Int;
-  price_gt?: Int;
-  price_gte?: Int;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  description?: String;
-  description_not?: String;
-  description_in?: String[] | String;
-  description_not_in?: String[] | String;
-  description_lt?: String;
-  description_lte?: String;
-  description_gt?: String;
-  description_gte?: String;
-  description_contains?: String;
-  description_not_contains?: String;
-  description_starts_with?: String;
-  description_not_starts_with?: String;
-  description_ends_with?: String;
-  description_not_ends_with?: String;
-  categories_every?: ClassCategoryWhereInput;
-  categories_some?: ClassCategoryWhereInput;
-  categories_none?: ClassCategoryWhereInput;
-  streetUnit?: String;
-  streetUnit_not?: String;
-  streetUnit_in?: String[] | String;
-  streetUnit_not_in?: String[] | String;
-  streetUnit_lt?: String;
-  streetUnit_lte?: String;
-  streetUnit_gt?: String;
-  streetUnit_gte?: String;
-  streetUnit_contains?: String;
-  streetUnit_not_contains?: String;
-  streetUnit_starts_with?: String;
-  streetUnit_not_starts_with?: String;
-  streetUnit_ends_with?: String;
-  streetUnit_not_ends_with?: String;
-  streetAddress?: String;
-  streetAddress_not?: String;
-  streetAddress_in?: String[] | String;
-  streetAddress_not_in?: String[] | String;
-  streetAddress_lt?: String;
-  streetAddress_lte?: String;
-  streetAddress_gt?: String;
-  streetAddress_gte?: String;
-  streetAddress_contains?: String;
-  streetAddress_not_contains?: String;
-  streetAddress_starts_with?: String;
-  streetAddress_not_starts_with?: String;
-  streetAddress_ends_with?: String;
-  streetAddress_not_ends_with?: String;
-  city?: String;
-  city_not?: String;
-  city_in?: String[] | String;
-  city_not_in?: String[] | String;
-  city_lt?: String;
-  city_lte?: String;
-  city_gt?: String;
-  city_gte?: String;
-  city_contains?: String;
-  city_not_contains?: String;
-  city_starts_with?: String;
-  city_not_starts_with?: String;
-  city_ends_with?: String;
-  city_not_ends_with?: String;
-  postcode?: String;
-  postcode_not?: String;
-  postcode_in?: String[] | String;
-  postcode_not_in?: String[] | String;
-  postcode_lt?: String;
-  postcode_lte?: String;
-  postcode_gt?: String;
-  postcode_gte?: String;
-  postcode_contains?: String;
-  postcode_not_contains?: String;
-  postcode_starts_with?: String;
-  postcode_not_starts_with?: String;
-  postcode_ends_with?: String;
-  postcode_not_ends_with?: String;
-  state?: String;
-  state_not?: String;
-  state_in?: String[] | String;
-  state_not_in?: String[] | String;
-  state_lt?: String;
-  state_lte?: String;
-  state_gt?: String;
-  state_gte?: String;
-  state_contains?: String;
-  state_not_contains?: String;
-  state_starts_with?: String;
-  state_not_starts_with?: String;
-  state_ends_with?: String;
-  state_not_ends_with?: String;
-  country?: String;
-  country_not?: String;
-  country_in?: String[] | String;
-  country_not_in?: String[] | String;
-  country_lt?: String;
-  country_lte?: String;
-  country_gt?: String;
-  country_gte?: String;
-  country_contains?: String;
-  country_not_contains?: String;
-  country_starts_with?: String;
-  country_not_starts_with?: String;
-  country_ends_with?: String;
-  country_not_ends_with?: String;
-  contactNumber?: String;
-  contactNumber_not?: String;
-  contactNumber_in?: String[] | String;
-  contactNumber_not_in?: String[] | String;
-  contactNumber_lt?: String;
-  contactNumber_lte?: String;
-  contactNumber_gt?: String;
-  contactNumber_gte?: String;
-  contactNumber_contains?: String;
-  contactNumber_not_contains?: String;
-  contactNumber_starts_with?: String;
-  contactNumber_not_starts_with?: String;
-  contactNumber_ends_with?: String;
-  contactNumber_not_ends_with?: String;
-  sessions_every?: ClassSessionWhereInput;
-  sessions_some?: ClassSessionWhereInput;
-  sessions_none?: ClassSessionWhereInput;
-  AND?: ClassWhereInput[] | ClassWhereInput;
-  OR?: ClassWhereInput[] | ClassWhereInput;
-  NOT?: ClassWhereInput[] | ClassWhereInput;
-}
-
-export interface ClassSessionUpdateManyMutationInput {
-  day?: ClassSessionDay;
-  startTime?: String;
-  endTime?: String;
-  capacity?: Int;
-}
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  email?: String;
+}>;
 
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface UserPreviousValues {
@@ -1379,409 +342,6 @@ export interface UserPreviousValuesSubscription
   userGroup: () => Promise<AsyncIterator<String>>;
 }
 
-export interface ClassEdge {
-  node: Class;
-  cursor: String;
-}
-
-export interface ClassEdgePromise extends Promise<ClassEdge>, Fragmentable {
-  node: <T = ClassPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ClassEdgeSubscription
-  extends Promise<AsyncIterator<ClassEdge>>,
-    Fragmentable {
-  node: <T = ClassSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ClassSessionPreviousValues {
-  id: ID_Output;
-  day: ClassSessionDay;
-  startTime: String;
-  endTime: String;
-  capacity: Int;
-}
-
-export interface ClassSessionPreviousValuesPromise
-  extends Promise<ClassSessionPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  day: () => Promise<ClassSessionDay>;
-  startTime: () => Promise<String>;
-  endTime: () => Promise<String>;
-  capacity: () => Promise<Int>;
-}
-
-export interface ClassSessionPreviousValuesSubscription
-  extends Promise<AsyncIterator<ClassSessionPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  day: () => Promise<AsyncIterator<ClassSessionDay>>;
-  startTime: () => Promise<AsyncIterator<String>>;
-  endTime: () => Promise<AsyncIterator<String>>;
-  capacity: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface AggregateUser {
-  count: Int;
-}
-
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
-}
-
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
-}
-
-export interface ClassConnection {
-  pageInfo: PageInfo;
-  edges: ClassEdge[];
-}
-
-export interface ClassConnectionPromise
-  extends Promise<ClassConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ClassEdge>>() => T;
-  aggregate: <T = AggregateClassPromise>() => T;
-}
-
-export interface ClassConnectionSubscription
-  extends Promise<AsyncIterator<ClassConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ClassEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateClassSubscription>() => T;
-}
-
-export interface AggregateClassSession {
-  count: Int;
-}
-
-export interface AggregateClassSessionPromise
-  extends Promise<AggregateClassSession>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateClassSessionSubscription
-  extends Promise<AsyncIterator<AggregateClassSession>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface Class {
-  id: ID_Output;
-  price: Int;
-  name: String;
-  description: String;
-  streetUnit: String;
-  streetAddress: String;
-  city: String;
-  postcode: String;
-  state: String;
-  country: String;
-  contactNumber: String;
-}
-
-export interface ClassPromise extends Promise<Class>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  creator: <T = UserPromise>() => T;
-  price: () => Promise<Int>;
-  name: () => Promise<String>;
-  description: () => Promise<String>;
-  categories: <T = FragmentableArray<ClassCategory>>(
-    args?: {
-      where?: ClassCategoryWhereInput;
-      orderBy?: ClassCategoryOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  streetUnit: () => Promise<String>;
-  streetAddress: () => Promise<String>;
-  city: () => Promise<String>;
-  postcode: () => Promise<String>;
-  state: () => Promise<String>;
-  country: () => Promise<String>;
-  contactNumber: () => Promise<String>;
-  sessions: <T = FragmentableArray<ClassSession>>(
-    args?: {
-      where?: ClassSessionWhereInput;
-      orderBy?: ClassSessionOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface ClassSubscription
-  extends Promise<AsyncIterator<Class>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  creator: <T = UserSubscription>() => T;
-  price: () => Promise<AsyncIterator<Int>>;
-  name: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  categories: <T = Promise<AsyncIterator<ClassCategorySubscription>>>(
-    args?: {
-      where?: ClassCategoryWhereInput;
-      orderBy?: ClassCategoryOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  streetUnit: () => Promise<AsyncIterator<String>>;
-  streetAddress: () => Promise<AsyncIterator<String>>;
-  city: () => Promise<AsyncIterator<String>>;
-  postcode: () => Promise<AsyncIterator<String>>;
-  state: () => Promise<AsyncIterator<String>>;
-  country: () => Promise<AsyncIterator<String>>;
-  contactNumber: () => Promise<AsyncIterator<String>>;
-  sessions: <T = Promise<AsyncIterator<ClassSessionSubscription>>>(
-    args?: {
-      where?: ClassSessionWhereInput;
-      orderBy?: ClassSessionOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface ClassSessionConnection {
-  pageInfo: PageInfo;
-  edges: ClassSessionEdge[];
-}
-
-export interface ClassSessionConnectionPromise
-  extends Promise<ClassSessionConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ClassSessionEdge>>() => T;
-  aggregate: <T = AggregateClassSessionPromise>() => T;
-}
-
-export interface ClassSessionConnectionSubscription
-  extends Promise<AsyncIterator<ClassSessionConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ClassSessionEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateClassSessionSubscription>() => T;
-}
-
-export interface ClassSubscriptionPayload {
-  mutation: MutationType;
-  node: Class;
-  updatedFields: String[];
-  previousValues: ClassPreviousValues;
-}
-
-export interface ClassSubscriptionPayloadPromise
-  extends Promise<ClassSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ClassPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ClassPreviousValuesPromise>() => T;
-}
-
-export interface ClassSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ClassSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ClassSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ClassPreviousValuesSubscription>() => T;
-}
-
-export interface ClassCategoryEdge {
-  node: ClassCategory;
-  cursor: String;
-}
-
-export interface ClassCategoryEdgePromise
-  extends Promise<ClassCategoryEdge>,
-    Fragmentable {
-  node: <T = ClassCategoryPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ClassCategoryEdgeSubscription
-  extends Promise<AsyncIterator<ClassCategoryEdge>>,
-    Fragmentable {
-  node: <T = ClassCategorySubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ClassPreviousValues {
-  id: ID_Output;
-  price: Int;
-  name: String;
-  description: String;
-  streetUnit: String;
-  streetAddress: String;
-  city: String;
-  postcode: String;
-  state: String;
-  country: String;
-  contactNumber: String;
-}
-
-export interface ClassPreviousValuesPromise
-  extends Promise<ClassPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  price: () => Promise<Int>;
-  name: () => Promise<String>;
-  description: () => Promise<String>;
-  streetUnit: () => Promise<String>;
-  streetAddress: () => Promise<String>;
-  city: () => Promise<String>;
-  postcode: () => Promise<String>;
-  state: () => Promise<String>;
-  country: () => Promise<String>;
-  contactNumber: () => Promise<String>;
-}
-
-export interface ClassPreviousValuesSubscription
-  extends Promise<AsyncIterator<ClassPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  price: () => Promise<AsyncIterator<Int>>;
-  name: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  streetUnit: () => Promise<AsyncIterator<String>>;
-  streetAddress: () => Promise<AsyncIterator<String>>;
-  city: () => Promise<AsyncIterator<String>>;
-  postcode: () => Promise<AsyncIterator<String>>;
-  state: () => Promise<AsyncIterator<String>>;
-  country: () => Promise<AsyncIterator<String>>;
-  contactNumber: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateClass {
-  count: Int;
-}
-
-export interface AggregateClassPromise
-  extends Promise<AggregateClass>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateClassSubscription
-  extends Promise<AsyncIterator<AggregateClass>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ClassSession {
-  id: ID_Output;
-  day: ClassSessionDay;
-  startTime: String;
-  endTime: String;
-  capacity: Int;
-}
-
-export interface ClassSessionPromise
-  extends Promise<ClassSession>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  day: () => Promise<ClassSessionDay>;
-  startTime: () => Promise<String>;
-  endTime: () => Promise<String>;
-  capacity: () => Promise<Int>;
-}
-
-export interface ClassSessionSubscription
-  extends Promise<AsyncIterator<ClassSession>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  day: () => Promise<AsyncIterator<ClassSessionDay>>;
-  startTime: () => Promise<AsyncIterator<String>>;
-  endTime: () => Promise<AsyncIterator<String>>;
-  capacity: () => Promise<AsyncIterator<Int>>;
-}
-
 export interface UserEdge {
   node: User;
   cursor: String;
@@ -1797,148 +357,6 @@ export interface UserEdgeSubscription
     Fragmentable {
   node: <T = UserSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ClassSessionSubscriptionPayload {
-  mutation: MutationType;
-  node: ClassSession;
-  updatedFields: String[];
-  previousValues: ClassSessionPreviousValues;
-}
-
-export interface ClassSessionSubscriptionPayloadPromise
-  extends Promise<ClassSessionSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ClassSessionPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ClassSessionPreviousValuesPromise>() => T;
-}
-
-export interface ClassSessionSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ClassSessionSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ClassSessionSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ClassSessionPreviousValuesSubscription>() => T;
-}
-
-export interface ClassCategory {
-  id: ID_Output;
-  name: String;
-}
-
-export interface ClassCategoryPromise
-  extends Promise<ClassCategory>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface ClassCategorySubscription
-  extends Promise<AsyncIterator<ClassCategory>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ClassCategoryPreviousValues {
-  id: ID_Output;
-  name: String;
-}
-
-export interface ClassCategoryPreviousValuesPromise
-  extends Promise<ClassCategoryPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface ClassCategoryPreviousValuesSubscription
-  extends Promise<AsyncIterator<ClassCategoryPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ClassCategorySubscriptionPayload {
-  mutation: MutationType;
-  node: ClassCategory;
-  updatedFields: String[];
-  previousValues: ClassCategoryPreviousValues;
-}
-
-export interface ClassCategorySubscriptionPayloadPromise
-  extends Promise<ClassCategorySubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ClassCategoryPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ClassCategoryPreviousValuesPromise>() => T;
-}
-
-export interface ClassCategorySubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ClassCategorySubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ClassCategorySubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ClassCategoryPreviousValuesSubscription>() => T;
-}
-
-export interface User {
-  id: ID_Output;
-  email: String;
-  displayName?: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  userGroup: String;
-}
-
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  email: () => Promise<String>;
-  displayName: () => Promise<String>;
-  firstName: () => Promise<String>;
-  lastName: () => Promise<String>;
-  password: () => Promise<String>;
-  userGroup: () => Promise<String>;
-  classes: <T = FragmentableArray<Class>>(
-    args?: {
-      where?: ClassWhereInput;
-      orderBy?: ClassOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  email: () => Promise<AsyncIterator<String>>;
-  displayName: () => Promise<AsyncIterator<String>>;
-  firstName: () => Promise<AsyncIterator<String>>;
-  lastName: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  userGroup: () => Promise<AsyncIterator<String>>;
-  classes: <T = Promise<AsyncIterator<ClassSubscription>>>(
-    args?: {
-      where?: ClassWhereInput;
-      orderBy?: ClassOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
 }
 
 export interface UserSubscriptionPayload {
@@ -1966,71 +384,86 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface ClassCategoryConnection {
-  pageInfo: PageInfo;
-  edges: ClassCategoryEdge[];
+export interface User {
+  id: ID_Output;
+  email: String;
+  displayName?: String;
+  firstName: String;
+  lastName: String;
+  password: String;
+  userGroup: String;
 }
 
-export interface ClassCategoryConnectionPromise
-  extends Promise<ClassCategoryConnection>,
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
+  displayName: () => Promise<String>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  password: () => Promise<String>;
+  userGroup: () => Promise<String>;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  email: () => Promise<AsyncIterator<String>>;
+  displayName: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  userGroup: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ClassCategoryEdge>>() => T;
-  aggregate: <T = AggregateClassCategoryPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
 }
 
-export interface ClassCategoryConnectionSubscription
-  extends Promise<AsyncIterator<ClassCategoryConnection>>,
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ClassCategoryEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateClassCategorySubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface AggregateClassCategory {
-  count: Int;
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
 }
 
-export interface AggregateClassCategoryPromise
-  extends Promise<AggregateClassCategory>,
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateClassCategorySubscription
-  extends Promise<AsyncIterator<AggregateClassCategory>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ClassSessionEdge {
-  node: ClassSession;
-  cursor: String;
-}
-
-export interface ClassSessionEdgePromise
-  extends Promise<ClassSessionEdge>,
-    Fragmentable {
-  node: <T = ClassSessionPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ClassSessionEdgeSubscription
-  extends Promise<AsyncIterator<ClassSessionEdge>>,
-    Fragmentable {
-  node: <T = ClassSessionSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
-export type Boolean = boolean;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
-*/
-export type Int = number;
+export type String = string;
 
 export type Long = string;
 
@@ -2041,31 +474,20 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
-export type String = string;
+export type Int = number;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
 
 /**
  * Model Metadata
  */
 
 export const models: Model[] = [
-  {
-    name: "Class",
-    embedded: false
-  },
-  {
-    name: "ClassCategory",
-    embedded: false
-  },
-  {
-    name: "ClassSession",
-    embedded: false
-  },
-  {
-    name: "ClassSessionDay",
-    embedded: false
-  },
   {
     name: "User",
     embedded: false

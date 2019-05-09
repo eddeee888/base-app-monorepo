@@ -2,7 +2,7 @@ import {
   AuthenticationError,
   DatabaseError,
   FormValidationError
-} from '@bit/eddeee888.learnd-utils.graphql';
+} from '@bit/eddeee888.base-react-app-utils.graphql';
 import { Request } from 'jest-express/lib/request';
 import { Response } from 'jest-express/lib/response';
 import { setupTestDatabase } from 'src/helpers/tests';

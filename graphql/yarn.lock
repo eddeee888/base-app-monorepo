@@ -147,19 +147,19 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@bit/eddeee888.learnd-utils.forms.validations@^0.3.0":
-  version "0.3.0"
-  resolved "https://node.bitsrc.io/eddeee888.learnd-utils.forms.validations/-/eddeee888.learnd-utils.forms.validations-0.3.0.tgz#9cb96a674a7c2cc7c01ccd1d2356777d148503d0"
-  dependencies:
-    yup "^0.26.7"
-
-"@bit/eddeee888.learnd-utils.graphql@^0.0.5":
-  version "0.0.5"
-  resolved "https://node.bitsrc.io/eddeee888.learnd-utils.graphql/-/eddeee888.learnd-utils.graphql-0.0.5.tgz#0e28104329ec7d406e5e9e98d3bbeb029d0ee2cf"
+"@bit/eddeee888.base-react-app-utils.graphql@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bitsrc.io/eddeee888.base-react-app-utils.graphql/-/eddeee888.base-react-app-utils.graphql-0.0.1.tgz#4530677437f923b65dc7a3d88e468b1fa88792a6"
   dependencies:
     apollo-client "^2.5.1"
     apollo-errors "^1.9.0"
     graphql "^14.1.1"
+
+"@bit/eddeee888.base-react-app-utils.validations@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bitsrc.io/eddeee888.base-react-app-utils.validations/-/eddeee888.base-react-app-utils.validations-0.0.1.tgz#be0765786ee53954281aebc7817cfaa0dc7e61cb"
+  dependencies:
+    yup "^0.26.7"
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
@@ -655,20 +655,20 @@ apollo-errors@^1.9.0:
     extendable-error "^0.1.5"
 
 apollo-link-dedup@^1.0.0:
-  version "1.0.16"
-  resolved "https://registry.yarnpkg.com/apollo-link-dedup/-/apollo-link-dedup-1.0.16.tgz#7d1a883329ca04edf925746b5a46f72bdd0c96b6"
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/apollo-link-dedup/-/apollo-link-dedup-1.0.18.tgz#635cb5659b082e7f270f7649c4b0f71021f7bb4b"
   dependencies:
-    apollo-link "^1.2.9"
+    apollo-link "^1.2.11"
     tslib "^1.9.3"
 
-apollo-link@^1.0.0, apollo-link@^1.2.9:
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.9.tgz#40a8f0b90716ce3fd6beb27b7eae1108b92e0054"
+apollo-link@^1.0.0, apollo-link@^1.2.11:
+  version "1.2.11"
+  resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.11.tgz#493293b747ad3237114ccd22e9f559e5e24a194d"
   dependencies:
     apollo-utilities "^1.2.1"
     ts-invariant "^0.3.2"
     tslib "^1.9.3"
-    zen-observable-ts "^0.8.16"
+    zen-observable-ts "^0.8.18"
 
 apollo-link@^1.2.3:
   version "1.2.6"
@@ -839,9 +839,10 @@ assert-plus@1.0.0, assert-plus@^1.0.0:
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-1.0.0.tgz#f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525"
 
 assert@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/assert/-/assert-1.4.1.tgz#99912d591836b5a6f5b345c0f07eefc08fc65d91"
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/assert/-/assert-1.5.0.tgz#55c109aaf6e0aefdb3dc4b71240c70bf574b18eb"
   dependencies:
+    object-assign "^4.1.1"
     util "0.10.3"
 
 assign-symbols@^1.0.0:
@@ -2416,8 +2417,8 @@ graphql-yoga@^1.16.7:
     iterall "^1.2.2"
 
 graphql@^14.1.1:
-  version "14.1.1"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-14.1.1.tgz#d5d77df4b19ef41538d7215d1e7a28834619fac0"
+  version "14.3.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-14.3.0.tgz#34dd36faa489ff642bcd25df6c3b4f988a1a2f3e"
   dependencies:
     iterall "^1.2.2"
 
@@ -4117,7 +4118,7 @@ oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
 
-object-assign@^4, object-assign@^4.1.0:
+object-assign@^4, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
@@ -5632,8 +5633,8 @@ ts-invariant@^0.2.1:
     tslib "^1.9.3"
 
 ts-invariant@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/ts-invariant/-/ts-invariant-0.3.2.tgz#89a2ffeb70879b777258df1df1c59383c35209b0"
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/ts-invariant/-/ts-invariant-0.3.3.tgz#b5742b1885ecf9e29c31a750307480f045ec0b16"
   dependencies:
     tslib "^1.9.3"
 
@@ -6140,9 +6141,9 @@ zen-observable-ts@^0.8.13:
   dependencies:
     zen-observable "^0.8.0"
 
-zen-observable-ts@^0.8.16:
-  version "0.8.16"
-  resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.16.tgz#969367299074fe17422fe2f46ee417e9a30cf3fa"
+zen-observable-ts@^0.8.18:
+  version "0.8.18"
+  resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.18.tgz#ade44b1060cc4a800627856ec10b9c67f5f639c8"
   dependencies:
     tslib "^1.9.3"
     zen-observable "^0.8.0"

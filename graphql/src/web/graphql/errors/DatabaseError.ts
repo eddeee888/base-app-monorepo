@@ -1,4 +1,4 @@
-import { DatabaseError } from '@bit/eddeee888.learnd-utils.graphql';
+import { DatabaseError } from '@bit/eddeee888.base-react-app-utils.graphql';
 
 type ThrowDatabaseErrorFn = (message?: string) => never;
 

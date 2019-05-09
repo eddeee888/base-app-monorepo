@@ -1,4 +1,4 @@
-import { AuthenticationError } from '@bit/eddeee888.learnd-utils.graphql';
+import { AuthenticationError } from '@bit/eddeee888.base-react-app-utils.graphql';
 
 type ThrowAuthenticationErrorFn = (message?: string) => never;
 

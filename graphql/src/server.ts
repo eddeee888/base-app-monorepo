@@ -1,4 +1,4 @@
-import { formatError } from '@bit/eddeee888.learnd-utils.graphql';
+import { formatError } from '@bit/eddeee888.base-react-app-utils.graphql';
 import cookieParser = require('cookie-parser');
 import { importSchema } from 'graphql-import';
 import { GraphQLServer } from 'graphql-yoga';

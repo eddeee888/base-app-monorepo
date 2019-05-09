@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { not, or, rule, shield } from 'graphql-shield';
+import { not, rule, shield } from 'graphql-shield';
 import { getTokenFromRequest } from 'src/helpers/headers';
 import { verify } from 'src/helpers/utils/jwt';
 import { ResolverContext } from 'src/types';
@@ -28,26 +28,19 @@ const isAuthenticated = rule()(
   }
 );
 
-const isAdmin = rule()(
-  async (parent: any, args: any, ctx: ResolverContext, info: any) =>
-    ctx.viewer !== null && JSON.parse(ctx.viewer.userGroup).admin === true
-);
+// const isAdmin = rule()(
+//   async (parent: any, args: any, ctx: ResolverContext, info: any) =>
+//     ctx.viewer !== null && JSON.parse(ctx.viewer.userGroup).admin === true
+// );
 
-const isUser = rule()(
-  async (parent: any, args: any, ctx: ResolverContext, info: any) =>
-    ctx.viewer !== null && JSON.parse(ctx.viewer.userGroup).user === true
-);
+// const isUser = rule()(
+//   async (parent: any, args: any, ctx: ResolverContext, info: any) =>
+//     ctx.viewer !== null && JSON.parse(ctx.viewer.userGroup).user === true
+// );
 
 export default shield({
-  Query: {
-    class: or(isAuthenticated, not(isAuthenticated))
-  },
   Mutation: {
     signup: not(isAuthenticated),
-    login: not(isAuthenticated),
-    createClassCategory: isAdmin,
-    classSave: or(isUser, isAdmin)
-  },
-  ClassCategory: or(isUser, isAdmin),
-  ClassSession: or(isUser, isAdmin)
+    login: not(isAuthenticated)
+  }
 });

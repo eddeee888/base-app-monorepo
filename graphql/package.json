@@ -1,5 +1,5 @@
 {
-  "name": "learnd-server",
+  "name": "bra-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -20,8 +20,8 @@
   "author": "Eddy Nguyen",
   "license": "ISC",
   "dependencies": {
-    "@bit/eddeee888.learnd-utils.forms.validations": "^0.3.0",
-    "@bit/eddeee888.learnd-utils.graphql": "^0.0.5",
+    "@bit/eddeee888.base-react-app-utils.graphql": "^0.0.1",
+    "@bit/eddeee888.base-react-app-utils.validations": "^0.0.1",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.1",
     "@types/jsonwebtoken": "^8.3.0",
