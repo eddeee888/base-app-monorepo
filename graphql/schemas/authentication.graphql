@@ -1,0 +1,37 @@
+type Query {
+  user(id: ID!): User
+}
+
+type Mutation {
+  signup(input: SignupInput!): SignupPayload!
+  login(input: LoginInput!): LoginPayload
+  logout: Boolean!
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  displayName: String
+}
+
+input SignupInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type SignupPayload {
+  user: User!
+}
+
+type LoginPayload {
+  user: User!
+}

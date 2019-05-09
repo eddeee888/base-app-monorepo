@@ -1,0 +1,11 @@
+# https://www.prisma.io/features/data-modeling/
+
+type User {
+  id: ID! @unique
+  email: String! @unique
+  displayName: String
+  firstName: String!
+  lastName: String!
+  password: String!
+  userGroup: String!
+}
