@@ -5,7 +5,7 @@ import { Redirect, StaticRouter } from 'react-router-dom';
 import LogoutLogic from './LogoutLogic';
 
 describe('<Logout />', () => {
-  const logout = jest.fn();
+  const logout = jest.fn().mockResolvedValue(true);
   const clearViewer = jest.fn();
   it('should clear session and log user out', () => {
     const wrapper = mount(

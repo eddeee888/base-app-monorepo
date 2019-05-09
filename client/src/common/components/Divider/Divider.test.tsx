@@ -27,7 +27,7 @@ describe('<Divider />', () => {
     expect(
       wrapper
         .find(Box)
-        .at(1)
+        .at(0)
         .prop('mb')
     ).toBe(1);
   });
