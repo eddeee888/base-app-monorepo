@@ -1,4 +1,4 @@
-import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
+import { hostAClassValidation } from '@bit/eddeee888.base-react-app-utils.validations';
 import Block from 'common/components/Block';
 import Paper from 'common/components/Paper';
 import { Form, Formik } from 'formik';

@@ -1,4 +1,4 @@
-import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
+import { hostAClassValidation } from '@bit/eddeee888.base-react-app-utils.validations';
 import { mount } from 'enzyme';
 import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';

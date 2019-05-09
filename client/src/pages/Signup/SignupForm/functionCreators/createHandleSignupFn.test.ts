@@ -1,7 +1,7 @@
 import {
   CustomGraphQLErrors,
   FormValidationError
-} from '@bit/eddeee888.learnd-utils.graphql';
+} from '@bit/eddeee888.base-react-app-utils.graphql';
 import { SignupInput } from '__generated__/globalTypes';
 import createApolloError from 'common/helpers/tests/createApolloError';
 import getCustomGraphQLErrorFromErrorName from 'common/helpers/tests/getCustomGraphQLErrorFromErrorName';

@@ -3,7 +3,7 @@ import {
   CustomGraphQLErrors,
   DatabaseError,
   FormValidationError
-} from '@bit/eddeee888.learnd-utils.graphql';
+} from '@bit/eddeee888.base-react-app-utils.graphql';
 
 const getCustomGraphQLErrorFromErrorName = (
   customError: CustomGraphQLErrors

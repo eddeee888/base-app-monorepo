@@ -1033,19 +1033,19 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@bit/eddeee888.learnd-utils.forms.validations@^0.3.0":
-  version "0.3.0"
-  resolved "https://node.bitsrc.io/eddeee888.learnd-utils.forms.validations/-/eddeee888.learnd-utils.forms.validations-0.3.0.tgz#9cb96a674a7c2cc7c01ccd1d2356777d148503d0"
-  dependencies:
-    yup "^0.26.7"
-
-"@bit/eddeee888.learnd-utils.graphql@^0.0.5":
-  version "0.0.5"
-  resolved "https://node.bitsrc.io/eddeee888.learnd-utils.graphql/-/eddeee888.learnd-utils.graphql-0.0.5.tgz#0e28104329ec7d406e5e9e98d3bbeb029d0ee2cf"
+"@bit/eddeee888.@bit/eddeee888.base-react-app-utils.graphqleact-app-utils.graphql@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bitsrc.io/eddeee888.@bit/eddeee888.base-react-app-utils.graphqleact-app-utils.graphql/-/eddeee888.ba@bit/eddeee888.base-react-app-utils.graphqlct-app-utils.graphql-0.0.1.tgz#4530677437f923b65dc7a3d88e468b1fa88792a6"
   dependencies:
     apollo-client "^2.5.1"
     apollo-errors "^1.9.0"
-    graphql "^14.1.1"
+    graphql "^14@bit/eddeee888.base-react-app-utils.graphql
+
+"@bit/eddeee888.base-react-app-utils.validati@bit/eddeee888.base-react-app-utils.graphql.0.1":@bit/eddeee888.base-react-app-utils.graphql
+  version "0.0.1"
+  resolved "https://node.bitsrc.io/eddeee888.base-react-app-utils.validations/-/eddeee888.base-react-app-utils.validations-0.0.1.tgz#be0765786ee53954281aebc7817cfaa0dc7e61cb"
+  dependencies:
+    yup "^0.26.7"
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
@@ -2467,10 +2467,17 @@ assert-plus@1.0.0, assert-plus@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-1.0.0.tgz#f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525"
 
-assert@^1.1.1, assert@^1.4.1:
+assert@^1.1.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/assert/-/assert-1.4.1.tgz#99912d591836b5a6f5b345c0f07eefc08fc65d91"
   dependencies:
+    util "0.10.3"
+
+assert@^1.4.1:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/assert/-/assert-1.5.0.tgz#55c109aaf6e0aefdb3dc4b71240c70bf574b18eb"
+  dependencies:
+    object-assign "^4.1.1"
     util "0.10.3"
 
 assign-symbols@^1.0.0:

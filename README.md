@@ -1,4 +1,4 @@
-# Learnd
+# @bit/eddeee888.base-react-app-utils.graphql
 
 ## CLI & containers
 
@@ -8,30 +8,30 @@ To start on MacOS, install the CLI command to make development easier. Go to the
 ./bin/init.sh
 ```
 
-This will create allow you to use `learnd` in the CLI to control the project from anywhere, not just in the project folder. Typing `learnd` in the CLI will show options. For example:
+This will create allow you to use `@bit/eddeee888.base-react-app-utils.graphql` in the CLI to control the project from anywhere, not just in the project folder. Typing `@bit/eddeee888.base-react-app-utils.graphql` in the CLI will show options. For example:
 
 To build/rebuild:
 
 ```
-learnd rebuild
+@bit/eddeee888.base-react-app-utils.graphql rebuild
 ```
 
 To start the project:
 
 ```
-learnd start
+@bit/eddeee888.base-react-app-utils.graphql start
 ```
 
 To stop the project:
 
 ```
-learnd stop
+@bit/eddeee888.base-react-app-utils.graphql stop
 ```
 
-The project should be accessible on http://localhost. It is recommended to add the dev base URL to your hosts file. The default is `http://learnd.com.dockervm`. It should look something like this:
+The project should be accessible on http://localhost. It is recommended to add the dev base URL to your hosts file. The default is `http://@bit/eddeee888.base-react-app-utils.graphql.com.dockervm`. It should look something like this:
 
 ```
-127.0.0.1   learnd.com.dockervm
+127.0.0.1   @bit/eddeee888.base-react-app-utils.graphql.com.dockervm
 ```
 
 This setup step is optional. You can use `docker-compose` from the root of the project as an alternative.

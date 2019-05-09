@@ -1,4 +1,4 @@
-import { hostAClassValidation } from '@bit/eddeee888.learnd-utils.forms.validations';
+import { hostAClassValidation } from '@bit/eddeee888.base-react-app-utils.validations';
 import Grid from '@material-ui/core/Grid';
 import Block from 'common/components/Block';
 import Divider from 'common/components/Divider';

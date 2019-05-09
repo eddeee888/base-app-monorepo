@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # We are running this from /usr/local/bin
-CORE_CMD_NAME="learnd"
+CORE_CMD_NAME="bra"
 
 
 function display_help(){
