@@ -1,14 +1,18 @@
-FROM node:10.13.0-alpine
+FROM node:10.13.0-alpine as base
+ARG BIT_NPM_TOKEN
+ENV BIT_NPM_TOKEN=${BIT_NPM_TOKEN}
+WORKDIR /usr/src/app
+RUN apk update \ 
+  && apk add bash \
+  && rm -rf /var/cache/apk/*
+COPY . . 
+RUN ./scripts/setenv.sh
+RUN yarn install
 
-# Set up env variables
-ARG GRAPHQL_CONTAINER_PATH
+FROM node:10.13.0-alpine as final
+WORKDIR /usr/src/app 
+COPY --from=base /usr/src/app/node_modules .
+COPY --from=base /usr/src/app/src .
+COPY --from=base /usr/src/app/package.json .
 
-# Create app directory and use it as working directory
-RUN mkdir -p ${GRAPHQL_CONTAINER_PATH}
-WORKDIR ${GRAPHQL_CONTAINER_PATH}
-
-COPY start.sh /usr/local/bin/start.sh
-
-COPY . ${GRAPHQL_CONTAINER_PATH}
-
-CMD ["sh", "/usr/local/bin/start.sh"]
+CMD ["yarn", "serve"]

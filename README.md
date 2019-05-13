@@ -72,3 +72,11 @@ This is the main package which can be used to run commands to deploy, migrate da
 ### Prisma Client
 
 Prisma client is how the running node application can interact with the database via graphQL API
+
+### Bit
+
+Some packages in this project are hosted on https://bit.dev/. To make sure you can install packages in your host machine, run the following:
+
+```
+npm config set '@bit:registry' https://node.bit.dev
+```

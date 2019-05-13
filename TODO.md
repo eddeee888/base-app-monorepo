@@ -1,2 +1,2 @@
 - Add TLS certificate
-- Fix startup scripts and build images with `node_modules` so it doesn't take 2000 years to start
+- Investigate how to insert secrets safely

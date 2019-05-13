@@ -1,17 +1,22 @@
-version: '3'
+version: '3.7'
 
 services: 
   # Set up client container
   client:
-    build: ./client
+    build: 
+      context: ./client
+      target: base
+      args: 
+        GRAPHQL_END_POINT: ${GRAPHQL_END_POINT}
+        BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
+    command: yarn start
     ports:
-      - ${CLIENT_PORT}:${CLIENT_PORT}
+      - ${CLIENT_PORT}:${CLIENT_PORT}  
     environment:
-      GRAPHQL_END_POINT: ${GRAPHQL_END_POINT}
-      BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
+      PORT: ${CLIENT_PORT}
     volumes:
-      - ./client/public:/srv/app/client/public
-      - ./client/src:/srv/app/client/src
+      - ./client:/usr/src/app
+      - /usr/src/app/node_modules
     links:
       - graphql
 
@@ -19,17 +24,20 @@ services:
   graphql:
     build: 
       context: ./graphql
-      args:
-        GRAPHQL_CONTAINER_PATH: ${GRAPHQL_CONTAINER_PATH}
+      target: base
+      args: 
+        BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
+    command: yarn start
     ports:
       - ${GRAPHQL_PORT}:${GRAPHQL_PORT}
     environment:
       PRISMA_ENDPOINT: ${PRISMA_ENDPOINT}
       SERVER_NAME: ${SERVER_NAME}
       JWT_SECRET: ${JWT_SECRET}
-      BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
+      PORT: ${GRAPHQL_PORT}
     volumes:
-      - ./graphql/src:${GRAPHQL_CONTAINER_PATH}/src
+      - ./graphql:/usr/src/app
+      - /usr/src/app/node_modules
     depends_on:
       - prisma
 
@@ -37,8 +45,6 @@ services:
   reverse-proxy:
     build: 
       context: ./reverse-proxy
-      args:
-        REVERSE_PROXY_CONTAINER_CONFIG_PATH: ${REVERSE_PROXY_CONTAINER_CONFIG_PATH}
     tty: true
     links:
         - client
