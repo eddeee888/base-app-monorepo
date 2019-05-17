@@ -15,8 +15,8 @@ services:
     environment:
       PORT: ${CLIENT_PORT}
     volumes:
-      - ./client:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./client/src:/usr/src/app/src
+      - ./client/node_modules:/usr/src/app/node_modules
     links:
       - graphql
 
@@ -36,8 +36,8 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       PORT: ${GRAPHQL_PORT}
     volumes:
-      - ./graphql:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./graphql/src:/usr/src/app/src
+      - ./graphql/node_modules:/usr/src/app/node_modules
     depends_on:
       - prisma
 

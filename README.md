@@ -80,3 +80,6 @@ Some packages in this project are hosted on https://bit.dev/. To make sure you c
 ```
 npm config set '@bit:registry' https://node.bit.dev
 ```
+
+Made with ♥ by Eddy Nguyen
+https://eddy.works

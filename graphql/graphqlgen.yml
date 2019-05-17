@@ -1,6 +1,6 @@
 language: typescript
 
-schema: ./schemas/schema.graphql
+schema: ./src/schemas/schema.graphql
 context: ./src/types/index.ts:ResolverContext
 models:
   files:
