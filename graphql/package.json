@@ -36,7 +36,7 @@
     "graphql-yoga": "^1.16.7",
     "graphqlgen": "^0.4.0",
     "jsonwebtoken": "^8.4.0",
-    "prisma-client-lib": "^1.26.4",
+    "prisma-client-lib": "^1.33.0",
     "yup": "^0.26.6"
   },
   "devDependencies": {
@@ -44,7 +44,7 @@
     "jest": "^24.7.1",
     "jest-express": "^1.10.0",
     "nodemon": "^1.18.9",
-    "prisma": "^1.26.4",
+    "prisma": "^1.33.0",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.0.3",
     "tsconfig-paths": "^3.7.0",
