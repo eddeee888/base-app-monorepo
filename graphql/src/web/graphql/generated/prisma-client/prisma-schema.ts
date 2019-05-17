@@ -10,6 +10,8 @@ type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
 scalar Long
 
 type Mutation {
@@ -57,6 +59,8 @@ type User {
   lastName: String!
   password: String!
   userGroup: String!
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 type UserConnection {
@@ -66,6 +70,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   email: String!
   displayName: String
   firstName: String!
@@ -94,6 +99,10 @@ enum UserOrderByInput {
   password_DESC
   userGroup_ASC
   userGroup_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type UserPreviousValues {
@@ -104,6 +113,8 @@ type UserPreviousValues {
   lastName: String!
   password: String!
   userGroup: String!
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 type UserSubscriptionPayload {
@@ -241,6 +252,22 @@ input UserWhereInput {
   userGroup_not_starts_with: String
   userGroup_ends_with: String
   userGroup_not_ends_with: String
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
