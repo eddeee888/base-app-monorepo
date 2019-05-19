@@ -1,5 +1,45 @@
 # Base React App
 
+Note: This setup is for Mac, you will have to do the equivalent if you use Linux or Windows
+
+## Local DNS resolver
+
+By default, the project should be accessible on http://localhost. It is recommended to add the dev base URL to your hosts file. The default is `http://bra.com.dockervm`. It should look something like this:
+
+```
+127.0.0.1   bra.com.dockervm
+```
+
+Without this, nothing will work as intended.
+
+## Bit
+
+Some packages in this project are hosted on https://bit.dev/. To make sure you can install packages in your host machine, run the following in your terminal:
+
+```
+npm config set '@bit:registry' https://node.bit.dev
+```
+
+
+## Installing packages
+
+Our `docker-compose.yml` is set up to shadow `node_modules`. To make sure we can start our services, go to `/client` and `/graphql` and run yarn to install packages:
+
+```
+cd ./client && yarn
+```
+
+```
+cd ./graphql && yarn
+```
+
+Then, to initialise the data base, go to `graphql` and run
+
+```
+yarn prisma:deploy
+```
+
+
 ## CLI & containers
 
 To start on MacOS, install the CLI command to make development easier. Go to the root of the project and run the init script.
@@ -26,12 +66,6 @@ To stop the project (`service_name` is optional):
 
 ```
 bra stop <service_name>
-```
-
-The project should be accessible on http://localhost. It is recommended to add the dev base URL to your hosts file. The default is `http://bra.com.dockervm`. It should look something like this:
-
-```
-127.0.0.1   bra.com.dockervm
 ```
 
 This setup step is optional. You can use `docker-compose` from the root of the project as an alternative.
@@ -72,14 +106,6 @@ This is the main package which can be used to run commands to deploy, migrate da
 ### Prisma Client
 
 Prisma client is how the running node application can interact with the database via graphQL API
-
-### Bit
-
-Some packages in this project are hosted on https://bit.dev/. To make sure you can install packages in your host machine, run the following:
-
-```
-npm config set '@bit:registry' https://node.bit.dev
-```
 
 Made with ♥ by Eddy Nguyen
 https://eddy.works
