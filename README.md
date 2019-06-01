@@ -2,110 +2,85 @@
 
 Note: This setup is for Mac, you will have to do the equivalent if you use Linux or Windows
 
-## Local DNS resolver
+## Overview
 
-By default, the project should be accessible on http://localhost. It is recommended to add the dev base URL to your hosts file. The default is `http://bra.com.dockervm`. It should look something like this:
+- Runs on Docker. More on Docker [here](https://github.com/eddeee888/base-react-app/blob/master/docs/DOCKER.md).
+- Stack: React, GraphQL, Express, Prisma and TypeScript. More on the stack [here](https://github.com/eddeee888/base-react-app/blob/master/docs/STACK.md)
+- Has scripts to set up and run main app commands. All scripts are located [here](https://github.com/eddeee888/base-react-app/blob/master/bin/)
 
-```
-127.0.0.1   bra.com.dockervm
-```
+## Getting started
 
-Without this, nothing will work as intended.
-
-## Bit
-
-Some packages in this project are hosted on https://bit.dev/. To make sure you can install packages in your host machine, run the following in your terminal:
-
-```
-npm config set '@bit:registry' https://node.bit.dev
-```
-
-
-## Installing packages
+### 🔌 Installing packages
 
 Our `docker-compose.yml` is set up to shadow `node_modules`. To make sure we can start our services, go to `/client` and `/graphql` and run yarn to install packages:
 
 ```
-cd ./client && yarn
+~/base-react-app/client $ yarn
 ```
 
 ```
-cd ./graphql && yarn
+~/base-react-app/graphql $ yarn
 ```
 
-Then, to initialise the data base, go to `graphql` and run
+Then, to initialise the data base with seed, go to `graphql` and run
 
 ```
-yarn prisma:deploy
+~/base-react-app/graphql $ yarn prisma:deploy && yarn prisma:seed
 ```
 
-
-## CLI & containers
+### 🌟 Setting up CLI (Recommended)
 
 To start on MacOS, install the CLI command to make development easier. Go to the root of the project and run the init script.
 
 ```
-./bin/init.sh
+~/base-react-app/bin/init.sh
 ```
 
-This will create allow you to use `bra` in the CLI to control the project from anywhere, not just in the project folder. Typing `bra` in the CLI will show options. For example:
+More on how it works [here](https://github.com/eddeee888/base-react-app/blob/master/docs/INIT.md)
 
-To build/rebuild (`service_name` is optional):
+### ⚡️ Start the App!
 
-```
-bra build <service_name>
-```
-
-To start the project (`service_name` is optional):
+### Set up a custom DNS resolver
 
 ```
-bra start <service_name>
+$ bra vm-up
 ```
 
-To stop the project (`service_name` is optional):
+### Turn on the containers the first time
+
+If you have ran the init script, you can run the following command from anywhere:
 
 ```
-bra stop <service_name>
+$ bra build
 ```
 
-This setup step is optional. You can use `docker-compose` from the root of the project as an alternative.
+Check the logs in your `client` and `graphql` containers:
 
-## Graphql
+```
+$ bra logs -f client
+```
 
-Endpoint + subscription: `/graphql`
+```
+$ bra logs -f graphql
+```
 
-Interactive endpoint (graphiql): `/graphql/interactive`
+Once they have successfully built, go to the following URL from your favourite browser:
 
-## Prisma
+```
+http://bra.com.vm/
+```
 
-We use prisma (https://www.prisma.io/) as our graphql data layer. Prisma ecosystem helps us create strongly typed TypeScript application end-to-end. The main components of prisma:
+### Start containers without building
 
-- graphql-yoga
-- graphqlgen
-- Prisma CLI
-- Prisma Client
+```
+$ bra start
+```
 
-### Basics
+### Turn off everything
 
-Prisma ecosystem consists of multiple layers, all based on graphql and strongly typed. It is designed to take queries / mutations from a client through an endpoint and resolve data with another endpoint. The following graph is the workflow at the highest level
-
-client --> graphQL endpoint --> graphQL server with prisma client --> prisma endpoint --> database
-
-### GraphQL Yoga
-
-grahpql-yoga is a GraphQL server library based on Express.js
-
-### graphqlgen
-
-graphqlgen can be used to generate type safe types from schema. We use this for our resolvers
-
-### Prisma CLI
-
-This is the main package which can be used to run commands to deploy, migrate database and generate all CRUD commands.
-
-### Prisma Client
-
-Prisma client is how the running node application can interact with the database via graphQL API
+```
+$ bra vm-down
+```
 
 Made with ♥ by Eddy Nguyen
 https://eddy.works
