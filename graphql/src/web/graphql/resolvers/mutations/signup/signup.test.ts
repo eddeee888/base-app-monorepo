@@ -5,16 +5,16 @@ import {
 } from '@bit/eddeee888.base-react-app-utils.graphql';
 import { Request } from 'jest-express/lib/request';
 import { Response } from 'jest-express/lib/response';
-import { setupTestDatabase } from 'src/helpers/tests';
-import { getUserByEmail } from 'src/repositories/user';
 import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
 import { prisma } from 'src/web/graphql/generated/prisma-client';
 import signup from './signup';
 
 describe('signup()', () => {
+  const email = 'bartsimpson@gmail.com';
+
   const validArgs: MutationResolvers.ArgsSignup = {
     input: {
-      email: 'bartsimpson@gmail.com',
+      email,
       firstName: 'Bart',
       lastName: 'Simpson',
       password: 'password'
@@ -36,7 +36,6 @@ describe('signup()', () => {
   };
 
   beforeEach(async () => {
-    await setupTestDatabase();
     ctx.utils.jwt.sign.mockReset();
     ctx.utils.headers.setTokenToResponse.mockReset();
     ctx.utils.password.hash.mockReset();
@@ -44,14 +43,23 @@ describe('signup()', () => {
     ctx.utils.password.hash.mockResolvedValueOnce('hashed_password');
   });
 
+  afterEach(async () => {
+    await prisma.deleteManyUsers({ email });
+  });
+
   it('should create new record if valid input', async () => {
-    expect.assertions(5);
+    expect.assertions(6);
 
     await signup(undefined, validArgs, ctx, graphqlResolveInfo);
 
-    const savedUser = await getUserByEmail('bartsimpson@gmail.com');
+    const savedUser = await prisma.user({ email });
 
-    expect(savedUser.email).toEqual('bartsimpson@gmail.com');
+    if (!savedUser) {
+      throw new Error('No saved user');
+    }
+
+    expect(savedUser).not.toBe(null);
+    expect(savedUser.email).toEqual(email);
     expect(savedUser.firstName).toEqual('Bart');
     expect(savedUser.lastName).toEqual('Simpson');
     expect(savedUser.password).toEqual('hashed_password');

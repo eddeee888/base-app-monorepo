@@ -1,2 +1,33 @@
-# import Query.* from "authentication.graphql"
-# import Mutation.* from "authentication.graphql"
+directive @isOwner on FIELD_DEFINITION
+directive @isLoggedIn(status: Boolean) on FIELD_DEFINITION
+
+type Query {
+  user(id: ID!): User
+}
+
+type Mutation {
+  signup(input: SignupInput!): User! @isLoggedIn(status: false)
+  login(input: LoginInput!): User @isLoggedIn(status: false)
+  logout: Boolean!
+}
+
+input SignupInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+# User
+type User {
+  id: ID!
+  email: String! @isOwner
+  firstName: String!
+  lastName: String!
+  displayName: String
+}

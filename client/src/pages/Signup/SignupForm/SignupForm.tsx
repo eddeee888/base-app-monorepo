@@ -1,16 +1,16 @@
-import ViewerContext from 'common/components/ViewerContext';
+import { useViewer } from 'common/components/ViewerContext';
 import useFormError from 'common/hooks/useFormError';
 import SignupFormComponent from 'pages/Signup/SignupForm/SignupFormComponent';
-import SignupFormMutation from 'pages/Signup/SignupForm/SignupFormMutation';
-import React, { useContext } from 'react';
+import React from 'react';
 import createHandleSignupFn from './functionCreators/createHandleSignupFn';
+import { SignupMutationComponent } from '../Signup.generated';
 
 const SignupForm: React.FunctionComponent = () => {
-  const { setViewer } = useContext(ViewerContext);
+  const { setViewer } = useViewer();
   const [formError] = useFormError(1);
 
   return (
-    <SignupFormMutation>
+    <SignupMutationComponent>
       {(signup, { loading }) => (
         <SignupFormComponent
           onSubmit={createHandleSignupFn(signup, setViewer, formError.setError)}
@@ -18,7 +18,7 @@ const SignupForm: React.FunctionComponent = () => {
           loading={loading}
         />
       )}
-    </SignupFormMutation>
+    </SignupMutationComponent>
   );
 };
 

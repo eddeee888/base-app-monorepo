@@ -31,5 +31,5 @@ export {
   textOnPrimaryColor,
   textOnSecondaryColor,
   borderColor,
-  textShadowColor,
+  textShadowColor
 };

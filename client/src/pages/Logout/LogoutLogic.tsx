@@ -1,28 +1,24 @@
-import { linkgen, Paths } from 'common/helpers/pathing';
+import { routes } from 'common/helpers/pathing';
 import React, { useEffect } from 'react';
-import { MutationFn } from 'react-apollo';
 import { Redirect } from 'react-router';
-import { Logout } from './__generated__/Logout';
+import { LogoutMutationFn } from './Logout.generated';
 
 interface Props {
   clearViewer: () => void;
-  logout: MutationFn<Logout>;
+  logout: LogoutMutationFn;
 }
 
 const LogoutLogic: React.FunctionComponent<Props> = ({
   clearViewer,
   logout
 }) => {
-  useEffect(
-    () => {
-      logout().then(() => {
-        clearViewer();
-      });
-    },
-    [logout, clearViewer]
-  );
+  useEffect(() => {
+    logout().then(() => {
+      clearViewer();
+    });
+  }, [logout, clearViewer]);
 
-  return <Redirect to={linkgen(Paths.home)} />;
+  return <Redirect to={routes.home.generate({})} />;
 };
 
 export default LogoutLogic;

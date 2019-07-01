@@ -30,7 +30,7 @@ const getColor = (themeColor?: AnchorThemeColor): string => {
   }
 };
 
-export const generateCss = (params: CssParam) => {
+export const generateCss = (params: CssParam): string => {
   return css`
     cursor: pointer;
     text-decoration: none;

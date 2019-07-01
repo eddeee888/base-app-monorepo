@@ -1,23 +1,15 @@
-import ViewerContext from 'common/components/ViewerContext';
-import gql from 'graphql-tag';
-import React, { useContext } from 'react';
-import { Mutation } from 'react-apollo';
-import { Logout as LogoutData } from './__generated__/Logout';
+import { useViewer } from 'common/components/ViewerContext';
+import React from 'react';
 import LogoutLogic from './LogoutLogic';
-
-const LOGOUT = gql`
-  mutation Logout {
-    logout
-  }
-`;
+import { LogoutMutationComponent } from './Logout.generated';
 
 const Logout: React.FunctionComponent = () => {
-  const { clearViewer } = useContext(ViewerContext);
+  const { clearViewer } = useViewer();
 
   return (
-    <Mutation<LogoutData> mutation={LOGOUT}>
+    <LogoutMutationComponent>
       {logout => <LogoutLogic logout={logout} clearViewer={clearViewer} />}
-    </Mutation>
+    </LogoutMutationComponent>
   );
 };
 

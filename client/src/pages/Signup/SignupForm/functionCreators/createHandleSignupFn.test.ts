@@ -2,10 +2,10 @@ import {
   CustomGraphQLErrors,
   FormValidationError
 } from '@bit/eddeee888.base-react-app-utils.graphql';
-import { SignupInput } from '__generated__/globalTypes';
 import createApolloError from 'common/helpers/tests/createApolloError';
 import getCustomGraphQLErrorFromErrorName from 'common/helpers/tests/getCustomGraphQLErrorFromErrorName';
 import createHandleSignupFn from './createHandleSignupFn';
+import { SignupInput } from '__generated__/types';
 
 describe('createHandleSignupFn()', () => {
   const signupMutation = jest.fn();
@@ -97,21 +97,21 @@ describe('createHandleSignupFn()', () => {
       );
 
       const errorName = error as CustomGraphQLErrors;
-      const ErrorToThrow = getCustomGraphQLErrorFromErrorName(errorName);
+      const ErrorToThrow = getCustomGraphQLErrorFromErrorName(errorName) as any;
 
-      signupMutation.mockRejectedValueOnce(
-        createApolloError(new ErrorToThrow())
-      );
+      if (ErrorToThrow) {
+        signupMutation.mockRejectedValueOnce(createApolloError(ErrorToThrow));
 
-      await fn(signupInput, formikActions);
+        await fn(signupInput, formikActions);
 
-      assertSignupMutationCalled(signupInput);
-      expect(setViewer).toHaveBeenCalledTimes(0);
-      expect(formikActions.setErrors).toHaveBeenCalledTimes(0);
-      expect(setGeneralError).toHaveBeenCalledTimes(1);
-      expect(setGeneralError).toHaveBeenCalledWith(
-        'Unexpected error occurred!'
-      );
+        assertSignupMutationCalled(signupInput);
+        expect(setViewer).toHaveBeenCalledTimes(0);
+        expect(formikActions.setErrors).toHaveBeenCalledTimes(0);
+        expect(setGeneralError).toHaveBeenCalledTimes(1);
+        expect(setGeneralError).toHaveBeenCalledWith(
+          'Unexpected error occurred!'
+        );
+      }
     });
   });
 

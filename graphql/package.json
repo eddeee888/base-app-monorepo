@@ -16,8 +16,9 @@
     "test:prisma-setup": "prisma deploy --env-file .env.test",
     "test:prisma-delete": "prisma delete --force --env-file .env.test",
     "format:prettier": "prettier --config .prettierrc.json --write \"src/**/*.ts*\"",
-    "format:tslint": "tslint --fix 'src/**/*.{ts,tsx}'",
-    "format": "yarn format:prettier && yarn format:tslint"
+    "format:check": "eslint 'src/**/*.ts'",
+    "format:eslint": "eslint --fix 'src/**/*.ts'",
+    "format": "yarn format:prettier && yarn format:eslint"
   },
   "author": "Eddy Nguyen",
   "license": "ISC",
@@ -32,25 +33,31 @@
     "cookie-parser": "^1.4.3",
     "dotenv": "^6.2.0",
     "esm": "^3.2.14",
-    "graphql": "^14.0.2",
+    "graphql": "14.3.1",
     "graphql-import": "^0.7.1",
-    "graphql-shield": "^5.3.4",
-    "graphql-yoga": "^1.16.7",
-    "graphqlgen": "^0.4.0",
+    "graphql-yoga": "^1.17.4",
     "jsonwebtoken": "^8.4.0",
-    "prisma-client-lib": "^1.33.0",
+    "prisma-client-lib": "1.33.0",
     "yup": "^0.26.6"
   },
   "devDependencies": {
     "@types/jest": "^24.0.12",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "graphqlgen": "0.5.1",
     "jest": "^24.7.1",
     "jest-express": "^1.10.0",
     "nodemon": "^1.18.9",
-    "prisma": "^1.33.0",
+    "prisma": "1.33",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.0.3",
     "tsconfig-paths": "^3.7.0",
-    "tslint": "^5.12.0",
     "typescript": "^3.2.2"
+  },
+  "resolutions": {
+    "graphql": "14.3.1"
   }
 }

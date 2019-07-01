@@ -1,11 +1,3 @@
-export enum Paths {
-  home = '/',
-  login = '/login',
-  signup = '/signup',
-  logout = '/logout',
-  dashboard = '/dashboard'
-}
-
 export enum UrlQueryKeys {
   redirect = 'redirect'
 }

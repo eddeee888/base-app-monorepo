@@ -4,9 +4,9 @@ Note: This setup is for Mac, you will have to do the equivalent if you use Linux
 
 ## Overview
 
-- Runs on Docker. More on Docker [here](https://github.com/eddeee888/base-react-app/blob/master/docs/DOCKER.md).
-- Stack: React, GraphQL, Express, Prisma and TypeScript. More on the stack [here](https://github.com/eddeee888/base-react-app/blob/master/docs/STACK.md)
-- Has scripts to set up and run main app commands. All scripts are located [here](https://github.com/eddeee888/base-react-app/blob/master/bin/)
+- Runs on Docker. More on Docker [here](./docs/DOCKER.md).
+- Stack: React, GraphQL, Express, Prisma and TypeScript. More on the stack [here](./docs/STACK.md)
+- Has scripts to set up and run main app commands. All scripts are located [here](./bin)
 
 ## Getting started
 

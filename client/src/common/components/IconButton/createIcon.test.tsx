@@ -3,27 +3,29 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DuplicateIcon from '@material-ui/icons/FileCopy';
 import { mount } from 'enzyme';
 import createIcon from './createIcon';
+import React from 'react';
 
 describe('createIcon()', () => {
   const testCases = [
     {
       icon: 'add',
-      expectedComponent: AddIcon
+      ExpectedComponent: AddIcon
     },
     {
       icon: 'delete',
-      expectedComponent: DeleteIcon
+      ExpectedComponent: DeleteIcon
     },
     {
       icon: 'duplicate',
-      expectedComponent: DuplicateIcon
+      ExpectedComponent: DuplicateIcon
     }
   ];
 
-  testCases.forEach(({ icon, expectedComponent }) => {
+  testCases.forEach(({ icon, ExpectedComponent }) => {
     it(`should create ${icon} correctly`, () => {
       const wrapper = mount(createIcon(icon as any));
-      expect(wrapper.find(expectedComponent)).toHaveLength(1);
+      const wrapperActual = mount(<ExpectedComponent />);
+      expect(wrapperActual.html()).toBe(wrapper.html());
     });
   });
 

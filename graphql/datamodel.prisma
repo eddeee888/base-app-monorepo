@@ -1,5 +1,3 @@
-# https://www.prisma.io/features/data-modeling/
-
 type User {
   id: ID! @id @unique
   email: String! @unique

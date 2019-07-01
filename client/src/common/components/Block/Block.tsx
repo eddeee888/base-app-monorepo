@@ -1,11 +1,14 @@
 import { Breakpoints, breakpoints } from 'common/styles/media';
 import { css, cx } from 'emotion';
 import React from 'react';
+import { Box } from '@material-ui/core';
+import { MarginValue } from 'common/helpers/spacing';
 
 interface Props {
   size: keyof Breakpoints;
   children: React.ReactNode;
   fullHeight?: boolean;
+  marginTop?: MarginValue;
 }
 
 const defaultClassName = css`
@@ -24,7 +27,8 @@ const fullHeightClassName = css`
 const Block: React.FunctionComponent<Props> = ({
   size,
   children,
-  fullHeight
+  fullHeight,
+  marginTop = 4
 }) => {
   const maxWidthClassName = css`
     max-width: ${breakpoints[size]}px;
@@ -35,7 +39,12 @@ const Block: React.FunctionComponent<Props> = ({
     classNames.push(fullHeightClassName);
   }
 
-  return <div className={cx([...classNames])}>{children}</div>;
+  return (
+    <div className={cx([...classNames])}>
+      {!!marginTop && <Box mt={marginTop} />}
+      {children}
+    </div>
+  );
 };
 
 export default Block;

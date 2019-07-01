@@ -2,24 +2,24 @@ import Box from '@material-ui/core/Box';
 import MUIDivider, {
   DividerProps as MUIDividerProps
 } from '@material-ui/core/Divider';
-import { SpacingValue } from 'common/helpers/spacing';
+import { MarginValue } from 'common/helpers/spacing';
 import React, { FunctionComponent } from 'react';
 
 interface DividerProps extends MUIDividerProps {
-  marginTop?: SpacingValue;
-  marginBottom?: SpacingValue;
+  marginTop?: MarginValue;
+  marginBottom?: MarginValue;
 }
 
 const Divider: FunctionComponent<DividerProps> = ({
-  marginTop,
-  marginBottom,
+  marginTop = 2,
+  marginBottom = 2,
   ...props
 }) => {
   return (
     <>
-      {marginTop && <Box mt={marginTop} />}
+      {!!marginTop && <Box mt={marginTop} />}
       <MUIDivider {...props} />
-      {marginBottom && <Box mb={marginBottom} />}
+      {!!marginBottom && <Box mb={marginBottom} />}
     </>
   );
 };

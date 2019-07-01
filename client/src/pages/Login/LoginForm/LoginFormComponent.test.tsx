@@ -1,5 +1,5 @@
 import Button from 'common/components/Button';
-import { Paths } from 'common/helpers/pathing';
+import { routes } from 'common/helpers/pathing';
 import { mount, ReactWrapper } from 'enzyme';
 import { Formik } from 'formik';
 import React from 'react';
@@ -42,13 +42,15 @@ describe('<LoginFormComponent />', () => {
     );
     assertCommonElements(wrapper);
     assertButton(wrapper, false);
-    expect(wrapper.find(`a[href='${Paths.signup}']`)).toHaveLength(1);
+    expect(
+      wrapper.find(`a[href='${routes.signup.generate({})}']`)
+    ).toHaveLength(1);
   });
 
   it('should have link to /signup with redirect query if it exists in url', () => {
     const wrapper = mount(
       <StaticRouter
-        location={{ search: '?redirect=/redirect-to-this-path' }}
+        location={{ searcher: '?redirect=/redirect-to-this-path' }}
         context={{}}
       >
         <LoginFormComponent {...defaultProps} />
@@ -57,7 +59,11 @@ describe('<LoginFormComponent />', () => {
     assertCommonElements(wrapper);
     assertButton(wrapper, false);
     expect(
-      wrapper.find(`a[href='${Paths.signup}?redirect=/redirect-to-this-path']`)
+      wrapper.find(
+        `a[href='${routes.signup.generate(
+          {}
+        )}?redirect=/redirect-to-this-path']`
+      )
     ).toHaveLength(1);
   });
 
