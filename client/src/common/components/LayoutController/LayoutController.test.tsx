@@ -4,6 +4,7 @@ import { mount } from 'enzyme';
 import React from 'react';
 import { StaticRouter } from 'react-router';
 import LayoutController from './LayoutController';
+import { ViewerProvider } from '../ViewerContext';
 
 jest.mock('common/components/LayoutController/getLayoutConfig', () => ({
   __esModule: true,
@@ -18,7 +19,9 @@ describe('<LayoutController />', () => {
 
     const wrapper = mount(
       <StaticRouter context={{}}>
-        <LayoutController />
+        <ViewerProvider>
+          <LayoutController />
+        </ViewerProvider>
       </StaticRouter>
     );
 
@@ -32,7 +35,9 @@ describe('<LayoutController />', () => {
 
     const wrapper = mount(
       <StaticRouter context={{}}>
-        <LayoutController />
+        <ViewerProvider>
+          <LayoutController />
+        </ViewerProvider>
       </StaticRouter>
     );
 

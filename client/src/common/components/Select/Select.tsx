@@ -7,11 +7,14 @@ export interface SelectOption<V = string, L = string> {
   label: L | '';
 }
 
-interface Props extends OmittedTextFieldProps {
+export interface SelectProps extends OmittedTextFieldProps {
   options: SelectOption[];
 }
 
-const Select: React.FunctionComponent<Props> = ({ options, ...props }) => (
+const Select: React.FunctionComponent<SelectProps> = ({
+  options,
+  ...props
+}) => (
   <TextField
     fullWidth
     margin="normal"

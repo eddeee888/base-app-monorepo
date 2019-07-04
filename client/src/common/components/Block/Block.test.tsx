@@ -9,7 +9,6 @@ describe('<Block />', () => {
         <span>CHILDREN CONTENT</span>
       </Block>
     );
-    expect(wrapper.find('div')).toHaveLength(1);
     expect(wrapper.text()).toMatch(/CHILDREN CONTENT/);
   });
 });

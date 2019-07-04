@@ -9,15 +9,13 @@ interface ButtonProps extends DefaultIconButtonProps, Icon {
   fontSize?: SvgIconProps['fontSize'];
 }
 
-const IconButton: React.FunctionComponent<ButtonProps> = forwardRef<
-  any,
-  ButtonProps
->(({ icon, fontSize, ...props }, ref) => {
-  return (
-    <DefaultIconButton {...props} ref={ref}>
-      {createIcon(icon, { fontSize })}
-    </DefaultIconButton>
-  );
-});
+const IconButton: React.FunctionComponent<ButtonProps> = (
+  { icon, fontSize, ...props },
+  ref
+) => (
+  <DefaultIconButton {...props} ref={ref}>
+    {createIcon(icon, { fontSize })}
+  </DefaultIconButton>
+);
 
-export default IconButton;
+export default forwardRef(IconButton);

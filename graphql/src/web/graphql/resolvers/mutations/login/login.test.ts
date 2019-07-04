@@ -1,11 +1,11 @@
 import { Request } from 'jest-express/lib/request';
 import { Response } from 'jest-express/lib/response';
-import { setupTestDatabase } from 'src/helpers/tests';
 import { prisma } from 'src/web/graphql/generated/prisma-client';
-import signup from '../signup';
 import login from './login';
+import { MutationResolvers } from 'src/web/graphql/generated/graphqlgen';
 
 describe('login()', () => {
+  const email = 'bartsimpson@gmail.com';
   const ctx: any = {
     response: new Response(),
     request: new Request(),
@@ -21,22 +21,16 @@ describe('login()', () => {
   };
 
   const signupUser = async () => {
-    await signup(
-      undefined,
-      {
-        input: {
-          email: 'bartsimpson@gmail.com',
-          firstName: 'Bart',
-          lastName: 'Simpson',
-          password: 'password'
-        }
-      },
-      ctx,
-      {} as any
-    );
+    await prisma.createUser({
+      email,
+      firstName: 'Bart',
+      lastName: 'Simpson',
+      password: 'password',
+      userGroup: 'user'
+    });
   };
 
-  const loginUser = async (input: any) => {
+  const loginUser = async (input: MutationResolvers.LoginInput) => {
     return await login(
       undefined,
       {
@@ -48,12 +42,14 @@ describe('login()', () => {
   };
 
   beforeEach(async () => {
-    await setupTestDatabase();
-
     ctx.utils.password.hash.mockResolvedValue('hashed_password');
     ctx.utils.password.compare.mockResolvedValue(true);
 
     await signupUser();
+  });
+
+  afterEach(async () => {
+    await prisma.deleteManyUsers({ email });
   });
 
   afterEach(() => {
@@ -67,16 +63,20 @@ describe('login()', () => {
     expect.assertions(6);
 
     const payload = await loginUser({
-      email: 'bartsimpson@gmail.com',
+      email,
       password: 'password'
     });
 
+    if (!payload) {
+      throw new Error('Payload is expected');
+    }
+
     expect(payload).not.toBe(null);
-    expect(payload!.user.email).toBe('bartsimpson@gmail.com');
-    expect(payload!.user.firstName).toBe('Bart');
-    expect(payload!.user.lastName).toBe('Simpson');
-    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(2);
-    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(2);
+    expect(payload.email).toBe(email);
+    expect(payload.firstName).toBe('Bart');
+    expect(payload.lastName).toBe('Simpson');
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
   });
 
   it('should return null if wrong email', async () => {
@@ -88,8 +88,8 @@ describe('login()', () => {
     });
 
     expect(payload).toBe(null);
-    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(1);
-    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(0);
   });
 
   it('should return null if wrong password', async () => {
@@ -98,13 +98,13 @@ describe('login()', () => {
     ctx.utils.password.compare.mockResolvedValueOnce(false);
 
     const payload = await loginUser({
-      email: 'bartsimpson@gmail.com',
+      email,
       password: 'thisisawrongpassword'
     });
 
     expect(payload).toBe(null);
-    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(1);
-    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(0);
   });
 
   it('should return null if no email', async () => {
@@ -116,8 +116,8 @@ describe('login()', () => {
     });
 
     expect(payload).toBe(null);
-    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(1);
-    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(0);
   });
 
   it('should return null if no password', async () => {
@@ -126,13 +126,13 @@ describe('login()', () => {
     ctx.utils.password.compare.mockResolvedValueOnce(false);
 
     const payload = await loginUser({
-      email: 'bartsimpson@gmail.com',
+      email,
       password: ''
     });
 
     expect(payload).toBe(null);
-    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(1);
-    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(0);
   });
 
   it('should return null if SQL injection-ish', async () => {
@@ -144,7 +144,7 @@ describe('login()', () => {
     });
 
     expect(payload).toBe(null);
-    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(1);
-    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(1);
+    expect(ctx.utils.jwt.sign).toHaveBeenCalledTimes(0);
+    expect(ctx.utils.headers.setTokenToResponse).toHaveBeenCalledTimes(0);
   });
 });

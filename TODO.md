@@ -1,5 +1,2 @@
 - Add TLS certificate
 - Investigate how to insert secrets safely
-- Switch both frontend and backend to ESLint instead of TSLint
-- Simplify `ViewerContext` with hooks
-- Switch frontend to `graphql-code-generator`

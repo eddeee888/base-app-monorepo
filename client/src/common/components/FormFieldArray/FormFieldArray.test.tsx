@@ -67,32 +67,36 @@ describe('<FormFieldArray />', () => {
           property="property1"
           errors={errors}
           touched={touched}
-          children={children1}
-        />
+        >
+          {children1}
+        </FormFieldArray>
         <FormFieldArray<Input, Element>
           name="field1"
           index={0}
           property="property2"
           errors={errors}
           touched={touched}
-          children={children2}
-        />
+        >
+          {children2}
+        </FormFieldArray>
         <FormFieldArray<Input, Element>
           name="field1"
           index={1}
           property="property1"
           errors={errors}
           touched={touched}
-          children={children3}
-        />
+        >
+          {children3}
+        </FormFieldArray>
         <FormFieldArray<Input, Element>
           name="field1"
           index={1}
           property="property2"
           errors={errors}
           touched={touched}
-          children={children4}
-        />
+        >
+          {children4}
+        </FormFieldArray>
       </>
     );
 

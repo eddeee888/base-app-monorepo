@@ -1,17 +1,16 @@
 import ViewerContext from 'common/components/ViewerContext';
-import { Paths } from 'common/helpers/pathing';
 import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { Redirect, StaticRouter } from 'react-router';
 import Signup from './Signup';
 import SignupForm from './SignupForm';
+import { routes } from 'common/helpers/pathing';
 
 describe('<Signup />', () => {
   const contextValue = {
     viewer: null,
-    setViewer: jest.fn(),
-    clearViewer: jest.fn()
+    setViewerValue: jest.fn()
   };
 
   afterEach(() => {
@@ -20,7 +19,9 @@ describe('<Signup />', () => {
 
   const assertCommonElementsForNotLoggedIn = (wrapper: ReactWrapper) => {
     expect(wrapper.find(Redirect)).toHaveLength(0);
-    expect(wrapper.find(`a[href='${Paths.home}']`)).toHaveLength(1);
+    expect(wrapper.find(`a[href='${routes.home.generate({})}']`)).toHaveLength(
+      1
+    );
     expect(wrapper.find(SignupForm)).toHaveLength(1);
     expect(wrapper.find('h1').text()).toBe('Sign up');
   };
@@ -42,7 +43,7 @@ describe('<Signup />', () => {
     const wrapper = mount(
       <MockedProvider>
         <StaticRouter
-          location={{ search: '?redirect=/redirect-to-this-path' }}
+          location={{ searcher: '?redirect=/redirect-to-this-path' }}
           context={{}}
         >
           <ViewerContext.Provider value={contextValue}>
@@ -71,14 +72,14 @@ describe('<Signup />', () => {
       </MockedProvider>
     );
     expect(wrapper.find(Redirect)).toHaveLength(1);
-    expect(wrapper.find(Redirect).prop('to')).toBe(Paths.home);
+    expect(wrapper.find(Redirect).prop('to')).toBe(routes.home.generate({}));
   });
 
   it('should redirect to where ever dictated by the Url Query', () => {
     const wrapper = mount(
       <MockedProvider>
         <StaticRouter
-          location={{ search: '?redirect=/redirect-to-this-path' }}
+          location={{ searcher: '?redirect=/redirect-to-this-path' }}
           context={{}}
         >
           <ViewerContext.Provider

@@ -58,12 +58,9 @@ describe('<FormField />', () => {
   testCases.forEach(({ errors, touched, isError }) => {
     it(`should have isError:${isError} if touched:${!!touched.field1} and has error:${!!errors.field1} `, () => {
       const wrapper = mountWithFormik(
-        <FormField
-          name="field1"
-          errors={errors}
-          touched={touched}
-          children={children}
-        />
+        <FormField name="field1" errors={errors} touched={touched}>
+          {children}
+        </FormField>
       );
 
       if (isError) {

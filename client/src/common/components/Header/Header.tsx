@@ -1,14 +1,13 @@
 import { css } from 'emotion';
-import React, { useContext } from 'react';
-
+import React from 'react';
 import Button from 'common/components/Button';
 import Link from 'common/components/Link';
 import Logo from 'common/components/Logo';
-import ViewerContext from 'common/components/ViewerContext';
-import { linkgen, Paths } from 'common/helpers/pathing';
+import { useViewer } from 'common/components/ViewerContext';
 import { borderColor, primaryBackgroundColor } from 'common/styles/color';
 import { breakpoints, mediaQuery } from 'common/styles/media';
 import { headerHeight } from 'common/styles/size';
+import { routes } from 'common/helpers/pathing';
 
 const headerClassName = css`
   width: 100%;
@@ -58,12 +57,12 @@ const logoClassName = css`
 `;
 
 const Header: React.FunctionComponent<{}> = () => {
-  const { viewer } = useContext(ViewerContext);
+  const { viewer } = useViewer();
   return (
     <header className={headerClassName}>
       <div className={headerContentClassName}>
         <div className={logoWrapperClassName}>
-          <Link to={linkgen(Paths.home)}>
+          <Link to={routes.home.generate({})}>
             <Logo className={logoClassName} />
           </Link>
         </div>
@@ -71,20 +70,20 @@ const Header: React.FunctionComponent<{}> = () => {
         <div className={actionWrapperClassName}>
           {!viewer && (
             <>
-              <Link to={linkgen(Paths.signup)}>
+              <Link to={routes.signup.generate({})}>
                 <Button variant="outlined">Sign up</Button>
               </Link>
-              <Link to={linkgen(Paths.login)} themeColor="secondary">
+              <Link to={routes.login.generate({})} themeColor="secondary">
                 <Button variant="outlined">Log in</Button>
               </Link>
             </>
           )}
           {viewer && (
             <>
-              <Link to={linkgen(Paths.dashboard)}>
-                <Button variant="text">Dashboard</Button>
+              <Link to={routes.users.generate({})}>
+                <Button variant="text">Account</Button>
               </Link>
-              <Link to={linkgen(Paths.logout)}>
+              <Link to={routes.logout.generate({})}>
                 <Button variant="text">Logout</Button>
               </Link>
             </>

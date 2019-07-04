@@ -17,13 +17,13 @@ type ValidateSignupInputFn = (
 ) => Promise<ValidationData | undefined>;
 
 const validateSignupInput: ValidateSignupInputFn = async input => {
-  let validEmail: boolean = true;
+  let validEmail = true;
   let emailErrors: string[] | undefined;
-  let validFirstName: boolean = true;
+  let validFirstName = true;
   let firstNameErrors: string[] | undefined;
-  let validLastName: boolean = true;
+  let validLastName = true;
   let lastNameErrors: string[] | undefined;
-  let validPassword: boolean = true;
+  let validPassword = true;
   let passwordErrors: string[] | undefined;
 
   try {

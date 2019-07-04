@@ -5,7 +5,7 @@ import { primaryBackgroundColor, textColor } from 'common/styles/color';
 import { mediaQuery } from 'common/styles/media';
 import { remValue } from 'common/styles/unit';
 
-const createGlobalStyles = () => {
+const createGlobalStyles = (): void => {
   return injectGlobal`
     html {
       box-sizing: border-box;

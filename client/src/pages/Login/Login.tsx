@@ -6,27 +6,27 @@ import Link from 'common/components/Link';
 import Logo from 'common/components/Logo';
 import Main from 'common/components/Main';
 import Paper from 'common/components/Paper';
-import ViewerContext from 'common/components/ViewerContext';
-import { linkgen, Paths } from 'common/helpers/pathing';
+import { useViewer } from 'common/components/ViewerContext';
+import { routes } from 'common/helpers/pathing';
 import useUrlQuery from 'common/hooks/useUrlQuery';
-import React, { useContext } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router';
 import LoginForm from './LoginForm';
 
 const Login: React.FunctionComponent = () => {
-  const { viewer } = useContext(ViewerContext);
+  const { viewer } = useViewer();
   const { redirect } = useUrlQuery();
 
   if (viewer) {
-    return <Redirect to={redirect ? redirect : linkgen(Paths.dashboard)} />;
+    return <Redirect to={redirect ? redirect : routes.users.generate({})} />;
   }
 
   return (
     <Main fullViewPortHeight>
-      <Block size="sm" fullHeight>
+      <Block size="sm" fullHeight marginTop={0}>
         <Paper>
           <Grid container justify="center">
-            <Link to={linkgen(Paths.home)}>
+            <Link to={routes.home.generate({})}>
               <Logo />
             </Link>
           </Grid>

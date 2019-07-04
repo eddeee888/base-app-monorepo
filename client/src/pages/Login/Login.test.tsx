@@ -1,5 +1,5 @@
 import ViewerContext from 'common/components/ViewerContext';
-import { Paths } from 'common/helpers/pathing';
+import { routes } from 'common/helpers/pathing';
 import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';
@@ -10,8 +10,7 @@ import LoginForm from './LoginForm';
 describe('<Login />', () => {
   const contextValue = {
     viewer: null,
-    setViewer: jest.fn(),
-    clearViewer: jest.fn()
+    setViewerValue: jest.fn()
   };
 
   afterEach(() => {
@@ -20,7 +19,9 @@ describe('<Login />', () => {
 
   const assertCommonElementsForNotLoggedIn = (wrapper: ReactWrapper) => {
     expect(wrapper.find(Redirect)).toHaveLength(0);
-    expect(wrapper.find(`a[href='${Paths.home}']`)).toHaveLength(1);
+    expect(wrapper.find(`a[href='${routes.home.generate({})}']`)).toHaveLength(
+      1
+    );
     expect(wrapper.find(LoginForm)).toHaveLength(1);
     expect(wrapper.find('h1').text()).toBe('Log in');
   };
@@ -42,7 +43,7 @@ describe('<Login />', () => {
     const wrapper = mount(
       <MockedProvider>
         <StaticRouter
-          location={{ search: '?redirect=/redirect-to-this-path' }}
+          location={{ searcher: '?redirect=/redirect-to-this-path' }}
           context={{}}
         >
           <ViewerContext.Provider value={contextValue}>
@@ -71,14 +72,14 @@ describe('<Login />', () => {
       </MockedProvider>
     );
     expect(wrapper.find(Redirect)).toHaveLength(1);
-    expect(wrapper.find(Redirect).prop('to')).toBe(Paths.dashboard);
+    expect(wrapper.find(Redirect).prop('to')).toBe(routes.users.generate({}));
   });
 
   it('should redirect to where ever dictated by the Url Query', () => {
     const wrapper = mount(
       <MockedProvider>
         <StaticRouter
-          location={{ search: '?redirect=/redirect-to-this-path' }}
+          location={{ searcher: '?redirect=/redirect-to-this-path' }}
           context={{}}
         >
           <ViewerContext.Provider

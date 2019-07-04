@@ -1,16 +1,16 @@
-import ViewerContext from 'common/components/ViewerContext';
+import { useViewer } from 'common/components/ViewerContext';
 import useFormError from 'common/hooks/useFormError';
 import LoginFormComponent from 'pages/Login/LoginForm/LoginFormComponent';
-import LoginFormMutation from 'pages/Login/LoginForm/LoginFormMutation';
-import React, { useContext } from 'react';
+import React from 'react';
 import createHandleLoginFn from './functionCreators/createHandleLoginFn';
+import { LoginMutationComponent } from '../Login.generated';
 
 const LoginForm: React.FunctionComponent = () => {
-  const { setViewer } = useContext(ViewerContext);
+  const { setViewer } = useViewer();
   const [formError] = useFormError(1);
 
   return (
-    <LoginFormMutation>
+    <LoginMutationComponent>
       {(login, { loading }) => (
         <LoginFormComponent
           generalFormError={formError.error}
@@ -18,7 +18,7 @@ const LoginForm: React.FunctionComponent = () => {
           onSubmit={createHandleLoginFn(login, setViewer, formError.setError)}
         />
       )}
-    </LoginFormMutation>
+    </LoginMutationComponent>
   );
 };
 

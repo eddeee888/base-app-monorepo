@@ -14,7 +14,10 @@ const iconComponents = {
   duplicate: DuplicateIcon
 };
 
-const createIcon = (icon: Icon['icon'], props?: SvgIconProps) => {
+const createIcon = (
+  icon: Icon['icon'],
+  props?: SvgIconProps
+): React.ReactElement => {
   const TypedIcon = iconComponents[icon];
   return <TypedIcon {...props} />;
 };

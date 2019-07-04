@@ -1,11 +1,11 @@
 import Button from 'common/components/Button';
 import Link from 'common/components/Link';
-import { linkgen, Paths } from 'common/helpers/pathing';
 import { mount, ReactWrapper } from 'enzyme';
 import { Field, Formik } from 'formik';
 import React from 'react';
 import { StaticRouter } from 'react-router';
 import SignupFormComponent from './SignupFormComponent';
+import { routes } from 'common/helpers/pathing';
 
 const props = {
   onSubmit: jest.fn(),
@@ -52,13 +52,13 @@ describe('<SignupFormComponent />', () => {
       </StaticRouter>
     );
     assertCommonElements(wrapper);
-    expect(wrapper.find(Link).prop('to')).toBe(linkgen(Paths.login));
+    expect(wrapper.find(Link).prop('to')).toBe(routes.login.generate({}));
   });
 
   it('should render correct structure and a link to /login with redirect query that matches the one from url', () => {
     const wrapper = mount(
       <StaticRouter
-        location={{ search: '?redirect=/redirect-to-this-path' }}
+        location={{ searcher: '?redirect=/redirect-to-this-path' }}
         context={{}}
       >
         <SignupFormComponent {...props} />
@@ -66,7 +66,7 @@ describe('<SignupFormComponent />', () => {
     );
     assertCommonElements(wrapper);
     expect(wrapper.find(Link).prop('to')).toBe(
-      linkgen(Paths.login) + '?redirect=/redirect-to-this-path'
+      routes.login.generate({}, { redirect: '/redirect-to-this-path' })
     );
   });
 

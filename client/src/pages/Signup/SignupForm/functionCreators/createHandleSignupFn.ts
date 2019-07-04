@@ -6,9 +6,9 @@ import { SetViewerFn } from 'common/components/ViewerContext';
 import { FormErrorObject } from 'common/hooks/useFormError/useFormError';
 import { SignupFormikFn } from 'pages/Signup/SignupForm/SignupFormComponent';
 import {
-  SignupMutationFn,
-  SignupMutationOptions
-} from 'pages/Signup/SignupForm/SignupFormMutation';
+  SignupMutationOptions,
+  SignupMutationFn
+} from 'pages/Signup/Signup.generated';
 
 type CreateHandleSignupFn = (
   signup: SignupMutationFn,
@@ -33,7 +33,7 @@ const createHandleSignupFn: CreateHandleSignupFn = (
     const result = await signup(options);
     if (result && result.data) {
       setViewer({
-        id: result.data.signup.user.id
+        id: result.data.signup.id
       });
     } else {
       setGeneralError('Unexpected error occurred!');

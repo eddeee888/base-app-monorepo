@@ -13,6 +13,7 @@ interface FormFieldProps<Element> {
   field: {
     onChange: FormikHandlers['handleChange'];
     onBlur: FormikHandlers['handleBlur'];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     value: any;
     name: string;
     error: boolean;
@@ -36,7 +37,7 @@ function FormFieldArray<Input, Element>({
   errors,
   touched,
   children
-}: Props<Input, Element>) {
+}: Props<Input, Element>): React.ReactElement {
   const fieldName = `${name}.${index}.${property}`;
   const fieldError = getIn(errors, fieldName);
   const fieldTouched = getIn(touched, fieldName);

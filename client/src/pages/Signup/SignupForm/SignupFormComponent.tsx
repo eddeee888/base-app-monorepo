@@ -4,18 +4,18 @@ import {
   passwordValidation
 } from '@bit/eddeee888.base-react-app-utils.validations';
 import Grid from '@material-ui/core/Grid';
-import { SignupInput } from '__generated__/globalTypes';
 import Button from 'common/components/Button';
 import FormError from 'common/components/FormError';
 import FormField from 'common/components/FormField';
 import Link from 'common/components/Link';
 import Text from 'common/components/Text';
 import TextInput from 'common/components/TextInput';
-import { linkgen, Paths } from 'common/helpers/pathing';
+import { routes } from 'common/helpers/pathing';
 import useUrlQuery from 'common/hooks/useUrlQuery';
 import { Form, Formik, FormikActions } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
+import { SignupInput } from '__generated__/types';
 
 export type SignupFormikFn = (
   formValues: SignupInput,
@@ -35,11 +35,11 @@ interface Props {
   generalFormError: string;
 }
 
-const SignupFormComponent = ({
+const SignupFormComponent: React.FunctionComponent<Props> = ({
   onSubmit,
   loading,
   generalFormError
-}: Props) => {
+}) => {
   const query = useUrlQuery();
   return (
     <Formik<SignupInput>
@@ -89,7 +89,7 @@ const SignupFormComponent = ({
 
           <Text gutterBottom>
             Already have an account?{' '}
-            <Link to={linkgen(Paths.login, { query })}>Log in</Link>
+            <Link to={routes.login.generate({}, query)}>Log in</Link>
           </Text>
 
           <Button type="submit" disabled={loading} showSpinner={loading}>

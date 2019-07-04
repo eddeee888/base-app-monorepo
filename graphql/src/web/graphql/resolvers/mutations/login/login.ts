@@ -30,9 +30,11 @@ const login: MutationResolvers.LoginResolver = async (parent, args, ctx) => {
     return throwAuthenticationError('Unable to sign token');
   }
 
-  return {
-    user: { ...user }
-  };
+  // Must attach user here as viewer because at this point forward.
+  // The user is logged in. This allows us to query private user details such as email
+  ctx.viewer = user;
+
+  return { ...user };
 };
 
 export default login;

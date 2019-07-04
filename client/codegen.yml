@@ -1,0 +1,23 @@
+overwrite: true
+schema: 'http://bra.com.vm/graphql'
+documents: 'src/**/*.graphql'
+generates:
+  src/__generated__/types.ts:
+    plugins:
+      - 'typescript'
+    config:
+      enumsAsTypes: true
+      nonOptionalTypename: true
+
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: __generated__/types.ts
+      extension: .generated.tsx
+    plugins:
+      - 'typescript-operations'
+      - './codegen/plugins/typescript-react-apollo/dist/commonjs/index.js'
+    config:
+      enumsAsTypes: true
+      nonOptionalTypename: true
+      # noGraphQLTag: true

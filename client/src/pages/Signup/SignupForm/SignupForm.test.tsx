@@ -4,18 +4,21 @@ import { MockedProvider } from 'react-apollo/test-utils';
 import { MemoryRouter } from 'react-router';
 import SignupForm from './SignupForm';
 import SignupFormComponent from './SignupFormComponent';
-import SignupFormMutation from './SignupFormMutation';
+import { ViewerProvider } from 'common/components/ViewerContext';
+import { SignupMutationComponent } from '../Signup.generated';
 
 describe('<SignupForm />', () => {
-  it('should have SignupFormMutation and SignupFormComponent', () => {
+  it('should have SignupMutationComponent and SignupFormComponent', () => {
     const wrapper = mount(
       <MockedProvider>
         <MemoryRouter>
-          <SignupForm />
+          <ViewerProvider>
+            <SignupForm />
+          </ViewerProvider>
         </MemoryRouter>
       </MockedProvider>
     );
     expect(wrapper.find(SignupFormComponent)).toHaveLength(1);
-    expect(wrapper.find(SignupFormMutation)).toHaveLength(1);
+    expect(wrapper.find(SignupMutationComponent)).toHaveLength(1);
   });
 });

@@ -4,7 +4,7 @@ import { LoginFormikFn } from 'pages/Login/LoginForm/LoginFormComponent';
 import {
   LoginMutationFn,
   LoginMutationOptions
-} from 'pages/Login/LoginForm/LoginFormMutation';
+} from 'pages/Login/Login.generated';
 
 type CreateHandleLoginFn = (
   login: LoginMutationFn,
@@ -27,13 +27,8 @@ const createHandleLoginFn: CreateHandleLoginFn = (
 
   try {
     const fetchResult = await login(options);
-    if (
-      fetchResult &&
-      fetchResult.data &&
-      fetchResult.data.login &&
-      fetchResult.data.login.user
-    ) {
-      setViewer({ id: fetchResult.data.login.user.id });
+    if (fetchResult && fetchResult.data && fetchResult.data.login) {
+      setViewer({ id: fetchResult.data.login.id });
     } else {
       setGeneralError(
         'The email/password combination you entered is incorrect.'
