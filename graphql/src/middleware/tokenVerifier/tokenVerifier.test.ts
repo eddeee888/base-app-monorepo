@@ -1,8 +1,7 @@
 import { Request } from 'jest-express/lib/request';
 import { Response } from 'jest-express/lib/response';
-import { TokenType } from 'src/helpers/headers';
-import { sign, verify } from 'src/helpers/utils/jwt';
-import { JWTPayload } from 'src/helpers/utils/jwt/options';
+import { TokenType } from 'libs/headers';
+import { sign, verify, JWTPayload } from 'libs/jwt';
 import tokenVerifier from './tokenVerifier';
 
 describe('tokenVerifier middleware', () => {
