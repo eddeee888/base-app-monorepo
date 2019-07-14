@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { getTokenFromRequest, setTokenToResponse } from 'src/helpers/headers';
-import { sign, verify } from 'src/helpers/utils/jwt';
+import { getTokenFromRequest, setTokenToResponse } from 'libs/headers';
+import { sign, verify } from 'libs/jwt';
 
 type TokenVerifier = (req: Request, res: Response, next: NextFunction) => void;
 

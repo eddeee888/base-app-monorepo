@@ -4,7 +4,7 @@ datamodel: datamodel.prisma
 
 generate:
   - generator: typescript-client
-    output: ./src/web/graphql/generated/prisma-client/
+    output: ./src/prisma/generated/client/
 
 seed:
-  run: ts-node ./prisma/seed.ts
+  run: ts-node ./src/prisma/seed.ts

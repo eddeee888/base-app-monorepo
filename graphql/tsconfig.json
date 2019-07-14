@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["es2016", "esnext.asynciterable"],
-    "baseUrl": ".",
-    "paths": {
-      "src": ["./src"]
-    },
+    "baseUrl": "./src",
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
