@@ -1,7 +1,0 @@
-query Users($id: ID!) {
-  user(id: $id) {
-    id
-    firstName
-    lastName
-  }
-}

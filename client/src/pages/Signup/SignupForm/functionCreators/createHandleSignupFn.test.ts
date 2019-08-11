@@ -1,7 +1,7 @@
 import {
   CustomGraphQLErrors,
   FormValidationError
-} from '@bit/eddeee888.learnd-utils.graphql';
+} from '@bit/eddeee888.base-react-app-utils.graphql';
 import createApolloError from 'test/utils/createApolloError';
 import getCustomGraphQLErrorFromErrorName from 'test/utils/getCustomGraphQLErrorFromErrorName';
 import createHandleSignupFn from './createHandleSignupFn';

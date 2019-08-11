@@ -68,9 +68,6 @@ const Header: React.FunctionComponent<{}> = () => {
         </div>
 
         <div className={actionWrapperClassName}>
-          <Link to={routes.hostClassCreate.generate({})}>
-            <Button variant="outlined">Host a class</Button>
-          </Link>
           {!viewer && (
             <>
               <Link to={routes.signup.generate({})}>

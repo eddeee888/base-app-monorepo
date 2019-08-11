@@ -8,7 +8,7 @@ function init_packages()
   cd - 
 
   echo "*** Installing packages in graphql..."
-  cd ./graphql && yarn
+  cd ./graphql && yarn && yarn gg && yarn prisma:deploy
 
   cd -
 }

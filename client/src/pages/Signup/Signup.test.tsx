@@ -34,22 +34,6 @@ describe('<Signup />', () => {
     });
   });
 
-  it('should show signup form if viewer is not logged in and correct header', () => {
-    const { container } = render(
-      <MockedProvider>
-        <StaticRouter
-          location={{ search: '?redirect=/redirect-to-this-path' }}
-          context={{}}
-        >
-          <ViewerContext.Provider value={contextValue}>
-            <Signup />
-          </ViewerContext.Provider>
-        </StaticRouter>
-      </MockedProvider>
-    );
-    assertTextExists(container, /Sign upto continue/); // This is supposed to be on the next line
-  });
-
   it('should redirect to dashboard if viewer is logged in', () => {
     const { container } = render(
       <MockedProvider>

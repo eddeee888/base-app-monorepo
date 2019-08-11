@@ -1,44 +1,21 @@
 import React from 'react';
 import Main from 'common/components/Main';
 import Block from 'common/components/Block';
-import Error404 from 'common/components/Error404';
-import UsersDisplay from './UsersDisplay';
-import {
-  UserAndClassesCreatedComponent,
-  DeleteClassComponent
-} from './Operations.generated';
-import useEffectiveUserId from './useEffectiveUserId';
+import { routes } from 'common/pathing';
+import Paper from 'common/components/Paper';
+import H1 from 'common/components/H1';
+import Divider from 'common/components/Divider';
 
 const Users: React.FunctionComponent = () => {
-  const effectiveUserId = useEffectiveUserId();
-
-  if (!effectiveUserId) {
-    return <Error404 />;
-  }
+  const { userId } = routes.users.useParams();
 
   return (
     <Main>
       <Block size="md">
-        <UserAndClassesCreatedComponent
-          variables={{
-            id: effectiveUserId,
-            classesCreatedInput: { userId: effectiveUserId }
-          }}
-          fetchPolicy="network-only"
-        >
-          {({ loading, error, data }) => (
-            <DeleteClassComponent>
-              {deleteClassFn => (
-                <UsersDisplay
-                  loading={loading}
-                  error={error}
-                  data={data}
-                  deleteClassFn={deleteClassFn}
-                />
-              )}
-            </DeleteClassComponent>
-          )}
-        </UserAndClassesCreatedComponent>
+          <Paper>
+            <H1>{userId}</H1>
+            <Divider />
+          </Paper>
       </Block>
     </Main>
   );

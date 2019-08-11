@@ -1,7 +1,7 @@
 import {
   checkError,
   CustomGraphQLErrors
-} from '@bit/eddeee888.learnd-utils.graphql';
+} from '@bit/eddeee888.base-react-app-utils.graphql';
 import { SetViewerFn } from 'common/components/ViewerContext';
 import { FormErrorObject } from 'common/hooks/useFormError';
 import { SignupFormikFn } from 'pages/Signup/SignupForm/SignupFormComponent';

@@ -2,7 +2,7 @@ import {
   emailValidation,
   nameValidation,
   passwordValidation
-} from '@bit/eddeee888.learnd-utils.forms.validations';
+} from '@bit/eddeee888.base-react-app-utils.validations';
 import Grid from '@material-ui/core/Grid';
 import Button from 'common/components/Button';
 import FormError from 'common/components/FormError';
