@@ -8,6 +8,7 @@ import {
 import { MutationResolvers } from 'graphql/generated/graphqlgen';
 import { User as PrismaUser } from 'prisma/generated/client';
 import validateSignupInput from 'graphql/resolvers/mutations/signup/validateSignupInput';
+import { canUserBeCreated } from 'graphql/permissions';
 
 const createUser = async (
   ctx: ResolverContext,
@@ -33,7 +34,7 @@ const createUser = async (
 };
 
 const validateInput = async (
-  ctx: ResolverContext,
+  { prisma }: ResolverContext,
   input: MutationResolvers.SignupInput
 ): Promise<void> => {
   const inputErrors = await validateSignupInput(input);
@@ -41,14 +42,14 @@ const validateInput = async (
     throwInputValidationError(inputErrors);
   }
 
-  let existingUser;
+  let canBeCreated = false;
   try {
-    existingUser = await ctx.prisma.user({ email: input.email });
+    canBeCreated = await canUserBeCreated(prisma, input.email);
   } catch (e) {
     throwDatabaseError('Unable to check user email');
   }
 
-  if (existingUser) {
+  if (!canBeCreated) {
     throwInputValidationError({ email: ['Email already exists'] });
   }
 };

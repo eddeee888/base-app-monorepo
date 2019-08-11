@@ -2,14 +2,17 @@ import { formatError } from '@bit/eddeee888.base-react-app-utils.graphql';
 import cookieParser = require('cookie-parser');
 import { importSchema } from 'graphql-import';
 import { GraphQLServer } from 'graphql-yoga';
-import { getTokenFromRequest, setTokenToResponse } from 'libs/headers';
+import {
+  getTokenFromRequest,
+  setTokenToResponse,
+  getViewerFromRequest
+} from 'libs/headers';
 import { sign, verify } from 'libs/jwt';
 import { compare, hash } from 'libs/password';
 import tokenVerifier from 'middleware/tokenVerifier';
 import { prisma } from 'prisma/generated/client';
 import { resolvers } from 'graphql/resolvers';
 import directiveResolvers from 'graphql/directiveResolvers';
-import { getViewerFromRequest } from 'libs/headers';
 
 const PORT = process.env.PORT || 8000;
 
