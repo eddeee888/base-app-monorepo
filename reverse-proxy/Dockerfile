@@ -1,12 +1,19 @@
-# Use the standard Nginx image from Docker Hub
-FROM nginx
+FROM nginx:1.17.2-alpine 
 
-# Copy start script
-COPY start.sh /usr/local/bin/start.sh
+RUN apk update \ 
+  && apk add bash \
+  && apk add openssl \
+  && rm -rf /var/cache/apk/*
 
-# Copy the configuration file from the current directory and paste 
-# it inside the container to use it as Nginx's default config.
-COPY nginx.conf /etc/nginx/nginx.conf
+WORKDIR /opt
 
-# Start Nginx when the container has provisioned.
-CMD ["/usr/local/bin/start.sh"]
+COPY ./certificates/fullchain.pem /usr/share/nginx/certificates/fullchain.pem
+COPY ./certificates/privkey.pem /usr/share/nginx/certificates/privkey.pem
+
+COPY http.conf /etc/nginx/conf.d/http.conf
+
+COPY entrypoint.sh entrypoint.sh
+
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
