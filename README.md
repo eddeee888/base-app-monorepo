@@ -49,7 +49,7 @@ $ bra logs -f graphql
 Once they have successfully built, go to the following URL from your favourite browser:
 
 ```
-https://learnd.com.vm/
+https://bra.com.vm/
 ```
 
 #### Generate dummy data

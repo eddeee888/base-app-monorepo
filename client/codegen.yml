@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'http://learnd.com.vm/graphql'
+schema: './../graphql/src/graphql/schemas/schema.graphql'
 documents: 'src/**/*.graphql'
 generates:
   src/__generated__/types.ts:
