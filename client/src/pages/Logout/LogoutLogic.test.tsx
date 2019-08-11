@@ -1,24 +1,28 @@
-import { routes } from 'common/helpers/pathing';
-import { mount } from 'enzyme';
 import React from 'react';
-import { Redirect, StaticRouter } from 'react-router-dom';
 import LogoutLogic from './LogoutLogic';
+import { render } from '@testing-library/react';
+import { MemoryRouter, Route } from 'react-router';
+import { assertTextExists } from 'test/utils/react-testing-library';
 
 describe('<Logout />', () => {
   const logout = jest.fn().mockResolvedValueOnce(true);
   const clearViewer = jest.fn();
   it('should clear session and log user out', () => {
-    const wrapper = mount(
-      <StaticRouter context={{}}>
-        <LogoutLogic logout={logout} clearViewer={clearViewer} />
-      </StaticRouter>
+    const { container } = render(
+      <MemoryRouter initialEntries={['/login?redirect=/redirect-to-this-path']}>
+        <Route exact path="/" render={() => <div>Redirected</div>} />
+        <Route
+          path="/login"
+          render={() => (
+            <LogoutLogic logout={logout} clearViewer={clearViewer} />
+          )}
+        />
+      </MemoryRouter>
     );
 
-    expect(wrapper.find(Redirect)).toHaveLength(1);
-    expect(wrapper.find(Redirect).props().to).toBe(routes.home.generate({}));
+    assertTextExists(container, 'Redirected');
 
-    // TOTEST: update to test useEffect once it's implemented in enzyme
-    // expect(clearViewer).toHaveBeenCalledTimes(1);
-    // expect(logout).toHaveBeenCalledTimes(1);
+    // useEffect issue: https://github.com/testing-library/react-testing-library/issues/215
+    // expect(clearViewer).toBeCalledTimes(1);
   });
 });

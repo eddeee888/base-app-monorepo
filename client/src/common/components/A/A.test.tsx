@@ -1,14 +1,16 @@
-import { mount } from 'enzyme';
 import React from 'react';
 import A, { generateCss } from './A';
+import { render } from '@testing-library/react';
+import { assertTextLink } from 'test/utils/react-testing-library/assertTextLink';
 
 describe('<A />', () => {
   it('should display an anchor with a class', () => {
-    const wrapper = mount(<A>Linkage</A>);
+    const { container } = render(<A href="/awesome/link">Linkage</A>);
 
-    expect(wrapper.find('a')).toHaveLength(1);
-    expect(wrapper.find('a').props().className).toBeTruthy();
-    expect(wrapper.html()).toMatch(/Linkage/);
+    assertTextLink(container, {
+      text: 'Linkage',
+      href: '/awesome/link'
+    });
   });
 });
 

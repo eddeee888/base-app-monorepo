@@ -1,5 +1,5 @@
 import { SetViewerFn } from 'common/components/ViewerContext';
-import { FormErrorObject } from 'common/hooks/useFormError/useFormError';
+import { FormErrorObject } from 'common/hooks/useFormError';
 import { LoginFormikFn } from 'pages/Login/LoginForm/LoginFormComponent';
 import {
   LoginMutationFn,

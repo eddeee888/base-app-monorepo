@@ -3,14 +3,14 @@ import useFormError from 'common/hooks/useFormError';
 import SignupFormComponent from 'pages/Signup/SignupForm/SignupFormComponent';
 import React from 'react';
 import createHandleSignupFn from './functionCreators/createHandleSignupFn';
-import { SignupMutationComponent } from '../Signup.generated';
+import { SignupComponent } from '../Signup.generated';
 
 const SignupForm: React.FunctionComponent = () => {
   const { setViewer } = useViewer();
   const [formError] = useFormError(1);
 
   return (
-    <SignupMutationComponent>
+    <SignupComponent>
       {(signup, { loading }) => (
         <SignupFormComponent
           onSubmit={createHandleSignupFn(signup, setViewer, formError.setError)}
@@ -18,7 +18,7 @@ const SignupForm: React.FunctionComponent = () => {
           loading={loading}
         />
       )}
-    </SignupMutationComponent>
+    </SignupComponent>
   );
 };
 

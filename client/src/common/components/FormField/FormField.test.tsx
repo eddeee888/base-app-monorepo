@@ -1,13 +1,15 @@
-import { mount } from 'enzyme';
 import { Form, Formik, FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
 import FormField from './FormField';
+import { render } from '@testing-library/react';
+import { assertTextExists } from 'test/utils/react-testing-library';
 
 interface Input {
   field1: string;
 }
 
 interface TestCase {
+  description: string;
   errors: FormikErrors<Input>;
   touched: FormikTouched<Input>;
   isError: boolean;
@@ -19,7 +21,7 @@ describe('<FormField />', () => {
   };
 
   const mountWithFormik = (formField: any) => {
-    return mount(
+    return render(
       <Formik<Input> initialValues={mockInput} onSubmit={() => jest.fn()}>
         {() => <Form>{formField}</Form>}
       </Formik>
@@ -28,49 +30,51 @@ describe('<FormField />', () => {
 
   const testCases: TestCase[] = [
     {
+      description: 'should not show errors if has error but not touched',
       errors: { field1: 'Field 1 is required' },
       touched: { field1: false },
       isError: false
     },
     {
+      description: 'should show errors if has error and touched',
       errors: { field1: 'Field 1 is required' },
       touched: { field1: true },
       isError: true
     },
     {
+      description: 'should show errors if no error and not touched',
       errors: { field1: undefined },
       touched: { field1: false },
       isError: false
     },
     {
+      description: 'should not show errors if no error and not touched',
       errors: { field1: undefined },
       touched: { field1: true },
       isError: false
     }
   ];
 
-  const children = jest.fn();
-
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  testCases.forEach(({ errors, touched, isError }) => {
-    it(`should have isError:${isError} if touched:${!!touched.field1} and has error:${!!errors.field1} `, () => {
-      const wrapper = mountWithFormik(
+  testCases.forEach(({ description, errors, touched, isError }) => {
+    it(description, () => {
+      const { container } = mountWithFormik(
         <FormField name="field1" errors={errors} touched={touched}>
-          {children}
+          {() => <div>Content</div>}
         </FormField>
       );
 
       if (isError) {
-        expect(wrapper.text()).toMatch(/Field 1 is required/);
-        expect(children).toHaveBeenCalledTimes(1);
-        expect(children.mock.calls[0][0].field.error).toBe(true);
+        assertTextExists(container, /Field 1 is required/);
+        assertTextExists(container, /Content/);
       } else {
-        expect(wrapper.text()).not.toMatch(/Field 1 is required/);
-        expect(children).toHaveBeenCalledTimes(1);
-        expect(children.mock.calls[0][0].field.error).toBe(false);
+        expect(() =>
+          assertTextExists(container, /Field 1 is required/)
+        ).toThrow();
+        assertTextExists(container, /Content/);
       }
     });
   });

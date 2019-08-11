@@ -1,32 +1,16 @@
-import HookWrapper from 'common/helpers/tests/HookWrapper';
-import { mount } from 'enzyme';
-import React from 'react';
 import useFormError from './useFormError';
+import { renderHook, act } from '@testing-library/react-hooks';
 
 describe('useFormError()', () => {
-  const testCases = [0, 1, 3];
-  const children = jest.fn();
+  it(`should return an array with a given length`, () => {
+    const { result } = renderHook(() => useFormError(2));
 
-  beforeEach(() => {
-    children.mockReturnValue('');
+    expect(result.current[0].error).toBe('');
+    expect(result.current[1].error).toBe('');
+
+    act(() => result.current[1].setError('New Error!'));
+
+    expect(result.current[0].error).toBe('');
+    expect(result.current[1].error).toBe('New Error!');
   });
-
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
-  testCases.forEach(numberOfErrors => {
-    it(`should return an array with length ${numberOfErrors}`, () => {
-      const wrapper = mount(
-        <HookWrapper hook={() => useFormError(numberOfErrors)} />
-      );
-      const hookResult = wrapper.find('div').prop('hook');
-
-      expect(hookResult).toHaveLength(numberOfErrors);
-    });
-  });
-
-  it.todo(
-    'should update error at correct index if setError is called (waiting for hook support)'
-  );
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
-import { MarginValue } from 'common/helpers/spacing';
+import { MarginValue } from 'common/styles/spacing';
 
 interface Props {
   children: React.ReactNode;

@@ -1,11 +1,13 @@
 import ViewerContext from 'common/components/ViewerContext';
-import { mount, ReactWrapper } from 'enzyme';
 import React from 'react';
 import { MockedProvider } from 'react-apollo/test-utils';
-import { Redirect, StaticRouter } from 'react-router';
+import { StaticRouter, MemoryRouter, Route } from 'react-router';
 import Signup from './Signup';
-import SignupForm from './SignupForm';
-import { routes } from 'common/helpers/pathing';
+import {
+  assertTextExists,
+  assertTextLink
+} from 'test/utils/react-testing-library';
+import { render } from '@testing-library/react';
 
 describe('<Signup />', () => {
   const contextValue = {
@@ -13,21 +15,8 @@ describe('<Signup />', () => {
     setViewerValue: jest.fn()
   };
 
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
-  const assertCommonElementsForNotLoggedIn = (wrapper: ReactWrapper) => {
-    expect(wrapper.find(Redirect)).toHaveLength(0);
-    expect(wrapper.find(`a[href='${routes.home.generate({})}']`)).toHaveLength(
-      1
-    );
-    expect(wrapper.find(SignupForm)).toHaveLength(1);
-    expect(wrapper.find('h1').text()).toBe('Sign up');
-  };
-
   it('should show signup form if viewer is not logged in', () => {
-    const wrapper = mount(
+    const { container } = render(
       <MockedProvider>
         <StaticRouter context={{}}>
           <ViewerContext.Provider value={contextValue}>
@@ -36,64 +25,62 @@ describe('<Signup />', () => {
         </StaticRouter>
       </MockedProvider>
     );
-    assertCommonElementsForNotLoggedIn(wrapper);
-  });
 
-  it('should show signup form if viewer is not logged in and correct header', () => {
-    const wrapper = mount(
-      <MockedProvider>
-        <StaticRouter
-          location={{ searcher: '?redirect=/redirect-to-this-path' }}
-          context={{}}
-        >
-          <ViewerContext.Provider value={contextValue}>
-            <Signup />
-          </ViewerContext.Provider>
-        </StaticRouter>
-      </MockedProvider>
-    );
-    assertCommonElementsForNotLoggedIn(wrapper);
-    expect(wrapper.find('h2').text()).toBe('to continue');
+    //TODO: test there's a signup button
+
+    assertTextLink(container, {
+      text: 'Log in',
+      href: '/login'
+    });
   });
 
   it('should redirect to dashboard if viewer is logged in', () => {
-    const wrapper = mount(
+    const { container } = render(
       <MockedProvider>
-        <StaticRouter context={{}}>
-          <ViewerContext.Provider
-            value={{
-              ...contextValue,
-              viewer: { id: '100' }
-            }}
-          >
-            <Signup />
-          </ViewerContext.Provider>
-        </StaticRouter>
+        <ViewerContext.Provider
+          value={{
+            ...contextValue,
+            viewer: { id: '100' }
+          }}
+        >
+          <MemoryRouter initialEntries={['/signup']}>
+            <Route exact path="/users" render={() => <div>Redirected</div>} />
+            <Route path="/signup" render={() => <Signup />} />
+          </MemoryRouter>
+        </ViewerContext.Provider>
       </MockedProvider>
     );
-    expect(wrapper.find(Redirect)).toHaveLength(1);
-    expect(wrapper.find(Redirect).prop('to')).toBe(routes.home.generate({}));
+    assertTextExists(container, 'Redirected');
   });
 
   it('should redirect to where ever dictated by the Url Query', () => {
-    const wrapper = mount(
+    const { container } = render(
       <MockedProvider>
-        <StaticRouter
-          location={{ searcher: '?redirect=/redirect-to-this-path' }}
-          context={{}}
+        <ViewerContext.Provider
+          value={{
+            ...contextValue,
+            viewer: { id: '100' }
+          }}
         >
-          <ViewerContext.Provider
-            value={{
-              ...contextValue,
-              viewer: { id: '100' }
-            }}
+          <MemoryRouter
+            initialEntries={['/signup?redirect=/redirect-to-this-path']}
           >
-            <Signup />
-          </ViewerContext.Provider>
-        </StaticRouter>
+            <Route
+              exact
+              path="/users"
+              render={() => <div>Not redirected here</div>}
+            />
+            <Route
+              exact
+              path="/redirect-to-this-path"
+              render={() => <div>Redirected here</div>}
+            />
+            <Route path="/signup" render={() => <Signup />} />
+          </MemoryRouter>
+        </ViewerContext.Provider>
       </MockedProvider>
     );
-    expect(wrapper.find(Redirect)).toHaveLength(1);
-    expect(wrapper.find(Redirect).prop('to')).toBe('/redirect-to-this-path');
+
+    assertTextExists(container, 'Redirected here');
   });
 });

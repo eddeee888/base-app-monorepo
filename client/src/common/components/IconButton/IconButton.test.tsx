@@ -1,12 +1,11 @@
-import IconButtonMui from '@material-ui/core/IconButton';
-import { mount } from 'enzyme';
 import React from 'react';
 import IconButton from './IconButton';
+import { render } from '@testing-library/react';
 
 describe('<IconButton />', () => {
   it('should render an icon button', () => {
-    const wrapper = mount(<IconButton icon="add" />);
+    const { container } = render(<IconButton icon="add" />);
 
-    expect(wrapper.find(IconButtonMui)).toHaveLength(1);
+    expect(container.querySelector('button')).toBeTruthy();
   });
 });

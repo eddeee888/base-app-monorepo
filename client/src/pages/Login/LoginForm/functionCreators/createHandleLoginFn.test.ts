@@ -20,9 +20,7 @@ describe('createHandleSubmitFunction()', () => {
     loginMutation.mockResolvedValueOnce({
       data: {
         login: {
-          user: {
-            id: '100'
-          }
+          id: '100'
         }
       }
     });

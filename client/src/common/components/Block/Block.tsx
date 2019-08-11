@@ -2,7 +2,7 @@ import { Breakpoints, breakpoints } from 'common/styles/media';
 import { css, cx } from 'emotion';
 import React from 'react';
 import { Box } from '@material-ui/core';
-import { MarginValue } from 'common/helpers/spacing';
+import { MarginValue } from 'common/styles/spacing';
 
 interface Props {
   size: keyof Breakpoints;

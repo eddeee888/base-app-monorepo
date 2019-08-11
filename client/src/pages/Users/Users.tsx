@@ -1,35 +1,21 @@
 import React from 'react';
 import Main from 'common/components/Main';
 import Block from 'common/components/Block';
-import useParams from 'common/hooks/useParams';
-import { UsersParams } from 'common/helpers/pathing/routes';
-import Error404 from 'common/components/Error404';
-import { useViewer } from 'common/components/ViewerContext';
-import UsersDisplay from './components/UsersDisplay';
-import { GetUserQueryComponent } from './GetUser.generated';
+import { routes } from 'common/pathing';
+import Paper from 'common/components/Paper';
+import H1 from 'common/components/H1';
+import Divider from 'common/components/Divider';
 
 const Users: React.FunctionComponent = () => {
-  const { userId } = useParams<UsersParams>();
-  const { viewer } = useViewer();
-
-  const effectiveUserId = userId ? userId : viewer ? viewer.id : null;
-
-  if (!effectiveUserId) {
-    return <Error404 />;
-  }
+  const { userId } = routes.users.useParams();
 
   return (
     <Main>
       <Block size="md">
-        <GetUserQueryComponent
-          variables={{
-            id: effectiveUserId 
-          }}
-        >
-          {({ loading, error, data }) => {
-            return <UsersDisplay loading={loading} error={error} data={data} />;
-          }}
-        </GetUserQueryComponent>
+          <Paper>
+            <H1>{userId}</H1>
+            <Divider />
+          </Paper>
       </Block>
     </Main>
   );

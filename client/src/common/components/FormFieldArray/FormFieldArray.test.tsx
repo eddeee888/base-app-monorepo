@@ -1,7 +1,8 @@
-import { mount } from 'enzyme';
 import { Form, Formik, FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
 import FormFieldArray from './FormFieldArray';
+import { render } from '@testing-library/react';
+import { assertTextExists } from 'test/utils/react-testing-library';
 
 interface Element {
   property1: string;
@@ -34,17 +35,12 @@ const testCase: TestCase = {
   isError: false
 };
 
-const children1 = jest.fn();
-const children2 = jest.fn();
-const children3 = jest.fn();
-const children4 = jest.fn();
-
 const mockInput: Input = {
   field1: [{ property1: '', property2: '' }, { property1: '', property2: '' }]
 };
 
 const mountWithFormik = (formField: any) => {
-  return mount(
+  return render(
     <Formik<Input> initialValues={mockInput} onSubmit={() => jest.fn()}>
       {() => <Form>{formField}</Form>}
     </Formik>
@@ -59,7 +55,7 @@ describe('<FormFieldArray />', () => {
   it('should should show error correctly', () => {
     const { errors, touched } = testCase;
 
-    const wrapper = mountWithFormik(
+    const { container } = mountWithFormik(
       <>
         <FormFieldArray<Input, Element>
           name="field1"
@@ -68,7 +64,7 @@ describe('<FormFieldArray />', () => {
           errors={errors}
           touched={touched}
         >
-          {children1}
+          {() => <>Children 1</>}
         </FormFieldArray>
         <FormFieldArray<Input, Element>
           name="field1"
@@ -77,7 +73,7 @@ describe('<FormFieldArray />', () => {
           errors={errors}
           touched={touched}
         >
-          {children2}
+          {() => <>Children 2</>}
         </FormFieldArray>
         <FormFieldArray<Input, Element>
           name="field1"
@@ -86,7 +82,7 @@ describe('<FormFieldArray />', () => {
           errors={errors}
           touched={touched}
         >
-          {children3}
+          {() => <>Children 3</>}
         </FormFieldArray>
         <FormFieldArray<Input, Element>
           name="field1"
@@ -95,22 +91,15 @@ describe('<FormFieldArray />', () => {
           errors={errors}
           touched={touched}
         >
-          {children4}
+          {() => <>Children 4</>}
         </FormFieldArray>
       </>
     );
 
-    expect(children1).toHaveBeenCalledTimes(1);
-    expect(children1.mock.calls[0][0].field.error).toBe(true);
-    expect(wrapper.text()).toMatch(/Error 1/);
-
-    expect(children2).toHaveBeenCalledTimes(1);
-    expect(children2.mock.calls[0][0].field.error).toBe(false);
-
-    expect(children3).toHaveBeenCalledTimes(1);
-    expect(children3.mock.calls[0][0].field.error).toBe(false);
-
-    expect(children4).toHaveBeenCalledTimes(1);
-    expect(children4.mock.calls[0][0].field.error).toBe(false);
+    assertTextExists(container, /Children 1/);
+    assertTextExists(container, /Error 1/);
+    assertTextExists(container, /Children 2/);
+    assertTextExists(container, /Children 3/);
+    assertTextExists(container, /Children 4/);
   });
 });

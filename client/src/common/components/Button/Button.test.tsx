@@ -1,22 +1,12 @@
-import { CircularProgress } from '@material-ui/core';
-import { mount } from 'enzyme';
 import React from 'react';
 import Button from './Button';
+import { render } from '@testing-library/react';
+import { assertButton } from 'test/utils/react-testing-library/assertButton';
 
 describe('<Button />', () => {
   it('should mount correctly without loading', () => {
-    const wrapper = mount(<Button>Test button</Button>);
-    expect(wrapper.html()).toMatch(/Test button/);
-    expect(wrapper.find('button')).toHaveLength(1);
-    expect(wrapper.find('button').props().className).toBeTruthy();
-    expect(wrapper.find(CircularProgress)).toHaveLength(0);
-  });
+    const { container } = render(<Button>Test button</Button>);
 
-  it('should mount correctly with loading', () => {
-    const wrapper = mount(<Button showSpinner>Test button</Button>);
-    expect(wrapper.html()).toMatch(/Test button/);
-    expect(wrapper.find('button')).toHaveLength(1);
-    expect(wrapper.find('button').props().className).toBeTruthy();
-    expect(wrapper.find(CircularProgress)).toHaveLength(1);
+    assertButton(container, { text: 'Test button' });
   });
 });

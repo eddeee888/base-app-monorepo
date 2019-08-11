@@ -1,9 +1,10 @@
 overwrite: true
-schema: 'http://bra.com.vm/graphql'
+schema: './../graphql/src/graphql/schemas/schema.graphql'
 documents: 'src/**/*.graphql'
 generates:
   src/__generated__/types.ts:
     plugins:
+      - add: '/* eslint-disable */'
       - 'typescript'
     config:
       enumsAsTypes: true
@@ -15,9 +16,12 @@ generates:
       baseTypesPath: __generated__/types.ts
       extension: .generated.tsx
     plugins:
+      - add: '/* eslint-disable */'
       - 'typescript-operations'
-      - './codegen/plugins/typescript-react-apollo/dist/commonjs/index.js'
+      - 'typescript-react-apollo'
     config:
       enumsAsTypes: true
       nonOptionalTypename: true
-      # noGraphQLTag: true
+      noGraphQLTag: true
+      withHOC: false
+      withComponent: true

@@ -1,11 +1,11 @@
-import { mount } from 'enzyme';
 import React from 'react';
 import Paper from './Paper';
+import { render } from '@testing-library/react';
+import { assertTextExists } from 'test/utils/react-testing-library';
 
 describe('<Paper />', () => {
   it('should display children', () => {
-    const wrapper = mount(<Paper>Paper content</Paper>);
-    expect(wrapper.html()).toMatch(/Paper content/);
-    expect(wrapper.find('div')).toHaveLength(1);
+    const { container } = render(<Paper>Paper content</Paper>);
+    assertTextExists(container, 'Paper content');
   });
 });

@@ -1,4 +1,4 @@
-import { routes } from 'common/helpers/pathing';
+import { routes } from 'common/pathing';
 import React, { useEffect } from 'react';
 import { Redirect } from 'react-router';
 import { LogoutMutationFn } from './Logout.generated';

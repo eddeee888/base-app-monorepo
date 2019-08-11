@@ -1,6 +1,6 @@
 import { DirectiveResolverFn } from 'graphql-tools';
 import { ResolverContext } from 'graphql/types';
-import { throwAuthenticationError } from '../errors';
+import { throwAuthenticationError } from 'graphql/errors';
 
 const isOwner: DirectiveResolverFn<any, ResolverContext> = (
   next,

@@ -1,7 +1,7 @@
-import TextField from '@material-ui/core/TextField';
-import { mount } from 'enzyme';
 import React from 'react';
 import Select from './Select';
+import { render } from '@testing-library/react';
+import { assertTextExists } from 'test/utils/react-testing-library';
 
 describe('<Select />', () => {
   const options = [
@@ -9,17 +9,10 @@ describe('<Select />', () => {
     { value: 'option1', label: 'Option 1' },
     { value: 'option2', label: 'Option 2' }
   ];
-  it.skip(`should render with correct options
-  (waiting for https://github.com/airbnb/enzyme/issues/2025)`, () => {
-    const wrapper = mount(<Select value="option1" options={options} />);
+  it(`should render with correct options`, () => {
+    const { container } = render(<Select value="option1" options={options} />);
 
-    expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('select')).toBe(true);
-    expect(wrapper.find(TextField).prop('children')).toHaveLength(
-      options.length
-    );
-    expect(wrapper.find('select')).toHaveLength(1);
-    expect(wrapper.find('select').prop('value')).toBe('option1');
-    expect(wrapper.find('option')).toHaveLength(3);
+    assertTextExists(container, 'Option 1');
+    assertTextExists(container, 'Option 2');
   });
 });
