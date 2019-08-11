@@ -19,5 +19,5 @@
     "noImplicitAny": true
   },
   "include": ["src"],
-  "exclude": ["**/node_modules/**/*", "src/**/__generated__/*.ts"]
+  "exclude": ["node_modules", "**/__generated__/*.ts"]
 }

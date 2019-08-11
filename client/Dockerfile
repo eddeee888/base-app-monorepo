@@ -1,4 +1,4 @@
-FROM node:10.13.0-alpine AS base
+FROM node:12.8.0-alpine AS base
 ARG GRAPHQL_END_POINT
 ENV GRAPHQL_END_POINT=${GRAPHQL_END_POINT}
 ARG BIT_NPM_TOKEN
@@ -17,7 +17,7 @@ COPY public public/
 COPY src src/
 RUN yarn build
 
-FROM node:10.13.0-alpine as final
+FROM node:12.8.0-alpine as final
 WORKDIR /usr/src/app
 RUN yarn global add serve
 COPY --from=build /usr/src/app/build .

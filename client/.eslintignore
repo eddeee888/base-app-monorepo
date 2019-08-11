@@ -1,0 +1,4 @@
+node_modules/*
+src/__generated__/*
+**/*.generated.tsx
+**/dist/*

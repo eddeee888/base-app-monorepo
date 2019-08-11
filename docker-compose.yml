@@ -51,7 +51,6 @@ services:
         - graphql
     environment:
       REVERSE_PROXY_SERVER_NAME: ${REVERSE_PROXY_SERVER_NAME}
-      REVERSE_PROXY_PORT: ${REVERSE_PROXY_PORT}
       CLIENT_SERVICE_NAME: ${CLIENT_SERVICE_NAME}
       CLIENT_PORT: ${CLIENT_PORT}
       CLIENT_URL_PATH: ${CLIENT_URL_PATH}
@@ -59,7 +58,8 @@ services:
       GRAPHQL_PORT: ${GRAPHQL_PORT}
       GRAPHQL_URL_PATH: ${GRAPHQL_URL_PATH}
     ports:
-        - 80:${REVERSE_PROXY_PORT}
+        - 80:80
+        - 443:443
 
   # Set up database server
   database:
