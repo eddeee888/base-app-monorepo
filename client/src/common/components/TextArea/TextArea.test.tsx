@@ -1,17 +1,11 @@
-import { TextField } from '@material-ui/core';
-import { mount } from 'enzyme';
 import React from 'react';
 import TextArea from './TextArea';
+import { render } from '@testing-library/react';
+import { assertTextExists } from 'test/utils/react-testing-library';
 
 describe('<TextArea />', () => {
-  it('should mount a MUI TextArea with default values', () => {
-    const wrapper = mount(<TextArea />);
-
-    const MUITextField = wrapper.find(TextField);
-
-    expect(MUITextField.prop('fullWidth')).toBe(true);
-    expect(MUITextField.prop('margin')).toBe('normal');
-    expect(MUITextField.prop('multiline')).toBe(true);
-    expect(MUITextField.prop('variant')).toBe('outlined');
+  it('should display text value', () => {
+    const { container } = render(<TextArea value="Test Text" />);
+    assertTextExists(container, 'Test Text');
   });
 });

@@ -3,7 +3,7 @@ import {
   CustomGraphQLErrors,
   DatabaseError,
   FormValidationError
-} from '@bit/eddeee888.base-react-app-utils.graphql';
+} from '@bit/eddeee888.learnd-utils.graphql';
 import { ApolloError } from 'apollo-client';
 
 const getCustomGraphQLErrorFromErrorName = (

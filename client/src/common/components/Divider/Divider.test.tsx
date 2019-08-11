@@ -1,11 +1,11 @@
-import { mount } from 'enzyme';
 import React from 'react';
 import Divider from './Divider';
+import { render } from '@testing-library/react';
 
 describe('<Divider />', () => {
   it('should render a <hr />', () => {
-    const wrapper = mount(<Divider />);
+    const { container } = render(<Divider />);
 
-    expect(wrapper.find('hr')).toHaveLength(1);
+    expect(container.querySelector('hr')).toBeTruthy();
   });
 });

@@ -3,14 +3,14 @@ import useFormError from 'common/hooks/useFormError';
 import LoginFormComponent from 'pages/Login/LoginForm/LoginFormComponent';
 import React from 'react';
 import createHandleLoginFn from './functionCreators/createHandleLoginFn';
-import { LoginMutationComponent } from '../Login.generated';
+import { LoginComponent } from '../Login.generated';
 
 const LoginForm: React.FunctionComponent = () => {
   const { setViewer } = useViewer();
   const [formError] = useFormError(1);
 
   return (
-    <LoginMutationComponent>
+    <LoginComponent>
       {(login, { loading }) => (
         <LoginFormComponent
           generalFormError={formError.error}
@@ -18,7 +18,7 @@ const LoginForm: React.FunctionComponent = () => {
           onSubmit={createHandleLoginFn(login, setViewer, formError.setError)}
         />
       )}
-    </LoginMutationComponent>
+    </LoginComponent>
   );
 };
 

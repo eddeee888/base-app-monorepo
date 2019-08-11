@@ -3,7 +3,7 @@ import MuiButton, {
   ButtonProps as MuiButtonProps
 } from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { spacingRem } from 'common/helpers/spacing';
+import { spacingRem } from 'common/styles/spacing';
 import React from 'react';
 
 interface ButtonProps extends MuiButtonProps {

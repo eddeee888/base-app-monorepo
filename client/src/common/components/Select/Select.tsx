@@ -1,5 +1,5 @@
 import TextField from '@material-ui/core/TextField';
-import OmittedTextFieldProps from 'common/helpers/typings/OmittedTextFieldProps';
+import OmittedTextFieldProps from 'common/typings/OmittedTextFieldProps';
 import React from 'react';
 
 export interface SelectOption<V = string, L = string> {

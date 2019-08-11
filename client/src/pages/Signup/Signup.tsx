@@ -7,8 +7,7 @@ import Logo from 'common/components/Logo';
 import Main from 'common/components/Main';
 import Paper from 'common/components/Paper';
 import { useViewer } from 'common/components/ViewerContext';
-import { routes } from 'common/helpers/pathing';
-import useUrlQuery from 'common/hooks/useUrlQuery';
+import { routes, useUrlQuery } from 'common/pathing';
 import React from 'react';
 import { Redirect } from 'react-router';
 import SignupForm from './SignupForm';
@@ -18,7 +17,7 @@ const Signup: React.FunctionComponent = () => {
   const { redirect } = useUrlQuery();
 
   if (viewer) {
-    return <Redirect to={redirect ? redirect : routes.home.generate({})} />;
+    return <Redirect to={redirect ? redirect : routes.users.generate({})} />;
   }
 
   return (

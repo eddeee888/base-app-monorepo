@@ -1,11 +1,10 @@
-import { mount } from 'enzyme';
 import React from 'react';
 import TextInput from './TextInput';
+import { render } from '@testing-library/react';
 
 describe('<TextInput />', () => {
-  it('should render with correct input field', () => {
-    const wrapper = mount(<TextInput />);
-    expect(wrapper.find('input')).toHaveLength(1);
-    expect(wrapper.find('input').prop('className')).toBeTruthy();
+  it('should render an input with Test Text', () => {
+    const { getByDisplayValue } = render(<TextInput value="Test Text" />);
+    getByDisplayValue('Test Text');
   });
 });

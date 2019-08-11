@@ -7,7 +7,7 @@ import { useViewer } from 'common/components/ViewerContext';
 import { borderColor, primaryBackgroundColor } from 'common/styles/color';
 import { breakpoints, mediaQuery } from 'common/styles/media';
 import { headerHeight } from 'common/styles/size';
-import { routes } from 'common/helpers/pathing';
+import { routes } from 'common/pathing';
 
 const headerClassName = css`
   width: 100%;
@@ -68,6 +68,9 @@ const Header: React.FunctionComponent<{}> = () => {
         </div>
 
         <div className={actionWrapperClassName}>
+          <Link to={routes.hostClassCreate.generate({})}>
+            <Button variant="outlined">Host a class</Button>
+          </Link>
           {!viewer && (
             <>
               <Link to={routes.signup.generate({})}>
@@ -84,7 +87,7 @@ const Header: React.FunctionComponent<{}> = () => {
                 <Button variant="text">Account</Button>
               </Link>
               <Link to={routes.logout.generate({})}>
-                <Button variant="text">Logout</Button>
+                <Button variant="text">Log out</Button>
               </Link>
             </>
           )}

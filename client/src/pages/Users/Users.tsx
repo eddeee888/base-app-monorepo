@@ -1,18 +1,16 @@
 import React from 'react';
 import Main from 'common/components/Main';
 import Block from 'common/components/Block';
-import useParams from 'common/hooks/useParams';
-import { UsersParams } from 'common/helpers/pathing/routes';
 import Error404 from 'common/components/Error404';
-import { useViewer } from 'common/components/ViewerContext';
-import UsersDisplay from './components/UsersDisplay';
-import { GetUserQueryComponent } from './GetUser.generated';
+import UsersDisplay from './UsersDisplay';
+import {
+  UserAndClassesCreatedComponent,
+  DeleteClassComponent
+} from './Operations.generated';
+import useEffectiveUserId from './useEffectiveUserId';
 
 const Users: React.FunctionComponent = () => {
-  const { userId } = useParams<UsersParams>();
-  const { viewer } = useViewer();
-
-  const effectiveUserId = userId ? userId : viewer ? viewer.id : null;
+  const effectiveUserId = useEffectiveUserId();
 
   if (!effectiveUserId) {
     return <Error404 />;
@@ -21,15 +19,26 @@ const Users: React.FunctionComponent = () => {
   return (
     <Main>
       <Block size="md">
-        <GetUserQueryComponent
+        <UserAndClassesCreatedComponent
           variables={{
-            id: effectiveUserId 
+            id: effectiveUserId,
+            classesCreatedInput: { userId: effectiveUserId }
           }}
+          fetchPolicy="network-only"
         >
-          {({ loading, error, data }) => {
-            return <UsersDisplay loading={loading} error={error} data={data} />;
-          }}
-        </GetUserQueryComponent>
+          {({ loading, error, data }) => (
+            <DeleteClassComponent>
+              {deleteClassFn => (
+                <UsersDisplay
+                  loading={loading}
+                  error={error}
+                  data={data}
+                  deleteClassFn={deleteClassFn}
+                />
+              )}
+            </DeleteClassComponent>
+          )}
+        </UserAndClassesCreatedComponent>
       </Block>
     </Main>
   );

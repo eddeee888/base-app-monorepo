@@ -1,11 +1,12 @@
 import React from 'react';
 import PageNotFound from './PageNotFound';
-import { mount } from 'enzyme';
+import { assertTextExists } from 'test/utils/react-testing-library';
+import { render } from '@testing-library/react';
 
 describe('<PageNotFound />', () => {
   it('should show Page Not Found text', () => {
-    const wrapper = mount(<PageNotFound />);
+    const { container } = render(<PageNotFound />);
 
-    expect(wrapper.text()).toMatch(/Sorry! This content is unavailable!/);
+    assertTextExists(container, /Sorry! This content is unavailable!/);
   });
 });

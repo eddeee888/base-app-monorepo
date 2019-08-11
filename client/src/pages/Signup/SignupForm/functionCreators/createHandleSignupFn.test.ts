@@ -1,9 +1,9 @@
 import {
   CustomGraphQLErrors,
   FormValidationError
-} from '@bit/eddeee888.base-react-app-utils.graphql';
-import createApolloError from 'common/helpers/tests/createApolloError';
-import getCustomGraphQLErrorFromErrorName from 'common/helpers/tests/getCustomGraphQLErrorFromErrorName';
+} from '@bit/eddeee888.learnd-utils.graphql';
+import createApolloError from 'test/utils/createApolloError';
+import getCustomGraphQLErrorFromErrorName from 'test/utils/getCustomGraphQLErrorFromErrorName';
 import createHandleSignupFn from './createHandleSignupFn';
 import { SignupInput } from '__generated__/types';
 
@@ -45,12 +45,10 @@ describe('createHandleSignupFn()', () => {
     signupMutation.mockResolvedValueOnce({
       data: {
         signup: {
-          user: {
-            id: '100',
-            email: 'eddy@gmail.com',
-            firstName: 'firstName',
-            lastName: 'lastName'
-          }
+          id: '100',
+          email: 'eddy@gmail.com',
+          firstName: 'firstName',
+          lastName: 'lastName'
         }
       }
     });

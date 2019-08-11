@@ -1,8 +1,4 @@
-import {
-  clearViewerId,
-  getViewerId,
-  setViewerId
-} from 'common/helpers/sessions';
+import { clearViewerId, getViewerId, setViewerId } from 'common/sessions';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 
 export interface Viewer {

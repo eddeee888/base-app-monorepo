@@ -2,7 +2,7 @@ import {
   emailValidation,
   nameValidation,
   passwordValidation
-} from '@bit/eddeee888.base-react-app-utils.validations';
+} from '@bit/eddeee888.learnd-utils.forms.validations';
 import Grid from '@material-ui/core/Grid';
 import Button from 'common/components/Button';
 import FormError from 'common/components/FormError';
@@ -10,8 +10,7 @@ import FormField from 'common/components/FormField';
 import Link from 'common/components/Link';
 import Text from 'common/components/Text';
 import TextInput from 'common/components/TextInput';
-import { routes } from 'common/helpers/pathing';
-import useUrlQuery from 'common/hooks/useUrlQuery';
+import { routes, useUrlQuery } from 'common/pathing';
 import { Form, Formik, FormikActions } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
