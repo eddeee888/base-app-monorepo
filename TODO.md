@@ -1,4 +1,2 @@
-- Add TLS certificate
 - Investigate how to insert secrets safely
-- [graphql server] Add await-to-js to handle Node JS errors better
-- [graphql server] Rename error throwers to better fit what they do i.e. `throwAuthenticationError`, `throwDatabaseError`, `throwInputValidationError`
+- [client] update apollo to v3 with hooks
