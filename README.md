@@ -12,7 +12,7 @@ Note: This setup is for Mac, you will have to do the equivalent if you use Linux
 
 To start on MacOS, setting up the CLI command to make development easier. Go to the root of the project and run the init script. 
 
-For convinience, this will install packages in `client` and `graphql` folders and SSL for the webapp.
+For convenience, this will install packages in `client` and `graphql` folders and SSL for the webapp.
 
 ```
 ~/base-react-app/bin/init.sh
@@ -30,7 +30,7 @@ We use Docker machine since it gives us better performance compared to Docker fo
 $ bra vm-up
 ```
 
-Then, we go into the machine by running:
+Then, we switch into the docker-machine environment by running:
 
 ```
 $ eval $(docker-machine env bra)
