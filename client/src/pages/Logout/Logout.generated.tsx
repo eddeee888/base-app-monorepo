@@ -2,9 +2,8 @@
 import * as Types from '../../__generated__/types';
 
 import { DocumentNode } from 'graphql';
-import * as ReactApollo from 'react-apollo';
-import * as React from 'react';
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+import * as ApolloReactCommon from '@apollo/react-common';
+import * as ApolloReactHooks from '@apollo/react-hooks';
 export type LogoutMutationVariables = {};
 
 export type LogoutMutation = { __typename: 'Mutation' } & Pick<
@@ -35,24 +34,27 @@ export const LogoutDocument: DocumentNode = {
     }
   ]
 };
-export type LogoutMutationFn = ReactApollo.MutationFn<
+export type LogoutMutationFn = ApolloReactCommon.MutationFunction<
   LogoutMutation,
   LogoutMutationVariables
 >;
-export type LogoutComponentProps = Omit<
-  ReactApollo.MutationProps<LogoutMutation, LogoutMutationVariables>,
-  'mutation'
+
+export function useLogoutMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    LogoutMutation,
+    LogoutMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<LogoutMutation, LogoutMutationVariables>(
+    LogoutDocument,
+    baseOptions
+  );
+}
+export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
+export type LogoutMutationResult = ApolloReactCommon.MutationResult<
+  LogoutMutation
 >;
-
-export const LogoutComponent = (props: LogoutComponentProps) => (
-  <ReactApollo.Mutation<LogoutMutation, LogoutMutationVariables>
-    mutation={LogoutDocument}
-    {...props}
-  />
-);
-
-export type LogoutMutationResult = ReactApollo.MutationResult<LogoutMutation>;
-export type LogoutMutationOptions = ReactApollo.MutationOptions<
+export type LogoutMutationOptions = ApolloReactCommon.BaseMutationOptions<
   LogoutMutation,
   LogoutMutationVariables
 >;

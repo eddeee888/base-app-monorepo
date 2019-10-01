@@ -4,7 +4,7 @@ import { ViewerProvider } from 'common/components/ViewerContext';
 import createGlobalStyles from 'common/helpers/createGlobalStyles';
 import graphqlClient from 'common/helpers/graphql/client';
 import React from 'react';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 createGlobalStyles();
 

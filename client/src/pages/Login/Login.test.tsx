@@ -1,6 +1,6 @@
 import ViewerContext from 'common/components/ViewerContext';
 import React from 'react';
-import { MockedProvider } from 'react-apollo/test-utils';
+import { MockedProvider } from '@apollo/react-testing';
 import { StaticRouter, MemoryRouter, Route } from 'react-router';
 import Login from './Login';
 import {
@@ -31,6 +31,21 @@ describe('<Login />', () => {
     });
   });
 
+  it('should show login form if viewer is not logged in and correct header', () => {
+    const { container } = render(
+      <MockedProvider>
+        <MemoryRouter
+          initialEntries={['/login?redirect=/redirect-to-this-path']}
+        >
+          <ViewerContext.Provider value={contextValue}>
+            <Route exact path="/login" component={Login} />
+          </ViewerContext.Provider>
+        </MemoryRouter>
+      </MockedProvider>
+    );
+    assertTextExists(container, /Log into continue/); // This is supposed to be on the next line
+  });
+
   it('should redirect to dashboard if viewer is logged in', () => {
     const { container } = render(
       <MockedProvider>
@@ -41,7 +56,7 @@ describe('<Login />', () => {
           }}
         >
           <MemoryRouter initialEntries={['/login']}>
-            <Route exact path="/users" render={() => <div>Redirected</div>} />
+            <Route exact path="/me" render={() => <div>Redirected</div>} />
             <Route path="/login" render={() => <Login />} />
           </MemoryRouter>
         </ViewerContext.Provider>

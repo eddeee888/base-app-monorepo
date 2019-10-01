@@ -32,6 +32,7 @@ services:
       - ${GRAPHQL_PORT}:${GRAPHQL_PORT}
     environment:
       PRISMA_ENDPOINT: ${PRISMA_ENDPOINT}
+      PRISMA_SECRET: ${PRISMA_SECRET}
       SERVER_NAME: ${SERVER_NAME}
       JWT_SECRET: ${JWT_SECRET}
       PORT: ${GRAPHQL_PORT}
@@ -77,13 +78,14 @@ services:
 
   # Set up prisma client
   prisma:
-    image: prismagraphql/prisma:1.33
+    image: prismagraphql/prisma:1.34
     restart: always
     ports:
       - ${PRISMA_PORT}:${PRISMA_PORT}
     environment:
       PRISMA_CONFIG: |
         port: ${PRISMA_PORT}
+        managementApiSecret: ${PRISMA_SECRET}
         databases:
           default:
             connector: mysql

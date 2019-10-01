@@ -2,7 +2,7 @@ import { remValue } from 'common/styles/unit';
 
 const spacingUnit = 0.5; // this means 1 spacingUnit = 0.5rem = 8px
 
-export type MarginValue = 0 | 2 | 4;
+export type MarginValue = 0 | 1 | 2 | 4;
 export type SpacingValue = 0 | 1 | 2 | 3 | 4 | 5;
 type SpacingResultPx = 0 | 8 | 16 | 24 | 32 | 40;
 

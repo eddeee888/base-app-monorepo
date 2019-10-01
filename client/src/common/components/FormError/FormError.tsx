@@ -1,5 +1,5 @@
-import Text from 'common/components/Text';
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 export interface FormErrorProps {
   error: React.ReactNode;
@@ -20,9 +20,9 @@ const FormError: React.FunctionComponent<FormErrorProps> = ({ error }) => {
   }
 
   return (
-    <Text error variant="body2">
+    <Typography color="error" variant="body2">
       {error}
-    </Text>
+    </Typography>
   );
 };
 

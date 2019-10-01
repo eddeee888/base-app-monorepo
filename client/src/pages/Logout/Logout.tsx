@@ -1,16 +1,13 @@
 import { useViewer } from 'common/components/ViewerContext';
 import React from 'react';
 import LogoutLogic from './LogoutLogic';
-import { LogoutComponent } from './Logout.generated';
+import { useLogoutMutation } from './Logout.generated';
 
 const Logout: React.FunctionComponent = () => {
   const { clearViewer } = useViewer();
+  const [logout] = useLogoutMutation();
 
-  return (
-    <LogoutComponent>
-      {logout => <LogoutLogic logout={logout} clearViewer={clearViewer} />}
-    </LogoutComponent>
-  );
+  return <LogoutLogic logout={logout} clearViewer={clearViewer} />;
 };
 
 export default Logout;

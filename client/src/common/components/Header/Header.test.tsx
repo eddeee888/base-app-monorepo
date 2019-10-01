@@ -47,7 +47,7 @@ describe('<Header />', () => {
 
     assertTextLink(container, {
       text: 'Account',
-      href: '/users'
+      href: '/me'
     });
 
     assertTextLink(container, {

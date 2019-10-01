@@ -1,10 +1,7 @@
 import { SetViewerFn } from 'common/components/ViewerContext';
 import { FormErrorObject } from 'common/hooks/useFormError';
 import { LoginFormikFn } from 'pages/Login/LoginForm/LoginFormComponent';
-import {
-  LoginMutationFn,
-  LoginMutationOptions
-} from 'pages/Login/Login.generated';
+import { LoginMutationFn } from './../Login.generated';
 
 type CreateHandleLoginFn = (
   login: LoginMutationFn,
@@ -17,16 +14,14 @@ const createHandleLoginFn: CreateHandleLoginFn = (
   setViewer,
   setGeneralError
 ) => async formValues => {
-  const options: LoginMutationOptions = {
-    variables: {
-      input: {
-        ...formValues
-      }
-    }
-  };
-
   try {
-    const fetchResult = await login(options);
+    const fetchResult = await login({
+      variables: {
+        input: {
+          ...formValues
+        }
+      }
+    });
     if (fetchResult && fetchResult.data && fetchResult.data.login) {
       setViewer({ id: fetchResult.data.login.id });
     } else {
