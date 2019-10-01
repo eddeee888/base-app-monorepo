@@ -1,6 +1,10 @@
 overwrite: true
 schema: './../graphql/src/graphql/schemas/schema.graphql'
 documents: 'src/**/*.graphql'
+hooks:
+  afterAllFileWrite:
+    - eslint --fix --config .eslintrc.json
+    - prettier --write --config .prettierrc.json
 generates:
   src/__generated__/types.ts:
     plugins:
@@ -22,6 +26,7 @@ generates:
     config:
       enumsAsTypes: true
       nonOptionalTypename: true
-      noGraphQLTag: true
+      documentMode: documentNode
+      withHooks: true
       withHOC: false
-      withComponent: true
+      withComponent: false

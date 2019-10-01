@@ -1,7 +1,7 @@
-import { formatError } from '@bit/eddeee888.base-react-app-utils.graphql';
 import cookieParser = require('cookie-parser');
 import { importSchema } from 'graphql-import';
-import { GraphQLServer } from 'graphql-yoga';
+import * as express from 'express';
+import { ApolloServer } from 'apollo-server-express';
 import {
   getTokenFromRequest,
   setTokenToResponse,
@@ -12,18 +12,20 @@ import { compare, hash } from 'libs/password';
 import tokenVerifier from 'middleware/tokenVerifier';
 import { prisma } from 'prisma/generated/client';
 import { resolvers } from 'graphql/resolvers';
-import directiveResolvers from 'graphql/directiveResolvers';
+import { IsLoggedInDirective } from 'graphql/directives';
 
 const PORT = process.env.PORT || 8000;
 
-const server = new GraphQLServer({
+const server = new ApolloServer({
   typeDefs: importSchema('./src/graphql/schemas/schema.graphql'),
-  resolvers: resolvers as any, // https://github.com/prisma/graphql-yoga/issues/379
-  directiveResolvers,
+  resolvers,
+  schemaDirectives: {
+    isLoggedIn: IsLoggedInDirective
+  },
   context: async contextParams => ({
     ...contextParams,
     prisma,
-    viewer: await getViewerFromRequest(contextParams.request, prisma),
+    viewer: await getViewerFromRequest(contextParams.req, prisma),
     utils: {
       headers: {
         getTokenFromRequest,
@@ -41,17 +43,14 @@ const server = new GraphQLServer({
   })
 });
 
-server.express.use(cookieParser());
-server.express.use(tokenVerifier);
+const app = express();
+app.use(cookieParser());
+app.use(tokenVerifier);
 
-server.start(
-  {
-    port: PORT,
-    endpoint: '/graphql',
-    subscriptions: '/graphql',
-    playground: '/graphql/interactive',
-    formatError,
-    cors: { origin: process.env.SERVER_NAME, credentials: true }
-  },
-  () => console.log(`Server is running on http://localhost:${PORT}`)
+server.applyMiddleware({ app });
+
+app.listen({ port: PORT }, () =>
+  console.log(
+    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
+  )
 );

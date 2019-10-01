@@ -1,10 +1,9 @@
-import { ApolloError as ExtendedGraphQLError } from 'apollo-errors';
 import { ErrorResponse } from 'apollo-link-error';
 import { ServerError, ServerParseError } from 'apollo-link-http-common';
 import { GraphQLError } from 'graphql';
 
 const createApolloError = (
-  graphQLError?: GraphQLError | ExtendedGraphQLError,
+  graphQLError?: GraphQLError,
   networkError?: Error | ServerError | ServerParseError
 ): ErrorResponse => {
   return {

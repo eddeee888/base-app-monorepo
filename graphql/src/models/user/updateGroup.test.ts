@@ -1,14 +1,14 @@
 import updateGroup from './updateGroup';
-import { UserGroup, UserGroupMap } from './UserGroup';
+import { UserGroupMap } from './UserGroup';
 
 describe('addGroup()', () => {
   it('should create object given an object', () => {
     const group: UserGroupMap = {
-      [UserGroup.user]: true
+      user: true
     };
 
     const expected: UserGroupMap = {
-      [UserGroup.user]: true
+      user: true
     };
 
     const result = updateGroup(group);
@@ -18,18 +18,18 @@ describe('addGroup()', () => {
 
   it('should merge and update 2 groups', () => {
     const group1: UserGroupMap = {
-      [UserGroup.admin]: false,
-      [UserGroup.user]: true
+      admin: false,
+      user: true
     };
 
     const group2: UserGroupMap = {
-      [UserGroup.admin]: true,
-      [UserGroup.user]: false
+      admin: true,
+      user: false
     };
 
     const expected: UserGroupMap = {
-      [UserGroup.admin]: false,
-      [UserGroup.user]: true
+      admin: false,
+      user: true
     };
 
     const result = updateGroup(group1, group2);
@@ -40,13 +40,13 @@ describe('addGroup()', () => {
     const group1: UserGroupMap = {};
 
     const group2: UserGroupMap = {
-      [UserGroup.admin]: true,
-      [UserGroup.user]: true
+      admin: true,
+      user: true
     };
 
     const expected: UserGroupMap = {
-      [UserGroup.admin]: true,
-      [UserGroup.user]: true
+      admin: true,
+      user: true
     };
 
     const result = updateGroup(group1, group2);

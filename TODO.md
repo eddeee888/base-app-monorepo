@@ -1,3 +1,1 @@
 - Investigate how to insert secrets safely
-- [client] update apollo to v3 with hooks
-- [client] use new `graphql-code-generator` config

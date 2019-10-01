@@ -1,5 +1,17 @@
-import { UserResolvers } from 'graphql/generated/graphqlgen';
+import { UserResolvers } from 'graphql/resolvers/types';
+import { AuthenticationError, ForbiddenError } from 'apollo-server';
+import { hasGroup } from 'models/user';
 
-export const User: UserResolvers.Type = {
-  ...UserResolvers.defaultResolvers
+export const User: UserResolvers = {
+  email: ({ id, email }, arg, { viewer }) => {
+    if (!viewer) {
+      throw new AuthenticationError('Must be logged in');
+    }
+
+    if (!hasGroup(viewer, 'admin') && viewer.id !== id) {
+      throw new ForbiddenError('No permission');
+    }
+
+    return email;
+  }
 };

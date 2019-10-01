@@ -17,7 +17,7 @@ const Signup: React.FunctionComponent = () => {
   const { redirect } = useUrlQuery();
 
   if (viewer) {
-    return <Redirect to={redirect ? redirect : routes.users.generate({})} />;
+    return <Redirect to={redirect ? redirect : routes.me.generate({})} />;
   }
 
   return (

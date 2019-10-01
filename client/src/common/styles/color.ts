@@ -2,6 +2,8 @@ const vikingBlue = '#46a8c9';
 const lightBlue = '#aedae9';
 const mantisGreen = '#7DC855';
 const shuttleGrey = '#5e6977';
+const redOrange = '#f44336';
+const eucalyptus = '#339966';
 
 const white = '#ffffff';
 const snow = '#fafafa';
@@ -19,6 +21,8 @@ const textOnPrimaryColor = white;
 const textOnSecondaryColor = white;
 const borderColor = whisper;
 const textShadowColor = charcoal;
+const textSuccessColor = eucalyptus;
+const textErrorColor = redOrange;
 
 export {
   primaryColor,
@@ -31,5 +35,7 @@ export {
   textOnPrimaryColor,
   textOnSecondaryColor,
   borderColor,
-  textShadowColor
+  textShadowColor,
+  textSuccessColor,
+  textErrorColor
 };

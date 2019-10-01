@@ -22,12 +22,24 @@ More on how it works [here](./docs/INIT.md)
 
 ### ⚡️ Start the App!
 
-#### Set up a custom DNS resolver
+#### Set up the Docker environment
 
-To use custom domain to simulate a real web app, run the following to create a custom DNS resolver:
+We use Docker machine since it gives us better performance compared to Docker for Mac. We create the machine and DNS resolver using the following command:
 
 ```
 $ bra vm-up
+```
+
+Then, we go into the machine by running:
+
+```
+$ eval $(docker-machine env bra)
+```
+
+Running `docker` commands should now work. For example:
+
+```
+$ docker ps
 ```
 
 #### Turn on the containers the first time

@@ -1,17 +1,20 @@
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import React from 'react';
 
-interface Props extends TypographyProps {
+type AllowedTypographyProps = Pick<
+  TypographyProps,
+  'gutterBottom' | 'variant' | 'align'
+>;
+
+interface Props {
   children: React.ReactNode;
-  error?: boolean;
 }
 
-const Text: React.FunctionComponent<Props> = ({
+const Text: React.FunctionComponent<Props & AllowedTypographyProps> = ({
   children,
-  error,
   ...props
 }) => (
-  <Typography variant="body1" {...props} color={error ? 'error' : undefined}>
+  <Typography variant="body1" {...props}>
     {children}
   </Typography>
 );

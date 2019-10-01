@@ -80,7 +80,7 @@ const Header: React.FunctionComponent<{}> = () => {
           )}
           {viewer && (
             <>
-              <Link to={routes.users.generate({})}>
+              <Link to={routes.me.generate({})}>
                 <Button variant="text">Account</Button>
               </Link>
               <Link to={routes.logout.generate({})}>

@@ -27,7 +27,7 @@ function symlink(){
 }
 
 function init(){
-    echo -e "Welcome to BRA setup!"
+    echo -e "Welcome to base-react-app setup!"
     echo -e "========= **** =========\n"
 
     remove_old_symlink
@@ -36,6 +36,7 @@ function init(){
     $CORE_CMD_NAME init-bit
     $CORE_CMD_NAME init-cert $REVERSE_PROXY_CERTIFICATE_DIR
     $CORE_CMD_NAME init-packages
+    $CORE_CMD_NAME dm-create $CORE_CMD_NAME
 
     echo -e "\nCommand has been linked!\nTry '$CORE_CMD_NAME build' to build the project!"
 }
