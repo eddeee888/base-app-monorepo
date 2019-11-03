@@ -7,8 +7,9 @@ services:
       context: ./client
       target: base
       args: 
-        GRAPHQL_END_POINT: ${GRAPHQL_END_POINT}
         BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
+        GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+        GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
     command: yarn start
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}  
@@ -34,8 +35,12 @@ services:
       PRISMA_ENDPOINT: ${PRISMA_ENDPOINT}
       PRISMA_SECRET: ${PRISMA_SECRET}
       SERVER_NAME: ${SERVER_NAME}
+      GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
       JWT_SECRET: ${JWT_SECRET}
       PORT: ${GRAPHQL_PORT}
+      AWS_S3_IMAGES_GET_SIGNED_URL: ${AWS_S3_IMAGES_GET_SIGNED_URL}
+      AWS_S3_IMAGES_FOLDER_URL: ${AWS_S3_IMAGES_FOLDER_URL}
+      AWS_S3_IMAGES_GET_SIGNED_URL_API_KEY: ${AWS_S3_IMAGES_GET_SIGNED_URL_API_KEY}
     volumes:
       - ./graphql/src:/usr/src/app/src
       - ./graphql/node_modules:/usr/src/app/node_modules
