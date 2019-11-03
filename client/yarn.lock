@@ -965,14 +965,6 @@
   dependencies:
     yup "^0.26.7"
 
-"@bit/eddeee888.learnd-utils.forms.validations@1.1.1":
-  version "1.1.1"
-  resolved "https://node.bit.dev/eddeee888.learnd-utils.forms.validations/-/eddeee888.learnd-utils.forms.validations-1.1.1.tgz#1f29985e614d3e833d5f8f1a36bdf2624ae24934"
-  integrity sha1-HymYXmFNPoM9X48aNr3yYkriSTQ=
-  dependencies:
-    "@types/yup" "^0.26.5"
-    yup "^0.26.7"
-
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
@@ -1816,7 +1808,7 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@types/yup@^0.26.4", "@types/yup@^0.26.5":
+"@types/yup@^0.26.4":
   version "0.26.24"
   resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.26.24.tgz#c24170b3a5c867b4fabd49fcc42fe45f780cb153"
   integrity sha512-x0bhHnYjH5mZit4HivUYbTMO4LouOTGwp/LLxSL1mbJYVwNJtHYESH0ed2bwM1lkI2yDmsoCDYJnWEgHeJDACg==
