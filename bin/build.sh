@@ -1,9 +1,9 @@
 #!/bin/bash
 
-function rebuild(){
+function build(){
     local cmd="docker-compose up --build -d $1"
     echo $cmd
     eval $cmd
 }
 
-rebuild $1
+build $1
