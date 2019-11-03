@@ -1,4 +1,4 @@
-import { useViewer } from 'common/components/ViewerContext';
+import { useViewer } from 'common/components/ViewerProvider';
 import { checkClientApolloError } from '@bit/eddeee888.base-react-app-utils.graphql';
 import useFormError from 'common/hooks/useFormError';
 import SignupFormComponent from 'pages/Signup/SignupForm/SignupFormComponent';
@@ -12,7 +12,7 @@ const SignupForm: React.FunctionComponent = () => {
 
   return (
     <SignupFormComponent
-      onSubmit={async (values, actions) => {
+      onSubmit={async (values, { setErrors }) => {
         try {
           const result = await signup({
             variables: {
@@ -23,7 +23,8 @@ const SignupForm: React.FunctionComponent = () => {
           });
           if (result && result.data) {
             setViewer({
-              id: result.data.signup.id
+              id: result.data.signup.id,
+              avatar: result.data.signup.avatar
             });
           } else {
             formError.setError('Unexpected error occurred!');
@@ -31,7 +32,7 @@ const SignupForm: React.FunctionComponent = () => {
         } catch (error) {
           const clientError = checkClientApolloError(error);
           if (clientError.code === 'BAD_USER_INPUT' && clientError.metadata) {
-            actions.setErrors(clientError.metadata);
+            setErrors(clientError.metadata);
           } else {
             formError.setError('Unexpected error occurred!');
           }

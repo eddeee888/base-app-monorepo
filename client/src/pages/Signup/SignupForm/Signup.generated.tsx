@@ -4,12 +4,13 @@ import * as Types from '../../../__generated__/types';
 import { DocumentNode } from 'graphql';
 import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactHooks from '@apollo/react-hooks';
+
 export type SignupMutationVariables = {
   input: Types.SignupInput;
 };
 
 export type SignupMutation = { __typename: 'Mutation' } & {
-  signup: { __typename: 'User' } & Pick<Types.User, 'id'>;
+  signup: { __typename: 'User' } & Pick<Types.User, 'id' | 'avatar'>;
 };
 
 export const SignupDocument: DocumentNode = {
@@ -62,6 +63,12 @@ export const SignupDocument: DocumentNode = {
                   name: { kind: 'Name', value: 'id' },
                   arguments: [],
                   directives: []
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'avatar' },
+                  arguments: [],
+                  directives: []
                 }
               ]
             }
@@ -76,6 +83,23 @@ export type SignupMutationFn = ApolloReactCommon.MutationFunction<
   SignupMutationVariables
 >;
 
+/**
+ * __useSignupMutation__
+ *
+ * To run a mutation, you first call `useSignupMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignupMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [signupMutation, { data, loading, error }] = useSignupMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
 export function useSignupMutation(
   baseOptions?: ApolloReactHooks.MutationHookOptions<
     SignupMutation,

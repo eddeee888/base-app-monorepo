@@ -3,25 +3,24 @@ import {
   nameValidation,
   passwordValidation
 } from '@bit/eddeee888.base-react-app-utils.validations';
-import Grid from '@material-ui/core/Grid';
+import { Grid } from '@material-ui/core';
 import Button from 'common/components/Button';
 import FormError from 'common/components/FormError';
-import FormField from 'common/components/FormField';
 import Link from 'common/components/Link';
 import Text from 'common/components/Text';
-import TextInput from 'common/components/TextInput';
 import { routes, useUrlQuery } from 'common/pathing';
-import { Form, Formik, FormikActions } from 'formik';
+import { FormikHelpers, useFormik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
 import { SignupInput } from '__generated__/types';
+import FormikTextInput from 'common/components/Formik/FormikTextInput';
 
 export type SignupFormikFn = (
   formValues: SignupInput,
-  actions: FormikActions<SignupInput>
+  actions: FormikHelpers<SignupInput>
 ) => void;
 
-const SignupSchema = Yup.object().shape({
+const validationSchema = Yup.object().shape({
   firstName: nameValidation('first'),
   lastName: nameValidation('last'),
   email: emailValidation,
@@ -40,63 +39,59 @@ const SignupFormComponent: React.FunctionComponent<Props> = ({
   generalFormError
 }) => {
   const query = useUrlQuery();
+  const formik = useFormik<SignupInput>({
+    onSubmit,
+    validationSchema,
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: ''
+    }
+  });
   return (
-    <Formik<SignupInput>
-      initialValues={{
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-      }}
-      validationSchema={SignupSchema}
-      onSubmit={onSubmit}
-    >
-      {({ errors, touched }) => (
-        <Form>
-          <Grid container>
-            <Grid item xs={12}>
-              <FormField name="email" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="Email" />}
-              </FormField>
-            </Grid>
-          </Grid>
+    <form onSubmit={formik.handleSubmit}>
+      <Grid container>
+        <Grid item xs={12}>
+          <FormikTextInput formik={formik} name="email" label="Email" />
+        </Grid>
+      </Grid>
 
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={6}>
-              <FormField name="firstName" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="First name" />}
-              </FormField>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <FormField name="lastName" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="Last name" />}
-              </FormField>
-            </Grid>
-          </Grid>
+      <Grid container spacing={1}>
+        <Grid item xs={12} md={6}>
+          <FormikTextInput
+            formik={formik}
+            name="firstName"
+            label="First name"
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <FormikTextInput formik={formik} name="lastName" label="Last name" />
+        </Grid>
+      </Grid>
 
-          <Grid container>
-            <Grid item xs={12}>
-              <FormField name="password" errors={errors} touched={touched}>
-                {({ field }) => (
-                  <TextInput {...field} type="password" label="Password" />
-                )}
-              </FormField>
-            </Grid>
-          </Grid>
+      <Grid container>
+        <Grid item xs={12}>
+          <FormikTextInput
+            formik={formik}
+            name="password"
+            type="password"
+            label="Password"
+          />
+        </Grid>
+      </Grid>
 
-          <FormError error={generalFormError} />
+      <FormError error={generalFormError} />
 
-          <Text gutterBottom>
-            Already have an account?{' '}
-            <Link to={routes.login.generate({}, query)}>Log in</Link>
-          </Text>
+      <Text gutterBottom>
+        Already have an account?{' '}
+        <Link to={routes.login.generate({}, query)}>Log in</Link>
+      </Text>
 
-          <Button type="submit" disabled={loading} showSpinner={loading}>
-            Submit
-          </Button>
-        </Form>
-      )}
-    </Formik>
+      <Button type="submit" disabled={loading} showSpinner={loading}>
+        Submit
+      </Button>
+    </form>
   );
 };
 

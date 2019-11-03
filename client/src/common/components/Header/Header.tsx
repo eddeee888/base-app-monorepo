@@ -3,11 +3,12 @@ import React from 'react';
 import Button from 'common/components/Button';
 import Link from 'common/components/Link';
 import Logo from 'common/components/Logo';
-import { useViewer } from 'common/components/ViewerContext';
+import { useViewer } from 'common/components/ViewerProvider';
 import { borderColor, primaryBackgroundColor } from 'common/styles/color';
 import { breakpoints, mediaQuery } from 'common/styles/media';
 import { headerHeight } from 'common/styles/size';
 import { routes } from 'common/pathing';
+import LoggedInMenu from 'common/components/Header/LoggedInMenu';
 
 const headerClassName = css`
   width: 100%;
@@ -68,26 +69,20 @@ const Header: React.FunctionComponent<{}> = () => {
         </div>
 
         <div className={actionWrapperClassName}>
+          <Link to={routes.hostClassCreate.generate({})}>
+            <Button variant="outlined">Host a class</Button>
+          </Link>
           {!viewer && (
             <>
               <Link to={routes.signup.generate({})}>
                 <Button variant="outlined">Sign up</Button>
               </Link>
-              <Link to={routes.login.generate({})} themeColor="secondary">
+              <Link to={routes.login.generate({})} color="secondary">
                 <Button variant="outlined">Log in</Button>
               </Link>
             </>
           )}
-          {viewer && (
-            <>
-              <Link to={routes.me.generate({})}>
-                <Button variant="text">Account</Button>
-              </Link>
-              <Link to={routes.logout.generate({})}>
-                <Button variant="text">Log out</Button>
-              </Link>
-            </>
-          )}
+          {viewer && <LoggedInMenu viewer={viewer} />}
         </div>
       </div>
     </header>

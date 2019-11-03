@@ -1,7 +1,5 @@
-import Box from '@material-ui/core/Box';
-import MUIDivider, {
-  DividerProps as MUIDividerProps
-} from '@material-ui/core/Divider';
+import { Box, Divider as MUIDivider } from '@material-ui/core';
+import { DividerProps as MUIDividerProps } from '@material-ui/core/Divider';
 import { MarginValue } from 'common/styles/spacing';
 import React, { FunctionComponent } from 'react';
 

@@ -1,4 +1,4 @@
-import MuiPaper from '@material-ui/core/Paper';
+import { Paper as MuiPaper } from '@material-ui/core';
 import { spacingRem } from 'common/styles/spacing';
 import { css, cx } from 'emotion';
 import React from 'react';

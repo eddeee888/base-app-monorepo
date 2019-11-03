@@ -16,7 +16,7 @@ describe('<A />', () => {
 
 describe('generateCss()', () => {
   it('should return correct css object', () => {
-    const cssObject = generateCss({ themeColor: 'primary' });
+    const cssObject = generateCss({ color: 'primary' });
     expect(cssObject).not.toBe(null);
   });
 });

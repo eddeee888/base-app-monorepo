@@ -1,7 +1,10 @@
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
-import DuplicateIcon from '@material-ui/icons/FileCopy';
+import {
+  Add as AddIcon,
+  Delete as DeleteIcon,
+  FileCopy as DuplicateIcon
+} from '@material-ui/icons';
+
 import React from 'react';
 
 export interface Icon {

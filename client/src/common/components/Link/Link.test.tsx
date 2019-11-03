@@ -10,7 +10,7 @@ describe('<Link />', () => {
     const { container } = render(
       <MemoryRouter>
         <Route exact path="/login" render={() => <div>Login page</div>} />
-        <Link to="/login" themeColor="secondary">
+        <Link to="/login" color="secondary">
           Linkage
         </Link>
       </MemoryRouter>

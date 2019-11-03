@@ -1,9 +1,18 @@
-import TextField from '@material-ui/core/TextField';
-import OmittedTextFieldProps from 'common/typings/OmittedTextFieldProps';
-import React from 'react';
+import { TextField } from '@material-ui/core';
+import { OmittedTextFieldProps } from 'common/typings/Omitted';
+import React, { forwardRef } from 'react';
 
-const TextInput: React.FunctionComponent<OmittedTextFieldProps> = ({
-  ...props
-}) => <TextField fullWidth margin="normal" {...props} variant="outlined" />;
+const TextInput: React.FunctionComponent<OmittedTextFieldProps> = (
+  { ...props },
+  ref
+) => (
+  <TextField
+    inputRef={ref}
+    fullWidth
+    margin="normal"
+    {...props}
+    variant="outlined"
+  />
+);
 
-export default TextInput;
+export default forwardRef(TextInput);

@@ -4,14 +4,11 @@ import React from 'react';
 import { Link as RouterLink, LinkProps } from 'react-router-dom';
 
 const Link: React.FunctionComponent<LinkProps & AnchorProps> = ({
-  themeColor,
+  color,
   className,
   ...props
 }) => (
-  <RouterLink
-    className={cx([generateCss({ themeColor }), className])}
-    {...props}
-  />
+  <RouterLink className={cx([generateCss({ color }), className])} {...props} />
 );
 
 export default Link;

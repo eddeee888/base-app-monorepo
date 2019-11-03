@@ -1,5 +1,6 @@
 /* eslint-disable */
 export type Maybe<T> = T | null;
+
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -19,6 +20,7 @@ export type Mutation = {
   signup: User;
   login?: Maybe<User>;
   logout: Scalars['Boolean'];
+  userUpdate: User;
 };
 
 export type MutationSignupArgs = {
@@ -29,13 +31,30 @@ export type MutationLoginArgs = {
   input: LoginInput;
 };
 
+export type MutationUserUpdateArgs = {
+  input: UserUpdateInput;
+};
+
 export type Query = {
   __typename: 'Query';
   user?: Maybe<User>;
+  getSignedUrlsToUploadImages: Array<S3SignedObject>;
 };
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
+};
+
+export type QueryGetSignedUrlsToUploadImagesArgs = {
+  filenames: Array<Scalars['String']>;
+};
+
+export type S3SignedObject = {
+  __typename: 'S3SignedObject';
+  src: Scalars['String'];
+  filename: Scalars['String'];
+  originalFilename: Scalars['String'];
+  uploadUrl: Scalars['String'];
 };
 
 export type SignupInput = {
@@ -52,4 +71,10 @@ export type User = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   displayName?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
+};
+
+export type UserUpdateInput = {
+  id: Scalars['ID'];
+  avatar?: Maybe<Scalars['String']>;
 };
