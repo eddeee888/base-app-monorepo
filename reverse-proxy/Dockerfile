@@ -7,8 +7,8 @@ RUN apk update \
 
 WORKDIR /opt
 
-COPY ./certificates/fullchain.pem /usr/share/nginx/certificates/fullchain.pem
-COPY ./certificates/privkey.pem /usr/share/nginx/certificates/privkey.pem
+COPY ./certificates/device.crt /usr/share/nginx/certificates/device.crt
+COPY ./certificates/device.key /usr/share/nginx/certificates/device.key
 
 COPY http.conf /etc/nginx/conf.d/http.conf
 
