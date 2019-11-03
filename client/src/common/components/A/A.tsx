@@ -1,59 +1,56 @@
 import {
   primaryColor,
   secondaryColor,
-  textOnPrimaryColor
+  textOnPrimaryColor,
+  textColor
 } from 'common/styles/color';
 import { css, cx } from 'emotion';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-type AnchorThemeColor = 'primary' | 'primaryInverted' | 'secondary';
+type AnchorColor = 'primary' | 'primaryInverted' | 'secondary' | 'text';
 
 export interface AnchorProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  themeColor?: AnchorThemeColor;
+  color?: AnchorColor;
 }
 
 interface CssParam {
-  themeColor?: AnchorThemeColor;
+  color?: AnchorColor;
 }
 
-const getColor = (themeColor?: AnchorThemeColor): string => {
-  switch (themeColor) {
+const getColor = (color?: AnchorColor): string => {
+  switch (color) {
     case 'primary':
       return primaryColor;
     case 'secondary':
       return secondaryColor;
     case 'primaryInverted':
       return textOnPrimaryColor;
+    case 'text':
+      return textColor;
     default:
       return primaryColor;
   }
 };
 
-export const generateCss = (params: CssParam): string => {
+export const generateCss = ({ color }: CssParam): string => {
   return css`
     cursor: pointer;
     text-decoration: none;
     font-size: 1em;
-    color: ${getColor(params.themeColor)};
+    color: ${getColor(color)};
   `;
 };
 
-const A: React.FunctionComponent<AnchorProps> = ({
-  children,
-  themeColor,
-  className,
-  ...props
-}) => {
+const A: React.FunctionComponent<AnchorProps> = (
+  { children, color = 'primary', className, ...props },
+  ref
+) => {
   return (
-    <a className={cx([generateCss({ themeColor }), className])} {...props}>
+    <a className={cx([generateCss({ color }), className])} {...props} ref={ref}>
       {children}
     </a>
   );
 };
 
-A.defaultProps = {
-  themeColor: 'primary'
-};
-
-export default A;
+export default forwardRef(A);

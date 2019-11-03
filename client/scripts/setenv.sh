@@ -1,7 +1,7 @@
 env_path=./.env
 
 function replaceEnvVariables(){
-    sed -i -e "s~\\\$ENV{GRAPHQL_END_POINT}~${GRAPHQL_END_POINT}~g" ${env_path}
+    sed -i -e "s~\\\$ENV{GRAPHQL_ENDPOINT}~${GRAPHQL_ENDPOINT}~g" ${env_path}
 }
 
 function setupBit(){

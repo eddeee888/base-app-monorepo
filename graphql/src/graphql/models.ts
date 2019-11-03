@@ -4,4 +4,10 @@ export interface User {
   firstName: string;
   lastName: string;
   displayName?: string;
+  avatar?: string;
+}
+export interface File {
+  id: string;
+  src: string;
+  originalFilename: string;
 }

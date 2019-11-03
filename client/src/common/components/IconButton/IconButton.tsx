@@ -1,6 +1,5 @@
-import DefaultIconButton, {
-  IconButtonProps as DefaultIconButtonProps
-} from '@material-ui/core/IconButton';
+import { IconButton as DefaultIconButton } from '@material-ui/core';
+import { IconButtonProps as DefaultIconButtonProps } from '@material-ui/core/IconButton';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import React, { forwardRef } from 'react';
 import createIcon, { Icon } from './createIcon';

@@ -40,7 +40,7 @@ function set_up_dnsmasq {
   fi
 
   # create the dnsmasq container
-  docker run -d --name $DNS_CONTAINER_NAME -p $DNS_PORT:53/tcp -p $DNS_PORT:53/udp --cap-add=NET_ADMIN andyshinn/dnsmasq:2.78 --address=/$DOMAIN/$DOCKER_MACHINE_IP &> /dev/null || error_exit "Unable to create $DNS_CONTAINER_NAME"
+  docker run -d --name $DNS_CONTAINER_NAME -p $DNS_PORT:53/tcp -p $DNS_PORT:53/udp --cap-add=NET_ADMIN andyshinn/dnsmasq:2.78 --address=/$TOP_LEVEL_DOMAIN/$DOCKER_MACHINE_IP &> /dev/null || error_exit "Unable to create $DNS_CONTAINER_NAME"
 
   docker ps -f name=$DNS_CONTAINER_NAME
   echo ""

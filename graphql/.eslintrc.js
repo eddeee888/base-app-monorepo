@@ -26,8 +26,8 @@ module.exports = {
     {
       files: ['**/*.test.ts*'],
       rules: {
-        '@typescript-eslint/explicit-function-return-type': false,
-        '@typescript-eslint/no-explicit-any': false
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/no-explicit-any': 'off'
       }
     }
   ]

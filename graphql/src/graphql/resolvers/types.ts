@@ -7,58 +7,92 @@ export type RequireFields<T, K extends keyof T> = {
 } &
   { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
-export interface Scalars {
+export type Scalars = {
   ID: string;
   String: string;
   Boolean: boolean;
   Int: number;
   Float: number;
-}
+};
 
-export interface LoginInput {
+export type File = {
+  __typename?: 'File';
+  id: Scalars['ID'];
+  src: Scalars['String'];
+  originalFilename: Scalars['String'];
+};
+
+export type LoginInput = {
   email: Scalars['String'];
   password: Scalars['String'];
-}
+};
 
-export interface Mutation {
+export type Mutation = {
   __typename?: 'Mutation';
   signup: User;
   login?: Maybe<User>;
   logout: Scalars['Boolean'];
-}
+  userUpdate: User;
+};
 
-export interface MutationSignupArgs {
+export type MutationSignupArgs = {
   input: SignupInput;
-}
+};
 
-export interface MutationLoginArgs {
+export type MutationLoginArgs = {
   input: LoginInput;
-}
+};
 
-export interface Query {
+export type MutationUserUpdateArgs = {
+  input: UserUpdateInput;
+};
+
+export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
-}
+  getSignedUrlsToUploadImages: Array<S3SignedObject>;
+};
 
-export interface QueryUserArgs {
+export type QueryUserArgs = {
   id: Scalars['ID'];
-}
+};
 
-export interface SignupInput {
+export type QueryGetSignedUrlsToUploadImagesArgs = {
+  filenames: Array<Scalars['String']>;
+};
+
+/** AWS Sign URL to upload image */
+export type S3SignedObject = {
+  __typename?: 'S3SignedObject';
+  src: Scalars['String'];
+  filename: Scalars['String'];
+  originalFilename: Scalars['String'];
+  uploadUrl: Scalars['String'];
+};
+
+export type SignupInput = {
   email: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   password: Scalars['String'];
-}
+};
 
-export interface User {
+/** User */
+export type User = {
   __typename?: 'User';
   id: Scalars['ID'];
   email: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   displayName?: Maybe<Scalars['String']>;
-}
+  avatar?: Maybe<Scalars['String']>;
+};
+
+export type UserUpdateInput = {
+  id: Scalars['ID'];
+  avatar?: Maybe<Scalars['String']>;
+};
+
 export type WithIndex<TObject> = TObject & Record<string, any>;
 export type ResolversObject<TObject> = WithIndex<TObject>;
 
@@ -71,10 +105,10 @@ export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   info: GraphQLResolveInfo
 ) => Promise<TResult> | TResult;
 
-export interface StitchingResolver<TResult, TParent, TContext, TArgs> {
+export type StitchingResolver<TResult, TParent, TContext, TArgs> = {
   fragment: string;
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
-}
+};
 
 export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
   | ResolverFn<TResult, TParent, TContext, TArgs>
@@ -169,10 +203,13 @@ export type ResolversTypes = ResolversObject<{
   ID: ResolverTypeWrapper<Scalars['ID']>;
   User: ResolverTypeWrapper<User>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  S3SignedObject: ResolverTypeWrapper<S3SignedObject>;
   Mutation: ResolverTypeWrapper<{}>;
   SignupInput: SignupInput;
   LoginInput: LoginInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  UserUpdateInput: UserUpdateInput;
+  File: ResolverTypeWrapper<File>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -181,10 +218,13 @@ export type ResolversParentTypes = ResolversObject<{
   ID: Scalars['ID'];
   User: User;
   String: Scalars['String'];
+  S3SignedObject: S3SignedObject;
   Mutation: {};
   SignupInput: SignupInput;
   LoginInput: LoginInput;
   Boolean: Scalars['Boolean'];
+  UserUpdateInput: UserUpdateInput;
+  File: File;
 }>;
 
 export type IsLoggedInDirectiveResolver<
@@ -193,6 +233,19 @@ export type IsLoggedInDirectiveResolver<
   ContextType = ResolverContext,
   Args = { status?: Maybe<Maybe<Scalars['Boolean']>> }
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export type FileResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes['File'] = ResolversParentTypes['File']
+> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  src?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  originalFilename?: Resolver<
+    ResolversTypes['String'],
+    ParentType,
+    ContextType
+  >;
+}>;
 
 export type MutationResolvers<
   ContextType = ResolverContext,
@@ -211,6 +264,12 @@ export type MutationResolvers<
     RequireFields<MutationLoginArgs, 'input'>
   >;
   logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  userUpdate?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUserUpdateArgs, 'input'>
+  >;
 }>;
 
 export type QueryResolvers<
@@ -223,6 +282,26 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryUserArgs, 'id'>
   >;
+  getSignedUrlsToUploadImages?: Resolver<
+    Array<ResolversTypes['S3SignedObject']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryGetSignedUrlsToUploadImagesArgs, 'filenames'>
+  >;
+}>;
+
+export type S3SignedObjectResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes['S3SignedObject'] = ResolversParentTypes['S3SignedObject']
+> = ResolversObject<{
+  src?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  filename?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  originalFilename?: Resolver<
+    ResolversTypes['String'],
+    ParentType,
+    ContextType
+  >;
+  uploadUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 }>;
 
 export type UserResolvers<
@@ -238,11 +317,14 @@ export type UserResolvers<
     ParentType,
     ContextType
   >;
+  avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 }>;
 
 export type Resolvers<ContextType = ResolverContext> = ResolversObject<{
+  File?: FileResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  S3SignedObject?: S3SignedObjectResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 }>;
 

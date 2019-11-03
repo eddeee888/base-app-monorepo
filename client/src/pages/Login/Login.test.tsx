@@ -1,4 +1,4 @@
-import ViewerContext from 'common/components/ViewerContext';
+import { ViewerContext } from 'common/components/ViewerProvider';
 import React from 'react';
 import { MockedProvider } from '@apollo/react-testing';
 import { StaticRouter, MemoryRouter, Route } from 'react-router';

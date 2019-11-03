@@ -6,7 +6,7 @@ import Link from 'common/components/Link';
 import Logo from 'common/components/Logo';
 import Main from 'common/components/Main';
 import Paper from 'common/components/Paper';
-import { useViewer } from 'common/components/ViewerContext';
+import { useViewer } from 'common/components/ViewerProvider';
 import { routes, useUrlQuery } from 'common/pathing';
 import React from 'react';
 import { Redirect } from 'react-router';

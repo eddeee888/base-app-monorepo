@@ -1,19 +1,18 @@
-import Grid from '@material-ui/core/Grid';
+import { Grid } from '@material-ui/core';
 import Button from 'common/components/Button';
 import FormError from 'common/components/FormError';
-import FormField from 'common/components/FormField';
 import Link from 'common/components/Link';
 import Text from 'common/components/Text';
-import TextInput from 'common/components/TextInput';
 import { routes, useUrlQuery } from 'common/pathing';
-import { Form, Formik, FormikActions } from 'formik';
+import { FormikHelpers, useFormik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
 import { LoginInput } from '__generated__/types';
+import FormikTextInput from 'common/components/Formik/FormikTextInput';
 
 export type LoginFormikFn = (
   formValues: LoginInput,
-  actions: FormikActions<LoginInput>
+  actions: FormikHelpers<LoginInput>
 ) => void;
 
 interface Props {
@@ -22,7 +21,7 @@ interface Props {
   isSubmitting: boolean;
 }
 
-const LoginSchema = Yup.object().shape({
+const validationSchema = Yup.object().shape({
   email: Yup.string().required('Email is required'),
   password: Yup.string().required('Password is required')
 });
@@ -33,49 +32,41 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({
   isSubmitting
 }) => {
   const query = useUrlQuery();
+  const formik = useFormik<LoginInput>({
+    initialValues: { email: '', password: '' },
+    validationSchema,
+    onSubmit
+  });
 
   return (
-    <Formik<LoginInput>
-      initialValues={{ email: '', password: '' }}
-      validationSchema={LoginSchema}
-      onSubmit={onSubmit}
-    >
-      {({ errors, touched }) => (
-        <Form>
-          <Grid container>
-            <Grid item xs={12}>
-              <FormField name="email" errors={errors} touched={touched}>
-                {({ field }) => <TextInput {...field} label="Email" />}
-              </FormField>
-            </Grid>
-          </Grid>
-          <Grid container>
-            <Grid item xs={12}>
-              <FormField name="password" errors={errors} touched={touched}>
-                {({ field }) => (
-                  <TextInput {...field} type="password" label="Password" />
-                )}
-              </FormField>
-            </Grid>
-          </Grid>
+    <form onSubmit={formik.handleSubmit}>
+      <Grid container>
+        <Grid item xs={12}>
+          <FormikTextInput formik={formik} name="email" label="Email" />
+        </Grid>
+      </Grid>
+      <Grid container>
+        <Grid item xs={12}>
+          <FormikTextInput
+            formik={formik}
+            name="password"
+            type="password"
+            label="Password"
+          />
+        </Grid>
+      </Grid>
 
-          <FormError error={generalFormError} />
+      <FormError error={generalFormError} />
 
-          <Text gutterBottom>
-            {"Don't have an account? "}
-            <Link to={routes.signup.generate({}, query)}>Sign up</Link>
-          </Text>
+      <Text gutterBottom>
+        {"Don't have an account? "}
+        <Link to={routes.signup.generate({}, query)}>Sign up</Link>
+      </Text>
 
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            showSpinner={isSubmitting}
-          >
-            Log in
-          </Button>
-        </Form>
-      )}
-    </Formik>
+      <Button type="submit" disabled={isSubmitting} showSpinner={isSubmitting}>
+        Log in
+      </Button>
+    </form>
   );
 };
 

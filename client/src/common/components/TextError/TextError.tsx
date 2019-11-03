@@ -1,7 +1,8 @@
-import Typography, { TypographyProps } from '@material-ui/core/Typography';
-import Error from '@material-ui/icons/Error';
 import React from 'react';
 import { css } from 'emotion';
+import { Typography } from '@material-ui/core';
+import { TypographyProps } from '@material-ui/core/Typography';
+import { Error } from '@material-ui/icons';
 import { textErrorColor } from 'common/styles/color';
 import { spacingPx } from 'common/styles/spacing';
 

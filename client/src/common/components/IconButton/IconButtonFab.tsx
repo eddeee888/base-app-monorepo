@@ -1,4 +1,5 @@
-import DefaultFab, { FabProps as DefaultFabProps } from '@material-ui/core/Fab';
+import { Fab as DefaultFab } from '@material-ui/core';
+import { FabProps as DefaultFabProps } from '@material-ui/core/Fab';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import React, { forwardRef } from 'react';
 import createIcon, { Icon } from './createIcon';

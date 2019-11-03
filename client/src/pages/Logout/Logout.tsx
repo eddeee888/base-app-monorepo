@@ -1,4 +1,4 @@
-import { useViewer } from 'common/components/ViewerContext';
+import { useViewer } from 'common/components/ViewerProvider';
 import React from 'react';
 import LogoutLogic from './LogoutLogic';
 import { useLogoutMutation } from './Logout.generated';

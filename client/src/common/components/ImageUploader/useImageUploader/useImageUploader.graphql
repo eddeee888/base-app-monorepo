@@ -1,0 +1,12 @@
+query GetSignedUrls ($filenames: [String!]!) {
+  getSignedUrlsToUploadImages(filenames: $filenames) {
+    ...SignedImageObject_S3SignedObject
+  }
+}
+
+fragment SignedImageObject_S3SignedObject on S3SignedObject {
+  src
+  filename
+  originalFilename
+  uploadUrl
+}

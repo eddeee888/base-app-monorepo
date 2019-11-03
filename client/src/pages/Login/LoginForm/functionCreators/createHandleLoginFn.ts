@@ -1,4 +1,4 @@
-import { SetViewerFn } from 'common/components/ViewerContext';
+import { SetViewerFn } from 'common/components/ViewerProvider';
 import { FormErrorObject } from 'common/hooks/useFormError';
 import { LoginFormikFn } from 'pages/Login/LoginForm/LoginFormComponent';
 import { LoginMutationFn } from './../Login.generated';
@@ -23,7 +23,10 @@ const createHandleLoginFn: CreateHandleLoginFn = (
       }
     });
     if (fetchResult && fetchResult.data && fetchResult.data.login) {
-      setViewer({ id: fetchResult.data.login.id });
+      setViewer({
+        id: fetchResult.data.login.id,
+        avatar: fetchResult.data.login.avatar
+      });
     } else {
       setGeneralError(
         'The email/password combination you entered is incorrect.'

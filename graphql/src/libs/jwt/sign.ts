@@ -10,7 +10,7 @@ interface CustomClaim {
 const sign: Sign = (payload, expiresIn = defaultExpiresIn) => {
   const signOptions: SignOptions = {
     issuer: process.env.SERVER_NAME,
-    audience: `${process.env.SERVER_NAME}/graphql`,
+    audience: process.env.GRAPHQL_ENDPOINT,
     expiresIn,
     subject: payload.id
   };
