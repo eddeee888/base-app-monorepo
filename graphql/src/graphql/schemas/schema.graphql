@@ -29,12 +29,6 @@ input UserUpdateInput {
   avatar: String
 }
 
-input FileInput {
-  id: ID
-  src: String!
-  originalFilename: String!
-}
-
 # User
 type User {
   id: ID!

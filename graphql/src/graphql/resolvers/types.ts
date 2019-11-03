@@ -22,12 +22,6 @@ export type File = {
   originalFilename: Scalars['String'];
 };
 
-export type FileInput = {
-  id?: Maybe<Scalars['ID']>;
-  src: Scalars['String'];
-  originalFilename: Scalars['String'];
-};
-
 export type LoginInput = {
   email: Scalars['String'];
   password: Scalars['String'];
@@ -215,7 +209,6 @@ export type ResolversTypes = ResolversObject<{
   LoginInput: LoginInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   UserUpdateInput: UserUpdateInput;
-  FileInput: FileInput;
   File: ResolverTypeWrapper<File>;
 }>;
 
@@ -231,7 +224,6 @@ export type ResolversParentTypes = ResolversObject<{
   LoginInput: LoginInput;
   Boolean: Scalars['Boolean'];
   UserUpdateInput: UserUpdateInput;
-  FileInput: FileInput;
   File: File;
 }>;
 
