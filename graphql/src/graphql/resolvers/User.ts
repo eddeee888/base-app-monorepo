@@ -13,5 +13,11 @@ export const User: UserResolvers = {
     }
 
     return email;
+  },
+  avatar: async ({ id }, arg, { prisma }) => {
+    return await prisma
+      .user({ id })
+      .avatar()
+      .src();
   }
 };

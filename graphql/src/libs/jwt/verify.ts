@@ -9,7 +9,7 @@ const verify: Verify = (token, subject) => {
 
   const verifyOptions: VerifyOptions = {
     issuer: process.env.SERVER_NAME,
-    audience: `${process.env.SERVER_NAME}/graphql`
+    audience: process.env.GRAPHQL_ENDPOINT
   };
 
   verifyOptions.subject = subject ? subject : undefined;

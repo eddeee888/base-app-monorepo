@@ -7,6 +7,9 @@ RUN apk update \
   && rm -rf /var/cache/apk/*
 COPY . . 
 RUN ./scripts/setenv.sh
+
+FROM base as build
+WORKDIR /usr/src/app
 RUN yarn install
 
 FROM node:12.8.0-alpine as final

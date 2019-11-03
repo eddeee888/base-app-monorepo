@@ -2,12 +2,14 @@ directive @isLoggedIn(status: Boolean) on FIELD_DEFINITION
 
 type Query {
   user(id: ID!): User
+  getSignedUrlsToUploadImages(filenames: [String!]!): [S3SignedObject!]!
 }
 
 type Mutation {
   signup(input: SignupInput!): User! @isLoggedIn(status: false)
   login(input: LoginInput!): User @isLoggedIn(status: false)
   logout: Boolean!
+  userUpdate(input: UserUpdateInput!): User! @isLoggedIn(status: true)
 }
 
 input SignupInput {
@@ -22,6 +24,17 @@ input LoginInput {
   password: String!
 }
 
+input UserUpdateInput {
+  id: ID!
+  avatar: String
+}
+
+input FileInput {
+  id: ID
+  src: String!
+  originalFilename: String!
+}
+
 # User
 type User {
   id: ID!
@@ -29,4 +42,19 @@ type User {
   firstName: String!
   lastName: String!
   displayName: String
+  avatar: String
+}
+
+# AWS Sign URL to upload image
+type S3SignedObject {
+  src: String!
+  filename: String!
+  originalFilename: String!
+  uploadUrl: String!
+}
+
+type File {
+  id: ID!
+  src: String!
+  originalFilename: String!
 }
