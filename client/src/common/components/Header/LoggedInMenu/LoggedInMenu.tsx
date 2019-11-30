@@ -1,6 +1,5 @@
 import React from 'react';
 import { routes } from 'common/pathing';
-import Link from 'common/components/Link';
 import {
   Popper,
   Grow,
@@ -71,10 +70,10 @@ const LoggedInMenu: React.FunctionComponent<LoggedInMenuProps> = ({
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} onKeyDown={handleListKeyDown}>
                   <MenuItem onClick={handleClose}>
-                    <Link to={routes.me.generate({})}>account</Link>
+                    <routes.me.Link params={{}}>account</routes.me.Link>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
-                    <Link to={routes.logout.generate({})}>log out</Link>
+                    <routes.logout.Link params={{}}>log out</routes.logout.Link>
                   </MenuItem>
                 </MenuList>
               </ClickAwayListener>

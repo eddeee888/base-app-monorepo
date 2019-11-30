@@ -1,7 +1,6 @@
 import { css } from 'emotion';
 import React from 'react';
 import Button from 'common/components/Button';
-import Link from 'common/components/Link';
 import Logo from 'common/components/Logo';
 import { useViewer } from 'common/components/ViewerProvider';
 import { borderColor, primaryBackgroundColor } from 'common/styles/color';
@@ -63,20 +62,20 @@ const Header: React.FunctionComponent<{}> = () => {
     <header className={headerClassName}>
       <div className={headerContentClassName}>
         <div className={logoWrapperClassName}>
-          <Link to={routes.home.generate({})}>
+          <routes.home.Link params={{}}>
             <Logo className={logoClassName} />
-          </Link>
+          </routes.home.Link>
         </div>
 
         <div className={actionWrapperClassName}>
           {!viewer && (
             <>
-              <Link to={routes.signup.generate({})}>
+              <routes.signup.Link params={{}}>
                 <Button variant="outlined">Sign up</Button>
-              </Link>
-              <Link to={routes.login.generate({})} color="secondary">
+              </routes.signup.Link>
+              <routes.login.Link params={{}} color="secondary">
                 <Button variant="outlined">Log in</Button>
-              </Link>
+              </routes.login.Link>
             </>
           )}
           {viewer && <LoggedInMenu viewer={viewer} />}

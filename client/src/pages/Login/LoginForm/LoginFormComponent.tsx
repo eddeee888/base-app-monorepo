@@ -1,7 +1,6 @@
 import { Grid } from '@material-ui/core';
 import Button from 'common/components/Button';
 import FormError from 'common/components/FormError';
-import Link from 'common/components/Link';
 import Text from 'common/components/Text';
 import { routes, useUrlQuery } from 'common/pathing';
 import { FormikHelpers, useFormik } from 'formik';
@@ -60,7 +59,9 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({
 
       <Text gutterBottom>
         {"Don't have an account? "}
-        <Link to={routes.signup.generate({}, query)}>Sign up</Link>
+        <routes.signup.Link params={{}} urlQuery={query}>
+          Sign up
+        </routes.signup.Link>
       </Text>
 
       <Button type="submit" disabled={isSubmitting} showSpinner={isSubmitting}>
