@@ -6,7 +6,7 @@ const routes = {
   signup: createRoute('/signup'),
   logout: createRoute('/logout'),
   me: createRoute('/me'),
-  meUploadAvatar: createRoute('/me/upload-avatar'),
+  meUploadAvatar: createRoute('/me/upload-avatar')
 };
 
 export default routes;

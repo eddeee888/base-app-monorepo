@@ -1,14 +1,11 @@
-import { getUrlQuery, UrlQuery } from 'common/pathing';
-import useRouter from 'use-react-router';
+import { useLocation } from 'react-router';
+import { UrlQuery } from 'common/pathing';
+import getUrlQuery from './getUrlQuery';
 
 const useUrlQuery: () => UrlQuery = () => {
-  const router = useRouter();
+  const location = useLocation();
 
-  if (!router) {
-    throw new Error('useUrlQuery must be used within a React Router');
-  }
-
-  return getUrlQuery(router.location.search);
+  return getUrlQuery(location.search);
 };
 
 export default useUrlQuery;

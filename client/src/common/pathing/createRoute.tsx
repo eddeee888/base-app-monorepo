@@ -1,44 +1,31 @@
-import { generatePath } from 'react-router';
+import React from 'react';
+import { useRouteMatch } from 'react-router';
 import { UrlQuery } from './types';
-import useParams from './useParams';
-import useMatchedPath from './useMatchedPath';
+import generatePathWithInputParams from './generatePathWithInputParams';
 import useRedirect from './useRedirect';
+import Link, { LinkProps } from './Link';
 
 interface Route<P> {
   pattern: string;
   generate: (inputParams: P, urlQuery?: UrlQuery) => string;
   useParams: () => P;
   useRedirect: (inputParams: P, urlQuery?: UrlQuery) => () => void;
+  Link: (props: Omit<LinkProps<P>, 'pattern'>) => ReturnType<typeof Link>;
 }
 
-const generateQueryString = (urlQuery?: UrlQuery): string => {
-  if (!urlQuery) {
-    return '';
+function createRoute<P>(pattern: string): Route<P> {
+  function RouteLink(
+    props: Omit<LinkProps<P>, 'pattern'>
+  ): ReturnType<typeof Link> {
+    return <Link pattern={pattern} {...props} />;
   }
 
-  let result = '?';
-  (Object.keys(urlQuery) as (keyof UrlQuery)[]).forEach(queryKey => {
-    result += `${queryKey}=${urlQuery[queryKey]}&`;
-  });
-  result = result.substring(0, result.length - 1);
-
-  return result;
-};
-
-const generatePathWithInputParams = <P>(
-  pattern: string,
-  inputParams: P,
-  urlQuery?: UrlQuery
-): string =>
-  generatePath(pattern, inputParams as any) + generateQueryString(urlQuery);
-
-function createRoute<P>(pattern: string): Route<P> {
   return {
     pattern,
     generate: (inputParams, urlQuery) =>
       generatePathWithInputParams<P>(pattern, inputParams, urlQuery),
     useParams: () => {
-      const path = useMatchedPath();
+      const { path, params } = useRouteMatch<P>();
 
       if (path !== pattern) {
         throw new Error(
@@ -46,12 +33,13 @@ function createRoute<P>(pattern: string): Route<P> {
         );
       }
 
-      return useParams<P>();
+      return params;
     },
     useRedirect: (inputParams, urlQuery) =>
       useRedirect(
         generatePathWithInputParams<P>(pattern, inputParams, urlQuery)
-      )
+      ),
+    Link: RouteLink
   };
 }
 
