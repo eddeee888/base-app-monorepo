@@ -6,7 +6,6 @@ import { Box, Grid } from '@material-ui/core';
 import Avatar from 'common/components/Avatar';
 import Paper from 'common/components/Paper';
 import { routes } from 'common/pathing';
-import Link from 'common/components/Link';
 import Text from 'common/components/Text';
 import Row from 'common/components/Row';
 
@@ -15,7 +14,6 @@ interface MeDisplayProps {
 }
 
 const MeDisplay: React.FunctionComponent<MeDisplayProps> = ({ viewer }) => {
-
   return (
     <Main>
       <Block size="md">
@@ -26,11 +24,11 @@ const MeDisplay: React.FunctionComponent<MeDisplayProps> = ({ viewer }) => {
                 <Avatar src={viewer.avatar} size="md" />
               </Grid>
               <Grid container justify="center">
-                <Link to={routes.meUploadAvatar.generate({})}>
+                <routes.meUploadAvatar.Link params={{}}>
                   <Row marginTop={2} marginBottom={0}>
                     <Text>Upload avatar</Text>
                   </Row>
-                </Link>
+                </routes.meUploadAvatar.Link>
               </Grid>
             </Paper>
           </Grid>

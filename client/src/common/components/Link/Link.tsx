@@ -1,9 +1,14 @@
 import { AnchorProps, generateCss } from 'common/components/A';
 import { cx } from 'emotion';
 import React from 'react';
-import { Link as RouterLink, LinkProps } from 'react-router-dom';
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps
+} from 'react-router-dom';
 
-const Link: React.FunctionComponent<LinkProps & AnchorProps> = ({
+export type LinkProps = RouterLinkProps & AnchorProps;
+
+const Link: React.FunctionComponent<LinkProps> = ({
   color,
   className,
   ...props

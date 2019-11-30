@@ -15,7 +15,6 @@ import { css } from 'emotion';
 import { avatarExtraLargePx } from 'common/styles/size';
 import { borderColor, secondaryBackgroundColor } from 'common/styles/color';
 import { useUpdateMyAvatarMutation } from 'pages/MeUploadAvatar/MeUploadAvatarMain/MeUploadAvatarMain.generated';
-import Link from 'common/components/Link';
 import { routes } from 'common/pathing';
 
 const avatarPlaceholderClassName = css`
@@ -121,9 +120,9 @@ const MeUploadAvatarMain: React.FunctionComponent<MeUploadAvatarMainProps> = ({
                         </Button>
                       </Grid>
                       <Grid item>
-                        <Link to={routes.me.generate({})}>
+                        <routes.me.Link params={{}}>
                           <Text>Back to account</Text>
-                        </Link>
+                        </routes.me.Link>
                       </Grid>
                     </>
                   )}
