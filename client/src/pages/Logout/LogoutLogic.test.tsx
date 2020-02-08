@@ -11,12 +11,7 @@ describe('<Logout />', () => {
     const { container } = render(
       <MemoryRouter initialEntries={['/login?redirect=/redirect-to-this-path']}>
         <Route exact path="/" render={() => <div>Redirected</div>} />
-        <Route
-          path="/login"
-          render={() => (
-            <LogoutLogic logout={logout} clearViewer={clearViewer} />
-          )}
-        />
+        <Route path="/login" render={() => <LogoutLogic logout={logout} clearViewer={clearViewer} />} />
       </MemoryRouter>
     );
 

@@ -1,4 +1,5 @@
 export enum Item {
   viewerId = 'viewerId',
-  viewerAvatar = 'viewerAvatar'
+  viewerAvatar = 'viewerAvatar',
+  viewerFirstName = 'viewerFirstName'
 }

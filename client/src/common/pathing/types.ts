@@ -1,5 +1,7 @@
 export enum UrlQueryKeys {
-  redirect = 'redirect'
+  redirect = 'redirect',
+  error = 'error',
+  success = 'success'
 }
 
 export type UrlQuery = { [key in UrlQueryKeys]?: string };

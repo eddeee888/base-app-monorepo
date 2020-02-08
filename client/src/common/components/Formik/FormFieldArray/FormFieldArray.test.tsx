@@ -21,16 +21,10 @@ interface TestCase {
 
 const testCase: TestCase = {
   errors: {
-    field1: [
-      { property1: 'Error 1', property2: 'Error 2' },
-      { property1: undefined, property2: undefined }
-    ]
+    field1: [{ property1: 'Error 1', property2: 'Error 2' }, { property1: undefined, property2: undefined }]
   },
   touched: {
-    field1: [
-      { property1: true, property2: false },
-      { property1: true, property2: false }
-    ]
+    field1: [{ property1: true, property2: false }, { property1: true, property2: false }]
   },
   isError: false
 };
@@ -57,40 +51,16 @@ describe('<FormFieldArray />', () => {
 
     const { container } = mountWithFormik(
       <>
-        <FormFieldArray<Input, Element>
-          name="field1"
-          index={0}
-          property="property1"
-          errors={errors}
-          touched={touched}
-        >
+        <FormFieldArray<Input, Element> name="field1" index={0} property="property1" errors={errors} touched={touched}>
           {() => <>Children 1</>}
         </FormFieldArray>
-        <FormFieldArray<Input, Element>
-          name="field1"
-          index={0}
-          property="property2"
-          errors={errors}
-          touched={touched}
-        >
+        <FormFieldArray<Input, Element> name="field1" index={0} property="property2" errors={errors} touched={touched}>
           {() => <>Children 2</>}
         </FormFieldArray>
-        <FormFieldArray<Input, Element>
-          name="field1"
-          index={1}
-          property="property1"
-          errors={errors}
-          touched={touched}
-        >
+        <FormFieldArray<Input, Element> name="field1" index={1} property="property1" errors={errors} touched={touched}>
           {() => <>Children 3</>}
         </FormFieldArray>
-        <FormFieldArray<Input, Element>
-          name="field1"
-          index={1}
-          property="property2"
-          errors={errors}
-          touched={touched}
-        >
+        <FormFieldArray<Input, Element> name="field1" index={1} property="property2" errors={errors} touched={touched}>
           {() => <>Children 4</>}
         </FormFieldArray>
       </>

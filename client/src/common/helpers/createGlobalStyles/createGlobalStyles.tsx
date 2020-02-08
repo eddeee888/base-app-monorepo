@@ -1,9 +1,5 @@
 import { injectGlobal } from 'emotion';
-
-import 'common/assets/fonts/fonts.css';
-import { primaryBackgroundColor, textColor } from 'common/styles/color';
-import { mediaQuery } from 'common/styles/media';
-import { remValue } from 'common/styles/unit';
+import { defaultBackgroundColor, textColor, remValue, mediaQuery } from '@bit/eddeee888.learnd-utils.styles';
 
 const createGlobalStyles = (): void => {
   return injectGlobal`
@@ -17,7 +13,7 @@ const createGlobalStyles = (): void => {
     }
     body {
       margin: 0;
-      background-color: ${primaryBackgroundColor};
+      background-color: ${defaultBackgroundColor};
       color: ${textColor};
       font-size: ${remValue}px;
       line-height: 1.5em;

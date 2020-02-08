@@ -1,12 +1,12 @@
 import createRoute from './createRoute';
+import createExternalRoute from './createExternalRoute';
 
 const routes = {
-  home: createRoute('/'),
-  login: createRoute('/login'),
-  signup: createRoute('/signup'),
-  logout: createRoute('/logout'),
-  me: createRoute('/me'),
-  meUploadAvatar: createRoute('/me/upload-avatar')
+  home: createExternalRoute('/'),
+  login: createRoute('/app/login'),
+  signup: createRoute('/app/signup'),
+  logout: createRoute('/app/logout'),
+  me: createRoute('/app/me')
 };
 
 export default routes;

@@ -1,7 +1,7 @@
 import { Grid } from '@material-ui/core';
-import Button from 'common/components/Button';
+import Button from 'common/ui/Button';
 import FormError from 'common/components/FormError';
-import Text from 'common/components/Text';
+import Text from 'common/ui/Text';
 import { routes, useUrlQuery } from 'common/pathing';
 import { FormikHelpers, useFormik } from 'formik';
 import React from 'react';
@@ -9,10 +9,7 @@ import * as Yup from 'yup';
 import { LoginInput } from '__generated__/types';
 import FormikTextInput from 'common/components/Formik/FormikTextInput';
 
-export type LoginFormikFn = (
-  formValues: LoginInput,
-  actions: FormikHelpers<LoginInput>
-) => void;
+export type LoginFormikFn = (formValues: LoginInput, actions: FormikHelpers<LoginInput>) => void;
 
 interface Props {
   onSubmit: LoginFormikFn;
@@ -25,11 +22,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required('Password is required')
 });
 
-const LoginFormComponent: React.FunctionComponent<Props> = ({
-  onSubmit,
-  generalFormError,
-  isSubmitting
-}) => {
+const LoginFormComponent: React.FunctionComponent<Props> = ({ onSubmit, generalFormError, isSubmitting }) => {
   const query = useUrlQuery();
   const formik = useFormik<LoginInput>({
     initialValues: { email: '', password: '' },
@@ -46,12 +39,7 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({
       </Grid>
       <Grid container>
         <Grid item xs={12}>
-          <FormikTextInput
-            formik={formik}
-            name="password"
-            type="password"
-            label="Password"
-          />
+          <FormikTextInput formik={formik} name="password" type="password" label="Password" />
         </Grid>
       </Grid>
 

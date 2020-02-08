@@ -1,6 +1,0 @@
-mutation UpdateMyAvatar($input: UserUpdateInput!) {
-  userUpdate(input: $input){
-    id
-    avatar
-  }
-}

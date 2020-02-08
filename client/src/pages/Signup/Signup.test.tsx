@@ -3,10 +3,7 @@ import React from 'react';
 import { MockedProvider } from '@apollo/react-testing';
 import { StaticRouter, MemoryRouter, Route } from 'react-router';
 import Signup from './Signup';
-import {
-  assertTextExists,
-  assertTextLink
-} from 'test/utils/react-testing-library';
+import { assertTextExists, assertTextLink } from 'test/utils/react-testing-library';
 import { render } from '@testing-library/react';
 
 describe('<Signup />', () => {
@@ -26,8 +23,6 @@ describe('<Signup />', () => {
       </MockedProvider>
     );
 
-    //TODO: test there's a signup button
-
     assertTextLink(container, {
       text: 'Log in',
       href: '/login'
@@ -37,9 +32,7 @@ describe('<Signup />', () => {
   it('should show signup form if viewer is not logged in and correct header', () => {
     const { container } = render(
       <MockedProvider>
-        <MemoryRouter
-          initialEntries={['/signup?redirect=/redirect-to-this-path']}
-        >
+        <MemoryRouter initialEntries={['/signup?redirect=/redirect-to-this-path']}>
           <ViewerContext.Provider value={contextValue}>
             <Route exact path="/signup" component={Signup} />
           </ViewerContext.Provider>
@@ -55,7 +48,7 @@ describe('<Signup />', () => {
         <ViewerContext.Provider
           value={{
             ...contextValue,
-            viewer: { id: '100' }
+            viewer: { id: '100', firstName: 'one' }
           }}
         >
           <MemoryRouter initialEntries={['/signup']}>
@@ -74,22 +67,12 @@ describe('<Signup />', () => {
         <ViewerContext.Provider
           value={{
             ...contextValue,
-            viewer: { id: '100' }
+            viewer: { id: '100', firstName: 'One' }
           }}
         >
-          <MemoryRouter
-            initialEntries={['/signup?redirect=/redirect-to-this-path']}
-          >
-            <Route
-              exact
-              path="/users"
-              render={() => <div>Not redirected here</div>}
-            />
-            <Route
-              exact
-              path="/redirect-to-this-path"
-              render={() => <div>Redirected here</div>}
-            />
+          <MemoryRouter initialEntries={['/signup?redirect=/redirect-to-this-path']}>
+            <Route exact path="/users" render={() => <div>Not redirected here</div>} />
+            <Route exact path="/redirect-to-this-path" render={() => <div>Redirected here</div>} />
             <Route path="/signup" render={() => <Signup />} />
           </MemoryRouter>
         </ViewerContext.Provider>
