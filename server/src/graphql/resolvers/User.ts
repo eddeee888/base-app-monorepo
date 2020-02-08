@@ -1,4 +1,4 @@
-import { UserResolvers } from 'graphql/resolvers/types';
+import { UserResolvers } from 'graphql/resolvers/types.generated';
 import { AuthenticationError, ForbiddenError } from 'apollo-server';
 import { hasGroup } from 'models/user';
 

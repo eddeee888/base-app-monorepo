@@ -1,5 +1,6 @@
 import { AuthenticationError } from 'apollo-server';
-import { MutationResolvers } from 'graphql/resolvers/types';
+import { MutationResolvers } from 'graphql/resolvers/types.generated';
+import { ResolverContextLoggedIn } from 'graphql/types';
 
 const login: MutationResolvers['login'] = async (parent, args, ctx) => {
   const { email, password } = args.input;
@@ -29,7 +30,7 @@ const login: MutationResolvers['login'] = async (parent, args, ctx) => {
 
   // Must attach user here as viewer because at this point forward.
   // The user is logged in. This allows us to query private user details such as email
-  ctx.viewer = user;
+  ((ctx as unknown) as ResolverContextLoggedIn).viewer = user;
 
   return { ...user };
 };

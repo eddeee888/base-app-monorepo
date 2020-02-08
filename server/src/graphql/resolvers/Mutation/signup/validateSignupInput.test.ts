@@ -1,5 +1,5 @@
 import validateSignupInput from './validateSignupInput';
-import { SignupInput } from 'graphql/resolvers/types';
+import { SignupInput } from 'graphql/resolvers/types.generated';
 
 describe('validateSignupInput()', () => {
   const validInput: SignupInput = {

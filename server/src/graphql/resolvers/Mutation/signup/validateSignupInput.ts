@@ -1,5 +1,5 @@
 import { emailValidation, nameValidation, passwordValidation } from '@bit/eddeee888.base-react-app-utils.validations';
-import { SignupInput } from 'graphql/resolvers/types';
+import { SignupInput } from 'graphql/resolvers/types.generated';
 
 interface ValidationData {
   email?: string[];

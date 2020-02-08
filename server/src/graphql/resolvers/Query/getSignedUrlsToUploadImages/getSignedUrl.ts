@@ -1,4 +1,4 @@
-import { S3SignedObject } from 'graphql/resolvers/types';
+import { S3SignedObject } from 'graphql/resolvers/types.generated';
 import request = require('request');
 import path = require('path');
 import uuid = require('uuid/v4');

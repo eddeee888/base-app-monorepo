@@ -1,4 +1,4 @@
-import { QueryResolvers } from 'graphql/resolvers/types';
+import { QueryResolvers } from 'graphql/resolvers/types.generated';
 import getSignedUrl from 'graphql/resolvers/Query/getSignedUrlsToUploadImages/getSignedUrl';
 
 const getSignedUrlsToUploadImages: QueryResolvers['getSignedUrlsToUploadImages'] = async (parent, { filenames }) => {

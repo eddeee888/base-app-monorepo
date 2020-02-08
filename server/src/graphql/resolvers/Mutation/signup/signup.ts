@@ -1,11 +1,11 @@
 import { updateGroup } from 'models/user';
-import { ResolverContext } from 'graphql/types';
+import { ResolverContextLoggedIn, ResolverContextNotLoggedIn } from 'graphql/types';
 import { AuthenticationError, UserInputError } from 'apollo-server';
 import validateSignupInput from 'graphql/resolvers/Mutation/signup/validateSignupInput';
 import { canUserBeCreated } from 'graphql/permissions';
-import { MutationResolvers, SignupInput } from 'graphql/resolvers/types';
+import { MutationResolvers, SignupInput } from 'graphql/resolvers/types.generated';
 
-const validateInput = async ({ prisma }: ResolverContext, input: SignupInput): Promise<void> => {
+const validateInput = async ({ prisma }: ResolverContextNotLoggedIn, input: SignupInput): Promise<void> => {
   const inputErrors = await validateSignupInput(input);
   if (inputErrors) {
     throw new UserInputError('Invalid input', inputErrors);
@@ -46,7 +46,7 @@ const signup: MutationResolvers['signup'] = async (parent, args, ctx) => {
 
   // Must attach user here as viewer because at this point forward.
   // The user is logged in. This allows us to query private user details such as email
-  ctx.viewer = newUser;
+  ((ctx as unknown) as ResolverContextLoggedIn).viewer = newUser;
 
   return { ...newUser };
 };

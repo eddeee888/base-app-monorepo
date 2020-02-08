@@ -1,5 +1,5 @@
 import { AuthenticationError } from 'apollo-server';
-import { MutationResolvers } from 'graphql/resolvers/types';
+import { MutationResolvers } from 'graphql/resolvers/types.generated';
 
 const logout: MutationResolvers['logout'] = async (parent, args, ctx) => {
   try {

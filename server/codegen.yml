@@ -14,6 +14,7 @@ generates:
       fieldContextTypes:
         - Mutation.signup#graphql/types#ResolverContextNotLoggedIn
         - Mutation.login#graphql/types#ResolverContextNotLoggedIn
+        - Mutation.userUpdate#graphql/types#ResolverContextLoggedIn
       namingConvention:
         enumValues: change-case#upperCase
       useIndexSignature: true

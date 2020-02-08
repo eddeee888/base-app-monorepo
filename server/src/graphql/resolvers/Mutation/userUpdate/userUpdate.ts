@@ -1,14 +1,10 @@
-import { MutationResolvers } from 'graphql/resolvers/types';
-import { AuthenticationError } from 'apollo-server';
+import { MutationResolvers } from 'graphql/resolvers/types.generated';
+import { ForbiddenError } from 'apollo-server';
 import { canUserUpdateUser } from 'graphql/permissions';
 const userUpdate: MutationResolvers['userUpdate'] = async (parent, { input }, { viewer, prisma }) => {
-  if (!viewer) {
-    throw new AuthenticationError('User must be logged in');
-  }
-
   const canUpdate = await canUserUpdateUser(prisma, viewer.id, input.id);
   if (!canUpdate) {
-    throw new AuthenticationError('User does not have permission to update details');
+    throw new ForbiddenError('User does not have permission to update details');
   }
 
   const updatedTargetUser = await prisma.updateUser({

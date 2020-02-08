@@ -1,8 +1,10 @@
+/* eslint-disable */
 import { GraphQLResolveInfo } from 'graphql';
-import { User } from 'graphql/models';
-import { ResolverContext } from 'graphql/types';
+import { UserMapper } from 'graphql/models';
+import { ResolverContext, ResolverContextNotLoggedIn, ResolverContextLoggedIn } from 'graphql/types';
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
+
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -163,7 +165,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
-  User: ResolverTypeWrapper<User>;
+  User: ResolverTypeWrapper<UserMapper>;
   String: ResolverTypeWrapper<Scalars['String']>;
   S3SignedObject: ResolverTypeWrapper<S3SignedObject>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -178,7 +180,7 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   Query: {};
   ID: Scalars['ID'];
-  User: User;
+  User: UserMapper;
   String: Scalars['String'];
   S3SignedObject: S3SignedObject;
   Mutation: {};
@@ -209,10 +211,10 @@ export type MutationResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
 > = ResolversObject<{
-  signup?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationSignupArgs, 'input'>>;
-  login?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'input'>>;
+  signup?: Resolver<ResolversTypes['User'], ParentType, ResolverContextNotLoggedIn, RequireFields<MutationSignupArgs, 'input'>>;
+  login?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ResolverContextNotLoggedIn, RequireFields<MutationLoginArgs, 'input'>>;
   logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  userUpdate?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUserUpdateArgs, 'input'>>;
+  userUpdate?: Resolver<ResolversTypes['User'], ParentType, ResolverContextLoggedIn, RequireFields<MutationUserUpdateArgs, 'input'>>;
 }>;
 
 export type QueryResolvers<
