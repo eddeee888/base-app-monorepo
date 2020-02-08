@@ -8,7 +8,7 @@ source $CURRENT_DIR/utils/error_exit.sh
 function remove_old_symlink(){
     if [ -f $USR_BIN/$CORE_CMD_NAME ]; then
         echo "*** Removing old command..."
-        rm $USR_BIN/$CORE_CMD_NAME
+        sudo rm $USR_BIN/$CORE_CMD_NAME
     fi
 
     echo "---"

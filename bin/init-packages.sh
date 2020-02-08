@@ -8,8 +8,8 @@ function init_packages()
   echo ""
   echo "---"
 
-  echo "*** Installing packages in graphql..."
-  cd ./graphql && yarn && yarn gg && yarn prisma:generate
+  echo "*** Installing packages and build in graphql..."
+  cd ./server && yarn && yarn gg && yarn prisma:generate && yarn build
   cd -
   echo ""
   echo "---"
