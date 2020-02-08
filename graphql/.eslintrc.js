@@ -20,7 +20,8 @@ module.exports = {
       }
     ],
     '@typescript-eslint/camelcase': 'off',
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    'max-len': ['warn', 140, 2]
   },
   overrides: [
     {

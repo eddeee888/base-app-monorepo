@@ -4,15 +4,21 @@ hooks:
     - eslint --fix --config .eslintrc.js
     - prettier --write --config .prettierrc.json
 generates:
-  ./src/graphql/resolvers/types.ts:
+  ./src/graphql/resolvers/types.generated.ts:
     plugins:
+      - add: '/* eslint-disable */'
       - typescript
       - typescript-resolvers
     config:
       contextType: graphql/types#ResolverContext
+      fieldContextTypes:
+        - Mutation.signup#graphql/types#ResolverContextNotLoggedIn
+        - Mutation.login#graphql/types#ResolverContextNotLoggedIn
       namingConvention:
         enumValues: change-case#upperCase
       useIndexSignature: true
       enumValues: graphql/enums
+      scalars:
+        DateTime: string
       mappers:
-        User: graphql/models#User
+        User: graphql/models#UserMapper

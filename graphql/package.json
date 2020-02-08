@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L",
-    "serve": "ts-node -r tsconfig-paths/register src/web/server.ts",
+    "build": "tsc --noEmit false",
+    "start": "nodemon --config ./nodemon.json --legacy-watch --polling-interval 5000",
+    "serve": "NODE_PATH=./build node ./build/web/server.js",
+    "start:crons": "nodemon --config ./nodemon.crons.json --legacy-watch --polling-interval 5000",
+    "serve:crons": "NODE_PATH=./build node ./build/crons/jobs.js",
     "prisma:generate": "prisma generate --env-file .env.dev",
     "prisma:deploy": "prisma deploy --env-file .env.dev",
-    "prisma:seed": "prisma seed --reset --env-file .env.dev",
+    "prisma:seed": "yarn build && yarn prisma seed --reset --env-file .env.dev",
     "prisma:reset": "prisma reset --env-file .env.dev",
     "prisma:token": "prisma token --env-file .env.dev",
     "gg": "graphql-codegen --config codegen.yml",
@@ -20,7 +23,8 @@
     "format:prettier": "prettier --config .prettierrc.json --write \"src/**/*.ts*\"",
     "format:check": "eslint 'src/**/*.ts'",
     "format:eslint": "eslint --fix 'src/**/*.ts'",
-    "format": "yarn format:prettier && yarn format:eslint"
+    "format": "yarn format:prettier && yarn format:eslint",
+    "add-gcg": "./scripts/install_gcg.sh"
   },
   "author": "Eddy Nguyen",
   "license": "ISC",
@@ -32,6 +36,7 @@
     "apollo-server-express": "^2.9.4",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.3",
+    "cron": "^1.7.2",
     "dotenv": "^6.2.0",
     "esm": "^3.2.14",
     "express": "^4.17.1",
@@ -44,11 +49,13 @@
     "yup": "^0.26.6"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.7.0",
-    "@graphql-codegen/typescript": "^1.7.0",
-    "@graphql-codegen/typescript-resolvers": "^1.7.0",
+    "@graphql-codegen/add": "1.10.0",
+    "@graphql-codegen/cli": "1.10.0",
+    "@graphql-codegen/typescript": "1.10.0",
+    "@graphql-codegen/typescript-resolvers": "1.10.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.2",
+    "@types/cron": "^1.7.1",
     "@types/jest": "^24.0.12",
     "@types/jsonwebtoken": "^8.3.4",
     "@types/request": "^2.48.3",
@@ -63,8 +70,7 @@
     "nodemon": "^1.18.9",
     "prisma": "^1.34.8",
     "ts-jest": "^24.0.2",
-    "ts-node": "^8.0.3",
     "tsconfig-paths": "^3.7.0",
-    "typescript": "^3.2.2"
+    "typescript": "^3.7.4"
   }
 }
