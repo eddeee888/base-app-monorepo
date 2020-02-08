@@ -56,6 +56,7 @@ export type QueryGetSignedUrlsToUploadImagesArgs = {
   filenames: Array<Scalars['String']>;
 };
 
+/** AWS Sign URL to upload image */
 export type S3SignedObject = {
   __typename: 'S3SignedObject';
   src: Scalars['String'];
@@ -71,6 +72,7 @@ export type SignupInput = {
   password: Scalars['String'];
 };
 
+/** User */
 export type User = {
   __typename: 'User';
   id: Scalars['ID'];

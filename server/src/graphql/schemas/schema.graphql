@@ -1,6 +1,7 @@
 directive @isLoggedIn(status: Boolean) on FIELD_DEFINITION
 
 type Query {
+  me: User
   user(id: ID!): User
   getSignedUrlsToUploadImages(filenames: [String!]!): [S3SignedObject!]!
 }

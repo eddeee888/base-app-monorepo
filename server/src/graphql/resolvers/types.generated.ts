@@ -48,6 +48,7 @@ export type MutationUserUpdateArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  me?: Maybe<User>;
   user?: Maybe<User>;
   getSignedUrlsToUploadImages: Array<S3SignedObject>;
 };
@@ -164,8 +165,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
   User: ResolverTypeWrapper<UserMapper>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   S3SignedObject: ResolverTypeWrapper<S3SignedObject>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -179,8 +180,8 @@ export type ResolversTypes = ResolversObject<{
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Query: {};
-  ID: Scalars['ID'];
   User: UserMapper;
+  ID: Scalars['ID'];
   String: Scalars['String'];
   S3SignedObject: S3SignedObject;
   Mutation: {};
@@ -221,6 +222,7 @@ export type QueryResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = ResolversObject<{
+  me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
   getSignedUrlsToUploadImages?: Resolver<
     Array<ResolversTypes['S3SignedObject']>,
