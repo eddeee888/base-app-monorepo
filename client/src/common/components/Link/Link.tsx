@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link as LinkMui, LinkProps as LinkMuiProps } from '@material-ui/core';
-import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
+import { Link as LinkRouter, LinkProps as LinkRouterProps } from 'react-router-dom';
 import { css } from 'emotion';
 import { primaryFont } from '@bit/eddeee888.learnd-utils.styles';
 
@@ -10,14 +10,14 @@ const buttonClassName = css`
 `;
 
 export interface LinkProps {
-  to: RouterLinkProps['to'];
-  children: RouterLinkProps['children'];
+  to: LinkRouterProps['to'];
+  children: LinkRouterProps['children'];
   color?: LinkMuiProps['color'];
 }
 
-export default React.forwardRef<any, LinkProps>(function Link({ to, children }, ref) {
+export default React.forwardRef<any, LinkProps>(function Link({ to, children, color = 'primary' }, ref) {
   return (
-    <LinkMui component={RouterLink} underline="none" color="primary" classes={{ button: buttonClassName }} to={to} ref={ref}>
+    <LinkMui component={LinkRouter} underline="none" color={color} classes={{ button: buttonClassName }} to={to} ref={ref}>
       {children}
     </LinkMui>
   );
