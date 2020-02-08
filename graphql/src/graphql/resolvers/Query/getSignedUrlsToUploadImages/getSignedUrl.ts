@@ -7,10 +7,7 @@ interface SignedUrl {
   url: string;
 }
 
-const getSignedUrl = async (
-  signUrl: string,
-  originalFilename: string
-): Promise<S3SignedObject> => {
+const getSignedUrl = async (signUrl: string, originalFilename: string): Promise<S3SignedObject> => {
   const objectFilename = `${uuid()}${path.extname(originalFilename)}`;
 
   const signedPromise = new Promise<SignedUrl>((resolve, reject) => {

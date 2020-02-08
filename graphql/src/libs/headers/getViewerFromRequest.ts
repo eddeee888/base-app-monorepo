@@ -3,10 +3,7 @@ import { getTokenFromRequest } from 'libs/headers';
 import { verify } from 'libs/jwt';
 import { Prisma, User } from 'prisma/generated/client';
 
-export type GetViewerFromRequest = (
-  req: Request,
-  prisma: Prisma
-) => Promise<User | null>;
+export type GetViewerFromRequest = (req: Request, prisma: Prisma) => Promise<User | null>;
 
 const getViewerFromRequest: GetViewerFromRequest = async (req, prisma) => {
   const token = getTokenFromRequest(req);

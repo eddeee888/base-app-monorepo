@@ -3,10 +3,7 @@ import { expiresIn } from 'libs/jwt';
 import { JWT } from 'graphql/types';
 import TokenType from './TokenType';
 
-export type SetTokenToResponse = (
-  response: Response,
-  accessToken: JWT
-) => Response;
+export type SetTokenToResponse = (response: Response, accessToken: JWT) => Response;
 
 const setTokenToResponse: SetTokenToResponse = (response, accessToken) => {
   return response.cookie(TokenType.accessToken, accessToken, {

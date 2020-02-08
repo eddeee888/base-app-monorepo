@@ -18,16 +18,11 @@ const verify: Verify = (token, subject) => {
     throw new Error('Cannot verify token without a secret');
   }
 
-  jwtVerify(
-    token,
-    process.env.JWT_SECRET,
-    verifyOptions,
-    (err: VerifyErrors, decoded: object | string) => {
-      if (decoded) {
-        result = decoded;
-      }
+  jwtVerify(token, process.env.JWT_SECRET, verifyOptions, (err: VerifyErrors, decoded: object | string) => {
+    if (decoded) {
+      result = decoded;
     }
-  );
+  });
 
   return result;
 };

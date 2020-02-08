@@ -37,8 +37,7 @@ describe('validateSignupInput()', () => {
       firstName: ['First name is required'],
       lastName: ['Last name is required'],
       password: [
-        'Password must be at least 8 english upper/lowercase characters, ' +
-          'any number, no spaces and any of the following: _#?!@$%^&*-.'
+        'Password must be at least 8 english upper/lowercase characters, ' + 'any number, no spaces and any of the following: _#?!@$%^&*-.'
       ]
     });
   });
@@ -64,8 +63,7 @@ describe('validateSignupInput()', () => {
 
     expect(errors).toEqual({
       password: [
-        'Password must be at least 8 english upper/lowercase characters, ' +
-          'any number, no spaces and any of the following: _#?!@$%^&*-.'
+        'Password must be at least 8 english upper/lowercase characters, ' + 'any number, no spaces and any of the following: _#?!@$%^&*-.'
       ]
     });
   });

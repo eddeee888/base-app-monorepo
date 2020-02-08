@@ -8,4 +8,4 @@ generate:
     output: ./src/prisma/generated/client/
 
 seed:
-  run: ts-node ./src/prisma/seed.ts
+  run: node ./build/prisma/seed.js

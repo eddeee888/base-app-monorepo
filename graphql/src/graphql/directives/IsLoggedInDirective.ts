@@ -4,9 +4,7 @@ import { AuthenticationError } from 'apollo-server';
 import { GraphQLField, defaultFieldResolver } from 'graphql';
 
 class IsLoggedInDirective extends SchemaDirectiveVisitor {
-  public visitFieldDefinition(
-    field: GraphQLField<any, ResolverContext>
-  ): GraphQLField<any, any> | void | null {
+  public visitFieldDefinition(field: GraphQLField<any, ResolverContext>): GraphQLField<any, any> | void | null {
     const { resolve = defaultFieldResolver } = field;
     const { status } = this.args;
 

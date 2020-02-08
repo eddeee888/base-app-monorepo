@@ -1,12 +1,8 @@
 import cookieParser = require('cookie-parser');
 import { importSchema } from 'graphql-import';
-import * as express from 'express';
+import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import {
-  getTokenFromRequest,
-  setTokenToResponse,
-  getViewerFromRequest
-} from 'libs/headers';
+import { getTokenFromRequest, setTokenToResponse, getViewerFromRequest } from 'libs/headers';
 import { sign, verify } from 'libs/jwt';
 import { compare, hash } from 'libs/password';
 import tokenVerifier from 'middleware/tokenVerifier';
@@ -49,8 +45,4 @@ app.use(tokenVerifier);
 
 server.applyMiddleware({ app });
 
-app.listen({ port: PORT }, () =>
-  console.log(
-    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
-  )
-);
+app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`));

@@ -5,9 +5,10 @@ import { Prisma, User } from 'prisma/generated/client';
 import { ExpressContext } from 'apollo-server-express/dist/ApolloServer';
 
 export type JWT = string;
-export interface ResolverContext extends ExpressContext {
+export type DateTime = string;
+export interface ResolverContext<U = User | null> extends ExpressContext {
   prisma: Prisma;
-  viewer: User | null;
+  viewer: U;
   utils: {
     headers: {
       getTokenFromRequest: GetTokenFromRequest;
@@ -23,3 +24,6 @@ export interface ResolverContext extends ExpressContext {
     };
   };
 }
+
+export type ResolverContextLoggedIn = ResolverContext<User>;
+export type ResolverContextNotLoggedIn = ResolverContext<null>;

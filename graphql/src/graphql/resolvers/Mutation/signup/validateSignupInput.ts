@@ -1,8 +1,4 @@
-import {
-  emailValidation,
-  nameValidation,
-  passwordValidation
-} from '@bit/eddeee888.base-react-app-utils.validations';
+import { emailValidation, nameValidation, passwordValidation } from '@bit/eddeee888.base-react-app-utils.validations';
 import { SignupInput } from 'graphql/resolvers/types';
 
 interface ValidationData {
@@ -12,9 +8,7 @@ interface ValidationData {
   password?: string[];
 }
 
-type ValidateSignupInputFn = (
-  input: SignupInput
-) => Promise<ValidationData | undefined>;
+type ValidateSignupInputFn = (input: SignupInput) => Promise<ValidationData | undefined>;
 
 const validateSignupInput: ValidateSignupInputFn = async input => {
   let validEmail = true;

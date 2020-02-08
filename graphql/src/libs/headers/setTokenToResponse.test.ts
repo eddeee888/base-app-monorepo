@@ -10,10 +10,10 @@ describe('setTokenToResponse', () => {
     setTokenToResponse(response, 'test_token');
 
     expect(response.cookie).toBeCalledTimes(1);
-    expect(response.cookie).toBeCalledWith(
-      TokenType.accessToken,
-      'test_token',
-      { maxAge: expiresIn * 1000, httpOnly: true, sameSite: 'lax' }
-    );
+    expect(response.cookie).toBeCalledWith(TokenType.accessToken, 'test_token', {
+      maxAge: expiresIn * 1000,
+      httpOnly: true,
+      sameSite: 'lax'
+    });
   });
 });

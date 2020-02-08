@@ -12,10 +12,7 @@ const login: MutationResolvers['login'] = async (parent, args, ctx) => {
     return null;
   }
 
-  const correctPassword = await ctx.utils.password.compare(
-    password,
-    user.password
-  );
+  const correctPassword = await ctx.utils.password.compare(password, user.password);
 
   if (!correctPassword) {
     return null;

@@ -1,11 +1,7 @@
 import { Prisma } from 'prisma/generated/client';
 import { isAdmin } from 'models/user';
 
-export const canUserUpdateUser = async (
-  prisma: Prisma,
-  userId: string,
-  targetUserId: string
-): Promise<boolean> => {
+export const canUserUpdateUser = async (prisma: Prisma, userId: string, targetUserId: string): Promise<boolean> => {
   const userExists = await prisma.$exists.user({ id: userId });
   if (!userExists) {
     return false;

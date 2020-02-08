@@ -5,10 +5,7 @@ import validateSignupInput from 'graphql/resolvers/Mutation/signup/validateSignu
 import { canUserBeCreated } from 'graphql/permissions';
 import { MutationResolvers, SignupInput } from 'graphql/resolvers/types';
 
-const validateInput = async (
-  { prisma }: ResolverContext,
-  input: SignupInput
-): Promise<void> => {
+const validateInput = async ({ prisma }: ResolverContext, input: SignupInput): Promise<void> => {
   const inputErrors = await validateSignupInput(input);
   if (inputErrors) {
     throw new UserInputError('Invalid input', inputErrors);
