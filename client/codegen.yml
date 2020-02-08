@@ -1,5 +1,5 @@
 overwrite: true
-schema: './../graphql/src/graphql/schemas/schema.graphql'
+schema: './../server/src/graphql/schemas/schema.graphql'
 documents: 'src/**/*.graphql'
 hooks:
   afterAllFileWrite:
@@ -13,6 +13,13 @@ generates:
     config:
       enumsAsTypes: true
       nonOptionalTypename: true
+      scalars:
+        DateTime: string
+
+  src/__generated__/operations.d.ts:
+    documents: src/pages/**/*.graphql
+    plugins:
+      - typescript-graphql-files-modules
 
   src/:
     preset: near-operation-file
@@ -26,7 +33,8 @@ generates:
     config:
       enumsAsTypes: true
       nonOptionalTypename: true
-      documentMode: documentNode
+      documentMode: external
+      importDocumentNodeExternallyFrom: near-operation-file
       withHooks: true
       withHOC: false
       withComponent: false
