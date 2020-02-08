@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["./src/*"]
+    },
+    "target": "es5",
+    "lib": ["es5", "es6", "dom", "esnext.asynciterable"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "noUnusedLocals": true,
+    "noImplicitAny": true
+  },
+  "files": ["./src/__generated__/operations.d.ts"],
+  "include": ["next-env.d.ts", "./src/**/*.ts", "./src/**/*.tsx"],
+  "exclude": ["node_modules", "**/__generated__/*.ts"]
+}
