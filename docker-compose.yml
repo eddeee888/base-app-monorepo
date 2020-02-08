@@ -1,70 +1,123 @@
-version: '3.7'
+version: "3.7"
 
-services: 
+services:
   # Set up client container
   client:
-    build: 
+    build:
       context: ./client
       target: base
-      args: 
+      args:
         BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
-        GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
     command: yarn start
     ports:
-      - ${CLIENT_PORT}:${CLIENT_PORT}  
+      - ${CLIENT_PORT}:${CLIENT_PORT}
     environment:
       PORT: ${CLIENT_PORT}
+      REACT_APP_GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
+      REACT_APP_GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      REACT_APP_STRIPE_PUBLIC_API_KEY: ${STRIPE_PUBLIC_API_KEY}
+      REACT_APP_STRIPE_CLIENT_ID: ${STRIPE_CLIENT_ID}
+      REACT_APP_SERVER_NAME: ${SERVER_NAME}
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: 5000
+      TSC_WATCHFILE: "UseFsEventsWithFallbackDynamicPolling"
     volumes:
       - ./client/src:/usr/src/app/src
-      - ./client/node_modules:/usr/src/app/node_modules
-    links:
-      - graphql
+      - ./client/yarn.lock:/usr/src/app/yarn.lock
+    networks:
+      - com_vm
+
+  client-seo:
+    build:
+      context: ./client-seo
+      target: base
+      args:
+        BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
+    command: yarn dev -p ${CLIENT_SEO_PORT}
+    ports:
+      - ${CLIENT_SEO_PORT}:${CLIENT_SEO_PORT}
+    environment:
+      PORT: ${CLIENT_SEO_PORT}
+    volumes:
+      - ./client-seo/pages:/usr/src/app/pages
+      - ./client-seo/src:/usr/src/app/src
+      - ./client-seo/yarn.lock:/usr/src/app/yarn.lock
+      - ./client-seo/.next:/usr/src/app/.next
+    networks:
+      - com_vm
 
   # Set up server container
-  graphql:
-    build: 
-      context: ./graphql
+  server:
+    build:
+      context: ./server
       target: base
-      args: 
+      args:
         BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
     command: yarn start
     ports:
-      - ${GRAPHQL_PORT}:${GRAPHQL_PORT}
+      - ${SERVER_PORT}:${SERVER_PORT}
     environment:
       PRISMA_ENDPOINT: ${PRISMA_ENDPOINT}
       PRISMA_SECRET: ${PRISMA_SECRET}
       SERVER_NAME: ${SERVER_NAME}
       GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
       JWT_SECRET: ${JWT_SECRET}
-      PORT: ${GRAPHQL_PORT}
+      PORT: ${SERVER_PORT}
       AWS_S3_IMAGES_GET_SIGNED_URL: ${AWS_S3_IMAGES_GET_SIGNED_URL}
       AWS_S3_IMAGES_FOLDER_URL: ${AWS_S3_IMAGES_FOLDER_URL}
       AWS_S3_IMAGES_GET_SIGNED_URL_API_KEY: ${AWS_S3_IMAGES_GET_SIGNED_URL_API_KEY}
     volumes:
-      - ./graphql/src:/usr/src/app/src
-      - ./graphql/node_modules:/usr/src/app/node_modules
+      - ./server/src:/usr/src/app/src
+      - ./server/yarn.lock:/usr/src/app/yarn.lock
+    depends_on:
+      - prisma
+    networks:
+      - com_vm
+
+  # Set up server worker
+  server-worker:
+    build:
+      context: ./server
+      target: base
+
+    command: yarn start:crons
+    environment:
+      BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
+      PRISMA_ENDPOINT: ${PRISMA_ENDPOINT}
+      PRISMA_SECRET: ${PRISMA_SECRET}
+      STRIPE_PRIVATE_API_KEY: ${STRIPE_PRIVATE_API_KEY}
+    volumes:
+      - ./server/src:/usr/src/app/src
+      - ./server/yarn.lock:/usr/src/app/yarn.lock
     depends_on:
       - prisma
 
   # Set up load balancer container
   reverse-proxy:
-    build: 
+    build:
       context: ./reverse-proxy
     tty: true
-    links:
-        - client
-        - graphql
     environment:
-      REVERSE_PROXY_SERVER_NAME: ${REVERSE_PROXY_SERVER_NAME}
+      MAIN_SERVER_NAME: ${MAIN_SERVER_NAME}
       CLIENT_SERVICE_NAME: ${CLIENT_SERVICE_NAME}
       CLIENT_PORT: ${CLIENT_PORT}
       CLIENT_URL_PATH: ${CLIENT_URL_PATH}
-      GRAPHQL_SERVICE_NAME: ${GRAPHQL_SERVICE_NAME}
-      GRAPHQL_PORT: ${GRAPHQL_PORT}
+      CLIENT_STATIC_URL_PATH: ${CLIENT_STATIC_URL_PATH}
+      CLIENT_MANIFEST_URL_PATH: ${CLIENT_MANIFEST_URL_PATH}
+      CLIENT_SEO_SERVICE_NAME: ${CLIENT_SEO_SERVICE_NAME}
+      CLIENT_SEO_PORT: ${CLIENT_SEO_PORT}
+      HOMEPAGE_URL_PATH: ${HOMEPAGE_URL_PATH}
+      SERVER_SERVICE_NAME: ${SERVER_SERVICE_NAME}
+      SERVER_PORT: ${SERVER_PORT}
       GRAPHQL_URL_PATH: ${GRAPHQL_URL_PATH}
+      PAYMENTS_URL_PATH: ${PAYMENTS_URL_PATH}
     ports:
-        - 80:80
-        - 443:443
+      - 80:80
+      - 443:443
+    networks:
+      com_vm:
+        aliases:
+          - ${MAIN_SERVER_NAME}
 
   # Set up database server
   database:
@@ -75,10 +128,12 @@ services:
       - MYSQL_PORT=${MYSQL_PORT}
     volumes:
       - database:/var/lib/mysql
-    expose: 
+    expose:
       - ${MYSQL_PORT}
     ports:
       - ${MYSQL_PORT}:${MYSQL_PORT}
+    networks:
+      - com_vm
 
   # Set up prisma client
   prisma:
@@ -98,6 +153,13 @@ services:
             user: root
             password: ${MYSQL_ROOT_PASSWORD}
             migrations: true
+    depends_on:
+      - database
+    networks:
+      - com_vm
 
 volumes:
   database:
+
+networks:
+  com_vm:
