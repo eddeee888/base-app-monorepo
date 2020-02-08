@@ -14,9 +14,6 @@ services:
     environment:
       PORT: ${CLIENT_PORT}
       REACT_APP_GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
-      REACT_APP_GOOGLE_API_KEY: ${GOOGLE_API_KEY}
-      REACT_APP_STRIPE_PUBLIC_API_KEY: ${STRIPE_PUBLIC_API_KEY}
-      REACT_APP_STRIPE_CLIENT_ID: ${STRIPE_CLIENT_ID}
       REACT_APP_SERVER_NAME: ${SERVER_NAME}
       CHOKIDAR_USEPOLLING: "true"
       CHOKIDAR_INTERVAL: 5000
@@ -85,7 +82,6 @@ services:
       BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
       PRISMA_ENDPOINT: ${PRISMA_ENDPOINT}
       PRISMA_SECRET: ${PRISMA_SECRET}
-      STRIPE_PRIVATE_API_KEY: ${STRIPE_PRIVATE_API_KEY}
     volumes:
       - ./server/src:/usr/src/app/src
       - ./server/yarn.lock:/usr/src/app/yarn.lock
@@ -110,7 +106,6 @@ services:
       SERVER_SERVICE_NAME: ${SERVER_SERVICE_NAME}
       SERVER_PORT: ${SERVER_PORT}
       GRAPHQL_URL_PATH: ${GRAPHQL_URL_PATH}
-      PAYMENTS_URL_PATH: ${PAYMENTS_URL_PATH}
     ports:
       - 80:80
       - 443:443

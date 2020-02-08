@@ -1642,18 +1642,6 @@
   dependencies:
     yup "^0.26.7"
 
-"@bit/eddeee888.learnd-utils.forms.validations@^1.7.1":
-  version "1.7.1"
-  resolved "https://node.bit.dev/eddeee888.learnd-utils.forms.validations/-/eddeee888.learnd-utils.forms.validations-1.7.1.tgz#9f45959e99bce19a713605aa304352e73ea31281"
-  integrity sha1-n0WVnpm84ZpxNgWqMENS5z6jEoE=
-  dependencies:
-    yup "^0.26.7"
-
-"@bit/eddeee888.learnd-utils.payments@^0.1.1":
-  version "0.1.1"
-  resolved "https://node.bit.dev/eddeee888.learnd-utils.payments/-/eddeee888.learnd-utils.payments-0.1.1.tgz#e14aceb6028944984871c40f3b27a6cfe4a806fe"
-  integrity sha1-4UrOtgKJRJhIccQPOyemz+SoBv4=
-
 "@bit/eddeee888.learnd-utils.styles@^0.0.1":
   version "0.0.1"
   resolved "https://node.bit.dev/eddeee888.learnd-utils.styles/-/eddeee888.learnd-utils.styles-0.0.1.tgz#d9b6940fb44767afa15af094d8330a63b7f6e579"
