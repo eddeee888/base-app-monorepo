@@ -35,6 +35,7 @@ services:
       - ${CLIENT_SEO_PORT}:${CLIENT_SEO_PORT}
     environment:
       PORT: ${CLIENT_SEO_PORT}
+      GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
     volumes:
       - ./client-seo/pages:/usr/src/app/pages
       - ./client-seo/src:/usr/src/app/src
@@ -109,6 +110,10 @@ services:
     ports:
       - 80:80
       - 443:443
+    depends_on:
+      - client
+      - client-seo
+      - server
     networks:
       com_vm:
         aliases:

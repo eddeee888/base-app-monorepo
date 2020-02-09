@@ -62,7 +62,7 @@ function createApolloClient(initialState = {}, httpLink: HttpLink): ApolloClient
  * @param  {Object} options
  */
 function initApolloClient(initialState: object, headers?: IncomingHttpHeaders): ApolloClient<any> {
-  const uri = 'https://learnd.com.vm/graphql';
+  const uri = process.env.GRAPHQL_ENDPOINT;
 
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)

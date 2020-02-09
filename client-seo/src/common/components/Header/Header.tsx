@@ -51,12 +51,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({ viewer }) => {
 
         <Grid item>
           <Grid container alignItems="center" spacing={1}>
-            <Grid item>
-              <routes.hostClassCreate.Link params={{}}>
-                <Button variant="outlined">Host a class</Button>
-              </routes.hostClassCreate.Link>
-            </Grid>
-
             {!viewer && (
               <>
                 <Grid item>

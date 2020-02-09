@@ -8,7 +8,7 @@ export interface Viewer {
 }
 export type SetViewerFn = (viewer: Viewer) => void;
 export type SetViewerAvatarFn = (avatar?: string | null) => void;
-export type ClearViewerFn = () => void;
+export type ClearViewerFn = (shouldClearViewerValue?: boolean) => void;
 
 interface ViewerContextValue {
   viewer: Viewer | null;
@@ -79,11 +79,13 @@ const useViewer = (): UseViewerResult => {
     });
   };
 
-  const clearViewer: ClearViewerFn = () => {
+  const clearViewer: ClearViewerFn = (shouldClearViewerValue = false) => {
     removeItem(Item.viewerId);
     removeItem(Item.viewerAvatar);
     removeItem(Item.viewerFirstName);
-    setViewerValue(null);
+    if (shouldClearViewerValue) {
+      setViewerValue(null);
+    }
   };
 
   return {
