@@ -1,14 +1,14 @@
 import { removeItem, getItem, setItem, Item } from 'common/localStorage';
-import React, { useCallback, useContext, useMemo, useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 export interface Viewer {
   id: string;
   avatar?: string | null;
+  firstName: string;
 }
 export type SetViewerFn = (viewer: Viewer) => void;
 export type SetViewerAvatarFn = (avatar?: string | null) => void;
 export type ClearViewerFn = () => void;
-export type CheckIfViewerFn = (userId: string) => boolean;
 
 interface ViewerContextValue {
   viewer: Viewer | null;
@@ -24,21 +24,21 @@ interface UseViewerResult {
   setViewer: SetViewerFn;
   setViewerAvatar: SetViewerAvatarFn;
   clearViewer: ClearViewerFn;
-  checkIfViewer: CheckIfViewerFn;
   isLoggedIn: boolean;
 }
 
-const ViewerContext = React.createContext<ViewerContextValue | undefined>(
-  undefined
-);
+const ViewerContext = React.createContext<ViewerContextValue | undefined>(undefined);
 
 const ViewerProvider = (props: ContextProps): React.ReactElement => {
   const viewerId = getItem(Item.viewerId);
   const avatar = getItem(Item.viewerAvatar);
+  const viewerFirstName = getItem(Item.viewerFirstName);
+
   const initialViewer: Viewer | null = viewerId
     ? {
         id: viewerId,
-        avatar
+        avatar,
+        firstName: viewerFirstName ? viewerFirstName : ''
       }
     : null;
 
@@ -62,53 +62,36 @@ const useViewer = (): UseViewerResult => {
   }
   const { viewer, setViewerValue } = context;
 
-  const checkIfViewer = useCallback<CheckIfViewerFn>(
-    userId => {
-      if (viewer && viewer.id === userId) {
-        return true;
+  const setViewer: SetViewerFn = newViewer => {
+    setItem(Item.viewerId, newViewer.id);
+    setItem(Item.viewerAvatar, newViewer.avatar);
+    setItem(Item.viewerFirstName, newViewer.firstName);
+    setViewerValue(newViewer);
+  };
+
+  const setViewerAvatar: SetViewerAvatarFn = avatar => {
+    setItem(Item.viewerAvatar, avatar);
+    setViewerValue(prevViewer => {
+      if (!prevViewer) {
+        return null;
       }
-      return false;
-    },
-    [viewer]
-  );
+      return { ...prevViewer, avatar };
+    });
+  };
 
-  const isLoggedIn = useMemo<boolean>(() => !!viewer, [viewer]);
-
-  const setViewer = useCallback<SetViewerFn>(
-    newViewer => {
-      setItem(Item.viewerId, newViewer.id);
-      setItem(Item.viewerAvatar, newViewer.avatar);
-      setViewerValue(newViewer);
-    },
-    [setViewerValue]
-  );
-
-  const setViewerAvatar = useCallback<SetViewerAvatarFn>(
-    avatar => {
-      setItem(Item.viewerAvatar, avatar);
-      setViewerValue(prevViewer => {
-        if (!prevViewer) {
-          return null;
-        }
-        return { ...prevViewer, avatar };
-      });
-    },
-    [setViewerValue]
-  );
-
-  const clearViewer = useCallback<ClearViewerFn>(() => {
+  const clearViewer: ClearViewerFn = () => {
     removeItem(Item.viewerId);
     removeItem(Item.viewerAvatar);
+    removeItem(Item.viewerFirstName);
     setViewerValue(null);
-  }, [setViewerValue]);
+  };
 
   return {
     viewer,
     setViewer,
     clearViewer,
-    checkIfViewer,
     setViewerAvatar,
-    isLoggedIn
+    isLoggedIn: !!viewer
   };
 };
 

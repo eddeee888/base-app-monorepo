@@ -1,39 +1,25 @@
 import React from 'react';
 import { routes } from 'common/pathing';
-import {
-  Popper,
-  Grow,
-  ClickAwayListener,
-  MenuList,
-  MenuItem,
-  Paper
-} from '@material-ui/core';
-import Avatar from 'common/components/Avatar';
+import { Popper, Grow, ClickAwayListener, MenuList, MenuItem, Paper } from '@material-ui/core';
+import Avatar from 'common/ui/Avatar';
 import { Viewer } from 'common/components/ViewerProvider';
-import A from 'common/components/A';
+import AnchorButton from 'common/ui/AnchorButton';
 
 interface LoggedInMenuProps {
   viewer: Viewer;
 }
 
-const LoggedInMenu: React.FunctionComponent<LoggedInMenuProps> = ({
-  viewer
-}) => {
+const LoggedInMenu: React.FunctionComponent<LoggedInMenuProps> = ({ viewer }) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLAnchorElement>(null);
 
-  const handleToggle = (
-    event: React.MouseEvent<EventTarget, MouseEvent>
-  ): void => {
+  const handleToggle = (event: React.MouseEvent<EventTarget, MouseEvent>): void => {
     event.preventDefault();
     setOpen(prevOpen => !prevOpen);
   };
 
   const handleClose = (event: React.MouseEvent<EventTarget>): void => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
+    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
     }
 
@@ -49,31 +35,25 @@ const LoggedInMenu: React.FunctionComponent<LoggedInMenuProps> = ({
 
   return (
     <>
-      <A ref={anchorRef} onClick={handleToggle} href="#">
-        <Avatar
-          src={viewer.avatar}
-          size="sm"
-          aria-controls="menu-list-grow"
-          aria-haspopup="true"
-        />
-      </A>
+      <AnchorButton ref={anchorRef} onClick={handleToggle}>
+        <Avatar src={viewer.avatar} size="sm" aria-controls="menu-list-grow" aria-haspopup="true" />
+      </AnchorButton>
       <Popper open={open} anchorEl={anchorRef.current} transition disablePortal>
         {({ TransitionProps, placement }) => (
           <Grow
             {...TransitionProps}
             style={{
-              transformOrigin:
-                placement === 'bottom' ? 'center top' : 'center bottom'
+              transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom'
             }}
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} onKeyDown={handleListKeyDown}>
                   <MenuItem onClick={handleClose}>
-                    <routes.me.Link params={{}}>account</routes.me.Link>
+                    <routes.me.Link params={{}}>Account</routes.me.Link>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
-                    <routes.logout.Link params={{}}>log out</routes.logout.Link>
+                    <routes.logout.Link params={{}}>Log out</routes.logout.Link>
                   </MenuItem>
                 </MenuList>
               </ClickAwayListener>
