@@ -1,5 +1,5 @@
 import { injectGlobal } from 'emotion';
-import { defaultBackgroundColor, textColor, remValue, mediaQuery } from '@bit/eddeee888.learnd-utils.styles';
+import { defaultBackgroundColor, textColor, remValue, mediaQuery } from '@bit/eddeee888.base-react-app-utils.styles';
 
 const createGlobalStyles = (): void => {
   return injectGlobal`

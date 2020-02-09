@@ -2,7 +2,7 @@ import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { muiTheme, defaultBackgroundColor, textColor, remValue, mediaQuery } from '@bit/eddeee888.learnd-utils.styles';
+import { muiTheme, defaultBackgroundColor, textColor, remValue, mediaQuery } from '@bit/eddeee888.base-react-app-utils.styles';
 import { CacheProvider, Global, css } from '@emotion/core';
 import { cache } from 'emotion';
 

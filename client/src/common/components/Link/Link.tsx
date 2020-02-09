@@ -2,7 +2,7 @@ import React from 'react';
 import { Link as LinkMui, LinkProps as LinkMuiProps } from '@material-ui/core';
 import { Link as LinkRouter, LinkProps as LinkRouterProps } from 'react-router-dom';
 import { css } from 'emotion';
-import { primaryFont } from '@bit/eddeee888.learnd-utils.styles';
+import { primaryFont } from '@bit/eddeee888.base-react-app-utils.styles';
 
 const buttonClassName = css`
   font-family: ${primaryFont}, Helvetica Neue, Helvetica, Arial, sans-serif;

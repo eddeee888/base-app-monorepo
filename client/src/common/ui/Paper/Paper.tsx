@@ -1,5 +1,5 @@
 import { Paper as MuiPaper } from '@material-ui/core';
-import { spacingRem } from '@bit/eddeee888.learnd-utils.styles';
+import { spacingRem } from '@bit/eddeee888.base-react-app-utils.styles';
 import { css, cx } from 'emotion';
 import React from 'react';
 

@@ -1,5 +1,5 @@
 import { css, cx } from 'emotion';
-import { Breakpoints, breakpoints, MarginValue } from '@bit/eddeee888.learnd-utils.styles';
+import { Breakpoints, breakpoints, MarginValue } from '@bit/eddeee888.base-react-app-utils.styles';
 import React from 'react';
 import { Box } from '@material-ui/core';
 

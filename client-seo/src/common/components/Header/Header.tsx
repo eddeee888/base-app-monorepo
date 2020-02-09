@@ -2,7 +2,7 @@ import { css } from 'emotion';
 import React from 'react';
 import Button from 'src/common/ui/Button';
 import Logo from 'src/common/ui/Logo';
-import { headerHeight, mediaQuery, borderColor, primaryBackgroundColor } from '@bit/eddeee888.learnd-utils.styles';
+import { headerHeight, mediaQuery, borderColor, primaryBackgroundColor } from '@bit/eddeee888.base-react-app-utils.styles';
 import routes from 'src/common/pathing/routes';
 import { Grid } from '@material-ui/core';
 import LoggedInMenu from 'src/common/components/Header/LoggedInMenu';

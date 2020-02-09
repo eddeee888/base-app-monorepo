@@ -3,7 +3,7 @@ import React from 'react';
 import Button from 'common/ui/Button';
 import Logo from 'common/ui/Logo';
 import { useViewer } from 'common/components/ViewerProvider';
-import { headerHeight, mediaQuery, borderColor, primaryBackgroundColor } from '@bit/eddeee888.learnd-utils.styles';
+import { headerHeight, mediaQuery, borderColor, primaryBackgroundColor } from '@bit/eddeee888.base-react-app-utils.styles';
 import { routes } from 'common/pathing';
 import LoggedInMenu from 'common/components/Header/LoggedInMenu';
 import { Grid } from '@material-ui/core';

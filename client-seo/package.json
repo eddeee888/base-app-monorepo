@@ -9,7 +9,7 @@
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
     "@apollo/react-ssr": "^3.1.3",
-    "@bit/eddeee888.learnd-utils.styles": "^0.0.1",
+    "@bit/eddeee888.base-react-app-utils.styles": "^0.0.1",
     "@emotion/core": "^10.0.27",
     "@material-ui/core": "^4.8.3",
     "@material-ui/icons": "^4.9.1",

@@ -1,6 +1,6 @@
 import { css, cx } from 'emotion';
 import React from 'react';
-import { headerHeight, breakpoints, mediaQuery } from '@bit/eddeee888.learnd-utils.styles';
+import { headerHeight, breakpoints, mediaQuery } from '@bit/eddeee888.base-react-app-utils.styles';
 
 interface Props {
   children: React.ReactNode;

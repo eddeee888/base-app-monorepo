@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar as AvatarMui } from '@material-ui/core';
 import makeStyles from '@material-ui/styles/makeStyles';
 import { AvatarProps as AvatarMuiProps } from '@material-ui/core/Avatar';
-import { avatarSmallPx, avatarMediumPx, avatarLargePx, avatarExtraLargePx } from '@bit/eddeee888.learnd-utils.styles';
+import { avatarSmallPx, avatarMediumPx, avatarLargePx, avatarExtraLargePx } from '@bit/eddeee888.base-react-app-utils.styles';
 import { Person } from '@material-ui/icons';
 
 interface AvatarProps {

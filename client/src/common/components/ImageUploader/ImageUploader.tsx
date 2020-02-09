@@ -3,7 +3,7 @@ import Text from 'common/ui/Text';
 import TextError from 'common/ui/TextError';
 import Row from 'common/ui/Row';
 import { css } from 'emotion';
-import { spacingRem, borderColor, secondaryBackgroundColor } from '@bit/eddeee888.learnd-utils.styles';
+import { spacingRem, borderColor, secondaryBackgroundColor } from '@bit/eddeee888.base-react-app-utils.styles';
 import Spinner from 'common/ui/Spinner';
 import { ImageUploaderProps } from 'common/components/ImageUploader/types';
 import { Grid, IconButton } from '@material-ui/core';

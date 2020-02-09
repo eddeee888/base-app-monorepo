@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { Typography } from '@material-ui/core';
 import { TypographyProps } from '@material-ui/core/Typography';
 import { CheckCircle as CheckCircleIcon } from '@material-ui/icons';
-import { textSuccessColor, spacingPx } from '@bit/eddeee888.learnd-utils.styles';
+import { textSuccessColor, spacingPx } from '@bit/eddeee888.base-react-app-utils.styles';
 
 interface Props extends TypographyProps {
   children: React.ReactNode;

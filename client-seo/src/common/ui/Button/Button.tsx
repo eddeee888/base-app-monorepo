@@ -1,7 +1,7 @@
 import { Box, CircularProgress, Button as MuiButton } from '@material-ui/core';
 import { ButtonProps as MuiButtonProps } from '@material-ui/core/Button';
 import React from 'react';
-import { spacingRem } from '@bit/eddeee888.learnd-utils.styles';
+import { spacingRem } from '@bit/eddeee888.base-react-app-utils.styles';
 
 interface ButtonProps extends MuiButtonProps {
   showSpinner?: boolean;

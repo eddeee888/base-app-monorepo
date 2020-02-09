@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { Typography } from '@material-ui/core';
 import { TypographyProps } from '@material-ui/core/Typography';
 import { Warning } from '@material-ui/icons';
-import { spacingPx, textWarningColor } from '@bit/eddeee888.learnd-utils.styles';
+import { spacingPx, textWarningColor } from '@bit/eddeee888.base-react-app-utils.styles';
 
 interface Props extends TypographyProps {
   children: React.ReactNode;

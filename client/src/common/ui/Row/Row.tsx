@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
-import { MarginValue } from '@bit/eddeee888.learnd-utils.styles';
+import { MarginValue } from '@bit/eddeee888.base-react-app-utils.styles';
 import { css } from 'emotion';
 
 interface Props {
