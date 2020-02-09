@@ -58,9 +58,7 @@ describe('createHandleSubmitFunction()', () => {
     });
     expect(setViewer).toHaveBeenCalledTimes(0);
     expect(setGeneralError).toHaveBeenCalledTimes(1);
-    expect(setGeneralError).toHaveBeenCalledWith(
-      'The email/password combination you entered is incorrect.'
-    );
+    expect(setGeneralError).toHaveBeenCalledWith('The email/password combination you entered is incorrect.');
   });
 
   it('result function should fail and show error if mutation throws error', async () => {

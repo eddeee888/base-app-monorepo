@@ -3,10 +3,7 @@ import React from 'react';
 import { MockedProvider } from '@apollo/react-testing';
 import { StaticRouter, MemoryRouter, Route } from 'react-router';
 import Login from './Login';
-import {
-  assertTextExists,
-  assertTextLink
-} from 'test/utils/react-testing-library';
+import { assertTextExists, assertTextLink } from 'test/utils/react-testing-library';
 import { render } from '@testing-library/react';
 
 describe('<Login />', () => {
@@ -34,9 +31,7 @@ describe('<Login />', () => {
   it('should show login form if viewer is not logged in and correct header', () => {
     const { container } = render(
       <MockedProvider>
-        <MemoryRouter
-          initialEntries={['/login?redirect=/redirect-to-this-path']}
-        >
+        <MemoryRouter initialEntries={['/login?redirect=/redirect-to-this-path']}>
           <ViewerContext.Provider value={contextValue}>
             <Route exact path="/login" component={Login} />
           </ViewerContext.Provider>
@@ -52,7 +47,7 @@ describe('<Login />', () => {
         <ViewerContext.Provider
           value={{
             ...contextValue,
-            viewer: { id: '100' }
+            viewer: { id: '100', firstName: 'one' }
           }}
         >
           <MemoryRouter initialEntries={['/login']}>
@@ -71,22 +66,12 @@ describe('<Login />', () => {
         <ViewerContext.Provider
           value={{
             ...contextValue,
-            viewer: { id: '100' }
+            viewer: { id: '100', firstName: 'one' }
           }}
         >
-          <MemoryRouter
-            initialEntries={['/login?redirect=/redirect-to-this-path']}
-          >
-            <Route
-              exact
-              path="/users"
-              render={() => <div>Not redirected here</div>}
-            />
-            <Route
-              exact
-              path="/redirect-to-this-path"
-              render={() => <div>Redirected here</div>}
-            />
+          <MemoryRouter initialEntries={['/login?redirect=/redirect-to-this-path']}>
+            <Route exact path="/users" render={() => <div>Not redirected here</div>} />
+            <Route exact path="/redirect-to-this-path" render={() => <div>Redirected here</div>} />
             <Route path="/login" render={() => <Login />} />
           </MemoryRouter>
         </ViewerContext.Provider>

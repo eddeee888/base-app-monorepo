@@ -1,20 +1,20 @@
 import React from 'react';
 import { FormikBag } from '../types';
-import { OmittedFormikSelectProps } from 'common/typings/Omitted';
 import prepareFieldProps from 'common/components/Formik/prepareFieldProps';
 import FormError from 'common/components/FormError';
-import Select from 'common/components/Select';
+import Select, { SelectProps } from 'common/ui/Select';
+
+type OmittedFormikSelectProps = Omit<
+  Omit<Omit<Omit<Omit<Omit<SelectProps, 'value'>, 'name'>, 'multiple'>, 'checked'>, 'onChange'>,
+  'onBlur'
+>;
 
 type FormikSelectProps<Values> = {
   name: keyof Values;
   formik: FormikBag<Values>;
 } & OmittedFormikSelectProps;
 
-function FormikSelect<Values = {}>({
-  name,
-  formik,
-  ...rest
-}: FormikSelectProps<Values>): JSX.Element {
+function FormikSelect<Values = {}>({ name, formik, ...rest }: FormikSelectProps<Values>): JSX.Element {
   const { touched, error, props } = prepareFieldProps(formik, name);
   return (
     <>

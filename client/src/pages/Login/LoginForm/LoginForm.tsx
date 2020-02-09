@@ -1,22 +1,15 @@
 import { useViewer } from 'common/components/ViewerProvider';
-import useFormError from 'common/hooks/useFormError';
 import LoginFormComponent from 'pages/Login/LoginForm/LoginFormComponent';
-import React from 'react';
+import React, { useState } from 'react';
 import createHandleLoginFn from './functionCreators/createHandleLoginFn';
 import { useLoginMutation } from './Login.generated';
 
 const LoginForm: React.FunctionComponent = () => {
   const { setViewer } = useViewer();
   const [login, { loading }] = useLoginMutation();
-  const [formError] = useFormError(1);
+  const [error, setError] = useState('');
 
-  return (
-    <LoginFormComponent
-      generalFormError={formError.error}
-      isSubmitting={loading}
-      onSubmit={createHandleLoginFn(login, setViewer, formError.setError)}
-    />
-  );
+  return <LoginFormComponent generalFormError={error} isSubmitting={loading} onSubmit={createHandleLoginFn(login, setViewer, setError)} />;
 };
 
 export default LoginForm;

@@ -3,18 +3,14 @@ import { FormikBag } from '../types';
 import { OmittedFormikTextFieldProps } from 'common/typings/Omitted';
 import prepareFieldProps from 'common/components/Formik/prepareFieldProps';
 import FormError from 'common/components/FormError';
-import TextArea from 'common/components/TextArea';
+import TextArea from 'common/ui/TextArea';
 
 type FormikTextAreaProps<Values> = {
   name: keyof Values;
   formik: FormikBag<Values>;
 } & OmittedFormikTextFieldProps;
 
-function FormikTextArea<Values = {}>({
-  name,
-  formik,
-  ...rest
-}: FormikTextAreaProps<Values>): JSX.Element {
+function FormikTextArea<Values = {}>({ name, formik, ...rest }: FormikTextAreaProps<Values>): JSX.Element {
   const { touched, error, props } = prepareFieldProps(formik, name);
   return (
     <>

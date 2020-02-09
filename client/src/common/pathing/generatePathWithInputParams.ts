@@ -15,11 +15,7 @@ const generateQueryString = (urlQuery?: UrlQuery): string => {
   return result;
 };
 
-const generatePathWithInputParams = <P>(
-  pattern: string,
-  inputParams: P,
-  urlQuery?: UrlQuery
-): string =>
+const generatePathWithInputParams = <P>(pattern: string, inputParams: P, urlQuery?: UrlQuery): string =>
   generatePath(pattern, inputParams as any) + generateQueryString(urlQuery);
 
 export default generatePathWithInputParams;

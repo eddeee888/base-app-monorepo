@@ -1,7 +1,7 @@
-import Text from 'common/components/Text';
+import Text from 'common/ui/Text';
 import React from 'react';
-import Main from 'common/components/Main';
-import Block from 'common/components/Block';
+import Main from 'common/ui/Main';
+import Block from 'common/ui/Block';
 
 interface Error404Props {
   fullPage?: boolean;

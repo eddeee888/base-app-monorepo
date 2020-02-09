@@ -1,0 +1,55 @@
+directive @isLoggedIn(status: Boolean) on FIELD_DEFINITION
+
+type Query {
+  me: User
+  user(id: ID!): User
+  getSignedUrlsToUploadImages(filenames: [String!]!): [S3SignedObject!]!
+}
+
+type Mutation {
+  signup(input: SignupInput!): User! @isLoggedIn(status: false)
+  login(input: LoginInput!): User @isLoggedIn(status: false)
+  logout: Boolean!
+  userUpdate(input: UserUpdateInput!): User! @isLoggedIn(status: true)
+}
+
+input SignupInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input UserUpdateInput {
+  id: ID!
+  avatar: String
+}
+
+# User
+type User {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  displayName: String
+  avatar: String
+}
+
+# AWS Sign URL to upload image
+type S3SignedObject {
+  src: String!
+  filename: String!
+  originalFilename: String!
+  uploadUrl: String!
+}
+
+type File {
+  id: ID!
+  src: String!
+  originalFilename: String!
+}

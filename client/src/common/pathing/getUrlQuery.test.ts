@@ -17,9 +17,7 @@ describe('getUrlQuery()', () => {
   });
 
   it('should ignore other keys and return only valid key', () => {
-    const result = getUrlQuery(
-      '?invalid_key_1=abc&redirect=/signup&invalid_key_2=def'
-    );
+    const result = getUrlQuery('?invalid_key_1=abc&redirect=/signup&invalid_key_2=def');
     expect(result).toEqual({
       redirect: '/signup'
     });

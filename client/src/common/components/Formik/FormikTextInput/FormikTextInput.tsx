@@ -3,18 +3,14 @@ import { FormikBag } from '../types';
 import { OmittedFormikTextFieldProps } from 'common/typings/Omitted';
 import prepareFieldProps from 'common/components/Formik/prepareFieldProps';
 import FormError from 'common/components/FormError';
-import TextInput from 'common/components/TextInput';
+import TextInput from 'common/ui/TextInput';
 
 type FormikTextInputProps<Values> = {
   name: keyof Values;
   formik: FormikBag<Values>;
 } & OmittedFormikTextFieldProps;
 
-function FormikTextInput<Values = {}>({
-  name,
-  formik,
-  ...rest
-}: FormikTextInputProps<Values>): JSX.Element {
+function FormikTextInput<Values = {}>({ name, formik, ...rest }: FormikTextInputProps<Values>): JSX.Element {
   const { touched, error, props } = prepareFieldProps(formik, name);
   return (
     <>

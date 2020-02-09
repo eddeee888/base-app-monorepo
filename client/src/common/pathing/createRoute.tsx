@@ -3,27 +3,30 @@ import { useRouteMatch } from 'react-router';
 import { UrlQuery } from './types';
 import generatePathWithInputParams from './generatePathWithInputParams';
 import useRedirect from './useRedirect';
-import Link, { LinkProps } from './Link';
+import Link, { LinkProps } from 'common/components/Link';
+
+interface RouteLinkProps<P> extends Omit<LinkProps, 'to'> {
+  params: P;
+  urlQuery?: UrlQuery;
+}
 
 interface Route<P> {
   pattern: string;
   generate: (inputParams: P, urlQuery?: UrlQuery) => string;
   useParams: () => P;
   useRedirect: (inputParams: P, urlQuery?: UrlQuery) => () => void;
-  Link: (props: Omit<LinkProps<P>, 'pattern'>) => ReturnType<typeof Link>;
+  Link: (props: RouteLinkProps<P>) => ReturnType<typeof Link>;
 }
 
-function createRoute<P>(pattern: string): Route<P> {
-  function RouteLink(
-    props: Omit<LinkProps<P>, 'pattern'>
-  ): ReturnType<typeof Link> {
-    return <Link pattern={pattern} {...props} />;
+function createRoute<P = {}>(pattern: string): Route<P> {
+  function RouteLink({ params, urlQuery, ...props }: RouteLinkProps<P>): ReturnType<typeof Link> {
+    const to = generatePathWithInputParams(pattern, params, urlQuery);
+    return <Link to={to} {...props} />;
   }
 
   return {
     pattern,
-    generate: (inputParams, urlQuery) =>
-      generatePathWithInputParams<P>(pattern, inputParams, urlQuery),
+    generate: (inputParams, urlQuery) => generatePathWithInputParams<P>(pattern, inputParams, urlQuery),
     useParams: () => {
       const { path, params } = useRouteMatch<P>();
 
@@ -35,10 +38,7 @@ function createRoute<P>(pattern: string): Route<P> {
 
       return params;
     },
-    useRedirect: (inputParams, urlQuery) =>
-      useRedirect(
-        generatePathWithInputParams<P>(pattern, inputParams, urlQuery)
-      ),
+    useRedirect: (inputParams, urlQuery) => useRedirect(generatePathWithInputParams<P>(pattern, inputParams, urlQuery)),
     Link: RouteLink
   };
 }
