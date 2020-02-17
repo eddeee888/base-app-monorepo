@@ -6,12 +6,13 @@ import { Grid } from '@material-ui/core';
 import FormikTextInput from 'common/components/Formik/FormikTextInput';
 import FormError from 'common/components/FormError';
 import Text from 'common/ui/Text';
-import { routes, useUrlQuery } from 'common/pathing';
+import { useUrlQuery } from 'common/pathing';
 import Button from 'common/ui/Button';
 import * as Yup from 'yup';
 import { nameValidation, emailValidation, passwordValidation } from '@bit/eddeee888.base-react-app-utils.validations';
 import { useFormik } from 'formik';
 import { SignupInput } from '__generated__/types';
+import RouteToLogin from 'routes/RouteToLogin';
 
 const validationSchema = Yup.object().shape({
   firstName: nameValidation('first'),
@@ -97,9 +98,9 @@ const SignupForm: React.FunctionComponent = () => {
 
       <Text gutterBottom>
         Already have an account?{' '}
-        <routes.login.Link params={{}} urlQuery={query}>
+        <RouteToLogin.Link params={{}} urlQuery={query}>
           Log in
-        </routes.login.Link>
+        </RouteToLogin.Link>
       </Text>
 
       <Button type="submit" disabled={loading} showSpinner={loading}>

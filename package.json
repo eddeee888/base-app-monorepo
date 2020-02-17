@@ -1,0 +1,15 @@
+{
+  "name": "base-react-app",
+  "version": "1.0.0",
+  "description": "Base react app boilerplate",
+  "main": "index.js",
+  "repository": "git@github.com:eddeee888/base-react-app.git",
+  "author": "Eddy Nguyen <eddeee.nguyen@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "routegen": "routegen"
+  },
+  "dependencies": {
+    "react-route-generator": "^0.0.9"
+  }
+}

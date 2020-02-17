@@ -6,17 +6,19 @@ import Logo from 'common/ui/Logo';
 import Main from 'common/ui/Main';
 import Paper from 'common/ui/Paper';
 import { useViewer } from 'common/components/ViewerProvider';
-import { routes, useUrlQuery } from 'common/pathing';
+import { useUrlQuery } from 'common/pathing';
 import React from 'react';
 import { Redirect } from 'react-router';
 import LoginForm from './LoginForm';
+import RouteToMe from 'routes/RouteToMe';
+import RouteToHome from 'routes/RouteToHome';
 
 const Login: React.FunctionComponent = () => {
   const { viewer } = useViewer();
   const { redirect } = useUrlQuery();
 
   if (viewer) {
-    return <Redirect to={redirect ? redirect : routes.me.generate({})} />;
+    return <Redirect to={redirect ? redirect : RouteToMe.generate({})} />;
   }
 
   return (
@@ -24,9 +26,9 @@ const Login: React.FunctionComponent = () => {
       <Block size="sm" fullHeight marginTop={0}>
         <Paper>
           <Grid container justify="center">
-            <routes.home.Link params={{}}>
+            <RouteToHome.Link params={{}}>
               <Logo />
-            </routes.home.Link>
+            </RouteToHome.Link>
           </Grid>
 
           <H1 align="center" variant="h2">

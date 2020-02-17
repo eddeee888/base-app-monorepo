@@ -1,0 +1,19 @@
+apps:
+  client:
+    routes:
+      login: /app/login
+      signup: /app/signup
+      logout: /app/logout
+      me: /app/me
+    routingType: ReactRouter
+    reactRouterRouteCreator: common/pathing/createRoute
+    externalRouteCreator: common/pathing/createExternalRoute
+    destinationDir: client/src/routes
+
+  client-seo:
+    routes:
+      home: /
+    routingType: NextJS
+    nextJsRouteCreator: src/common/pathing/createExternalRoute
+    externalRouteCreator: src/common/pathing/createNextJsRoute
+    destinationDir: client-seo/src/routes

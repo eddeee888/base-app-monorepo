@@ -2,12 +2,13 @@ import { Grid } from '@material-ui/core';
 import Button from 'common/ui/Button';
 import FormError from 'common/components/FormError';
 import Text from 'common/ui/Text';
-import { routes, useUrlQuery } from 'common/pathing';
+import { useUrlQuery } from 'common/pathing';
 import { FormikHelpers, useFormik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
 import { LoginInput } from '__generated__/types';
 import FormikTextInput from 'common/components/Formik/FormikTextInput';
+import RouteToSignup from 'routes/RouteToSignup';
 
 export type LoginFormikFn = (formValues: LoginInput, actions: FormikHelpers<LoginInput>) => void;
 
@@ -47,9 +48,9 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({ onSubmit, generalF
 
       <Text gutterBottom>
         {"Don't have an account? "}
-        <routes.signup.Link params={{}} urlQuery={query}>
+        <RouteToSignup.Link params={{}} urlQuery={query}>
           Sign up
-        </routes.signup.Link>
+        </RouteToSignup.Link>
       </Text>
 
       <Button type="submit" disabled={isSubmitting} showSpinner={isSubmitting}>
