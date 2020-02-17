@@ -4,9 +4,11 @@ import Button from 'common/ui/Button';
 import Logo from 'common/ui/Logo';
 import { useViewer } from 'common/components/ViewerProvider';
 import { headerHeight, mediaQuery, borderColor, primaryBackgroundColor } from '@bit/eddeee888.base-react-app-utils.styles';
-import { routes } from 'common/pathing';
 import LoggedInMenu from 'common/components/Header/LoggedInMenu';
 import { Grid } from '@material-ui/core';
+import RouteToHome from 'routes/RouteToHome';
+import RouteToSignup from 'routes/RouteToSignup';
+import RouteToLogin from 'routes/RouteToLogin';
 
 const headerClassName = css`
   width: 100%;
@@ -36,9 +38,9 @@ const Header: React.FunctionComponent<{}> = () => {
     <header className={headerClassName}>
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
-          <routes.home.Link params={{}}>
+          <RouteToHome.Link params={{}}>
             <Logo className={logoClassName} />
-          </routes.home.Link>
+          </RouteToHome.Link>
         </Grid>
 
         <Grid item>
@@ -46,14 +48,14 @@ const Header: React.FunctionComponent<{}> = () => {
             {!viewer && (
               <>
                 <Grid item>
-                  <routes.signup.Link params={{}}>
+                  <RouteToSignup.Link params={{}}>
                     <Button variant="outlined">Sign up</Button>
-                  </routes.signup.Link>
+                  </RouteToSignup.Link>
                 </Grid>
                 <Grid item>
-                  <routes.login.Link params={{}} color="secondary">
+                  <RouteToLogin.Link params={{}} color="secondary">
                     <Button variant="outlined">Log in</Button>
-                  </routes.login.Link>
+                  </RouteToLogin.Link>
                 </Grid>
               </>
             )}

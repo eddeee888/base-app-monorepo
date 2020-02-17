@@ -1,9 +1,10 @@
 import React from 'react';
-import { routes } from 'common/pathing';
 import { Popper, Grow, ClickAwayListener, MenuList, MenuItem, Paper } from '@material-ui/core';
 import Avatar from 'common/ui/Avatar';
 import { Viewer } from 'common/components/ViewerProvider';
 import AnchorButton from 'common/ui/AnchorButton';
+import RouteToMe from 'routes/RouteToMe';
+import RouteToLogout from 'routes/RouteToLogout';
 
 interface LoggedInMenuProps {
   viewer: Viewer;
@@ -50,10 +51,10 @@ const LoggedInMenu: React.FunctionComponent<LoggedInMenuProps> = ({ viewer }) =>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} onKeyDown={handleListKeyDown}>
                   <MenuItem onClick={handleClose}>
-                    <routes.me.Link params={{}}>Account</routes.me.Link>
+                    <RouteToMe.Link params={{}}>Account</RouteToMe.Link>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
-                    <routes.logout.Link params={{}}>Log out</routes.logout.Link>
+                    <RouteToLogout.Link params={{}}>Log out</RouteToLogout.Link>
                   </MenuItem>
                 </MenuList>
               </ClickAwayListener>

@@ -3,9 +3,10 @@ import React from 'react';
 import Button from 'src/common/ui/Button';
 import Logo from 'src/common/ui/Logo';
 import { headerHeight, mediaQuery, borderColor, primaryBackgroundColor } from '@bit/eddeee888.base-react-app-utils.styles';
-import routes from 'src/common/pathing/routes';
 import { Grid } from '@material-ui/core';
-import LoggedInMenu from 'src/common/components/Header/LoggedInMenu';
+import RouteToHome from 'src/routes/RouteToHome';
+import RouteToSignup from 'src/routes/RouteToSignup';
+import RouteToLogin from 'src/routes/RouteToLogin';
 
 const headerClassName = css`
   width: 100%;
@@ -29,47 +30,28 @@ const logoClassName = css`
   display: block;
 `;
 
-export interface Viewer {
-  id: string;
-  avatar?: string | null;
-  firstName: string;
-}
-
-export interface HeaderProps {
-  viewer: Viewer | null;
-}
-
-const Header: React.FunctionComponent<HeaderProps> = ({ viewer }) => {
+const Header: React.FunctionComponent = () => {
   return (
     <header className={headerClassName}>
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
-          <routes.home.Link params={{}}>
+          <RouteToHome.Link params={{}}>
             <Logo className={logoClassName} />
-          </routes.home.Link>
+          </RouteToHome.Link>
         </Grid>
 
         <Grid item>
           <Grid container alignItems="center" spacing={1}>
-            {!viewer && (
-              <>
-                <Grid item>
-                  <routes.signup.Link params={{}}>
-                    <Button variant="outlined">Sign up</Button>
-                  </routes.signup.Link>
-                </Grid>
-                <Grid item>
-                  <routes.login.Link params={{}} color="secondary">
-                    <Button variant="outlined">Log in</Button>
-                  </routes.login.Link>
-                </Grid>
-              </>
-            )}
-            {viewer && (
-              <Grid item>
-                <LoggedInMenu viewer={viewer} />
-              </Grid>
-            )}
+            <Grid item>
+              <RouteToSignup.Link params={{}}>
+                <Button variant="outlined">Sign up</Button>
+              </RouteToSignup.Link>
+            </Grid>
+            <Grid item>
+              <RouteToLogin.Link params={{}}>
+                <Button variant="outlined">Log in</Button>
+              </RouteToLogin.Link>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

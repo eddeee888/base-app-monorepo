@@ -1,7 +1,7 @@
-import { routes } from 'common/pathing';
 import React, { useEffect } from 'react';
 import { LogoutMutationFn } from './Logout.generated';
 import { ClearViewerFn } from 'common/components/ViewerProvider';
+import RouteToHome from 'routes/RouteToHome';
 
 interface Props {
   clearViewer: ClearViewerFn;
@@ -12,7 +12,7 @@ const LogoutLogic: React.FunctionComponent<Props> = ({ clearViewer, logout }) =>
   useEffect(() => {
     logout().then(() => {
       clearViewer();
-      window.location.replace(routes.home.generate({}));
+      window.location.replace(RouteToHome.generate({}));
     });
   }, []);
 
