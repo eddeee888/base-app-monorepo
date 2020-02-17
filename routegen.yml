@@ -1,0 +1,15 @@
+apps:
+  client:
+    routes:
+      login: /app/login
+      signup: /app/signup
+      logout: /app/logout
+      me: /app/me
+    routingType: ReactRouter
+    destinationDir: client/src/routes
+
+  client-seo:
+    routes:
+      home: /
+    routingType: NextJS
+    destinationDir: client-seo/src/routes
