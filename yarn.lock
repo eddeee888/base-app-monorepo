@@ -4075,10 +4075,10 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
 
-react-route-generator@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/react-route-generator/-/react-route-generator-0.0.17.tgz#ebef5a5d5211557504587796730a9f351e72a41c"
-  integrity sha512-443PxuZ/cROGAxu1co5WpazSly4HVVdezXrAynTaeNiDNQi2zUIaA7vKzipqse1k9FS86/LOmJ6+SgUctI9lQg==
+react-route-generator@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/react-route-generator/-/react-route-generator-0.0.18.tgz#bea2fb42eaca4edb6cbe5324f5a6a0ac975c9532"
+  integrity sha512-c9J5p7K87GHPI2hCfSgnOQJ69EE0boHGLf9Dz1y/OEkLv/VS5d8CszvwD0Wu8htM5JXqmpm3SyXJZn2L/wWTNg==
   dependencies:
     js-yaml "^3.13.1"
     next "^9.2.1"

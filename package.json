@@ -10,6 +10,6 @@
     "routegen": "routegen && cd client && yarn format:prettier && cd ../client-seo && yarn format:prettier"
   },
   "dependencies": {
-    "react-route-generator": "^0.0.17"
+    "react-route-generator": "^0.0.18"
   }
 }
