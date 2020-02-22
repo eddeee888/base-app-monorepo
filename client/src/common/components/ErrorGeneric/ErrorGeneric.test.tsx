@@ -7,9 +7,6 @@ describe('<ErrorGeneric />', () => {
   it('shoud show correct text', () => {
     const { container } = render(<ErrorGeneric />);
 
-    assertTextExists(
-      container,
-      'Unexpected error occurred. Please try again later.'
-    );
+    assertTextExists(container, 'Unexpected error occurred. Please try again later.');
   });
 });

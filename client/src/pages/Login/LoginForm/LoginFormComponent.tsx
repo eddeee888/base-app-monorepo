@@ -2,7 +2,7 @@ import { Grid } from '@material-ui/core';
 import Button from 'common/ui/Button';
 import FormError from 'common/components/FormError';
 import Text from 'common/ui/Text';
-import { useUrlQuery } from 'common/pathing';
+import useUrlQuery from 'common/pathing/useUrlQuery';
 import { FormikHelpers, useFormik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
@@ -48,7 +48,7 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({ onSubmit, generalF
 
       <Text gutterBottom>
         {"Don't have an account? "}
-        <RouteToSignup.Link params={{}} urlQuery={query}>
+        <RouteToSignup.Link params={{}} urlQuery={{ ...query }}>
           Sign up
         </RouteToSignup.Link>
       </Text>

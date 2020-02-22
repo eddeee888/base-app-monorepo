@@ -1,12 +1,6 @@
-import {
-  SignedObject,
-  UploadedImage
-} from 'common/components/ImageUploader/types';
+import { SignedObject, UploadedImage } from 'common/components/ImageUploader/types';
 
-const uploadToS3 = async (
-  signedObj: SignedObject,
-  file: File
-): Promise<UploadedImage> => {
+const uploadToS3 = async (signedObj: SignedObject, file: File): Promise<UploadedImage> => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open('PUT', signedObj.uploadUrl, true);

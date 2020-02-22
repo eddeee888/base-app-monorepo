@@ -6,7 +6,7 @@ import Logo from 'common/ui/Logo';
 import Main from 'common/ui/Main';
 import Paper from 'common/ui/Paper';
 import { useViewer } from 'common/components/ViewerProvider';
-import { useUrlQuery } from 'common/pathing';
+import useUrlQuery from 'common/pathing/useUrlQuery';
 import React from 'react';
 import { Redirect } from 'react-router';
 import SignupForm from './SignupForm';

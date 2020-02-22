@@ -6,7 +6,7 @@ import { Grid } from '@material-ui/core';
 import FormikTextInput from 'common/components/Formik/FormikTextInput';
 import FormError from 'common/components/FormError';
 import Text from 'common/ui/Text';
-import { useUrlQuery } from 'common/pathing';
+import useUrlQuery from 'common/pathing/useUrlQuery';
 import Button from 'common/ui/Button';
 import * as Yup from 'yup';
 import { nameValidation, emailValidation, passwordValidation } from '@bit/eddeee888.base-react-app-utils.validations';

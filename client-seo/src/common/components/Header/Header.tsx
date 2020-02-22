@@ -36,7 +36,9 @@ const Header: React.FunctionComponent = () => {
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
           <RouteToHome.Link params={{}}>
-            <Logo className={logoClassName} />
+            <a>
+              <Logo className={logoClassName} />
+            </a>
           </RouteToHome.Link>
         </Grid>
 

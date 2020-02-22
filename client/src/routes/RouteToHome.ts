@@ -1,7 +1,4 @@
 /* This file was automatically generated and should not be edited. */
-import createRoute from 'common/pathing/createExternalRoute';
-export interface RouteToHomeParams {
-}
-const RouteToHome = createRoute<RouteToHomeParams>('/');
-
+import createRoute from './utils/createDefaultRoute';
+const RouteToHome = createRoute<{}>('/');
 export default RouteToHome;

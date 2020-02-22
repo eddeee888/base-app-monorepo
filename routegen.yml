@@ -6,14 +6,14 @@ apps:
       logout: /app/logout
       me: /app/me
     routingType: ReactRouter
-    reactRouterRouteCreator: common/pathing/createRoute
-    externalRouteCreator: common/pathing/createExternalRoute
+    reactRouterLinkCreatorPath: common/pathing/createReactRouterLink
+    defaultLinkCreatorPath: common/pathing/createDefaultLink
     destinationDir: client/src/routes
 
   client-seo:
     routes:
       home: /
     routingType: NextJS
-    nextJsRouteCreator: src/common/pathing/createNextJsRoute
-    externalRouteCreator: src/common/pathing/createExternalRoute
+    nextJSLinkCreatorPath: src/common/pathing/createNextJSLink
+    defaultLinkCreatorPath: src/common/pathing/createDefaultLink
     destinationDir: client-seo/src/routes
