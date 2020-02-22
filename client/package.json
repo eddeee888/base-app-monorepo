@@ -9,7 +9,7 @@
     "test": "react-app-rewired test --transformIgnorePatterns \"./node_modules/(?!(@material-ui))/\"",
     "eject": "react-app-rewired eject",
     "check:ts": "tsc -p tsconfig.json",
-    "format:prettier": "prettier --config .prettierrc.json --write \"src/**/*.tsx\"",
+    "format:prettier": "prettier --config .prettierrc.json --write \"src/**/*.{ts,tsx}\"",
     "format:eslint": "eslint --fix 'src/**/*.{ts,tsx}'",
     "format": "yarn format:prettier && yarn format:eslint",
     "gg": "graphql-codegen --config codegen.yml",

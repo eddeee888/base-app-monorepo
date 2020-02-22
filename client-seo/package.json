@@ -4,7 +4,8 @@
     "build": "next build",
     "start": "next start",
     "gg": "graphql-codegen --config codegen.yml",
-    "add-gcg": "./scripts/install_gcg.sh"
+    "add-gcg": "./scripts/install_gcg.sh",
+    "format:prettier": "prettier --config .prettierrc.json --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",

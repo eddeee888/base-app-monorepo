@@ -10,6 +10,6 @@
     "routegen": "routegen"
   },
   "dependencies": {
-    "react-route-generator": "^0.0.9"
+    "react-route-generator": "^0.0.17"
   }
 }

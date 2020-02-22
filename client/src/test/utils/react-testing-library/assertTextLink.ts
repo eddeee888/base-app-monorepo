@@ -5,10 +5,7 @@ interface AssertLinkOptions {
   href: string;
 }
 
-export function assertTextLink(
-  container: HTMLElement,
-  { text, href }: AssertLinkOptions
-): void {
+export function assertTextLink(container: HTMLElement, { text, href }: AssertLinkOptions): void {
   const anchor = getByText(container, text).closest('A');
 
   expect(anchor).not.toBeNull();

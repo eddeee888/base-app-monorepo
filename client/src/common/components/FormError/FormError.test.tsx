@@ -30,9 +30,7 @@ describe('<FormError />', () => {
   });
 
   it('should show error if ReactChild', () => {
-    const { container } = render(
-      <FormError error={<a href="/test">Hello</a>} />
-    );
+    const { container } = render(<FormError error={<a href="/test">Hello</a>} />);
     assertTextLink(container, { text: 'Hello', href: '/test' });
   });
 });

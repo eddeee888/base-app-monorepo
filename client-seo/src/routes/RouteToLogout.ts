@@ -1,7 +1,4 @@
 /* This file was automatically generated and should not be edited. */
-import createRoute from 'src/common/pathing/createExternalRoute';
-export interface RouteToLogoutParams {
-}
-const RouteToLogout = createRoute<RouteToLogoutParams>('/app/logout');
-
+import createRoute from './utils/createDefaultRoute';
+const RouteToLogout = createRoute<{}>('/app/logout');
 export default RouteToLogout;

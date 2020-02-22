@@ -56,11 +56,7 @@ export default new ApolloClient({
       },
       resolvers: {
         Mutation: {
-          updateNetworkStatus: (
-            _: any,
-            { isConnected }: any,
-            { cache }: any
-          ) => {
+          updateNetworkStatus: (_: any, { isConnected }: any, { cache }: any) => {
             cache.writeData({ data: { isConnected } });
             return null;
           }
