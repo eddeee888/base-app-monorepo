@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, LinkProps as ReactRouterLinkProps } from 'react-router-dom';
+import Link, { LinkProps as ReactRouterLinkProps } from 'common/components/Link';
 import generateUrl from 'routes/utils/generateUrl';
 
 export interface LinkProps<P> extends Omit<ReactRouterLinkProps, 'to'> {

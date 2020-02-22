@@ -7,7 +7,7 @@ apps:
       me: /app/me
     routingType: ReactRouter
     reactRouterLinkCreatorPath: common/pathing/createReactRouterLink
-    externalLinkCreatoPathr: common/pathing/createExternalLink
+    defaultLinkCreatorPath: common/pathing/createDefaultLink
     destinationDir: client/src/routes
 
   client-seo:
@@ -15,5 +15,5 @@ apps:
       home: /
     routingType: NextJS
     nextJSLinkCreatorPath: src/common/pathing/createNextJSLink
-    externalLinkCreatorPath: src/common/pathing/createDefaultLink
+    defaultLinkCreatorPath: src/common/pathing/createDefaultLink
     destinationDir: client-seo/src/routes

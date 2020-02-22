@@ -7,7 +7,7 @@
   "author": "Eddy Nguyen <eddeee.nguyen@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "routegen": "routegen"
+    "routegen": "routegen && cd client && yarn format:prettier && cd ../client-seo && yarn format:prettier"
   },
   "dependencies": {
     "react-route-generator": "^0.0.17"
