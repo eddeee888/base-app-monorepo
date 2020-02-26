@@ -1,10 +1,10 @@
 import React from 'react';
 import Anchor, { AnchorProps } from 'common/ui/Anchor';
-import generateUrl from 'routes/utils/generateUrl';
+import { generateUrl } from 'route-codegen';
 
 export interface LinkProps<P> extends Omit<AnchorProps, 'href'> {
   params: P;
-  urlQuery?: Record<string, string>;
+  urlQuery?: Partial<Record<string, string>>;
 }
 
 function createDefaultLink<P = {}>(pattern: string) {

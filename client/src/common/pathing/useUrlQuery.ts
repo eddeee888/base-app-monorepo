@@ -1,6 +1,10 @@
 import { useLocation } from 'react-router';
 
-const getUrlQuery = (queryString: string): Record<string, string> => {
+const getUrlQuery = (queryString: string): Partial<Record<string, string>> => {
+  if (queryString === '') {
+    return {};
+  }
+
   const result: Record<string, string> = {};
 
   const stripped = queryString.replace('?', '');
@@ -13,7 +17,7 @@ const getUrlQuery = (queryString: string): Record<string, string> => {
   return result;
 };
 
-const useUrlQuery = (): Record<string, string> => {
+const useUrlQuery = (): Partial<Record<string, string>> => {
   const location = useLocation();
 
   return getUrlQuery(location.search);

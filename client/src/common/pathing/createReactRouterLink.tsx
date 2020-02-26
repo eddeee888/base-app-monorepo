@@ -1,10 +1,10 @@
 import React from 'react';
 import Link, { LinkProps as ReactRouterLinkProps } from 'common/components/Link';
-import generateUrl from 'routes/utils/generateUrl';
+import { generateUrl } from 'route-codegen';
 
 export interface LinkProps<P> extends Omit<ReactRouterLinkProps, 'to'> {
   params: P;
-  urlQuery?: Record<string, string>;
+  urlQuery?: Partial<Record<string, string>>;
 }
 
 function createReactRouterLink<P = {}>(pattern: string) {

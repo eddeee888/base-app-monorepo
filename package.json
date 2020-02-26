@@ -7,9 +7,11 @@
   "author": "Eddy Nguyen <eddeee.nguyen@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "routegen": "routegen && cd client && yarn format:prettier && cd ../client-seo && yarn format:prettier"
+    "add-route-codegen": "yarn add -D route-codegen && cd client && yarn add route-codegen && cd ../client-seo && yarn add route-codegen && cd ../server && yarn add route-codegen",
+    "route-codegen": "route-codegen && cd client && yarn format:prettier && cd ../client-seo && yarn format:prettier && cd ../server && yarn format:prettier"
   },
-  "dependencies": {
-    "react-route-generator": "^0.0.18"
+  "dependencies": {},
+  "devDependencies": {
+    "route-codegen": "^0.0.6"
   }
 }
