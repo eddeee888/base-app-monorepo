@@ -1,11 +1,11 @@
 import React from 'react';
 import LinkNext, { LinkProps as NextJSLinkProps } from 'next/link';
-import generateUrl from 'src/routes/utils/generateUrl';
+import { generateUrl } from 'route-codegen';
 
 export interface LinkProps<P> extends Omit<NextJSLinkProps, 'href'> {
   params: P;
   children: React.ReactNode;
-  urlQuery?: Record<string, string>;
+  urlQuery?: Partial<Record<string, string>>;
 }
 
 function createNextJSLink<P>(pattern: string) {
@@ -13,7 +13,7 @@ function createNextJSLink<P>(pattern: string) {
     const to = generateUrl(pattern, params as any, urlQuery);
     return (
       <LinkNext href={to} {...props}>
-        {children}
+        <a>{children}</a>
       </LinkNext>
     );
   };
