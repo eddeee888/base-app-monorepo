@@ -2,10 +2,11 @@ import { css, cx } from 'emotion';
 import React from 'react';
 import { headerHeight, breakpoints, mediaQuery } from '@bit/eddeee888.base-react-app-utils.styles';
 
-interface Props {
+export interface MainProps {
   children: React.ReactNode;
   className?: string;
   fullViewPortHeight?: boolean;
+  fullWidth?: boolean;
 }
 
 const mainTagClassName = css`
@@ -21,7 +22,7 @@ const fullViewPortHeightClassName = css`
   height: 100vh;
 `;
 
-const contentClassName = css`
+const contentNormalClassName = css`
   padding: 0 1rem;
   max-width: ${breakpoints.lg}px;
   width: 100%;
@@ -31,12 +32,18 @@ const contentClassName = css`
   }
 `;
 
-const Main: React.FunctionComponent<Props> = ({ children, className, fullViewPortHeight }) => {
+const contentFullWidthClassName = css`
+  width: 100%;
+`;
+
+const Main: React.FunctionComponent<MainProps> = ({ children, className, fullViewPortHeight, fullWidth = false }) => {
   const classNames = [mainTagClassName];
 
   if (fullViewPortHeight) {
     classNames.push(fullViewPortHeightClassName);
   }
+
+  const contentClassName = fullWidth ? contentFullWidthClassName : contentNormalClassName;
 
   return (
     <main className={cx([...classNames, className])}>
