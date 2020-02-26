@@ -17,3 +17,7 @@ apps:
     nextJSLinkCreatorPath: src/common/pathing/createNextJSLink
     defaultLinkCreatorPath: src/common/pathing/createDefaultLink
     destinationDir: client-seo/src/routes
+
+  server:
+    generateLink: false
+    destinationDir: server/src/routes

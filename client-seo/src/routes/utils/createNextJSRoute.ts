@@ -1,11 +1,11 @@
 /* This file was automatically generated and should not be edited. */
-
 import createLink, { LinkProps } from 'src/common/pathing/createNextJSLink';
-import generateUrl from './generateUrl';
+
+import { generateUrl } from 'route-codegen';
 
 interface NextJSRoute<P> {
   pattern: string;
-  generate: (inputParams: P, urlQuery?: Record<string, string>) => string;
+  generate: (inputParams: P, urlQuery?: Partial<Record<string, string>>) => string;
   Link: React.FunctionComponent<LinkProps<P>>;
 }
 
