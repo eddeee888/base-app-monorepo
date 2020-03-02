@@ -48,9 +48,7 @@ const LoginFormComponent: React.FunctionComponent<Props> = ({ onSubmit, generalF
 
       <Text gutterBottom>
         {"Don't have an account? "}
-        <RouteToSignup.Link params={{}} urlQuery={{ ...query }}>
-          Sign up
-        </RouteToSignup.Link>
+        <RouteToSignup.Link urlQuery={{ ...query }}>Sign up</RouteToSignup.Link>
       </Text>
 
       <Button type="submit" disabled={isSubmitting} showSpinner={isSubmitting}>

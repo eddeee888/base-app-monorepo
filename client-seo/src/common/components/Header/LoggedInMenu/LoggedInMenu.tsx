@@ -51,10 +51,10 @@ const LoggedInMenu: React.FunctionComponent<LoggedInMenuProps> = ({ viewer }) =>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} onKeyDown={handleListKeyDown}>
                   <MenuItem onClick={handleClose}>
-                    <RouteToMe.Link params={{}}>Account</RouteToMe.Link>
+                    <RouteToMe.Link>Account</RouteToMe.Link>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
-                    <RouteToLogout.Link params={{}}>Log out</RouteToLogout.Link>
+                    <RouteToLogout.Link>Log out</RouteToLogout.Link>
                   </MenuItem>
                 </MenuList>
               </ClickAwayListener>
