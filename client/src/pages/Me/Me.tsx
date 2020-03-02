@@ -11,7 +11,7 @@ const Me: React.FunctionComponent = () => {
   const { viewer } = useViewer();
 
   if (!viewer) {
-    return <Redirect to={RouteToLogin.generate({}, { redirect: RouteToMe.generate({}) })} />;
+    return <Redirect to={RouteToLogin.generate({ urlQuery: { redirect: RouteToMe.generate({}) } })} />;
   }
 
   return (

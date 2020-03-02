@@ -8,10 +8,10 @@
   "license": "MIT",
   "scripts": {
     "add-route-codegen": "yarn add -D route-codegen && cd client && yarn add route-codegen && cd ../client-seo && yarn add route-codegen && cd ../server && yarn add route-codegen",
-    "route-codegen": "route-codegen && cd client && yarn format:prettier && cd ../client-seo && yarn format:prettier && cd ../server && yarn format:prettier"
+    "run-route-codegen": "route-codegen && cd client && yarn format:prettier && cd ../client-seo && yarn format:prettier && cd ../server && yarn format:prettier"
   },
   "dependencies": {},
   "devDependencies": {
-    "route-codegen": "^0.0.6"
+    "route-codegen": "^0.1.2"
   }
 }

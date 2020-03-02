@@ -97,10 +97,7 @@ const SignupForm: React.FunctionComponent = () => {
       <FormError error={formError} />
 
       <Text gutterBottom>
-        Already have an account?{' '}
-        <RouteToLogin.Link params={{}} urlQuery={query}>
-          Log in
-        </RouteToLogin.Link>
+        Already have an account? <RouteToLogin.Link urlQuery={query}>Log in</RouteToLogin.Link>
       </Text>
 
       <Button type="submit" disabled={loading} showSpinner={loading}>

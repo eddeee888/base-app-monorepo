@@ -45,7 +45,7 @@
     "jsonwebtoken": "^8.4.0",
     "prisma-client-lib": "^1.33.0",
     "request": "^2.88.0",
-    "route-codegen": "^0.0.6",
+    "route-codegen": "^0.1.2",
     "uuid": "^3.3.3",
     "yup": "^0.26.6"
   },

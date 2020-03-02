@@ -5,17 +5,30 @@ apps:
       signup: /app/signup
       logout: /app/logout
       me: /app/me
+      userInfo: /app/users/:id/:subview(profile|pictures)?
     routingType: ReactRouter
-    reactRouterLinkCreatorPath: common/pathing/createReactRouterLink
-    defaultLinkCreatorPath: common/pathing/createDefaultLink
+    reactRouterLinkOptions:
+      path: common/components/Link
+      propsInterfaceName: LinkProps
+      hrefProp: to
+    defaultLinkOptions:
+      path: common/ui/Anchor
+      propsInterfaceName: AnchorProps
+      hrefProp: href
     destinationDir: client/src/routes
 
   client-seo:
     routes:
       home: /
     routingType: NextJS
-    nextJSLinkCreatorPath: src/common/pathing/createNextJSLink
-    defaultLinkCreatorPath: src/common/pathing/createDefaultLink
+    nextJSLinkOptions:
+      path: src/common/components/Link
+      propsInterfaceName: LinkProps
+      hrefProp: href
+    defaultLinkOptions:
+      path: src/common/ui/Anchor
+      propsInterfaceName: AnchorProps
+      hrefProp: href
     destinationDir: client-seo/src/routes
 
   server:

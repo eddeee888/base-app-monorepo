@@ -26,7 +26,7 @@ const Signup: React.FunctionComponent = () => {
       <Block size="sm" fullHeight marginTop={0}>
         <Paper>
           <Grid container justify="center">
-            <RouteToHome.Link params={{}}>
+            <RouteToHome.Link>
               <Logo />
             </RouteToHome.Link>
           </Grid>

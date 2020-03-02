@@ -38,7 +38,7 @@ const Header: React.FunctionComponent<{}> = () => {
     <header className={headerClassName}>
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
-          <RouteToHome.Link params={{}}>
+          <RouteToHome.Link>
             <Logo className={logoClassName} />
           </RouteToHome.Link>
         </Grid>
@@ -48,12 +48,12 @@ const Header: React.FunctionComponent<{}> = () => {
             {!viewer && (
               <>
                 <Grid item>
-                  <RouteToSignup.Link params={{}}>
+                  <RouteToSignup.Link>
                     <Button variant="outlined">Sign up</Button>
                   </RouteToSignup.Link>
                 </Grid>
                 <Grid item>
-                  <RouteToLogin.Link params={{}} color="secondary">
+                  <RouteToLogin.Link color="secondary">
                     <Button variant="outlined">Log in</Button>
                   </RouteToLogin.Link>
                 </Grid>
