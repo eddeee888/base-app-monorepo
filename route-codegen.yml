@@ -5,6 +5,7 @@ apps:
       signup: /app/signup
       logout: /app/logout
       me: /app/me
+      userInfo: /app/users/:id/:subview(profile|pictures)?
     routingType: ReactRouter
     reactRouterLinkOptions:
       path: common/components/Link
