@@ -6520,10 +6520,10 @@ rimraf@^2.5.4, rimraf@^2.6.3:
   dependencies:
     glob "^7.1.3"
 
-route-codegen@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/route-codegen/-/route-codegen-0.0.6.tgz#162c99ce07b8848d7e0621a9a5f02c782d9e22f9"
-  integrity sha512-d4V5rVChP8W70TqZB4pGaj6NwpYc4PycaSoJGLLWBj2czTL//Z+1dZkS8zyHxWKH5i8Qozr/fY39McN4bjZnJw==
+route-codegen@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/route-codegen/-/route-codegen-0.1.2.tgz#8405a26ea8b7947b64c83f8b6eb227256c876417"
+  integrity sha512-CDNtqniatcO02r8mdpK/xYM5pyFhfO4B/Igw92BEf/uYXuuxKshAf+acsdzoO/sxRjpPIMtLNgb1GUOwXkbsWQ==
   dependencies:
     js-yaml "^3.13.1"
     path-to-regexp "^6.1.0"
