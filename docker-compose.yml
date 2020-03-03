@@ -77,10 +77,11 @@ services:
     build:
       context: ./server
       target: base
+      args:
+        BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
 
     command: yarn start:crons
     environment:
-      BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
       PRISMA_ENDPOINT: ${PRISMA_ENDPOINT}
       PRISMA_SECRET: ${PRISMA_SECRET}
     volumes:
