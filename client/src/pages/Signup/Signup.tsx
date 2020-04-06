@@ -1,34 +1,34 @@
-import { Grid } from '@material-ui/core';
-import Block from 'common/ui/Block';
-import H1 from 'common/ui/H1';
-import H2 from 'common/ui/H2';
-import Logo from 'common/ui/Logo';
-import Main from 'common/ui/Main';
-import Paper from 'common/ui/Paper';
-import { useViewer } from 'common/components/ViewerProvider';
-import useUrlQuery from 'common/pathing/useUrlQuery';
-import React from 'react';
-import { Redirect } from 'react-router';
-import SignupForm from './SignupForm';
-import RouteToMe from 'routes/RouteToMe';
-import RouteToHome from 'routes/RouteToHome';
+import { Grid } from "@material-ui/core";
+import H1 from "common/shared-ui/H1";
+import H2 from "common/shared-ui/H2";
+import Logo from "common/shared-ui/Logo";
+import Main from "common/shared-ui/Main";
+import Paper from "common/shared-ui/Paper";
+import { useViewer } from "common/components/ViewerProvider";
+import React from "react";
+import { Redirect } from "react-router";
+import SignupForm from "./SignupForm";
+import useUrlQuery from "common/pathing/useUrlQuery";
+import generateUrlMe from "routes/me/generateUrlMe";
+import LinkHome from "routes/home/LinkHome";
+import MainContent from "common/shared-ui/MainContent";
 
 const Signup: React.FunctionComponent = () => {
   const { viewer } = useViewer();
   const { redirect } = useUrlQuery();
 
   if (viewer) {
-    return <Redirect to={redirect ? redirect : RouteToMe.generate({})} />;
+    return <Redirect to={redirect ? redirect : generateUrlMe({})} />;
   }
 
   return (
     <Main fullViewPortHeight>
-      <Block size="sm" fullHeight marginTop={0}>
+      <MainContent size="xs">
         <Paper>
           <Grid container justify="center">
-            <RouteToHome.Link>
+            <LinkHome>
               <Logo />
-            </RouteToHome.Link>
+            </LinkHome>
           </Grid>
 
           <H1 align="center" variant="h2">
@@ -37,7 +37,7 @@ const Signup: React.FunctionComponent = () => {
           {redirect && <H2 align="center">to continue</H2>}
           <SignupForm />
         </Paper>
-      </Block>
+      </MainContent>
     </Main>
   );
 };

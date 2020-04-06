@@ -1,9 +1,9 @@
 #!/bin/bash
 
 function start(){
-    local cmd="docker-compose start $1"
+    local cmd="docker-compose start $@"
     echo $cmd
     eval $cmd
 }
 
-start $1
+start $@

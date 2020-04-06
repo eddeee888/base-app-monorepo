@@ -6,7 +6,7 @@ hooks:
 generates:
   ./src/graphql/resolvers/types.generated.ts:
     plugins:
-      - add: '/* eslint-disable */'
+      - add: "/* eslint-disable */"
       - typescript
       - typescript-resolvers
     config:

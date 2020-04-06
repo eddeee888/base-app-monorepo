@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from 'react';
-import { Link as LinkMui } from '@material-ui/core';
-import LinkNext, { LinkProps as LinkNextProps } from 'next/link';
+import React, { FunctionComponent } from "react";
+import { Link as LinkMui } from "@material-ui/core";
+import LinkNext, { LinkProps as LinkNextProps } from "next/link";
 
 export interface LinkProps extends LinkNextProps {
   innerRef?: React.Ref<any>;
@@ -8,7 +8,7 @@ export interface LinkProps extends LinkNextProps {
   children: React.ReactNode;
 }
 
-const NextComposed = React.forwardRef<any, Omit<LinkProps, 'innerRef'>>(function NextComposed(props, ref) {
+const NextComposed = React.forwardRef<any, Omit<LinkProps, "innerRef">>(function NextComposed(props, ref) {
   const { as, href, prefetch, ...other } = props;
 
   return (

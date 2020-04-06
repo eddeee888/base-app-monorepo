@@ -1,19 +1,19 @@
-import React from 'react';
-import Main from 'src/common/ui/Main';
-import Block from 'src/common/ui/Block';
-import Text from 'src/common/ui/Text';
+import React from "react";
+import Main from "src/common/shared-ui/Main";
+import Block from "src/common/shared-ui/Block";
+import Text from "src/common/shared-ui/Text";
 
 interface ErrorGenericProps {
   fullPage?: boolean;
 }
 
 const ErrorGeneric: React.FunctionComponent<ErrorGenericProps> = ({ fullPage }) => {
-  const message = 'Unexpected error occurred. Please try again later.';
+  const message = "Unexpected error occurred. Please try again later.";
 
   if (!!fullPage) {
     return (
       <Main>
-        <Block size="md">
+        <Block size="sm">
           <Text align="center">{message}</Text>
         </Block>
       </Main>

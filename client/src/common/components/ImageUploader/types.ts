@@ -1,4 +1,4 @@
-import { DropzoneState } from 'react-dropzone';
+import { DropzoneState } from "react-dropzone";
 
 export interface UploadedImage {
   src: string;
@@ -26,9 +26,9 @@ export interface ImageUploaderProps {
   uploadedImages: UploadedImage[];
   rejectedFiles: File[];
   dropzoneSetup: {
-    getRootProps: DropzoneState['getRootProps'];
-    getInputProps: DropzoneState['getInputProps'];
-    open: DropzoneState['open'];
+    getRootProps: DropzoneState["getRootProps"];
+    getInputProps: DropzoneState["getInputProps"];
+    open: DropzoneState["open"];
   };
   deleteAllUploads: () => void;
   deleteUpload: (index: number) => void;

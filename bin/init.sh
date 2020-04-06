@@ -33,7 +33,6 @@ function init(){
     remove_old_symlink
     setup_symlink_permission
     symlink
-    $CORE_CMD_NAME init-bit
     $CORE_CMD_NAME init-cert $COMMON_NAME $REVERSE_PROXY_CERTIFICATE_DIR
     $CORE_CMD_NAME init-packages
     $CORE_CMD_NAME dm-create $CORE_CMD_NAME

@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
-import { getTokenFromRequest, setTokenToResponse } from 'libs/headers';
-import { sign, verify } from 'libs/jwt';
+import { NextFunction, Request, Response } from "express";
+import { getTokenFromRequest, setTokenToResponse } from "libs/headers";
+import { sign, verify } from "libs/jwt";
 
 type TokenVerifier = (req: Request, res: Response, next: NextFunction) => void;
 

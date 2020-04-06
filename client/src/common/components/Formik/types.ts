@@ -1,4 +1,4 @@
-import { FormikErrors, FormikTouched, FieldInputProps, FieldMetaProps } from 'formik';
+import { FormikErrors, FormikTouched, FieldInputProps, FieldMetaProps } from "formik";
 
 export interface FormikBag<Values> {
   values: Values;

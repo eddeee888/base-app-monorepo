@@ -1,12 +1,12 @@
-import { AuthenticationError } from 'apollo-server';
-import { MutationResolvers } from 'graphql/resolvers/types.generated';
-import { ResolverContextLoggedIn } from 'graphql/types';
+import { AuthenticationError } from "apollo-server";
+import { MutationResolvers } from "graphql/resolvers/types.generated";
+import { ResolverContextLoggedIn } from "graphql/types";
 
-const login: MutationResolvers['login'] = async (parent, args, ctx) => {
+const login: MutationResolvers["login"] = async (parent, args, ctx) => {
   const { email, password } = args.input;
 
   const user = await ctx.prisma.user({
-    email
+    email,
   });
 
   if (!user) {
@@ -21,11 +21,11 @@ const login: MutationResolvers['login'] = async (parent, args, ctx) => {
 
   try {
     const token = ctx.utils.jwt.sign({
-      id: user.id
+      id: user.id,
     });
     ctx.utils.headers.setTokenToResponse(ctx.res, token);
   } catch (e) {
-    throw new AuthenticationError('Unable to sign token');
+    throw new AuthenticationError("Unable to sign token");
   }
 
   // Must attach user here as viewer because at this point forward.

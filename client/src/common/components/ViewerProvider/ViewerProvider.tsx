@@ -1,5 +1,5 @@
-import { removeItem, getItem, setItem, Item } from 'common/localStorage';
-import React, { useContext, useState } from 'react';
+import { removeItem, getItem, setItem, Item } from "common/shared-localStorage";
+import React, { useContext, useState } from "react";
 
 export interface Viewer {
   id: string;
@@ -8,7 +8,7 @@ export interface Viewer {
 }
 export type SetViewerFn = (viewer: Viewer) => void;
 export type SetViewerAvatarFn = (avatar?: string | null) => void;
-export type ClearViewerFn = (shouldClearViewerValue?: boolean) => void;
+export type ClearViewerFn = () => void;
 
 interface ViewerContextValue {
   viewer: Viewer | null;
@@ -38,7 +38,7 @@ const ViewerProvider = (props: ContextProps): React.ReactElement => {
     ? {
         id: viewerId,
         avatar,
-        firstName: viewerFirstName ? viewerFirstName : ''
+        firstName: viewerFirstName ? viewerFirstName : "",
       }
     : null;
 
@@ -48,7 +48,7 @@ const ViewerProvider = (props: ContextProps): React.ReactElement => {
     <ViewerContext.Provider
       value={{
         viewer,
-        setViewerValue
+        setViewerValue,
       }}
       {...props}
     />
@@ -58,20 +58,20 @@ const ViewerProvider = (props: ContextProps): React.ReactElement => {
 const useViewer = (): UseViewerResult => {
   const context = useContext(ViewerContext);
   if (!context) {
-    throw new Error('useViewer must be used within a ViewerProvider');
+    throw new Error("useViewer must be used within a ViewerProvider");
   }
   const { viewer, setViewerValue } = context;
 
-  const setViewer: SetViewerFn = newViewer => {
+  const setViewer: SetViewerFn = (newViewer) => {
     setItem(Item.viewerId, newViewer.id);
     setItem(Item.viewerAvatar, newViewer.avatar);
     setItem(Item.viewerFirstName, newViewer.firstName);
     setViewerValue(newViewer);
   };
 
-  const setViewerAvatar: SetViewerAvatarFn = avatar => {
+  const setViewerAvatar: SetViewerAvatarFn = (avatar) => {
     setItem(Item.viewerAvatar, avatar);
-    setViewerValue(prevViewer => {
+    setViewerValue((prevViewer) => {
       if (!prevViewer) {
         return null;
       }
@@ -79,13 +79,11 @@ const useViewer = (): UseViewerResult => {
     });
   };
 
-  const clearViewer: ClearViewerFn = (shouldClearViewerValue = false) => {
+  const clearViewer: ClearViewerFn = () => {
     removeItem(Item.viewerId);
     removeItem(Item.viewerAvatar);
     removeItem(Item.viewerFirstName);
-    if (shouldClearViewerValue) {
-      setViewerValue(null);
-    }
+    setViewerValue(null);
   };
 
   return {
@@ -93,7 +91,7 @@ const useViewer = (): UseViewerResult => {
     setViewer,
     clearViewer,
     setViewerAvatar,
-    isLoggedIn: !!viewer
+    isLoggedIn: !!viewer,
   };
 };
 

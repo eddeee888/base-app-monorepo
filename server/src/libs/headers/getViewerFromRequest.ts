@@ -1,7 +1,7 @@
-import { Request } from 'express';
-import { getTokenFromRequest } from 'libs/headers';
-import { verify } from 'libs/jwt';
-import { Prisma, User } from 'prisma/generated/client';
+import { Request } from "express";
+import { getTokenFromRequest } from "libs/headers";
+import { verify } from "libs/jwt";
+import { Prisma, User } from "prisma/generated/client";
 
 export type GetViewerFromRequest = (req: Request, prisma: Prisma) => Promise<User | null>;
 

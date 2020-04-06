@@ -1,8 +1,8 @@
-import { Form, Formik, FormikErrors, FormikTouched } from 'formik';
-import React from 'react';
-import FormFieldArray from './FormFieldArray';
-import { render } from '@testing-library/react';
-import { assertTextExists } from 'test/utils/react-testing-library';
+import { Form, Formik, FormikErrors, FormikTouched } from "formik";
+import React from "react";
+import FormFieldArray from "./FormFieldArray";
+import { render } from "@testing-library/react";
+import { assertTextExists } from "test/utils/react-testing-library";
 
 interface Element {
   property1: string;
@@ -21,16 +21,25 @@ interface TestCase {
 
 const testCase: TestCase = {
   errors: {
-    field1: [{ property1: 'Error 1', property2: 'Error 2' }, { property1: undefined, property2: undefined }]
+    field1: [
+      { property1: "Error 1", property2: "Error 2" },
+      { property1: undefined, property2: undefined },
+    ],
   },
   touched: {
-    field1: [{ property1: true, property2: false }, { property1: true, property2: false }]
+    field1: [
+      { property1: true, property2: false },
+      { property1: true, property2: false },
+    ],
   },
-  isError: false
+  isError: false,
 };
 
 const mockInput: Input = {
-  field1: [{ property1: '', property2: '' }, { property1: '', property2: '' }]
+  field1: [
+    { property1: "", property2: "" },
+    { property1: "", property2: "" },
+  ],
 };
 
 const mountWithFormik = (formField: any) => {
@@ -45,8 +54,8 @@ afterEach(() => {
   jest.resetAllMocks();
 });
 
-describe('<FormFieldArray />', () => {
-  it('should should show error correctly', () => {
+describe("<FormFieldArray />", () => {
+  it("should should show error correctly", () => {
     const { errors, touched } = testCase;
 
     const { container } = mountWithFormik(

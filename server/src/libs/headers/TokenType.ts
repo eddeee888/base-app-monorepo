@@ -1,5 +1,5 @@
 enum TokenType {
-  accessToken = 'accessToken'
+  accessToken = "accessToken",
 }
 
 export default TokenType;

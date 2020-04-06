@@ -1,9 +1,9 @@
 #!/bin/bash
 
 function rebuild(){
-    local cmd="docker-compose rm -f -s $1 && docker-compose build --no-cache $1"
+    local cmd="docker-compose rm -f -s $@ && docker-compose build --no-cache $@"
     echo $cmd
     eval $cmd
 }
 
-rebuild $1
+rebuild $@

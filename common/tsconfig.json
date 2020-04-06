@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "./dist",
+    "lib": ["es5", "es6", "dom", "esnext.asynciterable"],
+    "target": "es5",
+    "module": "esnext",
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "noEmit": true,
+
+    "alwaysStrict": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noUnusedLocals": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

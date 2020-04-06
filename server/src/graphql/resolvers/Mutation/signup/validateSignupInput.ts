@@ -1,5 +1,7 @@
-import { emailValidation, nameValidation, passwordValidation } from '@bit/eddeee888.base-react-app-utils.validations';
-import { SignupInput } from 'graphql/resolvers/types.generated';
+import { SignupInput } from "graphql/resolvers/types.generated";
+import nameValidation from "libs/shared-validations/nameValidation";
+import emailValidation from "libs/shared-validations/emailValidation";
+import passwordValidation from "libs/shared-validations/passwordValidation";
 
 interface ValidationData {
   email?: string[];
@@ -10,7 +12,7 @@ interface ValidationData {
 
 type ValidateSignupInputFn = (input: SignupInput) => Promise<ValidationData | undefined>;
 
-const validateSignupInput: ValidateSignupInputFn = async input => {
+const validateSignupInput: ValidateSignupInputFn = async (input) => {
   let validEmail = true;
   let emailErrors: string[] | undefined;
   let validFirstName = true;
@@ -28,14 +30,14 @@ const validateSignupInput: ValidateSignupInputFn = async input => {
   }
 
   try {
-    await nameValidation('first').validate(input.firstName);
+    await nameValidation("first").validate(input.firstName);
   } catch (err) {
     validFirstName = false;
     firstNameErrors = err.errors;
   }
 
   try {
-    await nameValidation('last').validate(input.lastName);
+    await nameValidation("last").validate(input.lastName);
   } catch (err) {
     validLastName = false;
     lastNameErrors = err.errors;
@@ -56,7 +58,7 @@ const validateSignupInput: ValidateSignupInputFn = async input => {
     email: emailErrors,
     firstName: firstNameErrors,
     lastName: lastNameErrors,
-    password: passwordErrors
+    password: passwordErrors,
   };
 };
 

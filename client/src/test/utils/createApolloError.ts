@@ -1,6 +1,6 @@
-import { ErrorResponse } from 'apollo-link-error';
-import { ServerError, ServerParseError } from 'apollo-link-http-common';
-import { GraphQLError } from 'graphql';
+import { ErrorResponse } from "apollo-link-error";
+import { ServerError, ServerParseError } from "apollo-link-http-common";
+import { GraphQLError } from "graphql";
 
 const createApolloError = (graphQLError?: GraphQLError, networkError?: Error | ServerError | ServerParseError): ErrorResponse => {
   return {
@@ -9,7 +9,7 @@ const createApolloError = (graphQLError?: GraphQLError, networkError?: Error | S
     response: undefined,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     operation: {} as any,
-    forward: jest.fn()
+    forward: jest.fn(),
   };
 };
 

@@ -1,4 +1,4 @@
-query GetSignedUrls ($filenames: [String!]!) {
+query GetSignedUrls($filenames: [String!]!) {
   getSignedUrlsToUploadImages(filenames: $filenames) {
     ...SignedImageObject_S3SignedObject
   }

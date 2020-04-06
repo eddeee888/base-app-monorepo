@@ -1,1 +1,1 @@
-export { default } from './tokenVerifier';
+export { default } from "./tokenVerifier";

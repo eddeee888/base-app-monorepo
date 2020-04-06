@@ -1,21 +1,21 @@
 /* eslint-disable */
-import * as Types from '../../../../__generated__/types';
+import * as Types from "../../../../__generated__/types";
 
-import * as Operations from './useImageUploader.graphql';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+import * as Operations from "./useImageUploader.graphql";
+import * as ApolloReactCommon from "@apollo/react-common";
+import * as ApolloReactHooks from "@apollo/react-hooks";
 
 export type GetSignedUrlsQueryVariables = {
-  filenames: Array<Types.Scalars['String']>;
+  filenames: Array<Types.Scalars["String"]>;
 };
 
-export type GetSignedUrlsQuery = { __typename: 'Query' } & {
-  getSignedUrlsToUploadImages: Array<{ __typename: 'S3SignedObject' } & SignedImageObject_S3SignedObjectFragment>;
+export type GetSignedUrlsQuery = { __typename: "Query" } & {
+  getSignedUrlsToUploadImages: Array<{ __typename: "S3SignedObject" } & SignedImageObject_S3SignedObjectFragment>;
 };
 
-export type SignedImageObject_S3SignedObjectFragment = { __typename: 'S3SignedObject' } & Pick<
+export type SignedImageObject_S3SignedObjectFragment = { __typename: "S3SignedObject" } & Pick<
   Types.S3SignedObject,
-  'src' | 'filename' | 'originalFilename' | 'uploadUrl'
+  "src" | "filename" | "originalFilename" | "uploadUrl"
 >;
 
 /**

@@ -1,1 +1,1 @@
-export { default } from './userUpdate';
+export { default } from "./userUpdate";

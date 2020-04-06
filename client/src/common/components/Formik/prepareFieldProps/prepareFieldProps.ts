@@ -1,5 +1,5 @@
-import { FormikBag } from 'common/components/Formik/types';
-import { FieldInputProps } from 'formik';
+import { FormikBag } from "common/components/Formik/types";
+import { FieldInputProps } from "formik";
 
 interface Result {
   props: FieldInputProps<any>;
@@ -12,7 +12,7 @@ const prepareFieldProps = <Values = {}>(formik: FormikBag<Values>, fieldName: ke
   return {
     props: formik.getFieldProps(fieldName),
     error: meta.error,
-    touched: meta.touched
+    touched: meta.touched,
   };
 };
 

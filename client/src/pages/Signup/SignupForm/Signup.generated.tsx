@@ -1,16 +1,16 @@
 /* eslint-disable */
-import * as Types from '../../../__generated__/types';
+import * as Types from "../../../__generated__/types";
 
-import * as Operations from './Signup.graphql';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+import * as Operations from "./Signup.graphql";
+import * as ApolloReactCommon from "@apollo/react-common";
+import * as ApolloReactHooks from "@apollo/react-hooks";
 
 export type SignupMutationVariables = {
   input: Types.SignupInput;
 };
 
-export type SignupMutation = { __typename: 'Mutation' } & {
-  signup: { __typename: 'User' } & Pick<Types.User, 'id' | 'avatar' | 'firstName'>;
+export type SignupMutation = { __typename: "Mutation" } & {
+  signup: { __typename: "User" } & Pick<Types.User, "id" | "avatar" | "firstName">;
 };
 
 export type SignupMutationFn = ApolloReactCommon.MutationFunction<SignupMutation, SignupMutationVariables>;

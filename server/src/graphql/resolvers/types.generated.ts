@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { GraphQLResolveInfo } from 'graphql';
-import { UserMapper } from 'graphql/models';
-import { ResolverContext, ResolverContextNotLoggedIn, ResolverContextLoggedIn } from 'graphql/types';
+import { GraphQLResolveInfo } from "graphql";
+import { UserMapper } from "graphql/models";
+import { ResolverContext, ResolverContextNotLoggedIn, ResolverContextLoggedIn } from "graphql/types";
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 
@@ -15,22 +15,22 @@ export type Scalars = {
 };
 
 export type File = {
-  __typename?: 'File';
-  id: Scalars['ID'];
-  src: Scalars['String'];
-  originalFilename: Scalars['String'];
+  __typename?: "File";
+  id: Scalars["ID"];
+  src: Scalars["String"];
+  originalFilename: Scalars["String"];
 };
 
 export type LoginInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars["String"];
+  password: Scalars["String"];
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename?: "Mutation";
   signup: User;
   login?: Maybe<User>;
-  logout: Scalars['Boolean'];
+  logout: Scalars["Boolean"];
   userUpdate: User;
 };
 
@@ -47,63 +47,56 @@ export type MutationUserUpdateArgs = {
 };
 
 export type Query = {
-  __typename?: 'Query';
+  __typename?: "Query";
   me?: Maybe<User>;
   user?: Maybe<User>;
   getSignedUrlsToUploadImages: Array<S3SignedObject>;
 };
 
 export type QueryUserArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
 
 export type QueryGetSignedUrlsToUploadImagesArgs = {
-  filenames: Array<Scalars['String']>;
+  filenames: Array<Scalars["String"]>;
 };
 
 /** AWS Sign URL to upload image */
 export type S3SignedObject = {
-  __typename?: 'S3SignedObject';
-  src: Scalars['String'];
-  filename: Scalars['String'];
-  originalFilename: Scalars['String'];
-  uploadUrl: Scalars['String'];
+  __typename?: "S3SignedObject";
+  src: Scalars["String"];
+  filename: Scalars["String"];
+  originalFilename: Scalars["String"];
+  uploadUrl: Scalars["String"];
 };
 
 export type SignupInput = {
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars["String"];
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+  password: Scalars["String"];
 };
 
 /** User */
 export type User = {
-  __typename?: 'User';
-  id: Scalars['ID'];
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  displayName?: Maybe<Scalars['String']>;
-  avatar?: Maybe<Scalars['String']>;
+  __typename?: "User";
+  id: Scalars["ID"];
+  email: Scalars["String"];
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+  displayName?: Maybe<Scalars["String"]>;
+  avatar?: Maybe<Scalars["String"]>;
 };
 
 export type UserUpdateInput = {
-  id: Scalars['ID'];
-  avatar?: Maybe<Scalars['String']>;
+  id: Scalars["ID"];
+  avatar?: Maybe<Scalars["String"]>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
 export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
-
-export type ResolverFn<TResult, TParent, TContext, TArgs> = (
-  parent: TParent,
-  args: TArgs,
-  context: TContext,
-  info: GraphQLResolveInfo
-) => Promise<TResult> | TResult;
 
 export type StitchingResolver<TResult, TParent, TContext, TArgs> = {
   fragment: string;
@@ -113,6 +106,13 @@ export type StitchingResolver<TResult, TParent, TContext, TArgs> = {
 export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
   | ResolverFn<TResult, TParent, TContext, TArgs>
   | StitchingResolver<TResult, TParent, TContext, TArgs>;
+
+export type ResolverFn<TResult, TParent, TContext, TArgs> = (
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => Promise<TResult> | TResult;
 
 export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
@@ -150,7 +150,9 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   parent: TParent,
   context: TContext,
   info: GraphQLResolveInfo
-) => Maybe<TTypes>;
+) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
+
+export type isTypeOfResolverFn<T = {}> = (obj: T, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
@@ -166,13 +168,13 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
   User: ResolverTypeWrapper<UserMapper>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
-  String: ResolverTypeWrapper<Scalars['String']>;
+  ID: ResolverTypeWrapper<Scalars["ID"]>;
+  String: ResolverTypeWrapper<Scalars["String"]>;
   S3SignedObject: ResolverTypeWrapper<S3SignedObject>;
   Mutation: ResolverTypeWrapper<{}>;
   SignupInput: SignupInput;
   LoginInput: LoginInput;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   UserUpdateInput: UserUpdateInput;
   File: ResolverTypeWrapper<File>;
 }>;
@@ -181,77 +183,82 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   Query: {};
   User: UserMapper;
-  ID: Scalars['ID'];
-  String: Scalars['String'];
+  ID: Scalars["ID"];
+  String: Scalars["String"];
   S3SignedObject: S3SignedObject;
   Mutation: {};
   SignupInput: SignupInput;
   LoginInput: LoginInput;
-  Boolean: Scalars['Boolean'];
+  Boolean: Scalars["Boolean"];
   UserUpdateInput: UserUpdateInput;
   File: File;
 }>;
+
+export type IsLoggedInDirectiveArgs = { status?: Maybe<Scalars["Boolean"]> };
 
 export type IsLoggedInDirectiveResolver<
   Result,
   Parent,
   ContextType = ResolverContext,
-  Args = { status?: Maybe<Maybe<Scalars['Boolean']>> }
+  Args = IsLoggedInDirectiveArgs
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type FileResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes['File'] = ResolversParentTypes['File']
+  ParentType extends ResolversParentTypes["File"] = ResolversParentTypes["File"]
 > = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  src?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  originalFilename?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  src?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  originalFilename?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type MutationResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
+  ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"]
 > = ResolversObject<{
-  signup?: Resolver<ResolversTypes['User'], ParentType, ResolverContextNotLoggedIn, RequireFields<MutationSignupArgs, 'input'>>;
-  login?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ResolverContextNotLoggedIn, RequireFields<MutationLoginArgs, 'input'>>;
-  logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  userUpdate?: Resolver<ResolversTypes['User'], ParentType, ResolverContextLoggedIn, RequireFields<MutationUserUpdateArgs, 'input'>>;
+  signup?: Resolver<ResolversTypes["User"], ParentType, ResolverContextNotLoggedIn, RequireFields<MutationSignupArgs, "input">>;
+  login?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ResolverContextNotLoggedIn, RequireFields<MutationLoginArgs, "input">>;
+  logout?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  userUpdate?: Resolver<ResolversTypes["User"], ParentType, ResolverContextLoggedIn, RequireFields<MutationUserUpdateArgs, "input">>;
 }>;
 
 export type QueryResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
+  ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = ResolversObject<{
-  me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
+  me?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType, RequireFields<QueryUserArgs, "id">>;
   getSignedUrlsToUploadImages?: Resolver<
-    Array<ResolversTypes['S3SignedObject']>,
+    Array<ResolversTypes["S3SignedObject"]>,
     ParentType,
     ContextType,
-    RequireFields<QueryGetSignedUrlsToUploadImagesArgs, 'filenames'>
+    RequireFields<QueryGetSignedUrlsToUploadImagesArgs, "filenames">
   >;
 }>;
 
 export type S3SignedObjectResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes['S3SignedObject'] = ResolversParentTypes['S3SignedObject']
+  ParentType extends ResolversParentTypes["S3SignedObject"] = ResolversParentTypes["S3SignedObject"]
 > = ResolversObject<{
-  src?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  filename?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  originalFilename?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  uploadUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  src?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  filename?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  originalFilename?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  uploadUrl?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type UserResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']
+  ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
 > = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  displayName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  email?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  firstName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  lastName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  displayName?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  avatar?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type Resolvers<ContextType = ResolverContext> = ResolversObject<{

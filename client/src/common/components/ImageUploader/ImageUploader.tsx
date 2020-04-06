@@ -1,13 +1,14 @@
-import React from 'react';
-import Text from 'common/ui/Text';
-import TextError from 'common/ui/TextError';
-import Row from 'common/ui/Row';
-import { css } from 'emotion';
-import { spacingRem, borderColor, secondaryBackgroundColor } from '@bit/eddeee888.base-react-app-utils.styles';
-import Spinner from 'common/ui/Spinner';
-import { ImageUploaderProps } from 'common/components/ImageUploader/types';
-import { Grid, IconButton } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+import React from "react";
+import Text from "common/shared-ui/Text";
+import TextError from "common/shared-ui/TextError";
+import Row from "common/shared-ui/Row";
+import { css } from "emotion";
+import Spinner from "common/shared-ui/Spinner";
+import { ImageUploaderProps } from "common/components/ImageUploader/types";
+import { Grid, IconButton } from "@material-ui/core";
+import { Close } from "@material-ui/icons";
+import { spacingRem } from "common/shared-styles/spacings";
+import { borderColor, secondaryBackgroundColor } from "common/shared-styles/colors";
 
 const rootClassName = css`
   padding: ${spacingRem(4)}rem;
@@ -30,7 +31,7 @@ const ImageUploader: React.FunctionComponent<ImageUploaderProps> = ({
   rejectedFiles,
   state,
   dropzoneSetup,
-  deleteUpload
+  deleteUpload,
 }) => {
   const hasUploadedImages = !!uploadedImages && uploadedImages.length > 0;
   const hasRejectedFiles = !!rejectedFiles && rejectedFiles.length > 0;
@@ -95,7 +96,7 @@ const ImageUploader: React.FunctionComponent<ImageUploaderProps> = ({
       {hasRejectedFiles && (
         <Row marginTop={2}>
           <Text>The following files failed to upload:</Text>
-          {rejectedFiles.map(file => (
+          {rejectedFiles.map((file) => (
             <div key={file.name}>
               <TextError>{file.name}</TextError>
             </div>

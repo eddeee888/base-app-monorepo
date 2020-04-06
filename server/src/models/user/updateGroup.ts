@@ -1,4 +1,4 @@
-import { UserGroupMap } from './UserGroup';
+import { UserGroupMap } from "./UserGroup";
 
 type UpdateGroupFn = (newGroup: UserGroupMap, existingGroups?: UserGroupMap) => UserGroupMap;
 

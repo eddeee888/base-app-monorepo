@@ -1,1 +1,1 @@
-export { default } from './ErrorGeneric';
+export { default } from "./ErrorGeneric";

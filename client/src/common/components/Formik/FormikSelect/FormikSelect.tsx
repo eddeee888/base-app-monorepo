@@ -1,12 +1,12 @@
-import React from 'react';
-import { FormikBag } from '../types';
-import prepareFieldProps from 'common/components/Formik/prepareFieldProps';
-import FormError from 'common/components/FormError';
-import Select, { SelectProps } from 'common/ui/Select';
+import React from "react";
+import { FormikBag } from "../types";
+import prepareFieldProps from "common/components/Formik/prepareFieldProps";
+import FormError from "common/components/FormError";
+import Select, { SelectProps } from "common/shared-ui/Select";
 
 type OmittedFormikSelectProps = Omit<
-  Omit<Omit<Omit<Omit<Omit<SelectProps, 'value'>, 'name'>, 'multiple'>, 'checked'>, 'onChange'>,
-  'onBlur'
+  Omit<Omit<Omit<Omit<Omit<SelectProps, "value">, "name">, "multiple">, "checked">, "onChange">,
+  "onBlur"
 >;
 
 type FormikSelectProps<Values> = {

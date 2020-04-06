@@ -1,9 +1,9 @@
 #!/bin/bash
 
 function up(){
-    local cmd="docker-compose up -d $1"
+    local cmd="docker-compose up -d $@"
     echo $cmd
     eval $cmd
 }
 
-up $1
+up $@
