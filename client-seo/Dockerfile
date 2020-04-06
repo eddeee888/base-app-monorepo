@@ -8,7 +8,7 @@ RUN apk update \
 WORKDIR /usr/src/app
 COPY . . 
 RUN ./scripts/set_up_bit.sh $BIT_NPM_TOKEN
-RUN yarn install
+RUN yarn install --pure-lockfile
 
 FROM base as build
 WORKDIR /usr/src/app

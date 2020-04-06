@@ -1,15 +1,18 @@
-import React from 'react';
-import App from 'next/app';
-import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { muiTheme, defaultBackgroundColor, textColor, remValue, mediaQuery } from '@bit/eddeee888.base-react-app-utils.styles';
-import { CacheProvider, Global, css } from '@emotion/core';
-import { cache } from 'emotion';
+import React from "react";
+import App from "next/app";
+import Head from "next/head";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { defaultBackgroundColor, textColor } from "../src/common/shared-styles/colors";
+import breakpoints from "../src/common/shared-styles/breakpoints";
+import { remValue } from "../src/common/shared-styles/sizes";
+import { muiTheme } from "../src/common/shared-styles/muiTheme";
+import { CacheProvider, Global, css } from "@emotion/core";
+import { cache } from "emotion";
 
 class MyApp extends App {
   componentDidMount(): void {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
+    const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
@@ -41,7 +44,7 @@ class MyApp extends App {
                 color: ${textColor};
                 font-size: ${remValue}px;
                 line-height: 1.5em;
-                ${mediaQuery.md} {
+                ${breakpoints.up("md")} {
                   font-size: 20px;
                 }
               }

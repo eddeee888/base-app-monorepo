@@ -1,15 +1,15 @@
-import React from 'react';
-import Head from 'next/head';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloLink } from 'apollo-link';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
-import fetch from 'isomorphic-unfetch';
-import { NextComponentType, NextPageContext } from 'next';
-import { IncomingHttpHeaders } from 'http';
-import { onError } from 'apollo-link-error';
-import { withClientState } from 'apollo-link-state';
+import React from "react";
+import Head from "next/head";
+import { ApolloProvider } from "@apollo/react-hooks";
+import { ApolloLink } from "apollo-link";
+import { ApolloClient } from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { HttpLink } from "apollo-link-http";
+import fetch from "isomorphic-unfetch";
+import { NextComponentType, NextPageContext } from "next";
+import { IncomingHttpHeaders } from "http";
+import { onError } from "apollo-link-error";
+import { withClientState } from "apollo-link-state";
 
 let globalApolloClient: ApolloClient<any> | null = null;
 
@@ -22,35 +22,35 @@ function createApolloClient(initialState = {}, httpLink: HttpLink): ApolloClient
   const cache = new InMemoryCache().restore(initialState);
 
   return new ApolloClient({
-    ssrMode: typeof window === 'undefined',
+    ssrMode: typeof window === "undefined",
     cache,
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
           // TODO set up logging service if needed here
-          console.warn('graphQLErrors in apolloClient');
+          console.warn("graphQLErrors in apolloClient");
         }
         if (networkError) {
           // TODO handle network error if needed here
-          console.warn('onNetworkError in apolloClient');
+          console.warn("onNetworkError in apolloClient");
         }
       }),
       withClientState({
         defaults: {
-          isConnected: true
+          isConnected: true,
         },
         resolvers: {
           Mutation: {
             updateNetworkStatus: (_: any, { isConnected }: any, { cache }: any) => {
               cache.writeData({ data: { isConnected } });
               return null;
-            }
-          }
+            },
+          },
         },
-        cache
+        cache,
       }),
-      httpLink
-    ])
+      httpLink,
+    ]),
   });
 }
 
@@ -66,14 +66,14 @@ function initApolloClient(initialState: object, headers?: IncomingHttpHeaders): 
 
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     const httpLink = new HttpLink({
       uri,
-      credentials: 'same-origin',
+      credentials: "same-origin",
       headers: {
-        cookie: headers && headers['cookie'] ? headers['cookie'] : ''
+        cookie: headers && headers["cookie"] ? headers["cookie"] : "",
       },
-      fetch
+      fetch,
     });
     return createApolloClient(initialState, httpLink);
   }
@@ -82,7 +82,7 @@ function initApolloClient(initialState: object, headers?: IncomingHttpHeaders): 
   if (!globalApolloClient) {
     const httpLink = new HttpLink({
       uri,
-      credentials: 'same-origin'
+      credentials: "same-origin",
     });
     globalApolloClient = createApolloClient(initialState, httpLink);
   }
@@ -92,7 +92,7 @@ function initApolloClient(initialState: object, headers?: IncomingHttpHeaders): 
 
 async function handleServerSideError(ctx: NextPageContext, error: Error): Promise<void> {
   ctx.res!.statusCode = 500;
-  ctx.res!.setHeader('Content-Type', 'text/html');
+  ctx.res!.setHeader("Content-Type", "text/html");
   ctx.res!.end(error.message);
 }
 
@@ -115,11 +115,11 @@ function withApollo(PageComponent: NextComponentType, { ssr = true } = {}): (pro
   };
 
   // Set the correct displayName in development
-  if (process.env.NODE_ENV !== 'production') {
-    const displayName = PageComponent.displayName || PageComponent.name || 'Component';
+  if (process.env.NODE_ENV !== "production") {
+    const displayName = PageComponent.displayName || PageComponent.name || "Component";
 
-    if (displayName === 'App') {
-      console.warn('This withApollo HOC only works with PageComponents.');
+    if (displayName === "App") {
+      console.warn("This withApollo HOC only works with PageComponents.");
     }
 
     WithApollo.displayName = `withApollo(${displayName})`;
@@ -140,7 +140,7 @@ function withApollo(PageComponent: NextComponentType, { ssr = true } = {}): (pro
       }
 
       // Only on the server:
-      if (typeof window === 'undefined') {
+      if (typeof window === "undefined") {
         // When redirecting, the response is finished.
         // No point in continuing to render
         if (ctx.res && ctx.res.finished) {
@@ -151,12 +151,12 @@ function withApollo(PageComponent: NextComponentType, { ssr = true } = {}): (pro
         if (ssr) {
           try {
             // Run all GraphQL queries
-            const { getDataFromTree } = await import('@apollo/react-ssr');
+            const { getDataFromTree } = await import("@apollo/react-ssr");
             await getDataFromTree(
               <AppTree
                 pageProps={{
                   ...pageProps,
-                  apolloClient
+                  apolloClient,
                 }}
               />
             );
@@ -176,7 +176,7 @@ function withApollo(PageComponent: NextComponentType, { ssr = true } = {}): (pro
 
       return {
         ...pageProps,
-        apolloState
+        apolloState,
       };
     };
   }

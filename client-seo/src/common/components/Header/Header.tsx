@@ -1,13 +1,15 @@
-import { css } from 'emotion';
-import React from 'react';
-import Button from 'src/common/ui/Button';
-import Logo from 'src/common/ui/Logo';
-import { headerHeight, mediaQuery, borderColor, primaryBackgroundColor } from '@bit/eddeee888.base-react-app-utils.styles';
-import { Grid } from '@material-ui/core';
-import LoggedInMenu from 'src/common/components/Header/LoggedInMenu';
-import RouteToHome from 'src/routes/RouteToHome';
-import RouteToSignup from 'src/routes/RouteToSignup';
-import RouteToLogin from 'src/routes/RouteToLogin';
+import { css } from "emotion";
+import React from "react";
+import Button from "src/common/shared-ui/Button";
+import Logo from "src/common/shared-ui/Logo";
+import { Grid } from "@material-ui/core";
+import LoggedInMenu from "src/common/components/Header/LoggedInMenu";
+import LinkHome from "src/routes/home/LinkHome";
+import LinkSignup from "src/routes/signup/LinkSignup";
+import LinkLogin from "src/routes/login/LinkLogin";
+import { headerHeight } from "src/common/shared-styles/sizes";
+import { primaryBackgroundColor, borderColor } from "src/common/shared-styles/colors";
+import breakpoints from "src/common/shared-styles/breakpoints";
 
 const headerClassName = css`
   width: 100%;
@@ -22,7 +24,7 @@ const headerClassName = css`
   border-bottom: 1px solid ${borderColor};
   z-index: 1201;
 
-  ${mediaQuery.md} {
+  ${breakpoints.up("md")} {
     padding: 0 2rem;
   }
 `;
@@ -46,9 +48,9 @@ const Header: React.FunctionComponent<HeaderProps> = ({ viewer }) => {
     <header className={headerClassName}>
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
-          <RouteToHome.Link>
+          <LinkHome>
             <Logo className={logoClassName} />
-          </RouteToHome.Link>
+          </LinkHome>
         </Grid>
 
         <Grid item>
@@ -56,14 +58,14 @@ const Header: React.FunctionComponent<HeaderProps> = ({ viewer }) => {
             {!viewer && (
               <>
                 <Grid item>
-                  <RouteToSignup.Link>
+                  <LinkSignup>
                     <Button variant="outlined">Sign up</Button>
-                  </RouteToSignup.Link>
+                  </LinkSignup>
                 </Grid>
                 <Grid item>
-                  <RouteToLogin.Link color="secondary">
+                  <LinkLogin color="secondary">
                     <Button variant="outlined">Log in</Button>
-                  </RouteToLogin.Link>
+                  </LinkLogin>
                 </Grid>
               </>
             )}

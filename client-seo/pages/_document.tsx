@@ -1,8 +1,8 @@
-import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
-import { muiTheme } from '@bit/eddeee888.base-react-app-utils.styles';
-import { extractCritical } from 'emotion-server';
+import React from "react";
+import Document, { Head, Main, NextScript } from "next/document";
+import { ServerStyleSheets } from "@material-ui/core/styles";
+import { muiTheme } from "../src/common/shared-styles/muiTheme";
+import { extractCritical } from "emotion-server";
 
 export default class MyDocument extends Document<{ emotionStyles: { ids: string[]; css: string } }> {
   render(): JSX.Element {
@@ -12,7 +12,7 @@ export default class MyDocument extends Document<{ emotionStyles: { ids: string[
           {/* PWA primary color */}
           <meta name="theme-color" content={muiTheme.palette.primary.main} />
           <style
-            data-emotion-css={this.props.emotionStyles.ids.join(' ')}
+            data-emotion-css={this.props.emotionStyles.ids.join(" ")}
             dangerouslySetInnerHTML={{ __html: this.props.emotionStyles.css }}
           />
         </Head>
@@ -25,7 +25,7 @@ export default class MyDocument extends Document<{ emotionStyles: { ids: string[
   }
 }
 
-MyDocument.getInitialProps = async ctx => {
+MyDocument.getInitialProps = async (ctx) => {
   // Resolution order
   //
   // On the server:
@@ -54,7 +54,7 @@ MyDocument.getInitialProps = async ctx => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: App => props => sheets.collect(<App {...props} />)
+      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
     });
 
   const page = await ctx.renderPage();
@@ -67,6 +67,6 @@ MyDocument.getInitialProps = async ctx => {
     ...page,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
-    emotionStyles
+    emotionStyles,
   };
 };
