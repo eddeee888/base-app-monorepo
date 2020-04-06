@@ -1,9 +1,9 @@
-import React from 'react';
-import { FormikBag } from '../types';
-import { OmittedFormikTextFieldProps } from 'common/typings/Omitted';
-import prepareFieldProps from 'common/components/Formik/prepareFieldProps';
-import FormError from 'common/components/FormError';
-import TextArea from 'common/ui/TextArea';
+import React from "react";
+import { FormikBag } from "../types";
+import { OmittedFormikTextFieldProps } from "common/shared-typings/Omitted";
+import prepareFieldProps from "common/components/Formik/prepareFieldProps";
+import FormError from "common/components/FormError";
+import TextArea from "common/shared-ui/TextArea";
 
 type FormikTextAreaProps<Values> = {
   name: keyof Values;

@@ -1,1 +1,1 @@
-export { default } from './prepareFieldProps';
+export { default } from "./prepareFieldProps";

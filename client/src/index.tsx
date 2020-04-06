@@ -1,14 +1,14 @@
 // import * as serviceWorker from 'serviceWorker';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import AppShell from 'AppShell';
-import App from 'App';
+import React from "react";
+import ReactDOM from "react-dom";
+import AppShell from "AppShell";
+import App from "App";
 
 ReactDOM.render(
   <AppShell>
     <App />
   </AppShell>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

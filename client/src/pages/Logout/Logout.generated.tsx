@@ -1,13 +1,13 @@
 /* eslint-disable */
-import * as Types from '../../__generated__/types';
+import * as Types from "../../__generated__/types";
 
-import * as Operations from './Logout.graphql';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+import * as Operations from "./Logout.graphql";
+import * as ApolloReactCommon from "@apollo/react-common";
+import * as ApolloReactHooks from "@apollo/react-hooks";
 
 export type LogoutMutationVariables = {};
 
-export type LogoutMutation = { __typename: 'Mutation' } & Pick<Types.Mutation, 'logout'>;
+export type LogoutMutation = { __typename: "Mutation" } & Pick<Types.Mutation, "logout">;
 
 export type LogoutMutationFn = ApolloReactCommon.MutationFunction<LogoutMutation, LogoutMutationVariables>;
 

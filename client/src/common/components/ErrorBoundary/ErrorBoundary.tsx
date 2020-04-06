@@ -1,5 +1,5 @@
-import React, { ErrorInfo } from 'react';
-import ErrorGeneric from 'common/components/ErrorGeneric';
+import React, { ErrorInfo } from "react";
+import ErrorGeneric from "common/components/ErrorGeneric";
 
 interface State {
   error: Error | null;
@@ -15,7 +15,7 @@ class ErrorBoundary extends React.Component<{}, State> {
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     this.setState({
       error,
-      errorInfo
+      errorInfo,
     });
   }
 

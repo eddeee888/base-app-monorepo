@@ -1,23 +1,23 @@
-import { useLocation } from 'react-router';
+import { useLocation } from "react-router";
 
-const getUrlQuery = (queryString: string): Partial<Record<string, string>> => {
-  if (queryString === '') {
+const getUrlQuery = (queryString: string): Record<string, string> => {
+  if (queryString === "") {
     return {};
   }
 
   const result: Record<string, string> = {};
 
-  const stripped = queryString.replace('?', '');
-  const optionsString = stripped.split('&');
-  optionsString.forEach(optionPair => {
-    const [key, value] = optionPair.split('=');
+  const stripped = queryString.replace("?", "");
+  const optionsString = stripped.split("&");
+  optionsString.forEach((optionPair) => {
+    const [key, value] = optionPair.split("=");
     result[key] = value;
   });
 
   return result;
 };
 
-const useUrlQuery = (): Partial<Record<string, string>> => {
+const useUrlQuery = (): Record<string, string> => {
   const location = useLocation();
 
   return getUrlQuery(location.search);

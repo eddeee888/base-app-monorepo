@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface ScriptResult {
   loaded: boolean;
@@ -11,7 +11,7 @@ const useScript = (src: string): ScriptResult => {
   // Keeping track of script loaded and error state
   const [state, setState] = useState({
     loaded: false,
-    error: false
+    error: false,
   });
 
   useEffect(() => {
@@ -20,13 +20,14 @@ const useScript = (src: string): ScriptResult => {
     if (cachedScripts.includes(src)) {
       setState({
         loaded: true,
-        error: false
+        error: false,
       });
+      return;
     } else {
       cachedScripts.push(src);
 
       // Create script
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.src = src;
       script.async = true;
 
@@ -34,7 +35,7 @@ const useScript = (src: string): ScriptResult => {
       const onScriptLoad = (): void => {
         setState({
           loaded: true,
-          error: false
+          error: false,
         });
       };
 
@@ -48,20 +49,20 @@ const useScript = (src: string): ScriptResult => {
 
         setState({
           loaded: true,
-          error: true
+          error: true,
         });
       };
 
-      script.addEventListener('load', onScriptLoad);
-      script.addEventListener('error', onScriptError);
+      script.addEventListener("load", onScriptLoad);
+      script.addEventListener("error", onScriptError);
 
       // Add script to document body
       document.body.appendChild(script);
 
       // Remove event listeners on cleanup
       return () => {
-        script.removeEventListener('load', onScriptLoad);
-        script.removeEventListener('error', onScriptError);
+        script.removeEventListener("load", onScriptLoad);
+        script.removeEventListener("error", onScriptError);
       };
     }
   }, [src]); // Only re-run effect if script src changes

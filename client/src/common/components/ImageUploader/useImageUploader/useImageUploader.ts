@@ -1,63 +1,63 @@
-import { useState, useEffect } from 'react';
-import { useDropzone } from 'react-dropzone';
-import { useGetSignedUrlsLazyQuery } from 'common/components/ImageUploader/useImageUploader/useImageUploader.generated';
-import uploadToS3 from 'common/components/ImageUploader/uploadToS3';
-import { ImageUploaderProps, SignedObject, UploadedImage, ImageUploaderHookProps } from 'common/components/ImageUploader/types';
+import { useState, useEffect } from "react";
+import { useDropzone } from "react-dropzone";
+import { useGetSignedUrlsLazyQuery } from "common/components/ImageUploader/useImageUploader/useImageUploader.generated";
+import uploadToS3 from "common/components/ImageUploader/uploadToS3";
+import { ImageUploaderProps, SignedObject, UploadedImage, ImageUploaderHookProps } from "common/components/ImageUploader/types";
 
-type ImageMimeTypes = 'image/gif' | 'image/jpeg' | 'image/png';
+type ImageMimeTypes = "image/gif" | "image/jpeg" | "image/png";
 
-const acceptedMimeTypes: ImageMimeTypes[] = ['image/gif', 'image/jpeg', 'image/png'];
+const acceptedMimeTypes: ImageMimeTypes[] = ["image/gif", "image/jpeg", "image/png"];
 
 const useImageUploader = ({ initialValues = [], onCompleted }: ImageUploaderHookProps = {}): ImageUploaderProps => {
-  const [signedObjects, setSignedObjects] = useState<SignedObject[]>([]);
+  const [signedObjects, setSignedObjects] = useState<SignedObject[] | null>(null);
   const [state, setState] = useState({ error: false, loading: false });
   const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>(initialValues);
   const [getSignedUrls] = useGetSignedUrlsLazyQuery({
-    onCompleted: data => setSignedObjects(data.getSignedUrlsToUploadImages),
-    onError: () => setState({ error: true, loading: false })
+    onCompleted: (data) => setSignedObjects(data.getSignedUrlsToUploadImages),
+    onError: () => setState({ error: true, loading: false }),
   });
 
   const { getRootProps, getInputProps, isDragActive, acceptedFiles, rejectedFiles, open } = useDropzone({
     accept: acceptedMimeTypes,
-    onDropAccepted: files => {
+    onDropAccepted: (files) => {
       setState({ error: false, loading: true });
       getSignedUrls({
         variables: {
-          filenames: files.map(file => file.name)
-        }
+          filenames: files.map((file) => file.name),
+        },
       });
-    }
+    },
   });
 
   useEffect(() => {
-    if (signedObjects.length > 0) {
-      const filePromises = signedObjects.map(signedObj => {
-        const fileToUpload = acceptedFiles.find(acceptedFile => acceptedFile.name === signedObj.originalFilename);
+    if (signedObjects !== null) {
+      const filePromises = signedObjects.map((signedObj) => {
+        const fileToUpload = acceptedFiles.find((acceptedFile) => acceptedFile.name === signedObj.originalFilename);
 
         if (!fileToUpload) {
-          throw new Error('Unable to find image to upload!');
+          throw new Error("Unable to find image to upload!");
         }
 
         return uploadToS3(signedObj, fileToUpload);
       });
 
       Promise.all(filePromises)
-        .then(newUploadedImages => {
+        .then((newUploadedImages) => {
           setState({ error: false, loading: false });
-          setSignedObjects([]);
+          setSignedObjects(null);
           setUploadedImages(newUploadedImages);
           if (onCompleted) {
             onCompleted(newUploadedImages);
           }
         })
         .catch(() => {
-          throw new Error('Unable to upload images!');
+          throw new Error("Unable to upload images!");
         });
     }
-  }, [acceptedFiles, signedObjects, onCompleted]);
+  }, [acceptedFiles, signedObjects, setState, setSignedObjects, setUploadedImages, onCompleted]);
 
   const deleteUpload = (index: number): void => {
-    setUploadedImages(prevUploadedImages => {
+    setUploadedImages((prevUploadedImages) => {
       const newUploadedImages = prevUploadedImages.slice(0, index).concat(prevUploadedImages.slice(index + 1, prevUploadedImages.length));
 
       return newUploadedImages;
@@ -72,17 +72,17 @@ const useImageUploader = ({ initialValues = [], onCompleted }: ImageUploaderHook
     state: {
       error: state.error,
       loading: state.loading,
-      dragging: isDragActive
+      dragging: isDragActive,
     },
     uploadedImages,
     rejectedFiles,
     dropzoneSetup: {
       getRootProps,
       getInputProps,
-      open
+      open,
     },
     deleteAllUploads,
-    deleteUpload
+    deleteUpload,
   };
 };
 

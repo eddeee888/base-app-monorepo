@@ -11,22 +11,22 @@ export type Scalars = {
 };
 
 export type File = {
-  __typename: 'File';
-  id: Scalars['ID'];
-  src: Scalars['String'];
-  originalFilename: Scalars['String'];
+  __typename: "File";
+  id: Scalars["ID"];
+  src: Scalars["String"];
+  originalFilename: Scalars["String"];
 };
 
 export type LoginInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars["String"];
+  password: Scalars["String"];
 };
 
 export type Mutation = {
-  __typename: 'Mutation';
+  __typename: "Mutation";
   signup: User;
   login?: Maybe<User>;
-  logout: Scalars['Boolean'];
+  logout: Scalars["Boolean"];
   userUpdate: User;
 };
 
@@ -43,47 +43,47 @@ export type MutationUserUpdateArgs = {
 };
 
 export type Query = {
-  __typename: 'Query';
+  __typename: "Query";
   user?: Maybe<User>;
   getSignedUrlsToUploadImages: Array<S3SignedObject>;
 };
 
 export type QueryUserArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
 
 export type QueryGetSignedUrlsToUploadImagesArgs = {
-  filenames: Array<Scalars['String']>;
+  filenames: Array<Scalars["String"]>;
 };
 
 /** AWS Sign URL to upload image */
 export type S3SignedObject = {
-  __typename: 'S3SignedObject';
-  src: Scalars['String'];
-  filename: Scalars['String'];
-  originalFilename: Scalars['String'];
-  uploadUrl: Scalars['String'];
+  __typename: "S3SignedObject";
+  src: Scalars["String"];
+  filename: Scalars["String"];
+  originalFilename: Scalars["String"];
+  uploadUrl: Scalars["String"];
 };
 
 export type SignupInput = {
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars["String"];
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+  password: Scalars["String"];
 };
 
 /** User */
 export type User = {
-  __typename: 'User';
-  id: Scalars['ID'];
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  displayName?: Maybe<Scalars['String']>;
-  avatar?: Maybe<Scalars['String']>;
+  __typename: "User";
+  id: Scalars["ID"];
+  email: Scalars["String"];
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+  displayName?: Maybe<Scalars["String"]>;
+  avatar?: Maybe<Scalars["String"]>;
 };
 
 export type UserUpdateInput = {
-  id: Scalars['ID'];
-  avatar?: Maybe<Scalars['String']>;
+  id: Scalars["ID"];
+  avatar?: Maybe<Scalars["String"]>;
 };

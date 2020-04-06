@@ -1,17 +1,17 @@
-import FormError from 'common/components/FormError';
-import { Field, FieldProps, FormikErrors, FormikHandlers, FormikTouched, getIn } from 'formik';
-import React from 'react';
+import FormError from "common/components/FormError";
+import { Field, FieldProps, FormikErrors, FormikHandlers, FormikTouched, getIn } from "formik";
+import React from "react";
 
 interface FormFieldProps<Element> {
   field: {
-    onChange: FormikHandlers['handleChange'];
-    onBlur: FormikHandlers['handleBlur'];
+    onChange: FormikHandlers["handleChange"];
+    onBlur: FormikHandlers["handleBlur"];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     value: any;
     name: string;
     error: boolean;
   };
-  form: FieldProps<Element>['form'];
+  form: FieldProps<Element>["form"];
 }
 
 interface Props<Input, Element> {
@@ -35,9 +35,9 @@ function FormFieldArray<Input, Element>({ name, index, property, errors, touched
           {children({
             field: {
               ...fieldProps.field,
-              error: !!fieldError && !!fieldTouched
+              error: !!fieldError && !!fieldTouched,
             },
-            form: fieldProps.form
+            form: fieldProps.form,
           })}
           {fieldTouched && <FormError error={fieldError} />}
         </>

@@ -1,16 +1,16 @@
 /* eslint-disable */
-import * as Types from '../../../__generated__/types';
+import * as Types from "../../../__generated__/types";
 
-import * as Operations from './Login.graphql';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+import * as Operations from "./Login.graphql";
+import * as ApolloReactCommon from "@apollo/react-common";
+import * as ApolloReactHooks from "@apollo/react-hooks";
 
 export type LoginMutationVariables = {
   input: Types.LoginInput;
 };
 
-export type LoginMutation = { __typename: 'Mutation' } & {
-  login: Types.Maybe<{ __typename: 'User' } & Pick<Types.User, 'id' | 'avatar' | 'firstName'>>;
+export type LoginMutation = { __typename: "Mutation" } & {
+  login: Types.Maybe<{ __typename: "User" } & Pick<Types.User, "id" | "avatar" | "firstName">>;
 };
 
 export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>;

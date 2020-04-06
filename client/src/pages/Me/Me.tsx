@@ -1,24 +1,25 @@
-import React from 'react';
-import { useViewer } from 'common/components/ViewerProvider';
-import { Redirect } from 'react-router';
-import Main from 'common/ui/Main';
-import Block from 'common/ui/Block';
-import Paper from 'common/ui/Paper';
-import RouteToLogin from 'routes/RouteToLogin';
-import RouteToMe from 'routes/RouteToMe';
+import React from "react";
+import { useViewer } from "common/components/ViewerProvider";
+import { Redirect } from "react-router";
+import generateUrlMe from "routes/me/generateUrlMe";
+import generateUrlLogin from "routes/login/generateUrlLogin";
+import Main from "common/shared-ui/Main";
+import MainContent from "common/shared-ui/MainContent";
+import Paper from "common/shared-ui/Paper";
 
 const Me: React.FunctionComponent = () => {
   const { viewer } = useViewer();
 
   if (!viewer) {
-    return <Redirect to={RouteToLogin.generate({ urlQuery: { redirect: RouteToMe.generate({}) } })} />;
+    const redirectTo = generateUrlMe({});
+    return <Redirect to={generateUrlLogin({ urlQuery: { redirect: redirectTo } })} />;
   }
 
   return (
     <Main>
-      <Block size="lg">
+      <MainContent size="md">
         <Paper>Welcome, {viewer.id}</Paper>
-      </Block>
+      </MainContent>
     </Main>
   );
 };
