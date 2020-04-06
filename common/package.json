@@ -1,0 +1,38 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "Learnd common",
+  "author": "Eddy",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --noEmit false",
+    "watch": "concurrently -n Typescript,Chokidar \"yarn watch:ts\" \"yarn watch:dist\" -p \"[{name} - {time}]\" -c \"yellow\",\"blue\" ",
+    "watch:ts": "tsc -w --preserveWatchOutput",
+    "watch:dist": "node watcher.js",
+    "format": "prettier --write 'src/**/*.{ts,tsx}'"
+  },
+  "devDependencies": {
+    "@types/react": "16.9.32",
+    "@types/react-dom": "16.9.6",
+    "@types/yup": "0.26.34",
+    "@typescript-eslint/eslint-plugin": "2.26.0",
+    "@typescript-eslint/parser": "2.26.0",
+    "chokidar": "^3.3.1",
+    "concurrently": "^5.1.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.10.1",
+    "eslint-plugin-prettier": "3.1.2",
+    "eslint-plugin-react": "7.19.0",
+    "prettier": "2.0.2",
+    "typescript": "3.8.3"
+  },
+  "dependencies": {
+    "@material-ui/core": "4.9.9",
+    "@material-ui/icons": "4.9.1",
+    "apollo-client": "2.6.8",
+    "emotion": "10.0.27",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "yup": "0.28.3"
+  }
+}
