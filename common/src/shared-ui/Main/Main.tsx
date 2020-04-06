@@ -1,9 +1,7 @@
 import { css, cx } from "emotion";
 import React from "react";
 import { headerHeight, pageSize } from "../../shared-styles/sizes";
-import breakpoints from "../../shared-styles/media";
-
-breakpoints.up("md");
+import breakpoints from "../../shared-styles/breakpoints";
 
 export interface MainProps {
   children: React.ReactNode;
