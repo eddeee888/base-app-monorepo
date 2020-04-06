@@ -44,6 +44,14 @@ Running `docker` commands should now work. For example:
 $ docker ps
 ```
 
+#### Sharing commons
+
+To keep things simple, we do not share common components/functions/settings via published npm packages. Instead, `/common` serves as the place where commons live. When changes happen in source folders, they would get copied into target folders. Settings can be found and extended [here](./common/watcher.js#13-20). To start, run the following:
+
+```
+$ yarn ws common:watch
+```
+
 #### Turn on the containers the first time
 
 ```
