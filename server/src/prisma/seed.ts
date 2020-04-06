@@ -1,5 +1,5 @@
-import { hash } from '../libs/password';
-import { prisma } from '../prisma/generated/client';
+import { hash } from "../libs/password";
+import { prisma } from "../prisma/generated/client";
 
 (async () => {
   const numberOfUsers = 10;
@@ -8,10 +8,10 @@ import { prisma } from '../prisma/generated/client';
     const realIndex = index + 1;
     await prisma.createUser({
       email: `user+${realIndex}@gmail.com`,
-      firstName: 'User',
+      firstName: "User",
       lastName: String(realIndex),
-      password: await hash('12345678'),
-      userGroup: JSON.stringify({ user: true })
+      password: await hash("12345678"),
+      userGroup: JSON.stringify({ user: true }),
     });
   });
 })();
