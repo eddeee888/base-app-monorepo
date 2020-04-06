@@ -1,6 +1,6 @@
-import { QueryResolvers } from 'graphql/resolvers/types.generated';
+import { QueryResolvers } from "graphql/resolvers/types.generated";
 
-const User: QueryResolvers['user'] = async (parent, { id }, { prisma }) => {
+const User: QueryResolvers["user"] = async (parent, { id }, { prisma }) => {
   return await prisma.user({ id });
 };
 

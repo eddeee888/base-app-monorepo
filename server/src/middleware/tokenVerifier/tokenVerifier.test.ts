@@ -1,16 +1,16 @@
-import { Request } from 'jest-express/lib/request';
-import { Response } from 'jest-express/lib/response';
-import { TokenType } from 'libs/headers';
-import { sign, verify, JWTPayload } from 'libs/jwt';
-import tokenVerifier from './tokenVerifier';
+import { Request } from "jest-express/lib/request";
+import { Response } from "jest-express/lib/response";
+import { TokenType } from "libs/headers";
+import { sign, verify, JWTPayload } from "libs/jwt";
+import tokenVerifier from "./tokenVerifier";
 
-describe('tokenVerifier middleware', () => {
+describe("tokenVerifier middleware", () => {
   const request = new Request() as any;
   const response = new Response() as any;
   const next = jest.fn();
 
   const payload: JWTPayload = {
-    id: 'abc123'
+    id: "abc123",
   };
 
   const token = sign(payload);
@@ -22,11 +22,11 @@ describe('tokenVerifier middleware', () => {
     next.mockReset();
   });
 
-  it('should reset token, set user and call next if token is valid', async () => {
+  it("should reset token, set user and call next if token is valid", async () => {
     expect.assertions(4);
 
     request.setCookies({
-      [TokenType.accessToken]: token
+      [TokenType.accessToken]: token,
     });
 
     await tokenVerifier(request, response, next);
@@ -39,7 +39,7 @@ describe('tokenVerifier middleware', () => {
     expect(response.cookie).toHaveBeenCalledTimes(1);
   });
 
-  it('should not reset token if no token given', async () => {
+  it("should not reset token if no token given", async () => {
     expect.assertions(2);
 
     await tokenVerifier(request, response, next);
@@ -48,11 +48,11 @@ describe('tokenVerifier middleware', () => {
     expect(next).toHaveBeenCalledTimes(1);
   });
 
-  it('should not reset token if invalid token given', async () => {
+  it("should not reset token if invalid token given", async () => {
     expect.assertions(2);
 
     request.setCookies({
-      [TokenType.accessToken]: 'RANDOM TOKEN'
+      [TokenType.accessToken]: "RANDOM TOKEN",
     });
 
     await tokenVerifier(request, response, next);

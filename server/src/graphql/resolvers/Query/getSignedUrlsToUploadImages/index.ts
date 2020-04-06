@@ -1,1 +1,1 @@
-export { default } from './getSignedUrlsToUploadImages';
+export { default } from "./getSignedUrlsToUploadImages";

@@ -1,4 +1,4 @@
-import { compare as comparePassword } from 'bcryptjs';
+import { compare as comparePassword } from "bcryptjs";
 
 export type ComparePassword = (password: string, hashed: string) => Promise<boolean>;
 

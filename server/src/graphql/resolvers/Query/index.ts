@@ -1,1 +1,1 @@
-export { Query } from './Query';
+export { Query } from "./Query";

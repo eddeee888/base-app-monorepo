@@ -1,42 +1,42 @@
-import cookieParser = require('cookie-parser');
-import { importSchema } from 'graphql-import';
-import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
-import { getTokenFromRequest, setTokenToResponse, getViewerFromRequest } from 'libs/headers';
-import { sign, verify } from 'libs/jwt';
-import { compare, hash } from 'libs/password';
-import tokenVerifier from 'middleware/tokenVerifier';
-import { prisma } from 'prisma/generated/client';
-import { resolvers } from 'graphql/resolvers';
-import { IsLoggedInDirective } from 'graphql/directives';
+import cookieParser = require("cookie-parser");
+import { importSchema } from "graphql-import";
+import express from "express";
+import { ApolloServer } from "apollo-server-express";
+import { getTokenFromRequest, setTokenToResponse, getViewerFromRequest } from "libs/headers";
+import { sign, verify } from "libs/jwt";
+import { compare, hash } from "libs/password";
+import tokenVerifier from "middleware/tokenVerifier";
+import { prisma } from "prisma/generated/client";
+import { resolvers } from "graphql/resolvers";
+import { IsLoggedInDirective } from "graphql/directives";
 
 const PORT = process.env.PORT || 8000;
 
 const server = new ApolloServer({
-  typeDefs: importSchema('./src/graphql/schemas/schema.graphql'),
+  typeDefs: importSchema("./src/graphql/schemas/schema.graphql"),
   resolvers,
   schemaDirectives: {
-    isLoggedIn: IsLoggedInDirective
+    isLoggedIn: IsLoggedInDirective,
   },
-  context: async contextParams => ({
+  context: async (contextParams) => ({
     ...contextParams,
     prisma,
     viewer: await getViewerFromRequest(contextParams.req, prisma),
     utils: {
       headers: {
         getTokenFromRequest,
-        setTokenToResponse
+        setTokenToResponse,
       },
       jwt: {
         sign,
-        verify
+        verify,
       },
       password: {
         compare,
-        hash
-      }
-    }
-  })
+        hash,
+      },
+    },
+  }),
 });
 
 const app = express();
