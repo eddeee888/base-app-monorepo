@@ -46,10 +46,10 @@ $ docker ps
 
 #### Sharing commons
 
-To keep things simple, we do not share common components/functions/settings via published npm packages. Instead, `/common` serves as the place where commons live. When changes happen in source folders, they would get copied into target folders. Settings can be found and extended [here](./common/watcher.js#13-20). To start, run the following:
+To keep things simple, we do not share common components/functions/settings via published npm packages. Instead, `/common` serves as the place where commons live. When changes happen in source folders, they would get copied into target folders. Settings can be found and extended [here](./common/watcher.js#L13-L20). To start, run the following:
 
 ```
-$ yarn ws common:watch
+$ bra ws common:watch
 ```
 
 #### Turn on the containers the first time
@@ -84,6 +84,18 @@ $ bra start
 ```
 $ bra vm-down
 ```
+
+### Routing
+
+It is easy to make mistake when routing between multiple apps. Inner-app routing can be done with client-side routing while inter-app routing must be done with server-side routing. That is why we are using `route-codegen` manage routing between all apps.
+
+The config can be found [here](./route-manager/route-codegen.yml). After making changes, run the following to generate route modules:
+
+```
+bra ws routegen
+```
+
+Read more about [route-codegen](https://github.com/eddeee888/route-codegen)
 
 Made with ♥ by Eddy Nguyen
 https://eddy.works
