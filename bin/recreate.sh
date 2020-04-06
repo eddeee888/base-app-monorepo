@@ -1,9 +1,9 @@
 #!/bin/bash
 
 function recreate(){
-    local cmd="docker-compose rm -f -s $1 && docker-compose up -d $1"
+    local cmd="docker-compose rm -f -s $@ && docker-compose up -d $@"
     echo $cmd
     eval $cmd
 }
 
-recreate $1
+recreate $@

@@ -6,7 +6,7 @@ function dm_create(){
     echo $cmd_create
     eval $cmd_create
 
-    local cmd_increase_watchers="docker-machine ssh $1 'echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p'"
+    local cmd_increase_watchers="docker-machine ssh $1 'echo fs.inotify.max_user_watches=1048576 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p'"
     echo "*** Increasing IO Notify watch limit on docker machine"
     echo $cmd_increase_watchers
     eval $cmd_increase_watchers
