@@ -98,13 +98,6 @@ export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
-export type ResolverFn<TResult, TParent, TContext, TArgs> = (
-  parent: TParent,
-  args: TArgs,
-  context: TContext,
-  info: GraphQLResolveInfo
-) => Promise<TResult> | TResult;
-
 export type StitchingResolver<TResult, TParent, TContext, TArgs> = {
   fragment: string;
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
@@ -113,6 +106,13 @@ export type StitchingResolver<TResult, TParent, TContext, TArgs> = {
 export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
   | ResolverFn<TResult, TParent, TContext, TArgs>
   | StitchingResolver<TResult, TParent, TContext, TArgs>;
+
+export type ResolverFn<TResult, TParent, TContext, TArgs> = (
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => Promise<TResult> | TResult;
 
 export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
@@ -150,7 +150,9 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   parent: TParent,
   context: TContext,
   info: GraphQLResolveInfo
-) => Maybe<TTypes>;
+) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
+
+export type isTypeOfResolverFn<T = {}> = (obj: T, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
@@ -192,11 +194,13 @@ export type ResolversParentTypes = ResolversObject<{
   File: File;
 }>;
 
+export type IsLoggedInDirectiveArgs = { status?: Maybe<Scalars["Boolean"]> };
+
 export type IsLoggedInDirectiveResolver<
   Result,
   Parent,
   ContextType = ResolverContext,
-  Args = { status?: Maybe<Maybe<Scalars["Boolean"]>> }
+  Args = IsLoggedInDirectiveArgs
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type FileResolvers<
@@ -206,6 +210,7 @@ export type FileResolvers<
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   src?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   originalFilename?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type MutationResolvers<
@@ -240,6 +245,7 @@ export type S3SignedObjectResolvers<
   filename?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   originalFilename?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   uploadUrl?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type UserResolvers<
@@ -252,6 +258,7 @@ export type UserResolvers<
   lastName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   displayName?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   avatar?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type Resolvers<ContextType = ResolverContext> = ResolversObject<{
