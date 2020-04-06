@@ -5,17 +5,19 @@ Note: This setup is for Mac, you will have to do the equivalent if you use Linux
 ## Overview
 
 - Runs on Docker. More on Docker [here](./docs/DOCKER.md).
-- Stack: React, GraphQL, Express, Prisma and TypeScript. More on the stack [here](./docs/STACK.md)
+- Stack: React, GraphQL, Apollo Server, Prisma and TypeScript. More on the stack [here](./docs/STACK.md)
+- Routes are managed and generated for all apps by [route-codegen](https://github.com/eddeee888/route-codegen)
+- Monorepo setup with Yarn workspaces
 - Has scripts to set up and run main app commands. All scripts are located [here](./bin/)
 
 ### 🌟 Setting up CLI (Recommended)
 
-To start on MacOS, setting up the CLI command to make development easier. Go to the root of the project and run the init script. 
+To start on MacOS, setting up the CLI command to make development easier. Go to the root of the project and run the init script.
 
-For convenience, this will install packages in `client` and `graphql` folders and SSL for the webapp.
+For convenience, this will install packages, set up SSL and docker-machine.
 
 ```
-~/base-react-app/bin/init.sh
+$ ./bin/init.sh
 ```
 
 More on how it works [here](./docs/INIT.md)
@@ -46,16 +48,7 @@ $ docker ps
 
 ```
 $ bra build
-```
-
-Check the logs in your `client` and `graphql` containers:
-
-```
-$ bra logs -f client
-```
-
-```
-$ bra logs -f graphql
+$ bra up
 ```
 
 Once they have successfully built, go to the following URL from your favourite browser:

@@ -3,8 +3,10 @@
 Running `bin/init.sh` does the following:
 
 - Set up `bra` as the project command
-- Set up https://bit.dev/ as a package registry (We use some shared packages hosted on here) 
 - Create a custom DNS resolver
+- Set up SSL for reverse-proxy
+- Create a docker machine
+- Install packages for workspaces
 
 ## Project command
 
@@ -16,14 +18,6 @@ $ bra
 
 NOTE: This setup step is optional. You can use `docker-compose` from the root of the project as an alternative. All the scripts are inside `~/bra/bin/`
 
-## Bit
-
-Some packages in this project are hosted on https://bit.dev/. You can also run command manually:
-
-```
-npm config set '@bit:registry' https://node.bit.dev
-```
-
 ## Custom DNS resolver
 
 We want a nice URL for our dev environment, such as `http://bra.com.vm`. When init script is run, it automatically create a custom resolver for the `.vm` domain. This runs in a container called `vm-dnsmasq`. Running `docker ps` shoudl show something like this:
@@ -34,6 +28,7 @@ e9e861d92f73        andyshinn/dnsmasq:2.78   "dnsmasq -k --addres…"   About an
 ```
 
 This can be created using the following command:
+
 ```
 bra vm-up
 ```

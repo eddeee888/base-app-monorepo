@@ -6,8 +6,6 @@ services:
     build:
       context: ./client
       target: base
-      args:
-        BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
     command: yarn start
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
@@ -28,8 +26,6 @@ services:
     build:
       context: ./client-seo
       target: base
-      args:
-        BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
     command: yarn dev -p ${CLIENT_SEO_PORT}
     ports:
       - ${CLIENT_SEO_PORT}:${CLIENT_SEO_PORT}
@@ -49,8 +45,6 @@ services:
     build:
       context: ./server
       target: base
-      args:
-        BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
     command: yarn start
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
@@ -77,9 +71,6 @@ services:
     build:
       context: ./server
       target: base
-      args:
-        BIT_NPM_TOKEN: ${BIT_NPM_TOKEN}
-
     command: yarn start:crons
     environment:
       PRISMA_ENDPOINT: ${PRISMA_ENDPOINT}
