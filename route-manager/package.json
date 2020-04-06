@@ -1,0 +1,7 @@
+{
+  "name": "route-manager",
+  "version": "1.0.0",
+  "devDependencies": {
+    "route-codegen": "^0.2.2"
+  }
+}
