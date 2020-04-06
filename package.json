@@ -1,17 +1,30 @@
 {
   "name": "base-react-app",
+  "private": true,
   "version": "1.0.0",
-  "description": "Base react app boilerplate",
-  "main": "index.js",
+  "description": "Base react monorepo boilerplate",
   "repository": "git@github.com:eddeee888/base-react-app.git",
   "author": "Eddy Nguyen <eddeee.nguyen@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "add-route-codegen": "yarn add -D route-codegen && cd client && yarn add route-codegen && cd ../client-seo && yarn add route-codegen && cd ../server && yarn add route-codegen",
-    "run-route-codegen": "route-codegen && cd client && yarn format:prettier && cd ../client-seo && yarn format:prettier && cd ../server && yarn format:prettier"
+    "routegen": "yarn workspace route-manager route-codegen && concurrently -n client,client-seo,server \"yarn workspace client prettier --write  'src/routes/**/*.{ts,tsx}'\"  \"yarn workspace client-seo prettier --write  'src/routes/**/*.{ts,tsx}'\" \"yarn workspace server prettier --write  'src/routes/**/*.{ts,tsx}'\"   -p \"[{name} - {time}]\" -c \"yellow\",\"blue\",\"red\"",
+    "format": "concurrently -n common,client,client-seo,server \"yarn workspace common format\" \"yarn workspace client format\" \"yarn workspace client-seo format\" \"yarn workspace server format\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"red\"",
+    "common:watch": "yarn workspace common watch"
+  },
+  "workspaces": {
+    "packages": [
+      "common",
+      "client",
+      "client-seo",
+      "server",
+      "route-manager"
+    ],
+    "nohoist": [
+      "**"
+    ]
   },
   "dependencies": {},
   "devDependencies": {
-    "route-codegen": "^0.1.2"
+    "concurrently": "^5.1.0"
   }
 }

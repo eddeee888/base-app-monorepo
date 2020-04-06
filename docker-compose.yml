@@ -20,7 +20,7 @@ services:
       TSC_WATCHFILE: "UseFsEventsWithFallbackDynamicPolling"
     volumes:
       - ./client/src:/usr/src/app/src
-      - ./client/yarn.lock:/usr/src/app/yarn.lock
+      - ./client/package.json:/usr/src/app/package.json
     networks:
       - com_vm
 
@@ -39,7 +39,7 @@ services:
     volumes:
       - ./client-seo/pages:/usr/src/app/pages
       - ./client-seo/src:/usr/src/app/src
-      - ./client-seo/yarn.lock:/usr/src/app/yarn.lock
+      - ./client-seo/package.json:/usr/src/app/package.json
       - ./client-seo/.next:/usr/src/app/.next
     networks:
       - com_vm
@@ -66,7 +66,7 @@ services:
       AWS_S3_IMAGES_GET_SIGNED_URL_API_KEY: ${AWS_S3_IMAGES_GET_SIGNED_URL_API_KEY}
     volumes:
       - ./server/src:/usr/src/app/src
-      - ./server/yarn.lock:/usr/src/app/yarn.lock
+      - ./server/package.json:/usr/src/app/package.json
     depends_on:
       - prisma
     networks:
@@ -86,7 +86,7 @@ services:
       PRISMA_SECRET: ${PRISMA_SECRET}
     volumes:
       - ./server/src:/usr/src/app/src
-      - ./server/yarn.lock:/usr/src/app/yarn.lock
+      - ./server/package.json:/usr/src/app/package.json
     depends_on:
       - prisma
 
