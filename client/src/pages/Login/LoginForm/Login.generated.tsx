@@ -10,7 +10,7 @@ export type LoginMutationVariables = {
 };
 
 export type LoginMutation = { __typename: "Mutation" } & {
-  login: Types.Maybe<{ __typename: "User" } & Pick<Types.User, "id" | "avatar" | "firstName">>;
+  login?: Types.Maybe<{ __typename: "User" } & Pick<Types.User, "id" | "avatar" | "firstName">>;
 };
 
 export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>;

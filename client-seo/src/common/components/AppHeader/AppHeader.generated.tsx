@@ -8,7 +8,7 @@ import * as ApolloReactHooks from "@apollo/react-hooks";
 export type ViewerQueryVariables = {};
 
 export type ViewerQuery = { __typename: "Query" } & {
-  me: Types.Maybe<{ __typename: "User" } & Pick<Types.User, "id" | "firstName" | "avatar">>;
+  me?: Types.Maybe<{ __typename: "User" } & Pick<Types.User, "id" | "firstName" | "avatar">>;
 };
 
 /**

@@ -44,6 +44,7 @@ export type MutationUserUpdateArgs = {
 
 export type Query = {
   __typename: "Query";
+  me?: Maybe<User>;
   user?: Maybe<User>;
   getSignedUrlsToUploadImages: Array<S3SignedObject>;
 };

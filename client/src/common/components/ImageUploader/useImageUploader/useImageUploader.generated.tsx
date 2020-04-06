@@ -13,9 +13,10 @@ export type GetSignedUrlsQuery = { __typename: "Query" } & {
   getSignedUrlsToUploadImages: Array<{ __typename: "S3SignedObject" } & SignedImageObject_S3SignedObjectFragment>;
 };
 
-export type SignedImageObject_S3SignedObjectFragment = {
-  __typename: "S3SignedObject";
-} & Pick<Types.S3SignedObject, "src" | "filename" | "originalFilename" | "uploadUrl">;
+export type SignedImageObject_S3SignedObjectFragment = { __typename: "S3SignedObject" } & Pick<
+  Types.S3SignedObject,
+  "src" | "filename" | "originalFilename" | "uploadUrl"
+>;
 
 /**
  * __useGetSignedUrlsQuery__
