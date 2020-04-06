@@ -28,7 +28,9 @@ const MainBanner: React.FunctionComponent = () => {
         <Box paddingX={2} className={boxFullWidthClassName}>
           <Grid container direction="column">
             <Grid item xs>
-              <H1 className={h1ClassName}>Welcome!</H1>
+              <H1 className={h1ClassName} align="center">
+                Welcome!
+              </H1>
             </Grid>
           </Grid>
         </Box>
