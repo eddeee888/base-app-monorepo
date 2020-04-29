@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "src/*": ["./src/*"]
-    },
+    "baseUrl": "./src",
     "target": "es5",
     "lib": ["es5", "es6", "dom", "esnext.asynciterable"],
     "module": "esnext",

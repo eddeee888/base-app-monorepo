@@ -1,4 +1,4 @@
-FROM node:12.8.0-alpine as base
+FROM node:13.12.0-alpine3.11 AS base
 
 WORKDIR /usr/src/app
 RUN apk update \ 

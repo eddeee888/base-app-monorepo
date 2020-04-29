@@ -11,5 +11,5 @@ yarn prisma:deploy && yarn prisma:seed
 To generate from GraphQL schema:
 
 ```
-yarn gg
+yarn gqlgen
 ```

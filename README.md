@@ -1,4 +1,4 @@
-# Base React App
+# Base App Monorepo
 
 Note: This setup is for Mac, you will have to do the equivalent if you use Linux or Windows
 
@@ -29,13 +29,13 @@ More on how it works [here](./docs/INIT.md)
 We use Docker machine since it gives us better performance compared to Docker for Mac. We create the machine and DNS resolver using the following command:
 
 ```
-$ bra vm-up
+$ bam vm-up
 ```
 
 Then, we switch into the docker-machine environment by running:
 
 ```
-$ eval $(docker-machine env bra)
+$ eval $(docker-machine env bam)
 ```
 
 Running `docker` commands should now work. For example:
@@ -49,20 +49,20 @@ $ docker ps
 To keep things simple, we do not share common components/functions/settings via published npm packages. Instead, `/common` serves as the place where commons live. When changes happen in source folders, they would get copied into target folders. Settings can be found and extended [here](./common/watcher.js#L13-L20). To start, run the following:
 
 ```
-$ bra ws common:watch
+$ bam ws common:watch
 ```
 
 #### Turn on the containers the first time
 
 ```
-$ bra build
-$ bra up
+$ bam build
+$ bam up
 ```
 
 Once they have successfully built, go to the following URL from your favourite browser:
 
 ```
-https://bra.com.vm/
+https://bam.com.vm/
 ```
 
 #### Generate dummy data
@@ -70,19 +70,13 @@ https://bra.com.vm/
 Here's the script to generate some dummy data to get started!
 
 ```
-$ bra init-data
-```
-
-#### Start containers without building
-
-```
-$ bra start
+$ bam init-data
 ```
 
 #### Turn off everything
 
 ```
-$ bra vm-down
+$ bam vm-down
 ```
 
 ### Routing
@@ -92,7 +86,7 @@ It is easy to make mistake when routing between multiple apps. Inner-app routing
 The config can be found [here](./route-manager/route-codegen.yml). After making changes, run the following to generate route modules:
 
 ```
-bra ws routegen
+bam ws routegen
 ```
 
 Read more about [route-codegen](https://github.com/eddeee888/route-codegen)

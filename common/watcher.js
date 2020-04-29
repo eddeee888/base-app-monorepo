@@ -11,11 +11,12 @@ const SERVER_DESTINATION = "../server/src/libs";
 // Note: config key is the immediate dir after SOURCE_ROOT. We only support 1 level.
 // i.e. DO NOT do shared-something/something
 const config = {
-  "shared-localStorage": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
+  "shared-apollo": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
+  "shared-local-storage": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
   "shared-styles": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
   "shared-typings": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
   "shared-ui": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
-  "shared-graphqlErrors": [CLIENT_DESTINATION],
+  "shared-graphql-errors": [CLIENT_DESTINATION],
   "shared-validations": [CLIENT_DESTINATION, SERVER_DESTINATION],
 };
 
@@ -50,7 +51,7 @@ const copyFile = (event, parsedConfig, filePath) => {
 
   const destinations = parsedConfig[configDirKey];
   if (!destinations) {
-    console.log(`Unable to get destinations for ${configDirKey}`);
+    console.log(`[WARNING] Unable to get destinations for ${configDirKey}`);
     return;
   }
 

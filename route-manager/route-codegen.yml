@@ -12,8 +12,6 @@ apps:
         propsNamedImport: LinkProps
         hrefProp: to
         from: common/components/Link
-      useParams: true
-      useRedirect: true
     defaultLinkOptions:
       importCustomLink:
         componentDefaultImport: true
@@ -31,15 +29,18 @@ apps:
         componentDefaultImport: true
         propsNamedImport: LinkProps
         hrefProp: href
-        from: src/common/components/Link
+        from: common/components/Link
     defaultLinkOptions:
       importCustomLink:
         componentDefaultImport: true
         propsNamedImport: AnchorProps
         hrefProp: href
-        from: src/common/shared-ui/Anchor
+        from: common/shared-ui/Anchor
     destinationDir: ../client-seo/src/routes
 
   server:
-    generateLink: false
+    generateLinkComponent: false
+    generateRedirectComponent: false
+    generateUseParams: false
+    generateUseRedirect: false
     destinationDir: ../server/src/routes

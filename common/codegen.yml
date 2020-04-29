@@ -1,0 +1,15 @@
+overwrite: true
+schema: "./../server/src/graphql/schemas/schema.graphql"
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+generates:
+  src/__generated__/types.ts:
+    plugins:
+      - add: "/* eslint-disable */"
+      - "typescript"
+    config:
+      enumsAsTypes: true
+      nonOptionalTypename: true
+      scalars:
+        DateTime: string

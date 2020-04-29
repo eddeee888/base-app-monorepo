@@ -1,8 +1,8 @@
 #!/bin/bash
 
-CORE_CMD_NAME="bra"
+CORE_CMD_NAME="bam"
 USR_BIN="/usr/local/bin"
-COMMON_NAME="bra.com.vm"
+COMMON_NAME="bam.com.vm"
 TOP_LEVEL_DOMAIN="vm"
 DNS_PORT=53535
 DNS_CONTAINER_NAME="${TOP_LEVEL_DOMAIN}-dnsmasq" 

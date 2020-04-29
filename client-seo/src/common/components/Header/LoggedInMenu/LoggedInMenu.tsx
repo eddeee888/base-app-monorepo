@@ -1,10 +1,10 @@
 import React from "react";
 import { Popper, Grow, ClickAwayListener, MenuList, MenuItem, Paper } from "@material-ui/core";
-import AnchorButton from "src/common/shared-ui/AnchorButton";
-import Avatar from "src/common/shared-ui/Avatar";
-import { Viewer } from "src/common/components/Header/Header";
-import LinkMe from "src/routes/me/LinkMe";
-import LinkLogout from "src/routes/logout/LinkLogout";
+import AnchorButton from "common/shared-ui/AnchorButton";
+import Avatar from "common/shared-ui/Avatar";
+import LinkMe from "routes/me/LinkMe";
+import LinkLogout from "routes/logout/LinkLogout";
+import { Viewer } from "common/components/ViewerQuery";
 
 interface LoggedInMenuProps {
   viewer: Viewer;

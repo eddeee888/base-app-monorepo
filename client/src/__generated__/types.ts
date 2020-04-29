@@ -10,13 +10,6 @@ export type Scalars = {
   Float: number;
 };
 
-export type File = {
-  __typename: "File";
-  id: Scalars["ID"];
-  src: Scalars["String"];
-  originalFilename: Scalars["String"];
-};
-
 export type LoginInput = {
   email: Scalars["String"];
   password: Scalars["String"];

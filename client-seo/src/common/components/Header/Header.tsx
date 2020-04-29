@@ -1,15 +1,16 @@
 import { css } from "emotion";
 import React from "react";
-import Button from "src/common/shared-ui/Button";
-import Logo from "src/common/shared-ui/Logo";
+import Button from "common/shared-ui/Button";
+import Logo from "common/shared-ui/Logo";
 import { Grid } from "@material-ui/core";
-import LoggedInMenu from "src/common/components/Header/LoggedInMenu";
-import LinkHome from "src/routes/home/LinkHome";
-import LinkSignup from "src/routes/signup/LinkSignup";
-import LinkLogin from "src/routes/login/LinkLogin";
-import { headerHeight } from "src/common/shared-styles/sizes";
-import { primaryBackgroundColor, borderColor } from "src/common/shared-styles/colors";
-import breakpoints from "src/common/shared-styles/breakpoints";
+import LoggedInMenu from "common/components/Header/LoggedInMenu";
+import LinkHome from "routes/home/LinkHome";
+import LinkSignup from "routes/signup/LinkSignup";
+import LinkLogin from "routes/login/LinkLogin";
+import { headerHeight } from "common/shared-styles/sizes";
+import { primaryBackgroundColor, borderColor } from "common/shared-styles/colors";
+import breakpoints from "common/shared-styles/breakpoints";
+import { useViewer } from "common/components/ViewerQuery";
 
 const headerClassName = css`
   width: 100%;
@@ -33,17 +34,9 @@ const logoClassName = css`
   display: block;
 `;
 
-export interface Viewer {
-  id: string;
-  avatar?: string | null;
-  firstName: string;
-}
+const Header: React.FunctionComponent = () => {
+  const viewer = useViewer();
 
-export interface HeaderProps {
-  viewer: Viewer | null;
-}
-
-const Header: React.FunctionComponent<HeaderProps> = ({ viewer }) => {
   return (
     <header className={headerClassName}>
       <Grid container justify="space-between" alignItems="center">

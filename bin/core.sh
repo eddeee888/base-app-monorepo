@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # We are running this from /usr/local/bin
-CORE_CMD_NAME="bra"
+CORE_CMD_NAME="bam"
 
 
 function display_help(){

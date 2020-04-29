@@ -74,7 +74,18 @@ function create_resolver_file {
   echo "---"
 }
 
+function increase_watchers {
+  local cmd_increase_watchers="docker-machine ssh $CORE_CMD_NAME 'echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p'"
+  echo "*** Increasing IO Notify watch limit on docker machine"
+  echo ""
+  echo $cmd_increase_watchers
+  eval $cmd_increase_watchers
+  echo ""
+  echo "---"
+}
+
 start_docker_machine
 docker_machine_env
 set_up_dnsmasq
 create_resolver_file
+increase_watchers

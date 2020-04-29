@@ -5,7 +5,7 @@ module.exports = {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
-      loader: 'graphql-tag/loader'
+      loader: "graphql-tag/loader",
     });
 
     return config;
@@ -13,8 +13,8 @@ module.exports = {
   webpackDevMiddleware: (config) => {
     config.watchOptions = {
       poll: 1000,
-      aggregateTimeout: 1000
+      aggregateTimeout: 1000,
     };
     return config;
-  }
+  },
 };

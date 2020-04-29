@@ -11,7 +11,9 @@ const buttonClassName = css`
 export type AnchorButtonProps = Omit<Omit<LinkProps<"button">, "component">, "href">;
 
 const AnchorButton = React.forwardRef<HTMLButtonElement, AnchorButtonProps>(function InnerAnchorButton(props, ref) {
-  return <Link underline="none" color="primary" classes={{ button: buttonClassName }} {...props} component="button" ref={ref} />;
+  return (
+    <Link underline="none" color="primary" classes={{ button: buttonClassName }} {...props} component="button" ref={ref} type="button" />
+  );
 });
 
 export default AnchorButton;

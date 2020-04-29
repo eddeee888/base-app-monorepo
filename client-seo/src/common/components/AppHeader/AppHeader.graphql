@@ -1,7 +1,0 @@
-query Viewer {
-  me {
-    id
-    firstName
-    avatar
-  }
-}

@@ -1,15 +1,21 @@
 {
-  "name": "base-react-app",
+  "name": "bam",
   "private": true,
   "version": "1.0.0",
-  "description": "Base react monorepo boilerplate",
-  "repository": "git@github.com:eddeee888/base-react-app.git",
+  "repository": "git@github.com:eddeee888/base-app-monorepo.git",
   "author": "Eddy Nguyen <eddeee.nguyen@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "routegen": "yarn workspace route-manager route-codegen && concurrently -n client,client-seo,server \"yarn workspace client prettier --write  'src/routes/**/*.{ts,tsx}'\"  \"yarn workspace client-seo prettier --write  'src/routes/**/*.{ts,tsx}'\" \"yarn workspace server prettier --write  'src/routes/**/*.{ts,tsx}'\"   -p \"[{name} - {time}]\" -c \"yellow\",\"blue\",\"red\"",
+    "routegen": "rm -rf ./client/src/routes && rm -rf ./client-seo/src/routes && rm -rf ./server/src/routes && yarn workspace route-manager route-codegen --verbose --stacktrace && concurrently -n client,client-seo,server \"yarn workspace client prettier --write  'src/routes/**/*.{ts,tsx}'\"  \"yarn workspace client-seo prettier --write  'src/routes/**/*.{ts,tsx}'\" \"yarn workspace server prettier --write  'src/routes/**/*.{ts,tsx}'\"   -p \"[{name} - {time}]\" -c \"yellow\",\"blue\",\"red\"",
     "format": "concurrently -n common,client,client-seo,server \"yarn workspace common format\" \"yarn workspace client format\" \"yarn workspace client-seo format\" \"yarn workspace server format\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"red\"",
-    "common:watch": "yarn workspace common watch"
+    "common:watch": "yarn workspace common watch",
+    "gqlgen": "concurrently -n common,client,client-seo,server \"yarn common:gqlgen\" \"yarn client:gqlgen\" \"yarn client-seo:gqlgen\"  \"yarn server:gqlgen\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\"",
+    "common:gqlgen": "yarn workspace common gqlgen",
+    "client:gqlgen": "yarn workspace client gqlgen",
+    "client-seo:gqlgen": "yarn workspace client-seo gqlgen",
+    "server:gqlgen": "yarn workspace server gqlgen",
+    "prisma:clientgen": "yarn workspace server prisma:generate",
+    "prisma:token": "yarn workspace server prisma:token"
   },
   "workspaces": {
     "packages": [
@@ -26,5 +32,8 @@
   "dependencies": {},
   "devDependencies": {
     "concurrently": "^5.1.0"
+  },
+  "resolutions": {
+    "graphql-tools": "4.0.7"
   }
 }

@@ -1,14 +1,14 @@
 import React from "react";
 import Text from "common/shared-ui/Text";
 import TextError from "common/shared-ui/TextError";
-import Row from "common/shared-ui/Row";
 import { css } from "emotion";
 import Spinner from "common/shared-ui/Spinner";
 import { ImageUploaderProps } from "common/components/ImageUploader/types";
-import { Grid, IconButton } from "@material-ui/core";
+import { Grid, IconButton, Box } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import { spacingRem } from "common/shared-styles/spacings";
 import { borderColor, secondaryBackgroundColor } from "common/shared-styles/colors";
+import StandardSpace from "common/shared-ui/StandardSpace";
 
 const rootClassName = css`
   padding: ${spacingRem(4)}rem;
@@ -63,7 +63,7 @@ const ImageUploader: React.FunctionComponent<ImageUploaderProps> = ({
           <Grid container spacing={2}>
             {uploadedImages.map(({ src, originalFilename }, uploadedImageIndex) => (
               <Grid item xs={12} sm={6} md={4} key={src}>
-                <Row marginBottom={1}>
+                <Box marginBottom={1}>
                   <Grid container justify="flex-end" alignItems="center">
                     <Grid item xs={6}>
                       <Text>{originalFilename}</Text>
@@ -79,7 +79,7 @@ const ImageUploader: React.FunctionComponent<ImageUploaderProps> = ({
                       </IconButton>
                     </Grid>
                   </Grid>
-                </Row>
+                </Box>
                 <Grid item xs={12}>
                   <img className={imagePreviewClassName} alt="" src={src} />
                 </Grid>
@@ -89,19 +89,23 @@ const ImageUploader: React.FunctionComponent<ImageUploaderProps> = ({
         </>
       )}
       {state.error && (
-        <Row marginTop={2}>
+        <>
+          <StandardSpace />
           <TextError>Unexpected problem occurred. Please try again later.</TextError>
-        </Row>
+          <StandardSpace />
+        </>
       )}
       {hasRejectedFiles && (
-        <Row marginTop={2}>
+        <>
+          <StandardSpace />
           <Text>The following files failed to upload:</Text>
           {rejectedFiles.map((file) => (
             <div key={file.name}>
               <TextError>{file.name}</TextError>
             </div>
           ))}
-        </Row>
+          <StandardSpace />
+        </>
       )}
     </>
   );

@@ -1,0 +1,11 @@
+query Viewer {
+  me {
+    ...Viewer_user
+  }
+}
+
+fragment Viewer_user on User {
+  id
+  firstName
+  avatar
+}
