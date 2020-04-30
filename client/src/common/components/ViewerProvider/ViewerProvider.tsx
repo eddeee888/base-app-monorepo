@@ -1,4 +1,4 @@
-import { removeItem, getItem, setItem, Item } from "common/shared-localStorage";
+import { removeItem, getItem, setItem, Item } from "common/shared-local-storage";
 import React, { useContext, useState } from "react";
 
 export interface Viewer {

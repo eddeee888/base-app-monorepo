@@ -9,7 +9,7 @@ const yellowSea = "#f4a236";
 const white = "#ffffff";
 const snow = "#fafafa";
 const lightgray = "#cccccc";
-const whitesmoke = "#efefef";
+const whiteSmoke = "#f5f5f5";
 const charcoal = "#444444";
 const blackPearl = "#292b20";
 
@@ -18,7 +18,7 @@ const primaryColorLight = lightBlue;
 const secondaryColor = amaranth;
 const primaryBackgroundColor = white;
 const secondaryBackgroundColor = snow;
-const defaultBackgroundColor = whitesmoke;
+const defaultBackgroundColor = whiteSmoke;
 const textColor = shuttleGrey;
 const textOnCardColor = shuttleGrey;
 const textOnPrimaryColor = white;

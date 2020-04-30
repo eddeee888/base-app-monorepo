@@ -1,8 +1,6 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import { primaryColor, secondaryColor, textOnPrimaryColor, textOnSecondaryColor, textColor } from "./colors";
-import { primaryFont } from "./fonts";
-
-const fontFamily = [primaryFont, '"Helvetica Neue"', "Arial", "sans-serif"].join(",");
+import { fontFamily } from "./fonts";
 
 export const muiTheme = createMuiTheme({
   palette: {

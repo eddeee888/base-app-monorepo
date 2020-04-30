@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { GraphQLResolveInfo } from "graphql";
-import { UserMapper } from "graphql/models";
+import { UserMapper } from "graphql/mappers";
 import { ResolverContext, ResolverContextNotLoggedIn, ResolverContextLoggedIn } from "graphql/types";
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
@@ -12,13 +12,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-};
-
-export type File = {
-  __typename?: "File";
-  id: Scalars["ID"];
-  src: Scalars["String"];
-  originalFilename: Scalars["String"];
 };
 
 export type LoginInput = {
@@ -176,7 +169,6 @@ export type ResolversTypes = ResolversObject<{
   LoginInput: LoginInput;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   UserUpdateInput: UserUpdateInput;
-  File: ResolverTypeWrapper<File>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -191,7 +183,6 @@ export type ResolversParentTypes = ResolversObject<{
   LoginInput: LoginInput;
   Boolean: Scalars["Boolean"];
   UserUpdateInput: UserUpdateInput;
-  File: File;
 }>;
 
 export type IsLoggedInDirectiveArgs = { status?: Maybe<Scalars["Boolean"]> };
@@ -202,16 +193,6 @@ export type IsLoggedInDirectiveResolver<
   ContextType = ResolverContext,
   Args = IsLoggedInDirectiveArgs
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
-export type FileResolvers<
-  ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["File"] = ResolversParentTypes["File"]
-> = ResolversObject<{
-  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  src?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  originalFilename?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
 
 export type MutationResolvers<
   ContextType = ResolverContext,
@@ -262,7 +243,6 @@ export type UserResolvers<
 }>;
 
 export type Resolvers<ContextType = ResolverContext> = ResolversObject<{
-  File?: FileResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   S3SignedObject?: S3SignedObjectResolvers<ContextType>;

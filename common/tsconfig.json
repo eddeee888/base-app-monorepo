@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "rootDir": "src",
+    "baseUrl": "src",
     "outDir": "./dist",
     "lib": ["es5", "es6", "dom", "esnext.asynciterable"],
     "target": "es5",

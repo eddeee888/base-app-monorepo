@@ -1,7 +1,6 @@
 {
   "name": "common",
   "version": "1.0.0",
-  "description": "Learnd common",
   "author": "Eddy",
   "license": "MIT",
   "scripts": {
@@ -9,9 +8,14 @@
     "watch": "concurrently -n Typescript,Chokidar \"yarn watch:ts\" \"yarn watch:dist\" -p \"[{name} - {time}]\" -c \"yellow\",\"blue\" ",
     "watch:ts": "tsc -w --preserveWatchOutput",
     "watch:dist": "node watcher.js",
-    "format": "prettier --write 'src/**/*.{ts,tsx}'"
+    "format": "prettier --write 'src/**/*.{ts,tsx}'",
+    "gqlgen": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
+    "@graphql-codegen/add": "1.13.1",
+    "@graphql-codegen/cli": "1.13.1",
+    "@graphql-codegen/core": "1.13.1",
+    "@graphql-codegen/typescript": "1.13.1",
     "@types/react": "16.9.32",
     "@types/react-dom": "16.9.6",
     "@types/yup": "0.26.34",
@@ -23,13 +27,18 @@
     "eslint-config-prettier": "6.10.1",
     "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-react": "7.19.0",
+    "graphql": "14.6.0",
     "prettier": "2.0.2",
     "typescript": "3.8.3"
   },
   "dependencies": {
     "@material-ui/core": "4.9.9",
     "@material-ui/icons": "4.9.1",
+    "apollo-cache-inmemory": "1.6.0",
     "apollo-client": "2.6.8",
+    "apollo-link-error": "1.1.10",
+    "apollo-link-http": "1.5.14",
+    "apollo-link-state": "0.4.2",
     "emotion": "10.0.27",
     "react": "16.13.1",
     "react-dom": "16.13.1",

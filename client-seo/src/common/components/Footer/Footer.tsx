@@ -1,10 +1,10 @@
 import React from "react";
 import { css } from "emotion";
 import { Box, Grid } from "@material-ui/core";
-import Text from "src/common/shared-ui/Text";
-import LinkSignup from "src/routes/signup/LinkSignup";
-import LinkLogin from "src/routes/login/LinkLogin";
-import { footerBackgroundColor, textColor } from "src/common/shared-styles/colors";
+import Text from "common/shared-ui/Text";
+import LinkSignup from "routes/signup/LinkSignup";
+import LinkLogin from "routes/login/LinkLogin";
+import { footerBackgroundColor, textColor } from "common/shared-styles/colors";
 
 const footerClassName = css`
   width: 100%;

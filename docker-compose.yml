@@ -33,7 +33,6 @@ services:
       PORT: ${CLIENT_SEO_PORT}
       GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
     volumes:
-      - ./client-seo/pages:/usr/src/app/pages
       - ./client-seo/src:/usr/src/app/src
       - ./client-seo/package.json:/usr/src/app/package.json
       - ./client-seo/.next:/usr/src/app/.next

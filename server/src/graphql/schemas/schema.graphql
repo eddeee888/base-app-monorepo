@@ -47,9 +47,3 @@ type S3SignedObject {
   originalFilename: String!
   uploadUrl: String!
 }
-
-type File {
-  id: ID!
-  src: String!
-  originalFilename: String!
-}

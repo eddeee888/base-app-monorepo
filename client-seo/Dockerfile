@@ -1,4 +1,4 @@
-FROM node:12.8.0-alpine AS base
+FROM node:13.12.0-alpine3.11 AS base
 
 RUN apk update \ 
   && apk add bash \

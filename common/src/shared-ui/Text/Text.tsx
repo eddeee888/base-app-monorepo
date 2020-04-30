@@ -4,11 +4,11 @@ import React from "react";
 
 type AllowedTypographyProps = Pick<TypographyProps, "gutterBottom" | "variant" | "align" | "className">;
 
-interface Props {
-  children: React.ReactNode;
+export interface TextProps extends AllowedTypographyProps {
+  component?: React.ElementType;
 }
 
-const Text: React.FunctionComponent<Props & AllowedTypographyProps> = ({ children, ...props }) => (
+const Text: React.FunctionComponent<TextProps> = ({ children, ...props }) => (
   <Typography variant="body1" {...props}>
     {children}
   </Typography>

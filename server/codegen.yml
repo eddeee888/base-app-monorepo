@@ -22,4 +22,4 @@ generates:
       scalars:
         DateTime: string
       mappers:
-        User: graphql/models#UserMapper
+        User: graphql/mappers#UserMapper

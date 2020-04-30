@@ -11,7 +11,7 @@ import { useFormik } from "formik";
 import { SignupInput } from "__generated__/types";
 import useUrlQuery from "common/pathing/useUrlQuery";
 import LinkLogin from "routes/login/LinkLogin";
-import checkClientApolloError from "common/shared-graphqlErrors/checkClientApolloError";
+import checkClientApolloError from "common/shared-graphql-errors/checkClientApolloError";
 import passwordValidation from "common/shared-validations/passwordValidation";
 import nameValidation from "common/shared-validations/nameValidation";
 import emailValidation from "common/shared-validations/emailValidation";

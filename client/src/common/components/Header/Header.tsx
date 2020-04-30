@@ -11,6 +11,7 @@ import LinkLogin from "routes/login/LinkLogin";
 import { headerHeight } from "common/shared-styles/sizes";
 import { primaryBackgroundColor, borderColor } from "common/shared-styles/colors";
 import breakpoints from "common/shared-styles/breakpoints";
+import { useHeader } from "common/components/HeaderProvider";
 
 const headerClassName = css`
   width: 100%;
@@ -36,6 +37,12 @@ const logoClassName = css`
 
 const Header: React.FunctionComponent<{}> = () => {
   const { viewer } = useViewer();
+  const { isVisible } = useHeader();
+
+  if (!isVisible) {
+    return null;
+  }
+
   return (
     <header className={headerClassName}>
       <Grid container justify="space-between" alignItems="center">

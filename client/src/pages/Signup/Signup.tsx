@@ -6,19 +6,20 @@ import Main from "common/shared-ui/Main";
 import Paper from "common/shared-ui/Paper";
 import { useViewer } from "common/components/ViewerProvider";
 import React from "react";
-import { Redirect } from "react-router";
 import SignupForm from "./SignupForm";
 import useUrlQuery from "common/pathing/useUrlQuery";
 import generateUrlMe from "routes/me/generateUrlMe";
 import LinkHome from "routes/home/LinkHome";
 import MainContent from "common/shared-ui/MainContent";
+import RedirectServerSide from "route-codegen/RedirectServerSide";
+import Spinner from "common/shared-ui/Spinner";
 
 const Signup: React.FunctionComponent = () => {
   const { viewer } = useViewer();
   const { redirect } = useUrlQuery();
 
   if (viewer) {
-    return <Redirect to={redirect ? redirect : generateUrlMe({})} />;
+    return <RedirectServerSide href={redirect ? redirect : generateUrlMe({})} fallback={<Spinner size="fullPage" />} />;
   }
 
   return (
