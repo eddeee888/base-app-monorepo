@@ -26,7 +26,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/yup": "0.26.34",
-    "apollo-server": "2.9.4",
+    "apollo-server": "2.14.2",
     "apollo-server-express": "2.9.4",
     "axios": "^0.19.2",
     "bcryptjs": "2.4.3",
