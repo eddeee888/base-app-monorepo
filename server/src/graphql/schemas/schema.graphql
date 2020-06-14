@@ -1,9 +1,9 @@
 directive @isLoggedIn(status: Boolean) on FIELD_DEFINITION
+directive @isPrivate on FIELD_DEFINITION
 
 type Query {
   me: User
   user(id: ID!): User
-  getSignedUrlsToUploadImages(filenames: [String!]!): [S3SignedObject!]!
 }
 
 type Mutation {
@@ -33,17 +33,10 @@ input UserUpdateInput {
 # User
 type User {
   id: ID!
-  email: String!
-  firstName: String!
-  lastName: String!
-  displayName: String
+  email: String! @isPrivate
+  firstName: String! @isPrivate
+  lastName: String! @isPrivate
+  contactNumber: String @isPrivate
+  displayName: String!
   avatar: String
-}
-
-# AWS Sign URL to upload image
-type S3SignedObject {
-  src: String!
-  filename: String!
-  originalFilename: String!
-  uploadUrl: String!
 }

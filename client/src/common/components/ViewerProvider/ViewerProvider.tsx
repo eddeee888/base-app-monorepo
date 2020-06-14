@@ -1,11 +1,9 @@
-import { removeItem, getItem, setItem, Item } from "common/shared-local-storage";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { useViewerQuery, Viewer_UserFragment } from "./ViewerProvider.generated";
+import Error500 from "common/components/Error500";
+import Spinner from "common/shared-ui/Spinner";
 
-export interface Viewer {
-  id: string;
-  avatar?: string | null;
-  firstName: string;
-}
+export type Viewer = Omit<Viewer_UserFragment, "__typename">;
 export type SetViewerFn = (viewer: Viewer) => void;
 export type SetViewerAvatarFn = (avatar?: string | null) => void;
 export type ClearViewerFn = () => void;
@@ -23,6 +21,7 @@ interface UseViewerResult {
   viewer: Viewer | null;
   setViewer: SetViewerFn;
   setViewerAvatar: SetViewerAvatarFn;
+  setViewerFirstName: (firstName: string) => void;
   clearViewer: ClearViewerFn;
   isLoggedIn: boolean;
 }
@@ -30,19 +29,21 @@ interface UseViewerResult {
 const ViewerContext = React.createContext<ViewerContextValue | undefined>(undefined);
 
 const ViewerProvider = (props: ContextProps): React.ReactElement => {
-  const viewerId = getItem(Item.viewerId);
-  const avatar = getItem(Item.viewerAvatar);
-  const viewerFirstName = getItem(Item.viewerFirstName);
+  const [viewer, setViewerValue] = useState<Viewer | null>(null);
+  const { data, loading, error } = useViewerQuery();
+  useEffect(() => {
+    if (data && data.me) {
+      setViewerValue(data.me);
+    }
+  }, [data]);
 
-  const initialViewer: Viewer | null = viewerId
-    ? {
-        id: viewerId,
-        avatar,
-        firstName: viewerFirstName ? viewerFirstName : "",
-      }
-    : null;
+  if (error) {
+    return <Error500 />;
+  }
 
-  const [viewer, setViewerValue] = useState<Viewer | null>(initialViewer);
+  if (loading) {
+    return <Spinner size="fullPage" />;
+  }
 
   return (
     <ViewerContext.Provider
@@ -62,15 +63,16 @@ const useViewer = (): UseViewerResult => {
   }
   const { viewer, setViewerValue } = context;
 
-  const setViewer: SetViewerFn = (newViewer) => {
-    setItem(Item.viewerId, newViewer.id);
-    setItem(Item.viewerAvatar, newViewer.avatar);
-    setItem(Item.viewerFirstName, newViewer.firstName);
-    setViewerValue(newViewer);
+  const setViewerFirstName = (firstName: string): void => {
+    setViewerValue((prevViewer) => {
+      if (!prevViewer) {
+        return null;
+      }
+      return { ...prevViewer, firstName };
+    });
   };
 
   const setViewerAvatar: SetViewerAvatarFn = (avatar) => {
-    setItem(Item.viewerAvatar, avatar);
     setViewerValue((prevViewer) => {
       if (!prevViewer) {
         return null;
@@ -80,17 +82,15 @@ const useViewer = (): UseViewerResult => {
   };
 
   const clearViewer: ClearViewerFn = () => {
-    removeItem(Item.viewerId);
-    removeItem(Item.viewerAvatar);
-    removeItem(Item.viewerFirstName);
     setViewerValue(null);
   };
 
   return {
     viewer,
-    setViewer,
+    setViewer: setViewerValue,
     clearViewer,
     setViewerAvatar,
+    setViewerFirstName,
     isLoggedIn: !!viewer,
   };
 };

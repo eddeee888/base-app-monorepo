@@ -13,8 +13,9 @@
     "@apollo/react-hooks": "3.1.1",
     "@apollo/react-ssr": "3.1.1",
     "@emotion/core": "10.0.27",
-    "@material-ui/core": "4.9.9",
+    "@material-ui/core": "4.9.14",
     "@material-ui/icons": "4.9.1",
+    "@material-ui/lab": "4.0.0-alpha.53",
     "apollo-cache-inmemory": "1.6.0",
     "apollo-client": "2.6.8",
     "apollo-link-error": "1.1.10",
@@ -26,11 +27,11 @@
     "graphql": "14.6.0",
     "graphql-tag": "^2.10.1",
     "isomorphic-unfetch": "3.0.0",
-    "next": "9.3.4",
+    "next": "9.4.2",
     "next-with-apollo": "^5.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "route-codegen": "0.4.4"
+    "route-codegen": "0.6.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.13.1",
@@ -41,6 +42,7 @@
     "@graphql-codegen/typescript-operations": "1.13.1",
     "@graphql-codegen/typescript-react-apollo": "1.13.1",
     "@graphql-codegen/visitor-plugin-common": "1.13.1",
+    "@svgr/webpack": "^5.4.0",
     "@types/node": "^13.1.5",
     "@types/react": "16.9.32",
     "@types/react-router": "^5.1.4",

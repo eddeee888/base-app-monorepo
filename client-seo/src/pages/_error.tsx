@@ -1,22 +1,24 @@
 import React from "react";
-import Main from "common/shared-ui/Main";
-import MainContent from "common/shared-ui/MainContent";
+import { NextComponentType, NextPageContext } from "next";
+import PageError404 from "common/shared-page-errors/PageError404";
+import PageError500 from "common/shared-page-errors/PageError500";
 import Text from "common/shared-ui/Text";
-import { NextComponentType } from "next";
+import Anchor from "common/shared-ui/Anchor";
+import generateUrlHome from "routes/home/generateUrlHome";
+import generateUrlClientSeoStaticImage from "routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
 
-const Error: NextComponentType = () => {
-  return (
-    <Main>
-      <MainContent size="md">
-        <Text align="center">Unexpected error occurred. Please try again later.</Text>
-      </MainContent>
-    </Main>
+const Error: NextComponentType<NextPageContext, {}, { statusCode: number }> = ({ statusCode }) => {
+  const link = (
+    <Text align="center">
+      <Anchor href={generateUrlHome()}>Click here to go back to the homepage</Anchor>
+    </Text>
   );
-};
-
-Error.getInitialProps = ({ res, err }) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  return { statusCode };
+  switch (statusCode) {
+    case 404:
+      return <PageError404 imageSrc={generateUrlClientSeoStaticImage({ path: { imageName: "404.png" } })} link={link} />;
+    default:
+      return <PageError500 imageSrc={generateUrlClientSeoStaticImage({ path: { imageName: "500.png" } })} link={link} />;
+  }
 };
 
 export default Error;

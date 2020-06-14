@@ -1,5 +1,5 @@
 import React, { ErrorInfo } from "react";
-import ErrorGeneric from "common/components/ErrorGeneric";
+import Error500 from "common/components/Error500";
 
 interface State {
   error: Error | null;
@@ -24,7 +24,7 @@ class ErrorBoundary extends React.Component<{}, State> {
     const { error } = this.state;
     if (error) {
       console.error(error);
-      return <ErrorGeneric fullPage />;
+      return <Error500 />;
     }
 
     return children;

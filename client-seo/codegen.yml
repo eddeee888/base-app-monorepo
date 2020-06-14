@@ -6,7 +6,7 @@ hooks:
     - yarn eslint --fix --config .eslintrc.json
     - yarn prettier --write --config .prettierrc.json
 generates:
-  src/__generated__/types.ts:
+  src/common/__generated__/types.ts:
     plugins:
       - add: '/* eslint-disable */'
       - 'typescript'
@@ -16,14 +16,14 @@ generates:
       scalars:
         DateTime: string
 
-  src/__generated__/operations.d.ts:
+  src/common/__generated__/operations.d.ts:
     plugins:
       - typescript-graphql-files-modules
 
-  pages:
+  src:
     preset: near-operation-file
     presetConfig:
-      baseTypesPath: ./../src/__generated__/types.ts
+      baseTypesPath: common/__generated__/types.ts
       extension: .generated.tsx
     plugins:
       - add: '/* eslint-disable */'

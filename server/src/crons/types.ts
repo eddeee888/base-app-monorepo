@@ -1,5 +1,5 @@
-import { Prisma } from "prisma/generated/client";
+import { PrismaClient } from "@prisma/client";
 
 export interface CronContext {
-  prisma: Prisma;
+  prisma: PrismaClient;
 }

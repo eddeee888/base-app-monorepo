@@ -1,0 +1,42 @@
+Remove this line to activate this workflow
+name: Deploy lambda layer
+on:
+  push:
+    branches:
+      # Ignore the commits that are created when PR is merged into master
+      - "master"
+
+    paths:
+      - "server/package.json"
+
+jobs:
+  deploy-lambda-layer:
+    name: Build and deploy lambda layer
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install PROD packages
+        run: yarn --production
+
+      - name: Prepare lambda layer
+        run: ./ci/scripts/prepare-server-lambda-layer.sh
+
+      - name: AWS Lambda Layer Publish
+        uses: taotao2345/aws-lambda-publishlayer@v1.0.0
+        env:
+          AWS_REGION: us-east-1 # Cannot deploy to "ap-southeast-2" because main domain certificate ( manged by ACM ) is in "us-east-1"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        with:
+          layer_name: # Add target layer name here
+          zip_file: server/lambda-layers/nodejs.zip

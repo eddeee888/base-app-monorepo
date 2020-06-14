@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "REACT_APP_ENVIRONMENT=dev react-app-rewired start",
+    "build": "REACT_APP_ENVIRONMENT=prod react-app-rewired build",
     "analyse": "yarn build && yarn source-map-explorer 'build/static/js/*.js'",
     "test": "react-app-rewired test --transformIgnorePatterns \"./node_modules/(?!(@material-ui))/\"",
     "eject": "react-app-rewired eject",
@@ -15,9 +15,9 @@
   "dependencies": {
     "@apollo/react-common": "3.1.1",
     "@apollo/react-hooks": "3.1.3",
-    "@material-ui/core": "4.9.9",
+    "@material-ui/core": "4.9.14",
     "@material-ui/icons": "4.9.1",
-    "@material-ui/lab": "4.0.0-alpha.38",
+    "@material-ui/lab": "4.0.0-alpha.53",
     "apollo-cache-inmemory": "1.6.0",
     "apollo-client": "2.6.8",
     "apollo-link": "1.2.11",
@@ -35,7 +35,7 @@
     "react-router": "5.1.2",
     "react-router-dom": "5.1.2",
     "react-scripts": "3.4.1",
-    "route-codegen": "0.4.4",
+    "route-codegen": "0.6.0",
     "yup": "0.28.3"
   },
   "devDependencies": {
@@ -74,7 +74,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "homepage": "/app",
   "browserslist": [
     ">0.2%",
     "not dead",

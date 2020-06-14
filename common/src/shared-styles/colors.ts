@@ -1,7 +1,8 @@
 const vikingBlue = "#46a8c9";
 const lightBlue = "#aedae9";
+const hawkesBlue = "#dae0e6";
 const amaranth = "#F5225A";
-const shuttleGrey = "#5e6977";
+const eclipse = "#363636";
 const redOrange = "#f44336";
 const eucalyptus = "#339966";
 const yellowSea = "#f4a236";
@@ -9,7 +10,6 @@ const yellowSea = "#f4a236";
 const white = "#ffffff";
 const snow = "#fafafa";
 const lightgray = "#cccccc";
-const whiteSmoke = "#f5f5f5";
 const charcoal = "#444444";
 const blackPearl = "#292b20";
 
@@ -18,9 +18,9 @@ const primaryColorLight = lightBlue;
 const secondaryColor = amaranth;
 const primaryBackgroundColor = white;
 const secondaryBackgroundColor = snow;
-const defaultBackgroundColor = whiteSmoke;
-const textColor = shuttleGrey;
-const textOnCardColor = shuttleGrey;
+const defaultBackgroundColor = hawkesBlue;
+const textColor = eclipse;
+const textOnCardColor = eclipse;
 const textOnPrimaryColor = white;
 const textOnSecondaryColor = white;
 const borderColor = lightgray;
@@ -29,6 +29,8 @@ const textSuccessColor = eucalyptus;
 const textErrorColor = redOrange;
 const textWarningColor = yellowSea;
 const footerBackgroundColor = blackPearl;
+const footerTextColor = white;
+const footerLinkColorHover = vikingBlue;
 
 export {
   primaryColor,
@@ -47,4 +49,6 @@ export {
   textWarningColor,
   defaultBackgroundColor,
   footerBackgroundColor,
+  footerTextColor,
+  footerLinkColorHover,
 };

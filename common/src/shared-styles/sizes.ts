@@ -2,6 +2,7 @@ import { PageSizeValue } from "./types";
 
 export const headerHeight = "5rem";
 
+export const avatarExtraSmallPx = 45;
 export const avatarSmallPx = 60;
 export const avatarMediumPx = 100;
 export const avatarLargePx = 140;

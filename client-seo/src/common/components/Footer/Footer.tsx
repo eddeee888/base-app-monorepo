@@ -4,15 +4,26 @@ import { Box, Grid } from "@material-ui/core";
 import Text from "common/shared-ui/Text";
 import LinkSignup from "routes/signup/LinkSignup";
 import LinkLogin from "routes/login/LinkLogin";
-import { footerBackgroundColor, textColor } from "common/shared-styles/colors";
+import { footerBackgroundColor, footerTextColor, footerLinkColorHover } from "common/shared-styles/colors";
+import LinkTermAndConditions from "routes/termAndConditions/LinkTermAndConditions";
+import LinkPrivacyPolicy from "routes/privacyPolicy/LinkPrivacyPolicy";
 
 const footerClassName = css`
   width: 100%;
   background-color: ${footerBackgroundColor};
 `;
 
-const greyTextAnchorClassName = css`
-  color: ${textColor};
+const headingClassName = css`
+  color: ${footerTextColor};
+`;
+
+const anchorClassName = css`
+  color: ${footerTextColor};
+  transition: 0.3s;
+
+  &:hover {
+    color: ${footerLinkColorHover};
+  }
 `;
 
 const Footer: React.FunctionComponent = () => {
@@ -20,14 +31,28 @@ const Footer: React.FunctionComponent = () => {
     <footer className={footerClassName}>
       <Box paddingY={8}>
         <Grid container justify="center">
-          <Grid item>
-            <Text variant="h6">Get started</Text>
+          <Grid item xs={4} sm={2}>
+            <Text variant="h6" className={headingClassName}>
+              GET STARTED
+            </Text>
             <LinkSignup>
-              <Text className={greyTextAnchorClassName}>Sign up</Text>
+              <Text className={anchorClassName}>Sign up</Text>
             </LinkSignup>
             <LinkLogin>
-              <Text className={greyTextAnchorClassName}>Log in</Text>
+              <Text className={anchorClassName}>Log in</Text>
             </LinkLogin>
+          </Grid>
+
+          <Grid item xs={4} sm={2}>
+            <Text variant="h6" className={headingClassName}>
+              LEGALS
+            </Text>
+            <LinkTermAndConditions>
+              <Text className={anchorClassName}>Terms and Conditions</Text>
+            </LinkTermAndConditions>
+            <LinkPrivacyPolicy>
+              <Text className={anchorClassName}>Privacy</Text>
+            </LinkPrivacyPolicy>
           </Grid>
         </Grid>
       </Box>

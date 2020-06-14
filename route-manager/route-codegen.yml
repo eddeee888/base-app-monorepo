@@ -1,10 +1,11 @@
 apps:
   client:
+    origin: https://app.${PRIMARY_DOMAIN}
     routes:
-      login: /app/login
-      signup: /app/signup
-      logout: /app/logout
-      me: /app/me
+      login: /login
+      signup: /signup
+      logout: /logout
+      me: /me
     routingType: ReactRouterV5
     reactRouterV5LinkOptions:
       importCustomLink:
@@ -21,8 +22,14 @@ apps:
     destinationDir: ../client/src/routes
 
   client-seo:
+    origin: https://${PRIMARY_DOMAIN}
     routes:
       home: /
+      termAndConditions: /terms
+      privacyPolicy: /privacy
+      clientSeoStaticImage: /client-seo-static/images/:imageName
+      static404: /404
+      static500: /500
     routingType: NextJS
     nextJSLinkOptions:
       importCustomLink:
@@ -39,8 +46,11 @@ apps:
     destinationDir: ../client-seo/src/routes
 
   server:
+    origin: https://server.${PRIMARY_DOMAIN}
     generateLinkComponent: false
     generateRedirectComponent: false
     generateUseParams: false
     generateUseRedirect: false
+    routes: 
+      graphql: /graphql
     destinationDir: ../server/src/routes

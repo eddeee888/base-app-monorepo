@@ -1,10 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import { UrlPartsSignup, patternSignup } from "./patternSignup";
+import { UrlPartsSignup, patternSignup, originSignup } from "./patternSignup";
 import generateUrl from "route-codegen/generateUrl";
-export type RedirectSignup = (urlParts: UrlPartsSignup) => void;
-const useRedirectSignup = (): RedirectSignup => {
-  const redirect: RedirectSignup = (urlParts) => {
-    const to = generateUrl(patternSignup, {}, urlParts.urlQuery);
+export type RedirectFnSignup = (urlParts?: UrlPartsSignup) => void;
+const useRedirectSignup = (): RedirectFnSignup => {
+  const redirect: RedirectFnSignup = (urlParts) => {
+    const to = generateUrl(patternSignup, {}, urlParts?.urlQuery, urlParts?.origin ?? originSignup);
     if (!!window && !!window.location) {
       window.location.href = to;
     }

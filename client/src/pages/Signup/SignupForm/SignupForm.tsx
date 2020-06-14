@@ -8,13 +8,14 @@ import Text from "common/shared-ui/Text";
 import Button from "common/shared-ui/Button";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { SignupInput } from "__generated__/types";
+import { SignupInput } from "common/__generated__/types";
 import useUrlQuery from "common/pathing/useUrlQuery";
 import LinkLogin from "routes/login/LinkLogin";
 import checkClientApolloError from "common/shared-graphql-errors/checkClientApolloError";
 import passwordValidation from "common/shared-validations/passwordValidation";
 import nameValidation from "common/shared-validations/nameValidation";
 import emailValidation from "common/shared-validations/emailValidation";
+import StandardSpace from "common/shared-ui/StandardSpace";
 
 const validationSchema = Yup.object().shape({
   firstName: nameValidation("first"),
@@ -28,12 +29,7 @@ const SignupForm: React.FunctionComponent = () => {
   const query = useUrlQuery();
   const [formError, setFormError] = useState("");
   const [signup, { loading }] = useSignupMutation({
-    onCompleted: (data) =>
-      setViewer({
-        id: data.signup.id,
-        avatar: data.signup.avatar,
-        firstName: data.signup.firstName,
-      }),
+    onCompleted: (data) => setViewer(data.signup),
   });
 
   const formik = useFormik<SignupInput>({
@@ -51,11 +47,7 @@ const SignupForm: React.FunctionComponent = () => {
         });
 
         if (data) {
-          setViewer({
-            id: data.signup.id,
-            avatar: data.signup.avatar,
-            firstName: data.signup.firstName,
-          });
+          setViewer(data.signup);
         } else {
           setFormError("Unexpected error occurred!");
         }
@@ -106,6 +98,8 @@ const SignupForm: React.FunctionComponent = () => {
       <Text gutterBottom>
         Already have an account? <LinkLogin urlQuery={query}>Log in</LinkLogin>
       </Text>
+
+      <StandardSpace />
 
       <Button type="submit" disabled={loading} showSpinner={loading}>
         Submit

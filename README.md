@@ -44,25 +44,41 @@ Running `docker` commands should now work. For example:
 $ docker ps
 ```
 
+### Routing
+
+It is easy to make mistake when routing between multiple apps. Inner-app routing can be done with client-side routing while inter-app routing must be done with server-side routing. That is why we are using `route-codegen` manage routing between all apps.
+
+The config can be found [here](./route-manager/route-codegen.yml). After making changes, run the following to generate route modules:
+
+```
+$ bam ws routegen:dev
+```
+
+Read more about [route-codegen](https://github.com/eddeee888/route-codegen)
+
 #### Sharing commons
 
-To keep things simple, we do not share common components/functions/settings via published npm packages. Instead, `/common` serves as the place where commons live. When changes happen in source folders, they would get copied into target folders. Settings can be found and extended [here](./common/watcher.js#L13-L20). To start, run the following:
+To keep things simple, we do not share common components/functions/settings via published npm packages. Instead, `/common` serves as the place where commons live. When changes happen in source folders, they would get copied into target folders. Settings can be found and extended [here](./common/utils/config.js#L7-L17). To copy files from the common to destinations, run the following:
+
+```
+$ bam ws common:copy
+```
+
+Or run the following to watch for changes:
 
 ```
 $ bam ws common:watch
 ```
 
-#### Turn on the containers the first time
+#### GraphQL codegen
+
+We use [GraphQL codegenerator](https://github.com/dotansimha/graphql-code-generator) to generate typed code for all of our codebases from the [graph schema](./server/src/graphql/schemas/schema.graphql)
 
 ```
-$ bam build
-$ bam up
-```
-
-Once they have successfully built, go to the following URL from your favourite browser:
-
-```
-https://bam.com.vm/
+$ bam ws gqlgen # This runs codegen on all codebases or run one of the following to target a particular codebase
+$ bam ws client:gqlgen
+$ bam ws client-seo:gqlgen
+$ bam ws server:gqlgen
 ```
 
 #### Generate dummy data
@@ -73,23 +89,35 @@ Here's the script to generate some dummy data to get started!
 $ bam init-data
 ```
 
+#### Turn on the containers the first time
+
+```
+$ bam up
+```
+
+Once they have successfully built, go to the following URL from your favourite browser:
+
+```
+https://bam.dev/
+```
+
+Main frontend app e.g. login, logout and business logic will be served from
+
+```
+https://app.bam.dev/
+```
+
+GraphQL endpoint and other logic endpoints will be served from
+
+```
+https://server.bam.dev/
+```
+
 #### Turn off everything
 
 ```
 $ bam vm-down
 ```
-
-### Routing
-
-It is easy to make mistake when routing between multiple apps. Inner-app routing can be done with client-side routing while inter-app routing must be done with server-side routing. That is why we are using `route-codegen` manage routing between all apps.
-
-The config can be found [here](./route-manager/route-codegen.yml). After making changes, run the following to generate route modules:
-
-```
-bam ws routegen
-```
-
-Read more about [route-codegen](https://github.com/eddeee888/route-codegen)
 
 Made with ♥ by Eddy Nguyen
 https://eddy.works

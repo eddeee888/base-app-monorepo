@@ -1,8 +1,7 @@
 export interface UserMapper {
-  id: string;
+  id: number;
   email: string;
   firstName: string;
   lastName: string;
-  displayName?: string;
   avatar?: string;
 }

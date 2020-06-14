@@ -2,15 +2,20 @@ import React from "react";
 import { Avatar as AvatarMui } from "@material-ui/core";
 import makeStyles from "@material-ui/styles/makeStyles";
 import { AvatarProps as AvatarMuiProps } from "@material-ui/core/Avatar";
-import { avatarSmallPx, avatarMediumPx, avatarLargePx, avatarExtraLargePx } from "../../shared-styles/sizes";
+import { avatarExtraSmallPx, avatarSmallPx, avatarMediumPx, avatarLargePx, avatarExtraLargePx } from "../../shared-styles/sizes";
 import Person from "@material-ui/icons/Person";
 
 interface AvatarProps {
   src?: string | null;
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
 }
 
 const useStyles = makeStyles({
+  xs: {
+    margin: 0,
+    width: avatarExtraSmallPx,
+    height: avatarExtraSmallPx,
+  },
   sm: {
     margin: 0,
     width: avatarSmallPx,

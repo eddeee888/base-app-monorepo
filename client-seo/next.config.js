@@ -1,4 +1,5 @@
 module.exports = {
+  target: "serverless",
   webpack(config) {
     config.resolve.modules.push(__dirname);
 
@@ -6,6 +7,19 @@ module.exports = {
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
       loader: "graphql-tag/loader",
+    });
+
+    config.module.rules.push({
+      test: /\.svg$/,
+      exclude: /node_modules/,
+      use: [
+        {
+          loader: "@svgr/webpack",
+          options: {
+            icon: true,
+          },
+        },
+      ],
     });
 
     return config;

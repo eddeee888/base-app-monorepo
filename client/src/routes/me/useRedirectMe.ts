@@ -2,11 +2,11 @@
 import { useHistory } from "react-router";
 import { UrlPartsMe, patternMe } from "./patternMe";
 import generateUrl from "route-codegen/generateUrl";
-export type RedirectMe = (urlParts: UrlPartsMe) => void;
-const useRedirectMe = (): RedirectMe => {
+export type RedirectFnMe = (urlParts?: UrlPartsMe) => void;
+const useRedirectMe = (): RedirectFnMe => {
   const history = useHistory();
-  const redirect: RedirectMe = (urlParts) => {
-    const to = generateUrl(patternMe, {}, urlParts.urlQuery);
+  const redirect: RedirectFnMe = (urlParts) => {
+    const to = generateUrl(patternMe, {}, urlParts?.urlQuery, urlParts?.origin);
     history.push(to);
   };
   return redirect;

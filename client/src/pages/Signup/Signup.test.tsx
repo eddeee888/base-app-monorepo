@@ -48,7 +48,7 @@ describe("<Signup />", () => {
         <ViewerContext.Provider
           value={{
             ...contextValue,
-            viewer: { id: "100", firstName: "one" },
+            viewer: { id: "100", displayName: "one" },
           }}
         >
           <MemoryRouter initialEntries={["/signup"]}>
@@ -67,7 +67,7 @@ describe("<Signup />", () => {
         <ViewerContext.Provider
           value={{
             ...contextValue,
-            viewer: { id: "100", firstName: "One" },
+            viewer: { id: "100", displayName: "One" },
           }}
         >
           <MemoryRouter initialEntries={["/signup?redirect=/redirect-to-this-path"]}>

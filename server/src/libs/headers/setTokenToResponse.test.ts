@@ -1,7 +1,7 @@
 import { Response } from "jest-express/lib/response";
 import { expiresIn } from "libs/jwt";
 import setTokenToResponse from "./setTokenToResponse";
-import TokenType from "./TokenType";
+import { TokenType } from "./types";
 
 describe("setTokenToResponse", () => {
   const response = new Response() as any;

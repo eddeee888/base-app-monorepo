@@ -27,7 +27,7 @@
     "isolatedModules": true,
     "noUnusedLocals": true
   },
-  "files": ["./src/__generated__/operations.d.ts"],
+  "files": ["./src/common/__generated__/operations.d.ts"],
   "include": ["./src"],
   "exclude": ["node_modules", "**/__generated__/*.ts"]
 }

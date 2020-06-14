@@ -1,48 +1,59 @@
-import cookieParser = require("cookie-parser");
-import { importSchema } from "graphql-import";
+import cookieParser from "cookie-parser";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
-import { getTokenFromRequest, setTokenToResponse, getViewerFromRequest } from "libs/headers";
-import { sign, verify } from "libs/jwt";
-import { compare, hash } from "libs/password";
+import { createHeaders } from "libs/headers";
+import { createJwt } from "libs/jwt";
+import { createPassword } from "libs/password";
+import errorMiddleware from "middleware/errorHandler";
 import tokenVerifier from "middleware/tokenVerifier";
-import { prisma } from "prisma/generated/client";
+import { PrismaClient } from "@prisma/client";
 import { resolvers } from "graphql/resolvers";
-import { IsLoggedInDirective } from "graphql/directives";
+import { IsLoggedInDirective, IsPrivateDirective } from "graphql/directives";
+import getTypeDefs from "graphql/schemas/getTypeDefs";
 
 const PORT = process.env.PORT || 8000;
 
-const server = new ApolloServer({
-  typeDefs: importSchema("./src/graphql/schemas/schema.graphql"),
+// Create services
+const password = createPassword();
+const prisma = new PrismaClient();
+const headers = createHeaders();
+const jwt = createJwt();
+
+// Create ApolloServer
+const apolloServer = new ApolloServer({
+  typeDefs: getTypeDefs(),
   resolvers,
   schemaDirectives: {
     isLoggedIn: IsLoggedInDirective,
+    isPrivate: IsPrivateDirective,
   },
   context: async (contextParams) => ({
     ...contextParams,
     prisma,
-    viewer: await getViewerFromRequest(contextParams.req, prisma),
+    viewer: await headers.getViewerFromRequest(contextParams.req, prisma),
     utils: {
-      headers: {
-        getTokenFromRequest,
-        setTokenToResponse,
-      },
-      jwt: {
-        sign,
-        verify,
-      },
-      password: {
-        compare,
-        hash,
-      },
+      headers,
+      jwt,
+      password,
     },
   }),
 });
 
-const app = express();
-app.use(cookieParser());
-app.use(tokenVerifier);
+// Set up other express middlewares and other routes
+const server = express();
+server.use(cookieParser());
+server.use(tokenVerifier({ headers, jwt }));
 
-server.applyMiddleware({ app });
+server.use(errorMiddleware());
 
-app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`));
+apolloServer.applyMiddleware({
+  app: server,
+  cors: {
+    origin: [`https://${process.env.CLIENT_SERVICE_DOMAIN}`, `https://${process.env.CLIENT_SEO_SERVICE_DOMAIN}`],
+    credentials: true,
+  },
+});
+
+server.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT}${apolloServer.graphqlPath}`));
+
+export default server;

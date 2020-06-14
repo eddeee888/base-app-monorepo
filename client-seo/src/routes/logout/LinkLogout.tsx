@@ -2,10 +2,10 @@
 import React from "react";
 import generateUrl from "route-codegen/generateUrl";
 import Link, { AnchorProps } from "common/shared-ui/Anchor";
-import { patternLogout, UrlPartsLogout } from "./patternLogout";
+import { patternLogout, UrlPartsLogout, originLogout } from "./patternLogout";
 type LinkLogoutProps = Omit<AnchorProps, "href"> & UrlPartsLogout;
-const LinkLogout: React.FunctionComponent<LinkLogoutProps> = ({ urlQuery, ...props }) => {
-  const to = generateUrl(patternLogout, {}, urlQuery);
+const LinkLogout: React.FunctionComponent<LinkLogoutProps> = ({ urlQuery, origin, ...props }) => {
+  const to = generateUrl(patternLogout, {}, urlQuery, origin ?? originLogout);
   return <Link {...props} href={to} />;
 };
 export default LinkLogout;

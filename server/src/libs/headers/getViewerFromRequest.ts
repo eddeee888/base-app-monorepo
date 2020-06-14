@@ -1,9 +1,9 @@
 import { Request } from "express";
-import { getTokenFromRequest } from "libs/headers";
-import { verify } from "libs/jwt";
-import { Prisma, User } from "prisma/generated/client";
+import getTokenFromRequest from "./getTokenFromRequest";
+import verify from "libs/jwt/verify";
+import { PrismaClient, User } from "@prisma/client";
 
-export type GetViewerFromRequest = (req: Request, prisma: Prisma) => Promise<User | null>;
+export type GetViewerFromRequest = (req: Request, prisma: PrismaClient) => Promise<User | null>;
 
 const getViewerFromRequest: GetViewerFromRequest = async (req, prisma) => {
   const token = getTokenFromRequest(req);
@@ -12,7 +12,7 @@ const getViewerFromRequest: GetViewerFromRequest = async (req, prisma) => {
   if (!verifiedToken) {
     return null;
   }
-  return await prisma.user({ id: verifiedToken.viewer.id });
+  return await prisma.user.findOne({ where: { id: parseInt(verifiedToken.viewer.id) } });
 };
 
 export default getViewerFromRequest;

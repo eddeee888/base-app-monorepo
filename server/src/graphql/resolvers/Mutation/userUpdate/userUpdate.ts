@@ -1,14 +1,21 @@
 import { MutationResolvers } from "graphql/resolvers/types.generated";
 import { ForbiddenError } from "apollo-server";
 import { canUserUpdateUser } from "graphql/permissions";
+
 const userUpdate: MutationResolvers["userUpdate"] = async (parent, { input }, { viewer, prisma }) => {
-  const canUpdate = await canUserUpdateUser(prisma, viewer.id, input.id);
+  const targetUserId = parseInt(input.id);
+
+  const canUpdate = await canUserUpdateUser({
+    prisma,
+    userId: viewer.id,
+    targetUserId: targetUserId,
+  });
   if (!canUpdate) {
     throw new ForbiddenError("User does not have permission to update details");
   }
 
-  const updatedTargetUser = await prisma.updateUser({
-    where: { id: input.id },
+  const updatedTargetUser = await prisma.user.update({
+    where: { id: targetUserId },
     data: {
       avatar: {
         upsert: !!input.avatar
@@ -22,7 +29,7 @@ const userUpdate: MutationResolvers["userUpdate"] = async (parent, { input }, { 
               },
             }
           : undefined,
-        delete: !!input.avatar ? false : true,
+        delete: input.avatar === null ? true : false,
       },
     },
   });

@@ -1,14 +1,22 @@
-import { Prisma } from "prisma/generated/client";
-import { isAdmin } from "models/user";
+import { PrismaClient } from "@prisma/client";
+import { hasGroup } from "models/user";
 
-export const canUserUpdateUser = async (prisma: Prisma, userId: string, targetUserId: string): Promise<boolean> => {
-  const userExists = await prisma.$exists.user({ id: userId });
-  if (!userExists) {
+interface CanUserUpdateUserParams {
+  prisma: PrismaClient;
+  userId: number;
+  targetUserId: number;
+}
+
+export const canUserUpdateUser = async (params: CanUserUpdateUserParams): Promise<boolean> => {
+  const { prisma, userId, targetUserId } = params;
+
+  const user = await prisma.user.findOne({ where: { id: userId } });
+  if (!user) {
     return false;
   }
 
-  const targetUserExists = await prisma.$exists.user({ id: targetUserId });
-  if (!targetUserExists) {
+  const targetUser = await prisma.user.findOne({ where: { id: targetUserId } });
+  if (!targetUser) {
     return false;
   }
 
@@ -16,7 +24,7 @@ export const canUserUpdateUser = async (prisma: Prisma, userId: string, targetUs
     return true;
   }
 
-  if (await isAdmin(prisma, userId)) {
+  if (hasGroup(user, "admin")) {
     return true;
   }
 

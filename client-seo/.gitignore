@@ -8,6 +8,9 @@ src/common/shared-*
 
 .next/
 
+# severless
+.serverless_nextjs
+
 # testing
 /coverage
 

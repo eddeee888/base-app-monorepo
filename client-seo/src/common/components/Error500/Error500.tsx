@@ -1,8 +1,11 @@
 import React from "react";
-import Error from "next/error";
+import ErrorPage from "pages/_error";
 
 const Error500: React.FunctionComponent = () => {
-  return <Error statusCode={500} />;
+  if (process.browser) {
+    return <ErrorPage statusCode={500} />;
+  }
+  throw new Error();
 };
 
 export default Error500;

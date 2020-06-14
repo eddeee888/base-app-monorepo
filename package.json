@@ -4,18 +4,23 @@
   "version": "1.0.0",
   "repository": "git@github.com:eddeee888/base-app-monorepo.git",
   "author": "Eddy Nguyen <eddeee.nguyen@gmail.com>",
-  "license": "MIT",
   "scripts": {
-    "routegen": "rm -rf ./client/src/routes && rm -rf ./client-seo/src/routes && rm -rf ./server/src/routes && yarn workspace route-manager route-codegen --verbose --stacktrace && concurrently -n client,client-seo,server \"yarn workspace client prettier --write  'src/routes/**/*.{ts,tsx}'\"  \"yarn workspace client-seo prettier --write  'src/routes/**/*.{ts,tsx}'\" \"yarn workspace server prettier --write  'src/routes/**/*.{ts,tsx}'\"   -p \"[{name} - {time}]\" -c \"yellow\",\"blue\",\"red\"",
-    "format": "concurrently -n common,client,client-seo,server \"yarn workspace common format\" \"yarn workspace client format\" \"yarn workspace client-seo format\" \"yarn workspace server format\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"red\"",
+    "routegen:clean": "rm -rf ./client/src/routes && rm -rf ./client-seo/src/routes && rm -rf ./server/src/routes ",
+    "routegen:format": "concurrently -n client,client-seo,server \"yarn workspace client prettier --write  'src/routes/**/*.{ts,tsx}'\"  \"yarn workspace client-seo prettier --write  'src/routes/**/*.{ts,tsx}'\" \"yarn workspace server prettier --write  'src/routes/**/*.{ts,tsx}'\"   -p \"[{name} - {time}]\" -c \"yellow\",\"blue\",\"red\"",
+    "routegen:dev": "yarn routegen:clean && PRIMARY_DOMAIN=bam.dev yarn workspace route-manager route-codegen --verbose --stacktrace && yarn routegen:format",
     "common:watch": "yarn workspace common watch",
-    "gqlgen": "concurrently -n common,client,client-seo,server \"yarn common:gqlgen\" \"yarn client:gqlgen\" \"yarn client-seo:gqlgen\"  \"yarn server:gqlgen\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\"",
+    "common:copy": "yarn workspace common copy",
+    "gqlgen": "concurrently -n common,client,client-seo,server \"yarn common:gqlgen\" \"yarn client:gqlgen\" \"yarn client-seo:gqlgen\"  \"yarn server:gqlgen\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"cyan\"",
     "common:gqlgen": "yarn workspace common gqlgen",
     "client:gqlgen": "yarn workspace client gqlgen",
     "client-seo:gqlgen": "yarn workspace client-seo gqlgen",
     "server:gqlgen": "yarn workspace server gqlgen",
-    "prisma:clientgen": "yarn workspace server prisma:generate",
-    "prisma:token": "yarn workspace server prisma:token"
+    "prisma:generate": "yarn workspace server prisma:generate",
+    "build": "concurrently -n client,client-seo,server \"yarn client:build\" \"yarn client-seo:build\" \"yarn server:build\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"cyan\"",
+    "client:build": "yarn workspace client build",
+    "client-seo:build": "yarn workspace client-seo build",
+    "server:build": "yarn workspace server build",
+    "format": "concurrently -n common,client,client-seo,server \"yarn workspace common format\" \"yarn workspace client format\" \"yarn workspace client-seo format\" \"yarn workspace server format\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"red\""
   },
   "workspaces": {
     "packages": [

@@ -11,8 +11,6 @@ services:
       - ${CLIENT_PORT}:${CLIENT_PORT}
     environment:
       PORT: ${CLIENT_PORT}
-      REACT_APP_GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
-      REACT_APP_SERVER_NAME: ${SERVER_NAME}
       CHOKIDAR_USEPOLLING: "true"
       CHOKIDAR_INTERVAL: 5000
       TSC_WATCHFILE: "UseFsEventsWithFallbackDynamicPolling"
@@ -30,8 +28,10 @@ services:
     ports:
       - ${CLIENT_SEO_PORT}:${CLIENT_SEO_PORT}
     environment:
-      PORT: ${CLIENT_SEO_PORT}
-      GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
+      NEXT_PUBLIC_GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
+      NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR: ${GRAPHQL_ENDPOINT_SSR}
+      NEXT_PUBLIC_APP_NAME: ${APP_NAME}
+      NEXT_PUBLIC_APP_ORIGIN: ${APP_ORIGIN}
     volumes:
       - ./client-seo/src:/usr/src/app/src
       - ./client-seo/package.json:/usr/src/app/package.json
@@ -48,56 +48,51 @@ services:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     environment:
-      PRISMA_ENDPOINT: ${PRISMA_ENDPOINT}
-      PRISMA_SECRET: ${PRISMA_SECRET}
-      SERVER_NAME: ${SERVER_NAME}
+      APP_ORIGIN: ${APP_ORIGIN}
+      PRIMARY_DOMAIN: ${PRIMARY_DOMAIN}
+      CLIENT_SEO_SERVICE_DOMAIN: ${CLIENT_SEO_SERVICE_DOMAIN}
+      CLIENT_SERVICE_DOMAIN: ${CLIENT_SERVICE_DOMAIN}
       GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
       JWT_SECRET: ${JWT_SECRET}
+      PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
       PORT: ${SERVER_PORT}
-      AWS_S3_IMAGES_GET_SIGNED_URL: ${AWS_S3_IMAGES_GET_SIGNED_URL}
-      AWS_S3_IMAGES_FOLDER_URL: ${AWS_S3_IMAGES_FOLDER_URL}
-      AWS_S3_IMAGES_GET_SIGNED_URL_API_KEY: ${AWS_S3_IMAGES_GET_SIGNED_URL_API_KEY}
     volumes:
       - ./server/src:/usr/src/app/src
+      - ./server/prisma:/usr/src/app/prisma
       - ./server/package.json:/usr/src/app/package.json
-    depends_on:
-      - prisma
     networks:
       - com_vm
 
-  # Set up server worker
+  # Set up server worker - TODO: this will not work with serverless framework
   server-worker:
     build:
       context: ./server
       target: base
     command: yarn start:crons
     environment:
-      PRISMA_ENDPOINT: ${PRISMA_ENDPOINT}
-      PRISMA_SECRET: ${PRISMA_SECRET}
+      PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
     volumes:
       - ./server/src:/usr/src/app/src
+      - ./server/prisma:/usr/src/app/prisma
       - ./server/package.json:/usr/src/app/package.json
-    depends_on:
-      - prisma
+    networks:
+      - com_vm
 
-  # Set up load balancer container
+  # Set up load balancer container 
   reverse-proxy:
     build:
       context: ./reverse-proxy
     tty: true
     environment:
-      MAIN_SERVER_NAME: ${MAIN_SERVER_NAME}
       CLIENT_SERVICE_NAME: ${CLIENT_SERVICE_NAME}
       CLIENT_PORT: ${CLIENT_PORT}
-      CLIENT_URL_PATH: ${CLIENT_URL_PATH}
-      CLIENT_STATIC_URL_PATH: ${CLIENT_STATIC_URL_PATH}
-      CLIENT_MANIFEST_URL_PATH: ${CLIENT_MANIFEST_URL_PATH}
       CLIENT_SEO_SERVICE_NAME: ${CLIENT_SEO_SERVICE_NAME}
       CLIENT_SEO_PORT: ${CLIENT_SEO_PORT}
-      HOMEPAGE_URL_PATH: ${HOMEPAGE_URL_PATH}
       SERVER_SERVICE_NAME: ${SERVER_SERVICE_NAME}
       SERVER_PORT: ${SERVER_PORT}
-      GRAPHQL_URL_PATH: ${GRAPHQL_URL_PATH}
+      CLIENT_SERVICE_DOMAIN: ${CLIENT_SERVICE_DOMAIN}
+      CLIENT_SEO_SERVICE_DOMAIN: ${CLIENT_SEO_SERVICE_DOMAIN}
+      SERVER_SERVICE_DOMAIN: ${SERVER_SERVICE_DOMAIN}
     ports:
       - 80:80
       - 443:443
@@ -108,7 +103,7 @@ services:
     networks:
       com_vm:
         aliases:
-          - ${MAIN_SERVER_NAME}
+          - ${CLIENT_SEO_SERVICE_DOMAIN}
 
   # Set up database server
   database:
@@ -123,29 +118,6 @@ services:
       - ${MYSQL_PORT}
     ports:
       - ${MYSQL_PORT}:${MYSQL_PORT}
-    networks:
-      - com_vm
-
-  # Set up prisma client
-  prisma:
-    image: prismagraphql/prisma:1.34
-    restart: always
-    ports:
-      - ${PRISMA_PORT}:${PRISMA_PORT}
-    environment:
-      PRISMA_CONFIG: |
-        port: ${PRISMA_PORT}
-        managementApiSecret: ${PRISMA_SECRET}
-        databases:
-          default:
-            connector: mysql
-            host: ${DATABASE_SERVICE_NAME}
-            port: ${MYSQL_PORT}
-            user: root
-            password: ${MYSQL_ROOT_PASSWORD}
-            migrations: true
-    depends_on:
-      - database
     networks:
       - com_vm
 

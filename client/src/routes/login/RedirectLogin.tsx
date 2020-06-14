@@ -4,7 +4,7 @@ import generateUrl from "route-codegen/generateUrl";
 import { Redirect } from "react-router";
 import { UrlPartsLogin, patternLogin } from "./patternLogin";
 const RedirectLogin: React.FunctionComponent<UrlPartsLogin & { fallback?: React.ReactNode }> = (props) => {
-  const to = generateUrl(patternLogin, {}, props.urlQuery);
+  const to = generateUrl(patternLogin, {}, props.urlQuery, props.origin);
   return (
     <>
       <Redirect to={to} />

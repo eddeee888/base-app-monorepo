@@ -1,0 +1,53 @@
+name: CI
+on:
+  push:
+    branches-ignore:
+      # Ignore the commits that are created when PR is merged into master
+      - "master"
+jobs:
+  build:
+    name: Build and check assets
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node_modules
+        id: yarn-cache-all-deps # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install packages
+        if: steps.yarn-cache-all-deps.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
+
+      - name: Copy common files
+        run: yarn common:copy 
+
+      - name: Check route-codegen DEV
+        run: ./ci/scripts/check-generated-routegen-dev.sh
+
+      - name: Check GraphQL codegen
+        run: ./ci/scripts/check-generated-graphql-codegen.sh
+
+      - name: Generate prisma
+        env:
+          PRISMA_BINARY_TARGET: rhel-openssl-1.0.x
+        run: yarn prisma:generate
+
+      - name: Build all assets
+        run: yarn build

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as Types from "../../__generated__/types";
+import * as Types from "../../common/__generated__/types";
 
 import * as Operations from "./Logout.graphql";
 import * as ApolloReactCommon from "@apollo/react-common";

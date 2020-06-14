@@ -8,6 +8,9 @@ src/common/shared-*
 /.pnp
 .pnp.js
 
+# severless
+.serverless
+
 # testing
 /coverage
 

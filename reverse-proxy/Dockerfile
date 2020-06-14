@@ -7,8 +7,14 @@ RUN apk update \
 
 WORKDIR /opt
 
-COPY ./certificates/device.crt /usr/share/nginx/certificates/device.crt
-COPY ./certificates/device.key /usr/share/nginx/certificates/device.key
+COPY ./certificates/client-seo/device.crt /usr/share/nginx/certificates/client-seo/device.crt
+COPY ./certificates/client-seo/device.key /usr/share/nginx/certificates/client-seo/device.key
+
+COPY ./certificates/client/device.crt /usr/share/nginx/certificates/client/device.crt
+COPY ./certificates/client/device.key /usr/share/nginx/certificates/client/device.key
+
+COPY ./certificates/server/device.crt /usr/share/nginx/certificates/server/device.crt
+COPY ./certificates/server/device.key /usr/share/nginx/certificates/server/device.key
 
 COPY http.conf /etc/nginx/conf.d/http.conf
 COPY proxy.conf /etc/nginx/proxy.conf

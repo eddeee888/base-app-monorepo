@@ -43,24 +43,10 @@ export type Query = {
   __typename?: "Query";
   me?: Maybe<User>;
   user?: Maybe<User>;
-  getSignedUrlsToUploadImages: Array<S3SignedObject>;
 };
 
 export type QueryUserArgs = {
   id: Scalars["ID"];
-};
-
-export type QueryGetSignedUrlsToUploadImagesArgs = {
-  filenames: Array<Scalars["String"]>;
-};
-
-/** AWS Sign URL to upload image */
-export type S3SignedObject = {
-  __typename?: "S3SignedObject";
-  src: Scalars["String"];
-  filename: Scalars["String"];
-  originalFilename: Scalars["String"];
-  uploadUrl: Scalars["String"];
 };
 
 export type SignupInput = {
@@ -77,7 +63,8 @@ export type User = {
   email: Scalars["String"];
   firstName: Scalars["String"];
   lastName: Scalars["String"];
-  displayName?: Maybe<Scalars["String"]>;
+  contactNumber?: Maybe<Scalars["String"]>;
+  displayName: Scalars["String"];
   avatar?: Maybe<Scalars["String"]>;
 };
 
@@ -163,7 +150,6 @@ export type ResolversTypes = ResolversObject<{
   User: ResolverTypeWrapper<UserMapper>;
   ID: ResolverTypeWrapper<Scalars["ID"]>;
   String: ResolverTypeWrapper<Scalars["String"]>;
-  S3SignedObject: ResolverTypeWrapper<S3SignedObject>;
   Mutation: ResolverTypeWrapper<{}>;
   SignupInput: SignupInput;
   LoginInput: LoginInput;
@@ -177,7 +163,6 @@ export type ResolversParentTypes = ResolversObject<{
   User: UserMapper;
   ID: Scalars["ID"];
   String: Scalars["String"];
-  S3SignedObject: S3SignedObject;
   Mutation: {};
   SignupInput: SignupInput;
   LoginInput: LoginInput;
@@ -193,6 +178,15 @@ export type IsLoggedInDirectiveResolver<
   ContextType = ResolverContext,
   Args = IsLoggedInDirectiveArgs
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export type IsPrivateDirectiveArgs = {};
+
+export type IsPrivateDirectiveResolver<Result, Parent, ContextType = ResolverContext, Args = IsPrivateDirectiveArgs> = DirectiveResolverFn<
+  Result,
+  Parent,
+  ContextType,
+  Args
+>;
 
 export type MutationResolvers<
   ContextType = ResolverContext,
@@ -210,23 +204,6 @@ export type QueryResolvers<
 > = ResolversObject<{
   me?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType, RequireFields<QueryUserArgs, "id">>;
-  getSignedUrlsToUploadImages?: Resolver<
-    Array<ResolversTypes["S3SignedObject"]>,
-    ParentType,
-    ContextType,
-    RequireFields<QueryGetSignedUrlsToUploadImagesArgs, "filenames">
-  >;
-}>;
-
-export type S3SignedObjectResolvers<
-  ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["S3SignedObject"] = ResolversParentTypes["S3SignedObject"]
-> = ResolversObject<{
-  src?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  filename?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  originalFilename?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  uploadUrl?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type UserResolvers<
@@ -237,7 +214,8 @@ export type UserResolvers<
   email?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   firstName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   lastName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  displayName?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  contactNumber?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  displayName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   avatar?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
@@ -245,7 +223,6 @@ export type UserResolvers<
 export type Resolvers<ContextType = ResolverContext> = ResolversObject<{
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  S3SignedObject?: S3SignedObjectResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 }>;
 
@@ -256,6 +233,7 @@ export type Resolvers<ContextType = ResolverContext> = ResolversObject<{
 export type IResolvers<ContextType = ResolverContext> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = ResolverContext> = ResolversObject<{
   isLoggedIn?: IsLoggedInDirectiveResolver<any, any, ContextType>;
+  isPrivate?: IsPrivateDirectiveResolver<any, any, ContextType>;
 }>;
 
 /**

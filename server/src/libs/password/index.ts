@@ -1,4 +1,5 @@
-export { default as hash } from "./hash";
-export * from "./hash";
-export { default as compare } from "./compare";
+export { default as createPassword } from "./createPassword";
+export * from "./createPassword";
 export * from "./compare";
+export * from "./hash";
+export * from "./random";

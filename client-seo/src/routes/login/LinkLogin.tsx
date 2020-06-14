@@ -2,10 +2,10 @@
 import React from "react";
 import generateUrl from "route-codegen/generateUrl";
 import Link, { AnchorProps } from "common/shared-ui/Anchor";
-import { patternLogin, UrlPartsLogin } from "./patternLogin";
+import { patternLogin, UrlPartsLogin, originLogin } from "./patternLogin";
 type LinkLoginProps = Omit<AnchorProps, "href"> & UrlPartsLogin;
-const LinkLogin: React.FunctionComponent<LinkLoginProps> = ({ urlQuery, ...props }) => {
-  const to = generateUrl(patternLogin, {}, urlQuery);
+const LinkLogin: React.FunctionComponent<LinkLoginProps> = ({ urlQuery, origin, ...props }) => {
+  const to = generateUrl(patternLogin, {}, urlQuery, origin ?? originLogin);
   return <Link {...props} href={to} />;
 };
 export default LinkLogin;
