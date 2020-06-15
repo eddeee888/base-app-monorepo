@@ -1,10 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import { UrlPartsLogout, patternLogout } from "./patternLogout";
+import { UrlPartsLogout, patternLogout, originLogout } from "./patternLogout";
 import generateUrl from "route-codegen/generateUrl";
-export type RedirectLogout = (urlParts: UrlPartsLogout) => void;
-const useRedirectLogout = (): RedirectLogout => {
-  const redirect: RedirectLogout = (urlParts) => {
-    const to = generateUrl(patternLogout, {}, urlParts.urlQuery);
+export type RedirectFnLogout = (urlParts?: UrlPartsLogout) => void;
+const useRedirectLogout = (): RedirectFnLogout => {
+  const redirect: RedirectFnLogout = (urlParts) => {
+    const to = generateUrl(patternLogout, {}, urlParts?.urlQuery, urlParts?.origin ?? originLogout);
     if (!!window && !!window.location) {
       window.location.href = to;
     }

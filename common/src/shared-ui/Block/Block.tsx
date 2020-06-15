@@ -7,6 +7,8 @@ interface BlockProps {
   size: PageSize;
   children: React.ReactNode;
   fullHeight?: boolean;
+  fullWidth?: boolean;
+  className?: string;
 }
 
 const defaultClassName = css`
@@ -22,14 +24,21 @@ const fullHeightClassName = css`
   height: 100%;
 `;
 
-const Block: React.FunctionComponent<BlockProps> = ({ size, children, fullHeight }) => {
+const Block: React.FunctionComponent<BlockProps> = ({ size, children, fullHeight, fullWidth = false, className }) => {
   const maxWidthClassName = css`
     max-width: ${pageSize[size].max}px;
   `;
+  const fullWidthClassName = css`
+    width: ${pageSize[size].max}px;
+  `;
 
-  const classNames = [defaultClassName, maxWidthClassName];
+  const classNames = [defaultClassName, maxWidthClassName, className];
   if (fullHeight) {
     classNames.push(fullHeightClassName);
+  }
+
+  if (fullWidth) {
+    classNames.push(fullWidthClassName);
   }
 
   return <div className={cx([...classNames])}>{children}</div>;

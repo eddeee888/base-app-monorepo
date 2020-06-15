@@ -5,7 +5,7 @@ import Text from "common/shared-ui/Text";
 import { FormikHelpers, useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-import { LoginInput } from "__generated__/types";
+import { LoginInput } from "common/__generated__/types";
 import FormikTextInput from "common/components/Formik/FormikTextInput";
 import useUrlQuery from "common/pathing/useUrlQuery";
 import LinkSignup from "routes/signup/LinkSignup";

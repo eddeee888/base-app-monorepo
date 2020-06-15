@@ -8,7 +8,7 @@ const verify: Verify = (token, subject) => {
   let result = null;
 
   const verifyOptions: VerifyOptions = {
-    issuer: process.env.SERVER_NAME,
+    issuer: process.env.APP_ORIGIN,
     audience: process.env.GRAPHQL_ENDPOINT,
   };
 

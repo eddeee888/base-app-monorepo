@@ -19,11 +19,7 @@ const createHandleLoginFn: CreateHandleLoginFn = (login, setViewer, setGeneralEr
       },
     });
     if (fetchResult && fetchResult.data && fetchResult.data.login) {
-      setViewer({
-        id: fetchResult.data.login.id,
-        avatar: fetchResult.data.login.avatar,
-        firstName: fetchResult.data.login.firstName,
-      });
+      setViewer(fetchResult.data.login);
     } else {
       setGeneralError("The email/password combination you entered is incorrect.");
     }

@@ -3,9 +3,7 @@
 function init_data()
 {
   echo "*** Initialising data..."
-  cd ./server && yarn prisma:deploy && yarn prisma:seed
-
-  cd -
+  docker-compose exec server yarn prisma:generate && docker-compose exec server yarn prisma migrate up --experimental  && docker-compose exec server yarn prisma:reseed
 }
 
 init_data

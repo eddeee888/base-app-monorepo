@@ -29,7 +29,7 @@ class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
     return (
       <React.Fragment>
         <Head>
-          <title>BAM</title>
+          <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         </Head>
         <CacheProvider value={cache}>
@@ -51,7 +51,21 @@ class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
 }
 
 const MyAppWithApollo = withApollo(
-  ({ initialState, headers }) => createApolloClient({ uri: process.env.GRAPHQL_ENDPOINT, initialState, ssrHeaders: headers }),
+  ({ initialState, headers }) => {
+    // NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR can be used if we want to have a different endpoint for SSR.
+    // e.g. in container in dev, we can use http://server:40002/graphql instead of https://server.app.dev/graphql
+    // If not provided, always fallback to NEXT_PUBLIC_GRAPHQL_ENDPOINT
+    const uri =
+      typeof window === "undefined" && process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR
+        ? process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR
+        : process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
+
+    return createApolloClient({
+      uri,
+      initialState,
+      ssrHeaders: headers,
+    });
+  },
   {
     getDataFromTree,
   }

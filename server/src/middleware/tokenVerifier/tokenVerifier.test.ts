@@ -1,10 +1,12 @@
 import { Request } from "jest-express/lib/request";
 import { Response } from "jest-express/lib/response";
-import { TokenType } from "libs/headers";
-import { sign, verify, JWTPayload } from "libs/jwt";
+import { TokenType, createHeaders } from "libs/headers";
+import { createJwt, JWTPayload } from "libs/jwt";
 import tokenVerifier from "./tokenVerifier";
 
 describe("tokenVerifier middleware", () => {
+  const jwt = createJwt();
+  const headers = createHeaders();
   const request = new Request() as any;
   const response = new Response() as any;
   const next = jest.fn();
@@ -13,8 +15,8 @@ describe("tokenVerifier middleware", () => {
     id: "abc123",
   };
 
-  const token = sign(payload);
-  const verifiedToken = verify(token);
+  const token = jwt.sign(payload);
+  const verifiedToken = jwt.verify(token);
 
   afterEach(() => {
     request.resetMocked();
@@ -29,7 +31,7 @@ describe("tokenVerifier middleware", () => {
       [TokenType.accessToken]: token,
     });
 
-    await tokenVerifier(request, response, next);
+    await tokenVerifier({ headers, jwt })(request, response, next);
 
     expect(verifiedToken).toBeTruthy();
     if (verifiedToken) {
@@ -42,7 +44,7 @@ describe("tokenVerifier middleware", () => {
   it("should not reset token if no token given", async () => {
     expect.assertions(2);
 
-    await tokenVerifier(request, response, next);
+    await tokenVerifier({ headers, jwt })(request, response, next);
 
     expect(response.cookie).toHaveBeenCalledTimes(0);
     expect(next).toHaveBeenCalledTimes(1);
@@ -55,7 +57,7 @@ describe("tokenVerifier middleware", () => {
       [TokenType.accessToken]: "RANDOM TOKEN",
     });
 
-    await tokenVerifier(request, response, next);
+    await tokenVerifier({ headers, jwt })(request, response, next);
 
     expect(response.cookie).toHaveBeenCalledTimes(0);
     expect(next).toHaveBeenCalledTimes(1);

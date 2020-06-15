@@ -9,7 +9,7 @@ interface CustomClaim {
 
 const sign: Sign = (payload, expiresIn = defaultExpiresIn) => {
   const signOptions: SignOptions = {
-    issuer: process.env.SERVER_NAME,
+    issuer: process.env.APP_ORIGIN,
     audience: process.env.GRAPHQL_ENDPOINT,
     expiresIn,
     subject: payload.id,

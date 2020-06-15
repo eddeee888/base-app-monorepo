@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as Types from "../../../__generated__/types";
+import * as Types from "../../../common/__generated__/types";
 
 import * as Operations from "./Signup.graphql";
 import * as ApolloReactCommon from "@apollo/react-common";
@@ -10,7 +10,7 @@ export type SignupMutationVariables = {
 };
 
 export type SignupMutation = { __typename: "Mutation" } & {
-  signup: { __typename: "User" } & Pick<Types.User, "id" | "avatar" | "firstName">;
+  signup: { __typename: "User" } & Pick<Types.User, "id" | "avatar" | "displayName">;
 };
 
 export type SignupMutationFn = ApolloReactCommon.MutationFunction<SignupMutation, SignupMutationVariables>;

@@ -1,0 +1,63 @@
+Remove this line to activate this workflow
+name: Deploy server
+on:
+  push:
+    branches:
+      - "master"
+    paths:
+      - "common/**"
+      - "route-manager/**"
+      - "package.json"
+      - "server/**"
+
+jobs:
+  deploy-server-app:
+    name: Build and deploy server
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install ALL packages
+        run: yarn --frozen-lockfile
+
+      - name: Prepare prisma client
+        env:
+          PRISMA_BINARY_TARGET: rhel-openssl-1.0.x
+        run: yarn prisma:generate
+
+      - name: Copy common files
+        run: yarn common:copy 
+
+      - name: Route codegen PROD
+        run: yarn routegen:prod
+
+      - name: Build assets
+        run: yarn server:build
+
+      # Deploy
+      - name: Deploy
+        uses: aaronpanch/action-serverless@master
+        with:
+          args: deploy --debug
+        env:
+          SERVICE_ROOT: ./server
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
+          APP_ORIGIN: # Add prod target here
+          PRIMARY_DOMAIN: # Add prod target here
+          GRAPHQL_ENDPOINT: # Add prod target here
+          CLIENT_SEO_SERVICE_DOMAIN: # Add prod target here
+          CLIENT_SERVICE_DOMAIN: # Add prod target here
+          SERVER_SERVICE_DOMAIN: # Add prod target here
+          PRISMA_DATABASE_URL: # Add prod target here
+          BAM_JWT_SECRET: ${{ secrets.BAM_JWT_SECRET }} 

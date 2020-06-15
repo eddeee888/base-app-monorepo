@@ -1,6 +1,6 @@
 import { Request } from "jest-express/lib/request";
 import getTokenFromRequest from "./getTokenFromRequest";
-import TokenType from "./TokenType";
+import { TokenType } from "./types";
 
 describe("getTokenFromRequest()", () => {
   const request = new Request() as any;

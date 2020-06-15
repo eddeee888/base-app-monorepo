@@ -1,10 +1,8 @@
-import { QueryResolvers } from "graphql/resolvers/types.generated";
-import user from "graphql/resolvers/Query/user";
-import getSignedUrlsToUploadImages from "graphql/resolvers/Query/getSignedUrlsToUploadImages";
-import me from "graphql/resolvers/Query/me";
+import { QueryResolvers } from "../types.generated";
+import user from "./user";
+import me from "./me";
 
 export const Query: QueryResolvers = {
   user,
-  getSignedUrlsToUploadImages,
   me,
 };

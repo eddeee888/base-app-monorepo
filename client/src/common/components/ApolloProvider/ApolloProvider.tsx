@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react";
 import { ApolloProvider as DefaultApolloProvider } from "@apollo/react-hooks";
 import createApolloClient from "common/shared-apollo/createApolloClient";
+import env from "env";
 
-const apolloClient = createApolloClient({ uri: process.env.REACT_APP_GRAPHQL_ENDPOINT });
+const apolloClient = createApolloClient({ uri: env.graphqlEndpoint });
 
 const ApolloProvider: FunctionComponent<{}> = ({ children }) => (
   <DefaultApolloProvider client={apolloClient}>{children}</DefaultApolloProvider>

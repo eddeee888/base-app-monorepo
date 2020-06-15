@@ -1,9 +1,9 @@
-import { updateGroup } from "models/user";
 import { ResolverContextLoggedIn, ResolverContextNotLoggedIn } from "graphql/types";
 import { AuthenticationError, UserInputError } from "apollo-server";
-import validateSignupInput from "graphql/resolvers/Mutation/signup/validateSignupInput";
+import validateSignupInput from "./validateSignupInput";
 import { canUserBeCreated } from "graphql/permissions";
 import { MutationResolvers, SignupInput } from "graphql/resolvers/types.generated";
+import createNewUser from "actions/createNewUser";
 
 const validateInput = async ({ prisma }: ResolverContextNotLoggedIn, input: SignupInput): Promise<void> => {
   const inputErrors = await validateSignupInput(input);
@@ -11,7 +11,7 @@ const validateInput = async ({ prisma }: ResolverContextNotLoggedIn, input: Sign
     throw new UserInputError("Invalid input", inputErrors);
   }
 
-  const canBeCreated = await canUserBeCreated(prisma, input.email);
+  const canBeCreated = await canUserBeCreated({ prisma, email: input.email });
   if (!canBeCreated) {
     throw new UserInputError("Invalid input", {
       email: ["Email already exists"],
@@ -22,22 +22,14 @@ const validateInput = async ({ prisma }: ResolverContextNotLoggedIn, input: Sign
 const signup: MutationResolvers["signup"] = async (parent, args, ctx) => {
   await validateInput(ctx, args.input);
 
-  const hashedPassword = await ctx.utils.password.hash(args.input.password);
-  const newUser = await ctx.prisma.createUser({
-    email: args.input.email,
-    firstName: args.input.firstName,
-    lastName: args.input.lastName,
-    password: hashedPassword,
-    userGroup: JSON.stringify(
-      updateGroup({
-        user: true,
-      })
-    ),
-  });
+  const newUser = await createNewUser(
+    { prisma: ctx.prisma, password: ctx.utils.password },
+    { email: args.input.email, password: args.input.password, firstName: args.input.firstName, lastName: args.input.lastName }
+  );
 
   try {
     const token = ctx.utils.jwt.sign({
-      id: newUser.id,
+      id: newUser.id.toString(),
     });
     ctx.utils.headers.setTokenToResponse(ctx.res, token);
   } catch (e) {

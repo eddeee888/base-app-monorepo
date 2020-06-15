@@ -1,0 +1,13 @@
+org: # Add your org here
+name: bam
+
+client-seo:
+  component: serverless-next.js
+  inputs:
+    bucketName: # Add S3 bucket name for your asset
+    domain: ${env.CLIENT_SEO_SERVICE_DOMAIN}
+    build:
+      env:
+        NEXT_PUBLIC_GRAPHQL_ENDPOINT: ${env.GRAPHQL_ENDPOINT}
+        NEXT_PUBLIC_APP_NAME: ${env.APP_NAME}
+        NEXT_PUBLIC_APP_ORIGIN: ${env.APP_ORIGIN}

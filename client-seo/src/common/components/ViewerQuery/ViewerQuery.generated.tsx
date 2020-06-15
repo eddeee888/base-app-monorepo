@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as Types from "../../../__generated__/types";
+import * as Types from "../../__generated__/types";
 
 import * as Operations from "./ViewerQuery.graphql";
 import * as ApolloReactCommon from "@apollo/react-common";
@@ -9,7 +9,7 @@ export type ViewerQueryVariables = {};
 
 export type ViewerQuery = { __typename: "Query" } & { me?: Types.Maybe<{ __typename: "User" } & Viewer_UserFragment> };
 
-export type Viewer_UserFragment = { __typename: "User" } & Pick<Types.User, "id" | "firstName" | "avatar">;
+export type Viewer_UserFragment = { __typename: "User" } & Pick<Types.User, "id" | "displayName" | "avatar">;
 
 /**
  * __useViewerQuery__

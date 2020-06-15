@@ -16,7 +16,7 @@ const LogoutLogic: React.FunctionComponent<Props> = ({ clearViewer, logout }) =>
   useEffect(() => {
     logout().then(() => {
       clearViewer();
-      window.location.replace(generateUrlHome({}));
+      window.location.replace(generateUrlHome());
     });
   }, []);
 

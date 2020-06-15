@@ -5,6 +5,6 @@ import { Mutation } from "graphql/resolvers/Mutation";
 
 export const resolvers: Resolvers = {
   Query,
-  User,
   Mutation,
+  User,
 };

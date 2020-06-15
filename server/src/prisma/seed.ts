@@ -1,17 +1,40 @@
-import { hash } from "../libs/password";
-import { prisma } from "../prisma/generated/client";
+import { createPassword } from "../libs/password";
+import { PrismaClient } from "@prisma/client";
+
+const seed = async (): Promise<void> => {
+  const prisma = new PrismaClient();
+
+  try {
+    const numberOfUsers = 30;
+
+    const createUserPromises = new Array(numberOfUsers).fill(0).map(async (value, index) => {
+      return prisma.user.create({
+        data: {
+          email: `user+${index}@bam.dev`,
+          firstName: `User ${String(index)}`,
+          lastName: `Lastname ${String(index)}`,
+          password: await createPassword().hash("12345678"),
+          userGroup: JSON.stringify({
+            user: true,
+            admin: index === 1 ? true : false,
+          }),
+        },
+      });
+    });
+
+    await Promise.all(createUserPromises);
+  } catch (e) {
+    console.log(e);
+  } finally {
+    await prisma.disconnect();
+  }
+};
 
 (async () => {
-  const numberOfUsers = 10;
-
-  new Array(numberOfUsers).fill(0).forEach(async (value, index) => {
-    const realIndex = index + 1;
-    await prisma.createUser({
-      email: `user+${realIndex}@gmail.com`,
-      firstName: "User",
-      lastName: String(realIndex),
-      password: await hash("12345678"),
-      userGroup: JSON.stringify({ user: true }),
-    });
-  });
+  try {
+    await seed();
+    console.log("*** Finished seeding...");
+  } catch (e) {
+    console.log(e);
+  }
 })();

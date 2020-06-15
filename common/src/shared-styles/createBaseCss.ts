@@ -21,6 +21,10 @@ body {
     font-size: 1rem;
   }
   font-family: ${fontFamily};
+}
+ul {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }`;
 
 export default createBaseCss;

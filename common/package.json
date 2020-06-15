@@ -8,6 +8,7 @@
     "watch": "concurrently -n Typescript,Chokidar \"yarn watch:ts\" \"yarn watch:dist\" -p \"[{name} - {time}]\" -c \"yellow\",\"blue\" ",
     "watch:ts": "tsc -w --preserveWatchOutput",
     "watch:dist": "node watcher.js",
+    "copy": "node copier.js",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "gqlgen": "graphql-codegen --config codegen.yml"
   },
@@ -15,7 +16,12 @@
     "@graphql-codegen/add": "1.13.1",
     "@graphql-codegen/cli": "1.13.1",
     "@graphql-codegen/core": "1.13.1",
+    "@graphql-codegen/near-operation-file-preset": "1.13.1",
     "@graphql-codegen/typescript": "1.13.1",
+    "@graphql-codegen/typescript-graphql-files-modules": "1.13.1",
+    "@graphql-codegen/typescript-operations": "1.13.1",
+    "@graphql-codegen/typescript-react-apollo": "1.13.1",
+    "@graphql-codegen/visitor-plugin-common": "1.13.1",
     "@types/react": "16.9.32",
     "@types/react-dom": "16.9.6",
     "@types/yup": "0.26.34",
@@ -32,7 +38,9 @@
     "typescript": "3.8.3"
   },
   "dependencies": {
-    "@material-ui/core": "4.9.9",
+    "@apollo/react-common": "3.1.1",
+    "@apollo/react-hooks": "3.1.1",
+    "@material-ui/core": "4.9.14",
     "@material-ui/icons": "4.9.1",
     "apollo-cache-inmemory": "1.6.0",
     "apollo-client": "2.6.8",

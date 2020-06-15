@@ -1,15 +1,15 @@
 module.exports = {
-  roots: ['<rootDir>/src'],
+  roots: ["<rootDir>/src"],
   transform: {
-    '^.+\\.tsx?$': 'ts-jest'
+    "^.+\\.tsx?$": "ts-jest",
   },
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  moduleDirectories: ['node_modules', '.'],
-  setupFiles: ['<rootDir>/src/tests/setupTests.js'],
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  moduleDirectories: ["node_modules", "."],
+  setupFiles: ["<rootDir>/src/tests/setupTests.js"],
   globals: {
-    'ts-jest': {
-      diagnostics: false
-    }
-  }
+    "ts-jest": {
+      diagnostics: false,
+    },
+  },
 };

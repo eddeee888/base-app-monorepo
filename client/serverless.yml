@@ -1,0 +1,15 @@
+org: # Add your org
+name: bam
+
+component: website
+app: client
+stage: prod
+
+inputs:
+  src:
+    src: ./
+    hook: yarn build
+    dist: build
+  region: # Add your AWS region
+  bucketName: # Add your S3 bucket name
+  domain: # Add your primary domain

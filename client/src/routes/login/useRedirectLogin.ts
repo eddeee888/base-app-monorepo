@@ -2,11 +2,11 @@
 import { useHistory } from "react-router";
 import { UrlPartsLogin, patternLogin } from "./patternLogin";
 import generateUrl from "route-codegen/generateUrl";
-export type RedirectLogin = (urlParts: UrlPartsLogin) => void;
-const useRedirectLogin = (): RedirectLogin => {
+export type RedirectFnLogin = (urlParts?: UrlPartsLogin) => void;
+const useRedirectLogin = (): RedirectFnLogin => {
   const history = useHistory();
-  const redirect: RedirectLogin = (urlParts) => {
-    const to = generateUrl(patternLogin, {}, urlParts.urlQuery);
+  const redirect: RedirectFnLogin = (urlParts) => {
+    const to = generateUrl(patternLogin, {}, urlParts?.urlQuery, urlParts?.origin);
     history.push(to);
   };
   return redirect;

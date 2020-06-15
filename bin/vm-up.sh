@@ -84,8 +84,19 @@ function increase_watchers {
   echo "---"
 }
 
+function increase_max_map_count {
+  local cmd="docker-machine ssh $CORE_CMD_NAME 'sudo sysctl -w vm.max_map_count=262144'"
+  echo "*** Increasing max map count for elasticsearch on docker machine"
+  echo ""
+  echo $cmd
+  eval $cmd
+  echo ""
+  echo "---"
+}
+
 start_docker_machine
 docker_machine_env
 set_up_dnsmasq
 create_resolver_file
 increase_watchers
+increase_max_map_count

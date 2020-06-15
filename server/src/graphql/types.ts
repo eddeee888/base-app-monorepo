@@ -1,13 +1,13 @@
 import { GetTokenFromRequest, SetTokenToResponse } from "libs/headers";
 import { Sign, Verify } from "libs/jwt";
-import { ComparePassword, HashPassword } from "libs/password";
-import { Prisma, User } from "prisma/generated/client";
+import { Password } from "libs/password";
+import { PrismaClient, User } from "@prisma/client";
 import { ExpressContext } from "apollo-server-express/dist/ApolloServer";
 
 export type JWT = string;
 export type DateTime = string;
 export interface ResolverContext<U = User | null> extends ExpressContext {
-  prisma: Prisma;
+  prisma: PrismaClient;
   viewer: U;
   utils: {
     headers: {
@@ -18,10 +18,7 @@ export interface ResolverContext<U = User | null> extends ExpressContext {
       sign: Sign;
       verify: Verify;
     };
-    password: {
-      compare: ComparePassword;
-      hash: HashPassword;
-    };
+    password: Password;
   };
 }
 

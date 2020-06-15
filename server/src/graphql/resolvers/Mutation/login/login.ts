@@ -5,8 +5,10 @@ import { ResolverContextLoggedIn } from "graphql/types";
 const login: MutationResolvers["login"] = async (parent, args, ctx) => {
   const { email, password } = args.input;
 
-  const user = await ctx.prisma.user({
-    email,
+  const user = await ctx.prisma.user.findOne({
+    where: {
+      email,
+    },
   });
 
   if (!user) {
@@ -21,7 +23,7 @@ const login: MutationResolvers["login"] = async (parent, args, ctx) => {
 
   try {
     const token = ctx.utils.jwt.sign({
-      id: user.id,
+      id: user.id.toString(),
     });
     ctx.utils.headers.setTokenToResponse(ctx.res, token);
   } catch (e) {

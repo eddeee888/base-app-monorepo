@@ -33,7 +33,9 @@ function init(){
     remove_old_symlink
     setup_symlink_permission
     symlink
-    $CORE_CMD_NAME init-cert $COMMON_NAME $REVERSE_PROXY_CERTIFICATE_DIR
+    $CORE_CMD_NAME init-cert $COMMON_NAME_CLIENT_SEO $REVERSE_PROXY_CERTIFICATE_DIR/client-seo
+    $CORE_CMD_NAME init-cert $COMMON_NAME_CLIENT $REVERSE_PROXY_CERTIFICATE_DIR/client
+    $CORE_CMD_NAME init-cert $COMMON_NAME_SERVER $REVERSE_PROXY_CERTIFICATE_DIR/server
     $CORE_CMD_NAME init-packages
     $CORE_CMD_NAME dm-create $CORE_CMD_NAME
 

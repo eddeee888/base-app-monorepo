@@ -1,0 +1,26 @@
+org: # Your org here
+name: bam
+
+component: express
+app: server
+stage: prod
+
+inputs:
+  src: ./build
+  memory: 512
+  timeout: 10
+  domain: ${env:SERVER_SERVICE_DOMAIN}
+  region: # Cannot deploy to "ap-southeast-2" because main domain certificate ( manged by ACM ) is in "us-east-1"
+  layers:
+    - # TODO: Put a lambda layer for server node_modules here ( except prisma client )
+    - # TODO: Put a lambda layer for server prisma client here.
+  env:
+    NODE_ENV: production
+    APP_ORIGIN: ${env:APP_ORIGIN}
+    PRIMARY_DOMAIN: ${env:PRIMARY_DOMAIN}
+    GRAPHQL_ENDPOINT: ${env:GRAPHQL_ENDPOINT}
+    CLIENT_SEO_SERVICE_DOMAIN: ${env:CLIENT_SEO_SERVICE_DOMAIN}
+    CLIENT_SERVICE_DOMAIN: ${env:CLIENT_SERVICE_DOMAIN}
+    JWT_SECRET: ${env:BAM_JWT_SECRET}
+    PRISMA_DATABASE_URL: ${env:PRISMA_DATABASE_URL}
+    PRISMA_BINARY_TARGET: rhel-openssl-1.0.x

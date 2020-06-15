@@ -7,8 +7,8 @@ jest.useFakeTimers();
 const assertToken = (token: JWTObject | null) => {
   expect(token).toBeTruthy();
   if (token) {
-    expect(token.iss).toBe(process.env.SERVER_NAME);
-    expect(token.aud).toBe(`${process.env.SERVER_NAME}/graphql`);
+    expect(token.iss).toBe(process.env.APP_ORIGIN);
+    expect(token.aud).toBe(`${process.env.APP_ORIGIN}/graphql`);
     expect(token.viewer.id).toBe("abc123");
   }
 };
