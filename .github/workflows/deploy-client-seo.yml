@@ -40,7 +40,7 @@ jobs:
       - name: Deploy
         uses: aaronpanch/action-serverless@master
         with:
-          args: deploy --debug
+          args: --debug
         env:
           SERVICE_ROOT: ./client-seo
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
@@ -50,3 +50,16 @@ jobs:
           # GRAPHQL_ENDPOINT:
           # APP_NAME:
           # APP_ORIGIN:
+
+      - name: Setup GIT
+        run: |
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config user.name "$GITHUB_ACTOR"
+      
+      - name: Commit new AWS templates
+        run: git add client-seo/.serverless/* && git commit -m "Update new serverless AWS templates"
+
+      - name: Update master with client-seo serverless AWS templates
+        run: git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
