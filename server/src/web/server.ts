@@ -37,6 +37,21 @@ const apolloServer = new ApolloServer({
       password,
     },
   }),
+  formatError: (error) => {
+    if (process.env.NODE_ENV === "production" && error.extensions && error.extensions.code === "INTERNAL_SERVER_ERROR") {
+      // TODO: snag this error
+      console.error(error);
+
+      // Prisma errors will put the reason into `error.message` and `error.extensions.exception.meta.message` regardless of environment
+      // We must manually redact it or face the pain of 1000 hacks
+      if (error.extensions && error.extensions.exception && error.extensions.exception.meta && error.extensions.exception.meta.message) {
+        error.extensions.exception.meta.message = "REDACTED";
+      }
+      error.message = "Internal Server Error. REDACTED.";
+    }
+
+    return error;
+  },
 });
 
 // Set up other express middlewares and other routes
