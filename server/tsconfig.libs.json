@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "lib": ["es2016", "esnext.asynciterable"],
+    "baseUrl": "./src/libs",
+    "outDir": "./build/libs",
+    "target": "es2016",
+    "module": "commonjs",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true
+  },
+  "include": ["./src/libs/**/*"],
+  "exclude": ["node_modules"]
+}

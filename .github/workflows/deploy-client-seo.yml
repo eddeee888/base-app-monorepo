@@ -7,7 +7,6 @@ on:
     paths:
       - "common/**"
       - "route-manager/**"
-      - "package.json"
       - "client-seo/**"
 jobs:
   deploy:
@@ -35,7 +34,7 @@ jobs:
         run: yarn routegen:prod
 
       - name: Build assets
-        run: yarn client-seo:build
+        run: yarn build:client-seo
 
       - name: Deploy
         uses: aaronpanch/action-serverless@master
@@ -44,12 +43,13 @@ jobs:
         env:
           SERVICE_ROOT: ./client-seo
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          # CLIENT_SEO_SERVICE_DOMAIN:
-          # GRAPHQL_ENDPOINT:
-          # APP_NAME:
-          # APP_ORIGIN:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
+          GOOGLE_MAP_API_KEY: ${{ secrets.GOOGLE_MAP_API_KEY }}
+          CLIENT_SEO_SERVICE_DOMAIN: # FILLME
+          GRAPHQL_ENDPOINT: # FILLME
+          APP_NAME: # FILLME
+          APP_ORIGIN: # FILLME
 
       - name: Setup GIT
         run: |
@@ -57,7 +57,10 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
       
       - name: Commit new AWS templates
-        run: git add client-seo/.serverless/* && git commit -m "Update new serverless AWS templates"
+        run: |
+          git pull origin master 
+          git add client-seo/.serverless/* 
+          git commit -m "Update new serverless AWS templates"
 
       - name: Update master with client-seo serverless AWS templates
         run: git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"

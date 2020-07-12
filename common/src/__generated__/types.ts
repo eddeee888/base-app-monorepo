@@ -19,7 +19,6 @@ export type Mutation = {
   __typename: "Mutation";
   signup: User;
   login?: Maybe<User>;
-  logout: Scalars["Boolean"];
   userUpdate: User;
 };
 
@@ -39,24 +38,10 @@ export type Query = {
   __typename: "Query";
   me?: Maybe<User>;
   user?: Maybe<User>;
-  getSignedUrlsToUploadImages: Array<S3SignedObject>;
 };
 
 export type QueryUserArgs = {
   id: Scalars["ID"];
-};
-
-export type QueryGetSignedUrlsToUploadImagesArgs = {
-  filenames: Array<Scalars["String"]>;
-};
-
-/** AWS Sign URL to upload image */
-export type S3SignedObject = {
-  __typename: "S3SignedObject";
-  src: Scalars["String"];
-  filename: Scalars["String"];
-  originalFilename: Scalars["String"];
-  uploadUrl: Scalars["String"];
 };
 
 export type SignupInput = {
@@ -73,7 +58,8 @@ export type User = {
   email: Scalars["String"];
   firstName: Scalars["String"];
   lastName: Scalars["String"];
-  displayName?: Maybe<Scalars["String"]>;
+  contactNumber?: Maybe<Scalars["String"]>;
+  displayName: Scalars["String"];
   avatar?: Maybe<Scalars["String"]>;
 };
 

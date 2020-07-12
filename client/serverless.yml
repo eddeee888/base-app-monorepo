@@ -1,7 +1,7 @@
-org: # Add your org
-name: bam
+org: # FILLME
+name: # FILLME
 
-component: website
+component: website@1.1.1
 app: client
 stage: prod
 
@@ -10,6 +10,6 @@ inputs:
     src: ./
     hook: yarn build
     dist: build
-  region: # Add your AWS region
-  bucketName: # Add your S3 bucket name
-  domain: # Add your primary domain
+  region: # FILLME
+  bucketName: # FILLME
+  domain: # FILLME

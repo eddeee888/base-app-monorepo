@@ -1,6 +1,6 @@
 import { verify as jwtVerify, VerifyErrors, VerifyOptions } from "jsonwebtoken";
-import { JWT } from "graphql/types";
 import { JWTObject } from "./options";
+import { JWT } from "../headers/types";
 
 export type Verify = (token: JWT, subject?: string) => JWTObject | null | never;
 

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "lib": ["es2016", "esnext.asynciterable"],
+    "baseUrl": "./src/crons",
+    "outDir": "./build",
+    "paths": {
+      "@libs/*": ["../libs/*"]
+    },
+    "target": "es2016",
+    "module": "commonjs",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true
+  },
+  "include": ["./src/crons/**/*"],
+  "exclude": ["node_modules"]
+}

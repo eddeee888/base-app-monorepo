@@ -47,12 +47,24 @@ const createApolloClient = ({ uri, initialState = {}, ssrHeaders }: CreateApollo
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
-          // TODO set up logging service if needed here
-          console.warn("graphQLErrors in client.js");
+          // TODO:ERROR set up logging service if needed here
+          if (typeof window === "undefined") {
+            // If this is on the server, just print it out
+            console.log("*** graphQLErrors in SSR:");
+            console.error(graphQLErrors);
+          } else {
+            console.warn("graphQLErrors in client.js");
+          }
         }
         if (networkError) {
-          // TODO handle network error if needed here
-          console.warn("onNetworkError in client.js");
+          // TODO:ERROR handle network error if needed here
+          if (typeof window === "undefined") {
+            // If this is on the server, just print it out
+            console.log("*** networkError in SSR:");
+            console.error(networkError);
+          } else {
+            console.warn("onNetworkError in client.js");
+          }
         }
       }),
       requestLink,

@@ -1,7 +1,6 @@
 import { Response } from "express";
-import { expiresIn } from "libs/jwt";
-import { JWT } from "graphql/types";
-import { TokenType } from "./types";
+import { expiresIn } from "../jwt";
+import { TokenType, JWT } from "./types";
 
 export type SetTokenToResponse = (response: Response, accessToken: JWT) => Response;
 

@@ -1,6 +1,6 @@
 import { sign as jwtSign, SignOptions } from "jsonwebtoken";
-import { JWT } from "graphql/types";
 import { expiresIn as defaultExpiresIn, JWTPayload } from "./options";
+import { JWT } from "../headers/types";
 
 export type Sign = (payload: JWTPayload, expiresIn?: number) => JWT | never;
 interface CustomClaim {
@@ -16,7 +16,9 @@ const sign: Sign = (payload, expiresIn = defaultExpiresIn) => {
   };
 
   const customClaims: CustomClaim = {
-    viewer: payload,
+    viewer: {
+      id: payload.id,
+    },
   };
 
   if (!process.env.JWT_SECRET) {

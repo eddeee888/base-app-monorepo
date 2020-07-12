@@ -76,17 +76,9 @@ We use [GraphQL codegenerator](https://github.com/dotansimha/graphql-code-genera
 
 ```
 $ bam ws gqlgen # This runs codegen on all codebases or run one of the following to target a particular codebase
-$ bam ws client:gqlgen
-$ bam ws client-seo:gqlgen
-$ bam ws server:gqlgen
-```
-
-#### Generate dummy data
-
-Here's the script to generate some dummy data to get started!
-
-```
-$ bam init-data
+$ bam ws gqlgen:client
+$ bam ws gqlgen:client-seo
+$ bam ws gqlgen:server
 ```
 
 #### Turn on the containers the first time
@@ -111,6 +103,20 @@ GraphQL endpoint and other logic endpoints will be served from
 
 ```
 https://server.bam.dev/
+```
+
+#### Generate dummy data
+
+To create the database the first time:
+
+```
+$ bam run server yarn prisma:migrate:up
+```
+
+Here's the script to generate some dummy data to get started!
+
+```
+$ bam init-data
 ```
 
 #### Turn off everything

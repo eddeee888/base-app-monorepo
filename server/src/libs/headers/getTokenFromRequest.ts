@@ -1,6 +1,5 @@
 import { Request } from "express";
-import { JWT } from "graphql/types";
-import { TokenType } from "./types";
+import { TokenType, JWT } from "./types";
 
 export type GetTokenFromRequest = (request: Request) => JWT;
 
