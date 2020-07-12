@@ -4,7 +4,6 @@ apps:
     routes:
       login: /login
       signup: /signup
-      logout: /logout
       me: /me
     routingType: ReactRouterV5
     reactRouterV5LinkOptions:
@@ -53,4 +52,5 @@ apps:
     generateUseRedirect: false
     routes: 
       graphql: /graphql
-    destinationDir: ../server/src/routes
+      logout: /logout
+    destinationDir: ../server/src/libs/routes

@@ -63,7 +63,7 @@ services:
     networks:
       - com_vm
 
-  # Set up server worker - TODO: this will not work with serverless framework
+  # Set up server worker
   server-worker:
     build:
       context: ./server

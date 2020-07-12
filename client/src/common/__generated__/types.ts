@@ -19,7 +19,6 @@ export type Mutation = {
   __typename: "Mutation";
   signup: User;
   login?: Maybe<User>;
-  logout: Scalars["Boolean"];
   userUpdate: User;
 };
 

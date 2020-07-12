@@ -1,4 +1,7 @@
 function prepare_server_lambda_layer() {
+  echo "Cleaning up workspace ..."
+  rm -rf server/lambda-layers
+  
   echo "Creating layer ..."
   mkdir -p server/lambda-layers/nodejs/node_modules/.prisma
   mkdir -p server/lambda-layers/nodejs/node_modules/@prisma

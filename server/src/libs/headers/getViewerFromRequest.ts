@@ -1,6 +1,6 @@
 import { Request } from "express";
 import getTokenFromRequest from "./getTokenFromRequest";
-import verify from "libs/jwt/verify";
+import verify from "../jwt/verify";
 import { PrismaClient, User } from "@prisma/client";
 
 export type GetViewerFromRequest = (req: Request, prisma: PrismaClient) => Promise<User | null>;

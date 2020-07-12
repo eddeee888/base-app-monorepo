@@ -1,7 +1,6 @@
 {
-  "ignore": ["src/crons", "**/*.test.ts", "**/*.spec.ts", ".git", "node_modules"],
-  "watch": ["./src"],
-  "exec": "yarn build && yarn serve",
-  "ext": "ts",
+  "ignore": [".git", "node_modules"],
+  "watch": ["./build/app/web/server.js"],
+  "exec": "yarn serve",
   "verbose": true
 }

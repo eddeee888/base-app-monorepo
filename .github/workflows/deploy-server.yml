@@ -7,12 +7,128 @@ on:
     paths:
       - "common/**"
       - "route-manager/**"
-      - "package.json"
       - "server/**"
 
 jobs:
-  deploy-server-app:
-    name: Build and deploy server
+  deploy-node_modules-lambda-layer:
+    name: Build and deploy "node_modules" lambda layer
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    outputs:
+      node_modules-lambda-layer-version: ${{ steps.set-node_modules-lambda-layer-version.outputs.version }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
+          aws-region: us-east-1
+
+      - name: Install PROD packages
+        run: yarn --production
+
+      - name: Prepare lambda layer
+        run: ./ci/scripts/prepare-server-node-modules-lambda-layer.sh
+
+      - name: AWS Lambda Layer Publish
+        uses: taotao2345/aws-lambda-publishlayer@v1.0.0
+        env:
+          AWS_REGION: us-east-1 # Cannot deploy to "ap-southeast-2" because main domain certificate ( manged by ACM ) is in "us-east-1"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
+        with:
+          layer_name: # FILLME
+          zip_file: server/lambda-layers/nodejs.zip
+
+      - id: set-node_modules-lambda-layer-version
+        run: ./ci/scripts/set-server-lambda-layer-version.sh arn:aws:lambda:us-east-1:***:layer:LAYER_NAME version # FILLME
+
+  deploy-other-lambda-layers:
+    name: Build and deploy "@libs/*", "@prisma/client" lambda layers
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    outputs:
+      libs-lambda-layer-version: ${{ steps.set-libs-lambda-layer-version.outputs.libs-version }}
+      prisma-client-lambda-layer-version: ${{ steps.set-prisma-client-lambda-layer-version.outputs.prisma-client-version }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
+          aws-region: us-east-1
+
+      - name: Install ALL packages
+        run: yarn --frozen-lockfile
+
+      - name: Prepare prisma client
+        run: yarn prisma:generate:prod
+
+      - name: Copy common files
+        run: yarn common:copy 
+
+      - name: Route codegen PROD
+        run: yarn routegen:prod
+
+      - name: Build assets
+        run: yarn build:server:libs
+
+      # Prepare and deploy @libs/*
+      - name: Prepare "@libs/*"" lambda layer
+        run: ./ci/scripts/prepare-server-libs-lambda-layer.sh
+
+      - name: AWS Lambda Layer Publish
+        uses: taotao2345/aws-lambda-publishlayer@v1.0.0
+        env:
+          AWS_REGION: us-east-1 # Cannot deploy to "ap-southeast-2" because main domain certificate ( manged by ACM ) is in "us-east-1"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
+        with:
+          layer_name: # FILLME
+          zip_file: server/lambda-layers/nodejs.zip
+
+      - id: set-libs-lambda-layer-version
+        run: ./ci/scripts/set-server-lambda-layer-version.sh arn:aws:lambda:us-east-1:***:layer:LAYER_NAME libs-version # FILLME
+
+      # Prepare and deploy @prisma/client
+      - name: Prepare "@prisma/client" lambda layer
+        run: ./ci/scripts/prepare-prisma-client-lambda-layer.sh
+
+      - name: AWS Lambda Layer Publish
+        uses: taotao2345/aws-lambda-publishlayer@v1.0.0
+        env:
+          AWS_REGION: us-east-1 # Cannot deploy to "ap-southeast-2" because main domain certificate ( manged by ACM ) is in "us-east-1"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
+        with:
+          layer_name: # FILLME
+          zip_file: server/lambda-layers/nodejs.zip
+
+      - id: set-prisma-client-lambda-layer-version
+        run: ./ci/scripts/set-server-lambda-layer-version.sh arn:aws:lambda:us-east-1:268973863106:layer:LAYER_NAME prisma-client-version # FILLME
+
+  build-server:
+    name: Build server app & crons
     runs-on: ubuntu-18.04
     strategy:
       matrix:
@@ -30,9 +146,7 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Prepare prisma client
-        env:
-          PRISMA_BINARY_TARGET: rhel-openssl-1.0.x
-        run: yarn prisma:generate
+        run: yarn prisma:generate:prod
 
       - name: Copy common files
         run: yarn common:copy 
@@ -40,24 +154,87 @@ jobs:
       - name: Route codegen PROD
         run: yarn routegen:prod
 
-      - name: Build assets
-        run: yarn server:build
+      - name: Build app assets
+        run: yarn build:server:app
 
-      # Deploy
-      - name: Deploy
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build-server-app
+          path: ./server/build/app
+
+      - name: Build cron assets
+        run: yarn build:server:crons
+      
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build-server-crons
+          path: ./server/build/crons
+
+  deploy-server:
+    name: Deploy server app & crons
+    needs: [deploy-node_modules-lambda-layer, deploy-other-lambda-layers, build-server]
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      - uses: actions/download-artifact@v2
+        with:
+          name: build-server-app
+          path: ./server/build/app
+
+      - name: Deploy server app
         uses: aaronpanch/action-serverless@master
         with:
-          args: deploy --debug
+          args: deploy --debug 
         env:
           SERVICE_ROOT: ./server
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
-          APP_ORIGIN: # Add prod target here
-          PRIMARY_DOMAIN: # Add prod target here
-          GRAPHQL_ENDPOINT: # Add prod target here
-          CLIENT_SEO_SERVICE_DOMAIN: # Add prod target here
-          CLIENT_SERVICE_DOMAIN: # Add prod target here
-          SERVER_SERVICE_DOMAIN: # Add prod target here
-          PRISMA_DATABASE_URL: # Add prod target here
+          AWS_ACCESS_KEY_ID_APP: ${{ secrets.AWS_ACCESS_KEY_ID_APP }}
+          AWS_SECRET_ACCESS_KEY_APP: ${{ secrets.AWS_SECRET_ACCESS_KEY_APP }}
+          NODE_MODULES_LAMBDA_LAYER_VERSION: ${{needs.deploy-node_modules-lambda-layer.outputs.node_modules-lambda-layer-version}}
+          PRISMA_CLIENT_LAMBDA_LAYER_VERSION: ${{needs.deploy-other-lambda-layers.outputs.prisma-client-lambda-layer-version}}
+          LIBS_LAMBDA_LAYER_VERSION: ${{needs.deploy-other-lambda-layers.outputs.libs-lambda-layer-version}}
+          APP_ORIGIN: # FILLME
+          PRIMARY_DOMAIN: # FILLME
+          GRAPHQL_ENDPOINT: # FILLME
+          CLIENT_SEO_SERVICE_DOMAIN: # FILLME
+          CLIENT_SERVICE_DOMAIN: # FILLME
+          SERVER_SERVICE_DOMAIN: # FILLME
+          PRISMA_DATABASE_URL: ${{ secrets.PRISMA_DATABASE_URL }}
           BAM_JWT_SECRET: ${{ secrets.BAM_JWT_SECRET }} 
+          GOOGLE_SIGNIN_CLIENT_ID: ${{ secrets.GOOGLE_SIGNIN_CLIENT_ID }}
+          GOOGLE_SIGNIN_CLIENT_SECRET: ${{ secrets.GOOGLE_SIGNIN_CLIENT_SECRET }}
+          STRIPE_CLIENT_ID: ${{ secrets.STRIPE_CLIENT_ID }}
+          STRIPE_PRIVATE_API_KEY: ${{ secrets.STRIPE_PRIVATE_API_KEY }}
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: build-server-crons
+          path: ./server/build/crons
+
+      - name: Deploy server crons
+        uses: aaronpanch/action-serverless@master
+        with:
+          args: deploy --debug
+        env:
+          SERVICE_ROOT: ./server/build/crons
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
+          NODE_MODULES_LAMBDA_LAYER_VERSION: ${{needs.deploy-node_modules-lambda-layer.outputs.node_modules-lambda-layer-version}}
+          PRISMA_CLIENT_LAMBDA_LAYER_VERSION: ${{needs.deploy-other-lambda-layers.outputs.prisma-client-lambda-layer-version}}
+          LIBS_LAMBDA_LAYER_VERSION: ${{needs.deploy-other-lambda-layers.outputs.libs-lambda-layer-version}}
+          PRISMA_DATABASE_URL: ${{ secrets.PRISMA_DATABASE_URL }}
+          STRIPE_PRIVATE_API_KEY: ${{ secrets.STRIPE_PRIVATE_API_KEY }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}

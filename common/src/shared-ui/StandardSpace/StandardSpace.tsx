@@ -6,8 +6,12 @@ const fullWidthClassname = css`
   width: 100%;
 `;
 
-const StandardSpace: React.FunctionComponent = () => {
-  return <Box className={fullWidthClassname} marginBottom={2} />;
+export interface StandardSpaceProps {
+  size?: 1 | 2;
+}
+
+const StandardSpace: React.FunctionComponent<StandardSpaceProps> = ({ size = 2 }) => {
+  return <Box className={fullWidthClassname} marginBottom={size} />;
 };
 
 export default StandardSpace;

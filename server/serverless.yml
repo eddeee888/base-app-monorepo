@@ -1,19 +1,21 @@
-org: # Your org here
-name: bam
+org: # FILL ME
+name: # FILL ME
 
-component: express
+component: express@1.5.3
 app: server
 stage: prod
 
 inputs:
-  src: ./build
+  src: ./build/app
   memory: 512
-  timeout: 10
+  timeout: 29
+  description: # FILL ME
   domain: ${env:SERVER_SERVICE_DOMAIN}
-  region: # Cannot deploy to "ap-southeast-2" because main domain certificate ( manged by ACM ) is in "us-east-1"
+  region: us-east-1 # Cannot deploy to "ap-southeast-2" because main domain certificate ( manged by ACM ) is in "us-east-1"
   layers:
-    - # TODO: Put a lambda layer for server node_modules here ( except prisma client )
-    - # TODO: Put a lambda layer for server prisma client here.
+    - arn:aws:lambda:us-east-1:***:layer:LAYER_NAME:${env:NODE_MODULES_LAMBDA_LAYER_VERSION}
+    - arn:aws:lambda:us-east-1:***:layer:LAYER_NAME:${env:PRISMA_CLIENT_LAMBDA_LAYER_VERSION}
+    - arn:aws:lambda:us-east-1:***:layer:LAYER_NAME:${env:LIBS_LAMBDA_LAYER_VERSION}
   env:
     NODE_ENV: production
     APP_ORIGIN: ${env:APP_ORIGIN}

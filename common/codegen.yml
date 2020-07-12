@@ -1,13 +1,14 @@
 overwrite: true
-schema: "./../server/src/graphql/schemas/schema.graphql"
-documents: 'src/**/*.graphql'
+schema: "./../server/src/app/graph/schemas/schema.graphql"
+# documents: 'src/**/*.graphql' # Uncomment this if there's a graph operation in common
 hooks:
   afterAllFileWrite:
     - prettier --write
 generates:
-  src/__generated__/operations.d.ts:
-    plugins:
-      - typescript-graphql-files-modules
+  # Uncomment this if there's a graph operation in common
+  # src/__generated__/operations.d.ts:
+  #   plugins:
+  #     - typescript-graphql-files-modules
 
   src/__generated__/types.ts:
     plugins:
