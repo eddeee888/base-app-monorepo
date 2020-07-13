@@ -1,17 +1,17 @@
 function prepare_server_lambda_layer() {
   echo "Cleaning up workspace ..."
-  rm -rf server/lambda-layers
+  rm -rf services/server/lambda-layers
   
   echo "Creating layer ..."
-  mkdir -p server/lambda-layers/nodejs/node_modules/.prisma
-  mkdir -p server/lambda-layers/nodejs/node_modules/@prisma
+  mkdir -p services/server/lambda-layers/nodejs/node_modules/.prisma
+  mkdir -p services/server/lambda-layers/nodejs/node_modules/@prisma
 
   echo "Prepare prisma client lambda layer ..."
-  cp -r server/node_modules/.prisma/client server/lambda-layers/nodejs/node_modules/.prisma
-  cp -r server/node_modules/@prisma server/lambda-layers/nodejs/node_modules
+  cp -r services/server/node_modules/.prisma/client services/server/lambda-layers/nodejs/node_modules/.prisma
+  cp -r services/server/node_modules/@prisma services/server/lambda-layers/nodejs/node_modules
 
   echo "Compressing ..."
-  cd server/lambda-layers && zip -r nodejs.zip nodejs
+  cd services/server/lambda-layers && zip -r nodejs.zip nodejs
 }
 
 prepare_server_lambda_layer
