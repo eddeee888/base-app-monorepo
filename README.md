@@ -72,7 +72,7 @@ $ bam ws common:watch
 
 #### GraphQL codegen
 
-We use [GraphQL codegenerator](https://github.com/dotansimha/graphql-code-generator) to generate typed code for all of our codebases from the [graph schema](./server/src/graphql/schemas/schema.graphql)
+We use [GraphQL codegenerator](https://github.com/dotansimha/graphql-code-generator) to generate typed code for all of our codebases from the [graph schema](./services/server/src/app/graph/schemas/schema.graphql)
 
 ```
 $ bam ws gqlgen # This runs codegen on all codebases or run one of the following to target a particular codebase

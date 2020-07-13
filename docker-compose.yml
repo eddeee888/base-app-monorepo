@@ -1,10 +1,9 @@
 version: "3.7"
 
 services:
-  # Set up client container
   client:
     build:
-      context: ./client
+      context: ./services/client
       target: base
     command: yarn start
     ports:
@@ -15,14 +14,14 @@ services:
       CHOKIDAR_INTERVAL: 5000
       TSC_WATCHFILE: "UseFsEventsWithFallbackDynamicPolling"
     volumes:
-      - ./client/src:/usr/src/app/src
-      - ./client/package.json:/usr/src/app/package.json
+      - ./services/client/src:/usr/src/app/src
+      - ./services/client/package.json:/usr/src/app/package.json
     networks:
       - com_vm
 
   client-seo:
     build:
-      context: ./client-seo
+      context: ./services/client-seo
       target: base
     command: yarn dev -p ${CLIENT_SEO_PORT}
     ports:
@@ -33,16 +32,15 @@ services:
       NEXT_PUBLIC_APP_NAME: ${APP_NAME}
       NEXT_PUBLIC_APP_ORIGIN: ${APP_ORIGIN}
     volumes:
-      - ./client-seo/src:/usr/src/app/src
-      - ./client-seo/package.json:/usr/src/app/package.json
-      - ./client-seo/.next:/usr/src/app/.next
+      - ./services/client-seo/src:/usr/src/app/src
+      - ./services/client-seo/package.json:/usr/src/app/package.json
+      - ./services/client-seo/.next:/usr/src/app/.next
     networks:
       - com_vm
 
-  # Set up server container
   server:
     build:
-      context: ./server
+      context: ./services/server
       target: base
     command: yarn start
     ports:
@@ -57,31 +55,30 @@ services:
       PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
       PORT: ${SERVER_PORT}
     volumes:
-      - ./server/src:/usr/src/app/src
-      - ./server/prisma:/usr/src/app/prisma
-      - ./server/package.json:/usr/src/app/package.json
+      - ./services/server/src:/usr/src/app/src
+      - ./services/server/prisma:/usr/src/app/prisma
+      - ./services/server/package.json:/usr/src/app/package.json
     networks:
       - com_vm
 
-  # Set up server worker
   server-worker:
     build:
-      context: ./server
+      context: ./services/server
       target: base
     command: yarn start:crons
     environment:
       PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
     volumes:
-      - ./server/src:/usr/src/app/src
-      - ./server/prisma:/usr/src/app/prisma
-      - ./server/package.json:/usr/src/app/package.json
+      - ./services/server/src:/usr/src/app/src
+      - ./services/server/prisma:/usr/src/app/prisma
+      - ./services/server/package.json:/usr/src/app/package.json
     networks:
       - com_vm
 
   # Set up load balancer container 
   reverse-proxy:
     build:
-      context: ./reverse-proxy
+      context: ./services/reverse-proxy
     tty: true
     environment:
       CLIENT_SERVICE_NAME: ${CLIENT_SERVICE_NAME}
