@@ -5,9 +5,9 @@ on:
     branches:
       - "master"
     paths:
-      - "common/**"
-      - "route-manager/**"
-      - "client-seo/**"
+      - "services/common/**"
+      - "services/route-manager/**"
+      - "services/client-seo/**"
 jobs:
   deploy:
     name: Build and deploy client-seo
@@ -41,7 +41,7 @@ jobs:
         with:
           args: --debug
         env:
-          SERVICE_ROOT: ./client-seo
+          SERVICE_ROOT: ./services/client-seo
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
@@ -59,7 +59,7 @@ jobs:
       - name: Commit new AWS templates
         run: |
           git pull origin master 
-          git add client-seo/.serverless/* 
+          git add services/client-seo/.serverless/* 
           git commit -m "Update new serverless AWS templates"
 
       - name: Update master with client-seo serverless AWS templates
