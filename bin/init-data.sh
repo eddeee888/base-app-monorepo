@@ -4,7 +4,7 @@ function init_data()
 {
   echo "*** Initialising data..."
   
-  local cmd="docker-compose exec server-worker yarn prisma:reseed"
+  local cmd="docker-compose run --rm server yarn prisma:reseed"
   echo $cmd
   eval $cmd
 }

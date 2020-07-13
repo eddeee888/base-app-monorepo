@@ -5,9 +5,9 @@ on:
     branches:
       - "master"
     paths:
-      - "common/**"
-      - "route-manager/**"
-      - "server/**"
+      - "services/common/**"
+      - "services/route-manager/**"
+      - "services/server/**"
 
 jobs:
   deploy-node_modules-lambda-layer:
@@ -48,7 +48,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
         with:
           layer_name: # FILLME
-          zip_file: server/lambda-layers/nodejs.zip
+          zip_file: services/server/lambda-layers/nodejs.zip
 
       - id: set-node_modules-lambda-layer-version
         run: ./ci/scripts/set-server-lambda-layer-version.sh arn:aws:lambda:us-east-1:***:layer:LAYER_NAME version # FILLME
@@ -105,7 +105,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
         with:
           layer_name: # FILLME
-          zip_file: server/lambda-layers/nodejs.zip
+          zip_file: services/server/lambda-layers/nodejs.zip
 
       - id: set-libs-lambda-layer-version
         run: ./ci/scripts/set-server-lambda-layer-version.sh arn:aws:lambda:us-east-1:***:layer:LAYER_NAME libs-version # FILLME
@@ -122,7 +122,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
         with:
           layer_name: # FILLME
-          zip_file: server/lambda-layers/nodejs.zip
+          zip_file: services/server/lambda-layers/nodejs.zip
 
       - id: set-prisma-client-lambda-layer-version
         run: ./ci/scripts/set-server-lambda-layer-version.sh arn:aws:lambda:us-east-1:268973863106:layer:LAYER_NAME prisma-client-version # FILLME
@@ -160,7 +160,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: build-server-app
-          path: ./server/build/app
+          path: ./services/server/build/app
 
       - name: Build cron assets
         run: yarn build:server:crons
@@ -168,7 +168,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: build-server-crons
-          path: ./server/build/crons
+          path: ./services/server/build/crons
 
   deploy-server:
     name: Deploy server app & crons
@@ -189,14 +189,14 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: build-server-app
-          path: ./server/build/app
+          path: ./services/server/build/app
 
       - name: Deploy server app
         uses: aaronpanch/action-serverless@master
         with:
           args: deploy --debug 
         env:
-          SERVICE_ROOT: ./server
+          SERVICE_ROOT: ./services/server
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}
@@ -221,14 +221,14 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: build-server-crons
-          path: ./server/build/crons
+          path: ./services/server/build/crons
 
       - name: Deploy server crons
         uses: aaronpanch/action-serverless@master
         with:
           args: deploy --debug
         env:
-          SERVICE_ROOT: ./server/build/crons
+          SERVICE_ROOT: ./services/server/build/crons
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}

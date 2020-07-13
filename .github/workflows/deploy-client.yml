@@ -5,9 +5,9 @@ on:
     branches:
       - "master"
     paths:
-      - "common/**"
-      - "route-manager/**"
-      - "client/**"
+      - "services/common/**"
+      - "services/route-manager/**"
+      - "services/client/**"
 jobs:
   deploy:
     name: Build and deploy client
@@ -41,7 +41,7 @@ jobs:
         with:
           args: deploy --debug
         env:
-          SERVICE_ROOT: ./client
+          SERVICE_ROOT: ./services/client
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_CI }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_CI }}

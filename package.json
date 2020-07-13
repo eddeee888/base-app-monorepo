@@ -5,7 +5,7 @@
   "repository": "git@github.com:eddeee888/base-app-monorepo.git",
   "author": "Eddy Nguyen <eddeee.nguyen@gmail.com>",
   "scripts": {
-    "routegen:clean": "rm -rf ./client/src/routes && rm -rf ./client-seo/src/routes && rm -rf ./server/src/libs/routes ",
+    "routegen:clean": "rm -rf ./services/client/src/routes && rm -rf ./services/client-seo/src/routes && rm -rf ./services/server/src/libs/routes ",
     "routegen:format": "concurrently -n client,client-seo,server \"yarn workspace client prettier --write  'src/routes/**/*.{ts,tsx}'\"  \"yarn workspace client-seo prettier --write  'src/routes/**/*.{ts,tsx}'\" \"yarn workspace server prettier --write  'src/libs/routes/**/*.{ts,tsx}'\"   -p \"[{name} - {time}]\" -c \"yellow\",\"blue\",\"red\"",
     "routegen:dev": "yarn routegen:clean && PRIMARY_DOMAIN=bam.dev yarn workspace route-manager route-codegen --verbose --stacktrace && yarn routegen:format",
     "routegen:prod": "yarn routegen:clean && PRIMARY_DOMAIN=bam.com yarn workspace route-manager route-codegen --verbose --stacktrace && yarn routegen:format",
@@ -29,11 +29,7 @@
   },
   "workspaces": {
     "packages": [
-      "common",
-      "client",
-      "client-seo",
-      "server",
-      "route-manager"
+      "services/**"
     ],
     "nohoist": [
       "**"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-REVERSE_PROXY_CERTIFICATE_DIR="${CURRENT_DIR}/../reverse-proxy/certificates"
+REVERSE_PROXY_CERTIFICATE_DIR="${CURRENT_DIR}/../services/reverse-proxy/certificates"
 source $CURRENT_DIR/utils/constants.sh
 source $CURRENT_DIR/utils/error_exit.sh
 
