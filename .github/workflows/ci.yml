@@ -12,6 +12,11 @@ jobs:
       matrix:
         node-version: [12.x]
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.4.1
+        with:
+          access_token: ${{ github.token }}
+
       - name: Check out repository
         uses: actions/checkout@v2
 
@@ -20,11 +25,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Copy common files
+        run: yarn common:copy
+
       - name: Install packages
         run: yarn --frozen-lockfile
-
-      - name: Copy common files
-        run: yarn common:copy 
 
       - name: Check route-codegen DEV
         run: ./ci/scripts/check-generated-routegen-dev.sh

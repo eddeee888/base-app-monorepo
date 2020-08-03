@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "*** Checking routegen:dev"
 yarn routegen:dev
 

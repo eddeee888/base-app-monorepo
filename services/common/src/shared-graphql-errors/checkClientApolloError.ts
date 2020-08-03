@@ -1,4 +1,4 @@
-import { isApolloError, ApolloError } from "apollo-client";
+import { isApolloError, ApolloError } from "@apollo/client";
 import { ClientApolloError } from "./type";
 
 function checkClientApolloError(error: ApolloError): ClientApolloError {

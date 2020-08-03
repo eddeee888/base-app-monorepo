@@ -15,17 +15,17 @@ const login: MutationResolvers["login"] = async (parent, args, ctx) => {
     return null;
   }
 
-  const correctPassword = await ctx.utils.password.compare(password, user.password);
+  const correctPassword = await ctx.libs.password.compare(password, user.password);
 
   if (!correctPassword) {
     return null;
   }
 
   try {
-    const token = ctx.utils.jwt.sign({
+    const token = ctx.libs.jwt.sign({
       id: user.id.toString(),
     });
-    ctx.utils.headers.setTokenToResponse(ctx.res, token);
+    ctx.libs.headers.setTokenToResponse(ctx.res, token);
   } catch (e) {
     throw new AuthenticationError("Unable to sign token");
   }

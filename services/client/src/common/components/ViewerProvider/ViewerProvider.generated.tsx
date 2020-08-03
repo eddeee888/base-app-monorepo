@@ -2,10 +2,10 @@
 import * as Types from "../../__generated__/types";
 
 import * as Operations from "./ViewerProvider.graphql";
-import * as ApolloReactCommon from "@apollo/react-common";
-import * as ApolloReactHooks from "@apollo/react-hooks";
+import * as ApolloReactCommon from "@apollo/client";
+import * as ApolloReactHooks from "@apollo/client";
 
-export type ViewerQueryVariables = {};
+export type ViewerQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type ViewerQuery = { __typename: "Query" } & { me?: Types.Maybe<{ __typename: "User" } & Viewer_UserFragment> };
 

@@ -7,8 +7,9 @@ datasource db {
 }
 
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = [env("PRISMA_BINARY_TARGET")]
+  provider        = "prisma-client-js"
+  binaryTargets   = [env("PRISMA_BINARY_TARGET")]
+  previewFeatures = ["transactionApi", "middlewares"]
 }
 
 model User {

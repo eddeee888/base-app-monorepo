@@ -2,15 +2,22 @@ import { sign as jwtSign, SignOptions } from "jsonwebtoken";
 import { expiresIn as defaultExpiresIn, JWTPayload } from "./options";
 import { JWT } from "../headers/types";
 
-export type Sign = (payload: JWTPayload, expiresIn?: number) => JWT | never;
+interface SignParams {
+  appOrigin: string;
+  graphqlEndpoint: string;
+  jwtSecret: string;
+  payload: JWTPayload;
+  expiresIn?: number;
+}
+
 interface CustomClaim {
   viewer: JWTPayload;
 }
 
-const sign: Sign = (payload, expiresIn = defaultExpiresIn) => {
+const sign = ({ appOrigin, graphqlEndpoint, jwtSecret, payload, expiresIn = defaultExpiresIn }: SignParams): JWT => {
   const signOptions: SignOptions = {
-    issuer: process.env.APP_ORIGIN,
-    audience: process.env.GRAPHQL_ENDPOINT,
+    issuer: appOrigin,
+    audience: graphqlEndpoint,
     expiresIn,
     subject: payload.id,
   };
@@ -21,11 +28,7 @@ const sign: Sign = (payload, expiresIn = defaultExpiresIn) => {
     },
   };
 
-  if (!process.env.JWT_SECRET) {
-    throw new Error("Cannot sign token without a secret");
-  }
-
-  return jwtSign(customClaims, process.env.JWT_SECRET, signOptions);
+  return jwtSign(customClaims, jwtSecret, signOptions);
 };
 
 export default sign;

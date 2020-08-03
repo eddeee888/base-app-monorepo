@@ -1,12 +1,18 @@
 import { Request } from "jest-express/lib/request";
 import { Response } from "jest-express/lib/response";
-import { TokenType, createHeaders } from "@libs/headers";
-import { createJwt, JWTPayload } from "@libs/jwt";
+import { TokenType, createHeadersService } from "@libs/headers";
+import { createJwtService, JWTPayload } from "@libs/jwt";
 import tokenVerifier from "./tokenVerifier";
 
 describe("tokenVerifier middleware", () => {
-  const jwt = createJwt();
-  const headers = createHeaders();
+  const jwt = createJwtService({
+    appOrigin: "domain.com",
+    graphqlEndpoint: "domain.com/graphql",
+    jwtSecret: "supersecret",
+  });
+  const headers = createHeadersService({
+    primaryDomain: "domain.com",
+  });
   const request = new Request() as any;
   const response = new Response() as any;
   const next = jest.fn();

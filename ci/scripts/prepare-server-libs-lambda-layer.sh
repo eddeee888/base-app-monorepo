@@ -1,3 +1,4 @@
+#!/bin/bash
 function prepare_server_libs_lambda_layer() {
   echo "Cleaning up workspace ..."
   rm -rf services/server/lambda-layers

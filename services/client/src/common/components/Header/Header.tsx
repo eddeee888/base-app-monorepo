@@ -25,7 +25,6 @@ const headerClassName = css`
   background-color: ${primaryBackgroundColor};
   border-bottom: 1px solid ${borderColor};
   z-index: 1201;
-
   ${breakpoints.up("md")} {
     padding: 0 2rem;
   }

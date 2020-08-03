@@ -1,14 +1,14 @@
 import { Request } from "express";
 import getTokenFromRequest from "./getTokenFromRequest";
-import verify from "../jwt/verify";
 import { PrismaClient, User } from "@prisma/client";
+import { JwtService } from "../jwt";
 
-export type GetViewerFromRequest = (req: Request, prisma: PrismaClient) => Promise<User | null>;
+export type GetViewerFromRequest = (req: Request, prisma: PrismaClient, jwt: JwtService) => Promise<User | null>;
 
-const getViewerFromRequest: GetViewerFromRequest = async (req, prisma) => {
+const getViewerFromRequest: GetViewerFromRequest = async (req, prisma, jwt) => {
   const token = getTokenFromRequest(req);
 
-  const verifiedToken = verify(token);
+  const verifiedToken = jwt.verify(token);
   if (!verifiedToken) {
     return null;
   }

@@ -23,15 +23,15 @@ const signup: MutationResolvers["signup"] = async (parent, args, ctx) => {
   await validateInput(ctx, args.input);
 
   const newUser = await createNewUser(
-    { prisma: ctx.prisma, password: ctx.utils.password },
+    { prisma: ctx.prisma, password: ctx.libs.password },
     { email: args.input.email, password: args.input.password, firstName: args.input.firstName, lastName: args.input.lastName }
   );
 
   try {
-    const token = ctx.utils.jwt.sign({
+    const token = ctx.libs.jwt.sign({
       id: newUser.id.toString(),
     });
-    ctx.utils.headers.setTokenToResponse(ctx.res, token);
+    ctx.libs.headers.setTokenToResponse(ctx.res, token);
   } catch (e) {
     throw new AuthenticationError("Unable to sign token");
   }

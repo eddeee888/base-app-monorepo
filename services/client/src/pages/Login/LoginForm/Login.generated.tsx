@@ -2,12 +2,12 @@
 import * as Types from "../../../common/__generated__/types";
 
 import * as Operations from "./Login.graphql";
-import * as ApolloReactCommon from "@apollo/react-common";
-import * as ApolloReactHooks from "@apollo/react-hooks";
+import * as ApolloReactCommon from "@apollo/client";
+import * as ApolloReactHooks from "@apollo/client";
 
-export type LoginMutationVariables = {
+export type LoginMutationVariables = Types.Exact<{
   input: Types.LoginInput;
-};
+}>;
 
 export type LoginMutation = { __typename: "Mutation" } & {
   login?: Types.Maybe<{ __typename: "User" } & Pick<Types.User, "id" | "avatar" | "displayName">>;

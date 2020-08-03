@@ -37,3 +37,4 @@ generates:
       withHooks: true
       withHOC: false
       withComponent: false
+      reactApolloVersion: 3

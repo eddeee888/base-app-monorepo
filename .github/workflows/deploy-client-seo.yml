@@ -8,6 +8,7 @@ on:
       - "services/common/**"
       - "services/route-manager/**"
       - "services/client-seo/**"
+      - "package.json"
 jobs:
   deploy:
     name: Build and deploy client-seo
@@ -24,17 +25,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install packages
-        run: yarn --frozen-lockfile
-
       - name: Copy common files
         run: yarn common:copy 
 
-      - name: Route codegen PROD
-        run: yarn routegen:prod
+      - name: Install packages
+        run: yarn --frozen-lockfile
 
-      - name: Build assets
-        run: yarn build:client-seo
+      - name: Route codegen PROD
+        run: yarn routegen:prod && yarn routegen:format:client-seo
 
       - name: Deploy
         uses: aaronpanch/action-serverless@master

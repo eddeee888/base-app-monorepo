@@ -1,9 +1,5 @@
-import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
-import { ApolloClient } from "apollo-client";
-import { ApolloLink, Observable } from "apollo-link";
-import { onError } from "apollo-link-error";
-import { HttpLink } from "apollo-link-http";
-import { withClientState } from "apollo-link-state";
+import { ApolloClient, ApolloLink, Observable, InMemoryCache, NormalizedCacheObject, HttpLink } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 import { IncomingHttpHeaders } from "http";
 
 interface CreateApolloClientParams {
@@ -15,7 +11,27 @@ interface CreateApolloClientParams {
 const isSsr = (): boolean => typeof window === "undefined";
 
 const createApolloClient = ({ uri, initialState = {}, ssrHeaders }: CreateApolloClientParams): ApolloClient<NormalizedCacheObject> => {
-  const cache = new InMemoryCache().restore(initialState);
+  const httpLink = new HttpLink({
+    uri,
+    credentials: "include",
+  });
+
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    const errorLoc = typeof window === "undefined" ? "SSR" : "Browser";
+
+    if (graphQLErrors) {
+      const prefix = `graphQLErrors in ${errorLoc}`;
+      console.warn(prefix);
+      graphQLErrors.map((e) => {
+        console.error(new Error(`${prefix}. Message: ${e.message}`));
+      });
+    }
+    if (networkError) {
+      const prefix = `networkError in ${errorLoc}`;
+      console.error(new Error(`${prefix}. Message: ${networkError.message}`));
+    }
+  });
+
   const requestLink = new ApolloLink(
     (operation, forward) =>
       new Observable((observer) => {
@@ -44,50 +60,8 @@ const createApolloClient = ({ uri, initialState = {}, ssrHeaders }: CreateApollo
   );
 
   const client = new ApolloClient({
-    link: ApolloLink.from([
-      onError(({ graphQLErrors, networkError }) => {
-        if (graphQLErrors) {
-          // TODO:ERROR set up logging service if needed here
-          if (typeof window === "undefined") {
-            // If this is on the server, just print it out
-            console.log("*** graphQLErrors in SSR:");
-            console.error(graphQLErrors);
-          } else {
-            console.warn("graphQLErrors in client.js");
-          }
-        }
-        if (networkError) {
-          // TODO:ERROR handle network error if needed here
-          if (typeof window === "undefined") {
-            // If this is on the server, just print it out
-            console.log("*** networkError in SSR:");
-            console.error(networkError);
-          } else {
-            console.warn("onNetworkError in client.js");
-          }
-        }
-      }),
-      requestLink,
-      withClientState({
-        defaults: {
-          isConnected: true,
-        },
-        resolvers: {
-          Mutation: {
-            updateNetworkStatus: (_: any, { isConnected }: any, { cache }: any) => {
-              cache.writeData({ data: { isConnected } });
-              return null;
-            },
-          },
-        },
-        cache,
-      }),
-      new HttpLink({
-        uri,
-        credentials: "include",
-      }),
-    ]),
-    cache,
+    link: ApolloLink.from([errorLink, requestLink, httpLink]),
+    cache: new InMemoryCache().restore(initialState),
     ssrMode: isSsr(),
     ssrForceFetchDelay: 100,
   });

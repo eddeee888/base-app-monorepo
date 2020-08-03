@@ -3,7 +3,7 @@ const nodeExternals = require("webpack-node-externals");
 
 const { NODE_ENV = "development" } = process.env;
 
-const isDevelopment = NODE_ENV === "development";
+console.log(`Running webpack... NODE_ENV=${NODE_ENV}`);
 
 module.exports = {
   mode: NODE_ENV,
@@ -16,19 +16,7 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()],
     extensions: [".mjs", ".ts", ".js"],
   },
-  externals: [
-    nodeExternals(),
-    ((fileRegex, shouldRun) => {
-      return function (context, request, callback) {
-        if (shouldRun) {
-          if (fileRegex.test(request)) {
-            return callback(null, request);
-          }
-        }
-        callback();
-      };
-    })(/^\@libs/, !isDevelopment), // If is NOT development (i.e. production), we treat all `@libs*` modules as external because in prod they come from lambda layer
-  ],
+  externals: [nodeExternals()],
   module: {
     rules: [
       {

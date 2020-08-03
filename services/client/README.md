@@ -7,5 +7,5 @@ This is the front end SPA codebase for our app. This uses schema generated from 
 To generate schema, make sure `graphql` container is running, then run the following:
 
 ```
-yarn gqlgen
+$ yarn gqlgen
 ```
