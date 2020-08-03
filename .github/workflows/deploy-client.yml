@@ -8,6 +8,7 @@ on:
       - "services/common/**"
       - "services/route-manager/**"
       - "services/client/**"
+      - "package.json"
 jobs:
   deploy:
     name: Build and deploy client
@@ -23,15 +24,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      
+      - name: Copy common files
+        run: yarn common:copy
 
       - name: Install packages
         run: yarn --frozen-lockfile
 
-      - name: Copy common files
-        run: yarn common:copy 
-
       - name: Route codegen PROD
-        run: yarn routegen:prod
+        run: yarn routegen:prod && yarn routegen:format:client
 
       - name: Build assets
         run: yarn build:client

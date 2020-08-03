@@ -1,8 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import { Headers } from "@libs/headers";
-import { Jwt } from "@libs/jwt";
+import { HeadersService } from "@libs/headers";
+import { JwtService } from "@libs/jwt";
 
-export type TokenVerifier = (services: { headers: Headers; jwt: Jwt }) => (req: Request, res: Response, next: NextFunction) => void;
+export type TokenVerifier = (services: {
+  headers: HeadersService;
+  jwt: JwtService;
+}) => (req: Request, res: Response, next: NextFunction) => void;
 
 const tokenVerifier: TokenVerifier = ({ headers, jwt }) => (req, res, next) => {
   const token = headers.getTokenFromRequest(req);

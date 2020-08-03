@@ -1,5 +1,3 @@
-export { default as createJwt } from "./createJwt";
-export * from "./createJwt";
+export { default as createJwtService } from "./createJwtService";
+export * from "./createJwtService";
 export * from "./options";
-export * from "./sign";
-export * from "./verify";

@@ -1,5 +1,6 @@
-import { ErrorResponse } from "apollo-link-error";
-import { ServerError, ServerParseError } from "apollo-link-http-common";
+import { ErrorResponse } from "@apollo/client/link/error";
+import { ServerParseError } from "@apollo/client/link/http";
+import { ServerError } from "@apollo/client/link/utils";
 import { GraphQLError } from "graphql";
 
 const createApolloError = (graphQLError?: GraphQLError, networkError?: Error | ServerError | ServerParseError): ErrorResponse => {

@@ -30,8 +30,8 @@ const Footer: React.FunctionComponent = () => {
   return (
     <footer className={footerClassName}>
       <Box paddingY={8}>
-        <Grid container justify="center">
-          <Grid item xs={4} sm={2}>
+        <Grid container justify="center" spacing={4}>
+          <Grid item xs={5} sm={4} md={2}>
             <Text variant="h6" className={headingClassName}>
               GET STARTED
             </Text>
@@ -43,7 +43,7 @@ const Footer: React.FunctionComponent = () => {
             </LinkLogin>
           </Grid>
 
-          <Grid item xs={4} sm={2}>
+          <Grid item xs={5} sm={4} md={2}>
             <Text variant="h6" className={headingClassName}>
               LEGALS
             </Text>

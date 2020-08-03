@@ -1,12 +1,12 @@
 import cookieParser from "cookie-parser";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
-import { createHeaders } from "@libs/headers";
-import { createJwt } from "@libs/jwt";
+import { createHeadersService } from "@libs/headers";
+import { createJwtService } from "@libs/jwt";
 import { createPassword } from "@libs/password";
+import { createPrismaClient } from "@libs/prismaClient";
 import errorMiddleware from "middleware/errorHandler";
 import tokenVerifier from "middleware/tokenVerifier";
-import { PrismaClient } from "@prisma/client";
 import { resolvers } from "graph/resolvers";
 import { IsLoggedInDirective, IsPrivateDirective } from "graph/directives";
 import getTypeDefs from "graph/schemas/getTypeDefs";
@@ -14,12 +14,17 @@ import handleLogout from "./handlers/handleLogout";
 import { patternLogout } from "@libs/routes/logout/patternLogout";
 
 const PORT = process.env.PORT || 8000;
+const STAGE: "production" | "development" = process.env.NODE_ENV === "production" ? "production" : "development";
 
 // Create services
 const password = createPassword();
-const prisma = new PrismaClient();
-const headers = createHeaders();
-const jwt = createJwt();
+const prisma = createPrismaClient({ mode: STAGE });
+const headers = createHeadersService({ primaryDomain: process.env.PRIMARY_DOMAIN });
+const jwt = createJwtService({
+  appOrigin: process.env.APP_ORIGIN,
+  graphqlEndpoint: process.env.GRAPHQL_ENDPOINT,
+  jwtSecret: process.env.JWT_SECRET,
+});
 
 // Create ApolloServer
 const apolloServer = new ApolloServer({
@@ -32,8 +37,8 @@ const apolloServer = new ApolloServer({
   context: async (contextParams) => ({
     ...contextParams,
     prisma,
-    viewer: await headers.getViewerFromRequest(contextParams.req, prisma),
-    utils: {
+    viewer: await headers.getViewerFromRequest(contextParams.req, prisma, jwt),
+    libs: {
       headers,
       jwt,
       password,
@@ -62,6 +67,7 @@ server.use(cookieParser());
 server.use(tokenVerifier({ headers, jwt }));
 
 server.get(patternLogout, handleLogout({ headers }));
+server.get("/healthcheck", (req, res) => res.sendStatus(200));
 
 server.use(errorMiddleware());
 

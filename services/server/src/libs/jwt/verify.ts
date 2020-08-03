@@ -2,23 +2,25 @@ import { verify as jwtVerify, VerifyErrors, VerifyOptions } from "jsonwebtoken";
 import { JWTObject } from "./options";
 import { JWT } from "../headers/types";
 
-export type Verify = (token: JWT, subject?: string) => JWTObject | null | never;
+interface VerifyParams {
+  appOrigin: string;
+  graphqlEndpoint: string;
+  jwtSecret: string;
+  token: JWT;
+  subject?: string;
+}
 
-const verify: Verify = (token, subject) => {
+const verify = ({ appOrigin, graphqlEndpoint, jwtSecret, token, subject }: VerifyParams): JWTObject | null => {
   let result = null;
 
   const verifyOptions: VerifyOptions = {
-    issuer: process.env.APP_ORIGIN,
-    audience: process.env.GRAPHQL_ENDPOINT,
+    issuer: appOrigin,
+    audience: graphqlEndpoint,
   };
 
   verifyOptions.subject = subject ? subject : undefined;
 
-  if (!process.env.JWT_SECRET) {
-    throw new Error("Cannot verify token without a secret");
-  }
-
-  jwtVerify(token, process.env.JWT_SECRET, verifyOptions, (err: VerifyErrors, decoded: object | string) => {
+  jwtVerify(token, jwtSecret, verifyOptions, (err: VerifyErrors, decoded: object | string) => {
     if (decoded) {
       result = decoded;
     }

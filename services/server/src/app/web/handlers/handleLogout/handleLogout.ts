@@ -1,10 +1,10 @@
-import { Headers } from "@libs/headers";
+import { HeadersService } from "@libs/headers";
 import { RequestHandler } from "express";
 import generateUrlHome from "@libs/routes/home/generateUrlHome";
 import generateUrlStatic500 from "@libs/routes/static500/generateUrlStatic500";
 
 export interface HandleLogoutParams {
-  headers: Headers;
+  headers: HeadersService;
 }
 
 const handleLogout = ({ headers }: HandleLogoutParams): RequestHandler => {

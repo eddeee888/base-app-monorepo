@@ -25,7 +25,8 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "downlevelIteration": true
   },
   "files": ["./src/common/__generated__/operations.d.ts"],
   "include": ["./src"],

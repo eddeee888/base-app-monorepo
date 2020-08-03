@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "*** Checking yarn gqlgen"
 yarn gqlgen
 

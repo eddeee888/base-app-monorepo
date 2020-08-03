@@ -1,6 +1,3 @@
-export { default as createHeaders } from "./createHeaders";
-export * from "./createHeaders";
-export * from "./getTokenFromRequest";
-export * from "./setTokenToResponse";
-export * from "./getViewerFromRequest";
+export { default as createHeadersService } from "./createHeadersService";
+export * from "./createHeadersService";
 export * from "./types";

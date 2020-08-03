@@ -1,6 +1,6 @@
 import React from "react";
 import { FormikBag } from "../types";
-import prepareFieldProps from "common/components/Formik/prepareFieldProps";
+import prepareFieldProps from "../prepareFieldProps";
 import FormError from "common/components/FormError";
 import Select, { SelectProps } from "common/shared-ui/Select";
 

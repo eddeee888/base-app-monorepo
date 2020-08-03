@@ -5,14 +5,15 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { muiTheme } from "common/shared-styles/muiTheme";
 import { CacheProvider, Global, css } from "@emotion/core";
 import { cache } from "emotion";
-import { ApolloProvider } from "@apollo/react-hooks";
+import { ApolloProvider, ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import createApolloClient from "common/shared-apollo/createApolloClient";
 import withApollo from "next-with-apollo";
-import { getDataFromTree } from "@apollo/react-ssr";
-import ApolloClient from "apollo-client";
-import { NormalizedCacheObject } from "apollo-cache-inmemory";
+import { getDataFromTree } from "@apollo/client/react/ssr";
 import Header from "common/components/Header";
 import createBaseCss from "common/shared-styles/createBaseCss";
+import createFontsStyles from "common/shared-styles/createFontsStyles";
+import generateUrlClientSeoStaticImage from "routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
+import { ErrorWithCode } from "common/components/IsomorphicError/types";
 
 class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
   componentDidMount(): void {
@@ -27,15 +28,20 @@ class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
     const { Component, pageProps, apollo } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <Head>
           <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+          <meta name="twitter:card" content="summary" />
+          <meta property="og:title" content={`${process.env.NEXT_PUBLIC_APP_NAME}`} />
+          <meta property="og:description" content={`${process.env.NEXT_PUBLIC_APP_NAME}`} />
+          <meta property="og:image" content={generateUrlClientSeoStaticImage({ path: { imageName: "seo-logo.jpg" } })} />
         </Head>
         <CacheProvider value={cache}>
           <Global
             styles={css`
               ${createBaseCss()}
+              ${createFontsStyles("./client-seo-static/fonts")}
             `}
           ></Global>
           <ApolloProvider client={apollo}>
@@ -45,7 +51,7 @@ class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
             </ThemeProvider>
           </ApolloProvider>
         </CacheProvider>
-      </React.Fragment>
+      </>
     );
   }
 }
@@ -60,6 +66,14 @@ const MyAppWithApollo = withApollo(
         ? process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR
         : process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
 
+    const ssrHeaders = headers ?? {};
+    // Remove host header if exists. Otherwise we'll get something like:
+    // request to https://domain.com/graphql failed, reason: Hostname/IP does not match certificate's altnames:
+    // Host: bucket.s3.amazonaws.com. is not in the cert's altnames: DNS:*.execute-api.us-east-1.amazonaws.com
+    if ("host" in ssrHeaders) {
+      delete ssrHeaders.host;
+    }
+
     return createApolloClient({
       uri,
       initialState,
@@ -68,6 +82,13 @@ const MyAppWithApollo = withApollo(
   },
   {
     getDataFromTree,
+    onError: (err, ctx) => {
+      if (ctx && ctx.res && "code" in err) {
+        const error = (err as any) as ErrorWithCode;
+        ctx.res.statusCode = error.code;
+        return;
+      }
+    },
   }
 )(MyApp);
 
