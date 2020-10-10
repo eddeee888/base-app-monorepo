@@ -6,7 +6,7 @@ on:
       - "master"
 jobs:
   build:
-    name: Build and check assets
+    name: Build, check assets
     runs-on: ubuntu-18.04
     strategy:
       matrix:
@@ -40,5 +40,66 @@ jobs:
       - name: Generate prisma
         run: yarn prisma:generate:prod
 
+      - name: Lint
+        run: yarn lint
+
       - name: Build all assets
         run: yarn build
+
+  test-frontends:
+    name: Test frontends
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Copy common files
+        run: yarn common:copy
+
+      - name: Install packages
+        run: yarn --frozen-lockfile
+
+      - name: Test common
+        run: yarn test:common:unit
+
+      - name: Test client
+        run: yarn test:client:unit
+
+      - name: Test client-seo
+        run: yarn test:client-seo:unit
+  
+  test-server-app:
+    name: Test server app
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Copy common files
+        run: yarn common:copy
+
+      - name: Test server app - unit
+        run: |
+          cd services/server
+          ./scripts/test-unit.sh
+
+      - name: Test server app - graph resolvers
+        run: |
+          cd services/server
+          ./scripts/test-graph-resolvers.sh

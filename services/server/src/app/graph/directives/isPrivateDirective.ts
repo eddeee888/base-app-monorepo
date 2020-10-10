@@ -1,9 +1,8 @@
 import { SchemaDirectiveVisitor } from "graphql-tools";
-import { ResolverContext } from "graph/types";
+import { ResolverContext } from "@libs/graph/types";
 import { GraphQLField, defaultFieldResolver } from "graphql";
 import { AuthenticationError } from "apollo-server";
 import { canUserViewUserPrivateDetails } from "graph/permissions";
-import mustGetUser from "models/user/mustGetUser";
 
 enum AcceptableParentType {
   "User" = "User",
@@ -15,7 +14,7 @@ class IsPrivateDirective extends SchemaDirectiveVisitor {
 
     field.resolve = async function (...params) {
       const { id } = params[0];
-      const { prisma, viewer } = params[2];
+      const { viewer } = params[2];
       const { parentType } = params[3];
 
       if (!viewer) {
@@ -24,8 +23,10 @@ class IsPrivateDirective extends SchemaDirectiveVisitor {
 
       switch (parentType.name) {
         case AcceptableParentType.User:
-          const user = await mustGetUser(prisma, id);
-          const canViewPrivateField = await canUserViewUserPrivateDetails({ prisma, viewerId: viewer.id, userId: user.id });
+          const canViewPrivateField = await canUserViewUserPrivateDetails({
+            viewer: viewer,
+            userId: id,
+          });
           if (!canViewPrivateField) {
             throw new AuthenticationError("No permission to access private field");
           }

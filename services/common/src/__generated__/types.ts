@@ -11,24 +11,9 @@ export type Scalars = {
   Float: number;
 };
 
-export type LoginInput = {
-  email: Scalars["String"];
-  password: Scalars["String"];
-};
-
 export type Mutation = {
   __typename: "Mutation";
-  signup: User;
-  login?: Maybe<User>;
   userUpdate: User;
-};
-
-export type MutationSignupArgs = {
-  input: SignupInput;
-};
-
-export type MutationLoginArgs = {
-  input: LoginInput;
 };
 
 export type MutationUserUpdateArgs = {
@@ -43,13 +28,6 @@ export type Query = {
 
 export type QueryUserArgs = {
   id: Scalars["ID"];
-};
-
-export type SignupInput = {
-  email: Scalars["String"];
-  firstName: Scalars["String"];
-  lastName: Scalars["String"];
-  password: Scalars["String"];
 };
 
 export type User = {

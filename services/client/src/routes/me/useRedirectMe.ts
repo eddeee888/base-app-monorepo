@@ -6,7 +6,7 @@ export type RedirectFnMe = (urlParts?: UrlPartsMe) => void;
 const useRedirectMe = (): RedirectFnMe => {
   const history = useHistory();
   const redirect: RedirectFnMe = (urlParts) => {
-    const to = generateUrl(patternMe, {}, urlParts?.urlQuery, urlParts?.origin);
+    const to = generateUrl(patternMe, {}, urlParts?.query, urlParts?.origin);
     history.push(to);
   };
   return redirect;

@@ -6,14 +6,15 @@ export interface LinkProps {
   to: RouterLinkProps["to"];
   children: RouterLinkProps["children"];
   color?: LinkMuiProps["color"];
+  onClick?: () => void;
 }
 
 const AdaptorLink = React.forwardRef<any, RouterLinkProps>(function InnerAdaptorLink(props, ref) {
   return <RouterLink ref={ref} {...props} />;
 });
 
-const Link: React.FunctionComponent<LinkProps> = ({ to, children, color = "primary" }) => (
-  <LinkMui component={AdaptorLink} to={to} underline="none" color={color}>
+const Link: React.FunctionComponent<LinkProps> = ({ to, children, color = "primary", onClick }) => (
+  <LinkMui component={AdaptorLink} to={to} underline="none" color={color} onClick={onClick}>
     {children}
   </LinkMui>
 );

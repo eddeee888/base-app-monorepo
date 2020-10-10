@@ -1,11 +1,19 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
-import generateUrl from "route-codegen/generateUrl";
-import Link, { AnchorProps } from "common/shared-ui/Anchor";
-import { patternSignup, UrlPartsSignup, originSignup } from "./patternSignup";
-type LinkSignupProps = Omit<AnchorProps, "href"> & UrlPartsSignup;
-const LinkSignup: React.FunctionComponent<LinkSignupProps> = ({ urlQuery, origin, ...props }) => {
-  const to = generateUrl(patternSignup, {}, urlQuery, origin ?? originSignup);
-  return <Link {...props} href={to} />;
+import Link, { LinkProps } from "common/components/Link";
+import { UrlPartsSignup, patternNextJSSignup } from "./patternSignup";
+type LinkSignupProps = Omit<LinkProps, "nextHref"> & UrlPartsSignup;
+const LinkSignup: React.FunctionComponent<LinkSignupProps> = (props) => {
+  const { query = {}, ...rest } = props;
+  const path = {};
+  const pathname = patternNextJSSignup;
+  const nextHref = {
+    pathname: pathname,
+    query: {
+      ...path,
+      ...query,
+    },
+  };
+  return <Link {...rest} nextHref={nextHref} />;
 };
 export default LinkSignup;

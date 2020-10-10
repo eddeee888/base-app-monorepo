@@ -6,11 +6,11 @@
     "start": "REACT_APP_ENVIRONMENT=development react-app-rewired start",
     "build": "REACT_APP_ENVIRONMENT=production react-app-rewired build",
     "analyse": "yarn build && yarn source-map-explorer 'build/static/js/*.js'",
-    "test": "react-app-rewired test --transformIgnorePatterns \"./node_modules/(?!(@material-ui))/\"",
+    "test": "react-app-rewired test --env=jest-environment-jsdom-sixteen",
     "eject": "react-app-rewired eject",
+    "lint": "eslint 'src/**/*.{js,ts,tsx}'",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
-    "gqlgen": "graphql-codegen --config codegen.yml",
-    "add-gcg": "./scripts/install_gcg.sh"
+    "gqlgen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@apollo/client": "3.1.1",
@@ -28,20 +28,23 @@
     "react-router": "5.1.2",
     "react-router-dom": "5.1.2",
     "react-scripts": "3.4.1",
-    "route-codegen": "0.6.0",
+    "route-codegen": "0.7.0",
+    "subscriptions-transport-ws": "0.9.18",
     "yup": "0.28.3"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "1.17.4",
-    "@graphql-codegen/core": "1.17.4",
-    "@graphql-codegen/near-operation-file-preset": "1.17.4",
-    "@graphql-codegen/typescript": "1.17.4",
-    "@graphql-codegen/typescript-graphql-files-modules": "1.17.4",
-    "@graphql-codegen/typescript-operations": "1.17.4",
-    "@graphql-codegen/typescript-react-apollo": "1.17.4",
-    "@graphql-codegen/visitor-plugin-common": "1.17.4",
-    "@testing-library/react": "10.0.2",
-    "@testing-library/react-hooks": "3.2.1",
+    "@graphql-codegen/cli": "1.17.10",
+    "@graphql-codegen/core": "1.17.8",
+    "@graphql-codegen/near-operation-file-preset": "1.17.11",
+    "@graphql-codegen/typescript": "1.17.10",
+    "@graphql-codegen/typescript-graphql-files-modules": "1.18.0",
+    "@graphql-codegen/typescript-operations": "1.17.8",
+    "@graphql-codegen/typescript-react-apollo": "2.0.7",
+    "@graphql-codegen/visitor-plugin-common": "1.17.15",
+    "@graphql-tools/mock": "6.2.4",
+    "@testing-library/jest-dom": "5.11.4",
+    "@testing-library/react": "11.0.4",
+    "@testing-library/user-event": "12.1.7",
     "@types/jest": "25.2.1",
     "@types/node": "12.7.8",
     "@types/react": "16.9.32",
@@ -49,19 +52,26 @@
     "@types/react-router": "5.1.5",
     "@types/react-router-dom": "5.1.3",
     "@types/yup": "0.26.34",
-    "@typescript-eslint/eslint-plugin": "2.26.0",
-    "@typescript-eslint/parser": "2.26.0",
+    "@typescript-eslint/eslint-plugin": "2.34.0",
+    "@typescript-eslint/parser": "2.34.0",
+    "apollo-mocked-provider": "4.0.1",
     "babel-plugin-import": "1.12.2",
-    "customize-cra": "0.8.0",
+    "customize-cra": "1.0.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
     "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-react": "7.19.0",
+    "jest-environment-jsdom-sixteen": "1.0.3",
+    "jest-transform-graphql": "2.1.0",
     "prettier": "2.0.2",
     "react-app-rewired": "2.1.5",
     "react-test-renderer": "16.13.1",
     "source-map-explorer": "2.4.2",
     "typescript": "3.8.3"
+  },
+  "resolutions": {
+    "graphql": "14.6.0",
+    "@apollo/client": "3.1.1"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -71,5 +81,13 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "jest": {
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/*/?(*.)test.(js|ts)?(x)"
+    ]
+  }
 }

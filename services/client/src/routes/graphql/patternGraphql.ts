@@ -3,6 +3,6 @@ export const patternGraphql = "/graphql";
 export const originGraphql = "https://server.bam.dev";
 
 export interface UrlPartsGraphql {
-  urlQuery?: Record<string, string>;
+  query?: Record<string, string | undefined>;
   origin?: string;
 }

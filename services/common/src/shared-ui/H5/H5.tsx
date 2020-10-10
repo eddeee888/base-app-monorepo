@@ -1,5 +1,4 @@
-import { Typography } from "@material-ui/core";
-import { TypographyProps } from "@material-ui/core/Typography";
+import { Typography, TypographyProps } from "@material-ui/core";
 import React from "react";
 
 type H5Props = Omit<TypographyProps<"h5">, "component">;

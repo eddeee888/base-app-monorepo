@@ -4,22 +4,19 @@ hooks:
     - eslint --fix --config .eslintrc.js
     - prettier --write --config .prettierrc.json
 generates:
-  ./src/app/graph/resolvers/types.generated.ts:
+  ./src/libs/graph/resolvers.generated.ts:
     plugins:
-      - add: "/* eslint-disable */"
       - typescript
       - typescript-resolvers
     config:
-      contextType: graph/types#ResolverContext
+      contextType: '@libs/graph/types#ResolverContext'
       fieldContextTypes:
-        - Mutation.signup#graph/types#ResolverContextNotLoggedIn
-        - Mutation.login#graph/types#ResolverContextNotLoggedIn
-        - Mutation.userUpdate#graph/types#ResolverContextLoggedIn
+        - Mutation.userUpdate#@libs/graph/types#ResolverContextLoggedIn
       namingConvention:
         enumValues: change-case#upperCase
       useIndexSignature: true
-      enumValues: graph/enums
+      enumValues: '@libs/graph/enums'
       scalars:
         DateTime: string
       mappers:
-        User: graph/mappers#UserMapper
+        User: '@libs/graph/mappers#UserMapper'

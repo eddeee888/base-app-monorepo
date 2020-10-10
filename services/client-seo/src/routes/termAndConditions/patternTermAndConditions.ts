@@ -4,6 +4,6 @@ export const originTermAndConditions = "https://bam.dev";
 export const patternNextJSTermAndConditions = "/terms";
 
 export interface UrlPartsTermAndConditions {
-  urlQuery?: Record<string, string>;
+  query?: Record<string, string | undefined>;
   origin?: string;
 }

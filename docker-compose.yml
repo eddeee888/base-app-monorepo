@@ -28,12 +28,15 @@ services:
       - ${CLIENT_SEO_PORT}:${CLIENT_SEO_PORT}
     environment:
       NODE_ENV: development
+      NEXT_PUBLIC_WEBSOCKET_GRAPHQL_ENDPOINT: ${WEBSOCKET_GRAPHQL_ENDPOINT}
       NEXT_PUBLIC_GRAPHQL_ENDPOINT: ${GRAPHQL_ENDPOINT}
       NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR: ${GRAPHQL_ENDPOINT_SSR}
       NEXT_PUBLIC_APP_NAME: ${APP_NAME}
       NEXT_PUBLIC_APP_ORIGIN: ${APP_ORIGIN}
+      # NEXT_PUBLIC_SPECIAL_MODE: "maintenance"
       NODE_ICU_DATA: /usr/src/app/node_modules/full-icu # TODO:HACK to get full-icu in nodejs 12
     volumes:
+      - ./services/client-seo/public:/usr/src/app/public
       - ./services/client-seo/src:/usr/src/app/src
       - ./services/client-seo/package.json:/usr/src/app/package.json
       - ./services/client-seo/.next:/usr/src/app/.next
@@ -56,9 +59,11 @@ services:
       PORT: ${SERVER_PORT}
       JWT_SECRET: ${JWT_SECRET}
       PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
+      SERVER_DATABASE_NAME: ${SERVER_DATABASE_NAME}
     volumes:
       - ./services/server/src:/usr/src/app/src
       - ./services/server/prisma:/usr/src/app/prisma
+      - ./services/server/scripts:/usr/src/app/scripts
       - ./services/server/package.json:/usr/src/app/package.json
     networks:
       - com_vm

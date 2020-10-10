@@ -16,6 +16,6 @@
     "noUnusedLocals": true,
     "noImplicitAny": true
   },
-  "include": ["./src/app/**/*", "./src/crons/**/*"],
+  "include": ["./src/app/**/*", "./src/crons/**/*", "./src/libs/**/*"],
   "exclude": ["node_modules", "./src/**/generated/*.ts"]
 }

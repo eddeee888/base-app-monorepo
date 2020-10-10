@@ -14,6 +14,7 @@ import createBaseCss from "common/shared-styles/createBaseCss";
 import createFontsStyles from "common/shared-styles/createFontsStyles";
 import generateUrlClientSeoStaticImage from "routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
 import { ErrorWithCode } from "common/components/IsomorphicError/types";
+import isSsr from "common/components/isSsr";
 
 class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
   componentDidMount(): void {
@@ -76,6 +77,7 @@ const MyAppWithApollo = withApollo(
 
     return createApolloClient({
       uri,
+      webSocketUri: isSsr() ? undefined : process.env.NEXT_PUBLIC_WEBSOCKET_GRAPHQL_ENDPOINT, // If SSR, do not need websocket
       initialState,
       ssrHeaders: headers,
     });

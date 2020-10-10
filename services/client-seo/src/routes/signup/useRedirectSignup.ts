@@ -1,14 +1,20 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import { UrlPartsSignup, patternSignup, originSignup } from "./patternSignup";
-import generateUrl from "route-codegen/generateUrl";
+import { useRouter } from "next/router";
+import { UrlPartsSignup, patternNextJSSignup } from "./patternSignup";
 export type RedirectFnSignup = (urlParts?: UrlPartsSignup) => void;
 const useRedirectSignup = (): RedirectFnSignup => {
+  const router = useRouter();
   const redirect: RedirectFnSignup = (urlParts) => {
-    const to = generateUrl(patternSignup, {}, urlParts?.urlQuery, urlParts?.origin ?? originSignup);
-    if (!!window && !!window.location) {
-      window.location.href = to;
-    }
-    return;
+    const query = urlParts?.query ?? {};
+    const path = {};
+    const pathname = patternNextJSSignup;
+    router.push({
+      pathname: pathname,
+      query: {
+        ...path,
+        ...query,
+      },
+    });
   };
   return redirect;
 };

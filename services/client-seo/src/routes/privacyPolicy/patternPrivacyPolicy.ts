@@ -4,6 +4,6 @@ export const originPrivacyPolicy = "https://bam.dev";
 export const patternNextJSPrivacyPolicy = "/privacy";
 
 export interface UrlPartsPrivacyPolicy {
-  urlQuery?: Record<string, string>;
+  query?: Record<string, string | undefined>;
   origin?: string;
 }

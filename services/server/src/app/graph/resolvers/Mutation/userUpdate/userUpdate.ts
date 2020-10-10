@@ -1,4 +1,4 @@
-import { MutationResolvers } from "graph/resolvers/types.generated";
+import { MutationResolvers } from "@libs/graph/resolvers.generated";
 import { ForbiddenError } from "apollo-server";
 import { canUserUpdateUser } from "graph/permissions";
 

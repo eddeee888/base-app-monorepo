@@ -1,6 +1,6 @@
 import { sign as jwtSign, SignOptions } from "jsonwebtoken";
 import { expiresIn as defaultExpiresIn, JWTPayload } from "./options";
-import { JWT } from "../headers/types";
+import { JWT } from "@libs/headers/types";
 
 interface SignParams {
   appOrigin: string;

@@ -1,5 +1,5 @@
 import { SchemaDirectiveVisitor } from "graphql-tools";
-import { ResolverContext } from "graph/types";
+import { ResolverContext } from "@libs/graph/types";
 import { AuthenticationError } from "apollo-server";
 import { GraphQLField, defaultFieldResolver } from "graphql";
 

@@ -1,3 +1,4 @@
 node_modules/*
 **/generated/**
 webpack.*.js
+*.generated.*

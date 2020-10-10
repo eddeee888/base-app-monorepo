@@ -1,7 +1,5 @@
-/* eslint-disable */
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
-
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -11,24 +9,9 @@ export type Scalars = {
   Float: number;
 };
 
-export type LoginInput = {
-  email: Scalars["String"];
-  password: Scalars["String"];
-};
-
 export type Mutation = {
   __typename: "Mutation";
-  signup: User;
-  login?: Maybe<User>;
   userUpdate: User;
-};
-
-export type MutationSignupArgs = {
-  input: SignupInput;
-};
-
-export type MutationLoginArgs = {
-  input: LoginInput;
 };
 
 export type MutationUserUpdateArgs = {
@@ -43,13 +26,6 @@ export type Query = {
 
 export type QueryUserArgs = {
   id: Scalars["ID"];
-};
-
-export type SignupInput = {
-  email: Scalars["String"];
-  firstName: Scalars["String"];
-  lastName: Scalars["String"];
-  password: Scalars["String"];
 };
 
 export type User = {

@@ -4,7 +4,7 @@ import RedirectServerSide from "route-codegen/RedirectServerSide";
 import generateUrl from "route-codegen/generateUrl";
 import { UrlPartsHome, patternHome, originHome } from "./patternHome";
 const RedirectHome: React.FunctionComponent<UrlPartsHome & { fallback?: React.ReactNode }> = (props) => {
-  const to = generateUrl(patternHome, {}, props.urlQuery, props.origin ?? originHome);
+  const to = generateUrl(patternHome, {}, props.query, props.origin ?? originHome);
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };
 export default RedirectHome;

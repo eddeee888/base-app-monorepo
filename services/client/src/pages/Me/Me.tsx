@@ -11,7 +11,7 @@ const Me: React.FunctionComponent = () => {
 
   if (!viewer) {
     const redirectTo = generateUrlMe({});
-    return <RedirectLogin urlQuery={{ redirect: redirectTo }} />;
+    return <RedirectLogin query={{ redirect: redirectTo }} />;
   }
 
   return (

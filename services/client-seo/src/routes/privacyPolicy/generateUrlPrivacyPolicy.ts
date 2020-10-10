@@ -2,5 +2,5 @@
 import generateUrl from "route-codegen/generateUrl";
 import { patternPrivacyPolicy, UrlPartsPrivacyPolicy, originPrivacyPolicy } from "./patternPrivacyPolicy";
 const generateUrlPrivacyPolicy = (urlParts?: UrlPartsPrivacyPolicy): string =>
-  generateUrl(patternPrivacyPolicy, {}, urlParts?.urlQuery, urlParts?.origin ?? originPrivacyPolicy);
+  generateUrl(patternPrivacyPolicy, {}, urlParts?.query, urlParts?.origin ?? originPrivacyPolicy);
 export default generateUrlPrivacyPolicy;

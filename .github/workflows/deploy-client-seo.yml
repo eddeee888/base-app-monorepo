@@ -10,8 +10,36 @@ on:
       - "services/client-seo/**"
       - "package.json"
 jobs:
+  test:
+    name: Test client-seo and common
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Copy common files
+        run: yarn common:copy
+
+      - name: Install packages
+        run: yarn --frozen-lockfile
+
+      - name: Test common
+        run: yarn test:common:unit
+
+      - name: Test client-seo
+        run: yarn test:client-seo:unit
+
   deploy:
     name: Build and deploy client-seo
+    needs: [test]
     runs-on: ubuntu-18.04
     strategy:
       matrix:

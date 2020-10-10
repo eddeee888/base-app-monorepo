@@ -2,8 +2,6 @@ apps:
   client:
     origin: https://app.${PRIMARY_DOMAIN}
     routes:
-      login: /login
-      signup: /signup
       me: /me
     routingType: ReactRouterV5
     reactRouterV5LinkOptions:
@@ -24,6 +22,8 @@ apps:
     origin: https://${PRIMARY_DOMAIN}
     routes:
       home: /
+      login: /login
+      signup: /signup
       termAndConditions: /terms
       privacyPolicy: /privacy
       clientSeoStaticImage: /client-seo-static/images/:imageName
@@ -34,7 +34,7 @@ apps:
       importCustomLink:
         componentDefaultImport: true
         propsNamedImport: LinkProps
-        hrefProp: href
+        hrefProp: nextHref
         from: common/components/Link
     defaultLinkOptions:
       importCustomLink:
@@ -50,7 +50,9 @@ apps:
     generateRedirectComponent: false
     generateUseParams: false
     generateUseRedirect: false
-    routes: 
+    routes:
+      xhrLogin: /xhr/login
+      xhrSignup: /xhr/signup
       graphql: /graphql
       logout: /logout
     destinationDir: ../server/src/libs/routes

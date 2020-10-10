@@ -1,15 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
+import RedirectServerSide from "route-codegen/RedirectServerSide";
 import generateUrl from "route-codegen/generateUrl";
-import { Redirect } from "react-router";
-import { UrlPartsLogin, patternLogin } from "./patternLogin";
+import { UrlPartsLogin, patternLogin, originLogin } from "./patternLogin";
 const RedirectLogin: React.FunctionComponent<UrlPartsLogin & { fallback?: React.ReactNode }> = (props) => {
-  const to = generateUrl(patternLogin, {}, props.urlQuery, props.origin);
-  return (
-    <>
-      <Redirect to={to} />
-      {props.fallback}
-    </>
-  );
+  const to = generateUrl(patternLogin, {}, props.query, props.origin ?? originLogin);
+  return <RedirectServerSide href={to} fallback={props.fallback} />;
 };
 export default RedirectLogin;

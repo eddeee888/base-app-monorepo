@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { expiresIn } from "../jwt";
+import { expiresIn } from "@libs/jwt";
 import { TokenType, JWT } from "./types";
 
 const setTokenToResponse = (response: Response, accessToken: JWT, primaryDomain: string): Response => {

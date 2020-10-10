@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  server:
+    build:
+      context: ./
+      target: base
+    ports:
+      - 9999:80
+    environment:
+      APP_ORIGIN: https://server.test
+      GRAPHQL_ENDPOINT: server.test/graphql
+      JWT_SECRET: ServerTestJwtSecret
+      PRISMA_DATABASE_URL: mysql://root:root@database:3306/servertest
+      SERVER_DATABASE_NAME: servertest
+    depends_on:
+      - database
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./prisma:/usr/src/app/prisma
+      - ./scripts:/usr/src/app/scripts
+      - ./package.json:/usr/src/app/package.json
+    networks:
+      - test_vm
+
+  database:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - database:/var/lib/mysql
+    expose:
+      - 3307
+    ports:
+      - 3307:3306
+    networks:
+      - test_vm
+
+volumes:
+  database:
+
+networks:
+  test_vm:

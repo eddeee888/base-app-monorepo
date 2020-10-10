@@ -7,10 +7,10 @@ This is the backend for our application. It is a NodeJS server running with a Gr
 After changing the prisma schema, run the following:
 
 ```bash
-$ bam run server yarn prisma migrate save --name migration-name --experimental
-$ bam run server yarn prisma:migrate:up
-$ bam run server yarn prisma:generate:dev
-$ bam run server-worker yarn prisma:generate:dev
+$ bam exec server yarn prisma migrate save --experimental --name migration-name
+$ bam exec server yarn prisma:migrate:up
+$ bam exec server yarn prisma:generate:dev
+$ bam exec server-worker yarn prisma:generate:dev
 ```
 
 Note that the previous commands update the container. Run the following to update the binary type on the host machine:
@@ -23,6 +23,22 @@ To seed the database in dev:
 
 ```
 $ bam init-data
+```
+
+## Test
+
+### Unit
+
+```
+$ yarn test:app:unit
+```
+
+### Graph resolvers
+
+We run test in a separate container and remove it to test against a test database. Each resolver test is run one after another. Everything is wrapped in the following script:
+
+```
+$ ./scripts/test-graph-resolvers.sh
 ```
 
 ## How it works

@@ -2,6 +2,7 @@ node_modules
 npm-debug.log
 Dockerfile*
 docker-compose*
+.env
 .dockerignore
 .git
 .gitignore

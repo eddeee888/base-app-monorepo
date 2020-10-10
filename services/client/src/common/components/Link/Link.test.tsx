@@ -1,31 +1,23 @@
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
 import Link from "./Link";
-import { render, getByText, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Route } from "react-router";
-import { assertTextLink } from "test/utils/react-testing-library/assertTextLink";
 
 describe("<Link />", () => {
   it("should follow link correctly to the destination", () => {
-    const { container } = render(
+    render(
       <MemoryRouter>
         <Route exact path="/login" render={() => <div>Login page</div>} />
         <Link to="/login">Linkage</Link>
       </MemoryRouter>
     );
 
-    expect(container.innerHTML).not.toContain("Login page");
+    expect(screen.queryByText("Login page")).not.toBeInTheDocument();
 
-    assertTextLink(container, { text: "Linkage", href: "/login" });
+    userEvent.click(screen.getByText("Linkage"));
 
-    fireEvent(
-      getByText(container, "Linkage"),
-      new MouseEvent("click", {
-        bubbles: true,
-        cancelable: true,
-      })
-    );
-
-    expect(container.innerHTML).toContain("Login page");
+    expect(screen.getByText("Login page")).toBeInTheDocument();
   });
 });

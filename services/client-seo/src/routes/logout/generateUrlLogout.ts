@@ -2,5 +2,5 @@
 import generateUrl from "route-codegen/generateUrl";
 import { patternLogout, UrlPartsLogout, originLogout } from "./patternLogout";
 const generateUrlLogout = (urlParts?: UrlPartsLogout): string =>
-  generateUrl(patternLogout, {}, urlParts?.urlQuery, urlParts?.origin ?? originLogout);
+  generateUrl(patternLogout, {}, urlParts?.query, urlParts?.origin ?? originLogout);
 export default generateUrlLogout;

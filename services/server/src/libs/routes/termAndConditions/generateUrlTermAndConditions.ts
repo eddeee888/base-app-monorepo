@@ -2,5 +2,5 @@
 import generateUrl from "route-codegen/generateUrl";
 import { patternTermAndConditions, UrlPartsTermAndConditions, originTermAndConditions } from "./patternTermAndConditions";
 const generateUrlTermAndConditions = (urlParts?: UrlPartsTermAndConditions): string =>
-  generateUrl(patternTermAndConditions, {}, urlParts?.urlQuery, urlParts?.origin ?? originTermAndConditions);
+  generateUrl(patternTermAndConditions, {}, urlParts?.query, urlParts?.origin ?? originTermAndConditions);
 export default generateUrlTermAndConditions;

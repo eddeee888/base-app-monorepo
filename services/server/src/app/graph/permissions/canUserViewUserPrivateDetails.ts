@@ -1,20 +1,19 @@
-import { PrismaClient } from "@prisma/client";
-import { isAdmin } from "models/user";
+import { User } from "@prisma/client";
+import { hasGroup } from "@libs/models/user";
 
-interface CanUserViewUserPrivateDetails {
-  prisma: PrismaClient;
-  viewerId: number;
+export interface CanUserViewUserPrivateDetails {
+  viewer: User;
   userId: number;
 }
 
-export const canUserViewUserPrivateDetails = async (params: CanUserViewUserPrivateDetails): Promise<boolean> => {
-  const { prisma, viewerId, userId } = params;
-  if (viewerId === userId) {
+export const canUserViewUserPrivateDetails = (params: CanUserViewUserPrivateDetails): boolean => {
+  const { viewer, userId } = params;
+
+  if (hasGroup(viewer, "admin")) {
     return true;
   }
 
-  const isViewerAdmin = await isAdmin(prisma, viewerId);
-  if (isViewerAdmin) {
+  if (userId === viewer.id) {
     return true;
   }
 

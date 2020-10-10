@@ -110,7 +110,7 @@ https://server.bam.dev/
 To create the database the first time:
 
 ```
-$ bam run server yarn prisma:migrate:up
+$ bam exec server yarn prisma:migrate:up
 ```
 
 Here's the script to generate some dummy data to get started!

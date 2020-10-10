@@ -2,5 +2,5 @@
 import generateUrl from "route-codegen/generateUrl";
 import { patternSignup, UrlPartsSignup, originSignup } from "./patternSignup";
 const generateUrlSignup = (urlParts?: UrlPartsSignup): string =>
-  generateUrl(patternSignup, {}, urlParts?.urlQuery, urlParts?.origin ?? originSignup);
+  generateUrl(patternSignup, {}, urlParts?.query, urlParts?.origin ?? originSignup);
 export default generateUrlSignup;

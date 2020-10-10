@@ -4,7 +4,7 @@ import generateUrl from "route-codegen/generateUrl";
 export type RedirectFnClientSeoStaticImage = (urlParts: UrlPartsClientSeoStaticImage) => void;
 const useRedirectClientSeoStaticImage = (): RedirectFnClientSeoStaticImage => {
   const redirect: RedirectFnClientSeoStaticImage = (urlParts) => {
-    const to = generateUrl(patternClientSeoStaticImage, urlParts.path, urlParts?.urlQuery, urlParts?.origin ?? originClientSeoStaticImage);
+    const to = generateUrl(patternClientSeoStaticImage, urlParts.path, urlParts?.query, urlParts?.origin ?? originClientSeoStaticImage);
     if (!!window && !!window.location) {
       window.location.href = to;
     }

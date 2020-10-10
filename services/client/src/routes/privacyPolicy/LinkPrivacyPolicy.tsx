@@ -4,8 +4,8 @@ import generateUrl from "route-codegen/generateUrl";
 import Link, { AnchorProps } from "common/shared-ui/Anchor";
 import { patternPrivacyPolicy, UrlPartsPrivacyPolicy, originPrivacyPolicy } from "./patternPrivacyPolicy";
 type LinkPrivacyPolicyProps = Omit<AnchorProps, "href"> & UrlPartsPrivacyPolicy;
-const LinkPrivacyPolicy: React.FunctionComponent<LinkPrivacyPolicyProps> = ({ urlQuery, origin, ...props }) => {
-  const to = generateUrl(patternPrivacyPolicy, {}, urlQuery, origin ?? originPrivacyPolicy);
+const LinkPrivacyPolicy: React.FunctionComponent<LinkPrivacyPolicyProps> = ({ query, origin, ...props }) => {
+  const to = generateUrl(patternPrivacyPolicy, {}, query, origin ?? originPrivacyPolicy);
   return <Link {...props} href={to} />;
 };
 export default LinkPrivacyPolicy;

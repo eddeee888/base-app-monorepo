@@ -4,8 +4,8 @@ import generateUrl from "route-codegen/generateUrl";
 import Link, { AnchorProps } from "common/shared-ui/Anchor";
 import { patternGraphql, UrlPartsGraphql, originGraphql } from "./patternGraphql";
 type LinkGraphqlProps = Omit<AnchorProps, "href"> & UrlPartsGraphql;
-const LinkGraphql: React.FunctionComponent<LinkGraphqlProps> = ({ urlQuery, origin, ...props }) => {
-  const to = generateUrl(patternGraphql, {}, urlQuery, origin ?? originGraphql);
+const LinkGraphql: React.FunctionComponent<LinkGraphqlProps> = ({ query, origin, ...props }) => {
+  const to = generateUrl(patternGraphql, {}, query, origin ?? originGraphql);
   return <Link {...props} href={to} />;
 };
 export default LinkGraphql;

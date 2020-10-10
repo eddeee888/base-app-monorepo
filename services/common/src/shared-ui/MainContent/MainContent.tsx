@@ -8,7 +8,7 @@ export interface MainContentProps {
   marginTop?: SpacingValue;
 }
 
-const MainContent: React.FunctionComponent<MainContentProps> = ({ size, children, marginTop = 4 }) => {
+const MainContent: React.FunctionComponent<MainContentProps> = ({ size, children, marginTop = 2 }) => {
   return (
     <Block size={size} fullHeight>
       <Box mt={marginTop} />
