@@ -1,8 +1,8 @@
 import { Response } from "express";
+import { JWT } from "./types";
 import getTokenFromRequest, { GetTokenFromRequest } from "./getTokenFromRequest";
 import getViewerFromRequest, { GetViewerFromRequest } from "./getViewerFromRequest";
 import setTokenToResponse from "./setTokenToResponse";
-import { JWT } from "./types";
 
 export interface CreateHeadersServiceParams {
   primaryDomain?: string;
@@ -20,9 +20,9 @@ const createHeadersService = ({ primaryDomain }: CreateHeadersServiceParams): He
   }
 
   return {
-    getTokenFromRequest,
+    getTokenFromRequest: getTokenFromRequest,
     setTokenToResponse: (response, accessToken) => setTokenToResponse(response, accessToken, primaryDomain),
-    getViewerFromRequest,
+    getViewerFromRequest: getViewerFromRequest,
   };
 };
 

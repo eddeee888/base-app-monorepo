@@ -10,7 +10,35 @@ on:
       - "services/server/**"
       - "package.json"
 jobs:
-  build-server-app:
+  test:
+    name: Test server app
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Copy common files
+        run: yarn common:copy
+
+      - name: Test server app - unit
+        run: |
+          cd services/server
+          ./scripts/test-unit.sh
+
+      - name: Test server app - graph resolvers
+        run: |
+          cd services/server
+          ./scripts/test-graph-resolvers.sh
+
+  build:
     name: Build server app
     runs-on: ubuntu-18.04
     strategy:
@@ -59,9 +87,9 @@ jobs:
       - name: Confirm image has been uploaded
         run: ./ci/scripts/find-ecr-image.sh ECR_REPOSITORY ${{ github.sha }}
 
-  deploy-server-app:
+  deploy:
     name: Deploy server app
-    needs: [build-server-app]
+    needs: [test, build]
     runs-on: ubuntu-18.04
     strategy:
       matrix:

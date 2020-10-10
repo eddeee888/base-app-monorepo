@@ -1,7 +1,0 @@
-mutation Login($input: LoginInput!) {
-  login(input: $input) {
-    id
-    avatar
-    displayName
-  }
-}

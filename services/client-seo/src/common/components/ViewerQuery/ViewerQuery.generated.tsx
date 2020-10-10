@@ -1,10 +1,7 @@
-/* eslint-disable */
 import * as Types from "../../__generated__/types";
 
 import * as Operations from "./ViewerQuery.graphql";
-import * as ApolloReactCommon from "@apollo/client";
-import * as ApolloReactHooks from "@apollo/client";
-
+import * as Apollo from "@apollo/client";
 export type ViewerQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type ViewerQuery = { __typename: "Query" } & { me?: Types.Maybe<{ __typename: "User" } & Viewer_UserFragment> };
@@ -26,12 +23,12 @@ export type Viewer_UserFragment = { __typename: "User" } & Pick<Types.User, "id"
  *   },
  * });
  */
-export function useViewerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ViewerQuery, ViewerQueryVariables>) {
-  return ApolloReactHooks.useQuery<ViewerQuery, ViewerQueryVariables>(Operations.Viewer, baseOptions);
+export function useViewerQuery(baseOptions?: Apollo.QueryHookOptions<ViewerQuery, ViewerQueryVariables>) {
+  return Apollo.useQuery<ViewerQuery, ViewerQueryVariables>(Operations.Viewer, baseOptions);
 }
-export function useViewerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ViewerQuery, ViewerQueryVariables>) {
-  return ApolloReactHooks.useLazyQuery<ViewerQuery, ViewerQueryVariables>(Operations.Viewer, baseOptions);
+export function useViewerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ViewerQuery, ViewerQueryVariables>) {
+  return Apollo.useLazyQuery<ViewerQuery, ViewerQueryVariables>(Operations.Viewer, baseOptions);
 }
 export type ViewerQueryHookResult = ReturnType<typeof useViewerQuery>;
 export type ViewerLazyQueryHookResult = ReturnType<typeof useViewerLazyQuery>;
-export type ViewerQueryResult = ApolloReactCommon.QueryResult<ViewerQuery, ViewerQueryVariables>;
+export type ViewerQueryResult = Apollo.QueryResult<ViewerQuery, ViewerQueryVariables>;

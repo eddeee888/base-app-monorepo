@@ -4,8 +4,8 @@ import generateUrl from "route-codegen/generateUrl";
 import Link, { AnchorProps } from "common/shared-ui/Anchor";
 import { patternMe, UrlPartsMe, originMe } from "./patternMe";
 type LinkMeProps = Omit<AnchorProps, "href"> & UrlPartsMe;
-const LinkMe: React.FunctionComponent<LinkMeProps> = ({ urlQuery, origin, ...props }) => {
-  const to = generateUrl(patternMe, {}, urlQuery, origin ?? originMe);
+const LinkMe: React.FunctionComponent<LinkMeProps> = ({ query, origin, ...props }) => {
+  const to = generateUrl(patternMe, {}, query, origin ?? originMe);
   return <Link {...props} href={to} />;
 };
 export default LinkMe;

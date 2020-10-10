@@ -11,9 +11,10 @@ const destinations = {
   "shared-typings": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
   "shared-ui": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
   "shared-graphql-errors": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
-  "shared-validations": [CLIENT_DESTINATION, SERVER_LIBS_DESTINATION],
+  "shared-validations": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION, SERVER_LIBS_DESTINATION],
   "shared-frontend-components": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
-  "shared-page-errors": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
+  "shared-frontend-test-utils": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
+  "shared-page-messages": [CLIENT_DESTINATION, CLIENT_SEO_DESTINATION],
 };
 
 exports.default = {

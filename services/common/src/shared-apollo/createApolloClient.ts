@@ -1,20 +1,50 @@
-import { ApolloClient, ApolloLink, Observable, InMemoryCache, NormalizedCacheObject, HttpLink } from "@apollo/client";
+import { ApolloClient, ApolloLink, Observable, InMemoryCache, NormalizedCacheObject, HttpLink, split } from "@apollo/client";
+import { getMainDefinition } from "@apollo/client/utilities";
+import { WebSocketLink } from "@apollo/client/link/ws";
 import { onError } from "@apollo/client/link/error";
 import { IncomingHttpHeaders } from "http";
 
 interface CreateApolloClientParams {
   uri: string | undefined;
+  webSocketUri: string | undefined;
   initialState?: NormalizedCacheObject;
   ssrHeaders?: IncomingHttpHeaders;
 }
 
 const isSsr = (): boolean => typeof window === "undefined";
 
-const createApolloClient = ({ uri, initialState = {}, ssrHeaders }: CreateApolloClientParams): ApolloClient<NormalizedCacheObject> => {
+const createApolloClient = (params: CreateApolloClientParams): ApolloClient<NormalizedCacheObject> => {
+  const { uri, webSocketUri, initialState = {}, ssrHeaders } = params;
+
   const httpLink = new HttpLink({
-    uri,
+    uri: uri,
     credentials: "include",
   });
+
+  const wsLink =
+    webSocketUri !== undefined
+      ? new WebSocketLink({
+          uri: webSocketUri,
+          options: {
+            connectionParams: {}, // TODO: decide how to validate via websocket API
+            lazy: true,
+            reconnect: true,
+            reconnectionAttempts: 3,
+            inactivityTimeout: 18000, // Wait 3 minutes before disconnecting when no active subscription e.g. moving away from a page with subscription
+          },
+        })
+      : undefined;
+
+  const transportLink = wsLink
+    ? split(
+        ({ query }) => {
+          const definition = getMainDefinition(query);
+          return definition.kind === "OperationDefinition" && definition.operation === "subscription";
+        },
+        wsLink,
+        httpLink
+      )
+    : httpLink;
 
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     const errorLoc = typeof window === "undefined" ? "SSR" : "Browser";
@@ -60,7 +90,7 @@ const createApolloClient = ({ uri, initialState = {}, ssrHeaders }: CreateApollo
   );
 
   const client = new ApolloClient({
-    link: ApolloLink.from([errorLink, requestLink, httpLink]),
+    link: ApolloLink.from([errorLink, requestLink, transportLink]),
     cache: new InMemoryCache().restore(initialState),
     ssrMode: isSsr(),
     ssrForceFetchDelay: 100,

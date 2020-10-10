@@ -1,12 +1,20 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import Router from "next/router";
-import { patternPrivacyPolicy, UrlPartsPrivacyPolicy, patternNextJSPrivacyPolicy } from "./patternPrivacyPolicy";
-import generateUrl from "route-codegen/generateUrl";
+import { useRouter } from "next/router";
+import { UrlPartsPrivacyPolicy, patternNextJSPrivacyPolicy } from "./patternPrivacyPolicy";
 export type RedirectFnPrivacyPolicy = (urlParts?: UrlPartsPrivacyPolicy) => void;
 const useRedirectPrivacyPolicy = (): RedirectFnPrivacyPolicy => {
+  const router = useRouter();
   const redirect: RedirectFnPrivacyPolicy = (urlParts) => {
-    const to = generateUrl(patternPrivacyPolicy, {}, urlParts?.urlQuery, urlParts?.origin);
-    Router.push(patternNextJSPrivacyPolicy, to);
+    const query = urlParts?.query ?? {};
+    const path = {};
+    const pathname = patternNextJSPrivacyPolicy;
+    router.push({
+      pathname: pathname,
+      query: {
+        ...path,
+        ...query,
+      },
+    });
   };
   return redirect;
 };

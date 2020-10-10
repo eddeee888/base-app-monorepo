@@ -4,6 +4,6 @@ export const originStatic500 = "https://bam.dev";
 export const patternNextJSStatic500 = "/500";
 
 export interface UrlPartsStatic500 {
-  urlQuery?: Record<string, string>;
+  query?: Record<string, string | undefined>;
   origin?: string;
 }

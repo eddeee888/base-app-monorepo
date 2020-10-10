@@ -1,4 +1,5 @@
-import { UserResolvers } from "graph/resolvers/types.generated";
+import { UserResolvers } from "@libs/graph/resolvers.generated";
+import { convertDisplayName } from "@libs/models/user";
 
 export const User: UserResolvers = {
   avatar: async ({ id }, arg, { prisma }) => {
@@ -6,6 +7,6 @@ export const User: UserResolvers = {
     return avatar?.src ?? null;
   },
   displayName: async ({ firstName, lastName }) => {
-    return `${firstName} ${lastName.charAt(0)}.`;
+    return convertDisplayName({ firstName, lastName });
   },
 };

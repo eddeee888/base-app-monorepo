@@ -10,6 +10,7 @@ const yellowSea = "#f4a236";
 const white = "#ffffff";
 const snow = "#fafafa";
 const lightgray = "#cccccc";
+const darkgray = "#aaaaaa";
 const charcoal = "#444444";
 const blackPearl = "#292b20";
 
@@ -29,8 +30,10 @@ const textSuccessColor = eucalyptus;
 const textErrorColor = redOrange;
 const textWarningColor = yellowSea;
 const footerBackgroundColor = blackPearl;
-const footerTextColor = white;
+const footerHeadingColor = white;
+const footerTextColor = lightgray;
 const footerLinkColorHover = vikingBlue;
+const subtitleTextColor = darkgray;
 
 export {
   primaryColor,
@@ -49,6 +52,8 @@ export {
   textWarningColor,
   defaultBackgroundColor,
   footerBackgroundColor,
+  footerHeadingColor,
   footerTextColor,
   footerLinkColorHover,
+  subtitleTextColor,
 };

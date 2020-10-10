@@ -1,14 +1,20 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import { UrlPartsLogin, patternLogin, originLogin } from "./patternLogin";
-import generateUrl from "route-codegen/generateUrl";
+import { useRouter } from "next/router";
+import { UrlPartsLogin, patternNextJSLogin } from "./patternLogin";
 export type RedirectFnLogin = (urlParts?: UrlPartsLogin) => void;
 const useRedirectLogin = (): RedirectFnLogin => {
+  const router = useRouter();
   const redirect: RedirectFnLogin = (urlParts) => {
-    const to = generateUrl(patternLogin, {}, urlParts?.urlQuery, urlParts?.origin ?? originLogin);
-    if (!!window && !!window.location) {
-      window.location.href = to;
-    }
-    return;
+    const query = urlParts?.query ?? {};
+    const path = {};
+    const pathname = patternNextJSLogin;
+    router.push({
+      pathname: pathname,
+      query: {
+        ...path,
+        ...query,
+      },
+    });
   };
   return redirect;
 };

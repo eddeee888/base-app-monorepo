@@ -3,6 +3,6 @@ export const patternLogout = "/logout";
 export const originLogout = "https://server.bam.dev";
 
 export interface UrlPartsLogout {
-  urlQuery?: Record<string, string>;
+  query?: Record<string, string | undefined>;
   origin?: string;
 }

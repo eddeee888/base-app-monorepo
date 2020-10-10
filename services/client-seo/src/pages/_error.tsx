@@ -1,13 +1,13 @@
 import React from "react";
 import { NextComponentType, NextPageContext } from "next";
-import PageError404 from "common/shared-page-errors/PageError404";
-import PageError500 from "common/shared-page-errors/PageError500";
+import PageError404 from "common/shared-page-messages/PageError404";
+import PageError500 from "common/shared-page-messages/PageError500";
 import Text from "common/shared-ui/Text";
 import Anchor from "common/shared-ui/Anchor";
 import generateUrlHome from "routes/home/generateUrlHome";
 import generateUrlClientSeoStaticImage from "routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
 
-const Error: NextComponentType<NextPageContext, {}, { statusCode: number }> = ({ statusCode }) => {
+const Error: NextComponentType<NextPageContext, Record<string, unknown>, { statusCode: number }> = ({ statusCode }) => {
   const link = (
     <Text align="center">
       <Anchor href={generateUrlHome()}>Click here to go back to the homepage</Anchor>

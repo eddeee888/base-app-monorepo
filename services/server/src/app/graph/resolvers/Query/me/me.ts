@@ -1,4 +1,4 @@
-import { QueryResolvers } from "graph/resolvers/types.generated";
+import { QueryResolvers } from "@libs/graph/resolvers.generated";
 
 const me: QueryResolvers["me"] = async (parent, args, { viewer }) => viewer;
 

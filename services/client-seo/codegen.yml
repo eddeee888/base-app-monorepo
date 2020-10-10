@@ -8,7 +8,6 @@ hooks:
 generates:
   src/common/__generated__/types.ts:
     plugins:
-      - add: '/* eslint-disable */'
       - 'typescript'
     config:
       enumsAsTypes: true
@@ -26,7 +25,6 @@ generates:
       baseTypesPath: common/__generated__/types.ts
       extension: .generated.tsx
     plugins:
-      - add: '/* eslint-disable */'
       - 'typescript-operations'
       - 'typescript-react-apollo'
     config:

@@ -4,8 +4,8 @@ import generateUrl from "route-codegen/generateUrl";
 import Link, { LinkProps } from "common/components/Link";
 import { patternMe, UrlPartsMe } from "./patternMe";
 type LinkMeProps = Omit<LinkProps, "to"> & UrlPartsMe;
-const LinkMe: React.FunctionComponent<LinkMeProps> = ({ urlQuery, origin, ...props }) => {
-  const to = generateUrl(patternMe, {}, urlQuery, origin);
+const LinkMe: React.FunctionComponent<LinkMeProps> = ({ query, origin, ...props }) => {
+  const to = generateUrl(patternMe, {}, query, origin);
   return <Link {...props} to={to} />;
 };
 export default LinkMe;

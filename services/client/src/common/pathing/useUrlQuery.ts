@@ -1,11 +1,11 @@
 import { useLocation } from "react-router";
 
-const getUrlQuery = (queryString: string): Record<string, string> => {
+const getUrlQuery = (queryString: string): Record<string, string | undefined> => {
   if (queryString === "") {
     return {};
   }
 
-  const result: Record<string, string> = {};
+  const result: Record<string, string | undefined> = {};
 
   const stripped = queryString.replace("?", "");
   const optionsString = stripped.split("&");
@@ -17,7 +17,7 @@ const getUrlQuery = (queryString: string): Record<string, string> => {
   return result;
 };
 
-const useUrlQuery = (): Record<string, string> => {
+const useUrlQuery = (): Record<string, string | undefined> => {
   const location = useLocation();
 
   return getUrlQuery(location.search);

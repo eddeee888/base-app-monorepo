@@ -29,8 +29,12 @@
     "build:server:crons": "yarn workspace @bam/server build:crons",
     "build:server:libs": "yarn workspace @bam/server build:libs",
     "build:server:ops": "./ci/scripts/run-build-server-ops.sh",
-    "test:server:app": "yarn workspace @bam/server test:jest",
-    "format": "concurrently -n common,client,client-seo,server \"yarn workspace @bam/common format\" \"yarn workspace @bam/client format\" \"yarn workspace @bam/client-seo format\" \"yarn workspace @bam/server format\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"red\""
+    "test:common:unit": "yarn workspace @bam/common test",
+    "test:client:unit": "yarn workspace @bam/client test",
+    "test:client-seo:unit": "yarn workspace @bam/client-seo test",
+    "test:server:app:unit": "yarn workspace @bam/server test:app:unit",
+    "format": "concurrently -n common,client,client-seo,server \"yarn workspace @bam/common format\" \"yarn workspace @bam/client format\" \"yarn workspace @bam/client-seo format\" \"yarn workspace @bam/server format\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"red\"",
+    "lint": "concurrently -n common,client,client-seo,server \"yarn workspace @bam/common lint\" \"yarn workspace @bam/client lint\" \"yarn workspace @bam/client-seo lint\" \"yarn workspace @bam/server lint\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"red\""
   },
   "workspaces": {
     "packages": [
@@ -48,6 +52,7 @@
     "concurrently": "^5.1.0"
   },
   "resolutions": {
-    "graphql-tools": "4.0.7"
+    "graphql": "14.6.0",
+    "@apollo/client": "3.1.1"
   }
 }

@@ -7,6 +7,6 @@ export type PathParamsClientSeoStaticImage = { imageName: string };
 export const possilePathParamsClientSeoStaticImage = ["imageName"];
 export interface UrlPartsClientSeoStaticImage {
   path: PathParamsClientSeoStaticImage;
-  urlQuery?: Record<string, string>;
+  query?: Record<string, string | undefined>;
   origin?: string;
 }

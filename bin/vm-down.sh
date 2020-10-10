@@ -22,6 +22,15 @@ function remove_dns_resolver {
   fi
 }
 
+function remove_resolver_file {
+  if [ -e $RESOLVER_FILE ]; then 
+    echo "-> Removing old resolver file $RESOLVER_FILE ..."
+    sudo rm $RESOLVER_FILE
+    echo ""
+  fi
+}
+
 remove_dns_resolver
+remove_resolver_file
 $CORE_CMD_NAME stop
 stop_docker_machine

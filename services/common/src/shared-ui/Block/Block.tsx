@@ -3,7 +3,7 @@ import React from "react";
 import { PageSize } from "../../shared-styles/types";
 import { pageSize } from "../../shared-styles/sizes";
 
-interface BlockProps {
+export interface BlockProps {
   size: PageSize;
   children: React.ReactNode;
   fullHeight?: boolean;

@@ -1,5 +1,13 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import { primaryColor, secondaryColor, textOnPrimaryColor, textOnSecondaryColor, textColor, primaryBackgroundColor } from "./colors";
+import {
+  primaryColor,
+  secondaryColor,
+  textOnPrimaryColor,
+  textOnSecondaryColor,
+  textColor,
+  primaryBackgroundColor,
+  subtitleTextColor,
+} from "./colors";
 import { fontFamily } from "./fonts";
 
 export const muiTheme = createMuiTheme({
@@ -34,8 +42,12 @@ export const muiTheme = createMuiTheme({
       fontSize: "1.4rem",
     },
     h6: {
-      fontSize: "1.2rem",
-      fontWeight: 400,
+      fontSize: "1.1rem",
+      fontWeight: 700,
+    },
+    subtitle1: {
+      fontSize: "0.9rem",
+      color: subtitleTextColor,
     },
     button: {
       fontFamily,
@@ -53,6 +65,19 @@ export const muiTheme = createMuiTheme({
     MuiSelect: {
       root: {
         backgroundColor: primaryBackgroundColor,
+      },
+    },
+    MuiButton: {
+      sizeLarge: {
+        height: "54px",
+        fontSize: "1.1rem",
+      },
+    },
+    MuiInputLabel: {
+      formControl: {
+        background: primaryBackgroundColor,
+        paddingLeft: "3px",
+        paddingRight: "3px",
       },
     },
   },

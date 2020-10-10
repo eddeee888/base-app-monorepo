@@ -2,5 +2,5 @@
 import generateUrl from "route-codegen/generateUrl";
 import { patternClientSeoStaticImage, UrlPartsClientSeoStaticImage, originClientSeoStaticImage } from "./patternClientSeoStaticImage";
 const generateUrlClientSeoStaticImage = (urlParts: UrlPartsClientSeoStaticImage): string =>
-  generateUrl(patternClientSeoStaticImage, urlParts.path, urlParts?.urlQuery, urlParts?.origin ?? originClientSeoStaticImage);
+  generateUrl(patternClientSeoStaticImage, urlParts.path, urlParts?.query, urlParts?.origin ?? originClientSeoStaticImage);
 export default generateUrlClientSeoStaticImage;

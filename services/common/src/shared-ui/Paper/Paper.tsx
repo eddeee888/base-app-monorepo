@@ -3,17 +3,15 @@ import { css, cx } from "emotion";
 import React from "react";
 import { spacingRem } from "../../shared-styles/spacings";
 import { primaryBackgroundColor } from "../../shared-styles/colors";
+import { SpacingValue } from "../../shared-styles/types";
 
 interface Props {
   children?: React.ReactNode;
   className?: string;
+  paddingX?: SpacingValue;
+  paddingY?: SpacingValue;
   disabled?: boolean;
 }
-
-const spacingClassName = css`
-  padding: ${spacingRem(2)}rem ${spacingRem(3)}rem;
-  width: 100%;
-`;
 
 const disabledClassName = css`
   position: relative;
@@ -31,11 +29,20 @@ const disabledClassName = css`
   }
 `;
 
-const Paper: React.FunctionComponent<Props> = ({ className, children, disabled = false }) => {
-  const classNames = [className, spacingClassName];
+const Paper: React.FunctionComponent<Props> = ({ className, children, disabled = false, paddingX = 3, paddingY = 2 }) => {
+  const spacingClassName = css`
+    padding: ${spacingRem(paddingY)}rem ${spacingRem(paddingX)}rem;
+    width: 100%;
+  `;
+
+  const classNames = [spacingClassName];
   if (disabled) {
     classNames.push(disabledClassName);
   }
+  if (className) {
+    classNames.push(className);
+  }
+
   return (
     <MuiPaper className={cx(classNames)} elevation={1} square>
       {children}

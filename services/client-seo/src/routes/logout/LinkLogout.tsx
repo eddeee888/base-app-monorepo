@@ -4,8 +4,8 @@ import generateUrl from "route-codegen/generateUrl";
 import Link, { AnchorProps } from "common/shared-ui/Anchor";
 import { patternLogout, UrlPartsLogout, originLogout } from "./patternLogout";
 type LinkLogoutProps = Omit<AnchorProps, "href"> & UrlPartsLogout;
-const LinkLogout: React.FunctionComponent<LinkLogoutProps> = ({ urlQuery, origin, ...props }) => {
-  const to = generateUrl(patternLogout, {}, urlQuery, origin ?? originLogout);
+const LinkLogout: React.FunctionComponent<LinkLogoutProps> = ({ query, origin, ...props }) => {
+  const to = generateUrl(patternLogout, {}, query, origin ?? originLogout);
   return <Link {...props} href={to} />;
 };
 export default LinkLogout;

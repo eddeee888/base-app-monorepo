@@ -1,7 +1,7 @@
 import sign from "./sign";
 import verify from "./verify";
 import { JWTPayload, JWTObject } from "./options";
-import { JWT } from "../headers";
+import { JWT } from "@libs/headers";
 
 export interface CreateJwtServiceParams {
   appOrigin?: string;

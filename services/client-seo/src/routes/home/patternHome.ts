@@ -4,6 +4,6 @@ export const originHome = "https://bam.dev";
 export const patternNextJSHome = "/";
 
 export interface UrlPartsHome {
-  urlQuery?: Record<string, string>;
+  query?: Record<string, string | undefined>;
   origin?: string;
 }

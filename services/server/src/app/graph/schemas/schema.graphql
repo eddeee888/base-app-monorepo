@@ -7,21 +7,7 @@ type Query {
 }
 
 type Mutation {
-  signup(input: SignupInput!): User! @isLoggedIn(status: false)
-  login(input: LoginInput!): User @isLoggedIn(status: false)
   userUpdate(input: UserUpdateInput!): User! @isLoggedIn(status: true)
-}
-
-input SignupInput {
-  email: String!
-  firstName: String!
-  lastName: String!
-  password: String!
-}
-
-input LoginInput {
-  email: String!
-  password: String!
 }
 
 input UserUpdateInput {
