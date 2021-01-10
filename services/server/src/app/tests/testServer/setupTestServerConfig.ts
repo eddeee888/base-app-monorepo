@@ -1,23 +1,23 @@
 import { PrismaClient } from "@prisma/client";
 import createTestServer from "./createTestServer";
-import { createUserFixture, UserFixture } from "./fixtures";
+import { createUserFixtures, UserFixtures } from "./fixtures";
 
 export interface TestServerConfig {
   url: string;
   prisma: PrismaClient;
   fixtures: {
-    user: UserFixture;
+    user: UserFixtures;
   };
 }
 
 export const setupTestServerConfig = (): TestServerConfig => {
-  const { server, prisma, jwt, password } = createTestServer();
+  const { server, services } = createTestServer();
 
   const config: TestServerConfig = {
     url: "http://localhost/graphql",
-    prisma: prisma,
+    prisma: services.prismaClient,
     fixtures: {
-      user: createUserFixture({ prisma, jwt, password }),
+      user: createUserFixtures({ prisma: services.prismaClient, jwt: services.jwtService, password: services.passwordService }),
     },
   };
 
@@ -31,7 +31,7 @@ export const setupTestServerConfig = (): TestServerConfig => {
 
   afterAll(async (done) => {
     internalConfig.server.close();
-    await prisma.$disconnect();
+    await services.prismaClient.$disconnect();
     done();
   });
 

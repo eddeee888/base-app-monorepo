@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { UrlPartsStatic404, patternStatic404, originStatic404 } from "./patternStatic404";
-import generateUrl from "route-codegen/generateUrl";
+import { generateUrl } from "@route-codegen/utils";
 export type RedirectFnStatic404 = (urlParts?: UrlPartsStatic404) => void;
 const useRedirectStatic404 = (): RedirectFnStatic404 => {
   const redirect: RedirectFnStatic404 = (urlParts) => {

@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { UrlPartsLogout, patternLogout, originLogout } from "./patternLogout";
-import generateUrl from "route-codegen/generateUrl";
+import { generateUrl } from "@route-codegen/utils";
 export type RedirectFnLogout = (urlParts?: UrlPartsLogout) => void;
 const useRedirectLogout = (): RedirectFnLogout => {
   const redirect: RedirectFnLogout = (urlParts) => {

@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { UrlPartsTermAndConditions, patternTermAndConditions, originTermAndConditions } from "./patternTermAndConditions";
-import generateUrl from "route-codegen/generateUrl";
+import { generateUrl } from "@route-codegen/utils";
 export type RedirectFnTermAndConditions = (urlParts?: UrlPartsTermAndConditions) => void;
 const useRedirectTermAndConditions = (): RedirectFnTermAndConditions => {
   const redirect: RedirectFnTermAndConditions = (urlParts) => {

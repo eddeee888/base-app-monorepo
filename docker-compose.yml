@@ -39,6 +39,7 @@ services:
       - ./services/client-seo/public:/usr/src/app/public
       - ./services/client-seo/src:/usr/src/app/src
       - ./services/client-seo/package.json:/usr/src/app/package.json
+      - ./services/client-seo/next.config.js:/usr/src/app/next.config.js
       - ./services/client-seo/.next:/usr/src/app/.next
     networks:
       - com_vm

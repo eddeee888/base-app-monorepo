@@ -1,5 +1,5 @@
 overwrite: true
-schema: './../server/src/app/graph/schemas/schema.graphql'
+schema: './../server/src/app/graph/schemas/*.graphql'
 documents: 'src/**/*.graphql'
 hooks:
   afterAllFileWrite:

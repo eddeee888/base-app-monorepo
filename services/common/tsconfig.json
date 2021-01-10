@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "outDir": "./dist",
     "lib": ["es5", "es6", "dom", "esnext.asynciterable"],
     "target": "es5",
@@ -30,6 +29,6 @@
     "noUnusedLocals": true,
     "downlevelIteration": true
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }

@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { UrlPartsXhrLogin, patternXhrLogin, originXhrLogin } from "./patternXhrLogin";
-import generateUrl from "route-codegen/generateUrl";
+import { generateUrl } from "@route-codegen/utils";
 export type RedirectFnXhrLogin = (urlParts?: UrlPartsXhrLogin) => void;
 const useRedirectXhrLogin = (): RedirectFnXhrLogin => {
   const redirect: RedirectFnXhrLogin = (urlParts) => {

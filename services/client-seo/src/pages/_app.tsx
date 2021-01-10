@@ -12,8 +12,9 @@ import { getDataFromTree } from "@apollo/client/react/ssr";
 import Header from "common/components/Header";
 import createBaseCss from "common/shared-styles/createBaseCss";
 import createFontsStyles from "common/shared-styles/createFontsStyles";
+import ErrorBoundary from "common/components/ErrorBoundary";
+import MaintenancePage from "common/shared-page-messages/MaintenancePage";
 import generateUrlClientSeoStaticImage from "routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
-import { ErrorWithCode } from "common/components/IsomorphicError/types";
 import isSsr from "common/components/isSsr";
 
 class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
@@ -27,34 +28,45 @@ class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
 
   render(): JSX.Element {
     const { Component, pageProps, apollo } = this.props;
+    const isInMaintenance = process.env.NEXT_PUBLIC_SPECIAL_MODE === "maintenance";
 
     return (
       <>
         <Head>
           <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-          <meta name="twitter:card" content="summary" />
-          <meta property="og:title" content={`${process.env.NEXT_PUBLIC_APP_NAME}`} />
-          <meta property="og:description" content={`${process.env.NEXT_PUBLIC_APP_NAME}`} />
-          <meta property="og:image" content={generateUrlClientSeoStaticImage({ path: { imageName: "seo-logo.jpg" } })} />
         </Head>
         <CacheProvider value={cache}>
           <Global
             styles={css`
               ${createBaseCss()}
-              ${createFontsStyles("./client-seo-static/fonts")}
+              ${createFontsStyles("/client-seo-static/fonts")}
             `}
           ></Global>
-          <ApolloProvider client={apollo}>
-            <ThemeProvider theme={muiTheme}>
-              <Header />
-              <Component {...pageProps} />
-            </ThemeProvider>
-          </ApolloProvider>
+          {isInMaintenance && (
+            <MaintenancePage
+              appName={process.env.NEXT_PUBLIC_APP_NAME}
+              imageSrc={generateUrlClientSeoStaticImage({ path: { imageName: "maintenance.png" } })}
+            />
+          )}
+          {!isInMaintenance && (
+            <ApolloProvider client={apollo}>
+              <ThemeProvider theme={muiTheme}>
+                <ErrorBoundary>
+                  <Header />
+                  <Component {...pageProps} />
+                </ErrorBoundary>
+              </ThemeProvider>
+            </ApolloProvider>
+          )}
         </CacheProvider>
       </>
     );
   }
+}
+
+interface ErrorWithCode extends Error {
+  code: number;
 }
 
 const MyAppWithApollo = withApollo(
@@ -63,7 +75,7 @@ const MyAppWithApollo = withApollo(
     // e.g. in container in dev, we can use http://server:40002/graphql instead of https://server.app.dev/graphql
     // If not provided, always fallback to NEXT_PUBLIC_GRAPHQL_ENDPOINT
     const uri =
-      typeof window === "undefined" && process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR
+      isSsr() && process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR
         ? process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR
         : process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
 
@@ -76,9 +88,9 @@ const MyAppWithApollo = withApollo(
     }
 
     return createApolloClient({
-      uri,
+      uri: uri,
       webSocketUri: isSsr() ? undefined : process.env.NEXT_PUBLIC_WEBSOCKET_GRAPHQL_ENDPOINT, // If SSR, do not need websocket
-      initialState,
+      initialState: initialState,
       ssrHeaders: headers,
     });
   },

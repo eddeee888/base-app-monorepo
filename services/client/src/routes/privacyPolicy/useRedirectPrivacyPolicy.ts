@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { UrlPartsPrivacyPolicy, patternPrivacyPolicy, originPrivacyPolicy } from "./patternPrivacyPolicy";
-import generateUrl from "route-codegen/generateUrl";
+import { generateUrl } from "@route-codegen/utils";
 export type RedirectFnPrivacyPolicy = (urlParts?: UrlPartsPrivacyPolicy) => void;
 const useRedirectPrivacyPolicy = (): RedirectFnPrivacyPolicy => {
   const redirect: RedirectFnPrivacyPolicy = (urlParts) => {

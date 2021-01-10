@@ -1,7 +1,7 @@
 {
-  "name": "route-manager",
+  "name": "@bam/route-manager",
   "version": "1.0.0",
-  "devDependencies": {
-    "route-codegen": "0.7.0"
+  "dependencies": {
+    "@route-codegen/core": "0.3.0"
   }
 }

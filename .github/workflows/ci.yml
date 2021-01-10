@@ -5,12 +5,9 @@ on:
       # Ignore the commits that are created when PR is merged into master
       - "master"
 jobs:
-  build:
-    name: Build, check assets
+  check-code:
+    name: Check generated code and linting
     runs-on: ubuntu-18.04
-    strategy:
-      matrix:
-        node-version: [12.x]
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.4.1
@@ -20,10 +17,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 12.x
 
       - name: Copy common files
         run: yarn common:copy
@@ -32,10 +29,10 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Check route-codegen DEV
-        run: ./ci/scripts/check-generated-routegen-dev.sh
+        run: ./scripts/ci/check-generated-routegen-dev.sh
 
       - name: Check GraphQL codegen
-        run: ./ci/scripts/check-generated-graphql-codegen.sh
+        run: ./scripts/ci/check-generated-graphql-codegen.sh
 
       - name: Generate prisma
         run: yarn prisma:generate:prod
@@ -43,23 +40,89 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - name: Build all assets
-        run: yarn build
-
-  test-frontends:
-    name: Test frontends
+  build-client:
+    name: Build client
     runs-on: ubuntu-18.04
-    strategy:
-      matrix:
-        node-version: [12.x]
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 12.x
+
+      - name: Copy common files
+        run: yarn common:copy
+
+      - name: Install packages
+        run: yarn --frozen-lockfile
+
+      - name: Build
+        run: yarn build:client
+  
+  build-client-seo:
+    name: Build client-seo
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Copy common files
+        run: yarn common:copy
+
+      - name: Install packages
+        run: yarn --frozen-lockfile
+
+      - name: Build
+        run: yarn build:client-seo
+
+  build-server-apps:
+    name: Build server apps
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Copy common files
+        run: yarn common:copy
+
+      - name: Install packages
+        run: yarn --frozen-lockfile
+
+      - name: Generate prisma
+        run: yarn prisma:generate:prod
+
+      - name: Build server main app
+        run: yarn build:server:app
+
+      - name: Build server crons
+        run: yarn build:server:crons
+
+      - name: Build server libs
+        run: yarn build:server:libs
+
+  test-frontends:
+    name: Test frontends
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
 
       - name: Copy common files
         run: yarn common:copy
@@ -79,27 +142,23 @@ jobs:
   test-server-app:
     name: Test server app
     runs-on: ubuntu-18.04
-    strategy:
-      matrix:
-        node-version: [12.x]
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 12.x
 
       - name: Copy common files
         run: yarn common:copy
 
-      - name: Test server app - unit
-        run: |
-          cd services/server
-          ./scripts/test-unit.sh
+      - name: Test server app
+        run: yarn test:server:app
 
-      - name: Test server app - graph resolvers
-        run: |
-          cd services/server
-          ./scripts/test-graph-resolvers.sh
+      - name: Run Insider
+        uses: insidersec/insider-action@v0
+        with:
+            technology: javascript
+            target: services/server/src

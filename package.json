@@ -5,15 +5,15 @@
   "repository": "git@github.com:eddeee888/base-app-monorepo.git",
   "author": "Eddy Nguyen <eddeee.nguyen@gmail.com>",
   "scripts": {
-    "routegen:clean": "rm -rf ./services/client/src/routes && rm -rf ./services/client-seo/src/routes && rm -rf ./services/server/src/libs/routes ",
+    "routegen:clean": "rm -rf ./services/client/src/routes && rm -rf ./services/client-seo/src/routes && rm -rf ./services/server/src/libs/routes",
     "routegen:format": "concurrently -n client,client-seo,server \"yarn routegen:format:client\"  \"yarn routegen:format:client-seo\" \"yarn routegen:format:server\"   -p \"[{name} - {time}]\" -c \"yellow\",\"blue\",\"red\"",
     "routegen:format:client": "yarn workspace @bam/client prettier --write  'src/routes/**/*.{ts,tsx}'",
     "routegen:format:client-seo": "yarn workspace @bam/client-seo prettier --write  'src/routes/**/*.{ts,tsx}'",
     "routegen:format:server": "yarn workspace @bam/server prettier --write  'src/libs/routes/**/*.{ts,tsx}'",
-    "routegen:dev": "./ci/scripts/run-route-codegen.sh dev",
-    "routegen:prod": "./ci/scripts/run-route-codegen.sh prod",
+    "routegen:dev": "./scripts/workspace/codegen-route.sh dev",
+    "routegen:prod": "./scripts/workspace/codegen-route.sh prod",
     "common:watch": "yarn workspace @bam/common watch",
-    "common:copy": "./ci/scripts/run-common-copy.sh ",
+    "common:copy": "./scripts/workspace/copy-common.sh ",
     "gqlgen": "concurrently -n common,client,client-seo,server \"yarn gqlgen:common\" \"yarn gqlgen:client\" \"yarn gqlgen:client-seo\"  \"yarn gqlgen:server\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"cyan\"",
     "gqlgen:common": "yarn workspace @bam/common gqlgen",
     "gqlgen:client": "yarn workspace @bam/client gqlgen",
@@ -22,17 +22,18 @@
     "prisma:migrate:up": "yarn workspace @bam/server prisma:migrate:up",
     "prisma:generate:prod": "yarn workspace @bam/server prisma:generate:prod",
     "prisma:generate:dev": "yarn workspace @bam/server prisma:generate:dev",
+    "prisma:dev": "./scripts/workspace/prisma-dev.sh",
     "build": "concurrently -n client,client-seo,server-app,server-crons,server-libs \"yarn build:client\" \"yarn build:client-seo\" \"yarn build:server:app\" \"yarn build:server:crons\" \"yarn build:server:libs\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"cyan\",\"red\"",
     "build:client": "yarn workspace @bam/client build",
     "build:client-seo": "yarn workspace @bam/client-seo build",
     "build:server:app": "yarn workspace @bam/server build",
     "build:server:crons": "yarn workspace @bam/server build:crons",
     "build:server:libs": "yarn workspace @bam/server build:libs",
-    "build:server:ops": "./ci/scripts/run-build-server-ops.sh",
+    "build:server:ops": "./scripts/ci/build-server-ops.sh",
     "test:common:unit": "yarn workspace @bam/common test",
     "test:client:unit": "yarn workspace @bam/client test",
     "test:client-seo:unit": "yarn workspace @bam/client-seo test",
-    "test:server:app:unit": "yarn workspace @bam/server test:app:unit",
+    "test:server:app": "yarn workspace @bam/server test:app",
     "format": "concurrently -n common,client,client-seo,server \"yarn workspace @bam/common format\" \"yarn workspace @bam/client format\" \"yarn workspace @bam/client-seo format\" \"yarn workspace @bam/server format\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"red\"",
     "lint": "concurrently -n common,client,client-seo,server \"yarn workspace @bam/common lint\" \"yarn workspace @bam/client lint\" \"yarn workspace @bam/client-seo lint\" \"yarn workspace @bam/server lint\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\",\"blue\",\"red\""
   },
@@ -53,6 +54,7 @@
   },
   "resolutions": {
     "graphql": "14.6.0",
-    "@apollo/client": "3.1.1"
+    "@apollo/client": "3.3.0",
+    "@testing-library/dom": "7.24.4"
   }
 }

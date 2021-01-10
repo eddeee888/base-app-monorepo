@@ -1,3 +1,5 @@
+const { createSecureHeaders } = require("next-secure-headers");
+
 module.exports = {
   target: "serverless",
   webpack(config) {
@@ -30,5 +32,32 @@ module.exports = {
       aggregateTimeout: 1000,
     };
     return config;
+  },
+  poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          ...createSecureHeaders({
+            forceHTTPSRedirect: [
+              true,
+              {
+                maxAge: 63072000,
+                includeSubDomains: true,
+              },
+            ],
+            contentSecurityPolicy: {
+              directives: {
+                defaultSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "wss:", "https:"],
+              },
+            },
+            frameGuard: "sameorigin",
+            xssProtection: "block-rendering",
+          }),
+          { key: "X-Permitted-Cross-Domain-Policies", value: "none" },
+        ],
+      },
+    ];
   },
 };

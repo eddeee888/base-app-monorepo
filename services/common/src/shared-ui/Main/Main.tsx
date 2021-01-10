@@ -8,20 +8,8 @@ export interface MainProps {
   className?: string;
   fullViewPortHeight?: boolean;
   fullWidth?: boolean;
+  hasHeader?: boolean;
 }
-
-const mainTagClassName = css`
-  margin-top: ${headerHeight};
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex: 1;
-`;
-
-const fullViewPortHeightClassName = css`
-  margin-top: 0px;
-  height: 100vh;
-`;
 
 const contentNormalClassName = css`
   padding: 0 1rem;
@@ -37,7 +25,20 @@ const contentFullWidthClassName = css`
   width: 100%;
 `;
 
-const Main: React.FunctionComponent<MainProps> = ({ children, className, fullViewPortHeight, fullWidth = false }) => {
+const Main: React.FunctionComponent<MainProps> = ({ children, className, fullViewPortHeight, fullWidth = false, hasHeader = true }) => {
+  const mainTagClassName = css`
+    ${hasHeader ? `margin-top: ${headerHeight};` : ""}
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+  `;
+
+  const fullViewPortHeightClassName = css`
+    ${hasHeader ? `margin-top: 0px; padding-top: ${headerHeight};` : ""}
+    height: 100vh;
+  `;
+
   const classNames = [mainTagClassName];
 
   if (fullViewPortHeight) {

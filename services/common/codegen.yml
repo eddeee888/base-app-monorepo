@@ -1,5 +1,5 @@
 overwrite: true
-schema: "./../server/src/app/graph/schemas/schema.graphql"
+schema: "./../server/src/app/graph/schemas/*.graphql"
 # documents: 'src/**/*.graphql' # Uncomment this if there's a graph operation in common
 hooks:
   afterAllFileWrite:
@@ -12,7 +12,6 @@ generates:
 
   src/__generated__/types.ts:
     plugins:
-      - add: "/* eslint-disable */"
       - "typescript"
     config:
       enumsAsTypes: true
@@ -26,7 +25,6 @@ generates:
       baseTypesPath: __generated__/types.ts
       extension: .generated.tsx
     plugins:
-      - add: '/* eslint-disable */'
       - 'typescript-operations'
       - 'typescript-react-apollo'
     config:
