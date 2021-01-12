@@ -1,6 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
   "extends": [
+    "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
@@ -39,6 +40,35 @@
         "@typescript-eslint/no-explicit-any": "off",
         "react/display-name": ["off"],
         "@typescript-eslint/no-non-null-assertion": "off"
+      }
+    },
+    {
+      "files": ["next.config.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    },
+    {
+      "files": ["*.graphql"],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint"],
+      "rules": {
+        "eol-last": "off",
+        "prettier/prettier": "off",
+        "@graphql-eslint/avoid-operation-name-prefix": ["error", { "keywords": ["get"] }],
+        "@graphql-eslint/no-anonymous-operations": ["error"],
+        "@graphql-eslint/avoid-duplicate-fields": ["error"],
+        "@graphql-eslint/executable-definitions": ["error"],
+        "@graphql-eslint/no-deprecated": ["error"],
+        "@graphql-eslint/require-id-when-available": ["error"],
+        // "@graphql-eslint/validate-against-schema": ["error"], // This has issue with importing/exporting fragments
+        "@graphql-eslint/no-operation-name-suffix": ["error"],
+        "@graphql-eslint/naming-convention": [
+          "error",
+          {
+            // "FragmentDefinition": "PascalCase" // Needs to allows "_"
+          }
+        ]
       }
     }
   ],

@@ -1,5 +1,5 @@
 import React from "react";
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import { muiTheme } from "common/shared-styles/muiTheme";
 import { extractCritical } from "emotion-server";
@@ -7,7 +7,7 @@ import { extractCritical } from "emotion-server";
 export default class MyDocument extends Document<{ emotionStyles: { ids: string[]; css: string } }> {
   render(): JSX.Element {
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={muiTheme.palette.primary.main} />
@@ -20,7 +20,7 @@ export default class MyDocument extends Document<{ emotionStyles: { ids: string[
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

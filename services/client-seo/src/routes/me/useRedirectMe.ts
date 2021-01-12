@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { UrlPartsMe, patternMe, originMe } from "./patternMe";
-import generateUrl from "route-codegen/generateUrl";
+import { generateUrl } from "@route-codegen/utils";
 export type RedirectFnMe = (urlParts?: UrlPartsMe) => void;
 const useRedirectMe = (): RedirectFnMe => {
   const redirect: RedirectFnMe = (urlParts) => {

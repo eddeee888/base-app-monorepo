@@ -40,12 +40,7 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()],
     extensions: [".mjs", ".ts", ".js"],
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new CopyPlugin({
-      patterns: [{ from: "./serverless.crons.yml", to: "./serverless.yml" }],
-    }),
-  ],
+  plugins: [new CleanWebpackPlugin()],
   externals: [
     nodeExternals(),
     ((fileRegex, shouldRun) => {

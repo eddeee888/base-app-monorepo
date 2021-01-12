@@ -1,0 +1,1 @@
+schema: './src/app/graph/schemas/*.graphql'

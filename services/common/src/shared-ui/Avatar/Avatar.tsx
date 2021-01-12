@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar as AvatarMui } from "@material-ui/core";
-import makeStyles from "@material-ui/styles/makeStyles";
+import { makeStyles } from "@material-ui/core/styles";
 import { AvatarProps as AvatarMuiProps } from "@material-ui/core/Avatar";
 import { avatarExtraSmallPx, avatarSmallPx, avatarMediumPx, avatarLargePx, avatarExtraLargePx } from "../../shared-styles/sizes";
 import Person from "@material-ui/icons/Person";

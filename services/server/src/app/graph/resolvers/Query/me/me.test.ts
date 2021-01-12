@@ -15,7 +15,7 @@ describe("query me resolver", () => {
       }
     `;
 
-    const { user } = await fixtures.user.createUser();
+    const { user } = await fixtures.user.user();
 
     const client = new GraphQLClient(url);
     const result = await client.request(query, { id: user.id });
@@ -34,7 +34,7 @@ describe("query me resolver", () => {
       }
     `;
 
-    const { user, tokenCookie } = await fixtures.user.createUser();
+    const { user, tokenCookie } = await fixtures.user.user();
 
     const client = new GraphQLClient(url, { headers: { cookie: tokenCookie } });
     const result = await client.request(query, { id: user.id });

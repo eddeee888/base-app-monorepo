@@ -14,6 +14,8 @@ const darkgray = "#aaaaaa";
 const charcoal = "#444444";
 const blackPearl = "#292b20";
 
+const disabled = "rgba(0, 0, 0, 0.26)";
+
 const primaryColor = vikingBlue;
 const primaryColorLight = lightBlue;
 const secondaryColor = amaranth;
@@ -29,6 +31,7 @@ const textShadowColor = charcoal;
 const textSuccessColor = eucalyptus;
 const textErrorColor = redOrange;
 const textWarningColor = yellowSea;
+const textDisabled = disabled;
 const footerBackgroundColor = blackPearl;
 const footerHeadingColor = white;
 const footerTextColor = lightgray;
@@ -50,6 +53,7 @@ export {
   textSuccessColor,
   textErrorColor,
   textWarningColor,
+  textDisabled,
   defaultBackgroundColor,
   footerBackgroundColor,
   footerHeadingColor,

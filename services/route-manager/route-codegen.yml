@@ -5,6 +5,7 @@ apps:
       me: /me
     routingType: ReactRouterV5
     reactRouterV5LinkOptions:
+      mode: strict
       importCustomLink:
         componentDefaultImport: true
         propsNamedImport: LinkProps
@@ -31,6 +32,7 @@ apps:
       static500: /500
     routingType: NextJS
     nextJSLinkOptions:
+      mode: strict
       importCustomLink:
         componentDefaultImport: true
         propsNamedImport: LinkProps
@@ -46,10 +48,12 @@ apps:
 
   server:
     origin: https://server.${PRIMARY_DOMAIN}
-    generateLinkComponent: false
-    generateRedirectComponent: false
-    generateUseParams: false
-    generateUseRedirect: false
+    generate:
+      linkComponent: false
+      redirectComponent: false
+      useParams: false
+      useRedirect: false
+      rootIndex: true
     routes:
       xhrLogin: /xhr/login
       xhrSignup: /xhr/signup

@@ -1,5 +1,5 @@
 import React, { ErrorInfo } from "react";
-import PageError500 from "common/shared-page-messages/PageError500";
+import PageErrorGeneric from "common/shared-page-messages/PageErrorGeneric";
 import generateUrlClientSeoStaticImage from "routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
 import Anchor from "common/shared-ui/Anchor";
 import Text from "common/shared-ui/Text";
@@ -28,7 +28,7 @@ class ErrorBoundary extends React.Component<Record<string, unknown>, State> {
     const { error } = this.state;
     if (error) {
       return (
-        <PageError500
+        <PageErrorGeneric
           imageSrc={generateUrlClientSeoStaticImage({ path: { imageName: "500.png" } })}
           link={
             <Text align="center">

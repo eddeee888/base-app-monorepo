@@ -10,8 +10,6 @@ module.exports = {
     sourceType: "module", // Allows for the use of imports
   },
   rules: {
-    // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
-    // e.g. "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {
@@ -30,6 +28,33 @@ module.exports = {
       rules: {
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-explicit-any": "off",
+      },
+    },
+    {
+      files: ["*.graphql"],
+      parser: "@graphql-eslint/eslint-plugin",
+      plugins: ["@graphql-eslint"],
+      rules: {
+        "eol-last": "off",
+        "prettier/prettier": "off",
+        "@graphql-eslint/no-case-insensitive-enum-values-duplicates": ["error"],
+        "@graphql-eslint/naming-convention": [
+          "error",
+          {
+            FieldDefinition: "camelCase",
+            ObjectTypeDefinition: "PascalCase",
+            InterfaceTypeDefinition: "PascalCase",
+            EnumTypeDefinition: "PascalCase",
+            EnumValueDefinition: "UPPER_CASE",
+            InputObjectTypeDefinition: {
+              style: "PascalCase",
+              suffix: "Input",
+            },
+            InputValueDefinition: "camelCase",
+            UnionTypeDefinition: "PascalCase",
+            ScalarTypeDefinition: "PascalCase",
+          },
+        ],
       },
     },
   ],

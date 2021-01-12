@@ -11,7 +11,7 @@ import LinkLogin from "routes/login/LinkLogin";
 import { headerHeight } from "common/shared-styles/sizes";
 import { primaryBackgroundColor, borderColor } from "common/shared-styles/colors";
 import breakpoints from "common/shared-styles/breakpoints";
-import { useHeader } from "common/components/HeaderProvider";
+import { useLayout } from "../LayoutContext";
 
 const headerClassName = css`
   width: 100%;
@@ -34,9 +34,11 @@ const logoClassName = css`
   display: block;
 `;
 
-const Header: React.FunctionComponent<{}> = () => {
+const Header: React.FunctionComponent = () => {
   const { viewer } = useViewer();
-  const { isVisible } = useHeader();
+  const {
+    header: { isVisible },
+  } = useLayout();
 
   if (!isVisible) {
     return null;

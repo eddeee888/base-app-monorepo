@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import expressAsyncHandler from "express-async-handler";
 import signupSchema from "@libs/shared-validations/signupSchema";
 import createHttpError from "http-errors";
-import { canUserBeCreated } from "graph/permissions";
+import permissions from "permissions";
 import { PrismaClient } from "@prisma/client";
 import createNewUser from "actions/createNewUser";
 import { Password } from "@libs/password";
@@ -32,7 +32,7 @@ const handleXhrSignup = (params: HandleXhrSignupParams): RequestHandler => {
       throw createHttpError(400);
     }
 
-    const canBeCreated = await canUserBeCreated({
+    const canBeCreated = await permissions.canUserBeCreated({
       prisma: prisma,
       email: email,
     });

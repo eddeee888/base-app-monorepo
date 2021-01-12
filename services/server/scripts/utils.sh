@@ -1,13 +1,16 @@
 #!/bin/bash
 
-TEST_FILE=docker-compose.test.yml
-
 function dc_down() {
   echo "*** Removing containers..."
-  docker-compose -f $TEST_FILE down
+  docker-compose -f $1 down
 }
 
 function dc_run() {
-  echo "*** run $@"
-  docker-compose -f $TEST_FILE run $@
+  echo "*** run ${@:2}"
+  docker-compose -f $1 run ${@:2}
+}
+
+function dc_build() {
+  echo "*** build $2"
+  docker-compose -f $1 build --no-cache ${2}
 }

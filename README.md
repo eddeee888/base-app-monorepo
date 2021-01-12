@@ -1,3 +1,5 @@
+![CI](https://github.com/eddeee888/base-app-monorepo/workflows/CI/badge.svg)
+
 # Base App Monorepo
 
 Note: This setup is for Mac, you will have to do the equivalent if you use Linux or Windows
@@ -72,7 +74,7 @@ $ bam ws common:watch
 
 #### GraphQL codegen
 
-We use [GraphQL codegenerator](https://github.com/dotansimha/graphql-code-generator) to generate typed code for all of our codebases from the [graph schema](./services/server/src/app/graph/schemas/schema.graphql)
+We use [GraphQL codegenerator](https://github.com/dotansimha/graphql-code-generator) to generate typed code for all of our codebases from the [graph schemas](./services/server/src/app/graph/schemas)
 
 ```
 $ bam ws gqlgen # This runs codegen on all codebases or run one of the following to target a particular codebase
@@ -116,7 +118,7 @@ $ bam exec server yarn prisma:migrate:up
 Here's the script to generate some dummy data to get started!
 
 ```
-$ bam init-data
+$ bam ws prisma:dev initdb
 ```
 
 #### Turn off everything
@@ -127,3 +129,5 @@ $ bam vm-down
 
 Made with ♥ by Eddy Nguyen
 https://eddy.works
+
+Need a coding mentor? Send me a request: https://jooclass.com/classes/2

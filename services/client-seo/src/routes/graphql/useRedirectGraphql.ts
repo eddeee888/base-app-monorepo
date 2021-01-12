@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { UrlPartsGraphql, patternGraphql, originGraphql } from "./patternGraphql";
-import generateUrl from "route-codegen/generateUrl";
+import { generateUrl } from "@route-codegen/utils";
 export type RedirectFnGraphql = (urlParts?: UrlPartsGraphql) => void;
 const useRedirectGraphql = (): RedirectFnGraphql => {
   const redirect: RedirectFnGraphql = (urlParts) => {

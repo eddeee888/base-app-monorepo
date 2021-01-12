@@ -1,8 +1,13 @@
 import { MatcherFunction } from "@testing-library/react";
 
-export const inMultiNodes = (matcher: string): MatcherFunction => {
+export const inMultiNodes = (matcher: string | RegExp): MatcherFunction => {
   const matcherFn: MatcherFunction = (content, node) => {
-    const hasText = (node: any): boolean => node.textContent === matcher;
+    const hasText = (node: HTMLElement | Element): boolean => {
+      if (typeof matcher === "string") {
+        return node.textContent === matcher;
+      }
+      return node.textContent ? !!node.textContent.match(matcher) : false;
+    };
     const nodeHasText = hasText(node);
     const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child));
 

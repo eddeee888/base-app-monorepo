@@ -19,7 +19,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyPlugin({
-      patterns: [{ from: "src/app/graph/schemas/schema.graphql", to: "../graph/schemas/schema.graphql" }],
+      patterns: [{ from: "src/app/graph/schemas/*.graphql", to: "../graph/schemas/[name].[ext]" }],
     }),
   ],
 };

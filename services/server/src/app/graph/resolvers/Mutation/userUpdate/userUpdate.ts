@@ -1,11 +1,12 @@
 import { MutationResolvers } from "@libs/graph/resolvers.generated";
 import { ForbiddenError } from "apollo-server";
-import { canUserUpdateUser } from "graph/permissions";
+import permissions from "permissions";
+import { mustParseInt } from "@libs/utils";
 
 const userUpdate: MutationResolvers["userUpdate"] = async (parent, { input }, { viewer, prisma }) => {
-  const targetUserId = parseInt(input.id);
+  const targetUserId = mustParseInt(input.id);
 
-  const canUpdate = await canUserUpdateUser({
+  const canUpdate = await permissions.canUserUpdateUser({
     prisma,
     userId: viewer.id,
     targetUserId: targetUserId,

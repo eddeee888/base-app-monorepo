@@ -13,7 +13,7 @@ const getViewerFromRequest: GetViewerFromRequest = async (req, prisma, jwt) => {
   if (!verifiedToken) {
     return null;
   }
-  return await prisma.user.findOne({ where: { id: mustParseInt(verifiedToken.viewer.id) } });
+  return await prisma.user.findUnique({ where: { id: mustParseInt(verifiedToken.viewer.id) } });
 };
 
 export default getViewerFromRequest;

@@ -1,6 +1,5 @@
-import { Sql } from "@prisma/client/runtime";
-import { sql, join, empty } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
-export const printHavings = (havings: Sql[]): Sql => {
-  return havings.length > 0 ? sql`HAVING ${join(havings, " AND ")}` : empty;
+export const printHavings = (havings: Prisma.Sql[]): Prisma.Sql => {
+  return havings.length > 0 ? Prisma.sql`HAVING ${Prisma.join(havings, " AND ")}` : Prisma.empty;
 };

@@ -4,41 +4,52 @@ This is the backend for our application. It is a NodeJS server running with a Gr
 
 ## Prisma2
 
-After changing the prisma schema, run the following:
+After changing the prisma schema, run the following to create migration files:
 
 ```bash
-$ bam exec server yarn prisma migrate save --experimental --name migration-name
-$ bam exec server yarn prisma:migrate:up
-$ bam exec server yarn prisma:generate:dev
-$ bam exec server-worker yarn prisma:generate:dev
+$ bam prisma:dev migrate:create name-of-the-migration
 ```
 
-Note that the previous commands update the container. Run the following to update the binary type on the host machine:
+Run the following command to apply the changes to both host machine and containers:
 
 ```bash
-$ bam ws prisma:generate:dev
+$ bam prisma:dev migrate:up
 ```
 
 To seed the database in dev:
 
 ```
-$ bam init-data
+$ bam ws prisma:dev initdb
 ```
 
 ## Test
 
-### Unit
+We run test in a separate container and remove it to test against a new test database each run. Each test is run one after another. Everything is wrapped in the following script:
 
 ```
-$ yarn test:app:unit
+$ bam ws test:server:app
 ```
 
-### Graph resolvers
-
-We run test in a separate container and remove it to test against a test database. Each resolver test is run one after another. Everything is wrapped in the following script:
+If you want to rebuild the server image ( in case the database or packages changed ), run the same script with the `--rebuild` flag:
 
 ```
-$ ./scripts/test-graph-resolvers.sh
+$ bam ws test:server:app --rebuild
+$ bam ws test:server:app --rebuild --watchAll
+```
+
+We do this because certain tests may require a working database to avoid mocking too many things ( e.g. prisma ). This command is useful in CI if you want a command to run all the tests.
+
+In development, it makes sense to reuse the same test database to avoid recreating a new database all the time. You can use the following command to run tests in a container against an existing test database:
+
+```
+$ bam ws test:server:app --noreset
+$ bam ws test:server:app --noreset --watch <pattern>
+```
+
+If you have a pure function test that does not require a database, you can run your test directly on the host machine:
+
+```
+$ yarn jest
 ```
 
 ## How it works

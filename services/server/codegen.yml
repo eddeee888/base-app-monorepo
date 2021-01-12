@@ -1,4 +1,5 @@
-schema: ./src/app/graph/schemas/schema.graphql
+schema: 
+  - ./src/app/graph/schemas/*.graphql
 hooks:
   afterAllFileWrite:
     - eslint --fix --config .eslintrc.js
@@ -15,7 +16,7 @@ generates:
       namingConvention:
         enumValues: change-case#upperCase
       useIndexSignature: true
-      enumValues: '@libs/graph/enums'
+      enumsAsTypes: true
       scalars:
         DateTime: string
       mappers:

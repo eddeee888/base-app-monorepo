@@ -8,8 +8,9 @@ import { SpacingValue } from "../../shared-styles/types";
 interface Props {
   children?: React.ReactNode;
   className?: string;
-  paddingX?: SpacingValue;
-  paddingY?: SpacingValue;
+  paddingX?: SpacingValue | [SpacingValue, SpacingValue];
+  paddingY?: SpacingValue | [SpacingValue, SpacingValue];
+  fullHeight?: boolean;
   disabled?: boolean;
 }
 
@@ -29,10 +30,19 @@ const disabledClassName = css`
   }
 `;
 
-const Paper: React.FunctionComponent<Props> = ({ className, children, disabled = false, paddingX = 3, paddingY = 2 }) => {
+const Paper: React.FunctionComponent<Props> = (props) => {
+  const { className, children, disabled = false, paddingX = 3, paddingY = 2, fullHeight = false } = props;
+
+  const paddingTopValue = typeof paddingY === "number" ? paddingY : paddingY[0];
+  const paddingBottomValue = typeof paddingY === "number" ? paddingY : paddingY[1];
+  const paddingRightValue = typeof paddingX === "number" ? paddingX : paddingX[0];
+  const paddingLeftValue = typeof paddingX === "number" ? paddingX : paddingX[1];
+
   const spacingClassName = css`
-    padding: ${spacingRem(paddingY)}rem ${spacingRem(paddingX)}rem;
+    padding: ${spacingRem(paddingTopValue)}rem ${spacingRem(paddingRightValue)}rem ${spacingRem(paddingBottomValue)}rem
+      ${spacingRem(paddingLeftValue)}rem;
     width: 100%;
+    ${fullHeight ? `height: 100%;` : ""}
   `;
 
   const classNames = [spacingClassName];

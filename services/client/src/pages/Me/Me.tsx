@@ -17,7 +17,7 @@ const Me: React.FunctionComponent = () => {
   return (
     <Main>
       <MainContent size="md">
-        <Paper>Welcome, {viewer.id}</Paper>
+        <Paper>Welcome, {viewer.displayName}</Paper>
       </MainContent>
     </Main>
   );
