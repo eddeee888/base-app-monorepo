@@ -15,7 +15,7 @@ export const checkIfError: CheckIfErrorFn = (error, touched) => {
 };
 
 const FormError: React.FunctionComponent<FormErrorProps> = ({ error }) => {
-  if (!!!error) {
+  if (!error) {
     return null;
   }
 

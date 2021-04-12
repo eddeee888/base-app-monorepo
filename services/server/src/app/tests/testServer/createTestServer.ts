@@ -1,9 +1,9 @@
 import { Express } from "express";
 import { createPrismaClient } from "@libs/prismaClient";
-import { createHeadersService } from "@libs/headers";
-import { createJwtService } from "@libs/jwt";
-import { createPassword } from "@libs/password";
-import createServers, { CreateServersConfig } from "web/createServers";
+import { createHeadersService } from "@libs/headersService";
+import { createJwtService } from "@libs/jwtService";
+import { createPasswordService } from "@libs/passwordService";
+import createServers, { CreateServersConfig } from "~/web/createServers";
 
 export interface TestServer {
   server: Express;
@@ -12,7 +12,7 @@ export interface TestServer {
 
 const createTestServer = (): TestServer => {
   const prisma = createPrismaClient({ mode: "test" });
-  const password = createPassword();
+  const password = createPasswordService();
   const headers = createHeadersService({ primaryDomain: "bam.test" });
   const jwt = createJwtService({
     appOrigin: process.env.APP_ORIGIN,

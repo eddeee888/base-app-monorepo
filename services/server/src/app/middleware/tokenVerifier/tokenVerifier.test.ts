@@ -1,7 +1,7 @@
 import { Request } from "jest-express/lib/request";
 import { Response } from "jest-express/lib/response";
-import { TokenType, createHeadersService } from "@libs/headers";
-import { createJwtService, JWTPayload } from "@libs/jwt";
+import { TokenType, createHeadersService } from "@libs/headersService";
+import { createJwtService, JWTPayload } from "@libs/jwtService";
 import tokenVerifier from "./tokenVerifier";
 
 describe("tokenVerifier middleware", () => {

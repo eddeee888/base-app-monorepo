@@ -1,13 +1,13 @@
 import React from "react";
 import { NextComponentType, NextPageContext } from "next";
 import Head from "next/head";
-import PageError404 from "common/shared-page-messages/PageError404";
-import PageError500 from "common/shared-page-messages/PageError500";
-import PageErrorGeneric from "common/shared-page-messages/PageErrorGeneric";
-import Text from "common/shared-ui/Text";
-import Anchor from "common/shared-ui/Anchor";
-import generateUrlHome from "routes/home/generateUrlHome";
-import generateUrlClientSeoStaticImage from "routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
+import PageError404 from "~/common/shared-page-messages/PageError404";
+import PageError500 from "~/common/shared-page-messages/PageError500";
+import PageErrorGeneric from "~/common/shared-page-messages/PageErrorGeneric";
+import Text from "~/common/shared-ui/Text";
+import Anchor from "~/common/shared-ui/Anchor";
+import generateUrlHome from "~/routes/home/generateUrlHome";
+import generateUrlClientSeoStaticImage from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
 
 const ErrorPage: NextComponentType<NextPageContext, Record<string, unknown>, { statusCode: number }> = ({ statusCode }) => {
   const link = (

@@ -1,8 +1,7 @@
-import { User } from "@prisma/client";
-import { UserLoader } from "@libs/graph/loaders";
+import { PrismaClient, User } from "@prisma/client";
 
-export const mustGetUser = async (userLoader: UserLoader, userId: number): Promise<User> => {
-  const user = await userLoader.load(userId);
+export const mustGetUser = async (prisma: PrismaClient, userId: number): Promise<User> => {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
 
   if (!user) {
     throw new Error("User does not exist");

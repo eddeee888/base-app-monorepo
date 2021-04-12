@@ -1,5 +1,3 @@
-![CI](https://github.com/eddeee888/base-app-monorepo/workflows/CI/badge.svg)
-
 # Base App Monorepo
 
 Note: This setup is for Mac, you will have to do the equivalent if you use Linux or Windows
@@ -46,7 +44,7 @@ Running `docker` commands should now work. For example:
 $ docker ps
 ```
 
-### Routing
+#### Routing
 
 It is easy to make mistake when routing between multiple apps. Inner-app routing can be done with client-side routing while inter-app routing must be done with server-side routing. That is why we are using `route-codegen` manage routing between all apps.
 
@@ -112,7 +110,7 @@ https://server.bam.dev/
 To create the database the first time:
 
 ```
-$ bam exec server yarn prisma:migrate:up
+$ bam ws prisma:dev migrate
 ```
 
 Here's the script to generate some dummy data to get started!

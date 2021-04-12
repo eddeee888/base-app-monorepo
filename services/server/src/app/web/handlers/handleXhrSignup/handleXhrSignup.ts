@@ -1,17 +1,17 @@
 import { RequestHandler } from "express";
 import expressAsyncHandler from "express-async-handler";
-import signupSchema from "@libs/shared-validations/signupSchema";
+import { signupSchema } from "@libs/shared-validations/schemas/signupSchema";
 import createHttpError from "http-errors";
-import permissions from "permissions";
+import permissions from "~/permissions";
 import { PrismaClient } from "@prisma/client";
-import createNewUser from "actions/createNewUser";
-import { Password } from "@libs/password";
-import { JwtService } from "@libs/jwt";
-import { HeadersService } from "@libs/headers";
+import actions from "~/actions";
+import { PasswordService } from "@libs/passwordService";
+import { JwtService } from "@libs/jwtService";
+import { HeadersService } from "@libs/headersService";
 
 export interface HandleXhrSignupParams {
   prisma: PrismaClient;
-  password: Password;
+  password: PasswordService;
   jwt: JwtService;
   headers: HeadersService;
 }
@@ -41,7 +41,7 @@ const handleXhrSignup = (params: HandleXhrSignupParams): RequestHandler => {
       return;
     }
 
-    const newUser = await createNewUser(
+    const newUser = await actions.createNewUser(
       { prisma: prisma, password: passwordService },
       { email: email, password: password, firstName: firstName, lastName: lastName }
     );

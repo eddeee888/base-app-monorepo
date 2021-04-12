@@ -1,4 +1,4 @@
-schema: 
+schema:
   - ./src/app/graph/schemas/*.graphql
 hooks:
   afterAllFileWrite:
@@ -10,7 +10,7 @@ generates:
       - typescript
       - typescript-resolvers
     config:
-      contextType: '@libs/graph/types#ResolverContext'
+      contextType: "@libs/graph/types#ResolverContext"
       fieldContextTypes:
         - Mutation.userUpdate#@libs/graph/types#ResolverContextLoggedIn
       namingConvention:
@@ -20,4 +20,4 @@ generates:
       scalars:
         DateTime: string
       mappers:
-        User: '@libs/graph/mappers#UserMapper'
+        User: "@libs/graph/mappers#UserMapper"

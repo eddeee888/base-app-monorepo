@@ -1,4 +1,4 @@
-import * as Types from "../../__generated__/types";
+import * as Types from "../../graphql/types.generated";
 
 import * as Operations from "./ViewerQuery.graphql";
 import * as Apollo from "@apollo/client";

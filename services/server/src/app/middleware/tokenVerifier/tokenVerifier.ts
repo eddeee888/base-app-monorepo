@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { HeadersService } from "@libs/headers";
-import { JwtService } from "@libs/jwt";
+import { HeadersService } from "@libs/headersService";
+import { JwtService } from "@libs/jwtService";
 
 export type TokenVerifier = (services: {
   headers: HeadersService;

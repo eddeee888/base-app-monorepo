@@ -1,6 +1,5 @@
 node_modules/*
-src/__generated__/*
 src/routes/*
-**/*.generated.tsx
+**/*.generated.*
 **/dist/*
 src/common/shared-*

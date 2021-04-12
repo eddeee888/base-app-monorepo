@@ -4,19 +4,24 @@ apps:
     routes:
       me: /me
     routingType: ReactRouterV5
+    generate:
+      linkComponent: true
+      redirectComponent: true
+      useRedirect: true
+      useParams: true
     reactRouterV5LinkOptions:
       mode: strict
       importCustomLink:
         componentDefaultImport: true
         propsNamedImport: LinkProps
         hrefProp: to
-        from: common/components/Link
+        from: ~/common/components/Link
     defaultLinkOptions:
       importCustomLink:
         componentDefaultImport: true
         propsNamedImport: AnchorProps
         hrefProp: href
-        from: common/shared-ui/Anchor
+        from: ~/common/shared-ui/Anchor
     destinationDir: ../client/src/routes
 
   client-seo:
@@ -31,28 +36,29 @@ apps:
       static404: /404
       static500: /500
     routingType: NextJS
+    generate:
+      linkComponent: true
+      redirectComponent: true
+      useRedirect: true
+      useParams: true
     nextJSLinkOptions:
       mode: strict
       importCustomLink:
         componentDefaultImport: true
         propsNamedImport: LinkProps
         hrefProp: nextHref
-        from: common/components/Link
+        from: ~/common/components/Link
     defaultLinkOptions:
       importCustomLink:
         componentDefaultImport: true
         propsNamedImport: AnchorProps
         hrefProp: href
-        from: common/shared-ui/Anchor
+        from: ~/common/shared-ui/Anchor
     destinationDir: ../client-seo/src/routes
 
   server:
     origin: https://server.${PRIMARY_DOMAIN}
     generate:
-      linkComponent: false
-      redirectComponent: false
-      useParams: false
-      useRedirect: false
       rootIndex: true
     routes:
       xhrLogin: /xhr/login

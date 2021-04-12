@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Grid } from "@material-ui/core";
-import FormError from "common/shared-frontend-components/FormError";
-import FormikTextInput from "common/shared-frontend-components/Formik/FormikTextInput";
-import Button from "common/shared-ui/Button";
-import StandardSpace from "common/shared-ui/StandardSpace";
-import Text from "common/shared-ui/Text";
-import loginSchema from "common/shared-validations/loginSchema";
+import FormError from "~/common/shared-frontend-components/FormError";
+import FormikTextInput from "~/common/shared-frontend-components/Formik/FormikTextInput";
+import Button from "~/common/shared-ui/Button";
+import StandardSpace from "~/common/shared-ui/StandardSpace";
+import Text from "~/common/shared-ui/Text";
+import { loginSchema } from "~/common/shared-validations/schemas/loginSchema";
 import { useFormik } from "formik";
-import LinkSignup from "routes/signup/LinkSignup";
-import { usePost } from "common/shared-frontend-components/usePost";
-import generateUrlXhrLogin from "routes/xhrLogin/generateUrlXhrLogin";
+import LinkSignup from "~/routes/signup/LinkSignup";
+import { usePost } from "~/common/shared-frontend-components/usePost";
+import generateUrlXhrLogin from "~/routes/xhrLogin/generateUrlXhrLogin";
 
 export interface LoginFormProps {
   redirectDestination: string;

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import Main from "common/shared-ui/Main";
-import MainContent from "common/shared-ui/MainContent";
-import { useViewer } from "common/components/ViewerQuery";
-import generateUrlMe from "routes/me/generateUrlMe";
-import Paper from "common/shared-ui/Paper";
-import H1 from "common/shared-ui/H1";
-import H2 from "common/shared-ui/H2";
-import StandardSpace from "common/shared-ui/StandardSpace";
-import Spinner from "common/shared-ui/Spinner";
+import Main from "~/common/shared-ui/Main";
+import MainContent from "~/common/shared-ui/MainContent";
+import { useViewer } from "~/common/components/ViewerQuery";
+import generateUrlMe from "~/routes/me/generateUrlMe";
+import Paper from "~/common/shared-ui/Paper";
+import H1 from "~/common/shared-ui/H1";
+import H2 from "~/common/shared-ui/H2";
+import StandardSpace from "~/common/shared-ui/StandardSpace";
+import Spinner from "~/common/shared-ui/Spinner";
 import LoginForm from "./LoginForm";
 import Head from "next/head";
 

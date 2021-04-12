@@ -1,16 +1,16 @@
 import { css } from "emotion";
 import React from "react";
-import Button from "common/shared-ui/Button";
-import Logo from "common/shared-ui/Logo";
-import { useViewer } from "common/components/ViewerProvider";
-import LoggedInMenu from "common/components/Header/LoggedInMenu";
+import Button from "~/common/shared-ui/Button";
+import Logo from "~/common/shared-ui/Logo";
+import { useViewer } from "~/common/components/ViewerProvider";
+import LoggedInMenu from "~/common/components/Header/LoggedInMenu";
 import { Grid } from "@material-ui/core";
-import LinkHome from "routes/home/LinkHome";
-import LinkSignup from "routes/signup/LinkSignup";
-import LinkLogin from "routes/login/LinkLogin";
-import { headerHeight } from "common/shared-styles/sizes";
-import { primaryBackgroundColor, borderColor } from "common/shared-styles/colors";
-import breakpoints from "common/shared-styles/breakpoints";
+import LinkHome from "~/routes/home/LinkHome";
+import LinkSignup from "~/routes/signup/LinkSignup";
+import LinkLogin from "~/routes/login/LinkLogin";
+import { headerHeight } from "~/common/shared-styles/sizes";
+import { primaryBackgroundColor, borderColor } from "~/common/shared-styles/colors";
+import breakpoints from "~/common/shared-styles/breakpoints";
 import { useLayout } from "../LayoutContext";
 
 const headerClassName = css`

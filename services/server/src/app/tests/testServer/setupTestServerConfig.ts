@@ -1,24 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PrismaClient } from "@prisma/client";
 import createTestServer from "./createTestServer";
-import { createUserFixtures, UserFixtures } from "./fixtures";
+import createTestConfig, { TestConfig } from "@libs/tests/createTestConfig";
 
 export interface TestServerConfig {
   url: string;
   prisma: PrismaClient;
-  fixtures: {
-    user: UserFixtures;
-  };
+  fixtures: TestConfig["fixtures"];
 }
 
 export const setupTestServerConfig = (): TestServerConfig => {
   const { server, services } = createTestServer();
 
+  const { fixtures } = createTestConfig({
+    prisma: services.prismaClient,
+    jwtService: services.jwtService,
+    passwordService: services.passwordService,
+  });
+
   const config: TestServerConfig = {
     url: "http://localhost/graphql",
     prisma: services.prismaClient,
-    fixtures: {
-      user: createUserFixtures({ prisma: services.prismaClient, jwt: services.jwtService, password: services.passwordService }),
-    },
+    fixtures: fixtures,
   };
 
   const internalConfig: any = {};

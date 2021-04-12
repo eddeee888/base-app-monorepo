@@ -8,7 +8,7 @@ source ${SERVER_ROOT}/scripts/utils.sh
 
 function testAfterReset(){
   echo "*** Running all tests..."
-  dc_run ${DOCKER_COMPOSE_FILE} --rm server ./scripts/wait-for-it.sh database:3306 -- yarn prisma:reset
+  dc_run ${DOCKER_COMPOSE_FILE} --rm server ./scripts/wait-for-it.sh database:3306 -- yarn prisma:migrate:reset -f
   if dc_run ${DOCKER_COMPOSE_FILE} --rm server yarn jest -i $@; then
     echo "*** Tests passed!"
     dc_down ${DOCKER_COMPOSE_FILE}

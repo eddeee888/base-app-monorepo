@@ -3,6 +3,7 @@ import { useBeforeunloadContext } from "./BeforeunloadContext";
 
 export type UseBeforeunloadSetup = () => void;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const unload = (event: any): void => {
   event.preventDefault();
   event.returnValue = "";

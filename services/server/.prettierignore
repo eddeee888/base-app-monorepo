@@ -1,1 +1,5 @@
-**/generated/
+**/build/
+**/node_modules/
+**/cdk.out
+src/common/shared-*
+.vscode/

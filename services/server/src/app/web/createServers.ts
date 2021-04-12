@@ -7,18 +7,17 @@ import { json as bodyParser } from "body-parser";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 
-import errorMiddleware from "middleware/errorHandler";
-import tokenVerifier from "middleware/tokenVerifier";
+import errorMiddleware from "~/middleware/errorHandler";
+import tokenVerifier from "~/middleware/tokenVerifier";
 
 import { ResolverContext } from "@libs/graph/types";
-import IsLoggedInDirective from "graph/directives/IsLoggedInDirective";
-import IsPrivateDirective from "graph/directives/IsPrivateDirective";
-import getTypeDefs from "graph/schemas/getTypeDefs";
-import { resolvers } from "graph/resolvers";
+import { IsLoggedInDirective, IsPrivateDirective } from "~/graph/directives";
+import { getTypeDefs } from "~/graph/schemas/utils";
+import { resolvers } from "~/graph/resolvers";
 
-import { createHeadersService } from "@libs/headers";
-import { createJwtService } from "@libs/jwt";
-import { createPassword } from "@libs/password";
+import { createHeadersService } from "@libs/headersService";
+import { createJwtService } from "@libs/jwtService";
+import { createPasswordService } from "@libs/passwordService";
 import { createPrismaClient } from "@libs/prismaClient";
 import { createErrorNotifier } from "./plugins";
 
@@ -32,19 +31,19 @@ export interface CreateServersConfig {
   corsOptions: CorsOptions | undefined;
   services: {
     prismaClient: ReturnType<typeof createPrismaClient>;
-    passwordService: ReturnType<typeof createPassword>;
+    passwordService: ReturnType<typeof createPasswordService>;
     headersService: ReturnType<typeof createHeadersService>;
     jwtService: ReturnType<typeof createJwtService>;
   };
 }
 
-interface CreateServerResult {
+interface Servers {
   httpServer: http.Server;
   server: Express;
   apolloServer: ApolloServer;
 }
 
-const createServers = ({ stage, corsOptions, services }: CreateServersConfig): CreateServerResult => {
+const createServers = ({ stage, corsOptions, services }: CreateServersConfig): Servers => {
   const apolloServer = new ApolloServer({
     typeDefs: getTypeDefs(),
     resolvers: resolvers,
@@ -83,6 +82,7 @@ const createServers = ({ stage, corsOptions, services }: CreateServersConfig): C
           const headerCookieString = request.headers.cookie;
           if (headerCookieString) {
             const cookies = cookie.parse(headerCookieString);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const subscriptionRequest = request as any;
             subscriptionRequest.cookies = cookies;
             return { subscriptionRequest: subscriptionRequest };

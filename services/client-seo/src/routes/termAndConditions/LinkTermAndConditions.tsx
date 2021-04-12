@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
-import Link, { LinkProps } from "common/components/Link";
+import Link, { LinkProps } from "~/common/components/Link";
 import { UrlPartsTermAndConditions, patternNextJSTermAndConditions } from "./patternTermAndConditions";
 type LinkTermAndConditionsProps = Omit<LinkProps, "nextHref"> & UrlPartsTermAndConditions;
 const LinkTermAndConditions: React.FunctionComponent<LinkTermAndConditionsProps> = (props) => {

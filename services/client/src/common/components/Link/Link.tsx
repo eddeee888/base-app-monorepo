@@ -9,6 +9,7 @@ export interface LinkProps {
   onClick?: () => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const AdaptorLink = React.forwardRef<any, RouterLinkProps>(function InnerAdaptorLink(props, ref) {
   return <RouterLink ref={ref} {...props} />;
 });

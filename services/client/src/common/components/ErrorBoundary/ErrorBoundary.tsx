@@ -1,5 +1,5 @@
 import React, { ErrorInfo } from "react";
-import Error500 from "common/components/Error500";
+import Error500 from "~/common/components/Error500";
 
 interface State {
   error: Error | null;

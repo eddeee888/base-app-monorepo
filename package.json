@@ -53,8 +53,6 @@
     "concurrently": "^5.1.0"
   },
   "resolutions": {
-    "graphql": "14.6.0",
-    "@apollo/client": "3.3.0",
     "@testing-library/dom": "7.24.4"
   }
 }

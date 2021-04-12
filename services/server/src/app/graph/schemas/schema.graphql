@@ -1,27 +1,6 @@
-directive @isLoggedIn(status: Boolean) on FIELD_DEFINITION
+directive @isLoggedIn(status: Boolean!) on FIELD_DEFINITION
 directive @isPrivate on FIELD_DEFINITION
 
-type Query {
-  me: User
-  user(id: ID!): User
-}
+type Query
 
-type Mutation {
-  userUpdate(input: UserUpdateInput!): User! @isLoggedIn(status: true)
-}
-
-input UserUpdateInput {
-  id: ID!
-  avatar: String
-}
-
-# User
-type User {
-  id: ID!
-  email: String! @isPrivate
-  firstName: String! @isPrivate
-  lastName: String! @isPrivate
-  contactNumber: String @isPrivate
-  displayName: String!
-  avatar: String
-}
+type Mutation

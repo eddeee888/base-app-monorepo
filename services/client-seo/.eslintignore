@@ -1,7 +1,6 @@
 node_modules/*
 **/out/*
 **/.next/*
-src/__generated__/*
-**/*.generated.tsx
+**/*.generated.*
 **/dist/*
 src/common/shared-*

@@ -84,7 +84,7 @@ services:
     networks:
       - com_vm
 
-  # Set up load balancer container 
+  # Set up load balancer container
   reverse-proxy:
     build:
       context: ./services/reverse-proxy

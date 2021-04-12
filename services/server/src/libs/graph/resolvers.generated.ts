@@ -3,6 +3,8 @@ import { UserMapper } from "@libs/graph/mappers";
 import { ResolverContext, ResolverContextLoggedIn } from "@libs/graph/types";
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -11,15 +13,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-};
-
-export type Mutation = {
-  __typename?: "Mutation";
-  userUpdate: User;
-};
-
-export type MutationUserUpdateArgs = {
-  input: UserUpdateInput;
 };
 
 export type Query = {
@@ -32,6 +25,20 @@ export type QueryUserArgs = {
   id: Scalars["ID"];
 };
 
+export type Mutation = {
+  __typename?: "Mutation";
+  userUpdate: User;
+};
+
+export type MutationUserUpdateArgs = {
+  input: UserUpdateInput;
+};
+
+export type UserUpdateInput = {
+  id: Scalars["ID"];
+  avatar?: Maybe<Scalars["String"]>;
+};
+
 export type User = {
   __typename?: "User";
   id: Scalars["ID"];
@@ -40,11 +47,6 @@ export type User = {
   lastName: Scalars["String"];
   contactNumber?: Maybe<Scalars["String"]>;
   displayName: Scalars["String"];
-  avatar?: Maybe<Scalars["String"]>;
-};
-
-export type UserUpdateInput = {
-  id: Scalars["ID"];
   avatar?: Maybe<Scalars["String"]>;
 };
 
@@ -129,26 +131,26 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
-  User: ResolverTypeWrapper<UserMapper>;
   ID: ResolverTypeWrapper<Scalars["ID"]>;
-  String: ResolverTypeWrapper<Scalars["String"]>;
   Mutation: ResolverTypeWrapper<{}>;
   UserUpdateInput: UserUpdateInput;
+  String: ResolverTypeWrapper<Scalars["String"]>;
+  User: ResolverTypeWrapper<UserMapper>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Query: {};
-  User: UserMapper;
   ID: Scalars["ID"];
-  String: Scalars["String"];
   Mutation: {};
   UserUpdateInput: UserUpdateInput;
+  String: Scalars["String"];
+  User: UserMapper;
   Boolean: Scalars["Boolean"];
 }>;
 
-export type IsLoggedInDirectiveArgs = { status?: Maybe<Scalars["Boolean"]> };
+export type IsLoggedInDirectiveArgs = { status: Scalars["Boolean"] };
 
 export type IsLoggedInDirectiveResolver<
   Result,
@@ -166,19 +168,19 @@ export type IsPrivateDirectiveResolver<Result, Parent, ContextType = ResolverCon
   Args
 >;
 
-export type MutationResolvers<
-  ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"]
-> = ResolversObject<{
-  userUpdate?: Resolver<ResolversTypes["User"], ParentType, ResolverContextLoggedIn, RequireFields<MutationUserUpdateArgs, "input">>;
-}>;
-
 export type QueryResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = ResolversObject<{
   me?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType, RequireFields<QueryUserArgs, "id">>;
+}>;
+
+export type MutationResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"]
+> = ResolversObject<{
+  userUpdate?: Resolver<ResolversTypes["User"], ParentType, ResolverContextLoggedIn, RequireFields<MutationUserUpdateArgs, "input">>;
 }>;
 
 export type UserResolvers<
@@ -196,8 +198,8 @@ export type UserResolvers<
 }>;
 
 export type Resolvers<ContextType = ResolverContext> = ResolversObject<{
-  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 }>;
 

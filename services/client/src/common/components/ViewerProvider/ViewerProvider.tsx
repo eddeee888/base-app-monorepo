@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useViewerQuery, Viewer_UserFragment } from "./ViewerProvider.generated";
-import Error500 from "common/components/Error500";
-import Spinner from "common/shared-ui/Spinner";
+import Error500 from "~/common/components/Error500";
+import Spinner from "~/common/shared-ui/Spinner";
 
 export type Viewer = Omit<Viewer_UserFragment, "__typename">;
 export type SetViewerFn = (viewer: Viewer) => void;
