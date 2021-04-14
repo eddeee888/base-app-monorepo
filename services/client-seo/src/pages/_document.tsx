@@ -1,7 +1,7 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
-import { muiTheme } from "common/shared-styles/muiTheme";
+import { muiTheme } from "~/common/shared-styles/muiTheme";
 import { extractCritical } from "emotion-server";
 
 export default class MyDocument extends Document<{ emotionStyles: { ids: string[]; css: string } }> {

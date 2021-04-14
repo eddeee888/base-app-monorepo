@@ -2,11 +2,12 @@ import { SchemaDirectiveVisitor } from "graphql-tools";
 import { ResolverContext } from "@libs/graph/types";
 import { AuthenticationError } from "apollo-server";
 import { GraphQLField, defaultFieldResolver } from "graphql";
+import { IsLoggedInDirectiveArgs } from "@libs/graph/resolvers.generated";
 
-class IsLoggedInDirective extends SchemaDirectiveVisitor {
-  public visitFieldDefinition(field: GraphQLField<any, ResolverContext>): GraphQLField<any, any> | void | null {
+export class IsLoggedInDirective extends SchemaDirectiveVisitor {
+  public visitFieldDefinition(field: GraphQLField<unknown, ResolverContext>): GraphQLField<unknown, unknown> | void | null {
     const { resolve = defaultFieldResolver } = field;
-    const { status } = this.args;
+    const { status } = this.args as IsLoggedInDirectiveArgs;
 
     field.resolve = async function (...args) {
       const { viewer } = args[2];
@@ -21,5 +22,3 @@ class IsLoggedInDirective extends SchemaDirectiveVisitor {
     };
   }
 }
-
-export default IsLoggedInDirective;

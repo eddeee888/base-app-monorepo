@@ -16,15 +16,14 @@ const PageError500: React.FunctionComponent<PageError500Props> = ({ link, imageS
     <Main fullViewPortHeight>
       <MainContent size="xs">
         <Block size="xs">
-          <H1 gutterBottom={false} style={{ fontSize: "72px" }}>
-            500
+          <H1 align="center" gutterBottom={false}>
+            Oops! Something went wrong
           </H1>
+          <StandardSpace />
           <Text variant="h5" align="center">
-            Oops! Something went wrong.
+            Please try again later
           </Text>
-          <Text variant="h5" align="center">
-            Please try again later.
-          </Text>
+          <StandardSpace />
           {link}
           <StandardSpace />
           <StandardSpace />

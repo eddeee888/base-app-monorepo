@@ -1,32 +1,32 @@
 overwrite: true
-schema: './../server/src/app/graph/schemas/*.graphql'
-documents: './**/*.graphql'
+schema: "./../server/src/app/graph/schemas/*.graphql"
+documents: "./**/*.graphql"
 hooks:
   afterAllFileWrite:
     - yarn eslint --fix --config .eslintrc.json
     - yarn prettier --write --config .prettierrc.json
 generates:
-  src/common/__generated__/types.ts:
+  src/common/graphql/types.generated.ts:
     plugins:
-      - 'typescript'
+      - "typescript"
     config:
       enumsAsTypes: true
       nonOptionalTypename: true
       scalars:
         DateTime: string
 
-  src/common/__generated__/operations.d.ts:
+  src/common/graphql/operations.generated.d.ts:
     plugins:
       - typescript-graphql-files-modules
 
   src:
     preset: near-operation-file
     presetConfig:
-      baseTypesPath: common/__generated__/types.ts
+      baseTypesPath: common/graphql/types.generated.ts
       extension: .generated.tsx
     plugins:
-      - 'typescript-operations'
-      - 'typescript-react-apollo'
+      - "typescript-operations"
+      - "typescript-react-apollo"
     config:
       enumsAsTypes: true
       nonOptionalTypename: true

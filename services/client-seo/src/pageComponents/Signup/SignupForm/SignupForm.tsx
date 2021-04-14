@@ -1,18 +1,18 @@
 import { Grid } from "@material-ui/core";
-import { usePost } from "common/shared-frontend-components/usePost";
-import FormError from "common/shared-frontend-components/FormError";
-import FormikTextInput from "common/shared-frontend-components/Formik/FormikTextInput";
-import Anchor from "common/shared-ui/Anchor";
-import Button from "common/shared-ui/Button";
-import StandardSpace from "common/shared-ui/StandardSpace";
-import Text from "common/shared-ui/Text";
-import signupSchema from "common/shared-validations/signupSchema";
+import { usePost } from "~/common/shared-frontend-components/usePost";
+import FormError from "~/common/shared-frontend-components/FormError";
+import FormikTextInput from "~/common/shared-frontend-components/Formik/FormikTextInput";
+import Anchor from "~/common/shared-ui/Anchor";
+import Button from "~/common/shared-ui/Button";
+import StandardSpace from "~/common/shared-ui/StandardSpace";
+import Text from "~/common/shared-ui/Text";
+import { signupSchema } from "~/common/shared-validations/schemas/signupSchema";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import LinkLogin from "routes/login/LinkLogin";
-import generateUrlPrivacyPolicy from "routes/privacyPolicy/generateUrlPrivacyPolicy";
-import generateUrlTermAndConditions from "routes/termAndConditions/generateUrlTermAndConditions";
-import generateUrlXhrSignup from "routes/xhrSignup/generateUrlXhrSignup";
+import LinkLogin from "~/routes/login/LinkLogin";
+import generateUrlPrivacyPolicy from "~/routes/privacyPolicy/generateUrlPrivacyPolicy";
+import generateUrlTermAndConditions from "~/routes/termAndConditions/generateUrlTermAndConditions";
+import generateUrlXhrSignup from "~/routes/xhrSignup/generateUrlXhrSignup";
 
 export interface SignupFormProps {
   redirectDestination: string;

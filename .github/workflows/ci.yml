@@ -60,7 +60,7 @@ jobs:
 
       - name: Build
         run: yarn build:client
-  
+
   build-client-seo:
     name: Build client-seo
     runs-on: ubuntu-18.04
@@ -138,7 +138,7 @@ jobs:
 
       - name: Test client-seo
         run: yarn test:client-seo:unit
-  
+
   test-server-app:
     name: Test server app
     runs-on: ubuntu-18.04
@@ -160,5 +160,5 @@ jobs:
       - name: Run Insider
         uses: insidersec/insider-action@v0
         with:
-            technology: javascript
-            target: services/server/src
+          technology: javascript
+          target: services/server/src

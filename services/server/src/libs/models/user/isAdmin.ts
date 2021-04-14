@@ -1,8 +1,8 @@
 import hasGroup from "@libs/models/user/hasGroup";
-import { UserLoader } from "@libs/graph/loaders";
+import { PrismaClient } from "@prisma/client";
 
-const isAdmin = async (userLoader: UserLoader, userId: number): Promise<boolean> => {
-  const user = await userLoader.load(userId);
+const isAdmin = async (prisma: PrismaClient, userId: number): Promise<boolean> => {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!!user && hasGroup(user, "admin")) {
     return true;
   }

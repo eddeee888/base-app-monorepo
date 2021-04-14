@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import Main from "common/shared-ui/Main";
-import MainContent from "common/shared-ui/MainContent";
-import { useViewer } from "common/components/ViewerQuery";
-import generateUrlMe from "routes/me/generateUrlMe";
-import Paper from "common/shared-ui/Paper";
-import H1 from "common/shared-ui/H1";
-import H2 from "common/shared-ui/H2";
-import StandardSpace from "common/shared-ui/StandardSpace";
+import Main from "~/common/shared-ui/Main";
+import MainContent from "~/common/shared-ui/MainContent";
+import { useViewer } from "~/common/components/ViewerQuery";
+import generateUrlMe from "~/routes/me/generateUrlMe";
+import Paper from "~/common/shared-ui/Paper";
+import H1 from "~/common/shared-ui/H1";
+import H2 from "~/common/shared-ui/H2";
+import StandardSpace from "~/common/shared-ui/StandardSpace";
 import { useMediaQuery } from "@material-ui/core";
-import Spinner from "common/shared-ui/Spinner";
+import Spinner from "~/common/shared-ui/Spinner";
 import SignupForm from "./SignupForm";
-import breakpoints from "common/shared-styles/breakpoints";
+import breakpoints from "~/common/shared-styles/breakpoints";
 import Head from "next/head";
 
 const Signup: React.FunctionComponent = () => {

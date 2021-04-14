@@ -3,6 +3,7 @@ import { getMainDefinition } from "@apollo/client/utilities";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { onError } from "@apollo/client/link/error";
 import { IncomingHttpHeaders } from "http";
+import introspectionResult from "./introspectionResult.generated";
 
 interface CreateApolloClientParams {
   uri: string | undefined;
@@ -30,7 +31,8 @@ const createApolloClient = (params: CreateApolloClientParams): ApolloClient<Norm
             lazy: true,
             reconnect: true,
             reconnectionAttempts: 3,
-            inactivityTimeout: 18000, // Wait 3 minutes before disconnecting when no active subscription e.g. moving away from a page with subscription
+            // Wait 3 minutes before disconnecting when no active subscription e.g. moving away from a page with subscription
+            inactivityTimeout: 18000,
           },
         })
       : undefined;
@@ -65,6 +67,7 @@ const createApolloClient = (params: CreateApolloClientParams): ApolloClient<Norm
   const requestLink = new ApolloLink(
     (operation, forward) =>
       new Observable((observer) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let handle: any;
         Promise.resolve(operation)
           .then(async (operation) => {
@@ -91,7 +94,7 @@ const createApolloClient = (params: CreateApolloClientParams): ApolloClient<Norm
 
   const client = new ApolloClient({
     link: ApolloLink.from([errorLink, requestLink, transportLink]),
-    cache: new InMemoryCache().restore(initialState),
+    cache: new InMemoryCache({ possibleTypes: introspectionResult.possibleTypes }).restore(initialState),
     ssrMode: isSsr(),
     ssrForceFetchDelay: 100,
   });

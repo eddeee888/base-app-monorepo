@@ -1,10 +1,10 @@
 import React from "react";
 import { css } from "emotion";
 import { Grid, Box } from "@material-ui/core";
-import H1 from "common/shared-ui/H1";
-import Block from "common/shared-ui/Block";
-import { headerHeight } from "common/shared-styles/sizes";
-import { primaryColor, primaryBackgroundColor } from "common/shared-styles/colors";
+import H1 from "~/common/shared-ui/H1";
+import Block from "~/common/shared-ui/Block";
+import { headerHeight } from "~/common/shared-styles/sizes";
+import { primaryColor, primaryBackgroundColor } from "~/common/shared-styles/colors";
 
 const containerClassName = css`
   height: calc(100vh - ${headerHeight});

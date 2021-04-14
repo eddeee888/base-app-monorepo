@@ -2,20 +2,20 @@ import React from "react";
 import App from "next/app";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { muiTheme } from "common/shared-styles/muiTheme";
+import { muiTheme } from "~/common/shared-styles/muiTheme";
 import { CacheProvider, Global, css } from "@emotion/core";
 import { cache } from "emotion";
 import { ApolloProvider, ApolloClient, NormalizedCacheObject } from "@apollo/client";
-import createApolloClient from "common/shared-apollo/createApolloClient";
+import createApolloClient from "~/common/shared-apollo/createApolloClient";
 import withApollo from "next-with-apollo";
 import { getDataFromTree } from "@apollo/client/react/ssr";
-import Header from "common/components/Header";
-import createBaseCss from "common/shared-styles/createBaseCss";
-import createFontsStyles from "common/shared-styles/createFontsStyles";
-import ErrorBoundary from "common/components/ErrorBoundary";
-import MaintenancePage from "common/shared-page-messages/MaintenancePage";
-import generateUrlClientSeoStaticImage from "routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
-import isSsr from "common/components/isSsr";
+import Header from "~/common/components/Header";
+import createBaseCss from "~/common/shared-styles/createBaseCss";
+import createFontsStyles from "~/common/shared-styles/createFontsStyles";
+import ErrorBoundary from "~/common/components/ErrorBoundary";
+import MaintenancePage from "~/common/shared-page-messages/MaintenancePage";
+import generateUrlClientSeoStaticImage from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
+import isSsr from "~/common/components/isSsr";
 
 class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
   componentDidMount(): void {

@@ -4,22 +4,30 @@ This is the backend for our application. It is a NodeJS server running with a Gr
 
 ## Prisma2
 
-After changing the prisma schema, run the following to create migration files:
+After changing the prisma schema, run the following to apply changes to the database and regenerate all prisma clients:
 
 ```bash
-$ bam prisma:dev migrate:create name-of-the-migration
+$ bam ws prisma:dev migrate
 ```
 
-Run the following command to apply the changes to both host machine and containers:
+The `migrate` command can be broken down into 3 steps to create the migration, applying the migration and generate client types respectively:
 
 ```bash
-$ bam prisma:dev migrate:up
+$ bam ws prisma:dev create <name-of-migration?>
+$ bam ws prisma:dev deploy
+$ bam ws prisma:dev generate
 ```
 
-To seed the database in dev:
+To init/reset/reseed the database in dev:
 
-```
+```bash
 $ bam ws prisma:dev initdb
+```
+
+To reset the database:
+
+```bash
+$ bam ws prisma:dev reset
 ```
 
 ## Test
@@ -35,6 +43,7 @@ If you want to rebuild the server image ( in case the database or packages chang
 ```
 $ bam ws test:server:app --rebuild
 $ bam ws test:server:app --rebuild --watchAll
+$ bam ws test:server:app --rebuild --watch <pattern>
 ```
 
 We do this because certain tests may require a working database to avoid mocking too many things ( e.g. prisma ). This command is useful in CI if you want a command to run all the tests.
@@ -43,6 +52,7 @@ In development, it makes sense to reuse the same test database to avoid recreati
 
 ```
 $ bam ws test:server:app --noreset
+$ bam ws test:server:app --noreset --watchAll
 $ bam ws test:server:app --noreset --watch <pattern>
 ```
 

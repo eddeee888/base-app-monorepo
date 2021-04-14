@@ -1,10 +1,13 @@
 import { defaultBackgroundColor, textColor } from "./colors";
-import { remValue } from "./sizes";
 import breakpoints from "./breakpoints";
 import { fontFamily } from "./fonts";
 
 const createBaseCss = (): string => `html {
   box-sizing: border-box;
+  font-size: 14px;
+  ${breakpoints.up("md")} {
+    font-size: 16px;
+  }
 }
 *,
 *::before,
@@ -15,11 +18,8 @@ body {
   margin: 0;
   background-color: ${defaultBackgroundColor};
   color: ${textColor};
-  font-size: ${remValue}px;
+  font-size: 1.1rem;
   line-height: 1.5em;
-  ${breakpoints.up("md")} {
-    font-size: 1rem;
-  }
   font-family: ${fontFamily};
 }
 ul {

@@ -3,7 +3,7 @@ import { convertDisplayName } from "@libs/models/user";
 
 export const User: UserResolvers = {
   avatar: async ({ id }, arg, { prisma }) => {
-    const avatar = await prisma.user.findOne({ where: { id } }).avatar();
+    const avatar = await prisma.user.findUnique({ where: { id } }).avatar();
     return avatar?.src ?? null;
   },
   displayName: async ({ firstName, lastName }) => {

@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
-import Link, { LinkProps } from "common/components/Link";
+import Link, { LinkProps } from "~/common/components/Link";
 import { UrlPartsLogin, patternNextJSLogin } from "./patternLogin";
 type LinkLoginProps = Omit<LinkProps, "nextHref"> & UrlPartsLogin;
 const LinkLogin: React.FunctionComponent<LinkLoginProps> = (props) => {

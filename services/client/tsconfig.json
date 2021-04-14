@@ -1,34 +1,4 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./src",
-    "target": "es5",
-    "lib": ["es5", "es6", "dom", "esnext.asynciterable"],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "jsx": "react",
-    "noEmit": true,
-
-    "alwaysStrict": true,
-    "noImplicitThis": true,
-    "noImplicitReturns": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "esModuleInterop": true,
-    "declaration": true,
-    "allowJs": true,
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noUnusedLocals": true,
-    "downlevelIteration": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {}
 }

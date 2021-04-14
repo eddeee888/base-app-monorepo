@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
-import Link, { LinkProps } from "common/components/Link";
+import Link, { LinkProps } from "~/common/components/Link";
 import { UrlPartsHome, patternNextJSHome } from "./patternHome";
 type LinkHomeProps = Omit<LinkProps, "nextHref"> & UrlPartsHome;
 const LinkHome: React.FunctionComponent<LinkHomeProps> = (props) => {

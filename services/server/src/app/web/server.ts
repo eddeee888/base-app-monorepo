@@ -1,6 +1,6 @@
-import { createHeadersService } from "@libs/headers";
-import { createJwtService } from "@libs/jwt";
-import { createPassword } from "@libs/password";
+import { createHeadersService } from "@libs/headersService";
+import { createJwtService } from "@libs/jwtService";
+import { createPasswordService } from "@libs/passwordService";
 import { createPrismaClient } from "@libs/prismaClient";
 import createServers from "./createServers";
 import { env } from "./env";
@@ -9,7 +9,7 @@ const PORT = env.PORT;
 const STAGE = env.NODE_ENV;
 
 // Create services
-const password = createPassword();
+const password = createPasswordService();
 const prisma = createPrismaClient({ mode: STAGE });
 const headers = createHeadersService({ primaryDomain: env.PRIMARY_DOMAIN });
 const jwt = createJwtService({

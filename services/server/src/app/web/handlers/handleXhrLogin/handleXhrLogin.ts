@@ -2,14 +2,14 @@ import { RequestHandler } from "express";
 import expressAsyncHandler from "express-async-handler";
 import createHttpError from "http-errors";
 import { PrismaClient } from "@prisma/client";
-import loginSchema from "@libs/shared-validations/loginSchema";
-import { Password } from "@libs/password";
-import { HeadersService } from "@libs/headers";
-import { JwtService } from "@libs/jwt";
+import { loginSchema } from "@libs/shared-validations/schemas/loginSchema";
+import { PasswordService } from "@libs/passwordService";
+import { HeadersService } from "@libs/headersService";
+import { JwtService } from "@libs/jwtService";
 
 export interface HandleXhrLoginParams {
   prisma: PrismaClient;
-  password: Password;
+  password: PasswordService;
   headers: HeadersService;
   jwt: JwtService;
 }
@@ -23,7 +23,7 @@ const handleXhrLogin = ({ prisma, password: passwordService, headers, jwt }: Han
       throw createHttpError(400);
     }
 
-    const user = await prisma.user.findOne({ where: { email: email } });
+    const user = await prisma.user.findUnique({ where: { email: email } });
     if (!user) {
       throw createHttpError(401);
     }

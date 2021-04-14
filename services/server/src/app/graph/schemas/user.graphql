@@ -1,0 +1,24 @@
+extend type Query {
+  me: User
+  user(id: ID!): User
+}
+
+extend type Mutation {
+  userUpdate(input: UserUpdateInput!): User! @isLoggedIn(status: true)
+}
+
+input UserUpdateInput {
+  id: ID!
+  avatar: String
+}
+
+# User
+type User {
+  id: ID!
+  email: String! @isPrivate
+  firstName: String! @isPrivate
+  lastName: String! @isPrivate
+  contactNumber: String @isPrivate
+  displayName: String!
+  avatar: String
+}

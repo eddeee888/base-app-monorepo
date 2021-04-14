@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorPage from "pages/_error";
+import ErrorPage from "~/pages/_error";
 
 const Error404: React.FunctionComponent = () => {
   return <ErrorPage statusCode={404} />;

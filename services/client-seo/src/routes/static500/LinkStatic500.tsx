@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
-import Link, { LinkProps } from "common/components/Link";
+import Link, { LinkProps } from "~/common/components/Link";
 import { UrlPartsStatic500, patternNextJSStatic500 } from "./patternStatic500";
 type LinkStatic500Props = Omit<LinkProps, "nextHref"> & UrlPartsStatic500;
 const LinkStatic500: React.FunctionComponent<LinkStatic500Props> = (props) => {

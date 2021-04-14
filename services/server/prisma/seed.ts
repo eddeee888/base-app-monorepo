@@ -1,4 +1,4 @@
-import { createPassword } from "../src/libs/password";
+import { createPasswordService } from "../src/libs/passwordService";
 import { createPrismaClient } from "../src/libs/prismaClient";
 
 const seed = async (): Promise<void> => {
@@ -13,7 +13,7 @@ const seed = async (): Promise<void> => {
           email: `user+${index}@bam.dev`,
           firstName: `User ${String(index)}`,
           lastName: `Lastname ${String(index)}`,
-          password: await createPassword().hash("12345678"),
+          password: await createPasswordService().hash("12345678"),
           userGroup: JSON.stringify({
             user: true,
             admin: index === 1 ? true : false,

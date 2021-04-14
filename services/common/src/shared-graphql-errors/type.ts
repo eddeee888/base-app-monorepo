@@ -5,5 +5,5 @@ export type ClientApolloErrorCode = ServerApolloErrorCode | "NETWORK_ERROR" | "U
 export interface ClientApolloError {
   code: ClientApolloErrorCode;
   message?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }

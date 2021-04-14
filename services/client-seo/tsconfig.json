@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "rootDir": ".",
+    "baseUrl": ".",
     "target": "es5",
     "lib": ["es5", "es6", "dom", "esnext.asynciterable"],
     "module": "esnext",
     "moduleResolution": "node",
     "jsx": "preserve",
     "noEmit": true,
-
     "alwaysStrict": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
@@ -26,7 +26,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noUnusedLocals": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "paths": {
+      "~/*": ["./src/*"]
+    }
   },
   "include": ["next-env.d.ts", "./src"],
   "exclude": ["node_modules"]
