@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, FunctionComponent } from "react";
 import { Grid } from "@material-ui/core";
 import FormError from "~/common/shared-frontend-components/FormError";
 import FormikTextInput from "~/common/shared-frontend-components/Formik/FormikTextInput";
@@ -16,7 +16,7 @@ export interface LoginFormProps {
   onCompleted: () => void;
 }
 
-const LoginForm: React.FunctionComponent<LoginFormProps> = ({ redirectDestination, onCompleted }) => {
+const LoginForm: FunctionComponent<LoginFormProps> = ({ redirectDestination, onCompleted }) => {
   const [generalError, setGeneralError] = useState("");
   const [post, { loading }] = usePost({
     url: generateUrlXhrLogin(),

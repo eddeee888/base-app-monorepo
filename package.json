@@ -50,9 +50,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "concurrently": "^5.1.0"
-  },
-  "resolutions": {
-    "@testing-library/dom": "7.24.4"
+    "concurrently": "6.0.2"
   }
 }

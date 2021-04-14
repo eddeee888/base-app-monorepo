@@ -1,21 +1,21 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useViewerQuery, Viewer_UserFragment } from "./ViewerProvider.generated";
+import { ReactElement, createContext, useContext, useState, useEffect, Dispatch, SetStateAction, ReactNode } from "react";
+import { useViewerQuery, ViewerUserFragment } from "./ViewerProvider.generated";
 import Error500 from "~/common/components/Error500";
 import Spinner from "~/common/shared-ui/Spinner";
 
-export type Viewer = Omit<Viewer_UserFragment, "__typename">;
+export type Viewer = Omit<ViewerUserFragment, "__typename">;
 export type SetViewerFn = (viewer: Viewer) => void;
 export type SetViewerAvatarFn = (avatar?: string | null) => void;
 export type ClearViewerFn = () => void;
 
 interface ViewerContextValue {
   viewer: Viewer | null;
-  setViewerValue: React.Dispatch<React.SetStateAction<Viewer | null>>;
+  setViewerValue: Dispatch<SetStateAction<Viewer | null>>;
 }
 
 interface ContextProps {
   value?: ViewerContextValue;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 interface UseViewerResult {
   viewer: Viewer | null;
@@ -26,9 +26,9 @@ interface UseViewerResult {
   isLoggedIn: boolean;
 }
 
-const ViewerContext = React.createContext<ViewerContextValue | undefined>(undefined);
+const ViewerContext = createContext<ViewerContextValue | undefined>(undefined);
 
-const ViewerProvider = (props: ContextProps): React.ReactElement => {
+const ViewerProvider = (props: ContextProps): ReactElement => {
   const [viewer, setViewerValue] = useState<Viewer | null>(null);
   const { data, loading, error } = useViewerQuery();
   useEffect(() => {

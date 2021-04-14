@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent, useState, useRef, MouseEvent, KeyboardEvent } from "react";
 import { Popper, Grow, ClickAwayListener, MenuList, MenuItem, Paper } from "@material-ui/core";
 import Avatar from "~/common/shared-ui/Avatar";
 import { Viewer } from "~/common/components/ViewerProvider";
@@ -10,16 +10,17 @@ interface LoggedInMenuProps {
   viewer: Viewer;
 }
 
-const LoggedInMenu: React.FunctionComponent<LoggedInMenuProps> = ({ viewer }) => {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLButtonElement>(null);
+const LoggedInMenu: FunctionComponent<LoggedInMenuProps> = ({ viewer }) => {
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef<HTMLButtonElement>(null);
 
-  const handleToggle = (event: React.MouseEvent<EventTarget, MouseEvent>): void => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleToggle = (event: any): void => {
     event.preventDefault();
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event: React.MouseEvent<EventTarget>): void => {
+  const handleClose = (event: MouseEvent<EventTarget>): void => {
     if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
     }
@@ -27,7 +28,7 @@ const LoggedInMenu: React.FunctionComponent<LoggedInMenuProps> = ({ viewer }) =>
     setOpen(false);
   };
 
-  const handleListKeyDown = (event: React.KeyboardEvent): void => {
+  const handleListKeyDown = (event: KeyboardEvent): void => {
     if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);

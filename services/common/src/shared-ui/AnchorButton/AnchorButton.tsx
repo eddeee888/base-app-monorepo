@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import { css } from "emotion";
 import { Link, LinkProps, Box, CircularProgress } from "@material-ui/core";
 import { primaryFont } from "../../shared-styles/fonts";
@@ -9,7 +9,7 @@ export type AnchorButtonProps = Omit<Omit<LinkProps<"button">, "component">, "hr
   showSpinner?: boolean;
 };
 
-const AnchorButton = React.forwardRef<HTMLButtonElement, AnchorButtonProps>(function InnerAnchorButton(props, ref) {
+const AnchorButton = forwardRef<HTMLButtonElement, AnchorButtonProps>(function InnerAnchorButton(props, ref) {
   const { showSpinner, disabled, children, ...rest } = props;
 
   const buttonClassName = css`

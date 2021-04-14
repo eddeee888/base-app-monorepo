@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode, FunctionComponent } from "react";
 import Main from "../shared-ui/Main";
 import MainContent from "../shared-ui/MainContent";
 import Block from "../shared-ui/Block";
@@ -7,10 +7,10 @@ import StandardSpace from "../shared-ui/StandardSpace";
 
 interface PageError404Props {
   imageSrc: string;
-  link?: React.ReactNode;
+  link?: ReactNode;
 }
 
-const Error404: React.FunctionComponent<PageError404Props> = ({ link, imageSrc }) => {
+const Error404: FunctionComponent<PageError404Props> = ({ link, imageSrc }) => {
   return (
     <Main fullViewPortHeight>
       <MainContent size="xs">

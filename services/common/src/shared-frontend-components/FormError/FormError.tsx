@@ -1,8 +1,8 @@
-import React from "react";
+import { FunctionComponent, ReactNode } from "react";
 import { Typography } from "@material-ui/core";
 
 export interface FormErrorProps {
-  error: React.ReactNode;
+  error: ReactNode;
 }
 
 type CheckIfErrorFn = (error?: boolean, touched?: boolean) => boolean;
@@ -14,7 +14,7 @@ export const checkIfError: CheckIfErrorFn = (error, touched) => {
   return false;
 };
 
-const FormError: React.FunctionComponent<FormErrorProps> = ({ error }) => {
+const FormError: FunctionComponent<FormErrorProps> = ({ error }) => {
   if (!error) {
     return null;
   }

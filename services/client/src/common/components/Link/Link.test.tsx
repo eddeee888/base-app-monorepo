@@ -1,4 +1,3 @@
-import React from "react";
 import { MemoryRouter } from "react-router-dom";
 import Link from "./Link";
 import { render, screen } from "@testing-library/react";

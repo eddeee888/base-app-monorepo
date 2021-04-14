@@ -1,5 +1,5 @@
+import { FunctionComponent } from "react";
 import { CircularProgress, Grid } from "@material-ui/core";
-import React from "react";
 import Main from "../Main";
 import MainContent from "../MainContent";
 
@@ -7,7 +7,7 @@ interface Props {
   size?: "default" | "fullPage" | "fullWidth";
 }
 
-const Spinner: React.FunctionComponent<Props> = ({ size = "default" }) => {
+const Spinner: FunctionComponent<Props> = ({ size = "default" }) => {
   if (size === "fullPage") {
     return (
       <Main fullViewPortHeight>

@@ -1,4 +1,5 @@
-import React, { ErrorInfo } from "react";
+import { ReactNode } from "react";
+import { Component, ErrorInfo } from "react";
 import Error500 from "~/common/components/Error500";
 
 interface State {
@@ -6,7 +7,7 @@ interface State {
   errorInfo: ErrorInfo | null;
 }
 
-class ErrorBoundary extends React.Component<Record<string, unknown>, State> {
+class ErrorBoundary extends Component<Record<string, unknown>, State> {
   constructor(props: Record<string, unknown>) {
     super(props);
     this.state = { error: null, errorInfo: null };
@@ -19,7 +20,7 @@ class ErrorBoundary extends React.Component<Record<string, unknown>, State> {
     });
   }
 
-  render(): React.ReactNode {
+  render(): ReactNode {
     const { children } = this.props;
     const { error } = this.state;
     if (error) {

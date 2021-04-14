@@ -1,20 +1,20 @@
-import React, { useState, useContext, useCallback } from "react";
+import { createContext, useState, useContext, useCallback, ReactNode, Dispatch, SetStateAction, FunctionComponent } from "react";
 
 export interface LayoutContextValue {
   header: {
     isVisible: boolean;
-    leftComponent: React.ReactNode | null;
-    setLeftComponent: React.Dispatch<React.SetStateAction<React.ReactNode | null>>;
+    leftComponent: ReactNode | null;
+    setLeftComponent: Dispatch<SetStateAction<ReactNode | null>>;
     show: () => void;
     hide: () => void;
   };
 }
 
-const context = React.createContext<LayoutContextValue | null>(null);
+const context = createContext<LayoutContextValue | null>(null);
 
-export const LayoutProvider: React.FunctionComponent = ({ children }) => {
+export const LayoutProvider: FunctionComponent = ({ children }) => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [leftComponent, setLeftComponent] = useState<React.ReactNode | null>(null);
+  const [leftComponent, setLeftComponent] = useState<ReactNode | null>(null);
   const showHeader = useCallback((): void => setIsHeaderVisible(true), [setIsHeaderVisible]);
   const hideHeader = useCallback((): void => setIsHeaderVisible(false), [setIsHeaderVisible]);
 

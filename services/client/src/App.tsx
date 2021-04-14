@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense, FunctionComponent } from "react";
 import { Route, Switch } from "react-router-dom";
 import ErrorBoundary from "~/common/components/ErrorBoundary";
 import Spinner from "~/common/shared-ui/Spinner";
@@ -9,7 +9,7 @@ import { patternMe } from "~/routes/me/patternMe";
 const Me = lazy(() => import("~/pages/Me"));
 const PageNotFound = lazy(() => import("~/pages/PageNotFound"));
 
-const App: React.FunctionComponent = () => (
+const App: FunctionComponent = () => (
   <ErrorBoundary>
     <Header />
     <Suspense fallback={<Spinner size="fullPage" />}>

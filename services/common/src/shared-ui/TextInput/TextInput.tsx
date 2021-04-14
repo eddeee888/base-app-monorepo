@@ -1,6 +1,6 @@
 import { TextField } from "@material-ui/core";
 import { OmittedTextFieldProps } from "../../shared-typings/Omitted";
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 
 export type TextInputProps = OmittedTextFieldProps;
 

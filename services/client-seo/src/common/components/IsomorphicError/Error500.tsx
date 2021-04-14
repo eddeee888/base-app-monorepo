@@ -1,7 +1,7 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import ErrorPage from "~/pages/_error";
 
-const Error500: React.FunctionComponent = () => {
+const Error500: FunctionComponent = () => {
   return <ErrorPage statusCode={500} />;
 };
 

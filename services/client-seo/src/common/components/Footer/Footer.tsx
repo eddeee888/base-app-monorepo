@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import { css } from "emotion";
 import { Box, Grid } from "@material-ui/core";
 import Text from "~/common/shared-ui/Text";
@@ -26,7 +26,7 @@ const anchorClassName = css`
   }
 `;
 
-const Footer: React.FunctionComponent = () => {
+const Footer: FunctionComponent = () => {
   return (
     <footer className={footerClassName}>
       <Box paddingY={8}>

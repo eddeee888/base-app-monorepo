@@ -1,6 +1,6 @@
-import { useViewerQuery, Viewer_UserFragment } from "./ViewerQuery.generated";
+import { useViewerQuery, ViewerUserFragment } from "./ViewerQuery.generated";
 
-export type Viewer = Viewer_UserFragment;
+export type Viewer = ViewerUserFragment;
 
 const useViewer = (): Viewer | null => {
   const { loading, error, data } = useViewerQuery();

@@ -5,7 +5,7 @@
     "lib": ["es5", "es6", "dom", "esnext.asynciterable"],
     "target": "es5",
     "module": "esnext",
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "moduleResolution": "node",
     "noEmit": true,
 

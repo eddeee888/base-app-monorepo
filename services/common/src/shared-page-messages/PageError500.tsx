@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent, ReactNode } from "react";
 import Main from "../shared-ui/Main";
 import MainContent from "../shared-ui/MainContent";
 import Block from "../shared-ui/Block";
@@ -8,10 +8,10 @@ import StandardSpace from "../shared-ui/StandardSpace";
 
 interface PageError500Props {
   imageSrc: string;
-  link?: React.ReactNode;
+  link?: ReactNode;
 }
 
-const PageError500: React.FunctionComponent<PageError500Props> = ({ link, imageSrc }) => {
+const PageError500: FunctionComponent<PageError500Props> = ({ link, imageSrc }) => {
   return (
     <Main fullViewPortHeight>
       <MainContent size="xs">

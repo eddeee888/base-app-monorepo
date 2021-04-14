@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect, FunctionComponent } from "react";
 import { useLayout } from "./LayoutContext";
 
-const ShowHeader: React.FunctionComponent = () => {
+const ShowHeader: FunctionComponent = () => {
   const {
     header: { isVisible, show },
   } = useLayout();

@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import { Avatar as AvatarMui } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AvatarProps as AvatarMuiProps } from "@material-ui/core/Avatar";
@@ -38,7 +38,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Avatar: React.FunctionComponent<AvatarProps & Omit<AvatarMuiProps, "src">> = ({ size = "sm", src = undefined, ...props }) => {
+const Avatar: FunctionComponent<AvatarProps & Omit<AvatarMuiProps, "src">> = ({ size = "sm", src = undefined, ...props }) => {
   const classNames = useStyles();
 
   if (!src) {

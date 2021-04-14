@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { FunctionComponent } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Main from "~/common/shared-ui/Main";
 import MainContent from "~/common/shared-ui/MainContent";
@@ -12,7 +13,7 @@ import Spinner from "~/common/shared-ui/Spinner";
 import LoginForm from "./LoginForm";
 import Head from "next/head";
 
-const Login: React.FunctionComponent = () => {
+const Login: FunctionComponent = () => {
   const viewer = useViewer();
   const { query } = useRouter();
   const redirectDestination = query.redirect as string;

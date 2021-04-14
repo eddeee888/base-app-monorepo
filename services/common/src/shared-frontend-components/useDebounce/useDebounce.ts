@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 export interface UseDebounceProps<T> {
   initialValue: T;
   duration: number;
 }
 
-const useDebounce = <T>({ initialValue, duration }: UseDebounceProps<T>): [T, T, React.Dispatch<React.SetStateAction<T>>] => {
+const useDebounce = <T>({ initialValue, duration }: UseDebounceProps<T>): [T, T, Dispatch<SetStateAction<T>>] => {
   const [value, setValue] = useState(initialValue);
   const [debouncedValue, setDebouncedValue] = useState(initialValue);
 

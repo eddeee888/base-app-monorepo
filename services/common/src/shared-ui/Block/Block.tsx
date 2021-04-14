@@ -1,11 +1,11 @@
+import { FunctionComponent, ReactNode } from "react";
 import { css, cx } from "emotion";
-import React from "react";
 import { PageSize } from "../../shared-styles/types";
 import { pageSize } from "../../shared-styles/sizes";
 
 export interface BlockProps {
   size: PageSize;
-  children: React.ReactNode;
+  children: ReactNode;
   fullHeight?: boolean;
   fullWidth?: boolean;
   className?: string;
@@ -24,7 +24,7 @@ const fullHeightClassName = css`
   height: 100%;
 `;
 
-const Block: React.FunctionComponent<BlockProps> = ({ size, children, fullHeight, fullWidth = false, className }) => {
+const Block: FunctionComponent<BlockProps> = ({ size, children, fullHeight, fullWidth = false, className }) => {
   const maxWidthClassName = css`
     max-width: ${pageSize[size].max}px;
   `;

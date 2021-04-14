@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, FunctionComponent } from "react";
 import { useRouter } from "next/router";
 import Main from "~/common/shared-ui/Main";
 import MainContent from "~/common/shared-ui/MainContent";
@@ -14,7 +14,7 @@ import SignupForm from "./SignupForm";
 import breakpoints from "~/common/shared-styles/breakpoints";
 import Head from "next/head";
 
-const Signup: React.FunctionComponent = () => {
+const Signup: FunctionComponent = () => {
   const viewer = useViewer();
   const isMobile = useMediaQuery(breakpoints.down("sm"));
   const { query } = useRouter();

@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode, FunctionComponent } from "react";
 import { css } from "emotion";
 import { Typography } from "@material-ui/core";
 import { TypographyProps } from "@material-ui/core/Typography";
@@ -7,7 +7,7 @@ import { textSuccessColor, textColor } from "../../shared-styles/colors";
 import { spacingPx } from "../../shared-styles/spacings";
 
 export interface TextSuccessProps extends TypographyProps {
-  children: React.ReactNode;
+  children: ReactNode;
   textColor?: "success" | "normal";
 }
 
@@ -28,7 +28,7 @@ const textColorNormal = css`
   color: ${textColor};
 `;
 
-const TextSuccess: React.FunctionComponent<TextSuccessProps> = ({ textColor = "success", children, ...props }) => (
+const TextSuccess: FunctionComponent<TextSuccessProps> = ({ textColor = "success", children, ...props }) => (
   <Typography {...props} variant="body1" className={successClassName}>
     <CheckCircleIcon className={successIconClassName} />
     <span className={textColor === "success" ? textColorSuccess : textColorNormal}>{children}</span>
