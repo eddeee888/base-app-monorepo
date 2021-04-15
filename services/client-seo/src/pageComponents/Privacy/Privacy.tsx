@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import Main from "~/common/shared-ui/Main";
 import MainContent from "~/common/shared-ui/MainContent";
 import Paper from "~/common/shared-ui/Paper";
@@ -7,7 +7,7 @@ import Text from "~/common/shared-ui/Text";
 import StandardSpace from "~/common/shared-ui/StandardSpace";
 import Footer from "~/common/components/Footer";
 
-const Privacy: React.FunctionComponent = () => {
+const Privacy: FunctionComponent = () => {
   return (
     <>
       <Main>

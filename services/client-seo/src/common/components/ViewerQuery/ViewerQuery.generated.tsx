@@ -2,11 +2,14 @@ import * as Types from "../../graphql/types.generated";
 
 import * as Operations from "./ViewerQuery.graphql";
 import * as Apollo from "@apollo/client";
+const defaultOptions = {};
 export type ViewerQueryVariables = Types.Exact<{ [key: string]: never }>;
 
-export type ViewerQuery = { __typename: "Query" } & { me?: Types.Maybe<{ __typename: "User" } & Viewer_UserFragment> };
+export type ViewerQuery = { __typename: "Query" } & {
+  me?: Types.Maybe<{ __typename: "User" } & Pick<Types.User, "id"> & ViewerUserFragment>;
+};
 
-export type Viewer_UserFragment = { __typename: "User" } & Pick<Types.User, "id" | "displayName" | "avatar">;
+export type ViewerUserFragment = { __typename: "User" } & Pick<Types.User, "id" | "displayName" | "avatar">;
 
 /**
  * __useViewerQuery__
@@ -24,10 +27,12 @@ export type Viewer_UserFragment = { __typename: "User" } & Pick<Types.User, "id"
  * });
  */
 export function useViewerQuery(baseOptions?: Apollo.QueryHookOptions<ViewerQuery, ViewerQueryVariables>) {
-  return Apollo.useQuery<ViewerQuery, ViewerQueryVariables>(Operations.Viewer, baseOptions);
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<ViewerQuery, ViewerQueryVariables>(Operations.Viewer, options);
 }
 export function useViewerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ViewerQuery, ViewerQueryVariables>) {
-  return Apollo.useLazyQuery<ViewerQuery, ViewerQueryVariables>(Operations.Viewer, baseOptions);
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ViewerQuery, ViewerQueryVariables>(Operations.Viewer, options);
 }
 export type ViewerQueryHookResult = ReturnType<typeof useViewerQuery>;
 export type ViewerLazyQueryHookResult = ReturnType<typeof useViewerLazyQuery>;

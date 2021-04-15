@@ -1,4 +1,3 @@
-import React from "react";
 import { FormikBag } from "../types";
 import prepareFieldProps from "../prepareFieldProps";
 import FormError from "../../FormError";

@@ -1,10 +1,10 @@
+import { FunctionComponent, ReactNode } from "react";
 import { css, cx } from "emotion";
-import React from "react";
 import { headerHeight, pageSize } from "../../shared-styles/sizes";
 import breakpoints from "../../shared-styles/breakpoints";
 
 export interface MainProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   fullViewPortHeight?: boolean;
   fullWidth?: boolean;
@@ -25,7 +25,7 @@ const contentFullWidthClassName = css`
   width: 100%;
 `;
 
-const Main: React.FunctionComponent<MainProps> = ({ children, className, fullViewPortHeight, fullWidth = false, hasHeader = true }) => {
+const Main: FunctionComponent<MainProps> = ({ children, className, fullViewPortHeight, fullWidth = false, hasHeader = true }) => {
   const mainTagClassName = css`
     ${hasHeader ? `margin-top: ${headerHeight};` : ""}
     width: 100%;

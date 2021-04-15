@@ -1,6 +1,6 @@
-import React, { ImgHTMLAttributes } from "react";
+import { ImgHTMLAttributes, FunctionComponent } from "react";
 
-const Logo: React.FunctionComponent<ImgHTMLAttributes<HTMLImageElement>> = ({ ...props }) => (
+const Logo: FunctionComponent<ImgHTMLAttributes<HTMLImageElement>> = ({ ...props }) => (
   <img alt="" src="https://picsum.photos/60/60" {...props} />
 );
 

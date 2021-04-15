@@ -1,4 +1,3 @@
-import React from "react";
 import { FormikBag } from "../types";
 import { OmittedFormikTextFieldProps } from "../../../shared-typings/Omitted";
 import prepareFieldProps from "../prepareFieldProps";

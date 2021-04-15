@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent, ReactNode } from "react";
 import Main from "../shared-ui/Main";
 import MainContent from "../shared-ui/MainContent";
 import Block from "../shared-ui/Block";
@@ -7,10 +7,10 @@ import StandardSpace from "../shared-ui/StandardSpace";
 
 interface PageErrorGenericProps {
   imageSrc: string;
-  link?: React.ReactNode;
+  link?: ReactNode;
 }
 
-const PageErrorGeneric: React.FunctionComponent<PageErrorGenericProps> = ({ link, imageSrc }) => {
+const PageErrorGeneric: FunctionComponent<PageErrorGenericProps> = ({ link, imageSrc }) => {
   return (
     <Main fullViewPortHeight>
       <MainContent size="xs">

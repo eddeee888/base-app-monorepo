@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import { NextRouter } from "next/router";
 
@@ -20,8 +20,11 @@ export const mockRouter: NextRouter = {
     emit: jest.fn(),
   },
   isFallback: false,
+  isLocaleDomain: true,
+  isPreview: true,
+  isReady: true,
 };
 
-export const NextMockedRouterProvider: React.FunctionComponent<{ value: Partial<NextRouter> }> = ({ children, value }) => {
+export const NextMockedRouterProvider: FunctionComponent<{ value: Partial<NextRouter> }> = ({ children, value }) => {
   return <RouterContext.Provider value={{ ...mockRouter, ...value }}>{children}</RouterContext.Provider>;
 };

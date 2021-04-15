@@ -1,4 +1,4 @@
-import React, { ErrorInfo } from "react";
+import { ErrorInfo, Component, ReactNode } from "react";
 import PageErrorGeneric from "~/common/shared-page-messages/PageErrorGeneric";
 import generateUrlClientSeoStaticImage from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
 import Anchor from "~/common/shared-ui/Anchor";
@@ -10,7 +10,7 @@ interface State {
   errorInfo: ErrorInfo | null;
 }
 
-class ErrorBoundary extends React.Component<Record<string, unknown>, State> {
+class ErrorBoundary extends Component<Record<string, unknown>, State> {
   constructor(props: Record<string, unknown>) {
     super(props);
     this.state = { error: null, errorInfo: null };
@@ -23,7 +23,7 @@ class ErrorBoundary extends React.Component<Record<string, unknown>, State> {
     });
   }
 
-  render(): React.ReactNode {
+  render(): ReactNode {
     const { children } = this.props;
     const { error } = this.state;
     if (error) {

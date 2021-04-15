@@ -1,10 +1,11 @@
 query Viewer {
   me {
-    ...Viewer_user
+    id
+    ...ViewerUser
   }
 }
 
-fragment Viewer_user on User {
+fragment ViewerUser on User {
   id
   displayName
   avatar

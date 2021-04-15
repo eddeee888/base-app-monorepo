@@ -1,4 +1,4 @@
-import React, { createContext, useState, FunctionComponent, useCallback, useContext } from "react";
+import { createContext, useState, FunctionComponent, useCallback, useContext } from "react";
 
 export interface BeforeunloadValues {
   isActivated: boolean;

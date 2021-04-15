@@ -1,7 +1,7 @@
-declare module "*.svg" {
-  import React from "react";
+import { FunctionComponent } from "react";
 
-  const Component: React.FunctionComponent<{ width?: string; height?: string; viewBox?: string }>;
+declare module "*.svg" {
+  const Component: FunctionComponent<{ width?: string; height?: string; viewBox?: string }>;
 
   export default Component;
 }

@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import DuplicateIcon from "@material-ui/icons/FileCopy";
 import { IconButtonProps } from "../types";

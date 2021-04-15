@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import MainContent from "../shared-ui/MainContent";
 import Main from "../shared-ui/Main";
 import Block from "../shared-ui/Block";
@@ -11,7 +11,7 @@ interface MaintenancePageProps {
   imageSrc: string;
 }
 
-const MaintenancePage: React.FunctionComponent<MaintenancePageProps> = ({ appName = "We", imageSrc }) => {
+const MaintenancePage: FunctionComponent<MaintenancePageProps> = ({ appName = "We", imageSrc }) => {
   return (
     <Main fullViewPortHeight>
       <MainContent size="xs">

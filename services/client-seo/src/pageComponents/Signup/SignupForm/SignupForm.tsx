@@ -1,3 +1,4 @@
+import { useState, FunctionComponent } from "react";
 import { Grid } from "@material-ui/core";
 import { usePost } from "~/common/shared-frontend-components/usePost";
 import FormError from "~/common/shared-frontend-components/FormError";
@@ -8,7 +9,6 @@ import StandardSpace from "~/common/shared-ui/StandardSpace";
 import Text from "~/common/shared-ui/Text";
 import { signupSchema } from "~/common/shared-validations/schemas/signupSchema";
 import { useFormik } from "formik";
-import React, { useState } from "react";
 import LinkLogin from "~/routes/login/LinkLogin";
 import generateUrlPrivacyPolicy from "~/routes/privacyPolicy/generateUrlPrivacyPolicy";
 import generateUrlTermAndConditions from "~/routes/termAndConditions/generateUrlTermAndConditions";
@@ -19,7 +19,7 @@ export interface SignupFormProps {
   onCompleted: () => void;
 }
 
-const SignupForm: React.FunctionComponent<SignupFormProps> = ({ redirectDestination, onCompleted }) => {
+const SignupForm: FunctionComponent<SignupFormProps> = ({ redirectDestination, onCompleted }) => {
   const [generalError, setGeneralError] = useState("");
   const [post, { loading }] = usePost({
     url: generateUrlXhrSignup(),

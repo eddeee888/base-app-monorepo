@@ -2,7 +2,7 @@ schema:
   - ./src/app/graph/schemas/*.graphql
 hooks:
   afterAllFileWrite:
-    - eslint --fix --config .eslintrc.js
+    - eslint --fix --config .eslintrc.json
     - prettier --write --config .prettierrc.json
 generates:
   ./src/libs/graph/resolvers.generated.ts:

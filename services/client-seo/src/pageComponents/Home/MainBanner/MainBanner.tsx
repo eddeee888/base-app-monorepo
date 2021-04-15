@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import { css } from "emotion";
 import { Grid, Box } from "@material-ui/core";
 import H1 from "~/common/shared-ui/H1";
@@ -21,7 +21,7 @@ const h1ClassName = css`
   color: ${primaryBackgroundColor};
 `;
 
-const MainBanner: React.FunctionComponent = () => {
+const MainBanner: FunctionComponent = () => {
   return (
     <Grid container className={containerClassName} alignItems="center" justify="center">
       <Block size="sm">

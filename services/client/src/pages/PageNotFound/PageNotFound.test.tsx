@@ -1,4 +1,3 @@
-import React from "react";
 import PageNotFound from "./PageNotFound";
 import { render, screen } from "@testing-library/react";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { NextComponentType, NextPageContext } from "next";
 import Head from "next/head";
 import PageError404 from "~/common/shared-page-messages/PageError404";

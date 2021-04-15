@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode, FunctionComponent } from "react";
 import { css } from "emotion";
 import { Typography } from "@material-ui/core";
 import { TypographyProps } from "@material-ui/core/Typography";
@@ -7,7 +7,7 @@ import { textWarningColor } from "../../shared-styles/colors";
 import { spacingPx } from "../../shared-styles/spacings";
 
 interface Props extends TypographyProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const warningClassName = css`
@@ -19,7 +19,7 @@ const iconClassName = css`
   margin-right: ${spacingPx(1) / 2}px;
 `;
 
-const TextWarning: React.FunctionComponent<Props> = ({ children, ...props }) => (
+const TextWarning: FunctionComponent<Props> = ({ children, ...props }) => (
   <Typography {...props} variant="body1" className={warningClassName}>
     <Warning className={iconClassName} />
     <span>{children}</span>

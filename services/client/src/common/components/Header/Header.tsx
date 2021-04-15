@@ -1,5 +1,5 @@
+import { FunctionComponent } from "react";
 import { css } from "emotion";
-import React from "react";
 import Button from "~/common/shared-ui/Button";
 import Logo from "~/common/shared-ui/Logo";
 import { useViewer } from "~/common/components/ViewerProvider";
@@ -34,7 +34,7 @@ const logoClassName = css`
   display: block;
 `;
 
-const Header: React.FunctionComponent = () => {
+const Header: FunctionComponent = () => {
   const { viewer } = useViewer();
   const {
     header: { isVisible },

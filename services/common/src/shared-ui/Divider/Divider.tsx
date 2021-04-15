@@ -1,6 +1,6 @@
 import { Box, Divider as MUIDivider } from "@material-ui/core";
 import { DividerProps as MUIDividerProps } from "@material-ui/core/Divider";
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { SpacingValue } from "../../shared-styles/types";
 
 interface DividerProps extends MUIDividerProps {
