@@ -48,7 +48,7 @@ services:
     build:
       context: ./services/server
       target: base
-    command: yarn start
+    command: yarn start:app
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     environment:

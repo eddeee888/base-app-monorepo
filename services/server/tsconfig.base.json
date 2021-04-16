@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["es2016", "esnext.asynciterable"],
     "target": "es2016",
     "module": "commonjs",
     "sourceMap": true,
@@ -10,17 +11,6 @@
     "noUnusedLocals": true,
     "noImplicitAny": true
   },
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.crons.json"
-    },
-    {
-      "path": "./tsconfig.libs.json"
-    }
-  ],
   "include": [],
   "exclude": ["node_modules"]
 }

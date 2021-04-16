@@ -2,9 +2,7 @@ const path = require("path");
 const glob = require("glob");
 const baseConfig = require("./webpack.base");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const nodeExternals = require("webpack-node-externals");
 
 const { NODE_ENV = "development" } = process.env;
 
@@ -29,29 +27,16 @@ module.exports = {
       return { ...prevHandlers, [targetFilename]: file };
     }, {});
 
-    return { ...handlers, jobs: "./src/crons/jobs.ts" };
+    return { ...handlers, jobs: path.resolve(__dirname, "src", "crons", "jobs.ts") };
   })(),
   output: {
-    path: path.resolve(__dirname, "build/crons"),
+    path: path.resolve(__dirname, "build", "crons"),
     filename: "[name].js",
     libraryTarget: "commonjs2",
   },
   resolve: {
-    plugins: [new TsconfigPathsPlugin()],
+    plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.crons.json" })],
     extensions: [".mjs", ".ts", ".js"],
   },
   plugins: [new CleanWebpackPlugin()],
-  externals: [
-    nodeExternals(),
-    ((fileRegex, shouldRun) => {
-      return function (context, request, callback) {
-        if (shouldRun) {
-          if (fileRegex.test(request)) {
-            return callback(null, request);
-          }
-        }
-        callback();
-      };
-    })(/^\@libs/, !isDevelopment), // If is NOT development (i.e. production), we treat all `@libs*` modules as external because in prod they come from lambda layer
-  ],
 };

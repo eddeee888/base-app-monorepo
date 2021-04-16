@@ -23,7 +23,7 @@ jobs:
           node-version: 12.x
 
       - name: Copy common files
-        run: yarn common:copy
+        run: yarn copy:common
 
       - name: Install packages
         run: yarn --frozen-lockfile
@@ -35,7 +35,7 @@ jobs:
         run: ./scripts/ci/check-generated-graphql-codegen.sh
 
       - name: Generate prisma
-        run: yarn prisma:generate:prod
+        run: yarn prisma:generate:native
 
       - name: Lint
         run: yarn lint
@@ -53,7 +53,7 @@ jobs:
           node-version: 12.x
 
       - name: Copy common files
-        run: yarn common:copy
+        run: yarn copy:common
 
       - name: Install packages
         run: yarn --frozen-lockfile
@@ -74,7 +74,7 @@ jobs:
           node-version: 12.x
 
       - name: Copy common files
-        run: yarn common:copy
+        run: yarn copy:common
 
       - name: Install packages
         run: yarn --frozen-lockfile
@@ -95,13 +95,13 @@ jobs:
           node-version: 12.x
 
       - name: Copy common files
-        run: yarn common:copy
+        run: yarn copy:common
 
       - name: Install packages
         run: yarn --frozen-lockfile
 
       - name: Generate prisma
-        run: yarn prisma:generate:prod
+        run: yarn prisma:generate:native
 
       - name: Build server main app
         run: yarn build:server:app
@@ -125,7 +125,7 @@ jobs:
           node-version: 12.x
 
       - name: Copy common files
-        run: yarn common:copy
+        run: yarn copy:common
 
       - name: Install packages
         run: yarn --frozen-lockfile
@@ -152,7 +152,7 @@ jobs:
           node-version: 12.x
 
       - name: Copy common files
-        run: yarn common:copy
+        run: yarn copy:common
 
       - name: Test server app
         run: yarn test:server:app

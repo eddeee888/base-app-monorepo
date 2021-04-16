@@ -7,14 +7,14 @@ RUN apk update \
   && rm -rf /var/cache/apk/*
 COPY . . 
 RUN yarn install --frozen-lockfile
-RUN yarn prisma:generate:dev
+RUN yarn prisma:generate:native
 # TODO:HACK Hack to get full-icu working in node 12. This should be removed when node 13 is supported in lambda
 RUN yarn add full-icu
 ENV NODE_ICU_DATA=/usr/src/app/node_modules/full-icu
 
 FROM base AS builder
 WORKDIR /usr/src/app
-RUN NODE_ENV=production yarn build
+RUN NODE_ENV=production yarn build:app
 
 FROM node:12.18.0-alpine3.11 as final
 WORKDIR /usr/src/app 
@@ -25,5 +25,5 @@ COPY --from=builder /usr/src/app/build ./build
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/prisma ./prisma
 RUN yarn global add pm2
-CMD ["serve:prod"]
+CMD ["serve:app:prod"]
 ENTRYPOINT ["yarn"]

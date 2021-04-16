@@ -61,13 +61,13 @@ Read more about [route-codegen](https://github.com/eddeee888/route-codegen)
 To keep things simple, we do not share common components/functions/settings via published npm packages. Instead, `/common` serves as the place where commons live. When changes happen in source folders, they would get copied into target folders. Settings can be found and extended [here](./common/utils/config.js#L7-L17). To copy files from the common to destinations, run the following:
 
 ```
-$ bam ws common:copy
+$ bam ws copy:common
 ```
 
 Or run the following to watch for changes:
 
 ```
-$ bam ws common:watch
+$ bam ws watch:common
 ```
 
 #### GraphQL codegen

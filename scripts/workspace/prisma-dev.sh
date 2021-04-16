@@ -20,15 +20,15 @@ function prisma-dev() {
       return 0
     ;;
     "generate")
-      docker-compose exec server yarn prisma:generate:dev
-      docker-compose exec server-worker yarn prisma:generate:dev
-      yarn prisma:generate:dev
+      docker-compose exec server yarn prisma:generate:native
+      docker-compose exec server-worker yarn prisma:generate:native
+      yarn prisma:generate:native
       return 0
     ;;
     'migrate')
       docker-compose exec server yarn prisma:migrate:dev
-      docker-compose exec server-worker yarn prisma:generate:dev
-      yarn prisma:generate:dev
+      docker-compose exec server-worker yarn prisma:generate:native
+      yarn prisma:generate:native
       return 0
     ;;
   esac

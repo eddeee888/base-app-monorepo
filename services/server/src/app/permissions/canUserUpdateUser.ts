@@ -1,7 +1,7 @@
 import { hasGroup } from "@libs/models/user";
 import { PrismaClient } from "@prisma/client";
 
-interface CanUserUpdateUserParams {
+export interface CanUserUpdateUserParams {
   prisma: PrismaClient;
   userId: number;
   targetUserId: number;
