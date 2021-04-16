@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "./src",
+    "baseUrl": "./src/app",
+    "paths": {
+      "@libs/*": ["../libs/*"],
+      "~/*": ["./*"]
+    },
+    "outDir": "./build-tsc/app",
+    "tsBuildInfoFile": "./build-tsc/app/tsconfig.app.tsbuildinfo"
+  },
+  "include": ["./src/app/**/*", "./src/libs/**/*"]
+}

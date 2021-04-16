@@ -6,11 +6,11 @@ function dc_down() {
 }
 
 function dc_run() {
-  echo "*** run ${@:2}"
+  echo "*** Run ${@:2}"
   docker-compose -f $1 run ${@:2}
 }
 
 function dc_build() {
-  echo "*** build $2"
+  echo "*** Build $2"
   docker-compose -f $1 build --no-cache ${2}
 }

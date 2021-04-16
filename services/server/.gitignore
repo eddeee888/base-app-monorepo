@@ -19,6 +19,7 @@ src/libs/shared-*
 
 # production
 /build
+/build-tsc
 
 # misc
 .DS_Store

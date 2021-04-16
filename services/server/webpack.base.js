@@ -1,4 +1,3 @@
-const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const nodeExternals = require("webpack-node-externals");
 
 const { NODE_ENV = "development" } = process.env;
@@ -12,10 +11,6 @@ module.exports = {
     ignored: /node_modules/,
   },
   target: "node",
-  resolve: {
-    plugins: [new TsconfigPathsPlugin()],
-    extensions: [".mjs", ".ts", ".js"],
-  },
   externals: [nodeExternals()],
   module: {
     rules: [

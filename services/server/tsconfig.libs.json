@@ -1,21 +1,15 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["es2016", "esnext.asynciterable"],
+    "composite": true,
+    "rootDir": "./src/libs",
     "baseUrl": "./src/libs",
-    "outDir": "./build/libs",
     "paths": {
-      "@libs/*": ["*"]
+      "@libs/*": ["./*"]
     },
-    "target": "es2016",
-    "module": "commonjs",
-    "strict": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noImplicitAny": true
+    "outDir": "./build-tsc/libs",
+    "tsBuildInfoFile": "./build-tsc/libs/tsconfig.libs.tsbuildinfo"
   },
   "include": ["./src/libs/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["./src/libs/shared-*"]
 }

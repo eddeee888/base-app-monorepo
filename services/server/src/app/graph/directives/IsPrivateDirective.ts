@@ -1,7 +1,7 @@
 import { SchemaDirectiveVisitor } from "graphql-tools";
 import { ResolverContext } from "@libs/graph/types";
 import { GraphQLField, defaultFieldResolver } from "graphql";
-import { AuthenticationError } from "apollo-server";
+import { AuthenticationError } from "apollo-server-express";
 import permissions from "~/permissions";
 
 enum AcceptableParentType {

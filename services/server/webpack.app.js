@@ -6,20 +6,25 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   ...baseConfig,
-  entry: "./src/app/web/server.ts",
+  entry: path.resolve(__dirname, "src", "app", "web", "server.ts"),
   output: {
-    path: path.resolve(__dirname, "build/app/web"),
+    path: path.resolve(__dirname, "build", "app", "web"),
     filename: "server.js",
     libraryTarget: "commonjs2",
   },
   resolve: {
-    plugins: [new TsconfigPathsPlugin()],
+    plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.app.json" })],
     extensions: [".mjs", ".ts", ".js"],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new CopyPlugin({
-      patterns: [{ from: "src/app/graph/schemas/*.graphql", to: "../graph/schemas/[name].[ext]" }],
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src", "app", "graph", "schemas", "*.graphql"),
+          to: path.resolve(__dirname, "build", "app", "graph", "schemas", "[name].[ext]"),
+        },
+      ],
     }),
   ],
 };

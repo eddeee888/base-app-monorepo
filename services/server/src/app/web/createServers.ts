@@ -39,7 +39,7 @@ export interface CreateServersConfig {
 
 interface Servers {
   httpServer: http.Server;
-  server: Express;
+  expressServer: Express;
   apolloServer: ApolloServer;
 }
 
@@ -94,37 +94,37 @@ const createServers = ({ stage, corsOptions, services }: CreateServersConfig): S
     },
   });
 
-  const server = express();
+  const expressServer = express();
 
   // Security headers
   if (stage !== "test") {
-    server.use(
+    expressServer.use(
       helmet.contentSecurityPolicy({
         directives: {
           defaultSrc: ["frame-ancestors 'none'"],
         },
       })
     );
-    server.use(
+    expressServer.use(
       helmet.hsts({
         maxAge: 63072000,
         includeSubDomains: true,
       })
     );
-    server.use(helmet.noSniff());
-    server.use(helmet.frameguard({ action: "deny" }));
-    server.disable("x-powered-by");
+    expressServer.use(helmet.noSniff());
+    expressServer.use(helmet.frameguard({ action: "deny" }));
+    expressServer.disable("x-powered-by");
   }
 
   if (corsOptions) {
-    server.use(corsMiddleware(corsOptions));
+    expressServer.use(corsMiddleware(corsOptions));
   }
-  server.use(bodyParser());
-  server.use(cookieParser());
-  server.use(tokenVerifier({ headers: services.headersService, jwt: services.jwtService }));
+  expressServer.use(bodyParser());
+  expressServer.use(cookieParser());
+  expressServer.use(tokenVerifier({ headers: services.headersService, jwt: services.jwtService }));
 
-  server.get(patternLogout, handleLogout({ headers: services.headersService }));
-  server.post(
+  expressServer.get(patternLogout, handleLogout({ headers: services.headersService }));
+  expressServer.post(
     patternXhrLogin,
     handleXhrLogin({
       prisma: services.prismaClient,
@@ -133,7 +133,7 @@ const createServers = ({ stage, corsOptions, services }: CreateServersConfig): S
       jwt: services.jwtService,
     })
   );
-  server.post(
+  expressServer.post(
     patternXhrSignup,
     handleXhrSignup({
       prisma: services.prismaClient,
@@ -142,21 +142,21 @@ const createServers = ({ stage, corsOptions, services }: CreateServersConfig): S
       password: services.passwordService,
     })
   );
-  server.get("/healthcheck", (req, res) => res.sendStatus(200));
+  expressServer.get("/healthcheck", (req, res) => res.sendStatus(200));
 
-  server.use(errorMiddleware());
+  expressServer.use(errorMiddleware());
 
   apolloServer.applyMiddleware({
-    app: server,
+    app: expressServer,
     cors: corsOptions,
   });
 
-  const httpServer = http.createServer(server);
+  const httpServer = http.createServer(expressServer);
   apolloServer.installSubscriptionHandlers(httpServer);
 
   return {
     httpServer: httpServer,
-    server: server,
+    expressServer: expressServer,
     apolloServer: apolloServer,
   };
 };

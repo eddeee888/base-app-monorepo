@@ -10,7 +10,7 @@ export interface TestServerConfig {
 }
 
 export const setupTestServerConfig = (): TestServerConfig => {
-  const { server, services } = createTestServer();
+  const { expressServer, services } = createTestServer();
 
   const { fixtures } = createTestConfig({
     prisma: services.prismaClient,
@@ -27,7 +27,7 @@ export const setupTestServerConfig = (): TestServerConfig => {
   const internalConfig: any = {};
 
   beforeAll(async (done) => {
-    const instance = await server.listen({ port: 80 });
+    const instance = await expressServer.listen({ port: 80 });
     internalConfig.server = instance;
     done();
   });

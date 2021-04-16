@@ -2,12 +2,12 @@ import { PrismaClient, User } from "@prisma/client";
 import { PasswordService } from "@libs/passwordService";
 import { updateGroup } from "@libs/models/user";
 
-interface CreateNewUserServices {
+export interface CreateNewUserServices {
   prisma: PrismaClient;
   password: PasswordService;
 }
 
-interface CreateNewUserParams {
+export interface CreateNewUserParams {
   email: string;
   firstName: string;
   lastName: string;

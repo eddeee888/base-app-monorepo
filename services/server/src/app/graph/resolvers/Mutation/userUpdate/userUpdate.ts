@@ -1,5 +1,5 @@
 import { MutationResolvers } from "@libs/graph/resolvers.generated";
-import { ForbiddenError } from "apollo-server";
+import { ForbiddenError } from "apollo-server-express";
 import permissions from "~/permissions";
 import { mustParseInt } from "@libs/utils";
 

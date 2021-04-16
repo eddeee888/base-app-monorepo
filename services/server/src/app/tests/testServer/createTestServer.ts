@@ -6,7 +6,7 @@ import { createPasswordService } from "@libs/passwordService";
 import createServers, { CreateServersConfig } from "~/web/createServers";
 
 export interface TestServer {
-  server: Express;
+  expressServer: Express;
   services: CreateServersConfig["services"];
 }
 
@@ -27,14 +27,14 @@ const createTestServer = (): TestServer => {
     jwtService: jwt,
   };
 
-  const { server } = createServers({
+  const { expressServer } = createServers({
     stage: "test",
     corsOptions: undefined,
     services: services,
   });
 
   return {
-    server: server,
+    expressServer: expressServer,
     services: services,
   };
 };
