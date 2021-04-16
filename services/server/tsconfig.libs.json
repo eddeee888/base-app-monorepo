@@ -10,6 +10,5 @@
     "outDir": "./build-tsc/libs",
     "tsBuildInfoFile": "./build-tsc/libs/tsconfig.libs.tsbuildinfo"
   },
-  "include": ["./src/libs/**/*"],
-  "exclude": ["./src/libs/shared-*"]
+  "include": ["./src/libs/**/*"]
 }

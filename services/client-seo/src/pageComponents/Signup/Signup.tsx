@@ -13,6 +13,7 @@ import Spinner from "~/common/shared-ui/Spinner";
 import SignupForm from "./SignupForm";
 import breakpoints from "~/common/shared-styles/breakpoints";
 import Head from "next/head";
+import { publicEnv } from "~/env";
 
 const Signup: FunctionComponent = () => {
   const viewer = useViewer();
@@ -34,11 +35,11 @@ const Signup: FunctionComponent = () => {
   return (
     <>
       <Head>
-        <title>{process.env.NEXT_PUBLIC_APP_NAME} | Sign up</title>
-        <meta name="description" content={`Sign up for ${process.env.NEXT_PUBLIC_APP_NAME}`} />
+        <title>{publicEnv.appName} | Sign up</title>
+        <meta name="description" content={`Sign up for ${publicEnv.appName}`} />
         <meta name="twitter:card" content="summary" />
-        <meta property="og:title" content={`${process.env.NEXT_PUBLIC_APP_NAME}`} />
-        <meta property="og:description" content={`Sign up for ${process.env.NEXT_PUBLIC_APP_NAME}`} />
+        <meta property="og:title" content={`${publicEnv.appName}`} />
+        <meta property="og:description" content={`Sign up for ${publicEnv.appName}`} />
       </Head>
       <Main fullViewPortHeight={!isMobile}>
         <MainContent size="xs">
