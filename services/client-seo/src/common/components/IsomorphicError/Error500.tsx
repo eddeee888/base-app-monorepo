@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
-import ErrorPage from "~/pages/_error";
+import PageErrorPage from "./PageErrorBase";
 
 const Error500: FunctionComponent = () => {
-  return <ErrorPage statusCode={500} />;
+  return <PageErrorPage statusCode={500} />;
 };
 
 export default Error500;

@@ -12,6 +12,7 @@ import StandardSpace from "~/common/shared-ui/StandardSpace";
 import Spinner from "~/common/shared-ui/Spinner";
 import LoginForm from "./LoginForm";
 import Head from "next/head";
+import { publicEnv } from "~/env";
 
 const Login: FunctionComponent = () => {
   const viewer = useViewer();
@@ -32,11 +33,11 @@ const Login: FunctionComponent = () => {
   return (
     <>
       <Head>
-        <title>{process.env.NEXT_PUBLIC_APP_NAME} | Log in</title>
-        <meta name="description" content={`Log in to ${process.env.NEXT_PUBLIC_APP_NAME}`} />
+        <title>{publicEnv.appName} | Log in</title>
+        <meta name="description" content={`Log in to ${publicEnv.appName}`} />
         <meta name="twitter:card" content="summary" />
-        <meta property="og:title" content={`${process.env.NEXT_PUBLIC_APP_NAME}`} />
-        <meta property="og:description" content={`Log in to ${process.env.NEXT_PUBLIC_APP_NAME}`} />
+        <meta property="og:title" content={`${publicEnv.appName}`} />
+        <meta property="og:description" content={`Log in to ${publicEnv.appName}`} />
       </Head>
       <Main fullViewPortHeight>
         <MainContent size="xs">

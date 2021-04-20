@@ -4,4 +4,4 @@ RUN apk update \
   && apk add bash \
   && rm -rf /var/cache/apk/*
 COPY . . 
-RUN yarn install --frozen-lockfile
+RUN yarn install

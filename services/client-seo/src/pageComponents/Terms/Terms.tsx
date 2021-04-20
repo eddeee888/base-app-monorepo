@@ -7,6 +7,7 @@ import H2 from "~/common/shared-ui/H2";
 import Text from "~/common/shared-ui/Text";
 import StandardSpace from "~/common/shared-ui/StandardSpace";
 import Footer from "~/common/components/Footer";
+import { publicEnv } from "~/env";
 
 const Terms: FunctionComponent = () => {
   return (
@@ -15,13 +16,11 @@ const Terms: FunctionComponent = () => {
         <MainContent size="md">
           <Paper>
             <H1>Terms and Conditions</H1>
-            <H2>Welcome to {process.env.NEXT_PUBLIC_APP_NAME}</H2>
-            <Text>
-              {`These terms and conditions outline the rules and regulations for the use of ${process.env.NEXT_PUBLIC_APP_NAME}'s Website.`}
-            </Text>
+            <H2>Welcome to {publicEnv.appName}</H2>
+            <Text>{`These terms and conditions outline the rules and regulations for the use of ${publicEnv.appName}'s Website.`}</Text>
             <StandardSpace />
             <Text>
-              {`By accessing this website we assume you accept these terms and conditions in full. Do not continue to use ${process.env.NEXT_PUBLIC_APP_NAME}'s website if you do not accept all of the terms and conditions stated on this page.`}
+              {`By accessing this website we assume you accept these terms and conditions in full. Do not continue to use ${publicEnv.appName}'s website if you do not accept all of the terms and conditions stated on this page.`}
             </Text>
             <Text>
               {`The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and any or all
@@ -38,7 +37,7 @@ const Terms: FunctionComponent = () => {
             <StandardSpace />
             <H2>Cookies</H2>
             <Text>
-              {`We employ the use of cookies. By using ${process.env.NEXT_PUBLIC_APP_NAME}'s website you consent to the use of cookies in accordance with ${process.env.NEXT_PUBLIC_APP_NAME}'s privacy policy.`}
+              {`We employ the use of cookies. By using ${publicEnv.appName}'s website you consent to the use of cookies in accordance with ${publicEnv.appName}'s privacy policy.`}
             </Text>
             <Text>
               Most of the modern day interactive web sites use cookies to enable us to retrieve user details for each visit. Cookies are
@@ -49,19 +48,17 @@ const Terms: FunctionComponent = () => {
             <StandardSpace />
             <H2>License</H2>
             <Text>
-              {`Unless otherwise stated, ${process.env.NEXT_PUBLIC_APP_NAME} and/or its licensors own the intellectual property rights for all material on ${process.env.NEXT_PUBLIC_APP_NAME}. All
-            intellectual property rights are reserved. You may view and/or print pages from ${process.env.NEXT_PUBLIC_APP_ORIGIN} for your own personal use
+              {`Unless otherwise stated, ${publicEnv.appName} and/or its licensors own the intellectual property rights for all material on ${publicEnv.appName}. All
+            intellectual property rights are reserved. You may view and/or print pages from ${publicEnv.appOrigin} for your own personal use
             subject to restrictions set in these terms and conditions.`}
             </Text>
             <Text>You must not:</Text>
             <ol>
-              <li>Republish material from {process.env.NEXT_PUBLIC_APP_ORIGIN}</li>
-              <li>Sell, rent or sub-license material from {process.env.NEXT_PUBLIC_APP_ORIGIN}</li>
-              <li>Reproduce, duplicate or copy material from {process.env.NEXT_PUBLIC_APP_ORIGIN}</li>
+              <li>Republish material from {publicEnv.appOrigin}</li>
+              <li>Sell, rent or sub-license material from {publicEnv.appOrigin}</li>
+              <li>Reproduce, duplicate or copy material from {publicEnv.appOrigin}</li>
             </ol>
-            <Text>
-              Redistribute content from {process.env.NEXT_PUBLIC_APP_NAME} (unless content is specifically made for redistribution).
-            </Text>
+            <Text>Redistribute content from {publicEnv.appName} (unless content is specifically made for redistribution).</Text>
 
             <StandardSpace />
             <H2>Hyperlinking to our Content</H2>
@@ -94,7 +91,7 @@ const Terms: FunctionComponent = () => {
               {`We will approve link requests from these organizations if we determine that: (a) the link would not reflect unfavorably on us or
             our accredited businesses (for example, trade associations or other organizations representing inherently suspect types of
             business, such as work-at-home opportunities, shall not be allowed to link); (b)the organization does not have an unsatisfactory
-            record with us; (c) the benefit to us from the visibility associated with the hyperlink outweighs the absence of ${process.env.NEXT_PUBLIC_APP_NAME}; and (d) where the link is in the context of general resource information or is otherwise
+            record with us; (c) the benefit to us from the visibility associated with the hyperlink outweighs the absence of ${publicEnv.appName}; and (d) where the link is in the context of general resource information or is otherwise
             consistent with editorial content in a newsletter or similar product furthering the mission of the organization.`}
             </Text>
             <Text>
@@ -110,7 +107,7 @@ const Terms: FunctionComponent = () => {
                 {`By use of any other description of our Web site or material being linked to that makes sense within the context and format of content on the linking party's site.`}
               </li>
             </ol>
-            <Text>{`No use of ${process.env.NEXT_PUBLIC_APP_NAME}'s logo or other artwork will be allowed for linking absent a trademark license agreement.`}</Text>
+            <Text>{`No use of ${publicEnv.appName}'s logo or other artwork will be allowed for linking absent a trademark license agreement.`}</Text>
 
             <StandardSpace />
             <H2>Iframes</H2>

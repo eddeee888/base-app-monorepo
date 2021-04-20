@@ -4,7 +4,7 @@ RUN apk update \
   && apk add bash \
   && rm -rf /var/cache/apk/*
 COPY . .
-RUN yarn install --frozen-lockfile
+RUN yarn install
 # TODO:HACK Hack to get full-icu working in node 12. This should be removed when node 13 is supported in lambda
-RUN yarn add full-icu
+RUN yarn add full-icu --frozen-lockfile
 ENV NODE_ICU_DATA=/usr/src/app/node_modules/full-icu

@@ -6,6 +6,7 @@ import H1 from "~/common/shared-ui/H1";
 import Text from "~/common/shared-ui/Text";
 import StandardSpace from "~/common/shared-ui/StandardSpace";
 import Footer from "~/common/components/Footer";
+import { publicEnv } from "~/env";
 
 const Privacy: FunctionComponent = () => {
   return (
@@ -15,8 +16,8 @@ const Privacy: FunctionComponent = () => {
           <Paper>
             <H1>Privacy Policy</H1>
             <Text>
-              {`Your privacy is important to us. It is ${process.env.NEXT_PUBLIC_APP_NAME}'s policy to respect your privacy regarding any
-            information we may collect from you across our website, ${process.env.NEXT_PUBLIC_APP_ORIGIN}, and other sites we own and operate.`}
+              {`Your privacy is important to us. It is ${publicEnv.appName}'s policy to respect your privacy regarding any
+            information we may collect from you across our website, ${publicEnv.appName}, and other sites we own and operate.`}
             </Text>
             <StandardSpace />
 

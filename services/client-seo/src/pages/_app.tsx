@@ -1,22 +1,24 @@
+import { ReactNode } from "react";
 import App from "next/app";
 import Head from "next/head";
+import { NextPage } from "next";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { muiTheme } from "~/common/shared-styles/muiTheme";
 import { CacheProvider, Global, css } from "@emotion/core";
 import { cache } from "emotion";
 import { ApolloProvider, ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import createApolloClient from "~/common/shared-apollo/createApolloClient";
-import withApollo from "next-with-apollo";
-import { getDataFromTree } from "@apollo/client/react/ssr";
+import { withApollo } from "next-with-apollo";
+import isSsr from "~/common/components/isSsr";
 import Header from "~/common/components/Header";
 import createBaseCss from "~/common/shared-styles/createBaseCss";
 import createFontsStyles from "~/common/shared-styles/createFontsStyles";
 import ErrorBoundary from "~/common/components/ErrorBoundary";
 import MaintenancePage from "~/common/shared-page-messages/MaintenancePage";
 import generateUrlClientSeoStaticImage from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
-import isSsr from "~/common/components/isSsr";
+import { publicEnv } from "~/env";
 
-class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
+class MyApp extends App {
   componentDidMount(): void {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
@@ -26,13 +28,13 @@ class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
   }
 
   render(): JSX.Element {
-    const { Component, pageProps, apollo } = this.props;
-    const isInMaintenance = process.env.NEXT_PUBLIC_SPECIAL_MODE === "maintenance";
+    const { Component, pageProps } = this.props;
+    const isInMaintenance = publicEnv.specialMode === "maintenance";
 
     return (
       <>
         <Head>
-          <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
+          <title>{publicEnv.appName}</title>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         </Head>
         <CacheProvider value={cache}>
@@ -41,23 +43,32 @@ class MyApp extends App<{ apollo: ApolloClient<NormalizedCacheObject> }> {
               ${createBaseCss()}
               ${createFontsStyles("/client-seo-static/fonts")}
             `}
-          ></Global>
-          {isInMaintenance && (
-            <MaintenancePage
-              appName={process.env.NEXT_PUBLIC_APP_NAME}
-              imageSrc={generateUrlClientSeoStaticImage({ path: { imageName: "maintenance.png" } })}
-            />
-          )}
-          {!isInMaintenance && (
-            <ApolloProvider client={apollo}>
-              <ThemeProvider theme={muiTheme}>
-                <ErrorBoundary>
-                  <Header />
-                  <Component {...pageProps} />
-                </ErrorBoundary>
-              </ThemeProvider>
-            </ApolloProvider>
-          )}
+          />
+
+          <ErrorBoundary>
+            <ThemeProvider theme={muiTheme}>
+              {isInMaintenance && (
+                <MaintenancePage
+                  appName={publicEnv.appName}
+                  imageSrc={generateUrlClientSeoStaticImage({ path: { imageName: "maintenance.png" } })}
+                />
+              )}
+              {!isInMaintenance && (
+                <>
+                  {/* This is used for static pages e.g. pages/404.tsx or pages/500.tsx.
+                   * Remember to use getStaticProps to set `isStaticStatusPage`
+                   */}
+                  {pageProps.isStaticStatusPage && (
+                    <>
+                      <Header isViewerMenuHidden />
+                      <Component {...pageProps} />
+                    </>
+                  )}
+                  {!pageProps.isStaticStatusPage && <InnerPageWithApollo component={<Component {...pageProps} />} />}
+                </>
+              )}
+            </ThemeProvider>
+          </ErrorBoundary>
         </CacheProvider>
       </>
     );
@@ -68,15 +79,20 @@ interface ErrorWithCode extends Error {
   code: number;
 }
 
-const MyAppWithApollo = withApollo(
+const InnerPage: NextPage<{ component: ReactNode; apollo: ApolloClient<NormalizedCacheObject> }> = (props) => {
+  const { component, apollo } = props;
+
+  return (
+    <ApolloProvider client={apollo}>
+      <Header />
+      {component}
+    </ApolloProvider>
+  );
+};
+
+const InnerPageWithApollo: any = withApollo(
   ({ initialState, headers }) => {
-    // NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR can be used if we want to have a different endpoint for SSR.
-    // e.g. in container in dev, we can use http://server:40002/graphql instead of https://server.app.dev/graphql
-    // If not provided, always fallback to NEXT_PUBLIC_GRAPHQL_ENDPOINT
-    const uri =
-      isSsr() && process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR
-        ? process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT_SSR
-        : process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
+    const uri = isSsr() && publicEnv.graphqlEndpointSsr ? publicEnv.graphqlEndpointSsr : publicEnv.graphqlEndpoint;
 
     const ssrHeaders = headers ?? {};
     // Remove host header if exists. Otherwise we'll get something like:
@@ -88,13 +104,12 @@ const MyAppWithApollo = withApollo(
 
     return createApolloClient({
       uri: uri,
-      webSocketUri: isSsr() ? undefined : process.env.NEXT_PUBLIC_WEBSOCKET_GRAPHQL_ENDPOINT, // If SSR, do not need websocket
+      webSocketUri: isSsr() ? undefined : publicEnv.websocketGraphqlEndpoint, // If SSR, do not need websocket
       initialState: initialState,
       ssrHeaders: headers,
     });
   },
   {
-    getDataFromTree,
     onError: (err, ctx) => {
       if (ctx && ctx.res && "code" in err) {
         const error = (err as any) as ErrorWithCode;
@@ -103,6 +118,6 @@ const MyAppWithApollo = withApollo(
       }
     },
   }
-)(MyApp);
+)(InnerPage);
 
-export default MyAppWithApollo;
+export default MyApp;

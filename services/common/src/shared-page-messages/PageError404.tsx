@@ -16,7 +16,7 @@ const Error404: FunctionComponent<PageError404Props> = ({ link, imageSrc }) => {
       <MainContent size="xs">
         <Block size="xs">
           <H1 gutterBottom={false} align="center">
-            What you are looking for is not available
+            Oops! What you are looking for is not available
           </H1>
           {link}
           <StandardSpace />
