@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from "react";
-import { css, cx } from "emotion";
+import { css, cx } from "@emotion/css";
 import { PageSize } from "../../shared-styles/types";
 import { pageSize } from "../../shared-styles/sizes";
 

@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from "react";
-import { css, cx } from "emotion";
+import { css, cx } from "@emotion/css";
 import { headerHeight, pageSize } from "../../shared-styles/sizes";
 import breakpoints from "../../shared-styles/breakpoints";
 

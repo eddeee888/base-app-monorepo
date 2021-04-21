@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode } from "react";
 import { Paper as MuiPaper } from "@material-ui/core";
-import { css, cx } from "emotion";
+import { css, cx } from "@emotion/css";
 
 import { spacingRem } from "../../shared-styles/spacings";
 import { primaryBackgroundColor } from "../../shared-styles/colors";

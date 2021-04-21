@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { css } from "emotion";
+import { css } from "@emotion/css";
 import { Box, Grid } from "@material-ui/core";
 import Text from "~/common/shared-ui/Text";
 import LinkSignup from "~/routes/signup/LinkSignup";

@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { css } from "emotion";
+import { css } from "@emotion/css";
 import { Link, LinkProps, Box, CircularProgress } from "@material-ui/core";
 import { primaryFont } from "../../shared-styles/fonts";
 import { spacingRem } from "../../shared-styles/spacings";

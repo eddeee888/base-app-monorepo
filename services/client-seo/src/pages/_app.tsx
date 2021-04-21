@@ -4,8 +4,8 @@ import Head from "next/head";
 import { NextPage } from "next";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { muiTheme } from "~/common/shared-styles/muiTheme";
-import { CacheProvider, Global, css } from "@emotion/core";
-import { cache } from "emotion";
+import { css } from "@emotion/css";
+import { Global } from "@emotion/react";
 import { ApolloProvider, ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import createApolloClient from "~/common/shared-apollo/createApolloClient";
 import { withApollo } from "next-with-apollo";
@@ -37,39 +37,37 @@ class MyApp extends App {
           <title>{publicEnv.appName}</title>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         </Head>
-        <CacheProvider value={cache}>
-          <Global
-            styles={css`
-              ${createBaseCss()}
-              ${createFontsStyles("/client-seo-static/fonts")}
-            `}
-          />
+        <Global
+          styles={css`
+            ${createBaseCss()}
+            ${createFontsStyles("/client-seo-static/fonts")}
+          `}
+        />
 
-          <ErrorBoundary>
-            <ThemeProvider theme={muiTheme}>
-              {isInMaintenance && (
-                <MaintenancePage
-                  appName={publicEnv.appName}
-                  imageSrc={generateUrlClientSeoStaticImage({ path: { imageName: "maintenance.png" } })}
-                />
-              )}
-              {!isInMaintenance && (
-                <>
-                  {/* This is used for static pages e.g. pages/404.tsx or pages/500.tsx.
-                   * Remember to use getStaticProps to set `isStaticStatusPage`
-                   */}
-                  {pageProps.isStaticStatusPage && (
-                    <>
-                      <Header isViewerMenuHidden />
-                      <Component {...pageProps} />
-                    </>
-                  )}
-                  {!pageProps.isStaticStatusPage && <InnerPageWithApollo component={<Component {...pageProps} />} />}
-                </>
-              )}
-            </ThemeProvider>
-          </ErrorBoundary>
-        </CacheProvider>
+        <ErrorBoundary>
+          <ThemeProvider theme={muiTheme}>
+            {isInMaintenance && (
+              <MaintenancePage
+                appName={publicEnv.appName}
+                imageSrc={generateUrlClientSeoStaticImage({ path: { imageName: "maintenance.png" } })}
+              />
+            )}
+            {!isInMaintenance && (
+              <>
+                {/* This is used for static pages e.g. pages/404.tsx or pages/500.tsx.
+                 * Remember to use getStaticProps to set `isStaticStatusPage`
+                 */}
+                {pageProps.isStaticStatusPage && (
+                  <>
+                    <Header isViewerMenuHidden />
+                    <Component {...pageProps} />
+                  </>
+                )}
+                {!pageProps.isStaticStatusPage && <InnerPageWithApollo component={<Component {...pageProps} />} />}
+              </>
+            )}
+          </ThemeProvider>
+        </ErrorBoundary>
       </>
     );
   }

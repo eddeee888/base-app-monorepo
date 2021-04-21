@@ -1,7 +1,7 @@
 import { ElementType, ReactElement } from "react";
 import { Typography, TypographyProps, TypographyTypeMap } from "@material-ui/core";
 import { primaryColor } from "../../shared-styles/colors";
-import { css, cx } from "emotion";
+import { css, cx } from "@emotion/css";
 
 const headingClassName = css`
   text-decoration: underline ${primaryColor};
