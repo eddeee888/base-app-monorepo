@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { css } from "emotion";
+import { css } from "@emotion/css";
 import Logo from "~/common/shared-ui/Logo";
 import { Grid } from "@material-ui/core";
 import LinkHome from "~/routes/home/LinkHome";

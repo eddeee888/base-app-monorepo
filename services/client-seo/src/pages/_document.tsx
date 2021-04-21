@@ -2,7 +2,8 @@ import { Children } from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import { muiTheme } from "~/common/shared-styles/muiTheme";
-import { extractCritical } from "emotion-server";
+import { cache } from "@emotion/css";
+import createEmotionServer from "@emotion/server/create-instance";
 
 export default class MyDocument extends Document<{ emotionStyles: { ids: string[]; css: string } }> {
   render(): JSX.Element {
@@ -58,6 +59,8 @@ MyDocument.getInitialProps = async (ctx) => {
     });
 
   const page = await ctx.renderPage();
+
+  const { extractCritical } = createEmotionServer(cache);
   const emotionStyles = extractCritical(page.html);
 
   const initialProps = await Document.getInitialProps(ctx);

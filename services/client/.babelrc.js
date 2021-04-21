@@ -1,7 +1,8 @@
-let plugins = [];
+let plugins = ["@emotion"];
 
 if (!process.env.BABEL_ENV === "test") {
   plugins = [
+    ...plugins,
     [
       "babel-plugin-import",
       {

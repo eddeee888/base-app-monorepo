@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { css } from "emotion";
+import { css } from "@emotion/css";
 import Button from "~/common/shared-ui/Button";
 import Logo from "~/common/shared-ui/Logo";
 import { useViewer } from "~/common/components/ViewerProvider";

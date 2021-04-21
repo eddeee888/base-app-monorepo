@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { css } from "emotion";
+import { css } from "@emotion/css";
 import { Grid, Box } from "@material-ui/core";
 import H1 from "~/common/shared-ui/H1";
 import Block from "~/common/shared-ui/Block";
