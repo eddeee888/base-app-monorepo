@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import generateUrlStatic500 from "@libs/routes/static500/generateUrlStatic500";
+import { generateUrlStatic500 } from "@libs/routes";
 
 const errorMiddleware = () => (error: Error, req: Request, res: Response, _next: NextFunction): void => {
   // TODO:ERROR snag this

@@ -3,8 +3,8 @@ import Head from "next/head";
 import PageError404 from "~/common/shared-page-messages/PageError404";
 import Text from "~/common/shared-ui/Text";
 import Anchor from "~/common/shared-ui/Anchor";
-import generateUrlHome from "~/routes/home/generateUrlHome";
-import generateUrlClientSeoStaticImage from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
+import { generateUrlHome } from "~/routes/home/generateUrlHome";
+import { generateUrlClientSeoStaticImage } from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
 
 const Custom404: NextPage = () => {
   return (

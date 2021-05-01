@@ -9,10 +9,10 @@ import StandardSpace from "~/common/shared-ui/StandardSpace";
 import Text from "~/common/shared-ui/Text";
 import { signupSchema } from "~/common/shared-validations/schemas/signupSchema";
 import { useFormik } from "formik";
-import LinkLogin from "~/routes/login/LinkLogin";
-import generateUrlPrivacyPolicy from "~/routes/privacyPolicy/generateUrlPrivacyPolicy";
-import generateUrlTermAndConditions from "~/routes/termAndConditions/generateUrlTermAndConditions";
-import generateUrlXhrSignup from "~/routes/xhrSignup/generateUrlXhrSignup";
+import { LinkLogin } from "~/routes/login/LinkLogin";
+import { generateUrlPrivacyPolicy } from "~/routes/privacyPolicy/generateUrlPrivacyPolicy";
+import { generateUrlTermAndConditions } from "~/routes/termAndConditions/generateUrlTermAndConditions";
+import { generateUrlXhrSignup } from "~/routes/xhrSignup/generateUrlXhrSignup";
 
 export interface SignupFormProps {
   redirectDestination: string;
@@ -78,7 +78,7 @@ const SignupForm: FunctionComponent<SignupFormProps> = ({ redirectDestination, o
       <FormError error={generalError} />
 
       <Text gutterBottom>
-        Already have an account? <LinkLogin query={{ redirect: redirectDestination }}>Log in</LinkLogin>
+        Already have an account? <LinkLogin urlParams={{ query: { redirect: redirectDestination } }}>Log in</LinkLogin>
       </Text>
 
       <StandardSpace size={1} />

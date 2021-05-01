@@ -7,9 +7,9 @@ import StandardSpace from "~/common/shared-ui/StandardSpace";
 import Text from "~/common/shared-ui/Text";
 import { loginSchema } from "~/common/shared-validations/schemas/loginSchema";
 import { useFormik } from "formik";
-import LinkSignup from "~/routes/signup/LinkSignup";
+import { LinkSignup } from "~/routes/signup/LinkSignup";
 import { usePost } from "~/common/shared-frontend-components/usePost";
-import generateUrlXhrLogin from "~/routes/xhrLogin/generateUrlXhrLogin";
+import { generateUrlXhrLogin } from "~/routes/xhrLogin/generateUrlXhrLogin";
 
 export interface LoginFormProps {
   redirectDestination: string;
@@ -53,7 +53,7 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ redirectDestination, onC
 
       <Text gutterBottom>
         {"Don't have an account? "}
-        <LinkSignup query={{ redirect: redirectDestination }}>Sign up</LinkSignup>
+        <LinkSignup urlParams={{ query: { redirect: redirectDestination } }}>Sign up</LinkSignup>
       </Text>
 
       <StandardSpace size={1} />

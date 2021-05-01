@@ -1,7 +1,6 @@
 import { HeadersService } from "@libs/headersService";
 import { RequestHandler } from "express";
-import generateUrlHome from "@libs/routes/home/generateUrlHome";
-import generateUrlStatic500 from "@libs/routes/static500/generateUrlStatic500";
+import { generateUrlHome, generateUrlStatic500 } from "@libs/routes";
 
 export interface HandleLogoutParams {
   headers: HeadersService;

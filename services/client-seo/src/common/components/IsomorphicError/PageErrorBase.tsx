@@ -5,8 +5,8 @@ import PageError500 from "~/common/shared-page-messages/PageError500";
 import PageErrorGeneric from "~/common/shared-page-messages/PageErrorGeneric";
 import Text from "~/common/shared-ui/Text";
 import Anchor from "~/common/shared-ui/Anchor";
-import generateUrlHome from "~/routes/home/generateUrlHome";
-import generateUrlClientSeoStaticImage from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
+import { generateUrlHome } from "~/routes/home/generateUrlHome";
+import { generateUrlClientSeoStaticImage } from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
 
 export interface PageErrorBaseProps {
   statusCode: number;
