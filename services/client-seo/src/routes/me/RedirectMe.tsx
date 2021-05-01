@@ -2,9 +2,8 @@
 import React from "react";
 import { RedirectServerSide } from "@route-codegen/react";
 import { generateUrl } from "@route-codegen/utils";
-import { UrlPartsMe, patternMe, originMe } from "./patternMe";
-const RedirectMe: React.FunctionComponent<UrlPartsMe & { fallback?: React.ReactNode }> = (props) => {
-  const to = generateUrl(patternMe, {}, props.query, props.origin ?? originMe);
+import { UrlParamsMe, patternMe, originMe } from "./patternMe";
+export const RedirectMe: React.FunctionComponent<{ fallback?: React.ReactNode; urlParams?: UrlParamsMe }> = ({ urlParams, ...props }) => {
+  const to = generateUrl(patternMe, { path: {}, query: urlParams.query, origin: urlParams.origin ?? originMe });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };
-export default RedirectMe;

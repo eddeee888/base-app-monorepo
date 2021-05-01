@@ -2,7 +2,7 @@
 export const patternSignup = "/signup";
 export const originSignup = "https://bam.dev";
 
-export interface UrlPartsSignup {
+export interface UrlParamsSignup {
   query?: Record<string, string | undefined>;
   origin?: string;
 }

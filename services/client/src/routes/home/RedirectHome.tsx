@@ -2,9 +2,11 @@
 import React from "react";
 import { RedirectServerSide } from "@route-codegen/react";
 import { generateUrl } from "@route-codegen/utils";
-import { UrlPartsHome, patternHome, originHome } from "./patternHome";
-const RedirectHome: React.FunctionComponent<UrlPartsHome & { fallback?: React.ReactNode }> = (props) => {
-  const to = generateUrl(patternHome, {}, props.query, props.origin ?? originHome);
+import { UrlParamsHome, patternHome, originHome } from "./patternHome";
+export const RedirectHome: React.FunctionComponent<{ fallback?: React.ReactNode; urlParams?: UrlParamsHome }> = ({
+  urlParams,
+  ...props
+}) => {
+  const to = generateUrl(patternHome, { path: {}, query: urlParams.query, origin: urlParams.origin ?? originHome });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };
-export default RedirectHome;

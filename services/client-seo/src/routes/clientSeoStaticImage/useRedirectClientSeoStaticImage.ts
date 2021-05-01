@@ -1,18 +1,18 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { useRouter } from "next/router";
 import {
-  UrlPartsClientSeoStaticImage,
+  UrlParamsClientSeoStaticImage,
   patternNextJSClientSeoStaticImage,
   possilePathParamsClientSeoStaticImage,
 } from "./patternClientSeoStaticImage";
-export type RedirectFnClientSeoStaticImage = (urlParts: UrlPartsClientSeoStaticImage) => void;
-const useRedirectClientSeoStaticImage = (): RedirectFnClientSeoStaticImage => {
+export type RedirectFnClientSeoStaticImage = (urlParams: UrlParamsClientSeoStaticImage) => void;
+export const useRedirectClientSeoStaticImage = (): RedirectFnClientSeoStaticImage => {
   const router = useRouter();
-  const redirect: RedirectFnClientSeoStaticImage = (urlParts) => {
-    const query = urlParts?.query ?? {};
-    const path = urlParts.path;
+  const redirect: RedirectFnClientSeoStaticImage = (urlParams) => {
+    const query = urlParams?.query ?? {};
+    const path = urlParams.path;
     const pathname = possilePathParamsClientSeoStaticImage
-      .filter((key) => !(key in urlParts.path))
+      .filter((key) => !(key in urlParams.path))
       .reduce((prevPattern, suppliedParam) => prevPattern.replace(`/[${suppliedParam}]`, ""), patternNextJSClientSeoStaticImage);
     router.push({
       pathname: pathname,
@@ -24,4 +24,3 @@ const useRedirectClientSeoStaticImage = (): RedirectFnClientSeoStaticImage => {
   };
   return redirect;
 };
-export default useRedirectClientSeoStaticImage;

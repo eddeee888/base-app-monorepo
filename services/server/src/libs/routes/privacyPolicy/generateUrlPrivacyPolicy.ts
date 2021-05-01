@@ -1,6 +1,5 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { generateUrl } from "@route-codegen/utils";
-import { patternPrivacyPolicy, UrlPartsPrivacyPolicy, originPrivacyPolicy } from "./patternPrivacyPolicy";
-const generateUrlPrivacyPolicy = (urlParts?: UrlPartsPrivacyPolicy): string =>
-  generateUrl(patternPrivacyPolicy, {}, urlParts?.query, urlParts?.origin ?? originPrivacyPolicy);
-export default generateUrlPrivacyPolicy;
+import { patternPrivacyPolicy, UrlParamsPrivacyPolicy, originPrivacyPolicy } from "./patternPrivacyPolicy";
+export const generateUrlPrivacyPolicy = (urlParams?: UrlParamsPrivacyPolicy): string =>
+  generateUrl(patternPrivacyPolicy, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originPrivacyPolicy });

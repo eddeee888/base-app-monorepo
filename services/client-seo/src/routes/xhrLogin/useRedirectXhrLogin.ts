@@ -1,10 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import { UrlPartsXhrLogin, patternXhrLogin, originXhrLogin } from "./patternXhrLogin";
+import { UrlParamsXhrLogin, patternXhrLogin, originXhrLogin } from "./patternXhrLogin";
 import { generateUrl } from "@route-codegen/utils";
-export type RedirectFnXhrLogin = (urlParts?: UrlPartsXhrLogin) => void;
-const useRedirectXhrLogin = (): RedirectFnXhrLogin => {
-  const redirect: RedirectFnXhrLogin = (urlParts) => {
-    const to = generateUrl(patternXhrLogin, {}, urlParts?.query, urlParts?.origin ?? originXhrLogin);
+export type RedirectFnXhrLogin = (urlParams?: UrlParamsXhrLogin) => void;
+export const useRedirectXhrLogin = (): RedirectFnXhrLogin => {
+  const redirect: RedirectFnXhrLogin = (urlParams) => {
+    const to = generateUrl(patternXhrLogin, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originXhrLogin });
     if (!!window && !!window.location) {
       window.location.href = to;
     }
@@ -12,4 +12,3 @@ const useRedirectXhrLogin = (): RedirectFnXhrLogin => {
   };
   return redirect;
 };
-export default useRedirectXhrLogin;

@@ -2,9 +2,11 @@
 import React from "react";
 import { RedirectServerSide } from "@route-codegen/react";
 import { generateUrl } from "@route-codegen/utils";
-import { UrlPartsLogout, patternLogout, originLogout } from "./patternLogout";
-const RedirectLogout: React.FunctionComponent<UrlPartsLogout & { fallback?: React.ReactNode }> = (props) => {
-  const to = generateUrl(patternLogout, {}, props.query, props.origin ?? originLogout);
+import { UrlParamsLogout, patternLogout, originLogout } from "./patternLogout";
+export const RedirectLogout: React.FunctionComponent<{ fallback?: React.ReactNode; urlParams?: UrlParamsLogout }> = ({
+  urlParams,
+  ...props
+}) => {
+  const to = generateUrl(patternLogout, { path: {}, query: urlParams.query, origin: urlParams.origin ?? originLogout });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };
-export default RedirectLogout;

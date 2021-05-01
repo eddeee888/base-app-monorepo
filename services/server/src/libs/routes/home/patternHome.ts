@@ -2,7 +2,7 @@
 export const patternHome = "/";
 export const originHome = "https://bam.dev";
 
-export interface UrlPartsHome {
+export interface UrlParamsHome {
   query?: Record<string, string | undefined>;
   origin?: string;
 }

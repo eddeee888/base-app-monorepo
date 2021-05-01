@@ -1,10 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
 import Link, { LinkProps } from "~/common/components/Link";
-import { UrlPartsLogin, patternNextJSLogin } from "./patternLogin";
-type LinkLoginProps = Omit<LinkProps, "nextHref"> & UrlPartsLogin;
-const LinkLogin: React.FunctionComponent<LinkLoginProps> = (props) => {
-  const { query = {}, ...rest } = props;
+import { UrlParamsLogin, patternNextJSLogin } from "./patternLogin";
+type LinkLoginProps = Omit<LinkProps, "nextHref"> & { urlParams?: UrlParamsLogin };
+export const LinkLogin: React.FunctionComponent<LinkLoginProps> = ({ urlParams, ...props }) => {
+  const { query = {} } = urlParams;
   const path = {};
   const pathname = patternNextJSLogin;
   const nextHref = {
@@ -14,6 +14,5 @@ const LinkLogin: React.FunctionComponent<LinkLoginProps> = (props) => {
       ...query,
     },
   };
-  return <Link {...rest} nextHref={nextHref} />;
+  return <Link {...props} nextHref={nextHref} />;
 };
-export default LinkLogin;

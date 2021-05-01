@@ -2,10 +2,9 @@
 import React from "react";
 import { generateUrl } from "@route-codegen/utils";
 import Link, { AnchorProps } from "~/common/shared-ui/Anchor";
-import { patternMe, UrlPartsMe, originMe } from "./patternMe";
-type LinkMeProps = Omit<AnchorProps, "href"> & UrlPartsMe;
-const LinkMe: React.FunctionComponent<LinkMeProps> = ({ query, origin, ...props }) => {
-  const to = generateUrl(patternMe, {}, query, origin ?? originMe);
+import { patternMe, UrlParamsMe, originMe } from "./patternMe";
+type LinkMeProps = Omit<AnchorProps, "href"> & { urlParams?: UrlParamsMe };
+export const LinkMe: React.FunctionComponent<LinkMeProps> = ({ urlParams, ...props }) => {
+  const to = generateUrl(patternMe, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originMe });
   return <Link {...props} href={to} />;
 };
-export default LinkMe;

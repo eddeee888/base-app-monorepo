@@ -2,7 +2,7 @@
 export const patternLogin = "/login";
 export const originLogin = "https://bam.dev";
 
-export interface UrlPartsLogin {
+export interface UrlParamsLogin {
   query?: Record<string, string | undefined>;
   origin?: string;
 }

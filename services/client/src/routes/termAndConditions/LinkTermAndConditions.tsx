@@ -2,10 +2,13 @@
 import React from "react";
 import { generateUrl } from "@route-codegen/utils";
 import Link, { AnchorProps } from "~/common/shared-ui/Anchor";
-import { patternTermAndConditions, UrlPartsTermAndConditions, originTermAndConditions } from "./patternTermAndConditions";
-type LinkTermAndConditionsProps = Omit<AnchorProps, "href"> & UrlPartsTermAndConditions;
-const LinkTermAndConditions: React.FunctionComponent<LinkTermAndConditionsProps> = ({ query, origin, ...props }) => {
-  const to = generateUrl(patternTermAndConditions, {}, query, origin ?? originTermAndConditions);
+import { patternTermAndConditions, UrlParamsTermAndConditions, originTermAndConditions } from "./patternTermAndConditions";
+type LinkTermAndConditionsProps = Omit<AnchorProps, "href"> & { urlParams?: UrlParamsTermAndConditions };
+export const LinkTermAndConditions: React.FunctionComponent<LinkTermAndConditionsProps> = ({ urlParams, ...props }) => {
+  const to = generateUrl(patternTermAndConditions, {
+    path: {},
+    query: urlParams?.query,
+    origin: urlParams?.origin ?? originTermAndConditions,
+  });
   return <Link {...props} href={to} />;
 };
-export default LinkTermAndConditions;
