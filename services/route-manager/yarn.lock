@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@route-codegen/core@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@route-codegen/core/-/core-0.5.0.tgz#d1f98ade5a2dbcaa0da885998252959ae559b557"
-  integrity sha512-8u+53p6k81WuS8x4986RnSbFP/VbPs1z9tF46+T+WUP0C4m2JeKkSSsYAQW+7+tQRQ6iKopuO0GRziS1sMkj+g==
+"@route-codegen/core@0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@route-codegen/core/-/core-0.5.1.tgz#2b2801c03731915df882fb01dfd88408004d14a7"
+  integrity sha512-5HKZ+BwxnUQwQ42DM17txOJyVOw7KwSQLlqWk5G1vWjqDG96mFsUZoSu2dxgAZMMp+NmDogk1+Jry0oHMzsdtA==
   dependencies:
     js-yaml "4.1.0"
     path-to-regexp "6.1.0"
