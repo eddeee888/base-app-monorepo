@@ -3349,10 +3349,10 @@
   resolved "https://registry.yarnpkg.com/@route-codegen/react/-/react-0.1.1.tgz#504920e939a3e11fe71c6f0571eb3ec892bd37c6"
   integrity sha512-DDb2UNxIOCfSCzK1py+2uWmWc2ket2WyQAtqkVpSFRkpDmCmKsnVC9NiMr3ZQscHWbgbheV9jQQHecmc/twN/A==
 
-"@route-codegen/utils@0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@route-codegen/utils/-/utils-0.1.2.tgz#321371a219fca742759f1eec9869cd52c8418753"
-  integrity sha512-S3uVVdX0+uGFMt8Xb3W7qUNAbGmZm9ME8Zqfxy3tP9BklHm88F7SgWKojN793LeAnTJVNeXYq/KyEfDr6GQ3AQ==
+"@route-codegen/utils@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@route-codegen/utils/-/utils-0.2.0.tgz#5554f61e5b3aeb21ada1ef3f20f827a157cabcc4"
+  integrity sha512-jK5h9IN8DLVtps6QYNVRNEzZyMHRzAY9+TKDgBw6M+eSAEVq2UbBnmjGeUsgF+1Qvt/ERGJBilpESITlT6cx9g==
   dependencies:
     path-to-regexp "6.1.0"
 
