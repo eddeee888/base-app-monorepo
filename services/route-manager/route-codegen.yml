@@ -3,26 +3,30 @@ apps:
     origin: https://app.${PRIMARY_DOMAIN}
     routes:
       me: /me
-    routingType: ReactRouterV5
+    destinationDir: ../client/src/routes
     generate:
       linkComponent: true
       redirectComponent: true
       useRedirect: true
       useParams: true
-    reactRouterV5LinkOptions:
-      mode: strict
-      importCustomLink:
-        componentDefaultImport: true
-        propsNamedImport: LinkProps
-        hrefProp: to
-        from: ~/common/components/Link
-    defaultLinkOptions:
-      importCustomLink:
-        componentDefaultImport: true
-        propsNamedImport: AnchorProps
-        hrefProp: href
-        from: ~/common/shared-ui/Anchor
-    destinationDir: ../client/src/routes
+    plugins:
+      - name: "typescript-pattern"
+      - name: "typescript-generate-url"
+      - name: "typescript-react-router-5"
+        config:
+          importCustomLink:
+            componentDefaultImport: true
+            propsNamedImport: LinkProps
+            hrefProp: to
+            from: ~/common/components/Link
+          mode: strict
+      - name: "typescript-anchor"
+        config:
+          importCustomLink:
+            componentDefaultImport: true
+            propsNamedImport: AnchorProps
+            hrefProp: href
+            from: ~/common/shared-ui/Anchor
 
   client-seo:
     origin: https://${PRIMARY_DOMAIN}
@@ -35,34 +39,40 @@ apps:
       clientSeoStaticImage: /client-seo-static/images/:imageName
       static404: /404
       static500: /500
-    routingType: NextJS
+    destinationDir: ../client-seo/src/routes
     generate:
       linkComponent: true
       redirectComponent: true
       useRedirect: true
       useParams: true
-    nextJSLinkOptions:
-      mode: strict
-      importCustomLink:
-        componentDefaultImport: true
-        propsNamedImport: LinkProps
-        hrefProp: nextHref
-        from: ~/common/components/Link
-    defaultLinkOptions:
-      importCustomLink:
-        componentDefaultImport: true
-        propsNamedImport: AnchorProps
-        hrefProp: href
-        from: ~/common/shared-ui/Anchor
-    destinationDir: ../client-seo/src/routes
+    plugins:
+      - name: "typescript-pattern"
+      - name: "typescript-generate-url"
+      - name: "typescript-next-js"
+        config:
+          importCustomLink:
+            componentDefaultImport: true
+            propsNamedImport: LinkProps
+            hrefProp: nextHref
+            from: ~/common/components/Link
+          mode: strict
+      - name: "typescript-anchor"
+        config:
+          importCustomLink:
+            componentDefaultImport: true
+            propsNamedImport: AnchorProps
+            hrefProp: href
+            from: ~/common/shared-ui/Anchor
 
   server:
     origin: https://server.${PRIMARY_DOMAIN}
-    generate:
-      rootIndex: true
     routes:
       xhrLogin: /xhr/login
       xhrSignup: /xhr/signup
       graphql: /graphql
       logout: /logout
     destinationDir: ../server/src/libs/routes
+    plugins:
+      - name: "typescript-pattern"
+      - name: "typescript-generate-url"
+      - name: "typescript-root-index"
