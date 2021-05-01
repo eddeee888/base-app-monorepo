@@ -9,8 +9,8 @@ export const RedirectClientSeoStaticImage: React.FunctionComponent<{
 }> = ({ urlParams, ...props }) => {
   const to = generateUrl(patternClientSeoStaticImage, {
     path: urlParams.path,
-    query: urlParams.query,
-    origin: urlParams.origin ?? originClientSeoStaticImage,
+    query: urlParams?.query,
+    origin: urlParams?.origin ?? originClientSeoStaticImage,
   });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };

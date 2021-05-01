@@ -7,6 +7,6 @@ export const RedirectLogin: React.FunctionComponent<{ fallback?: React.ReactNode
   urlParams,
   ...props
 }) => {
-  const to = generateUrl(patternLogin, { path: {}, query: urlParams.query, origin: urlParams.origin ?? originLogin });
+  const to = generateUrl(patternLogin, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originLogin });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };

@@ -7,6 +7,6 @@ export const RedirectLogout: React.FunctionComponent<{ fallback?: React.ReactNod
   urlParams,
   ...props
 }) => {
-  const to = generateUrl(patternLogout, { path: {}, query: urlParams.query, origin: urlParams.origin ?? originLogout });
+  const to = generateUrl(patternLogout, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originLogout });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };

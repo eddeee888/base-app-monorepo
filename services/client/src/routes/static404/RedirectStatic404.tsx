@@ -7,6 +7,6 @@ export const RedirectStatic404: React.FunctionComponent<{ fallback?: React.React
   urlParams,
   ...props
 }) => {
-  const to = generateUrl(patternStatic404, { path: {}, query: urlParams.query, origin: urlParams.origin ?? originStatic404 });
+  const to = generateUrl(patternStatic404, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originStatic404 });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };

@@ -4,7 +4,7 @@ import Link, { LinkProps } from "~/common/components/Link";
 import { UrlParamsLogin, patternNextJSLogin } from "./patternLogin";
 type LinkLoginProps = Omit<LinkProps, "nextHref"> & { urlParams?: UrlParamsLogin };
 export const LinkLogin: React.FunctionComponent<LinkLoginProps> = ({ urlParams, ...props }) => {
-  const { query = {} } = urlParams;
+  const query = urlParams?.query || {};
   const path = {};
   const pathname = patternNextJSLogin;
   const nextHref = {

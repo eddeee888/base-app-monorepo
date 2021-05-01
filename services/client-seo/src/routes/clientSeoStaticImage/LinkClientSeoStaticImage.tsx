@@ -8,7 +8,7 @@ import {
 } from "./patternClientSeoStaticImage";
 type LinkClientSeoStaticImageProps = Omit<LinkProps, "nextHref"> & { urlParams: UrlParamsClientSeoStaticImage };
 export const LinkClientSeoStaticImage: React.FunctionComponent<LinkClientSeoStaticImageProps> = ({ urlParams, ...props }) => {
-  const { query = {} } = urlParams;
+  const query = urlParams?.query || {};
   const path = urlParams.path;
   const pathname = possilePathParamsClientSeoStaticImage
     .filter((key) => !(key in path))

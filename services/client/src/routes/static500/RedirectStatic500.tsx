@@ -7,6 +7,6 @@ export const RedirectStatic500: React.FunctionComponent<{ fallback?: React.React
   urlParams,
   ...props
 }) => {
-  const to = generateUrl(patternStatic500, { path: {}, query: urlParams.query, origin: urlParams.origin ?? originStatic500 });
+  const to = generateUrl(patternStatic500, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originStatic500 });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };

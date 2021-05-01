@@ -4,7 +4,7 @@ import Link, { LinkProps } from "~/common/components/Link";
 import { UrlParamsTermAndConditions, patternNextJSTermAndConditions } from "./patternTermAndConditions";
 type LinkTermAndConditionsProps = Omit<LinkProps, "nextHref"> & { urlParams?: UrlParamsTermAndConditions };
 export const LinkTermAndConditions: React.FunctionComponent<LinkTermAndConditionsProps> = ({ urlParams, ...props }) => {
-  const { query = {} } = urlParams;
+  const query = urlParams?.query || {};
   const path = {};
   const pathname = patternNextJSTermAndConditions;
   const nextHref = {

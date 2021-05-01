@@ -4,7 +4,7 @@ import Link, { LinkProps } from "~/common/components/Link";
 import { UrlParamsPrivacyPolicy, patternNextJSPrivacyPolicy } from "./patternPrivacyPolicy";
 type LinkPrivacyPolicyProps = Omit<LinkProps, "nextHref"> & { urlParams?: UrlParamsPrivacyPolicy };
 export const LinkPrivacyPolicy: React.FunctionComponent<LinkPrivacyPolicyProps> = ({ urlParams, ...props }) => {
-  const { query = {} } = urlParams;
+  const query = urlParams?.query || {};
   const path = {};
   const pathname = patternNextJSPrivacyPolicy;
   const nextHref = {

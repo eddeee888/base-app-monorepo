@@ -7,6 +7,6 @@ export const RedirectGraphql: React.FunctionComponent<{ fallback?: React.ReactNo
   urlParams,
   ...props
 }) => {
-  const to = generateUrl(patternGraphql, { path: {}, query: urlParams.query, origin: urlParams.origin ?? originGraphql });
+  const to = generateUrl(patternGraphql, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originGraphql });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };

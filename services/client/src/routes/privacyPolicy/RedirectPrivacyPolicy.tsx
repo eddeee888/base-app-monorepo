@@ -7,6 +7,6 @@ export const RedirectPrivacyPolicy: React.FunctionComponent<{ fallback?: React.R
   urlParams,
   ...props
 }) => {
-  const to = generateUrl(patternPrivacyPolicy, { path: {}, query: urlParams.query, origin: urlParams.origin ?? originPrivacyPolicy });
+  const to = generateUrl(patternPrivacyPolicy, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originPrivacyPolicy });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };

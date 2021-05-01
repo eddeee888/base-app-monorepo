@@ -7,6 +7,6 @@ export const RedirectXhrLogin: React.FunctionComponent<{ fallback?: React.ReactN
   urlParams,
   ...props
 }) => {
-  const to = generateUrl(patternXhrLogin, { path: {}, query: urlParams.query, origin: urlParams.origin ?? originXhrLogin });
+  const to = generateUrl(patternXhrLogin, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originXhrLogin });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };

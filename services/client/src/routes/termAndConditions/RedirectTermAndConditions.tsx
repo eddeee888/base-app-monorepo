@@ -9,8 +9,8 @@ export const RedirectTermAndConditions: React.FunctionComponent<{ fallback?: Rea
 }) => {
   const to = generateUrl(patternTermAndConditions, {
     path: {},
-    query: urlParams.query,
-    origin: urlParams.origin ?? originTermAndConditions,
+    query: urlParams?.query,
+    origin: urlParams?.origin ?? originTermAndConditions,
   });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };
