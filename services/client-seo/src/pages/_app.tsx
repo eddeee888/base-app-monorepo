@@ -4,7 +4,7 @@ import Head from "next/head";
 import { NextPage } from "next";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { muiTheme } from "~/common/shared-styles/muiTheme";
-import { css } from "@emotion/css";
+import { css, injectGlobal } from "@emotion/css";
 import { Global } from "@emotion/react";
 import { ApolloProvider, ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import createApolloClient from "~/common/shared-apollo/createApolloClient";
@@ -15,8 +15,12 @@ import createBaseCss from "~/common/shared-styles/createBaseCss";
 import createFontsStyles from "~/common/shared-styles/createFontsStyles";
 import ErrorBoundary from "~/common/components/ErrorBoundary";
 import MaintenancePage from "~/common/shared-page-messages/MaintenancePage";
-import generateUrlClientSeoStaticImage from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
+import { generateUrlClientSeoStaticImage } from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
 import { publicEnv } from "~/env";
+
+if (isSsr()) {
+  injectGlobal`${createBaseCss()}`;
+}
 
 class MyApp extends App {
   componentDidMount(): void {
@@ -39,7 +43,6 @@ class MyApp extends App {
         </Head>
         <Global
           styles={css`
-            ${createBaseCss()}
             ${createFontsStyles("/client-seo-static/fonts")}
           `}
         />

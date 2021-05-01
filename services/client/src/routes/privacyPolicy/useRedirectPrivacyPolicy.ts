@@ -1,10 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import { UrlPartsPrivacyPolicy, patternPrivacyPolicy, originPrivacyPolicy } from "./patternPrivacyPolicy";
+import { UrlParamsPrivacyPolicy, patternPrivacyPolicy, originPrivacyPolicy } from "./patternPrivacyPolicy";
 import { generateUrl } from "@route-codegen/utils";
-export type RedirectFnPrivacyPolicy = (urlParts?: UrlPartsPrivacyPolicy) => void;
-const useRedirectPrivacyPolicy = (): RedirectFnPrivacyPolicy => {
-  const redirect: RedirectFnPrivacyPolicy = (urlParts) => {
-    const to = generateUrl(patternPrivacyPolicy, {}, urlParts?.query, urlParts?.origin ?? originPrivacyPolicy);
+export type RedirectFnPrivacyPolicy = (urlParams?: UrlParamsPrivacyPolicy) => void;
+export const useRedirectPrivacyPolicy = (): RedirectFnPrivacyPolicy => {
+  const redirect: RedirectFnPrivacyPolicy = (urlParams) => {
+    const to = generateUrl(patternPrivacyPolicy, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originPrivacyPolicy });
     if (!!window && !!window.location) {
       window.location.href = to;
     }
@@ -12,4 +12,3 @@ const useRedirectPrivacyPolicy = (): RedirectFnPrivacyPolicy => {
   };
   return redirect;
 };
-export default useRedirectPrivacyPolicy;

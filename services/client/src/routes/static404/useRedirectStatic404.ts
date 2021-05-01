@@ -1,10 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import { UrlPartsStatic404, patternStatic404, originStatic404 } from "./patternStatic404";
+import { UrlParamsStatic404, patternStatic404, originStatic404 } from "./patternStatic404";
 import { generateUrl } from "@route-codegen/utils";
-export type RedirectFnStatic404 = (urlParts?: UrlPartsStatic404) => void;
-const useRedirectStatic404 = (): RedirectFnStatic404 => {
-  const redirect: RedirectFnStatic404 = (urlParts) => {
-    const to = generateUrl(patternStatic404, {}, urlParts?.query, urlParts?.origin ?? originStatic404);
+export type RedirectFnStatic404 = (urlParams?: UrlParamsStatic404) => void;
+export const useRedirectStatic404 = (): RedirectFnStatic404 => {
+  const redirect: RedirectFnStatic404 = (urlParams) => {
+    const to = generateUrl(patternStatic404, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originStatic404 });
     if (!!window && !!window.location) {
       window.location.href = to;
     }
@@ -12,4 +12,3 @@ const useRedirectStatic404 = (): RedirectFnStatic404 => {
   };
   return redirect;
 };
-export default useRedirectStatic404;

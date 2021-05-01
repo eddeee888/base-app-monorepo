@@ -1,10 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
 import Link, { LinkProps } from "~/common/components/Link";
-import { UrlPartsTermAndConditions, patternNextJSTermAndConditions } from "./patternTermAndConditions";
-type LinkTermAndConditionsProps = Omit<LinkProps, "nextHref"> & UrlPartsTermAndConditions;
-const LinkTermAndConditions: React.FunctionComponent<LinkTermAndConditionsProps> = (props) => {
-  const { query = {}, ...rest } = props;
+import { UrlParamsTermAndConditions, patternNextJSTermAndConditions } from "./patternTermAndConditions";
+type LinkTermAndConditionsProps = Omit<LinkProps, "nextHref"> & { urlParams?: UrlParamsTermAndConditions };
+export const LinkTermAndConditions: React.FunctionComponent<LinkTermAndConditionsProps> = ({ urlParams, ...props }) => {
+  const query = urlParams?.query || {};
   const path = {};
   const pathname = patternNextJSTermAndConditions;
   const nextHref = {
@@ -14,6 +14,5 @@ const LinkTermAndConditions: React.FunctionComponent<LinkTermAndConditionsProps>
       ...query,
     },
   };
-  return <Link {...rest} nextHref={nextHref} />;
+  return <Link {...props} nextHref={nextHref} />;
 };
-export default LinkTermAndConditions;

@@ -1,10 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import { UrlPartsLogout, patternLogout, originLogout } from "./patternLogout";
+import { UrlParamsLogout, patternLogout, originLogout } from "./patternLogout";
 import { generateUrl } from "@route-codegen/utils";
-export type RedirectFnLogout = (urlParts?: UrlPartsLogout) => void;
-const useRedirectLogout = (): RedirectFnLogout => {
-  const redirect: RedirectFnLogout = (urlParts) => {
-    const to = generateUrl(patternLogout, {}, urlParts?.query, urlParts?.origin ?? originLogout);
+export type RedirectFnLogout = (urlParams?: UrlParamsLogout) => void;
+export const useRedirectLogout = (): RedirectFnLogout => {
+  const redirect: RedirectFnLogout = (urlParams) => {
+    const to = generateUrl(patternLogout, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originLogout });
     if (!!window && !!window.location) {
       window.location.href = to;
     }
@@ -12,4 +12,3 @@ const useRedirectLogout = (): RedirectFnLogout => {
   };
   return redirect;
 };
-export default useRedirectLogout;

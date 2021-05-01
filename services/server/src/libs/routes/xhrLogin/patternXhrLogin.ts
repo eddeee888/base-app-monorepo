@@ -2,7 +2,7 @@
 export const patternXhrLogin = "/xhr/login";
 export const originXhrLogin = "https://server.bam.dev";
 
-export interface UrlPartsXhrLogin {
+export interface UrlParamsXhrLogin {
   query?: Record<string, string | undefined>;
   origin?: string;
 }

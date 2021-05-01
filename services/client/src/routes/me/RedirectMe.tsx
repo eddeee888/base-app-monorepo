@@ -2,9 +2,9 @@
 import React from "react";
 import { generateUrl } from "@route-codegen/utils";
 import { Redirect } from "react-router";
-import { UrlPartsMe, patternMe } from "./patternMe";
-const RedirectMe: React.FunctionComponent<UrlPartsMe & { fallback?: React.ReactNode }> = (props) => {
-  const to = generateUrl(patternMe, {}, props.query, props.origin);
+import { UrlParamsMe, patternMe } from "./patternMe";
+export const RedirectMe: React.FunctionComponent<{ fallback?: React.ReactNode; urlParams?: UrlParamsMe }> = ({ urlParams, ...props }) => {
+  const to = generateUrl(patternMe, { path: {}, query: urlParams?.query, origin: urlParams?.origin });
   return (
     <>
       <Redirect to={to} />
@@ -12,4 +12,3 @@ const RedirectMe: React.FunctionComponent<UrlPartsMe & { fallback?: React.ReactN
     </>
   );
 };
-export default RedirectMe;

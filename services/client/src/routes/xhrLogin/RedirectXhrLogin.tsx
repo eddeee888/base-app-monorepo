@@ -2,9 +2,11 @@
 import React from "react";
 import { RedirectServerSide } from "@route-codegen/react";
 import { generateUrl } from "@route-codegen/utils";
-import { UrlPartsXhrLogin, patternXhrLogin, originXhrLogin } from "./patternXhrLogin";
-const RedirectXhrLogin: React.FunctionComponent<UrlPartsXhrLogin & { fallback?: React.ReactNode }> = (props) => {
-  const to = generateUrl(patternXhrLogin, {}, props.query, props.origin ?? originXhrLogin);
+import { UrlParamsXhrLogin, patternXhrLogin, originXhrLogin } from "./patternXhrLogin";
+export const RedirectXhrLogin: React.FunctionComponent<{ fallback?: React.ReactNode; urlParams?: UrlParamsXhrLogin }> = ({
+  urlParams,
+  ...props
+}) => {
+  const to = generateUrl(patternXhrLogin, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originXhrLogin });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };
-export default RedirectXhrLogin;

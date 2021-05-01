@@ -3,8 +3,8 @@ import { Popper, Grow, ClickAwayListener, MenuList, MenuItem, Paper } from "@mat
 import Avatar from "~/common/shared-ui/Avatar";
 import { Viewer } from "~/common/components/ViewerProvider";
 import AnchorButton from "~/common/shared-ui/AnchorButton";
-import LinkMe from "~/routes/me/LinkMe";
-import LinkLogout from "~/routes/logout/LinkLogout";
+import { LinkMe } from "~/routes/me/LinkMe";
+import { LinkLogout } from "~/routes/logout/LinkLogout";
 
 interface LoggedInMenuProps {
   viewer: Viewer;

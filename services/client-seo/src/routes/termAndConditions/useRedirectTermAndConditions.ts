@@ -1,11 +1,11 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { useRouter } from "next/router";
-import { UrlPartsTermAndConditions, patternNextJSTermAndConditions } from "./patternTermAndConditions";
-export type RedirectFnTermAndConditions = (urlParts?: UrlPartsTermAndConditions) => void;
-const useRedirectTermAndConditions = (): RedirectFnTermAndConditions => {
+import { UrlParamsTermAndConditions, patternNextJSTermAndConditions } from "./patternTermAndConditions";
+export type RedirectFnTermAndConditions = (urlParams?: UrlParamsTermAndConditions) => void;
+export const useRedirectTermAndConditions = (): RedirectFnTermAndConditions => {
   const router = useRouter();
-  const redirect: RedirectFnTermAndConditions = (urlParts) => {
-    const query = urlParts?.query ?? {};
+  const redirect: RedirectFnTermAndConditions = (urlParams) => {
+    const query = urlParams?.query ?? {};
     const path = {};
     const pathname = patternNextJSTermAndConditions;
     router.push({
@@ -18,4 +18,3 @@ const useRedirectTermAndConditions = (): RedirectFnTermAndConditions => {
   };
   return redirect;
 };
-export default useRedirectTermAndConditions;

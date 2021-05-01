@@ -2,7 +2,7 @@
 export const patternPrivacyPolicy = "/privacy";
 export const originPrivacyPolicy = "https://bam.dev";
 
-export interface UrlPartsPrivacyPolicy {
+export interface UrlParamsPrivacyPolicy {
   query?: Record<string, string | undefined>;
   origin?: string;
 }

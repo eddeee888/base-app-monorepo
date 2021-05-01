@@ -1,10 +1,14 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import { UrlPartsTermAndConditions, patternTermAndConditions, originTermAndConditions } from "./patternTermAndConditions";
+import { UrlParamsTermAndConditions, patternTermAndConditions, originTermAndConditions } from "./patternTermAndConditions";
 import { generateUrl } from "@route-codegen/utils";
-export type RedirectFnTermAndConditions = (urlParts?: UrlPartsTermAndConditions) => void;
-const useRedirectTermAndConditions = (): RedirectFnTermAndConditions => {
-  const redirect: RedirectFnTermAndConditions = (urlParts) => {
-    const to = generateUrl(patternTermAndConditions, {}, urlParts?.query, urlParts?.origin ?? originTermAndConditions);
+export type RedirectFnTermAndConditions = (urlParams?: UrlParamsTermAndConditions) => void;
+export const useRedirectTermAndConditions = (): RedirectFnTermAndConditions => {
+  const redirect: RedirectFnTermAndConditions = (urlParams) => {
+    const to = generateUrl(patternTermAndConditions, {
+      path: {},
+      query: urlParams?.query,
+      origin: urlParams?.origin ?? originTermAndConditions,
+    });
     if (!!window && !!window.location) {
       window.location.href = to;
     }
@@ -12,4 +16,3 @@ const useRedirectTermAndConditions = (): RedirectFnTermAndConditions => {
   };
   return redirect;
 };
-export default useRedirectTermAndConditions;

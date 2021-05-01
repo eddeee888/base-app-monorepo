@@ -1,6 +1,5 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { generateUrl } from "@route-codegen/utils";
-import { patternXhrLogin, UrlPartsXhrLogin, originXhrLogin } from "./patternXhrLogin";
-const generateUrlXhrLogin = (urlParts?: UrlPartsXhrLogin): string =>
-  generateUrl(patternXhrLogin, {}, urlParts?.query, urlParts?.origin ?? originXhrLogin);
-export default generateUrlXhrLogin;
+import { patternXhrLogin, UrlParamsXhrLogin, originXhrLogin } from "./patternXhrLogin";
+export const generateUrlXhrLogin = (urlParams?: UrlParamsXhrLogin): string =>
+  generateUrl(patternXhrLogin, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originXhrLogin });

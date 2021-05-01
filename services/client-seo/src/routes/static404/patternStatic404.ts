@@ -7,7 +7,7 @@ export const originStatic404 = "https://bam.dev";
  */
 export const patternNextJSStatic404 = "/404";
 
-export interface UrlPartsStatic404 {
+export interface UrlParamsStatic404 {
   query?: Record<string, string | undefined>;
   origin?: string;
 }

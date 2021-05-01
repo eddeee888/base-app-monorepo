@@ -9,7 +9,7 @@ export const patternNextJSClientSeoStaticImage = "/client-seo-static/images/[ima
 export type PathParamsClientSeoStaticImage = { imageName: string };
 
 export const possilePathParamsClientSeoStaticImage = ["imageName"];
-export interface UrlPartsClientSeoStaticImage {
+export interface UrlParamsClientSeoStaticImage {
   path: PathParamsClientSeoStaticImage;
   query?: Record<string, string | undefined>;
   origin?: string;

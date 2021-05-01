@@ -2,10 +2,9 @@
 import React from "react";
 import { generateUrl } from "@route-codegen/utils";
 import Link, { AnchorProps } from "~/common/shared-ui/Anchor";
-import { patternPrivacyPolicy, UrlPartsPrivacyPolicy, originPrivacyPolicy } from "./patternPrivacyPolicy";
-type LinkPrivacyPolicyProps = Omit<AnchorProps, "href"> & UrlPartsPrivacyPolicy;
-const LinkPrivacyPolicy: React.FunctionComponent<LinkPrivacyPolicyProps> = ({ query, origin, ...props }) => {
-  const to = generateUrl(patternPrivacyPolicy, {}, query, origin ?? originPrivacyPolicy);
+import { patternPrivacyPolicy, UrlParamsPrivacyPolicy, originPrivacyPolicy } from "./patternPrivacyPolicy";
+type LinkPrivacyPolicyProps = Omit<AnchorProps, "href"> & { urlParams?: UrlParamsPrivacyPolicy };
+export const LinkPrivacyPolicy: React.FunctionComponent<LinkPrivacyPolicyProps> = ({ urlParams, ...props }) => {
+  const to = generateUrl(patternPrivacyPolicy, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originPrivacyPolicy });
   return <Link {...props} href={to} />;
 };
-export default LinkPrivacyPolicy;

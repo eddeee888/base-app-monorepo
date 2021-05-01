@@ -1,10 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import { UrlPartsMe, patternMe, originMe } from "./patternMe";
+import { UrlParamsMe, patternMe, originMe } from "./patternMe";
 import { generateUrl } from "@route-codegen/utils";
-export type RedirectFnMe = (urlParts?: UrlPartsMe) => void;
-const useRedirectMe = (): RedirectFnMe => {
-  const redirect: RedirectFnMe = (urlParts) => {
-    const to = generateUrl(patternMe, {}, urlParts?.query, urlParts?.origin ?? originMe);
+export type RedirectFnMe = (urlParams?: UrlParamsMe) => void;
+export const useRedirectMe = (): RedirectFnMe => {
+  const redirect: RedirectFnMe = (urlParams) => {
+    const to = generateUrl(patternMe, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originMe });
     if (!!window && !!window.location) {
       window.location.href = to;
     }
@@ -12,4 +12,3 @@ const useRedirectMe = (): RedirectFnMe => {
   };
   return redirect;
 };
-export default useRedirectMe;

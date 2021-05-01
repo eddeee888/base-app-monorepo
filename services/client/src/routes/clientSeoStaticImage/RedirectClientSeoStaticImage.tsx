@@ -2,9 +2,15 @@
 import React from "react";
 import { RedirectServerSide } from "@route-codegen/react";
 import { generateUrl } from "@route-codegen/utils";
-import { UrlPartsClientSeoStaticImage, patternClientSeoStaticImage, originClientSeoStaticImage } from "./patternClientSeoStaticImage";
-const RedirectClientSeoStaticImage: React.FunctionComponent<UrlPartsClientSeoStaticImage & { fallback?: React.ReactNode }> = (props) => {
-  const to = generateUrl(patternClientSeoStaticImage, props.path, props.query, props.origin ?? originClientSeoStaticImage);
+import { UrlParamsClientSeoStaticImage, patternClientSeoStaticImage, originClientSeoStaticImage } from "./patternClientSeoStaticImage";
+export const RedirectClientSeoStaticImage: React.FunctionComponent<{
+  fallback?: React.ReactNode;
+  urlParams: UrlParamsClientSeoStaticImage;
+}> = ({ urlParams, ...props }) => {
+  const to = generateUrl(patternClientSeoStaticImage, {
+    path: urlParams.path,
+    query: urlParams?.query,
+    origin: urlParams?.origin ?? originClientSeoStaticImage,
+  });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };
-export default RedirectClientSeoStaticImage;

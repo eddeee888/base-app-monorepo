@@ -2,10 +2,9 @@
 import React from "react";
 import { generateUrl } from "@route-codegen/utils";
 import Link, { AnchorProps } from "~/common/shared-ui/Anchor";
-import { patternXhrLogin, UrlPartsXhrLogin, originXhrLogin } from "./patternXhrLogin";
-type LinkXhrLoginProps = Omit<AnchorProps, "href"> & UrlPartsXhrLogin;
-const LinkXhrLogin: React.FunctionComponent<LinkXhrLoginProps> = ({ query, origin, ...props }) => {
-  const to = generateUrl(patternXhrLogin, {}, query, origin ?? originXhrLogin);
+import { patternXhrLogin, UrlParamsXhrLogin, originXhrLogin } from "./patternXhrLogin";
+type LinkXhrLoginProps = Omit<AnchorProps, "href"> & { urlParams?: UrlParamsXhrLogin };
+export const LinkXhrLogin: React.FunctionComponent<LinkXhrLoginProps> = ({ urlParams, ...props }) => {
+  const to = generateUrl(patternXhrLogin, { path: {}, query: urlParams?.query, origin: urlParams?.origin ?? originXhrLogin });
   return <Link {...props} href={to} />;
 };
-export default LinkXhrLogin;

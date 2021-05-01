@@ -2,9 +2,15 @@
 import React from "react";
 import { RedirectServerSide } from "@route-codegen/react";
 import { generateUrl } from "@route-codegen/utils";
-import { UrlPartsTermAndConditions, patternTermAndConditions, originTermAndConditions } from "./patternTermAndConditions";
-const RedirectTermAndConditions: React.FunctionComponent<UrlPartsTermAndConditions & { fallback?: React.ReactNode }> = (props) => {
-  const to = generateUrl(patternTermAndConditions, {}, props.query, props.origin ?? originTermAndConditions);
+import { UrlParamsTermAndConditions, patternTermAndConditions, originTermAndConditions } from "./patternTermAndConditions";
+export const RedirectTermAndConditions: React.FunctionComponent<{ fallback?: React.ReactNode; urlParams?: UrlParamsTermAndConditions }> = ({
+  urlParams,
+  ...props
+}) => {
+  const to = generateUrl(patternTermAndConditions, {
+    path: {},
+    query: urlParams?.query,
+    origin: urlParams?.origin ?? originTermAndConditions,
+  });
   return <RedirectServerSide href={to} fallback={props.fallback} />;
 };
-export default RedirectTermAndConditions;

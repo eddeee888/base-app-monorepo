@@ -2,7 +2,7 @@
 export const patternGraphql = "/graphql";
 export const originGraphql = "https://server.bam.dev";
 
-export interface UrlPartsGraphql {
+export interface UrlParamsGraphql {
   query?: Record<string, string | undefined>;
   origin?: string;
 }

@@ -3,8 +3,8 @@ import { Grid } from "@material-ui/core";
 import { useViewer } from "~/common/components/ViewerQuery";
 import Button from "~/common/shared-ui/Button";
 import LoggedInMenu from "./LoggedInMenu";
-import LinkSignup from "~/routes/signup/LinkSignup";
-import LinkLogin from "~/routes/login/LinkLogin";
+import { LinkSignup } from "~/routes/signup/LinkSignup";
+import { LinkLogin } from "~/routes/login/LinkLogin";
 
 const ViewerMenu: FunctionComponent = () => {
   const viewer = useViewer();

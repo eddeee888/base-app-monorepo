@@ -1,11 +1,11 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import { useRouter } from "next/router";
-import { UrlPartsPrivacyPolicy, patternNextJSPrivacyPolicy } from "./patternPrivacyPolicy";
-export type RedirectFnPrivacyPolicy = (urlParts?: UrlPartsPrivacyPolicy) => void;
-const useRedirectPrivacyPolicy = (): RedirectFnPrivacyPolicy => {
+import { UrlParamsPrivacyPolicy, patternNextJSPrivacyPolicy } from "./patternPrivacyPolicy";
+export type RedirectFnPrivacyPolicy = (urlParams?: UrlParamsPrivacyPolicy) => void;
+export const useRedirectPrivacyPolicy = (): RedirectFnPrivacyPolicy => {
   const router = useRouter();
-  const redirect: RedirectFnPrivacyPolicy = (urlParts) => {
-    const query = urlParts?.query ?? {};
+  const redirect: RedirectFnPrivacyPolicy = (urlParams) => {
+    const query = urlParams?.query ?? {};
     const path = {};
     const pathname = patternNextJSPrivacyPolicy;
     router.push({
@@ -18,4 +18,3 @@ const useRedirectPrivacyPolicy = (): RedirectFnPrivacyPolicy => {
   };
   return redirect;
 };
-export default useRedirectPrivacyPolicy;

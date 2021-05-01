@@ -2,11 +2,11 @@ import { FunctionComponent } from "react";
 import { css } from "@emotion/css";
 import { Box, Grid } from "@material-ui/core";
 import Text from "~/common/shared-ui/Text";
-import LinkSignup from "~/routes/signup/LinkSignup";
-import LinkLogin from "~/routes/login/LinkLogin";
+import { LinkSignup } from "~/routes/signup/LinkSignup";
+import { LinkLogin } from "~/routes/login/LinkLogin";
 import { footerBackgroundColor, footerTextColor, footerLinkColorHover } from "~/common/shared-styles/colors";
-import LinkTermAndConditions from "~/routes/termAndConditions/LinkTermAndConditions";
-import LinkPrivacyPolicy from "~/routes/privacyPolicy/LinkPrivacyPolicy";
+import { LinkTermAndConditions } from "~/routes/termAndConditions/LinkTermAndConditions";
+import { LinkPrivacyPolicy } from "~/routes/privacyPolicy/LinkPrivacyPolicy";
 
 const footerClassName = css`
   width: 100%;
@@ -30,7 +30,7 @@ const Footer: FunctionComponent = () => {
   return (
     <footer className={footerClassName}>
       <Box paddingY={8}>
-        <Grid container justify="center" spacing={4}>
+        <Grid container justify="center">
           <Grid item xs={5} sm={4} md={2}>
             <Text variant="h6" className={headingClassName}>
               GET STARTED

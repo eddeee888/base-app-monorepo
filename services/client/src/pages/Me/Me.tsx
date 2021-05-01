@@ -1,17 +1,17 @@
 import { FunctionComponent } from "react";
 import { useViewer } from "~/common/components/ViewerProvider";
-import generateUrlMe from "~/routes/me/generateUrlMe";
+import { generateUrlMe } from "~/routes/me/generateUrlMe";
 import Main from "~/common/shared-ui/Main";
 import MainContent from "~/common/shared-ui/MainContent";
 import Paper from "~/common/shared-ui/Paper";
-import RedirectLogin from "~/routes/login/RedirectLogin";
+import { RedirectLogin } from "~/routes/login/RedirectLogin";
 
 const Me: FunctionComponent = () => {
   const { viewer } = useViewer();
 
   if (!viewer) {
     const redirectTo = generateUrlMe({});
-    return <RedirectLogin query={{ redirect: redirectTo }} />;
+    return <RedirectLogin urlParams={{ query: { redirect: redirectTo } }} />;
   }
 
   return (

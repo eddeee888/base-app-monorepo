@@ -2,13 +2,14 @@
 import React from "react";
 import Link, { LinkProps } from "~/common/components/Link";
 import {
-  UrlPartsClientSeoStaticImage,
+  UrlParamsClientSeoStaticImage,
   patternNextJSClientSeoStaticImage,
   possilePathParamsClientSeoStaticImage,
 } from "./patternClientSeoStaticImage";
-type LinkClientSeoStaticImageProps = Omit<LinkProps, "nextHref"> & UrlPartsClientSeoStaticImage;
-const LinkClientSeoStaticImage: React.FunctionComponent<LinkClientSeoStaticImageProps> = (props) => {
-  const { path = {}, query = {}, ...rest } = props;
+type LinkClientSeoStaticImageProps = Omit<LinkProps, "nextHref"> & { urlParams: UrlParamsClientSeoStaticImage };
+export const LinkClientSeoStaticImage: React.FunctionComponent<LinkClientSeoStaticImageProps> = ({ urlParams, ...props }) => {
+  const query = urlParams?.query || {};
+  const path = urlParams.path;
   const pathname = possilePathParamsClientSeoStaticImage
     .filter((key) => !(key in path))
     .reduce((prevPattern, suppliedParam) => prevPattern.replace(`/[${suppliedParam}]`, ""), patternNextJSClientSeoStaticImage);
@@ -19,6 +20,5 @@ const LinkClientSeoStaticImage: React.FunctionComponent<LinkClientSeoStaticImage
       ...query,
     },
   };
-  return <Link {...rest} nextHref={nextHref} />;
+  return <Link {...props} nextHref={nextHref} />;
 };
-export default LinkClientSeoStaticImage;
