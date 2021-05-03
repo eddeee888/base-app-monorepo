@@ -48,6 +48,7 @@ const Privacy: FunctionComponent = () => {
 
             <Text>{`This policy is effective as of 25 May 2020.`}</Text>
           </Paper>
+          <StandardSpace />
         </MainContent>
       </Main>
       <Footer />
