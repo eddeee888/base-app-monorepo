@@ -1,18 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
 import Link, { LinkProps } from "~/common/components/Link";
-import { UrlParamsPrivacyPolicy, patternNextJSPrivacyPolicy } from "./patternPrivacyPolicy";
-type LinkPrivacyPolicyProps = Omit<LinkProps, "nextHref"> & { urlParams?: UrlParamsPrivacyPolicy };
+import { generateUrl } from "@route-codegen/utils";
+import { UrlParamsPrivacyPolicy, patternPrivacyPolicy } from "./patternPrivacyPolicy";
+type LinkPrivacyPolicyProps = Omit<LinkProps, "href"> & { urlParams?: UrlParamsPrivacyPolicy };
 export const LinkPrivacyPolicy: React.FunctionComponent<LinkPrivacyPolicyProps> = ({ urlParams, ...props }) => {
-  const query = urlParams?.query || {};
-  const path = {};
-  const pathname = patternNextJSPrivacyPolicy;
-  const nextHref = {
-    pathname: pathname,
-    query: {
-      ...path,
-      ...query,
-    },
-  };
-  return <Link {...props} nextHref={nextHref} />;
+  const href = generateUrl(patternPrivacyPolicy, { path: {}, query: urlParams?.query, origin: urlParams?.origin });
+  return <Link {...props} href={href} />;
 };

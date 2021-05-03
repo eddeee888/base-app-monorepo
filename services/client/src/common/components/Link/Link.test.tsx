@@ -9,7 +9,7 @@ describe("<Link />", () => {
     render(
       <MemoryRouter>
         <Route exact path="/login" render={() => <div>Login page</div>} />
-        <Link to="/login">Linkage</Link>
+        <Link href="/login">Linkage</Link>
       </MemoryRouter>
     );
 
