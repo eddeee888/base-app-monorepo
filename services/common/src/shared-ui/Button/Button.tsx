@@ -5,11 +5,12 @@ import { spacingRem } from "../../shared-styles/spacings";
 
 export interface ButtonProps extends MuiButtonProps {
   showSpinner?: boolean;
+  component?: "button" | "span";
 }
 
-const Button: FunctionComponent<ButtonProps> = ({ children, showSpinner, ...props }) => {
+const Button: FunctionComponent<ButtonProps> = ({ children, showSpinner, component = "button", ...props }) => {
   return (
-    <MuiButton color="primary" variant="contained" fullWidth {...props}>
+    <MuiButton color="primary" variant="contained" component={component} fullWidth {...props}>
       {children}
       {showSpinner && (
         <>
