@@ -1,10 +1,9 @@
 import { FunctionComponent } from "react";
 import { Box, CircularProgress, Button as MuiButton } from "@material-ui/core";
 import { ButtonProps as MuiButtonProps } from "@material-ui/core/Button";
-
 import { spacingRem } from "../../shared-styles/spacings";
 
-interface ButtonProps extends MuiButtonProps {
+export interface ButtonProps extends MuiButtonProps {
   showSpinner?: boolean;
 }
 
