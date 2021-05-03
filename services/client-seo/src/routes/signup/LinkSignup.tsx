@@ -1,18 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
 import Link, { LinkProps } from "~/common/components/Link";
-import { UrlParamsSignup, patternNextJSSignup } from "./patternSignup";
-type LinkSignupProps = Omit<LinkProps, "nextHref"> & { urlParams?: UrlParamsSignup };
+import { generateUrl } from "@route-codegen/utils";
+import { UrlParamsSignup, patternSignup } from "./patternSignup";
+type LinkSignupProps = Omit<LinkProps, "href"> & { urlParams?: UrlParamsSignup };
 export const LinkSignup: React.FunctionComponent<LinkSignupProps> = ({ urlParams, ...props }) => {
-  const query = urlParams?.query || {};
-  const path = {};
-  const pathname = patternNextJSSignup;
-  const nextHref = {
-    pathname: pathname,
-    query: {
-      ...path,
-      ...query,
-    },
-  };
-  return <Link {...props} nextHref={nextHref} />;
+  const href = generateUrl(patternSignup, { path: {}, query: urlParams?.query, origin: urlParams?.origin });
+  return <Link {...props} href={href} />;
 };

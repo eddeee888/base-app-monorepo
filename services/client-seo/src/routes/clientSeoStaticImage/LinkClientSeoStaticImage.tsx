@@ -1,24 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
 import Link, { LinkProps } from "~/common/components/Link";
-import {
-  UrlParamsClientSeoStaticImage,
-  patternNextJSClientSeoStaticImage,
-  possilePathParamsClientSeoStaticImage,
-} from "./patternClientSeoStaticImage";
-type LinkClientSeoStaticImageProps = Omit<LinkProps, "nextHref"> & { urlParams: UrlParamsClientSeoStaticImage };
+import { generateUrl } from "@route-codegen/utils";
+import { UrlParamsClientSeoStaticImage, patternClientSeoStaticImage } from "./patternClientSeoStaticImage";
+type LinkClientSeoStaticImageProps = Omit<LinkProps, "href"> & { urlParams: UrlParamsClientSeoStaticImage };
 export const LinkClientSeoStaticImage: React.FunctionComponent<LinkClientSeoStaticImageProps> = ({ urlParams, ...props }) => {
-  const query = urlParams?.query || {};
-  const path = urlParams.path;
-  const pathname = possilePathParamsClientSeoStaticImage
-    .filter((key) => !(key in path))
-    .reduce((prevPattern, suppliedParam) => prevPattern.replace(`/[${suppliedParam}]`, ""), patternNextJSClientSeoStaticImage);
-  const nextHref = {
-    pathname: pathname,
-    query: {
-      ...path,
-      ...query,
-    },
-  };
-  return <Link {...props} nextHref={nextHref} />;
+  const href = generateUrl(patternClientSeoStaticImage, { path: urlParams.path, query: urlParams?.query, origin: urlParams?.origin });
+  return <Link {...props} href={href} />;
 };

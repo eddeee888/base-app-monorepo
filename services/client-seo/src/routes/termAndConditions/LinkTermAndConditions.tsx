@@ -1,18 +1,10 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
 import Link, { LinkProps } from "~/common/components/Link";
-import { UrlParamsTermAndConditions, patternNextJSTermAndConditions } from "./patternTermAndConditions";
-type LinkTermAndConditionsProps = Omit<LinkProps, "nextHref"> & { urlParams?: UrlParamsTermAndConditions };
+import { generateUrl } from "@route-codegen/utils";
+import { UrlParamsTermAndConditions, patternTermAndConditions } from "./patternTermAndConditions";
+type LinkTermAndConditionsProps = Omit<LinkProps, "href"> & { urlParams?: UrlParamsTermAndConditions };
 export const LinkTermAndConditions: React.FunctionComponent<LinkTermAndConditionsProps> = ({ urlParams, ...props }) => {
-  const query = urlParams?.query || {};
-  const path = {};
-  const pathname = patternNextJSTermAndConditions;
-  const nextHref = {
-    pathname: pathname,
-    query: {
-      ...path,
-      ...query,
-    },
-  };
-  return <Link {...props} nextHref={nextHref} />;
+  const href = generateUrl(patternTermAndConditions, { path: {}, query: urlParams?.query, origin: urlParams?.origin });
+  return <Link {...props} href={href} />;
 };
