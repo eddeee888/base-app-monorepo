@@ -16,56 +16,56 @@ import { UrlParamsGraphql, patternGraphql } from "./graphql/patternGraphql";
 import { UrlParamsLogout, patternLogout } from "./logout/patternLogout";
 export const routeConfig = {
   me: {
-    pattern: patternMe,
-    component: Link,
+    pathPattern: patternMe,
+    Component: Link,
   },
   home: {
-    pattern: patternHome,
-    component: Anchor,
+    pathPattern: patternHome,
+    Component: Anchor,
   },
   login: {
-    pattern: patternLogin,
-    component: Anchor,
+    pathPattern: patternLogin,
+    Component: Anchor,
   },
   signup: {
-    pattern: patternSignup,
-    component: Anchor,
+    pathPattern: patternSignup,
+    Component: Anchor,
   },
   termAndConditions: {
-    pattern: patternTermAndConditions,
-    component: Anchor,
+    pathPattern: patternTermAndConditions,
+    Component: Anchor,
   },
   privacyPolicy: {
-    pattern: patternPrivacyPolicy,
-    component: Anchor,
+    pathPattern: patternPrivacyPolicy,
+    Component: Anchor,
   },
   clientSeoStaticImage: {
-    pattern: patternClientSeoStaticImage,
-    component: Anchor,
+    pathPattern: patternClientSeoStaticImage,
+    Component: Anchor,
   },
   static404: {
-    pattern: patternStatic404,
-    component: Anchor,
+    pathPattern: patternStatic404,
+    Component: Anchor,
   },
   static500: {
-    pattern: patternStatic500,
-    component: Anchor,
+    pathPattern: patternStatic500,
+    Component: Anchor,
   },
   xhrLogin: {
-    pattern: patternXhrLogin,
-    component: Anchor,
+    pathPattern: patternXhrLogin,
+    Component: Anchor,
   },
   xhrSignup: {
-    pattern: patternXhrSignup,
-    component: Anchor,
+    pathPattern: patternXhrSignup,
+    Component: Anchor,
   },
   graphql: {
-    pattern: patternGraphql,
-    component: Anchor,
+    pathPattern: patternGraphql,
+    Component: Anchor,
   },
   logout: {
-    pattern: patternLogout,
-    component: Anchor,
+    pathPattern: patternLogout,
+    Component: Anchor,
   },
 };
 export type RouteConfigProps =

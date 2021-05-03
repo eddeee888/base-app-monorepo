@@ -5,14 +5,17 @@ import { routeConfig, RouteConfigProps } from "~/routes/routeConfig";
 
 export type ButtonXProps = Omit<ButtonProps, "href"> & RouteConfigProps;
 
-const ButtonX: FunctionComponent<ButtonXProps> = ({ to, urlParams = {}, ...props }) => {
-  const { pattern, component: Link } = routeConfig[to];
-  const href = generateUrl(pattern, urlParams as any);
-
+const ButtonX: FunctionComponent<ButtonXProps> = ({ to, urlParams, ...props }) => {
+  const { pathPattern, Component } = routeConfig[to];
+  const href = generateUrl(pathPattern, {
+    path: urlParams && "path" in urlParams ? urlParams.path : {},
+    query: urlParams?.query,
+    origin: urlParams?.origin,
+  });
   return (
-    <Link href={href}>
+    <Component href={href}>
       <Button {...props} component="span" />
-    </Link>
+    </Component>
   );
 };
 
