@@ -6,7 +6,11 @@ type RouteConfig = Record<string, { pathPattern: string; Component: ComponentTyp
 type ButtonXComponent<P> = FunctionComponent<P & Omit<ButtonProps, "href">>;
 
 export function createButtonX<P extends { to: string; urlParams?: Record<string, any> }>(routeConfig: RouteConfig): ButtonXComponent<P> {
-  const ButtonX: ButtonXComponent<P> = ({ to, urlParams, ...props }) => {
+  const ButtonX: ButtonXComponent<P> = ({ to, urlParams, disabled, ...props }) => {
+    if (disabled) {
+      return <Button disabled={disabled} {...props} />;
+    }
+
     const { pathPattern, Component } = routeConfig[to];
     const href = generateUrl(pathPattern, {
       path: urlParams && "path" in urlParams ? urlParams.path : {},
