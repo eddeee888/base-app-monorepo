@@ -17,7 +17,7 @@ apps:
           importCustomLink:
             componentDefaultImport: true
             propsNamedImport: LinkProps
-            hrefProp: to
+            hrefProp: href
             from: ~/common/components/Link
           mode: strict
       - name: "typescript-anchor"
