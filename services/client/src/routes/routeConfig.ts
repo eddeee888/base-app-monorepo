@@ -14,58 +14,74 @@ import { UrlParamsXhrLogin, patternXhrLogin } from "./xhrLogin/patternXhrLogin";
 import { UrlParamsXhrSignup, patternXhrSignup } from "./xhrSignup/patternXhrSignup";
 import { UrlParamsGraphql, patternGraphql } from "./graphql/patternGraphql";
 import { UrlParamsLogout, patternLogout } from "./logout/patternLogout";
-export const routeConfig = {
+export const routeConfig: Record<
+  string,
+  { pathPattern: string } & ({ type: "external"; component: typeof Anchor } | { type: "internal"; component: typeof Link })
+> = {
   me: {
     pathPattern: patternMe,
-    Component: Link,
+    component: Link,
+    type: "internal",
   },
   home: {
     pathPattern: patternHome,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
   login: {
     pathPattern: patternLogin,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
   signup: {
     pathPattern: patternSignup,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
   termAndConditions: {
     pathPattern: patternTermAndConditions,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
   privacyPolicy: {
     pathPattern: patternPrivacyPolicy,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
   clientSeoStaticImage: {
     pathPattern: patternClientSeoStaticImage,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
   static404: {
     pathPattern: patternStatic404,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
   static500: {
     pathPattern: patternStatic500,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
   xhrLogin: {
     pathPattern: patternXhrLogin,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
   xhrSignup: {
     pathPattern: patternXhrSignup,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
   graphql: {
     pathPattern: patternGraphql,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
   logout: {
     pathPattern: patternLogout,
-    Component: Anchor,
+    component: Anchor,
+    type: "external",
   },
 };
 export type RouteConfigProps =
