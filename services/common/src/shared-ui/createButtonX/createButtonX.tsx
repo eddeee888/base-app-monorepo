@@ -2,7 +2,7 @@ import { ComponentType, FunctionComponent } from "react";
 import { generateUrl } from "@route-codegen/utils";
 import Button, { ButtonProps } from "../Button";
 
-type RouteConfig = Record<string, { pathPattern: string; Component: ComponentType<any> }>;
+type RouteConfig = Record<string, { pathPattern: string; component: ComponentType<any>; type: "internal" | "external" }>;
 type ButtonXComponent<P> = FunctionComponent<P & Omit<ButtonProps, "href">>;
 
 export function createButtonX<P extends { to: string; urlParams?: Record<string, any> }>(routeConfig: RouteConfig): ButtonXComponent<P> {
@@ -11,7 +11,7 @@ export function createButtonX<P extends { to: string; urlParams?: Record<string,
       return <Button disabled={disabled} {...props} />;
     }
 
-    const { pathPattern, Component } = routeConfig[to];
+    const { pathPattern, component: Component } = routeConfig[to];
     const href = generateUrl(pathPattern, {
       path: urlParams && "path" in urlParams ? urlParams.path : {},
       query: urlParams?.query,
