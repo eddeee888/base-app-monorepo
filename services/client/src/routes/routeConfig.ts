@@ -20,68 +20,68 @@ export const routeConfig: Record<
 > = {
   me: {
     pathPattern: patternMe,
-    component: Link,
     type: "internal",
+    component: Link,
   },
   home: {
     pathPattern: patternHome,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
   login: {
     pathPattern: patternLogin,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
   signup: {
     pathPattern: patternSignup,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
   termAndConditions: {
     pathPattern: patternTermAndConditions,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
   privacyPolicy: {
     pathPattern: patternPrivacyPolicy,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
   clientSeoStaticImage: {
     pathPattern: patternClientSeoStaticImage,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
   static404: {
     pathPattern: patternStatic404,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
   static500: {
     pathPattern: patternStatic500,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
   xhrLogin: {
     pathPattern: patternXhrLogin,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
   xhrSignup: {
     pathPattern: patternXhrSignup,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
   graphql: {
     pathPattern: patternGraphql,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
   logout: {
     pathPattern: patternLogout,
-    component: Anchor,
     type: "external",
+    component: Anchor,
   },
 };
 export type RouteConfigProps =

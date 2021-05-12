@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { Grid } from "@material-ui/core";
 import { useViewer } from "~/common/components/ViewerQuery";
-import ButtonX from "~/common/ButtonX";
+import ButtonX from "~/common/components/ButtonX";
 import LoggedInMenu from "./LoggedInMenu";
 
 const ViewerMenu: FunctionComponent = () => {
@@ -12,12 +12,12 @@ const ViewerMenu: FunctionComponent = () => {
         {!viewer && (
           <>
             <Grid item>
-              <ButtonX to="signup" variant="outlined">
+              <ButtonX route={{ to: "signup" }} variant="outlined">
                 Sign up
               </ButtonX>
             </Grid>
             <Grid item>
-              <ButtonX to="login" variant="outlined">
+              <ButtonX route={{ to: "login" }} variant="outlined">
                 Log in
               </ButtonX>
             </Grid>
