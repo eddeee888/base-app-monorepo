@@ -85,7 +85,7 @@ const SignupForm: FunctionComponent<SignupFormProps> = ({ redirectDestination, o
 
       <Grid container justify="center">
         <Grid item xs={12} sm={8}>
-          <ButtonX type="submit" disabled={loading} showSpinner={loading}>
+          <ButtonX type="submit" loading={loading}>
             Sign Up
           </ButtonX>
         </Grid>
