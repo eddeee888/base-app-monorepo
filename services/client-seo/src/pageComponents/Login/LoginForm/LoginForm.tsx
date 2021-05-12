@@ -18,10 +18,14 @@ export interface LoginFormProps {
 
 const LoginForm: FunctionComponent<LoginFormProps> = ({ redirectDestination, onCompleted }) => {
   const [generalError, setGeneralError] = useState("");
+  const [isCompleted, setIsCompleted] = useState(false);
   const [post, { loading }] = usePost({
     url: generateUrlXhrLogin(),
     onError: () => setGeneralError("The email/password combination you entered is incorrect."),
-    onCompleted: () => onCompleted(),
+    onCompleted: () => {
+      setIsCompleted(true);
+      onCompleted();
+    },
   });
   const formik = useFormik<{ email: string; password: string }>({
     initialValues: { email: "", password: "" },
@@ -60,7 +64,7 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ redirectDestination, onC
 
       <Grid container justify="center">
         <Grid item xs={12} sm={8}>
-          <ButtonX type="submit" loading={loading}>
+          <ButtonX type="submit" loading={loading || isCompleted}>
             Log In
           </ButtonX>
         </Grid>

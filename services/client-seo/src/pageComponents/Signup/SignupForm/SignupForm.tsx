@@ -21,6 +21,7 @@ export interface SignupFormProps {
 
 const SignupForm: FunctionComponent<SignupFormProps> = ({ redirectDestination, onCompleted }) => {
   const [generalError, setGeneralError] = useState("");
+  const [isCompleted, setIsCompleted] = useState(false);
   const [post, { loading }] = usePost({
     url: generateUrlXhrSignup(),
     onError: () => setGeneralError("Please fill in all the details"),
@@ -28,6 +29,7 @@ const SignupForm: FunctionComponent<SignupFormProps> = ({ redirectDestination, o
       if (data === "email already exists") {
         setGeneralError("Email already exists");
       } else {
+        setIsCompleted(true);
         onCompleted();
       }
     },
@@ -85,7 +87,7 @@ const SignupForm: FunctionComponent<SignupFormProps> = ({ redirectDestination, o
 
       <Grid container justify="center">
         <Grid item xs={12} sm={8}>
-          <ButtonX type="submit" loading={loading}>
+          <ButtonX type="submit" loading={loading || isCompleted}>
             Sign Up
           </ButtonX>
         </Grid>
