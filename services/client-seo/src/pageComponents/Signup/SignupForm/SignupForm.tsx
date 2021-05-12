@@ -4,7 +4,7 @@ import { usePost } from "~/common/shared-frontend-components/usePost";
 import FormError from "~/common/shared-frontend-components/FormError";
 import FormikTextInput from "~/common/shared-frontend-components/Formik/FormikTextInput";
 import Anchor from "~/common/shared-ui/Anchor";
-import Button from "~/common/shared-ui/Button";
+import ButtonX from "~/common/components/ButtonX";
 import StandardSpace from "~/common/shared-ui/StandardSpace";
 import Text from "~/common/shared-ui/Text";
 import { signupSchema } from "~/common/shared-validations/schemas/signupSchema";
@@ -85,9 +85,9 @@ const SignupForm: FunctionComponent<SignupFormProps> = ({ redirectDestination, o
 
       <Grid container justify="center">
         <Grid item xs={12} sm={8}>
-          <Button type="submit" disabled={loading} showSpinner={loading}>
+          <ButtonX type="submit" disabled={loading} showSpinner={loading}>
             Sign Up
-          </Button>
+          </ButtonX>
         </Grid>
       </Grid>
 

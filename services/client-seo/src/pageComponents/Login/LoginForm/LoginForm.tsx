@@ -2,7 +2,7 @@ import { useState, FunctionComponent } from "react";
 import { Grid } from "@material-ui/core";
 import FormError from "~/common/shared-frontend-components/FormError";
 import FormikTextInput from "~/common/shared-frontend-components/Formik/FormikTextInput";
-import Button from "~/common/shared-ui/Button";
+import ButtonX from "~/common/components/ButtonX";
 import StandardSpace from "~/common/shared-ui/StandardSpace";
 import Text from "~/common/shared-ui/Text";
 import { loginSchema } from "~/common/shared-validations/schemas/loginSchema";
@@ -60,9 +60,9 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ redirectDestination, onC
 
       <Grid container justify="center">
         <Grid item xs={12} sm={8}>
-          <Button type="submit" disabled={loading} showSpinner={loading}>
+          <ButtonX type="submit" disabled={loading} showSpinner={loading}>
             Log In
-          </Button>
+          </ButtonX>
         </Grid>
       </Grid>
     </form>

@@ -12,12 +12,12 @@ const ViewerMenu: FunctionComponent = () => {
         {!viewer && (
           <>
             <Grid item>
-              <ButtonX to="signup" variant="outlined">
+              <ButtonX route={{ to: "signup" }} variant="outlined">
                 Sign up
               </ButtonX>
             </Grid>
             <Grid item>
-              <ButtonX to="login" variant="outlined">
+              <ButtonX route={{ to: "login" }} variant="outlined">
                 Log in
               </ButtonX>
             </Grid>
