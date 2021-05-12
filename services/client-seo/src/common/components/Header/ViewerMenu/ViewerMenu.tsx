@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { Grid } from "@material-ui/core";
 import { useViewer } from "~/common/components/ViewerQuery";
-import ButtonX from "~/common/ButtonX";
+import ButtonX from "~/common/components/ButtonX";
 import LoggedInMenu from "./LoggedInMenu";
 
 const ViewerMenu: FunctionComponent = () => {
