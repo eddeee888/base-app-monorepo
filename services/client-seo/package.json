@@ -61,6 +61,6 @@
     "jest-transform-graphql": "2.1.0",
     "next-secure-headers": "2.0.0",
     "prettier": "2.2.1",
-    "typescript": "4.2.4"
+    "typescript": "4.3.4"
   }
 }
