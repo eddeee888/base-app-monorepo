@@ -1,7 +1,7 @@
 import { createPasswordService } from "../src/libs/passwordService";
 import { createPrismaClient } from "../src/libs/prismaClient";
 
-const seed = async (): Promise<void> => {
+export const seed = async (): Promise<void> => {
   const prisma = createPrismaClient({ mode: "development" });
 
   try {
@@ -29,12 +29,3 @@ const seed = async (): Promise<void> => {
     await prisma.$disconnect();
   }
 };
-
-(async () => {
-  try {
-    await seed();
-    console.log("*** Finished seeding...");
-  } catch (e) {
-    console.error(e);
-  }
-})();
