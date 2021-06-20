@@ -2,8 +2,7 @@ import { useState, useRef, FunctionComponent, MouseEvent, KeyboardEvent } from "
 import { Popper, Grow, ClickAwayListener, MenuList, MenuItem, Paper } from "@material-ui/core";
 import AnchorButton from "~/common/shared-ui/AnchorButton";
 import Avatar from "~/common/shared-ui/Avatar";
-import { LinkMe } from "~/routes/me/LinkMe";
-import { LinkLogout } from "~/routes/logout/LinkLogout";
+import { LinkMe, LinkLogout } from "~/routes";
 import { Viewer } from "~/common/components/ViewerQuery";
 
 interface LoggedInMenuProps {

@@ -7,9 +7,8 @@ import StandardSpace from "~/common/shared-ui/StandardSpace";
 import Text from "~/common/shared-ui/Text";
 import { loginSchema } from "~/common/shared-validations/schemas/loginSchema";
 import { useFormik } from "formik";
-import { LinkSignup } from "~/routes/signup/LinkSignup";
+import { LinkSignup, generateUrlXhrLogin } from "~/routes";
 import { usePost } from "~/common/shared-frontend-components/usePost";
-import { generateUrlXhrLogin } from "~/routes/xhrLogin/generateUrlXhrLogin";
 
 export interface LoginFormProps {
   redirectDestination: string;

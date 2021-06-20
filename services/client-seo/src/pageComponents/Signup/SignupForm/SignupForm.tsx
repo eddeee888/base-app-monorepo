@@ -9,10 +9,7 @@ import StandardSpace from "~/common/shared-ui/StandardSpace";
 import Text from "~/common/shared-ui/Text";
 import { signupSchema } from "~/common/shared-validations/schemas/signupSchema";
 import { useFormik } from "formik";
-import { LinkLogin } from "~/routes/login/LinkLogin";
-import { generateUrlPrivacyPolicy } from "~/routes/privacyPolicy/generateUrlPrivacyPolicy";
-import { generateUrlTermAndConditions } from "~/routes/termAndConditions/generateUrlTermAndConditions";
-import { generateUrlXhrSignup } from "~/routes/xhrSignup/generateUrlXhrSignup";
+import { LinkLogin, generateUrlPrivacyPolicy, generateUrlTermAndConditions, generateUrlXhrSignup } from "~/routes";
 
 export interface SignupFormProps {
   redirectDestination: string;

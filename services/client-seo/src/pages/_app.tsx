@@ -15,7 +15,7 @@ import createBaseCss from "~/common/shared-styles/createBaseCss";
 import createFontsStyles from "~/common/shared-styles/createFontsStyles";
 import ErrorBoundary from "~/common/components/ErrorBoundary";
 import MaintenancePage from "~/common/shared-page-messages/MaintenancePage";
-import { generateUrlClientSeoStaticImage } from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
+import { generateUrlClientSeoStaticImage } from "~/routes";
 import { publicEnv } from "~/env";
 
 if (isSsr()) {
@@ -91,6 +91,7 @@ const InnerPage: NextPage<{ component: ReactNode; apollo: ApolloClient<Normalize
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const InnerPageWithApollo: any = withApollo(
   ({ initialState, headers }) => {
     const uri = isSsr() && publicEnv.graphqlEndpointSsr ? publicEnv.graphqlEndpointSsr : publicEnv.graphqlEndpoint;
@@ -113,7 +114,7 @@ const InnerPageWithApollo: any = withApollo(
   {
     onError: (err, ctx) => {
       if (ctx && ctx.res && "code" in err) {
-        const error = (err as any) as ErrorWithCode;
+        const error = (err as unknown) as ErrorWithCode;
         ctx.res.statusCode = error.code;
         return;
       }
