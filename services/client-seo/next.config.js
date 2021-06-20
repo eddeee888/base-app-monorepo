@@ -1,7 +1,6 @@
 const { createSecureHeaders } = require("next-secure-headers");
 
 module.exports = {
-  target: "serverless",
   webpack(config) {
     config.resolve.modules.push(__dirname);
 
