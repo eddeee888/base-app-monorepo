@@ -15,7 +15,7 @@ import createBaseCss from "~/common/shared-styles/createBaseCss";
 import createFontsStyles from "~/common/shared-styles/createFontsStyles";
 import ErrorBoundary from "~/common/components/ErrorBoundary";
 import MaintenancePage from "~/common/shared-page-messages/MaintenancePage";
-import { generateUrlClientSeoStaticImage } from "~/routes/clientSeoStaticImage/generateUrlClientSeoStaticImage";
+import { generateUrlClientSeoStaticImage } from "~/routes";
 import { publicEnv } from "~/env";
 
 if (isSsr()) {

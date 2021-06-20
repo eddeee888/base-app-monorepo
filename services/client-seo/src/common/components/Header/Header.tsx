@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { css } from "@emotion/css";
 import Logo from "~/common/shared-ui/Logo";
 import { Grid } from "@material-ui/core";
-import { LinkHome } from "~/routes/home/LinkHome";
+import { LinkHome } from "~/routes";
 import { headerHeight } from "~/common/shared-styles/sizes";
 import { primaryBackgroundColor, borderColor } from "~/common/shared-styles/colors";
 import breakpoints from "~/common/shared-styles/breakpoints";

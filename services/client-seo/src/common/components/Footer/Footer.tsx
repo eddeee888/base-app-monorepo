@@ -2,11 +2,8 @@ import { FunctionComponent } from "react";
 import { css } from "@emotion/css";
 import { Box, Grid } from "@material-ui/core";
 import Text from "~/common/shared-ui/Text";
-import { LinkSignup } from "~/routes/signup/LinkSignup";
-import { LinkLogin } from "~/routes/login/LinkLogin";
+import { LinkSignup, LinkLogin, LinkTermAndConditions, LinkPrivacyPolicy } from "~/routes";
 import { footerBackgroundColor, footerTextColor, footerLinkColorHover } from "~/common/shared-styles/colors";
-import { LinkTermAndConditions } from "~/routes/termAndConditions/LinkTermAndConditions";
-import { LinkPrivacyPolicy } from "~/routes/privacyPolicy/LinkPrivacyPolicy";
 
 const footerClassName = css`
   width: 100%;

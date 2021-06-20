@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Main from "~/common/shared-ui/Main";
 import MainContent from "~/common/shared-ui/MainContent";
 import { useViewer } from "~/common/components/ViewerQuery";
-import { generateUrlMe } from "~/routes/me/generateUrlMe";
+import { generateUrlMe } from "~/routes";
 import Paper from "~/common/shared-ui/Paper";
 import H1 from "~/common/shared-ui/H1";
 import H2 from "~/common/shared-ui/H2";
