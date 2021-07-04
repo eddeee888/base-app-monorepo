@@ -1,6 +1,6 @@
 FROM node:12.18.0-alpine3.11 AS base
 ENV NODE_ENV=development
-ENV PRISMA_BINARY_TARGET=native
+ENV PRISMA_BINARY_TARGET='["native"]'
 WORKDIR /usr/src/app
 RUN apk update \ 
   && apk add bash \
@@ -18,7 +18,7 @@ RUN NODE_ENV=production yarn build:app
 
 FROM node:12.18.0-alpine3.11 as final
 WORKDIR /usr/src/app 
-ENV PRISMA_BINARY_TARGET=native
+ENV PRISMA_BINARY_TARGET='["native"]'
 ENV NODE_ICU_DATA=/usr/src/app/node_modules/full-icu
 COPY --from=builder /usr/src/app/package.json ./package.json
 COPY --from=builder /usr/src/app/build ./build
