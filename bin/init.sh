@@ -3,7 +3,7 @@
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 REVERSE_PROXY_CERTIFICATE_DIR="${CURRENT_DIR}/../services/reverse-proxy/certificates"
 source $CURRENT_DIR/utils/constants.sh
-source $CURRENT_DIR/utils/error_exit.sh
+source $CURRENT_DIR/utils/error-exit.sh
 
 function remove_old_symlink(){
     if [ -f $USR_BIN/$CORE_CMD_NAME ]; then

@@ -17,7 +17,7 @@ services:
       - ./services/client/src:/usr/src/app/src
       - ./services/client/package.json:/usr/src/app/package.json
     networks:
-      - com_vm
+      - vm
 
   client-seo:
     build:
@@ -42,7 +42,7 @@ services:
       - ./services/client-seo/next.config.js:/usr/src/app/next.config.js
       - ./services/client-seo/.next:/usr/src/app/.next
     networks:
-      - com_vm
+      - vm
 
   server:
     build:
@@ -67,7 +67,7 @@ services:
       - ./services/server/scripts:/usr/src/app/scripts
       - ./services/server/package.json:/usr/src/app/package.json
     networks:
-      - com_vm
+      - vm
 
   server-worker:
     build:
@@ -82,7 +82,7 @@ services:
       - ./services/server/prisma:/usr/src/app/prisma
       - ./services/server/package.json:/usr/src/app/package.json
     networks:
-      - com_vm
+      - vm
 
   # Set up load balancer container
   reverse-proxy:
@@ -107,7 +107,7 @@ services:
       - client-seo
       - server
     networks:
-      com_vm:
+      vm:
         aliases:
           - ${CLIENT_SEO_SERVICE_DOMAIN}
 
@@ -125,10 +125,10 @@ services:
     ports:
       - ${MYSQL_PORT}:${MYSQL_PORT}
     networks:
-      - com_vm
+      - vm
 
 volumes:
   database:
 
 networks:
-  com_vm:
+  vm:

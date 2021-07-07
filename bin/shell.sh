@@ -1,8 +1,10 @@
 #!/bin/bash
 
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+source $CURRENT_DIR/utils/dc.sh
+
 function shell(){
-    local cmd="docker-compose exec $1 /bin/bash"
-    echo $cmd
+    local cmd="dc exec $1 /bin/bash"
     eval $cmd
 }
 

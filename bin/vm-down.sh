@@ -2,7 +2,7 @@
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source $CURRENT_DIR/utils/constants.sh
-source $CURRENT_DIR/utils/error_exit.sh
+source $CURRENT_DIR/utils/error-exit.sh
 
 function remove_stoppped_container(){
   if [ "$(docker ps -aq -f status=exited -f name=$DNS_CONTAINER_NAME)" ]; then
