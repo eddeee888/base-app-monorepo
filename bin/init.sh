@@ -37,7 +37,6 @@ function init(){
     $CORE_CMD_NAME init-cert $COMMON_NAME_CLIENT $REVERSE_PROXY_CERTIFICATE_DIR/client
     $CORE_CMD_NAME init-cert $COMMON_NAME_SERVER $REVERSE_PROXY_CERTIFICATE_DIR/server
     $CORE_CMD_NAME init-packages
-    $CORE_CMD_NAME dm-create $CORE_CMD_NAME
 
     echo -e "\nCommand has been linked!\nTry '$CORE_CMD_NAME build' to build the project!"
 }
