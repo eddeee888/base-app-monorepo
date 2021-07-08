@@ -8,14 +8,19 @@ function display_help(){
     echo
     echo "Usage: $CORE_CMD_NAME [option...]" >&2
     echo
-    echo "vm-up                 Set up docker environment."
+    echo "vm-up                 Set up minimum networking requirements."
+    echo "vm-down               Turn off all services and remove all networking setup."
     echo "up [service?]         Start one or all services in detached mode."
     echo "down                  Stop the project, remove all containers and images."
-    echo "start [service?]      Start a service or all services."
     echo "build [service?]      Rebuild a service or all services."
+    echo "start [service?]      Start a service or all services."
     echo "stop [service?]       Stop a service or all services."
+    echo "exec [service?]       Run a command inside a service."
+    echo "shell [service?]      Shell into a service."
     echo "watch                 Start the project in watch mode."
     echo "logs [service?]       Look at the log of a particular service or all services."
+    echo "rebuild [service?]    Rebuild image of a service with no cache."
+    echo "recreate [service?]   Recreate a service container."
     echo
     exit 1
 }
