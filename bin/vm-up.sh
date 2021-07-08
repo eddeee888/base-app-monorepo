@@ -12,6 +12,9 @@ function remove_stoppped_container(){
 
 # This spins up a dnsmasq container so we don't have to manually update host files
 function set_up_dnsmasq {
+  echo "*** Setting up dnsmasq..."
+  echo ""
+
   remove_stoppped_container
 
   if [ "$(docker ps -q -f name=$DNS_CONTAINER_NAME)" ]; then
