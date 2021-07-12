@@ -1,33 +1,37 @@
 #!/bin/bash
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+source $CURRENT_DIR/../../bin/utils/dc.sh
+
 function prisma-dev() {
   cmd=$1
   
   case $cmd in
     'initdb')
-      docker-compose run --rm server yarn prisma:migrate:reseed
+      dc run --rm server yarn prisma:migrate:reseed
       return 0
     ;;
     'reset')
-      docker-compose run --rm server yarn prisma:migrate:reset
+      dc run --rm server yarn prisma:migrate:reset
       return 0
     ;;
     "create")
-      docker-compose exec server yarn prisma migrate dev --name=$2 --create-only --preview-feature
+      dc exec server yarn prisma migrate dev --name=$2 --create-only --preview-feature
       return 0
     ;;
     "deploy")
-      docker-compose exec server yarn prisma:migrate:deploy
+      dc exec server yarn prisma:migrate:deploy
       return 0
     ;;
     "generate")
-      docker-compose exec server yarn prisma:generate:native
-      docker-compose exec server-worker yarn prisma:generate:native
+      dc exec server yarn prisma:generate:native
+      dc exec server-worker yarn prisma:generate:native
       yarn prisma:generate:native
       return 0
     ;;
     'migrate')
-      docker-compose exec server yarn prisma:migrate:dev
-      docker-compose exec server-worker yarn prisma:generate:native
+      dc exec server yarn prisma:migrate:dev
+      dc exec server-worker yarn prisma:generate:native
       yarn prisma:generate:native
       return 0
     ;;
