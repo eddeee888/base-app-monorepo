@@ -5,7 +5,7 @@ services:
     build:
       context: ./services/client
       target: base
-    command: yarn start
+    command: yarn start --host # Ensure Vite dev server can take Docker traffic with --host flag
     environment:
       DEV_SERVER_PORT: ${CLIENT_PORT}
       CI: "true" # Ensure Vite dev server do not immediately send 0 status in container

@@ -10,6 +10,5 @@ export default defineConfig({
   plugins: [reactRefresh(), tsconfigPaths(), graphql(), reactJsx()],
   server: {
     port: parseInt(process.env.DEV_SERVER_PORT) || 3000,
-    host: true,
   },
 });
