@@ -2,10 +2,10 @@
   "compilerOptions": {
     "rootDir": ".",
     "baseUrl": ".",
-    "target": "es6",
-    "lib": ["es5", "es6", "dom", "esnext.asynciterable"],
-    "module": "esnext",
-    "moduleResolution": "node",
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "jsx": "react-jsx",
     "noEmit": true,
     "alwaysStrict": true,
@@ -16,10 +16,10 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
-    "esModuleInterop": true,
+    "esModuleInterop": false,
     "declaration": true,
-    "allowJs": true,
-    "skipLibCheck": true,
+    "allowJs": false,
+    "skipLibCheck": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -32,6 +32,6 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["./src"],
   "exclude": ["node_modules"]
 }
