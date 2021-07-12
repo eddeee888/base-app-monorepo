@@ -13,6 +13,7 @@ services:
       - ./services/client/src:/usr/src/app/src
       - ./services/client/package.json:/usr/src/app/package.json
       - ./services/client/vite.config.ts:/usr/src/app/vite.config.ts
+      - ./services/client/index.html:/usr/src/app/index.html
     networks:
       - vm
 
