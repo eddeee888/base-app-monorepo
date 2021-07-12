@@ -6,7 +6,7 @@
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "analyse": "yarn build && yarn source-map-explorer 'dist/static/js/*.js'",
+    "analyse": "yarn build && yarn source-map-explorer 'dist/**/*.js'",
     "test": "jest",
     "lint": "eslint 'src/**/*.{js,ts,tsx,graphql}'",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
