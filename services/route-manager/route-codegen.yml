@@ -19,7 +19,7 @@ apps:
             componentNamedImport: Link
             propsNamedImport: LinkProps
             hrefProp: href
-            from: "@/common/Link"
+            from: "@/common"
           mode: strict
       - name: "typescript-anchor"
         config:
@@ -31,7 +31,7 @@ apps:
       - name: "typescript-route-config"
         config:
           internalComponent:
-            from: "@/common/Link"
+            from: "@/common"
             namedImports:
               - name: "Link"
           externalComponent:
@@ -62,10 +62,10 @@ apps:
       - name: "typescript-next-js"
         config:
           importCustomLink:
-            componentDefaultImport: true
+            componentNamedImport: Link
             propsNamedImport: LinkProps
             hrefProp: href
-            from: ~/common/components/Link
+            from: "@/common"
           mode: strict
       - name: "typescript-anchor"
         config:
@@ -73,14 +73,15 @@ apps:
             componentDefaultImport: true
             propsNamedImport: AnchorProps
             hrefProp: href
-            from: ~/shared/ui/Anchor
+            from: "@/shared/ui/Anchor"
       - name: "typescript-route-config"
         config:
           internalComponent:
-            from: ~/common/components/Link
-            defaultImport: Link
+            from: "@/common"
+            namedImports:
+              - name: "Link"
           externalComponent:
-            from: ~/shared/ui/Anchor
+            from: "@/shared/ui/Anchor"
             defaultImport: Anchor
 
   server:
