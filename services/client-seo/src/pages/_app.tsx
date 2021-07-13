@@ -3,20 +3,18 @@ import App from "next/app";
 import Head from "next/head";
 import { NextPage } from "next";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { muiTheme } from "~/common/shared-styles/muiTheme";
+import { muiTheme } from "@/shared/styles/muiTheme";
 import { css, injectGlobal } from "@emotion/css";
 import { Global } from "@emotion/react";
 import { ApolloProvider, ApolloClient, NormalizedCacheObject } from "@apollo/client";
-import createApolloClient from "~/common/shared-apollo/createApolloClient";
+import createApolloClient from "@/shared/apollo/createApolloClient";
 import { withApollo } from "next-with-apollo";
-import isSsr from "~/common/components/isSsr";
-import Header from "~/common/components/Header";
-import createBaseCss from "~/common/shared-styles/createBaseCss";
-import createFontsStyles from "~/common/shared-styles/createFontsStyles";
-import ErrorBoundary from "~/common/components/ErrorBoundary";
-import MaintenancePage from "~/common/shared-page-messages/MaintenancePage";
-import { generateUrlClientSeoStaticImage } from "~/routes";
-import { publicEnv } from "~/env";
+import { isSsr, Header, ErrorBoundary } from "@/common";
+import createBaseCss from "@/shared/styles/createBaseCss";
+import createFontsStyles from "@/shared/styles/createFontsStyles";
+import MaintenancePage from "@/shared/page-messages/MaintenancePage";
+import { generateUrlClientSeoStaticImage } from "@/routes";
+import { publicEnv } from "@/env";
 
 if (isSsr()) {
   injectGlobal`${createBaseCss()}`;

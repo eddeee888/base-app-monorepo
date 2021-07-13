@@ -1,1 +1,1 @@
-export { default } from "~/pageComponents/Privacy";
+export { default } from "@/pageComponents/Privacy";

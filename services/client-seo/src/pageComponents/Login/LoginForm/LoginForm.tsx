@@ -1,14 +1,14 @@
 import { useState, FunctionComponent } from "react";
 import { Grid } from "@material-ui/core";
-import FormError from "~/common/shared-frontend-components/FormError";
-import FormikTextInput from "~/common/shared-frontend-components/Formik/FormikTextInput";
-import ButtonX from "~/common/components/ButtonX";
-import StandardSpace from "~/common/shared-ui/StandardSpace";
-import Text from "~/common/shared-ui/Text";
-import { loginSchema } from "~/common/shared-validations/schemas/loginSchema";
+import FormError from "@/shared/frontend-components/FormError";
+import FormikTextInput from "@/shared/frontend-components/Formik/FormikTextInput";
+import { ButtonX } from "@/common";
+import StandardSpace from "@/shared/ui/StandardSpace";
+import Text from "@/shared/ui/Text";
+import { loginSchema } from "@/shared/validations/schemas/loginSchema";
 import { useFormik } from "formik";
-import { LinkSignup, generateUrlXhrLogin } from "~/routes";
-import { usePost } from "~/common/shared-frontend-components/usePost";
+import { LinkSignup, generateUrlXhrLogin } from "@/routes";
+import { usePost } from "@/shared/frontend-components/usePost";
 
 export interface LoginFormProps {
   redirectDestination: string;

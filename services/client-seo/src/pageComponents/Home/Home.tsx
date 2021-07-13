@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
-import Main from "~/common/shared-ui/Main";
+import Main from "@/shared/ui/Main";
 import MainBanner from "./MainBanner";
-import Footer from "~/common/components/Footer";
+import { Footer } from "@/common";
 
 const Home: FunctionComponent = () => {
   return (

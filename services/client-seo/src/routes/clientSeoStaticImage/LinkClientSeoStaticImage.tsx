@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
-import Link, { LinkProps } from "~/common/components/Link";
+import { LinkProps, Link as Link } from "@/common";
 import { generateUrl } from "@route-codegen/utils";
 import { UrlParamsClientSeoStaticImage, patternClientSeoStaticImage } from "./patternClientSeoStaticImage";
 type LinkClientSeoStaticImageProps = Omit<LinkProps, "href"> & { urlParams: UrlParamsClientSeoStaticImage };

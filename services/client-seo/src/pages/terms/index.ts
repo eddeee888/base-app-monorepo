@@ -1,1 +1,1 @@
-export { default } from "~/pageComponents/Terms";
+export { default } from "@/pageComponents/Terms";

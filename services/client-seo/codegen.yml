@@ -6,7 +6,7 @@ hooks:
     - yarn eslint --fix --config .eslintrc.json
     - yarn prettier --write --config .prettierrc.json
 generates:
-  src/common/graphql/types.generated.ts:
+  src/graphql/types.generated.ts:
     plugins:
       - "typescript"
     config:
@@ -15,14 +15,14 @@ generates:
       scalars:
         DateTime: string
 
-  src/common/graphql/operations.generated.d.ts:
+  src/graphql/operations.generated.d.ts:
     plugins:
       - typescript-graphql-files-modules
 
   src:
     preset: near-operation-file
     presetConfig:
-      baseTypesPath: common/graphql/types.generated.ts
+      baseTypesPath: graphql/types.generated.ts
       extension: .generated.tsx
     plugins:
       - "typescript-operations"
