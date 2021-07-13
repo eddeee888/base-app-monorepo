@@ -1,4 +1,4 @@
-let plugins = ["@emotion"];
+let plugins = [];
 
 if (!process.env.BABEL_ENV === "test") {
   plugins = [
