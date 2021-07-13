@@ -3,12 +3,12 @@ import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import { ThemeProvider } from "@material-ui/styles";
 import env from "~/env";
-import createApolloClient from "~/common/shared-apollo/createApolloClient";
-import { muiTheme } from "~/common/shared-styles/muiTheme";
+import createApolloClient from "~/shared/apollo/createApolloClient";
+import { muiTheme } from "~/shared/styles/muiTheme";
 import createGlobalStyles from "~/createGlobalStyles";
 import ViewerProvider from "~/common/components/ViewerProvider";
 import { LayoutProvider } from "~/common/components/LayoutContext";
-import MaintenancePage from "~/common/shared-page-messages/MaintenancePage";
+import MaintenancePage from "~/shared/page-messages/MaintenancePage";
 import imageSrc from "~/common/assets/images/maintenance.png";
 
 createGlobalStyles();

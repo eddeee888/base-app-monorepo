@@ -2,4 +2,4 @@ node_modules/*
 src/routes/*
 **/*.generated.*
 **/dist/*
-src/common/shared-*
+src/shared/*

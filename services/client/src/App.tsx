@@ -1,7 +1,7 @@
 import { lazy, Suspense, FunctionComponent } from "react";
 import { Route, Switch } from "react-router-dom";
 import ErrorBoundary from "~/common/components/ErrorBoundary";
-import Spinner from "~/common/shared-ui/Spinner";
+import Spinner from "~/shared/ui/Spinner";
 import Header from "~/common/components/Header";
 import { ShowHeader } from "~/common/components/LayoutContext";
 import { patternMe } from "~/routes";

@@ -1,14 +1,14 @@
 import { FunctionComponent } from "react";
 import { css } from "@emotion/css";
 import ButtonX from "~/common/components/ButtonX";
-import Logo from "~/common/shared-ui/Logo";
+import Logo from "~/shared/ui/Logo";
 import { useViewer } from "~/common/components/ViewerProvider";
 import LoggedInMenu from "~/common/components/Header/LoggedInMenu";
 import { Grid } from "@material-ui/core";
 import { LinkHome } from "~/routes";
-import { headerHeight } from "~/common/shared-styles/sizes";
-import { primaryBackgroundColor, borderColor } from "~/common/shared-styles/colors";
-import breakpoints from "~/common/shared-styles/breakpoints";
+import { headerHeight } from "~/shared/styles/sizes";
+import { primaryBackgroundColor, borderColor } from "~/shared/styles/colors";
+import breakpoints from "~/shared/styles/breakpoints";
 import { useLayout } from "../LayoutContext";
 
 const headerClassName = css`

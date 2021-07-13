@@ -27,14 +27,14 @@ apps:
             componentDefaultImport: true
             propsNamedImport: AnchorProps
             hrefProp: href
-            from: ~/common/shared-ui/Anchor
+            from: ~/shared/ui/Anchor
       - name: "typescript-route-config"
         config:
           internalComponent:
             from: ~/common/components/Link
             defaultImport: Link
           externalComponent:
-            from: ~/common/shared-ui/Anchor
+            from: ~/shared/ui/Anchor
             defaultImport: Anchor
 
   client-seo:
@@ -72,14 +72,14 @@ apps:
             componentDefaultImport: true
             propsNamedImport: AnchorProps
             hrefProp: href
-            from: ~/common/shared-ui/Anchor
+            from: ~/shared/ui/Anchor
       - name: "typescript-route-config"
         config:
           internalComponent:
             from: ~/common/components/Link
             defaultImport: Link
           externalComponent:
-            from: ~/common/shared-ui/Anchor
+            from: ~/shared/ui/Anchor
             defaultImport: Anchor
 
   server:

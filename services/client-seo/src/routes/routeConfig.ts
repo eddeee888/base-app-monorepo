@@ -1,6 +1,6 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import Link from "~/common/components/Link";
-import Anchor from "~/common/shared-ui/Anchor";
+import Anchor from "~/shared/ui/Anchor";
 import { UrlParamsHome, patternHome } from "./home/patternHome";
 import { UrlParamsLogin, patternLogin } from "./login/patternLogin";
 import { UrlParamsSignup, patternSignup } from "./signup/patternSignup";
