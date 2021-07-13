@@ -1,6 +1,6 @@
 const CLIENT_DESTINATION = "../client/src/shared";
 const CLIENT_SEO_DESTINATION = "../client-seo/src/shared";
-const SERVER_LIBS_DESTINATION = "../server/src/libs";
+const SERVER_LIBS_DESTINATION = "../server/src/libs/shared";
 
 // Note: config key is the immediate dir after SOURCE_ROOT. We only support 1 level.
 // i.e. DO NOT do shared-something/something

@@ -4,8 +4,7 @@ const fs = require("fs");
 const copyFile = (event, parsedConfig, filePath) => {
   console.log(`${event}: ${filePath}`);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [srcRoot, configDirKey, ...relativeFilePathParts] = filePath.split("/");
+  const [_srcRoot, _sharedFolder, configDirKey, ...relativeFilePathParts] = filePath.split("/");
   const relativeFilePath = relativeFilePathParts.join("/");
   const dirName = path.dirname(relativeFilePath);
   const filename = path.basename(relativeFilePath);

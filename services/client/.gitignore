@@ -1,5 +1,6 @@
 # Commons built from ../common
-src/common/shared-*
+src/shared/*
+!src/shared/.gitkeep
 
 # dependencies
 node_modules
