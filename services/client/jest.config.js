@@ -4,9 +4,9 @@ module.exports = {
   moduleFileExtensions: ["js", "ts", "tsx", "json"],
   moduleDirectories: ["node_modules", "./src"],
   moduleNameMapper: {
-    "^~/(.*)$": "<rootDir>/src/$1",
+    "^@/(.*)$": "<rootDir>/src/$1",
   },
-  testPathIgnorePatterns: ["<rootDir>[/\\\\](node_modules|.next)[/\\\\]", "/src\\/common\\/shared(.*)/"],
+  testPathIgnorePatterns: ["<rootDir>[/\\\\](node_modules|.next)[/\\\\]", "/src\\/shared(.*)/"],
   transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$"],
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
   setupFiles: ["./jest.setup.js"],
