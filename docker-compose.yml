@@ -5,17 +5,15 @@ services:
     build:
       context: ./services/client
       target: base
-    command: yarn start
-    ports:
-      - ${CLIENT_PORT}:${CLIENT_PORT}
+    command: yarn start --host # Ensure Vite dev server can take Docker traffic with --host flag
     environment:
-      PORT: ${CLIENT_PORT}
-      CHOKIDAR_USEPOLLING: "true"
-      CHOKIDAR_INTERVAL: 5000
-      TSC_WATCHFILE: "UseFsEventsWithFallbackDynamicPolling"
+      DEV_SERVER_PORT: ${CLIENT_PORT}
+      CI: "true" # Ensure Vite dev server do not immediately send 0 status in container
     volumes:
       - ./services/client/src:/usr/src/app/src
       - ./services/client/package.json:/usr/src/app/package.json
+      - ./services/client/vite.config.ts:/usr/src/app/vite.config.ts
+      - ./services/client/index.html:/usr/src/app/index.html
     networks:
       - vm
 
@@ -24,8 +22,6 @@ services:
       context: ./services/client-seo
       target: base
     command: yarn dev -p ${CLIENT_SEO_PORT}
-    ports:
-      - ${CLIENT_SEO_PORT}:${CLIENT_SEO_PORT}
     environment:
       NODE_ENV: development
       NEXT_PUBLIC_WEBSOCKET_GRAPHQL_ENDPOINT: ${WEBSOCKET_GRAPHQL_ENDPOINT}
@@ -49,8 +45,6 @@ services:
       context: ./services/server
       target: base
     command: yarn start:app
-    ports:
-      - ${SERVER_PORT}:${SERVER_PORT}
     environment:
       APP_ORIGIN: ${APP_ORIGIN}
       PRIMARY_DOMAIN: ${PRIMARY_DOMAIN}
@@ -102,6 +96,7 @@ services:
     ports:
       - 80:80
       - 443:443
+      - 41001:41001 # HACK: get around Vite dev server HMR traffic clientPort bug: https://github.com/vitejs/vite/issues/3737
     depends_on:
       - client
       - client-seo

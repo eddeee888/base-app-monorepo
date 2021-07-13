@@ -1,12 +1,8 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # Commons built from ../common
 src/common/shared-*
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+node_modules
 
 # severless
 .serverless
@@ -15,14 +11,12 @@ src/common/shared-*
 /coverage
 
 # production
-/build
+dist
+dist-ssr
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+*.local
 
 npm-debug.log*
 yarn-debug.log*

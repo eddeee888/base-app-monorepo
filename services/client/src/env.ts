@@ -22,6 +22,6 @@ const prod: AppEnvironment = {
   specialMode: null,
 };
 
-const env = process.env.REACT_APP_ENVIRONMENT === "production" ? prod : dev;
+const env = import.meta.env.PROD ? prod : dev;
 
 export default env;

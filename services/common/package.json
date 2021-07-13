@@ -15,10 +15,10 @@
     "gqlgen": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
-    "@babel/core": "7.13.15",
-    "@babel/preset-env": "7.13.15",
-    "@babel/preset-react": "7.13.13",
-    "@babel/preset-typescript": "7.13.0",
+    "@babel/core": "7.12.10",
+    "@babel/preset-env": "7.12.11",
+    "@babel/preset-react": "7.12.10",
+    "@babel/preset-typescript": "7.12.7",
     "@graphql-codegen/cli": "1.21.3",
     "@graphql-codegen/core": "1.17.9",
     "@graphql-codegen/fragment-matcher": "2.0.1",

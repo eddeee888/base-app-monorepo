@@ -1,4 +1,4 @@
-FROM nginx:1.17.2-alpine 
+FROM nginx:1.20.1-alpine
 
 RUN apk update \ 
   && apk add bash \
@@ -18,6 +18,7 @@ COPY ./certificates/server/device.key /usr/share/nginx/certificates/server/devic
 
 COPY http.conf /etc/nginx/conf.d/http.conf
 COPY proxy.conf /etc/nginx/proxy.conf
+COPY ws.conf /etc/nginx/ws.conf
 
 COPY entrypoint.sh entrypoint.sh
 

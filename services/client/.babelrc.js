@@ -1,4 +1,4 @@
-let plugins = ["@emotion"];
+let plugins = [];
 
 if (!process.env.BABEL_ENV === "test") {
   plugins = [
@@ -24,4 +24,11 @@ if (!process.env.BABEL_ENV === "test") {
   ];
 }
 
-module.exports = { plugins };
+module.exports = {
+  presets: [
+    ["@babel/preset-env", { targets: { node: "current" } }],
+    ["@babel/preset-react", { runtime: "automatic" }],
+    "@babel/preset-typescript",
+  ],
+  plugins,
+};
