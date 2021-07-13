@@ -1,6 +1,7 @@
 #!/bin/bash
 
 CORE_CMD_NAME="bam"
+IDE_CMD="code"
 USR_BIN="/usr/local/bin"
 TOP_LEVEL_DOMAIN="dev"
 PRIMARY_DOMAIN="${CORE_CMD_NAME}.${TOP_LEVEL_DOMAIN}"
