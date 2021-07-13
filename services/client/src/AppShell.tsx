@@ -9,7 +9,7 @@ import createGlobalStyles from "~/createGlobalStyles";
 import ViewerProvider from "~/common/components/ViewerProvider";
 import { LayoutProvider } from "~/common/components/LayoutContext";
 import MaintenancePage from "~/shared/page-messages/MaintenancePage";
-import imageSrc from "~/common/assets/images/maintenance.png";
+import imageSrc from "~/assets/images/maintenance.png";
 
 createGlobalStyles();
 
