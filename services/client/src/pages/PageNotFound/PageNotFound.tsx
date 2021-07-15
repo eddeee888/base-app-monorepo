@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Error404 } from "@/common/Error404";
+import { Error404 } from "@/common";
 
 const PageNotFound: FunctionComponent = () => <Error404 />;
 

@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { useViewer } from "@/common/ViewerProvider";
+import { useViewer } from "@/common";
 import { generateUrlMe, RedirectLogin } from "@/routes";
 import Main from "@/shared/ui/Main";
 import MainContent from "@/shared/ui/MainContent";
