@@ -36,6 +36,7 @@ services:
       - ./services/client-seo/src:/usr/src/app/src
       - ./services/client-seo/package.json:/usr/src/app/package.json
       - ./services/client-seo/next.config.js:/usr/src/app/next.config.js
+      - ./services/client-seo/tsconfig.json:/usr/src/app/tsconfig.json
       - ./services/client-seo/.next:/usr/src/app/.next
     networks:
       - vm
