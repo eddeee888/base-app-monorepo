@@ -31,7 +31,7 @@ apps:
       - name: "typescript-route-config"
         config:
           internalComponent:
-            from: "@/common"
+            from: "@/common/Link"
             namedImports:
               - name: "Link"
           externalComponent:

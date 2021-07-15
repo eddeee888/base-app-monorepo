@@ -1,5 +1,5 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
-import { Link } from "@/common";
+import { Link } from "@/common/Link";
 import Anchor from "@/shared/ui/Anchor";
 import { UrlParamsMe, patternMe } from "./me/patternMe";
 import { UrlParamsHome, patternHome } from "./home/patternHome";
