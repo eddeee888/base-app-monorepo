@@ -1,8 +1,7 @@
 import { FunctionComponent, ReactNode } from "react";
 import { css } from "@emotion/css";
-import { Typography } from "@material-ui/core";
-import { TypographyProps } from "@material-ui/core/Typography";
-import Error from "@material-ui/icons/Error";
+import { Typography, TypographyProps } from "@material-ui/core";
+import { Error } from "@material-ui/icons";
 import { textErrorColor } from "../../styles/colors";
 import { spacingPx } from "../../styles/spacings";
 

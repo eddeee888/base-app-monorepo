@@ -1,5 +1,4 @@
-import { FabProps } from "@material-ui/core/Fab";
-import { SvgIconProps } from "@material-ui/core/SvgIcon";
+import { SvgIconProps, FabProps } from "@material-ui/core";
 
 export interface IconFabProps extends FabProps {
   fontSize?: SvgIconProps["fontSize"];

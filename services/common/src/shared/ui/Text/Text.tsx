@@ -1,6 +1,5 @@
 import { FunctionComponent, ElementType } from "react";
-import { Typography } from "@material-ui/core";
-import { TypographyProps } from "@material-ui/core/Typography";
+import { Typography, TypographyProps } from "@material-ui/core";
 
 type AllowedTypographyProps = Pick<TypographyProps, "gutterBottom" | "variant" | "align" | "className" | "color">;
 

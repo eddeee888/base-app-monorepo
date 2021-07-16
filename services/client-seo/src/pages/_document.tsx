@@ -1,6 +1,6 @@
 import { Children } from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import { ServerStyleSheets } from "@material-ui/core/styles";
+import { ServerStyleSheets } from "@material-ui/core";
 import { muiTheme } from "@/shared/styles/muiTheme";
 import { cache } from "@emotion/css";
 import createEmotionServer from "@emotion/server/create-instance";

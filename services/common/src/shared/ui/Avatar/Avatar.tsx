@@ -1,9 +1,8 @@
 import { FunctionComponent } from "react";
-import { Avatar as AvatarMui } from "@material-ui/core";
+import { Avatar as AvatarMui, AvatarProps as AvatarMuiProps } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { AvatarProps as AvatarMuiProps } from "@material-ui/core/Avatar";
 import { avatarExtraSmallPx, avatarSmallPx, avatarMediumPx, avatarLargePx, avatarExtraLargePx } from "../../styles/sizes";
-import Person from "@material-ui/icons/Person";
+import { Person } from "@material-ui/icons";
 
 interface AvatarProps {
   src?: string | null;

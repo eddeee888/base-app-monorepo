@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import App from "next/app";
 import Head from "next/head";
 import { NextPage } from "next";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core";
 import { muiTheme } from "@/shared/styles/muiTheme";
 import { css, injectGlobal } from "@emotion/css";
 import { Global } from "@emotion/react";

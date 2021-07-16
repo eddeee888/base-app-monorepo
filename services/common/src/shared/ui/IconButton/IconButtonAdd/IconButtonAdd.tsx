@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import AddIcon from "@material-ui/icons/Add";
+import { IconButton } from "@material-ui/core";
+import { Add as AddIcon } from "@material-ui/icons";
 import { IconButtonProps } from "../types";
 
 const IconButtonAdd = forwardRef<HTMLButtonElement, IconButtonProps>(function InnerIconButtonAdd({ fontSize, ...props }, ref) {

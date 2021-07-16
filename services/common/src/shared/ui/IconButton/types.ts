@@ -1,5 +1,4 @@
-import { SvgIconProps } from "@material-ui/core/SvgIcon";
-import { IconButtonProps as DefaultIconButtonProps } from "@material-ui/core/IconButton";
+import { SvgIconProps, IconButtonProps as DefaultIconButtonProps } from "@material-ui/core";
 
 export interface IconButtonProps extends DefaultIconButtonProps {
   fontSize?: SvgIconProps["fontSize"];

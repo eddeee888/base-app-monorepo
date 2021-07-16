@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import Block from "../Block";
-import Box from "@material-ui/core/Box";
+import { Box } from "@material-ui/core";
 import { PageSize, SpacingValue } from "../../styles/types";
 
 export interface MainContentProps {

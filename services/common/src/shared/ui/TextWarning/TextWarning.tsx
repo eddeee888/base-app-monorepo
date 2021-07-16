@@ -1,8 +1,7 @@
 import { ReactNode, FunctionComponent } from "react";
 import { css } from "@emotion/css";
-import { Typography } from "@material-ui/core";
-import { TypographyProps } from "@material-ui/core/Typography";
-import Warning from "@material-ui/icons/Warning";
+import { Typography, TypographyProps } from "@material-ui/core";
+import { Warning } from "@material-ui/icons";
 import { textWarningColor } from "../../styles/colors";
 import { spacingPx } from "../../styles/spacings";
 

@@ -1,4 +1,4 @@
-import { OutlinedTextFieldProps } from "@material-ui/core/TextField";
+import { OutlinedTextFieldProps } from "@material-ui/core";
 
 export type OmittedTextFieldProps = Omit<OutlinedTextFieldProps, "variant" | "select" | "multiline" | "SelectProps">;
 

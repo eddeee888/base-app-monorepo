@@ -1,8 +1,7 @@
 import { ReactNode, FunctionComponent } from "react";
 import { css } from "@emotion/css";
-import { Typography } from "@material-ui/core";
-import { TypographyProps } from "@material-ui/core/Typography";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import { Typography, TypographyProps } from "@material-ui/core";
+import { CheckCircle as CheckCircleIcon } from "@material-ui/icons";
 import { textSuccessColor, textColor } from "../../styles/colors";
 import { spacingPx } from "../../styles/spacings";
 
