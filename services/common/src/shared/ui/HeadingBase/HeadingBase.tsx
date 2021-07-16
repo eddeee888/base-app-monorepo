@@ -14,12 +14,10 @@ export type HeadingBaseProps<D extends ElementType = TypographyTypeMap["defaultC
   underline?: boolean;
 };
 
-function HeadingBase<D extends ElementType = TypographyTypeMap["defaultComponent"], P = Record<string, unknown>>(
+export function HeadingBase<D extends ElementType = TypographyTypeMap["defaultComponent"], P = Record<string, unknown>>(
   props: HeadingBaseProps<D, P>
 ): ReactElement {
   const { underline, className, ...rest } = props;
 
   return <Typography {...rest} className={cx([className, underline ? headingClassName : undefined])} />;
 }
-
-export default HeadingBase;

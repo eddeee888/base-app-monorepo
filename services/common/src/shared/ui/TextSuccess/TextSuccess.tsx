@@ -27,11 +27,9 @@ const textColorNormal = css`
   color: ${textColor};
 `;
 
-const TextSuccess: FunctionComponent<TextSuccessProps> = ({ textColor = "success", children, ...props }) => (
+export const TextSuccess: FunctionComponent<TextSuccessProps> = ({ textColor = "success", children, ...props }) => (
   <Typography {...props} variant="body1" className={successClassName}>
     <CheckCircleIcon className={successIconClassName} />
     <span className={textColor === "success" ? textColorSuccess : textColorNormal}>{children}</span>
   </Typography>
 );
-
-export default TextSuccess;

@@ -1,9 +1,5 @@
 import { ReactNode, FunctionComponent } from "react";
-import Main from "../ui/Main";
-import MainContent from "../ui/MainContent";
-import Block from "../ui/Block";
-import H1 from "../ui/H1";
-import StandardSpace from "../ui/StandardSpace";
+import { Main, MainContent, Block, H1, StandardSpace } from "../ui";
 
 interface PageError404Props {
   imageSrc: string;

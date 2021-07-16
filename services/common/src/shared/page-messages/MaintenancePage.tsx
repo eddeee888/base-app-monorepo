@@ -1,10 +1,5 @@
 import { FunctionComponent } from "react";
-import MainContent from "../ui/MainContent";
-import Main from "../ui/Main";
-import Block from "../ui/Block";
-import H1 from "../ui/H1";
-import Text from "../ui/Text";
-import StandardSpace from "../ui/StandardSpace";
+import { Main, MainContent, Block, H1, Text, StandardSpace } from "../ui";
 
 interface MaintenancePageProps {
   appName?: string;

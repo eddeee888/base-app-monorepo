@@ -1,12 +1,11 @@
 import { FunctionComponent, ReactNode } from "react";
 import { Paper as MuiPaper } from "@material-ui/core";
 import { css, cx } from "@emotion/css";
-
 import { spacingRem } from "../../styles/spacings";
 import { primaryBackgroundColor } from "../../styles/colors";
 import { SpacingValue } from "../../styles/types";
 
-interface Props {
+export interface PaperProps {
   children?: ReactNode;
   className?: string;
   paddingX?: SpacingValue | [SpacingValue, SpacingValue];
@@ -31,7 +30,7 @@ const disabledClassName = css`
   }
 `;
 
-const Paper: FunctionComponent<Props> = (props) => {
+export const Paper: FunctionComponent<PaperProps> = (props) => {
   const { className, children, disabled = false, paddingX = 3, paddingY = 2, fullHeight = false } = props;
 
   const paddingTopValue = typeof paddingY === "number" ? paddingY : paddingY[0];
@@ -60,5 +59,3 @@ const Paper: FunctionComponent<Props> = (props) => {
     </MuiPaper>
   );
 };
-
-export default Paper;

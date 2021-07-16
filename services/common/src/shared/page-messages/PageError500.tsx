@@ -1,10 +1,5 @@
 import { FunctionComponent, ReactNode } from "react";
-import Main from "../ui/Main";
-import MainContent from "../ui/MainContent";
-import Block from "../ui/Block";
-import H1 from "../ui/H1";
-import Text from "../ui/Text";
-import StandardSpace from "../ui/StandardSpace";
+import { Main, MainContent, Block, H1, Text, StandardSpace } from "../ui";
 
 interface PageError500Props {
   imageSrc: string;

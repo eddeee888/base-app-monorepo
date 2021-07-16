@@ -2,7 +2,7 @@ import { FormikBag } from "../types";
 import { OmittedFormikTextFieldProps } from "../../../typings/Omitted";
 import prepareFieldProps from "../prepareFieldProps";
 import FormError from "../../FormError";
-import TextInput from "../../../ui/TextInput";
+import { TextInput } from "../../../ui";
 
 type FormikTextInputProps<Values> = {
   name: keyof Values;

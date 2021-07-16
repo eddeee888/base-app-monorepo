@@ -7,10 +7,8 @@ export interface TextProps extends AllowedTypographyProps {
   component?: ElementType;
 }
 
-const Text: FunctionComponent<TextProps> = ({ children, ...props }) => (
+export const Text: FunctionComponent<TextProps> = ({ children, ...props }) => (
   <Typography variant="body1" {...props}>
     {children}
   </Typography>
 );
-
-export default Text;

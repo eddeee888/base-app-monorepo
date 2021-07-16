@@ -10,7 +10,7 @@ export interface SelectProps extends OmittedTextFieldProps {
   options: SelectOption[];
 }
 
-function Select({ options, ...props }: SelectProps): JSX.Element {
+export function Select({ options, ...props }: SelectProps): JSX.Element {
   return (
     <TextField fullWidth margin="normal" {...props} select variant="outlined" SelectProps={{ native: true }}>
       {options.map((option) => (
@@ -21,5 +21,3 @@ function Select({ options, ...props }: SelectProps): JSX.Element {
     </TextField>
   );
 }
-
-export default Select;

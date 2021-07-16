@@ -4,8 +4,6 @@ import { forwardRef } from "react";
 
 export type TextInputProps = OmittedTextFieldProps;
 
-const TextInput = forwardRef<any, TextInputProps>(function InnerTextInput(props, ref) {
+export const TextInput = forwardRef<any, TextInputProps>(function InnerTextInput(props, ref) {
   return <TextField inputRef={ref} fullWidth margin="normal" {...props} variant="outlined" />;
 });
-
-export default TextInput;

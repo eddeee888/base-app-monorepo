@@ -5,7 +5,7 @@ import { Warning } from "@material-ui/icons";
 import { textWarningColor } from "../../styles/colors";
 import { spacingPx } from "../../styles/spacings";
 
-interface Props extends TypographyProps {
+export interface TextWarningProps extends TypographyProps {
   children: ReactNode;
 }
 
@@ -18,11 +18,9 @@ const iconClassName = css`
   margin-right: ${spacingPx(1) / 2}px;
 `;
 
-const TextWarning: FunctionComponent<Props> = ({ children, ...props }) => (
+export const TextWarning: FunctionComponent<TextWarningProps> = ({ children, ...props }) => (
   <Typography {...props} variant="body1" className={warningClassName}>
     <Warning className={iconClassName} />
     <span>{children}</span>
   </Typography>
 );
-
-export default TextWarning;

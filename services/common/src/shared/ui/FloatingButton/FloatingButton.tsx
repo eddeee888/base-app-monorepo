@@ -8,8 +8,6 @@ const floatingButtonClassName = css`
   bottom: 15px;
 `;
 
-const FloatingButton: FunctionComponent<FabProps> = ({ className, ...props }) => {
+export const FloatingButton: FunctionComponent<FabProps> = ({ className, ...props }) => {
   return <Fab color="primary" className={cx([className, floatingButtonClassName])} {...props} />;
 };
-
-export default FloatingButton;

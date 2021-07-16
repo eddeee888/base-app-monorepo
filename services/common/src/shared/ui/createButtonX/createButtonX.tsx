@@ -1,6 +1,6 @@
 import { ComponentType, FunctionComponent } from "react";
 import { generateUrl } from "@route-codegen/utils";
-import Button, { ButtonProps } from "../Button";
+import { Button, ButtonProps } from "../Button";
 
 type RouteConfig = Record<string, { pathPattern: string; component: ComponentType<any>; type: "internal" | "external" }>;
 type ButtonXComponent<P> = FunctionComponent<P & Omit<ButtonProps, "href">>;
