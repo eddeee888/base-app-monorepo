@@ -1,9 +1,9 @@
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import PageError500 from "~/common/shared-page-messages/PageError500";
-import Text from "~/common/shared-ui/Text";
-import Anchor from "~/common/shared-ui/Anchor";
-import { generateUrlHome, generateUrlClientSeoStaticImage } from "~/routes";
+import PageError500 from "@/shared/page-messages/PageError500";
+import Text from "@/shared/ui/Text";
+import Anchor from "@/shared/ui/Anchor";
+import { generateUrlHome, generateUrlClientSeoStaticImage } from "@/routes";
 
 const Custom500: NextPage = () => {
   return (

@@ -1,34 +1,11 @@
-let plugins = [];
+const presets = [["@babel/preset-react", { runtime: "automatic" }], "@babel/preset-typescript"];
 
-if (!process.env.BABEL_ENV === "test") {
-  plugins = [
-    ...plugins,
-    [
-      "babel-plugin-import",
-      {
-        libraryName: "@material-ui/core",
-        libraryDirectory: "esm",
-        camel2DashComponentName: false,
-      },
-      "core",
-    ],
-    [
-      "babel-plugin-import",
-      {
-        libraryName: "@material-ui/icons",
-        libraryDirectory: "esm",
-        camel2DashComponentName: false,
-      },
-      "icons",
-    ],
-  ];
+// Vite handles preset-env automatically.
+// We run jest tests in a separate setup and it needs @babel/preset-env.
+if (process.env.BABEL_ENV === "test") {
+  presets.push(["@babel/preset-env", { targets: { node: "current" } }]);
 }
 
 module.exports = {
-  presets: [
-    ["@babel/preset-env", { targets: { node: "current" } }],
-    ["@babel/preset-react", { runtime: "automatic" }],
-    "@babel/preset-typescript",
-  ],
-  plugins,
+  presets,
 };

@@ -1,15 +1,15 @@
 import { useState, FunctionComponent } from "react";
 import { Grid } from "@material-ui/core";
-import { usePost } from "~/common/shared-frontend-components/usePost";
-import FormError from "~/common/shared-frontend-components/FormError";
-import FormikTextInput from "~/common/shared-frontend-components/Formik/FormikTextInput";
-import Anchor from "~/common/shared-ui/Anchor";
-import ButtonX from "~/common/components/ButtonX";
-import StandardSpace from "~/common/shared-ui/StandardSpace";
-import Text from "~/common/shared-ui/Text";
-import { signupSchema } from "~/common/shared-validations/schemas/signupSchema";
+import { usePost } from "@/shared/frontend-components/usePost";
+import FormError from "@/shared/frontend-components/FormError";
+import FormikTextInput from "@/shared/frontend-components/Formik/FormikTextInput";
+import Anchor from "@/shared/ui/Anchor";
+import { ButtonX } from "@/common";
+import StandardSpace from "@/shared/ui/StandardSpace";
+import Text from "@/shared/ui/Text";
+import { signupSchema } from "@/shared/validations/schemas/signupSchema";
 import { useFormik } from "formik";
-import { LinkLogin, generateUrlPrivacyPolicy, generateUrlTermAndConditions, generateUrlXhrSignup } from "~/routes";
+import { LinkLogin, generateUrlPrivacyPolicy, generateUrlTermAndConditions, generateUrlXhrSignup } from "@/routes";
 
 export interface SignupFormProps {
   redirectDestination: string;

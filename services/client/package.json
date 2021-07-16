@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "analyse": "yarn build && yarn source-map-explorer 'dist/**/*.js'",
-    "test": "jest",
+    "test": "BABEL_ENV=test jest",
     "lint": "eslint 'src/**/*.{js,ts,tsx,graphql}'",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "gqlgen": "graphql-codegen --config codegen.yml"
@@ -69,7 +69,7 @@
     "prettier": "2.2.1",
     "source-map-explorer": "2.4.2",
     "typescript": "4.3.4",
-    "vite": "2.4.1",
+    "vite": "2.4.2",
     "vite-react-jsx": "1.1.2",
     "vite-tsconfig-paths": "3.3.13"
   },

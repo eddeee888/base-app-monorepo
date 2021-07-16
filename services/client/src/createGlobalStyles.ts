@@ -1,6 +1,6 @@
 import { injectGlobal } from "@emotion/css";
-import createBaseCss from "~/common/shared-styles/createBaseCss";
-import createFontsStyles from "~/common/shared-styles/createFontsStyles";
+import createBaseCss from "@/shared/styles/createBaseCss";
+import createFontsStyles from "@/shared/styles/createFontsStyles";
 
 const createGlobalStyles = (): void => {
   return injectGlobal`${createBaseCss()}

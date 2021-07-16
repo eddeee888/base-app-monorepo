@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import expressAsyncHandler from "express-async-handler";
-import { signupSchema } from "@libs/shared-validations/schemas/signupSchema";
+import { signupSchema } from "@libs/shared/validations/schemas/signupSchema";
 import createHttpError from "http-errors";
 import permissions from "~/permissions";
 import { PrismaClient } from "@prisma/client";

@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import expressAsyncHandler from "express-async-handler";
 import createHttpError from "http-errors";
 import { PrismaClient } from "@prisma/client";
-import { loginSchema } from "@libs/shared-validations/schemas/loginSchema";
+import { loginSchema } from "@libs/shared/validations/schemas/loginSchema";
 import { PasswordService } from "@libs/passwordService";
 import { HeadersService } from "@libs/headersService";
 import { JwtService } from "@libs/jwtService";

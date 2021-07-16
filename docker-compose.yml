@@ -13,6 +13,7 @@ services:
       - ./services/client/src:/usr/src/app/src
       - ./services/client/package.json:/usr/src/app/package.json
       - ./services/client/vite.config.ts:/usr/src/app/vite.config.ts
+      - ./services/client-seo/tsconfig.json:/usr/src/app/tsconfig.json
       - ./services/client/index.html:/usr/src/app/index.html
     networks:
       - vm
@@ -36,6 +37,7 @@ services:
       - ./services/client-seo/src:/usr/src/app/src
       - ./services/client-seo/package.json:/usr/src/app/package.json
       - ./services/client-seo/next.config.js:/usr/src/app/next.config.js
+      - ./services/client-seo/tsconfig.json:/usr/src/app/tsconfig.json
       - ./services/client-seo/.next:/usr/src/app/.next
     networks:
       - vm

@@ -1,1 +1,1 @@
-export { default } from "~/pageComponents/Signup";
+export { default } from "@/pageComponents/Signup";

@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
-import { useViewer } from "~/common/components/ViewerProvider";
-import { generateUrlMe, RedirectLogin } from "~/routes";
-import Main from "~/common/shared-ui/Main";
-import MainContent from "~/common/shared-ui/MainContent";
-import Paper from "~/common/shared-ui/Paper";
+import { useViewer } from "@/common";
+import { generateUrlMe, RedirectLogin } from "@/routes";
+import Main from "@/shared/ui/Main";
+import MainContent from "@/shared/ui/MainContent";
+import Paper from "@/shared/ui/Paper";
 
 const Me: FunctionComponent = () => {
   const { viewer } = useViewer();

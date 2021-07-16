@@ -3,7 +3,8 @@
 .env
 
 # Commons built from ../common
-src/libs/shared-*
+src/libs/shared/**
+!src/libs/shared/.gitkeep
 
 # generated
 

@@ -1,7 +1,7 @@
 import { Children } from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import { ServerStyleSheets } from "@material-ui/core/styles";
-import { muiTheme } from "~/common/shared-styles/muiTheme";
+import { ServerStyleSheets } from "@material-ui/core";
+import { muiTheme } from "@/shared/styles/muiTheme";
 import { cache } from "@emotion/css";
 import createEmotionServer from "@emotion/server/create-instance";
 
@@ -12,6 +12,7 @@ export default class MyDocument extends Document<{ emotionStyles: { ids: string[
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={muiTheme.palette.primary.main} />
+          <link rel="icon" type="image/ico" href="/favicon.ico" />
           <style
             data-emotion-css={this.props.emotionStyles.ids.join(" ")}
             dangerouslySetInnerHTML={{ __html: this.props.emotionStyles.css }}

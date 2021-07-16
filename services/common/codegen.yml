@@ -5,7 +5,7 @@ hooks:
   afterAllFileWrite:
     - prettier --write
 generates:
-  src/shared-apollo/introspectionResult.generated.ts:
+  src/shared/apollo/introspectionResult.generated.ts:
     plugins:
       - "fragment-matcher"
 

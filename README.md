@@ -26,16 +26,10 @@ More on how it works [here](./docs/INIT.md)
 
 #### Set up the Docker environment
 
-We use Docker machine since it gives us better performance compared to Docker for Mac. We create the machine and DNS resolver using the following command:
+Set up `dnsmasq` and DNS resolver to point related traffic to your host machine using the following command:
 
 ```
 $ bam vm-up
-```
-
-Then, we switch into the docker-machine environment by running:
-
-```
-$ eval $(docker-machine env bam)
 ```
 
 Running `docker` commands should now work. For example:
