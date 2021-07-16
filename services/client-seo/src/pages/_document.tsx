@@ -12,6 +12,7 @@ export default class MyDocument extends Document<{ emotionStyles: { ids: string[
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={muiTheme.palette.primary.main} />
+          <link rel="icon" type="image/ico" href="/favicon.ico" />
           <style
             data-emotion-css={this.props.emotionStyles.ids.join(" ")}
             dangerouslySetInnerHTML={{ __html: this.props.emotionStyles.css }}
