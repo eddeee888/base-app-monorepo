@@ -38,7 +38,7 @@ function init(){
     $CORE_CMD_NAME init-cert $COMMON_NAME_SERVER $REVERSE_PROXY_CERTIFICATE_DIR/server
     $CORE_CMD_NAME init-packages
 
-    echo -e "\nCommand has been linked!\nTry '$CORE_CMD_NAME build' to build the project!"
+    echo -e "\nCommand has been linked!\nRun '$CORE_CMD_NAME vm-up && $CORE_CMD_NAME up && $CORE_CMD_NAME ws prisma:dev initdb' to initialize the project!"
 }
 
 init
