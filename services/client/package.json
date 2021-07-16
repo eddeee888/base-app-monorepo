@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "analyse": "yarn build && yarn source-map-explorer 'dist/**/*.js'",
-    "test": "jest",
+    "test": "BABEL_ENV=test jest",
     "lint": "eslint 'src/**/*.{js,ts,tsx,graphql}'",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "gqlgen": "graphql-codegen --config codegen.yml"
