@@ -7,7 +7,7 @@ import createApolloClient from "@/shared/apollo/createApolloClient";
 import { muiTheme } from "@/shared/styles/muiTheme";
 import createGlobalStyles from "@/createGlobalStyles";
 import { ViewerProvider, LayoutProvider } from "@/common";
-import MaintenancePage from "@/shared/page-messages/MaintenancePage";
+import { MaintenancePage } from "@/shared/page-messages";
 import imageSrc from "@/assets/images/maintenance.png";
 
 createGlobalStyles();

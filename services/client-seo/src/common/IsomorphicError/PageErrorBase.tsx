@@ -1,8 +1,6 @@
 import { FunctionComponent } from "react";
 import Head from "next/head";
-import PageError404 from "@/shared/page-messages/PageError404";
-import PageError500 from "@/shared/page-messages/PageError500";
-import PageErrorGeneric from "@/shared/page-messages/PageErrorGeneric";
+import { PageError404, PageError500, PageErrorGeneric } from "@/shared/page-messages";
 import { Text, Anchor } from "@/shared/ui";
 import { generateUrlHome, generateUrlClientSeoStaticImage } from "@/routes";
 

@@ -1,12 +1,12 @@
 import { FunctionComponent, ReactNode } from "react";
 import { Main, MainContent, Block, H1, Text, StandardSpace } from "../ui";
 
-interface PageError500Props {
+export interface PageError500Props {
   imageSrc: string;
   link?: ReactNode;
 }
 
-const PageError500: FunctionComponent<PageError500Props> = ({ link, imageSrc }) => {
+export const PageError500: FunctionComponent<PageError500Props> = ({ link, imageSrc }) => {
   return (
     <Main fullViewPortHeight>
       <MainContent size="xs">
@@ -28,5 +28,3 @@ const PageError500: FunctionComponent<PageError500Props> = ({ link, imageSrc }) 
     </Main>
   );
 };
-
-export default PageError500;

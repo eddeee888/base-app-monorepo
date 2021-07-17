@@ -1,12 +1,12 @@
 import { FunctionComponent } from "react";
 import { Main, MainContent, Block, H1, Text, StandardSpace } from "../ui";
 
-interface MaintenancePageProps {
+export interface MaintenancePageProps {
   appName?: string;
   imageSrc: string;
 }
 
-const MaintenancePage: FunctionComponent<MaintenancePageProps> = ({ appName = "We", imageSrc }) => {
+export const MaintenancePage: FunctionComponent<MaintenancePageProps> = ({ appName = "We", imageSrc }) => {
   return (
     <Main fullViewPortHeight>
       <MainContent size="xs">
@@ -23,5 +23,3 @@ const MaintenancePage: FunctionComponent<MaintenancePageProps> = ({ appName = "W
     </Main>
   );
 };
-
-export default MaintenancePage;

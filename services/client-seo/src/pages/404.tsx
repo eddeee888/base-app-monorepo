@@ -1,6 +1,6 @@
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import PageError404 from "@/shared/page-messages/PageError404";
+import { PageError404 } from "@/shared/page-messages";
 import { Text, Anchor } from "@/shared/ui";
 import { generateUrlHome, generateUrlClientSeoStaticImage } from "@/routes";
 

@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from "react";
-import PageError500 from "@/shared/page-messages/PageError500";
+import { PageError500 } from "@/shared/page-messages";
 import imageSrc from "@/assets/images/500.png";
 import { Text, Anchor } from "@/shared/ui";
 import { generateUrlHome } from "@/routes";

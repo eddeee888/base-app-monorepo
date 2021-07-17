@@ -1,5 +1,5 @@
 import { ErrorInfo, Component, ReactNode } from "react";
-import PageErrorGeneric from "@/shared/page-messages/PageErrorGeneric";
+import { PageErrorGeneric } from "@/shared/page-messages";
 import { generateUrlClientSeoStaticImage, generateUrlHome } from "@/routes";
 import { Anchor, Text } from "@/shared/ui";
 

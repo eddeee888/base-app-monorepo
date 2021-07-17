@@ -12,7 +12,7 @@ import { withApollo } from "next-with-apollo";
 import { isSsr, Header, ErrorBoundary } from "@/common";
 import createBaseCss from "@/shared/styles/createBaseCss";
 import createFontsStyles from "@/shared/styles/createFontsStyles";
-import MaintenancePage from "@/shared/page-messages/MaintenancePage";
+import { MaintenancePage } from "@/shared/page-messages";
 import { generateUrlClientSeoStaticImage } from "@/routes";
 import { publicEnv } from "@/env";
 
