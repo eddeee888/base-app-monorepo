@@ -5,7 +5,7 @@ import FormError from "@/shared/frontend-components/FormError";
 import FormikTextInput from "@/shared/frontend-components/Formik/FormikTextInput";
 import { Anchor, StandardSpace, Text } from "@/shared/ui";
 import { ButtonX } from "@/common";
-import { signupSchema } from "@/shared/validations/schemas/signupSchema";
+import { signupSchema } from "@/shared/validations";
 import { useFormik } from "formik";
 import { LinkLogin, generateUrlPrivacyPolicy, generateUrlTermAndConditions, generateUrlXhrSignup } from "@/routes";
 
