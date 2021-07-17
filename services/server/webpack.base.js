@@ -10,7 +10,7 @@ module.exports = {
     poll: 4000,
     ignored: /node_modules/,
   },
-  target: "node",
+  externalsPresets: { node: true },
   externals: [nodeExternals()],
   module: {
     rules: [
