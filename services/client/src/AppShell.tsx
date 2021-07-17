@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import { ThemeProvider } from "@material-ui/styles";
 import env from "@/env";
-import createApolloClient from "@/shared/apollo/createApolloClient";
+import { createApolloClient } from "@/shared/apollo";
 import { muiTheme } from "@/shared/styles/muiTheme";
 import createGlobalStyles from "@/createGlobalStyles";
 import { ViewerProvider, LayoutProvider } from "@/common";
