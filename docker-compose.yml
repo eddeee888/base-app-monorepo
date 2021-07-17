@@ -31,7 +31,6 @@ services:
       NEXT_PUBLIC_APP_NAME: ${APP_NAME}
       NEXT_PUBLIC_APP_ORIGIN: ${APP_ORIGIN}
       # NEXT_PUBLIC_SPECIAL_MODE: "maintenance"
-      NODE_ICU_DATA: /usr/src/app/node_modules/full-icu # TODO:HACK to get full-icu in nodejs 12
     volumes:
       - ./services/client-seo/public:/usr/src/app/public
       - ./services/client-seo/src:/usr/src/app/src
@@ -72,7 +71,6 @@ services:
     command: yarn start:crons
     environment:
       PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
-      NODE_ICU_DATA: /usr/src/app/node_modules/full-icu # TODO:HACK to get full-icu in nodejs 12
     volumes:
       - ./services/server/src:/usr/src/app/src
       - ./services/server/prisma:/usr/src/app/prisma

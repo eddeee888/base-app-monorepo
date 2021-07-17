@@ -1,7 +1,7 @@
 {
   "name": "bam",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
   "repository": "git@github.com:eddeee888/base-app-monorepo.git",
   "author": "Eddy Nguyen <eddeee.nguyen@gmail.com>",
   "scripts": {
