@@ -1,10 +1,7 @@
-FROM node:12.18.0-alpine3.11 AS base
+FROM node:14.17.3-alpine AS base
 WORKDIR /usr/src/app
 RUN apk update \
   && apk add bash \
   && rm -rf /var/cache/apk/*
 COPY . .
 RUN yarn install
-# TODO:HACK Hack to get full-icu working in node 12. This should be removed when node 13 is supported in lambda
-RUN yarn add full-icu --frozen-lockfile
-ENV NODE_ICU_DATA=/usr/src/app/node_modules/full-icu
