@@ -24,10 +24,10 @@ apps:
       - name: "typescript-anchor"
         config:
           importCustomLink:
-            componentDefaultImport: true
+            componentNamedImport: Anchor
             propsNamedImport: AnchorProps
             hrefProp: href
-            from: "@/shared/ui/Anchor"
+            from: "@/shared/ui"
       - name: "typescript-route-config"
         config:
           internalComponent:
@@ -36,7 +36,8 @@ apps:
               - name: "Link"
           externalComponent:
             from: "@/shared/ui/Anchor"
-            defaultImport: Anchor
+            namedImports:
+              - name: "Anchor"
 
   client-seo:
     origin: https://${PRIMARY_DOMAIN}
@@ -70,10 +71,10 @@ apps:
       - name: "typescript-anchor"
         config:
           importCustomLink:
-            componentDefaultImport: true
+            componentNamedImport: Anchor
             propsNamedImport: AnchorProps
             hrefProp: href
-            from: "@/shared/ui/Anchor"
+            from: "@/shared/ui"
       - name: "typescript-route-config"
         config:
           internalComponent:
@@ -82,7 +83,8 @@ apps:
               - name: "Link"
           externalComponent:
             from: "@/shared/ui/Anchor"
-            defaultImport: Anchor
+            namedImports:
+              - name: "Anchor"
 
   server:
     origin: https://server.${PRIMARY_DOMAIN}

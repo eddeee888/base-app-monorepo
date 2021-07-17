@@ -1,7 +1,7 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
 import { generateUrl } from "@route-codegen/utils";
-import Link, { AnchorProps } from "@/shared/ui/Anchor";
+import { AnchorProps, Anchor as Link } from "@/shared/ui";
 import { patternLogout, UrlParamsLogout, originLogout } from "./patternLogout";
 type LinkLogoutProps = Omit<AnchorProps, "href"> & { urlParams?: UrlParamsLogout };
 export const LinkLogout: React.FunctionComponent<LinkLogoutProps> = ({ urlParams, ...props }) => {
