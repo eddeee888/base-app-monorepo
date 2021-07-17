@@ -1,8 +1,7 @@
 {
   "name": "@bam/common",
   "version": "1.0.0",
-  "author": "Eddy",
-  "license": "MIT",
+  "private": true,
   "scripts": {
     "build": "tsc --noEmit false",
     "test": "jest",

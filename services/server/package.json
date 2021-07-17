@@ -1,8 +1,7 @@
 {
   "name": "@bam/server",
   "version": "1.0.0",
-  "description": "GraphQL and API server",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "build:app": "webpack --config webpack.app.js",
     "start:app": "concurrently -n Webpack,Nodemon \"yarn webpack --watch --config webpack.app.js\" \"yarn watch:app\" -p \"[{name} - {time}]\" -c \"green\",\"yellow\"",
@@ -25,8 +24,6 @@
     "lint": "eslint 'src/**/*.{js,ts,tsx,graphql}'",
     "typecheck": "tsc -b tsconfig.app.json tsconfig.crons.json tsconfig.libs.json"
   },
-  "author": "Eddy Nguyen",
-  "license": "ISC",
   "dependencies": {
     "@graphql-tools/load-files": "6.0.8",
     "@graphql-tools/merge": "6.0.8",
