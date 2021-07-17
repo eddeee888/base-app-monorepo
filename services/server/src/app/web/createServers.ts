@@ -7,13 +7,13 @@ import { json as bodyParser } from "body-parser";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 
-import errorMiddleware from "~/middleware/errorHandler";
-import tokenVerifier from "~/middleware/tokenVerifier";
+import errorMiddleware from "@/middleware/errorHandler";
+import tokenVerifier from "@/middleware/tokenVerifier";
 
 import { ResolverContext } from "@libs/graph/types";
-import { IsLoggedInDirective, IsPrivateDirective } from "~/graph/directives";
-import { getTypeDefs } from "~/graph/schemas/utils";
-import { resolvers } from "~/graph/resolvers";
+import { IsLoggedInDirective, IsPrivateDirective } from "@/graph/directives";
+import { getTypeDefs } from "@/graph/schemas/utils";
+import { resolvers } from "@/graph/resolvers";
 
 import { createHeadersService } from "@libs/headersService";
 import { createJwtService } from "@libs/jwtService";

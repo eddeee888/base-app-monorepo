@@ -1,6 +1,6 @@
 import { MutationResolvers } from "@libs/graph/resolvers.generated";
 import { ForbiddenError } from "apollo-server-express";
-import permissions from "~/permissions";
+import { permissions } from "@/permissions";
 import { mustParseInt } from "@libs/utils";
 
 const userUpdate: MutationResolvers["userUpdate"] = async (parent, { input }, { viewer, prisma }) => {

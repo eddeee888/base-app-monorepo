@@ -1,5 +1,5 @@
 import { gql, GraphQLClient } from "graphql-request";
-import { setupTestServerConfig } from "~/tests/testServer";
+import { setupTestServerConfig } from "@/tests/testServer";
 
 const { fixtures, url } = setupTestServerConfig();
 
