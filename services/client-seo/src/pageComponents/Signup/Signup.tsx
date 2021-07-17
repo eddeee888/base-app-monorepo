@@ -1,15 +1,9 @@
 import { useEffect, FunctionComponent } from "react";
 import { useRouter } from "next/router";
-import Main from "@/shared/ui/Main";
-import MainContent from "@/shared/ui/MainContent";
+import { Main, MainContent, Paper, H1, H2, StandardSpace, Spinner } from "@/shared/ui";
 import { useViewer } from "@/common";
 import { generateUrlMe } from "@/routes";
-import Paper from "@/shared/ui/Paper";
-import H1 from "@/shared/ui/H1";
-import H2 from "@/shared/ui/H2";
-import StandardSpace from "@/shared/ui/StandardSpace";
 import { useMediaQuery } from "@material-ui/core";
-import Spinner from "@/shared/ui/Spinner";
 import SignupForm from "./SignupForm";
 import breakpoints from "@/shared/styles/breakpoints";
 import Head from "next/head";

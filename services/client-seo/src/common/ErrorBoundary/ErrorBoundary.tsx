@@ -1,8 +1,7 @@
 import { ErrorInfo, Component, ReactNode } from "react";
 import PageErrorGeneric from "@/shared/page-messages/PageErrorGeneric";
 import { generateUrlClientSeoStaticImage, generateUrlHome } from "@/routes";
-import Anchor from "@/shared/ui/Anchor";
-import Text from "@/shared/ui/Text";
+import { Anchor, Text } from "@/shared/ui";
 
 interface State {
   error: Error | null;

@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { css } from "@emotion/css";
 import { Box, Grid } from "@material-ui/core";
-import Text from "@/shared/ui/Text";
+import { Text } from "@/shared/ui";
 import { LinkSignup, LinkLogin, LinkTermAndConditions, LinkPrivacyPolicy } from "@/routes";
 import { footerBackgroundColor, footerTextColor, footerLinkColorHover } from "@/shared/styles/colors";
 

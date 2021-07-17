@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import Main from "@/shared/ui/Main";
+import { Main } from "@/shared/ui";
 import MainBanner from "./MainBanner";
 import { Footer } from "@/common";
 

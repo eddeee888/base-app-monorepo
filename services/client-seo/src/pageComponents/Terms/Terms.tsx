@@ -1,11 +1,5 @@
 import { FunctionComponent } from "react";
-import Main from "@/shared/ui/Main";
-import MainContent from "@/shared/ui/MainContent";
-import Paper from "@/shared/ui/Paper";
-import H1 from "@/shared/ui/H1";
-import H2 from "@/shared/ui/H2";
-import Text from "@/shared/ui/Text";
-import StandardSpace from "@/shared/ui/StandardSpace";
+import { Main, MainContent, Paper, H1, H2, Text, StandardSpace } from "@/shared/ui";
 import { Footer } from "@/common";
 import { publicEnv } from "@/env";
 

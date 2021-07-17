@@ -1,8 +1,7 @@
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import PageError404 from "@/shared/page-messages/PageError404";
-import Text from "@/shared/ui/Text";
-import Anchor from "@/shared/ui/Anchor";
+import { Text, Anchor } from "@/shared/ui";
 import { generateUrlHome, generateUrlClientSeoStaticImage } from "@/routes";
 
 const Custom404: NextPage = () => {
