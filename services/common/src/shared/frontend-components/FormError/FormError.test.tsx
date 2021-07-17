@@ -1,4 +1,4 @@
-import FormError from "./FormError";
+import { FormError } from "./FormError";
 import { render, screen } from "@testing-library/react";
 
 describe("<FormError />", () => {

@@ -3,7 +3,7 @@ import { createPrismaClient } from "@libs/prismaClient";
 import { createHeadersService } from "@libs/headersService";
 import { createJwtService } from "@libs/jwtService";
 import { createPasswordService } from "@libs/passwordService";
-import createServers, { CreateServersConfig } from "~/web/createServers";
+import createServers, { CreateServersConfig } from "@/web/createServers";
 
 export interface TestServer {
   expressServer: Express;

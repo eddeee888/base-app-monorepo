@@ -1,4 +1,4 @@
-const getCookieByName = (cookieName: string, cookieString?: string): string => {
+export const getCookieByName = (cookieName: string, cookieString?: string): string => {
   if (!cookieString) {
     return "";
   }
@@ -18,5 +18,3 @@ const getCookieByName = (cookieName: string, cookieString?: string): string => {
   }
   return "";
 };
-
-export default getCookieByName;

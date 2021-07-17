@@ -6,7 +6,7 @@
     "baseUrl": "./src/app",
     "paths": {
       "@libs/*": ["../libs/*"],
-      "~/*": ["./*"]
+      "@/*": ["./*"]
     },
     "outDir": "./build-tsc/app",
     "tsBuildInfoFile": "./build-tsc/app/tsconfig.app.tsbuildinfo"

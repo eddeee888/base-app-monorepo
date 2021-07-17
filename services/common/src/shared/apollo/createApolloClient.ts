@@ -5,16 +5,14 @@ import { onError } from "@apollo/client/link/error";
 import { IncomingHttpHeaders } from "http";
 import introspectionResult from "./introspectionResult.generated";
 
-interface CreateApolloClientParams {
+export interface CreateApolloClientParams {
   uri: string | undefined;
   webSocketUri: string | undefined;
   initialState?: NormalizedCacheObject;
   ssrHeaders?: IncomingHttpHeaders;
 }
 
-const isSsr = (): boolean => typeof window === "undefined";
-
-const createApolloClient = (params: CreateApolloClientParams): ApolloClient<NormalizedCacheObject> => {
+export const createApolloClient = (params: CreateApolloClientParams): ApolloClient<NormalizedCacheObject> => {
   const { uri, webSocketUri, initialState = {}, ssrHeaders } = params;
 
   const httpLink = new HttpLink({
@@ -92,6 +90,8 @@ const createApolloClient = (params: CreateApolloClientParams): ApolloClient<Norm
       })
   );
 
+  const isSsr = (): boolean => typeof window === "undefined";
+
   const client = new ApolloClient({
     link: ApolloLink.from([errorLink, requestLink, transportLink]),
     cache: new InMemoryCache({ possibleTypes: introspectionResult.possibleTypes }).restore(initialState),
@@ -101,5 +101,3 @@ const createApolloClient = (params: CreateApolloClientParams): ApolloClient<Norm
 
   return client;
 };
-
-export default createApolloClient;

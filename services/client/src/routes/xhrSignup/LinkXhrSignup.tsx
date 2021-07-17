@@ -1,7 +1,7 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
 import { generateUrl } from "@route-codegen/utils";
-import Link, { AnchorProps } from "@/shared/ui/Anchor";
+import { AnchorProps, Anchor as Link } from "@/shared/ui";
 import { patternXhrSignup, UrlParamsXhrSignup, originXhrSignup } from "./patternXhrSignup";
 type LinkXhrSignupProps = Omit<AnchorProps, "href"> & { urlParams?: UrlParamsXhrSignup };
 export const LinkXhrSignup: React.FunctionComponent<LinkXhrSignupProps> = ({ urlParams, ...props }) => {

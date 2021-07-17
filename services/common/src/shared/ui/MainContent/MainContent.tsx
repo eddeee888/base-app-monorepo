@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import Block from "../Block";
+import { Block } from "../Block";
 import { Box } from "@material-ui/core";
 import { PageSize, SpacingValue } from "../../styles/types";
 
@@ -8,7 +8,7 @@ export interface MainContentProps {
   marginTop?: SpacingValue;
 }
 
-const MainContent: FunctionComponent<MainContentProps> = ({ size, children, marginTop = 2 }) => {
+export const MainContent: FunctionComponent<MainContentProps> = ({ size, children, marginTop = 2 }) => {
   return (
     <Block size={size} fullHeight>
       <Box mt={marginTop} />
@@ -16,5 +16,3 @@ const MainContent: FunctionComponent<MainContentProps> = ({ size, children, marg
     </Block>
   );
 };
-
-export default MainContent;

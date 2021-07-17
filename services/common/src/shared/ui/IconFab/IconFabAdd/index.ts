@@ -1,1 +1,1 @@
-export { default } from "./IconFabAdd";
+export * from "./IconFabAdd";

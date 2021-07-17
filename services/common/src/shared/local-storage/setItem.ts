@@ -1,6 +1,6 @@
 import { Item } from "./types";
 
-const setItem = (key: Item, value?: string | null): void => {
+export const setItem = (key: Item, value?: string | null): void => {
   if (window && window.localStorage) {
     if (value) {
       window.localStorage.setItem(key, value);
@@ -10,5 +10,3 @@ const setItem = (key: Item, value?: string | null): void => {
     window.localStorage.removeItem(key);
   }
 };
-
-export default setItem;

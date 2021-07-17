@@ -14,7 +14,7 @@ export const checkIfError: CheckIfErrorFn = (error, touched) => {
   return false;
 };
 
-const FormError: FunctionComponent<FormErrorProps> = ({ error }) => {
+export const FormError: FunctionComponent<FormErrorProps> = ({ error }) => {
   if (!error) {
     return null;
   }
@@ -25,5 +25,3 @@ const FormError: FunctionComponent<FormErrorProps> = ({ error }) => {
     </Typography>
   );
 };
-
-export default FormError;

@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { css } from "@emotion/css";
 import { ButtonX } from "../ButtonX";
-import Logo from "@/shared/ui/Logo";
+import { Logo } from "@/shared/ui";
 import { useViewer } from "../ViewerProvider";
 import { LoggedInMenu } from "./LoggedInMenu";
 import { Grid } from "@material-ui/core";

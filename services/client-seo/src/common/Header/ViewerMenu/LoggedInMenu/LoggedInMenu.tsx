@@ -1,7 +1,6 @@
 import { useState, useRef, FunctionComponent, MouseEvent, KeyboardEvent } from "react";
 import { Popper, Grow, ClickAwayListener, MenuList, MenuItem, Paper } from "@material-ui/core";
-import AnchorButton from "@/shared/ui/AnchorButton";
-import Avatar from "@/shared/ui/Avatar";
+import { AnchorButton, Avatar } from "@/shared/ui";
 import { LinkMe, LinkLogout } from "@/routes";
 import { Viewer } from "@/common";
 

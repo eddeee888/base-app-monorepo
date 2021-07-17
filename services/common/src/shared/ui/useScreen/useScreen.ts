@@ -6,7 +6,7 @@ export interface UseScreenResult {
   isDesktop: boolean;
 }
 
-const useScreen = (): UseScreenResult => {
+export const useScreen = (): UseScreenResult => {
   const isMobile = useMediaQuery(breakpoints.down("sm"));
   const isDesktop = useMediaQuery(breakpoints.up("md"));
 
@@ -15,5 +15,3 @@ const useScreen = (): UseScreenResult => {
     isDesktop: isDesktop,
   };
 };
-
-export default useScreen;

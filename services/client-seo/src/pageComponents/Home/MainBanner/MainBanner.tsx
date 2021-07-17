@@ -1,8 +1,7 @@
 import { FunctionComponent } from "react";
 import { css } from "@emotion/css";
 import { Grid, Box } from "@material-ui/core";
-import H1 from "@/shared/ui/H1";
-import Block from "@/shared/ui/Block";
+import { H1, Block } from "@/shared/ui";
 import { headerHeight } from "@/shared/styles/sizes";
 import { primaryColor, primaryBackgroundColor } from "@/shared/styles/colors";
 

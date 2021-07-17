@@ -1,1 +1,1 @@
-export { default } from "./FormikTextArea";
+export * from "./FormikTextArea";

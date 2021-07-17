@@ -24,7 +24,7 @@ const fullHeightClassName = css`
   height: 100%;
 `;
 
-const Block: FunctionComponent<BlockProps> = ({ size, children, fullHeight, fullWidth = false, className }) => {
+export const Block: FunctionComponent<BlockProps> = ({ size, children, fullHeight, fullWidth = false, className }) => {
   const maxWidthClassName = css`
     max-width: ${pageSize[size].max}px;
   `;
@@ -43,5 +43,3 @@ const Block: FunctionComponent<BlockProps> = ({ size, children, fullHeight, full
 
   return <div className={cx([...classNames])}>{children}</div>;
 };
-
-export default Block;

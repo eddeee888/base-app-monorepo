@@ -9,7 +9,7 @@ export type AnchorButtonProps = Omit<Omit<LinkProps<"button">, "component">, "hr
   showSpinner?: boolean;
 };
 
-const AnchorButton = forwardRef<HTMLButtonElement, AnchorButtonProps>(function InnerAnchorButton(props, ref) {
+export const AnchorButton = forwardRef<HTMLButtonElement, AnchorButtonProps>(function InnerAnchorButton(props, ref) {
   const { showSpinner, disabled, children, ...rest } = props;
 
   const buttonClassName = css`
@@ -43,5 +43,3 @@ const AnchorButton = forwardRef<HTMLButtonElement, AnchorButtonProps>(function I
     </Link>
   );
 });
-
-export default AnchorButton;

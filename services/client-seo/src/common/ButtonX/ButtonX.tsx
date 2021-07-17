@@ -1,4 +1,4 @@
 import { routeConfig, RouteConfigProps } from "@/routes/routeConfig";
-import { createButtonX } from "@/shared/ui/createButtonX";
+import { createButtonX } from "@/shared/ui";
 
 export const ButtonX = createButtonX<RouteConfigProps>(routeConfig);

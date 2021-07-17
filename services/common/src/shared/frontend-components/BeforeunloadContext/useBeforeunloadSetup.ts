@@ -9,7 +9,7 @@ const unload = (event: any): void => {
   event.returnValue = "";
 };
 
-const useBeforeunloadSetup: UseBeforeunloadSetup = () => {
+export const useBeforeunloadSetup: UseBeforeunloadSetup = () => {
   const { isActivated } = useBeforeunloadContext();
   const callback = useRef(unload);
   useEffect(() => {
@@ -26,5 +26,3 @@ const useBeforeunloadSetup: UseBeforeunloadSetup = () => {
     return;
   }, [isActivated]);
 };
-
-export default useBeforeunloadSetup;

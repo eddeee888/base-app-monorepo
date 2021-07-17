@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { avatarExtraSmallPx, avatarSmallPx, avatarMediumPx, avatarLargePx, avatarExtraLargePx } from "../../styles/sizes";
 import { Person } from "@material-ui/icons";
 
-interface AvatarProps {
+export interface AvatarProps {
   src?: string | null;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
 }
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Avatar: FunctionComponent<AvatarProps & Omit<AvatarMuiProps, "src">> = ({ size = "sm", src = undefined, ...props }) => {
+export const Avatar: FunctionComponent<AvatarProps & Omit<AvatarMuiProps, "src">> = ({ size = "sm", src = undefined, ...props }) => {
   const classNames = useStyles();
 
   if (!src) {
@@ -50,5 +50,3 @@ const Avatar: FunctionComponent<AvatarProps & Omit<AvatarMuiProps, "src">> = ({ 
 
   return <AvatarMui className={classNames[size]} src={src} {...props} />;
 };
-
-export default Avatar;

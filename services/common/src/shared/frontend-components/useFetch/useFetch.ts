@@ -3,11 +3,12 @@ import { useState } from "react";
 export interface UseFetchParams<B> {
   url?: string;
   body?: B;
+  method?: "POST" | "GET" | "PUT" | "DELETE" | "PATCH";
   onError?: (error: Error) => void;
   onCompleted?: (data: string) => void;
 }
 
-export type PostFn = <B>(overriddenParam?: UseFetchParams<B>) => void;
+export type FetchFn = <B>(overriddenParam?: UseFetchParams<B>) => void;
 
 export interface UseFetchResult {
   data?: string;
@@ -15,19 +16,20 @@ export interface UseFetchResult {
   loading: boolean;
 }
 
-const usePost = <B extends Record<string, unknown>>(params?: UseFetchParams<B>): [PostFn, UseFetchResult] => {
+export const useFetch = <B extends Record<string, unknown>>(params?: UseFetchParams<B>): [FetchFn, UseFetchResult] => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | undefined>(undefined);
   const [data, setData] = useState<string | undefined>(undefined);
 
-  const postFn: PostFn = (overriddenParam): void => {
+  const fn: FetchFn = (overriddenParam): void => {
     const finalUrl = overriddenParam?.url ?? params?.url;
     const finalBody = overriddenParam?.body ?? params?.body;
     const finalOnError = overriddenParam?.onError ?? params?.onError;
     const finalOnCompleted = overriddenParam?.onCompleted ?? params?.onCompleted;
+    const finalMethod = overriddenParam?.method ?? params?.method;
 
     fetch(finalUrl ?? "", {
-      method: "POST",
+      method: finalMethod ?? "GET",
       headers: {
         "Content-Type": "application/json",
       },
@@ -59,7 +61,7 @@ const usePost = <B extends Record<string, unknown>>(params?: UseFetchParams<B>):
   };
 
   return [
-    postFn,
+    fn,
     {
       data: data,
       loading: loading,
@@ -67,5 +69,3 @@ const usePost = <B extends Record<string, unknown>>(params?: UseFetchParams<B>):
     },
   ];
 };
-
-export default usePost;

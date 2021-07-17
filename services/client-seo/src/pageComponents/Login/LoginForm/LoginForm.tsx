@@ -1,14 +1,11 @@
 import { useState, FunctionComponent } from "react";
 import { Grid } from "@material-ui/core";
-import FormError from "@/shared/frontend-components/FormError";
-import FormikTextInput from "@/shared/frontend-components/Formik/FormikTextInput";
+import { FormError, FormikTextInput, useFetch } from "@/shared/frontend-components";
 import { ButtonX } from "@/common";
-import StandardSpace from "@/shared/ui/StandardSpace";
-import Text from "@/shared/ui/Text";
-import { loginSchema } from "@/shared/validations/schemas/loginSchema";
+import { StandardSpace, Text } from "@/shared/ui";
+import { loginSchema } from "@/shared/validations";
 import { useFormik } from "formik";
 import { LinkSignup, generateUrlXhrLogin } from "@/routes";
-import { usePost } from "@/shared/frontend-components/usePost";
 
 export interface LoginFormProps {
   redirectDestination: string;
@@ -18,8 +15,9 @@ export interface LoginFormProps {
 const LoginForm: FunctionComponent<LoginFormProps> = ({ redirectDestination, onCompleted }) => {
   const [generalError, setGeneralError] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
-  const [post, { loading }] = usePost({
+  const [post, { loading }] = useFetch({
     url: generateUrlXhrLogin(),
+    method: "POST",
     onError: () => setGeneralError("The email/password combination you entered is incorrect."),
     onCompleted: () => {
       setIsCompleted(true);

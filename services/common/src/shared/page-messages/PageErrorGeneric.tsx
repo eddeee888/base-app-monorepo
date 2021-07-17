@@ -1,16 +1,12 @@
 import { FunctionComponent, ReactNode } from "react";
-import Main from "../ui/Main";
-import MainContent from "../ui/MainContent";
-import Block from "../ui/Block";
-import Text from "../ui/Text";
-import StandardSpace from "../ui/StandardSpace";
+import { Main, MainContent, Block, Text, StandardSpace } from "../ui";
 
-interface PageErrorGenericProps {
+export interface PageErrorGenericProps {
   imageSrc: string;
   link?: ReactNode;
 }
 
-const PageErrorGeneric: FunctionComponent<PageErrorGenericProps> = ({ link, imageSrc }) => {
+export const PageErrorGeneric: FunctionComponent<PageErrorGenericProps> = ({ link, imageSrc }) => {
   return (
     <Main fullViewPortHeight>
       <MainContent size="xs">
@@ -28,5 +24,3 @@ const PageErrorGeneric: FunctionComponent<PageErrorGenericProps> = ({ link, imag
     </Main>
   );
 };
-
-export default PageErrorGeneric;

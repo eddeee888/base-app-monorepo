@@ -25,7 +25,7 @@ const contentFullWidthClassName = css`
   width: 100%;
 `;
 
-const Main: FunctionComponent<MainProps> = ({ children, className, fullViewPortHeight, fullWidth = false, hasHeader = true }) => {
+export const Main: FunctionComponent<MainProps> = ({ children, className, fullViewPortHeight, fullWidth = false, hasHeader = true }) => {
   const mainTagClassName = css`
     ${hasHeader ? `margin-top: ${headerHeight};` : ""}
     width: 100%;
@@ -53,5 +53,3 @@ const Main: FunctionComponent<MainProps> = ({ children, className, fullViewPortH
     </main>
   );
 };
-
-export default Main;

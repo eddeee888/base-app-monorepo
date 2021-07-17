@@ -4,7 +4,7 @@ export interface FormatTextProps {
   content: string;
 }
 
-const FormatText: FunctionComponent<FormatTextProps> = ({ content }) => {
+export const FormatText: FunctionComponent<FormatTextProps> = ({ content }) => {
   const lines = content.split("\n");
 
   return (
@@ -18,5 +18,3 @@ const FormatText: FunctionComponent<FormatTextProps> = ({ content }) => {
     </>
   );
 };
-
-export default FormatText;

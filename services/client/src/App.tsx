@@ -1,7 +1,7 @@
 import { lazy, Suspense, FunctionComponent } from "react";
 import { Route, Switch } from "react-router-dom";
 import { ErrorBoundary, Header, ShowHeader } from "@/common";
-import Spinner from "@/shared/ui/Spinner";
+import { Spinner } from "@/shared/ui";
 import { patternMe } from "@/routes";
 
 const Me = lazy(() => import("@/pages/Me"));

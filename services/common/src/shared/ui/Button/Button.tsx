@@ -7,7 +7,7 @@ export interface ButtonProps extends MuiButtonProps {
   component?: "button" | "span";
 }
 
-const Button: FunctionComponent<ButtonProps> = ({ children, loading, component = "button", disabled, ...props }) => {
+export const Button: FunctionComponent<ButtonProps> = ({ children, loading, component = "button", disabled, ...props }) => {
   const finalDisabled = loading || disabled;
 
   return (
@@ -22,5 +22,3 @@ const Button: FunctionComponent<ButtonProps> = ({ children, loading, component =
     </MuiButton>
   );
 };
-
-export default Button;

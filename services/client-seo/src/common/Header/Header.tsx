@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { css } from "@emotion/css";
-import Logo from "@/shared/ui/Logo";
+import { Logo } from "@/shared/ui";
 import { Grid } from "@material-ui/core";
 import { LinkHome } from "@/routes";
 import { headerHeight } from "@/shared/styles/sizes";

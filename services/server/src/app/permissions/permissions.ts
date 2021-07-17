@@ -5,7 +5,7 @@ export * from "./canUserUpdateUser";
 import { default as canUserViewUserPrivateDetails } from "./canUserViewUserPrivateDetails";
 export * from "./canUserViewUserPrivateDetails";
 
-export default {
+export const permissions = {
   canUserBeCreated,
   canUserUpdateUser,
   canUserViewUserPrivateDetails,

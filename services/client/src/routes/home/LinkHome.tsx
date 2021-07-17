@@ -1,7 +1,7 @@
 /* This file was automatically generated with route-codegen and should not be edited. */
 import React from "react";
 import { generateUrl } from "@route-codegen/utils";
-import Link, { AnchorProps } from "@/shared/ui/Anchor";
+import { AnchorProps, Anchor as Link } from "@/shared/ui";
 import { patternHome, UrlParamsHome, originHome } from "./patternHome";
 type LinkHomeProps = Omit<AnchorProps, "href"> & { urlParams?: UrlParamsHome };
 export const LinkHome: React.FunctionComponent<LinkHomeProps> = ({ urlParams, ...props }) => {

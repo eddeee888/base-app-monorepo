@@ -1,13 +1,9 @@
 import { useState, FunctionComponent } from "react";
 import { Grid } from "@material-ui/core";
-import { usePost } from "@/shared/frontend-components/usePost";
-import FormError from "@/shared/frontend-components/FormError";
-import FormikTextInput from "@/shared/frontend-components/Formik/FormikTextInput";
-import Anchor from "@/shared/ui/Anchor";
+import { useFetch, FormError, FormikTextInput } from "@/shared/frontend-components";
+import { Anchor, StandardSpace, Text } from "@/shared/ui";
 import { ButtonX } from "@/common";
-import StandardSpace from "@/shared/ui/StandardSpace";
-import Text from "@/shared/ui/Text";
-import { signupSchema } from "@/shared/validations/schemas/signupSchema";
+import { signupSchema } from "@/shared/validations";
 import { useFormik } from "formik";
 import { LinkLogin, generateUrlPrivacyPolicy, generateUrlTermAndConditions, generateUrlXhrSignup } from "@/routes";
 
@@ -19,8 +15,9 @@ export interface SignupFormProps {
 const SignupForm: FunctionComponent<SignupFormProps> = ({ redirectDestination, onCompleted }) => {
   const [generalError, setGeneralError] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
-  const [post, { loading }] = usePost({
+  const [post, { loading }] = useFetch({
     url: generateUrlXhrSignup(),
+    method: "POST",
     onError: () => setGeneralError("Please fill in all the details"),
     onCompleted: (data) => {
       if (data === "email already exists") {

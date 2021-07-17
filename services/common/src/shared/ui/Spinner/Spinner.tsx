@@ -1,13 +1,13 @@
 import { FunctionComponent } from "react";
 import { CircularProgress, Grid } from "@material-ui/core";
-import Main from "../Main";
-import MainContent from "../MainContent";
+import { Main } from "../Main";
+import { MainContent } from "../MainContent";
 
-interface Props {
+export interface SpinnerProps {
   size?: "default" | "fullPage" | "fullWidth";
 }
 
-const Spinner: FunctionComponent<Props> = ({ size = "default" }) => {
+export const Spinner: FunctionComponent<SpinnerProps> = ({ size = "default" }) => {
   if (size === "fullPage") {
     return (
       <Main fullViewPortHeight>
@@ -33,5 +33,3 @@ const Spinner: FunctionComponent<Props> = ({ size = "default" }) => {
   }
   return <CircularProgress />;
 };
-
-export default Spinner;

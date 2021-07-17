@@ -5,7 +5,7 @@ import { Error } from "@material-ui/icons";
 import { textErrorColor } from "../../styles/colors";
 import { spacingPx } from "../../styles/spacings";
 
-interface Props extends TypographyProps {
+export interface TextErrorProps extends TypographyProps {
   children: ReactNode;
 }
 
@@ -18,11 +18,9 @@ const iconClassName = css`
   margin-right: ${spacingPx(1) / 2}px;
 `;
 
-const TextError: FunctionComponent<Props> = ({ children, ...props }) => (
+export const TextError: FunctionComponent<TextErrorProps> = ({ children, ...props }) => (
   <Typography {...props} variant="body1" className={errorClassName}>
     <Error className={iconClassName} />
     <span>{children}</span>
   </Typography>
 );
-
-export default TextError;

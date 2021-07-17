@@ -10,8 +10,6 @@ export interface StandardSpaceProps {
   size?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 }
 
-const StandardSpace: FunctionComponent<StandardSpaceProps> = ({ size = 2 }) => {
+export const StandardSpace: FunctionComponent<StandardSpaceProps> = ({ size = 2 }) => {
   return <Box className={fullWidthClassname} marginBottom={size} />;
 };
-
-export default StandardSpace;

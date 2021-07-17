@@ -1,1 +1,1 @@
-export { default } from "./getCookieByName";
+export * from "./getCookieByName";

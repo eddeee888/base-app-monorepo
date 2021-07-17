@@ -12,6 +12,14 @@ export default defineConfig({
   server: {
     port: parseInt(process.env.DEV_SERVER_PORT) || 3000,
   },
+  /**
+   * Unable to optimize `@/shared/ui` when `vite-react-jsx` is used.
+   * This means files from this module are being loaded individually, making heaps of request instead of one
+   * https://github.com/alloc/vite-react-jsx/issues/9
+  optimizeDeps: {
+    include: ["@/shared/ui"],
+  },
+   */
   plugins: [reactRefresh(), tsconfigPaths(), graphql(), reactJsx()],
   clearScreen: false,
 });
