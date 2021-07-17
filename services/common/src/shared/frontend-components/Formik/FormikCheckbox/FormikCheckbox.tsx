@@ -2,19 +2,15 @@ import { ReactElement } from "react";
 import { FormControlLabel, Checkbox } from "@material-ui/core";
 import { FormikBag } from "../types";
 
-type FormikCheckboxProps<Values> = {
+export type FormikCheckboxProps<Values> = {
   label: string;
   name: keyof Values;
   formik: FormikBag<Values>;
   disabled?: boolean;
 };
 
-function FormikCheckbox<Values = Record<string, unknown>>({
-  name,
-  formik,
-  label,
-  disabled = false,
-}: FormikCheckboxProps<Values>): ReactElement {
+export function FormikCheckbox<Values = Record<string, unknown>>(props: FormikCheckboxProps<Values>): ReactElement {
+  const { name, formik, label, disabled = false } = props;
   return (
     <FormControlLabel
       disabled={disabled}
@@ -23,5 +19,3 @@ function FormikCheckbox<Values = Record<string, unknown>>({
     />
   );
 }
-
-export default FormikCheckbox;

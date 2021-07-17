@@ -1,2 +1,2 @@
 export * from "./BeforeunloadContext";
-export { default as useBeforeunloadSetup } from "./useBeforeunloadSetup";
+export * from "./useBeforeunloadSetup";

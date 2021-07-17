@@ -1,1 +1,1 @@
-export { default } from "./useScript";
+export * from "./useScript";

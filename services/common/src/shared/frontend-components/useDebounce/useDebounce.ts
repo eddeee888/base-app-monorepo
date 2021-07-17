@@ -5,7 +5,7 @@ export interface UseDebounceProps<T> {
   duration: number;
 }
 
-const useDebounce = <T>({ initialValue, duration }: UseDebounceProps<T>): [T, T, Dispatch<SetStateAction<T>>] => {
+export const useDebounce = <T>({ initialValue, duration }: UseDebounceProps<T>): [T, T, Dispatch<SetStateAction<T>>] => {
   const [value, setValue] = useState(initialValue);
   const [debouncedValue, setDebouncedValue] = useState(initialValue);
 
@@ -21,5 +21,3 @@ const useDebounce = <T>({ initialValue, duration }: UseDebounceProps<T>): [T, T,
 
   return [debouncedValue, value, setValue];
 };
-
-export default useDebounce;

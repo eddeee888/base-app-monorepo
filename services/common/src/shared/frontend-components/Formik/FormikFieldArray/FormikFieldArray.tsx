@@ -1,6 +1,6 @@
-import {ReactElement, ReactNode } from "react";
-import FormError from "../../FormError";
+import { ReactElement, ReactNode } from "react";
 import { Field, FieldProps, FormikErrors, FormikHandlers, FormikTouched, getIn } from "formik";
+import { FormError } from "../../FormError";
 
 interface FormFieldProps<Element> {
   field: {
@@ -14,7 +14,7 @@ interface FormFieldProps<Element> {
   form: FieldProps<Element>["form"];
 }
 
-interface Props<Input, Element> {
+export interface FormikFieldArrayProps<Input, Element> {
   name: keyof Input;
   property: keyof Element;
   index: number;
@@ -23,7 +23,9 @@ interface Props<Input, Element> {
   children: (fieldProps: FormFieldProps<Element>) => ReactNode;
 }
 
-function FormFieldArray<Input, Element>({ name, index, property, errors, touched, children }: Props<Input, Element>): ReactElement {
+export function FormikFieldArray<Input, Element>(props: FormikFieldArrayProps<Input, Element>): ReactElement {
+  const { name, index, property, errors, touched, children } = props;
+
   const fieldName = `${name}.${index}.${property}`;
   const fieldError = getIn(errors, fieldName);
   const fieldTouched = getIn(touched, fieldName);
@@ -45,5 +47,3 @@ function FormFieldArray<Input, Element>({ name, index, property, errors, touched
     </Field>
   );
 }
-
-export default FormFieldArray;

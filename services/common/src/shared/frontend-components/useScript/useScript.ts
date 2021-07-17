@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-interface ScriptResult {
+export interface ScriptResult {
   loaded: boolean;
   error: boolean;
 }
 
 const cachedScripts: string[] = [];
 
-const useScript = (src: string): ScriptResult => {
+export const useScript = (src: string): ScriptResult => {
   // Keeping track of script loaded and error state
   const [state, setState] = useState({
     loaded: false,
@@ -69,5 +69,3 @@ const useScript = (src: string): ScriptResult => {
 
   return state;
 };
-
-export default useScript;
