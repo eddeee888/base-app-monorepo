@@ -1,7 +1,7 @@
 import { isApolloError, ApolloError } from "@apollo/client";
-import { ClientApolloError } from "./type";
+import { ClientApolloError } from "./types";
 
-function checkClientApolloError(error: ApolloError): ClientApolloError {
+export function checkClientApolloError(error: ApolloError): ClientApolloError {
   const defaultResult: ClientApolloError = { code: "UNKNOWN" };
 
   if (isApolloError(error)) {
@@ -39,5 +39,3 @@ function checkClientApolloError(error: ApolloError): ClientApolloError {
 
   return defaultResult;
 }
-
-export default checkClientApolloError;
