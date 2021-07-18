@@ -27,7 +27,7 @@ export const Footer: FunctionComponent = () => {
   return (
     <footer className={footerClassName}>
       <Box paddingY={8}>
-        <Grid container justify="center">
+        <Grid container justifyContent="center">
           <Grid item xs={5} sm={4} md={2}>
             <Text variant="h6" className={headingClassName}>
               GET STARTED

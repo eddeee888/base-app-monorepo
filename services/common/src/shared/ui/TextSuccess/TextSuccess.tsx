@@ -3,7 +3,7 @@ import { css } from "@emotion/css";
 import { Typography, TypographyProps } from "@material-ui/core";
 import { CheckCircle as CheckCircleIcon } from "@material-ui/icons";
 import { textSuccessColor, textColor } from "../../styles/colors";
-import { spacingPx } from "../../styles/spacings";
+import { theme } from "../../styles/theme";
 
 export interface TextSuccessProps extends TypographyProps {
   children: ReactNode;
@@ -16,7 +16,7 @@ const successClassName = css`
 `;
 
 const successIconClassName = css`
-  margin-right: ${spacingPx(1) / 2}px;
+  margin-right: ${theme.spacing(1)};
 `;
 
 const textColorSuccess = css`

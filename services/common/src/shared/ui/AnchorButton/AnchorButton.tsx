@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { css } from "@emotion/css";
 import { Link, LinkProps, Box, CircularProgress } from "@material-ui/core";
 import { primaryFont } from "../../styles/fonts";
-import { spacingRem } from "../../styles/spacings";
+import { theme } from "../../styles/theme";
 import { textDisabled } from "../../styles/colors";
 
 export type AnchorButtonProps = Omit<Omit<LinkProps<"button">, "component">, "href"> & {
@@ -37,7 +37,7 @@ export const AnchorButton = forwardRef<HTMLButtonElement, AnchorButtonProps>(fun
       {showSpinner && (
         <>
           <Box ml={1} />
-          <CircularProgress size={`${spacingRem(2)}rem`} />
+          <CircularProgress size={theme.spacing(2)} />
         </>
       )}
     </Link>

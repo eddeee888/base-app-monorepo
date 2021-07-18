@@ -22,7 +22,7 @@ const h1ClassName = css`
 
 const MainBanner: FunctionComponent = () => {
   return (
-    <Grid container className={containerClassName} alignItems="center" justify="center">
+    <Grid container className={containerClassName} alignItems="center" justifyContent="center">
       <Block size="sm">
         <Box paddingX={2} className={boxFullWidthClassName}>
           <Grid container direction="column">

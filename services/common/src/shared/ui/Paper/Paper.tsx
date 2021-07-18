@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactNode } from "react";
 import { Paper as MuiPaper } from "@material-ui/core";
 import { css, cx } from "@emotion/css";
-import { spacingRem } from "../../styles/spacings";
+import { theme } from "../../styles/theme";
 import { primaryBackgroundColor } from "../../styles/colors";
 import { SpacingValue } from "../../styles/types";
 
@@ -38,9 +38,11 @@ export const Paper: FunctionComponent<PaperProps> = (props) => {
   const paddingRightValue = typeof paddingX === "number" ? paddingX : paddingX[0];
   const paddingLeftValue = typeof paddingX === "number" ? paddingX : paddingX[1];
 
+  const paddingValue = `${theme.spacing(paddingTopValue)} ${theme.spacing(paddingRightValue)} ${theme.spacing(
+    paddingBottomValue
+  )} ${theme.spacing(paddingLeftValue)}`;
   const spacingClassName = css`
-    padding: ${spacingRem(paddingTopValue)}rem ${spacingRem(paddingRightValue)}rem ${spacingRem(paddingBottomValue)}rem
-      ${spacingRem(paddingLeftValue)}rem;
+    padding: ${paddingValue};
     width: 100%;
     ${fullHeight ? `height: 100%;` : ""}
   `;

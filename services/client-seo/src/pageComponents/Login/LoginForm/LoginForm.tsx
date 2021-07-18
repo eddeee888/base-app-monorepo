@@ -59,7 +59,7 @@ const LoginForm: FunctionComponent<LoginFormProps> = ({ redirectDestination, onC
 
       <StandardSpace size={1} />
 
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Grid item xs={12} sm={8}>
           <ButtonX type="submit" loading={loading || isCompleted}>
             Log In

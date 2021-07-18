@@ -12,7 +12,7 @@ export const Spinner: FunctionComponent<SpinnerProps> = ({ size = "default" }) =
     return (
       <Main fullViewPortHeight>
         <MainContent size="md">
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item>
               <CircularProgress />
             </Grid>
@@ -24,7 +24,7 @@ export const Spinner: FunctionComponent<SpinnerProps> = ({ size = "default" }) =
 
   if (size === "fullWidth") {
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Grid item>
           <CircularProgress />
         </Grid>

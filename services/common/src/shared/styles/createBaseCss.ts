@@ -1,11 +1,11 @@
 import { defaultBackgroundColor, textColor } from "./colors";
-import breakpoints from "./breakpoints";
+import { theme } from "./theme";
 import { fontFamily } from "./fonts";
 
 const createBaseCss = (): string => `html {
   box-sizing: border-box;
   font-size: 14px;
-  ${breakpoints.up("md")} {
+  ${theme.breakpoints.up("md")} {
     font-size: 16px;
   }
 }
