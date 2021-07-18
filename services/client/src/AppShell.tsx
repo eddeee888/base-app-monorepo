@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
-import { ThemeProvider } from "@material-ui/styles";
+import { ThemeProvider } from "@material-ui/core";
 import env from "@/env";
 import { createApolloClient } from "@/shared/apollo";
 import { theme } from "@/shared/styles/theme";
