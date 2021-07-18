@@ -1,8 +1,6 @@
-import http from "http";
 import express, { Express } from "express";
 import { ApolloServer } from "apollo-server-express";
 import corsMiddleware, { CorsOptions } from "cors";
-import cookie from "cookie";
 import { json as bodyParser } from "body-parser";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
@@ -10,8 +8,9 @@ import helmet from "helmet";
 import errorMiddleware from "@/middleware/errorHandler";
 import tokenVerifier from "@/middleware/tokenVerifier";
 
+import { makeExecutableSchema } from "@graphql-tools/schema";
 import { ResolverContext } from "@libs/graph/types";
-import { IsLoggedInDirective, IsPrivateDirective } from "@/graph/directives";
+import { directiveResolvers } from "@/graph/directiveResolvers";
 import { getTypeDefs } from "@/graph/schemas/utils";
 import { resolvers } from "@/graph/resolvers";
 
@@ -38,28 +37,21 @@ export interface CreateServersConfig {
 }
 
 interface Servers {
-  httpServer: http.Server;
   expressServer: Express;
   apolloServer: ApolloServer;
 }
 
-const createServers = ({ stage, corsOptions, services }: CreateServersConfig): Servers => {
+const createServers = async ({ stage, corsOptions, services }: CreateServersConfig): Promise<Servers> => {
   const apolloServer = new ApolloServer({
-    typeDefs: getTypeDefs(),
-    resolvers: resolvers,
-    schemaDirectives: {
-      isLoggedIn: IsLoggedInDirective,
-      isPrivate: IsPrivateDirective,
-    },
+    schema: makeExecutableSchema({
+      typeDefs: getTypeDefs(),
+      resolvers: resolvers,
+      directiveResolvers: directiveResolvers,
+    }),
     context: async (contextParams): Promise<ResolverContext> => {
-      // For POST requests, the req is inside of contextParams
-      // For WebSocket initial request to connect to the server,
-      // we add it into the contextParams.connection.context.subscriptionRequest, done by "onConnect" function
-      const req = !contextParams.connection ? contextParams.req : contextParams.connection.context.subscriptionRequest;
-
       return {
         prisma: services.prismaClient,
-        viewer: await services.headersService.getViewerFromRequest(req, services.prismaClient, services.jwtService),
+        viewer: await services.headersService.getViewerFromRequest(contextParams.req, services.prismaClient, services.jwtService),
       };
     },
     formatError: (error) => {
@@ -75,24 +67,9 @@ const createServers = ({ stage, corsOptions, services }: CreateServersConfig): S
       return error;
     },
     plugins: [createErrorNotifier()],
-    subscriptions: {
-      onConnect: (connectionParam, websocket, { request }) => {
-        // TODO: add own authentication here
-        if (connectionParam) {
-          const headerCookieString = request.headers.cookie;
-          if (headerCookieString) {
-            const cookies = cookie.parse(headerCookieString);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const subscriptionRequest = request as any;
-            subscriptionRequest.cookies = cookies;
-            return { subscriptionRequest: subscriptionRequest };
-          }
-        }
-
-        throw new Error("Invalid subscription auth token");
-      },
-    },
   });
+
+  await apolloServer.start();
 
   const expressServer = express();
 
@@ -151,11 +128,7 @@ const createServers = ({ stage, corsOptions, services }: CreateServersConfig): S
     cors: corsOptions,
   });
 
-  const httpServer = http.createServer(expressServer);
-  apolloServer.installSubscriptionHandlers(httpServer);
-
   return {
-    httpServer: httpServer,
     expressServer: expressServer,
     apolloServer: apolloServer,
   };
