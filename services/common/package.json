@@ -11,6 +11,7 @@
     "copy": "node copier.js",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "lint": "eslint 'src/**/*.{js,ts,tsx,graphql}'",
+    "typecheck": "tsc --noEmit",
     "gqlgen": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
@@ -52,8 +53,11 @@
   "dependencies": {
     "@apollo/client": "3.3.15",
     "@emotion/css": "11.1.3",
-    "@material-ui/core": "4.11.3",
-    "@material-ui/icons": "4.11.2",
+    "@emotion/react": "11.4.0",
+    "@emotion/styled": "11.3.0",
+    "@material-ui/core": "5.0.0-beta.1",
+    "@material-ui/icons": "5.0.0-alpha.15",
+    "@material-ui/styles": "4.11.4",
     "@route-codegen/utils": "0.2.0",
     "formik": "2.1.5",
     "graphql": "15.5.0",

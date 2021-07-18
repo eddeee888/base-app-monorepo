@@ -1,4 +1,4 @@
-import { useState, useRef, FunctionComponent, MouseEvent, KeyboardEvent } from "react";
+import { useState, useRef, FunctionComponent, KeyboardEvent } from "react";
 import { Popper, Grow, ClickAwayListener, MenuList, MenuItem, Paper } from "@material-ui/core";
 import { AnchorButton, Avatar } from "@/shared/ui";
 import { LinkMe, LinkLogout } from "@/routes";
@@ -17,7 +17,7 @@ export const LoggedInMenu: FunctionComponent<LoggedInMenuProps> = ({ viewer }) =
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event: MouseEvent<EventTarget>): void => {
+  const handleClose = (event: any): void => {
     if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
     }

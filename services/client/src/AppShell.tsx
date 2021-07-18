@@ -1,11 +1,11 @@
 import { FunctionComponent } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
-import { ThemeProvider } from "@material-ui/styles";
+import { ThemeProvider } from "@material-ui/core";
 import env from "@/env";
 import { createApolloClient } from "@/shared/apollo";
-import { muiTheme } from "@/shared/styles/muiTheme";
-import createGlobalStyles from "@/createGlobalStyles";
+import { theme } from "@/shared/styles/theme";
+import { createGlobalStyles } from "./createGlobalStyles";
 import { ViewerProvider, LayoutProvider } from "@/common";
 import { MaintenancePage } from "@/shared/page-messages";
 import imageSrc from "@/assets/images/maintenance.png";
@@ -23,8 +23,8 @@ const AppShell: FunctionComponent = ({ children }) => {
   }
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <ThemeProvider theme={muiTheme}>
+    <ThemeProvider theme={theme}>
+      <ApolloProvider client={apolloClient}>
         <ViewerProvider>
           <LayoutProvider>
             <BrowserRouter>
@@ -32,8 +32,8 @@ const AppShell: FunctionComponent = ({ children }) => {
             </BrowserRouter>
           </LayoutProvider>
         </ViewerProvider>
-      </ThemeProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </ThemeProvider>
   );
 };
 

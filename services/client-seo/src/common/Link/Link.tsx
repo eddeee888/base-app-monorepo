@@ -9,7 +9,7 @@ export interface LinkProps extends LinkNextProps {
 }
 
 const NextComposed = forwardRef<HTMLAnchorElement, Omit<LinkProps, "innerRef">>(function NextComposed(props, ref) {
-  const { as, href, prefetch, ...other } = props;
+  const { as, href, prefetch, color: _color, ...other } = props;
 
   return (
     <LinkNext href={href} prefetch={prefetch} as={as}>

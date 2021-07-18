@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactNode } from "react";
 import { css, cx } from "@emotion/css";
 import { headerHeight, pageSize } from "../../styles/sizes";
-import breakpoints from "../../styles/breakpoints";
+import { theme } from "../../styles/theme";
 
 export interface MainProps {
   children: ReactNode;
@@ -16,7 +16,7 @@ const contentNormalClassName = css`
   max-width: ${pageSize.lg.max}px;
   width: 100%;
 
-  ${breakpoints.up("md")} {
+  ${theme.breakpoints.up("md")} {
     padding: 0 2rem;
   }
 `;

@@ -1,17 +1,15 @@
 import { useEffect, FunctionComponent } from "react";
 import { useRouter } from "next/router";
-import { Main, MainContent, Paper, H1, H2, StandardSpace, Spinner } from "@/shared/ui";
+import { Main, MainContent, Paper, H1, H2, StandardSpace, Spinner, useScreen } from "@/shared/ui";
 import { useViewer } from "@/common";
 import { generateUrlMe } from "@/routes";
-import { useMediaQuery } from "@material-ui/core";
 import SignupForm from "./SignupForm";
-import breakpoints from "@/shared/styles/breakpoints";
 import Head from "next/head";
 import { publicEnv } from "@/env";
 
 const Signup: FunctionComponent = () => {
   const viewer = useViewer();
-  const isMobile = useMediaQuery(breakpoints.down("sm"));
+  const { isMobile } = useScreen();
   const { query } = useRouter();
   const redirectDestination = query.redirect as string;
   const redirect = (): void => window.location.assign(redirectDestination ? decodeURIComponent(redirectDestination) : generateUrlMe());

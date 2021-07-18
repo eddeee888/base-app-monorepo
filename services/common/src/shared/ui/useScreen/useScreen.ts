@@ -1,5 +1,5 @@
 import { useMediaQuery } from "@material-ui/core";
-import breakpoints from "../../styles/breakpoints";
+import { theme } from "../../styles/theme";
 
 export interface UseScreenResult {
   isMobile: boolean;
@@ -7,8 +7,8 @@ export interface UseScreenResult {
 }
 
 export const useScreen = (): UseScreenResult => {
-  const isMobile = useMediaQuery(breakpoints.down("sm"));
-  const isDesktop = useMediaQuery(breakpoints.up("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   return {
     isMobile: isMobile,

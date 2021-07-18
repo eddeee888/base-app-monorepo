@@ -3,7 +3,7 @@ import { css } from "@emotion/css";
 import { Typography, TypographyProps } from "@material-ui/core";
 import { Warning } from "@material-ui/icons";
 import { textWarningColor } from "../../styles/colors";
-import { spacingPx } from "../../styles/spacings";
+import { theme } from "../../styles/theme";
 
 export interface TextWarningProps extends TypographyProps {
   children: ReactNode;
@@ -15,7 +15,7 @@ const warningClassName = css`
 `;
 
 const iconClassName = css`
-  margin-right: ${spacingPx(1) / 2}px;
+  margin-right: ${theme.spacing(1)};
 `;
 
 export const TextWarning: FunctionComponent<TextWarningProps> = ({ children, ...props }) => (

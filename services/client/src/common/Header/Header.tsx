@@ -8,7 +8,7 @@ import { Grid } from "@material-ui/core";
 import { LinkHome } from "@/routes";
 import { headerHeight } from "@/shared/styles/sizes";
 import { primaryBackgroundColor, borderColor } from "@/shared/styles/colors";
-import breakpoints from "@/shared/styles/breakpoints";
+import { theme } from "@/shared/styles/theme";
 import { useLayout } from "../LayoutContext";
 
 const headerClassName = css`
@@ -23,7 +23,7 @@ const headerClassName = css`
   background-color: ${primaryBackgroundColor};
   border-bottom: 1px solid ${borderColor};
   z-index: 1201;
-  ${breakpoints.up("md")} {
+  ${theme.breakpoints.up("md")} {
     padding: 0 2rem;
   }
 `;
@@ -44,7 +44,7 @@ export const Header: FunctionComponent = () => {
 
   return (
     <header className={headerClassName}>
-      <Grid container justify="space-between" alignItems="center">
+      <Grid container justifyContent="space-between" alignItems="center">
         <Grid item>
           <LinkHome>
             <Logo className={logoClassName} />
