@@ -5,7 +5,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import env from "@/env";
 import { createApolloClient } from "@/shared/apollo";
 import { theme } from "@/shared/styles/theme";
-import createGlobalStyles from "@/createGlobalStyles";
+import { createGlobalStyles } from "./createGlobalStyles";
 import { ViewerProvider, LayoutProvider } from "@/common";
 import { MaintenancePage } from "@/shared/page-messages";
 import imageSrc from "@/assets/images/maintenance.png";

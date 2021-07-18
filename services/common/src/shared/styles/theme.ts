@@ -47,7 +47,7 @@ export const theme = createTheme({
       fontWeight: 700,
     },
     body1: {
-      fontSize: "1.1rem",
+      fontSize: "1rem",
     },
     subtitle1: {
       fontSize: "0.9rem",
@@ -96,13 +96,6 @@ export const theme = createTheme({
       styleOverrides: {
         colorPrimary: {
           backgroundColor: borderColor,
-        },
-      },
-    },
-    MuiTableCell: {
-      styleOverrides: {
-        root: {
-          fontSize: "1.1rem",
         },
       },
     },
