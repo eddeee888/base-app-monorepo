@@ -2,7 +2,7 @@ import { convertDisplayName } from "@libs/models/user";
 import { gql, GraphQLClient } from "graphql-request";
 import { setupTestServerConfig } from "@/tests/testServer";
 
-const { url, fixtures } = setupTestServerConfig();
+const config = setupTestServerConfig();
 
 describe("query user resolver", () => {
   it("should get public user data if no user is logged in", async () => {
@@ -15,9 +15,9 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await fixtures.user.user();
+    const { user } = await config.fixtures.user.user();
 
-    const client = new GraphQLClient(url);
+    const client = new GraphQLClient(config.url);
     const result = await client.request(query, { id: user.id });
 
     expect(result.user).toEqual({
@@ -36,10 +36,10 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await fixtures.user.user();
-    const viewer = await fixtures.user.user();
+    const { user } = await config.fixtures.user.user();
+    const viewer = await config.fixtures.user.user();
 
-    const client = new GraphQLClient(url, { headers: { cookie: viewer.tokenCookie } });
+    const client = new GraphQLClient(config.url, { headers: { cookie: viewer.tokenCookie } });
     const result = await client.request(query, { id: user.id });
 
     expect(result.user).toEqual({
@@ -58,10 +58,10 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await fixtures.user.user();
-    const viewer = await fixtures.user.user();
+    const { user } = await config.fixtures.user.user();
+    const viewer = await config.fixtures.user.user();
 
-    const client = new GraphQLClient(url, { headers: { cookie: viewer.tokenCookie } });
+    const client = new GraphQLClient(config.url, { headers: { cookie: viewer.tokenCookie } });
     const result = await client.request(query, { id: user.id });
 
     expect(result.user).toEqual({
@@ -79,9 +79,9 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await fixtures.user.user();
+    const { user } = await config.fixtures.user.user();
 
-    const client = new GraphQLClient(url);
+    const client = new GraphQLClient(config.url);
 
     await expect(client.request(query, { id: user.id })).rejects.toThrow();
   });
@@ -95,10 +95,10 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await fixtures.user.user();
-    const viewer = await fixtures.user.user();
+    const { user } = await config.fixtures.user.user();
+    const viewer = await config.fixtures.user.user();
 
-    const client = new GraphQLClient(url, { headers: { cookie: viewer.tokenCookie } });
+    const client = new GraphQLClient(config.url, { headers: { cookie: viewer.tokenCookie } });
 
     await expect(client.request(query, { id: user.id })).rejects.toThrow();
   });
@@ -112,9 +112,9 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user, tokenCookie } = await fixtures.user.user();
+    const { user, tokenCookie } = await config.fixtures.user.user();
 
-    const client = new GraphQLClient(url, { headers: { cookie: tokenCookie } });
+    const client = new GraphQLClient(config.url, { headers: { cookie: tokenCookie } });
     const result = await client.request(query, { id: user.id });
 
     expect(result.user).toEqual({ firstName: user.firstName });
@@ -129,10 +129,10 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await fixtures.user.user();
-    const viewer = await fixtures.user.admin();
+    const { user } = await config.fixtures.user.user();
+    const viewer = await config.fixtures.user.admin();
 
-    const client = new GraphQLClient(url, { headers: { cookie: viewer.tokenCookie } });
+    const client = new GraphQLClient(config.url, { headers: { cookie: viewer.tokenCookie } });
     const result = await client.request(query, { id: user.id });
 
     expect(result.user).toEqual({ firstName: user.firstName });

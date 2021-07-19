@@ -1,7 +1,7 @@
 import { gql, GraphQLClient } from "graphql-request";
 import { setupTestServerConfig } from "@/tests/testServer";
 
-const { fixtures, url } = setupTestServerConfig();
+const config = setupTestServerConfig();
 
 describe("query me resolver", () => {
   it("should return null if not logged in", async () => {
@@ -15,9 +15,9 @@ describe("query me resolver", () => {
       }
     `;
 
-    const { user } = await fixtures.user.user();
+    const { user } = await config.fixtures.user.user();
 
-    const client = new GraphQLClient(url);
+    const client = new GraphQLClient(config.url);
     const result = await client.request(query, { id: user.id });
 
     expect(result.me).toBeNull();
@@ -34,9 +34,9 @@ describe("query me resolver", () => {
       }
     `;
 
-    const { user, tokenCookie } = await fixtures.user.user();
+    const { user, tokenCookie } = await config.fixtures.user.user();
 
-    const client = new GraphQLClient(url, { headers: { cookie: tokenCookie } });
+    const client = new GraphQLClient(config.url, { headers: { cookie: tokenCookie } });
     const result = await client.request(query, { id: user.id });
 
     expect(result.me).toEqual({
