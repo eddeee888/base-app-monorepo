@@ -17,10 +17,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js 12.x
+      - name: Set up Node.js 14
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: "14.17.3"
 
       - name: Copy common files
         run: yarn copy:common
@@ -47,10 +47,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js 12.x
+      - name: Set up Node.js 14
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: "14.17.3"
 
       - name: Copy common files
         run: yarn copy:common
@@ -68,10 +68,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js 12.x
+      - name: Set up Node.js 14
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: "14.17.3"
 
       - name: Copy common files
         run: yarn copy:common
@@ -89,10 +89,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js 12.x
+      - name: Set up Node.js 14
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: "14.17.3"
 
       - name: Copy common files
         run: yarn copy:common
@@ -119,10 +119,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js 12.x
+      - name: Set up Node.js 14
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: "14.17.3"
 
       - name: Copy common files
         run: yarn copy:common
@@ -146,10 +146,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Set up Node.js 14
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: "14.17.3"
 
       - name: Copy common files
         run: yarn copy:common
