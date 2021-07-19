@@ -47,7 +47,6 @@
     "@graphql-codegen/typescript-react-apollo": "2.2.3",
     "@graphql-codegen/visitor-plugin-common": "1.19.1",
     "@graphql-eslint/eslint-plugin": "0.9.1",
-    "@graphql-tools/mock": "6.2.4",
     "@rollup/plugin-graphql": "1.0.0",
     "@testing-library/dom": "7.30.3",
     "@testing-library/jest-dom": "5.11.10",

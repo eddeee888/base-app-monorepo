@@ -9,32 +9,44 @@ export interface TestServerConfig {
   fixtures: TestConfig["fixtures"];
 }
 
+/**
+ * setupTestServerConfig sets up a server that can be tested against
+ * Note that due to the asynchrony of the process, we cannot
+ * destructure the values at creation time because that happens
+ * before `beforeAll`.
+ * @example
+ * config = setupTestServerConfig();
+ * test("...", () => {
+ *   config.url
+ * })
+ */
 export const setupTestServerConfig = (): TestServerConfig => {
-  const { expressServer, services } = createTestServer();
-
-  const { fixtures } = createTestConfig({
-    prisma: services.prismaClient,
-    jwtService: services.jwtService,
-    passwordService: services.passwordService,
-  });
-
+  const internalConfig: any = {};
   const config: TestServerConfig = {
     url: "http://localhost/graphql",
-    prisma: services.prismaClient,
-    fixtures: fixtures,
+    prisma: undefined as any,
+    fixtures: undefined as any,
   };
 
-  const internalConfig: any = {};
-
   beforeAll(async (done) => {
-    const instance = await expressServer.listen({ port: 80 });
+    const { expressServer, services } = await createTestServer();
+    const { fixtures } = createTestConfig({
+      prisma: services.prismaClient,
+      jwtService: services.jwtService,
+      passwordService: services.passwordService,
+    });
+    config.prisma = services.prismaClient;
+    config.fixtures = fixtures;
+
+    const instance = expressServer.listen({ port: 80 });
     internalConfig.server = instance;
+    internalConfig.prisma = services.prismaClient;
     done();
   });
 
   afterAll(async (done) => {
     internalConfig.server.close();
-    await services.prismaClient.$disconnect();
+    await internalConfig.prisma.$disconnect();
     done();
   });
 

@@ -10,7 +10,7 @@ export interface TestServer {
   services: CreateServersConfig["services"];
 }
 
-const createTestServer = (): TestServer => {
+const createTestServer = async (): Promise<TestServer> => {
   const prisma = createPrismaClient({ mode: "test" });
   const password = createPasswordService();
   const headers = createHeadersService({ primaryDomain: "bam.test" });
@@ -27,7 +27,7 @@ const createTestServer = (): TestServer => {
     jwtService: jwt,
   };
 
-  const { expressServer } = createServers({
+  const { expressServer } = await createServers({
     stage: "test",
     corsOptions: undefined,
     services: services,

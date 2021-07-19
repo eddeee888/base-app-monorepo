@@ -17,7 +17,7 @@ export interface TestConfig {
     jwtService: JwtService;
   };
   fixtures: {
-    user: ReturnType<typeof createUserFixtures>;
+    User: ReturnType<typeof createUserFixtures>;
   };
   reset: () => void;
 }
@@ -40,7 +40,7 @@ const createTestConfig = (params: CreateTestConfigParams): TestConfig => {
       jwtService,
     },
     fixtures: {
-      user: createUserFixtures({ prisma: prisma, jwt: jwtService, password: passwordService }),
+      User: createUserFixtures({ prisma: prisma, jwt: jwtService, password: passwordService }),
     },
     reset: () => {
       afterAll(async (done) => {
