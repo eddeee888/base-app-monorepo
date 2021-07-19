@@ -15,7 +15,7 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await config.fixtures.user.user();
+    const { user } = await config.fixtures.User.user();
 
     const client = new GraphQLClient(config.url);
     const result = await client.request(query, { id: user.id });
@@ -36,8 +36,8 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await config.fixtures.user.user();
-    const viewer = await config.fixtures.user.user();
+    const { user } = await config.fixtures.User.user();
+    const viewer = await config.fixtures.User.user();
 
     const client = new GraphQLClient(config.url, { headers: { cookie: viewer.tokenCookie } });
     const result = await client.request(query, { id: user.id });
@@ -58,8 +58,8 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await config.fixtures.user.user();
-    const viewer = await config.fixtures.user.user();
+    const { user } = await config.fixtures.User.user();
+    const viewer = await config.fixtures.User.user();
 
     const client = new GraphQLClient(config.url, { headers: { cookie: viewer.tokenCookie } });
     const result = await client.request(query, { id: user.id });
@@ -79,7 +79,7 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await config.fixtures.user.user();
+    const { user } = await config.fixtures.User.user();
 
     const client = new GraphQLClient(config.url);
 
@@ -95,8 +95,8 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await config.fixtures.user.user();
-    const viewer = await config.fixtures.user.user();
+    const { user } = await config.fixtures.User.user();
+    const viewer = await config.fixtures.User.user();
 
     const client = new GraphQLClient(config.url, { headers: { cookie: viewer.tokenCookie } });
 
@@ -112,7 +112,7 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user, tokenCookie } = await config.fixtures.user.user();
+    const { user, tokenCookie } = await config.fixtures.User.user();
 
     const client = new GraphQLClient(config.url, { headers: { cookie: tokenCookie } });
     const result = await client.request(query, { id: user.id });
@@ -129,8 +129,8 @@ describe("query user resolver", () => {
       }
     `;
 
-    const { user } = await config.fixtures.user.user();
-    const viewer = await config.fixtures.user.admin();
+    const { user } = await config.fixtures.User.user();
+    const viewer = await config.fixtures.User.admin();
 
     const client = new GraphQLClient(config.url, { headers: { cookie: viewer.tokenCookie } });
     const result = await client.request(query, { id: user.id });
