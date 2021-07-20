@@ -3,4 +3,4 @@ node_modules/*
 **/.next/*
 **/*.generated.*
 **/dist/*
-src/common/shared-*
+src/shared/*
