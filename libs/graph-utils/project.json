@@ -1,0 +1,30 @@
+{
+  "root": "libs/graph-utils",
+  "sourceRoot": "libs/graph-utils/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/graph-utils/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/graph-utils"],
+      "options": {
+        "jestConfig": "libs/graph-utils/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "graphql-codegen": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": ["libs/graph-utils/src/generated"],
+      "options": {
+        "command": "graphql-codegen --config ./libs/graph-utils/graphql-codegen.yml"
+      }
+    }
+  },
+  "tags": ["lib:graph"]
+}

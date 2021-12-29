@@ -1,0 +1,13 @@
+overwrite: true
+schema: "./apps/graph/**/*.graphqls"
+hooks:
+  afterAllFileWrite:
+    - eslint --fix
+    - prettier --write
+generates:
+  libs/graph-utils/src/generated/types.generated.ts:
+    plugins:
+      - typescript
+    config:
+      enumsAsTypes: true
+      nonOptionalTypename: true

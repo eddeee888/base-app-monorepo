@@ -1,6 +1,0 @@
-directive @isLoggedIn(status: Boolean!) on FIELD_DEFINITION
-directive @isPrivate on FIELD_DEFINITION
-
-type Query
-
-type Mutation

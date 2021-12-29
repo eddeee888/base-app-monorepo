@@ -1,7 +1,0 @@
-{
-  "ignore": [".git", "node_modules"],
-  "watch": ["./build/crons/jobs.js"],
-  "exec": "yarn serve:crons",
-  "ext": "ts",
-  "verbose": true
-}

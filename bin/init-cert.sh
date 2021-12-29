@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 function create_root_cert_and_key () {
     echo "*** Creating Root CA..."
 

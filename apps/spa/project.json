@@ -1,0 +1,39 @@
+{
+  "root": "apps/spa",
+  "sourceRoot": "apps/spa/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "tsc --project apps/spa/tsconfig.app.json",
+          "vite --config apps/spa/vite.config.ts --emptyOutDir build"
+        ],
+        "parallel": false
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "vite --config apps/spa/vite.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/spa/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/spa"],
+      "options": {
+        "jestConfig": "apps/spa/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["app:spa"]
+}

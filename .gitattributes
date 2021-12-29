@@ -1,4 +1,0 @@
-services/client/src/routes/**/*.* linguist-generated
-services/client-seo/src/routes/**/*.* linguist-generated
-services/server/src/libs/routes/**/*.* linguist-generated
-**/*.generated.* linguist-generated
