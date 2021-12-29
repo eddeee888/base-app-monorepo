@@ -1,8 +1,0 @@
-{
-  "name": "@bam/route-manager",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "@route-codegen/core": "0.5.5"
-  }
-}

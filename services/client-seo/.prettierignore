@@ -1,7 +1,0 @@
-.serverless/
-node_modules/*
-**/out/*
-**/.next/*
-**/dist/*
-src/shared/*
-.vscode/

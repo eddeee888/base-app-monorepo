@@ -1,5 +1,0 @@
-.serverless/
-node_modules/*
-**/build
-src/shared/*
-.vscode/

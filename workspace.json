@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "graph": "apps/graph",
+    "graph-utils": "libs/graph-utils",
+    "marketing": "apps/marketing",
+    "spa": "apps/spa"
+  }
+}

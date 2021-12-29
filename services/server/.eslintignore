@@ -1,5 +1,0 @@
-build
-node_modules
-webpack.*.js
-*.generated.*
-.eslintrc.js

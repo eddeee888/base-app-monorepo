@@ -1,0 +1,74 @@
+{
+  "root": true,
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nrwl/nx"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nrwl/nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nrwl/nx/typescript"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          { "allowExpressions": true, "allowTypedFunctionExpressions": true }
+        ],
+        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+        "react/jsx-no-useless-fragment": "off"
+      }
+    },
+    {
+      "files": ["*.tsx"],
+      "extends": ["plugin:@nrwl/nx/react-typescript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nrwl/nx/javascript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.graphqls"],
+      "extends": "plugin:@graphql-eslint/schema-recommended",
+      "parserOptions": {
+        "schema": "./**/*.graphqls"
+      },
+      "rules": {
+        "@graphql-eslint/require-description": ["error", { "DirectiveDefinition": true }],
+        "@graphql-eslint/strict-id-in-types": [
+          "error",
+          {
+            "exceptions": {
+              "types": ["Query", "Mutation", "Subscription"],
+              "suffixes": ["Error", "Result"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.graphql"],
+      "extends": "plugin:@graphql-eslint/operations-recommended",
+      "parserOptions": {
+        "schema": "./**/*.graphqls"
+      },
+      "rules": {}
+    }
+  ]
+}

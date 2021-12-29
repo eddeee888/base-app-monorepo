@@ -1,9 +1,10 @@
 #!/bin/bash
 
+set -e
+
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-REVERSE_PROXY_CERTIFICATE_DIR="${CURRENT_DIR}/../services/reverse-proxy/certificates"
-source $CURRENT_DIR/utils/constants.sh
-source $CURRENT_DIR/utils/error-exit.sh
+REVERSE_PROXY_CERTIFICATE_DIR="${CURRENT_DIR}/../dev-services/reverse-proxy/certificates"
+source $CURRENT_DIR/utils-constants.sh
 
 function remove_old_symlink(){
     if [ -f $USR_BIN/$CORE_CMD_NAME ]; then
@@ -16,13 +17,13 @@ function remove_old_symlink(){
 
 function setup_symlink_permission(){
     echo "*** Setting up permission..."
-    sudo chmod a+rx $CURRENT_DIR/core.sh || error_exit "Unable to set up permission"
+    sudo chmod a+rx $CURRENT_DIR/core.sh
     echo "---"
 }
 
 function symlink(){
     echo "*** Sym linking..."
-    sudo ln -s $CURRENT_DIR/core.sh $USR_BIN/$CORE_CMD_NAME || error_exit "Unable to sym link"
+    sudo ln -s $CURRENT_DIR/core.sh $USR_BIN/$CORE_CMD_NAME
     echo "---"
 }
 
@@ -33,12 +34,10 @@ function init(){
     remove_old_symlink
     setup_symlink_permission
     symlink
-    $CORE_CMD_NAME init-cert $COMMON_NAME_CLIENT_SEO $REVERSE_PROXY_CERTIFICATE_DIR/client-seo
-    $CORE_CMD_NAME init-cert $COMMON_NAME_CLIENT $REVERSE_PROXY_CERTIFICATE_DIR/client
-    $CORE_CMD_NAME init-cert $COMMON_NAME_SERVER $REVERSE_PROXY_CERTIFICATE_DIR/server
-    $CORE_CMD_NAME init-packages
+    $CORE_CMD_NAME init-cert $PRIMARY_DOMAIN $REVERSE_PROXY_CERTIFICATE_DIR/primary
+    yarn install
 
-    echo -e "\nCommand has been linked!\nRun '$CORE_CMD_NAME vm-up && $CORE_CMD_NAME ws copy:common && $CORE_CMD_NAME up && $CORE_CMD_NAME ws prisma:dev initdb' to initialize the project!"
+    echo -e "\nCommand has been linked!\nRun '$CORE_CMD_NAME vm-up && $CORE_CMD_NAME build-dev-image && $CORE_CMD_NAME up && $CORE_CMD_NAME prisma-dev initdb' to initialize the project!"
 }
 
 init

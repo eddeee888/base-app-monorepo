@@ -1,0 +1,50 @@
+upstream ${SPA_SERVICE_NAME} {
+  server ${SPA_SERVICE_NAME}:${SPA_PORT};
+}
+
+upstream ${GRAPH_SERVICE_NAME} {
+  server ${GRAPH_SERVICE_NAME}:${GRAPH_PORT};
+}
+
+upstream ${MARKETING_SERVICE_NAME} {
+  server ${MARKETING_SERVICE_NAME}:${MARKETING_PORT};
+}
+
+server {
+  listen 80;
+  
+  location / {
+        return 301 https://$host$request_uri;
+  }      
+}
+
+server {
+  listen 443 ssl http2;
+  server_name ${PRIMARY_DOMAIN};
+  ssl_certificate /usr/share/nginx/certificates/primary/device.crt;
+  ssl_certificate_key /usr/share/nginx/certificates/primary/device.key;
+
+  location / {
+    proxy_pass http://${MARKETING_SERVICE_NAME};
+    include /etc/nginx/proxy.conf;
+    include /etc/nginx/ws.conf;
+  }
+
+  # Vite does not handle base URL without / at the end
+  location = /app {
+    return 301 https://$host/app/;
+  }
+
+  location /app/ {
+    rewrite ^/app(.*)$ /app$1 break;
+    proxy_pass http://${SPA_SERVICE_NAME};
+    include /etc/nginx/proxy.conf;
+    include /etc/nginx/ws.conf;
+  }
+
+  location /graphql {
+    rewrite ^/graphql(.*)$ /graphql$1 break;
+    proxy_pass http://${GRAPH_SERVICE_NAME};
+    include /etc/nginx/proxy.conf;
+  }
+}
