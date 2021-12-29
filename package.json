@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": "14.18.2"
+    "node": "16.13.1"
   },
   "dependencies": {
     "@emotion/react": "11.7.1",
@@ -51,7 +51,7 @@
     "@testing-library/react-hooks": "7.0.2",
     "@types/express": "4.17.13",
     "@types/jest": "27.0.3",
-    "@types/node": "14.18.3",
+    "@types/node": "16.11.17",
     "@types/react": "17.0.37",
     "@types/react-dom": "17.0.11",
     "@typescript-eslint/eslint-plugin": "5.8.1",
