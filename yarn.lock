@@ -1990,10 +1990,10 @@
     ts-node "^9"
     tslib "^2"
 
-"@envelop/core@1.6.5":
-  version "1.6.5"
-  resolved "https://registry.yarnpkg.com/@envelop/core/-/core-1.6.5.tgz#dd8728b6d5732aab37105a98388804a22f53f033"
-  integrity sha512-HcpQDFo5CLyzWJPbtX34jz2rViMcq8tlRgv5KAnpGDEMZnY+lO/Fx9C0eC0K0H4pRAX09kNvMg5JC/9ruRKGRg==
+"@envelop/core@1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@envelop/core/-/core-1.7.1.tgz#4cb397349ff40e3dc229175b9af58700d5742232"
+  integrity sha512-ZxeQs4G0FOzoFAH+zskubx5aM9kx6BiUvcSI9Lo3MfYBmnK7cjwcwDdwk6Mq48QDuAeVdGfDmQz+BiWg0k2GmQ==
   dependencies:
     "@envelop/types" "1.5.1"
 
