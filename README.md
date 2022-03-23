@@ -54,4 +54,4 @@ $ bam prisma-dev initdb
 ```
 
 Made with ♥ by Eddy Nguyen
-https://eddy.works
+https://eddeee888.me
