@@ -1,0 +1,76 @@
+name: CI
+on:
+  push:
+    branches-ignore:
+      - 'master'
+
+env:
+  node-version: '14.19.0'
+
+jobs:
+  precheck:
+    name: Check jobs to run
+    runs-on: ubuntu-18.04
+    outputs:
+      affected-main: ${{ steps.affected.outputs.main }}
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+
+      - name: Install deps
+        run: yarn install --prefer-offline
+
+      - name: Check affected apps
+        id: affected
+        run: |
+          echo "::set-output name=main::$(./ops/bin/check-affected.sh apps main origin/master)"
+
+  main:
+    name: Main app CI
+    runs-on: ubuntu-18.04
+    needs: precheck
+    if: ${{ needs.precheck.outputs.affected-main == 'true' }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+
+      - name: Install deps
+        run: yarn install --prefer-offline
+
+      - name: Codegen main-prisma
+        run: yarn nx codegen main-prisma
+        env:
+          PRISMA_BINARY_TARGET: '["linux-musl"]'
+
+      - name: Lint
+        run: yarn nx lint main
+
+      - name: Build
+        run: yarn nx build main
+
+      - name: Test - Unit
+        run: yarn nx test main
+
+      - name: Test - e2e
+        run: yarn nx run main-e2e:run-e2e:docker

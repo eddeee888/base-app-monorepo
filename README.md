@@ -6,7 +6,7 @@ Note: This setup is for Mac, you will have to do the equivalent if you use Linux
 
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
-- [GraphQL Helix](https://graphql-helix.vercel.app/) + [Envelop](https://www.envelop.dev/)
+- [GraphQL Yoga](https://github.com/dotansimha/graphql-yoga)
 - [Prisma](https://www.prisma.io/)
 - [Nx](https://nx.dev/)
 - [Docker](https://www.docker.com/)
@@ -41,17 +41,14 @@ $ bam up
 
 Once the containers have been successfully built, go to the following URLs from your favourite browser:
 
-- `https://bam.dev`: SSR app
-- `https://bam.dev/app/`: SPA app
-- `https://bam.dev/graphql`: GraphQL endpoint
+- `https://bam.dev`: Main app
+- `https://bam.dev/api/graphql`: GraphQL endpoint
 
 #### Generate dummy data
 
-To create the database the first time:
-
 ```
-$ bam prisma-dev initdb
+$ nx init-database main-prisma
 ```
 
 Made with ♥ by Eddy Nguyen
-https://eddy.works
+https://eddeee888.me

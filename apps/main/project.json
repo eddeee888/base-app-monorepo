@@ -1,0 +1,98 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/main",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/main",
+        "outputPath": "dist/apps/main"
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "libs/graph-backend/src/schemas/utils/getTypeDefs.ts",
+              "with": "libs/graph-backend/src/schemas/utils/getTypeDefs.prod.js"
+            }
+          ]
+        }
+      }
+    },
+    "build-for-runtime": {
+      "executor": "@nrwl/workspace:run-commands",
+      "defaultConfiguration": "vercel",
+      "configurations": {
+        "vercel": {
+          "command": "apps/main/bin/build-for-vercel.sh"
+        },
+        "e2e": {
+          "command": "apps/main/bin/build-for-e2e.sh"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "main:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "main:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "main:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "main:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/main"],
+      "options": {
+        "jestConfig": "apps/main/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/main/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "graphql-codegen": {
+      "executor": "@eddeee888/nx-graphql-code-generator:codegen",
+      "outputs": ["apps/main/frontend/graph/generated"],
+      "options": {
+        "configFile": "apps/main/graphql-codegen.yml",
+        "watch": false
+      },
+      "configurations": {
+        "watch": {
+          "watch": true
+        }
+      },
+      "dependsOn": [
+        {
+          "target": "graphql-codegen",
+          "projects": "dependencies"
+        }
+      ]
+    }
+  },
+  "tags": []
+}

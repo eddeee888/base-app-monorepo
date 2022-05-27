@@ -1,0 +1,57 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/graph-backend/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/graph-backend/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/graph-backend"],
+      "options": {
+        "jestConfig": "libs/graph-backend/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "prepare-prod-typedefs": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": ["libs/graph-backend/src/schemas/utils/getTypeDefs.prod.js"],
+      "options": {
+        "commands": [
+          "node --loader ts-node/esm libs/graph-backend/bin/prepare-prod-typedefs.ts",
+          "nx format:write --projects=graph-backend"
+        ],
+        "parallel": false
+      }
+    },
+    "graphql-codegen": {
+      "executor": "@eddeee888/nx-graphql-code-generator:codegen",
+      "outputs": ["libs/graph-backend/src/generated"],
+      "options": {
+        "configFile": "libs/graph-backend/graphql-codegen.yml",
+        "watch": false
+      },
+      "configurations": {
+        "watch": {
+          "watch": true
+        }
+      },
+      "dependsOn": [
+        {
+          "target": "graphql-codegen",
+          "projects": "dependencies"
+        },
+        {
+          "target": "prepare-prod-typedefs",
+          "projects": "self"
+        }
+      ]
+    }
+  },
+  "tags": []
+}

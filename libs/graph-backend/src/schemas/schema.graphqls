@@ -1,0 +1,18 @@
+type Query
+
+interface Result {
+  ok: Boolean!
+}
+
+interface Error {
+  ok: Boolean!
+  # eslint-disable-next-line @graphql-eslint/no-typename-prefix
+  error: ErrorType!
+}
+
+enum ErrorType {
+  NOT_FOUND
+  INPUT_VALIDATION_ERROR
+  FORBIDDEN_ERROR
+  UNEXPECTED_ERROR
+}

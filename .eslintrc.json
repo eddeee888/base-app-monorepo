@@ -51,15 +51,7 @@
       },
       "rules": {
         "@graphql-eslint/require-description": ["error", { "DirectiveDefinition": true }],
-        "@graphql-eslint/strict-id-in-types": [
-          "error",
-          {
-            "exceptions": {
-              "types": ["Query", "Mutation", "Subscription"],
-              "suffixes": ["Error", "Result"]
-            }
-          }
-        ]
+        "@graphql-eslint/strict-id-in-types": ["error", { "exceptions": { "suffixes": ["Error", "Result"] } }]
       }
     },
     {

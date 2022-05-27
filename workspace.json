@@ -1,9 +1,13 @@
 {
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "graph": "apps/graph",
-    "graph-utils": "libs/graph-utils",
-    "marketing": "apps/marketing",
-    "spa": "apps/spa"
+    "graph-backend": "libs/graph-backend",
+    "graph-frontend": "libs/graph-frontend",
+    "main": "apps/main",
+    "main-e2e": "apps/main-e2e",
+    "main-prisma": "libs/main-prisma",
+    "routing": "libs/routing",
+    "shared-config": "libs/shared-config"
   }
 }

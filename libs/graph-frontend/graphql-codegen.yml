@@ -1,0 +1,20 @@
+# https://www.graphql-code-generator.com/docs/config-reference/codegen-config
+overwrite: true
+schema: libs/graph-backend/**/*.graphqls
+hooks:
+  afterAllFileWrite:
+    - eslint --fix
+    - prettier --write
+generates:
+  libs/graph-frontend/src/generated/types.generated.ts:
+    plugins:
+      - typescript
+    config:
+      enumsAsTypes: true
+      nonOptionalTypename: true
+      scalars:
+        DateTime: string
+
+  libs/graph-frontend/src/generated/introspectionResult.generated.ts:
+    plugins:
+      - fragment-matcher
