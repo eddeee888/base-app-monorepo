@@ -1,2 +1,2 @@
-schema: "./**/*.graphqls"
-# documents: "./**/*.graphql" # Uncomment when GraphQL documents exist
+schema: '**/*.graphqls'
+documents: '**/*.graphql'

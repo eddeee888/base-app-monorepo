@@ -6,18 +6,21 @@
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
-    "noUncheckedIndexedAccess": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "ESNext",
-    "module": "ESNext",
-    "lib": ["ES2017", "DOM"],
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@bam/graph-utils": ["libs/graph-utils/src/index.ts"]
+      "@bam/graph-backend": ["libs/graph-backend/src/index.ts"],
+      "@bam/graph-frontend": ["libs/graph-frontend/src/index.ts"],
+      "@bam/graph-frontend/generated-types": ["libs/graph-frontend/src/generated/types.generated.ts"],
+      "@bam/main-prisma": ["libs/main-prisma/src/index.ts"],
+      "@bam/routing": ["libs/routing/src/index.ts"],
+      "@bam/shared-config": ["libs/shared-config/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

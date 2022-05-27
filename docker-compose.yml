@@ -1,41 +1,9 @@
-version: "3.7"
+version: '3.7'
 
 services:
-  spa:
-    image: bam/dev:latest
-    command: nx serve spa --host 0.0.0.0 # Ensure Vite dev server can take Docker traffic with --host flag
-    environment:
-      DEV_SERVER_PORT: ${SPA_PORT}
-      DEV_HMR_PORT: 443
-      CI: "true" # Ensure Vite dev server do not immediately send 0 status in container
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
-    networks:
-      - vm
-
-  graph:
-    build:
-      context: .
-      dockerfile: apps/graph/Dockerfile
-      args:
-        schema_flag: "--schema=./apps/graph/src/prisma/schema.prisma"
-        prisma_database_url: ${PRISMA_DATABASE_URL}
-        prisma_binary_target: ${PRISMA_BINARY_TARGET}
-    command: nx serve graph
-    environment:
-      PORT: ${GRAPH_PORT}
-      PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
-      PRISMA_BINARY_TARGET: ${PRISMA_BINARY_TARGET}
-    volumes:
-      - .:/usr/src/app/
-      - /usr/src/app/node_modules
-    networks:
-      - vm
-
-  marketing:
-    image: bam/dev:latest
-    command: nx serve marketing --port=${MARKETING_PORT}
+  main:
+    image: bam/dev-backend:latest
+    command: nx serve main --port=${MAIN_SERVICE_PORT}
     volumes:
       - .:/usr/src/app/
       - /usr/src/app/node_modules
@@ -66,31 +34,23 @@ services:
       - 80:80
       - 443:443
     depends_on:
-      - spa
-      - graph
-      - marketing
+      - main
       - dnsmasq
     environment:
       PRIMARY_DOMAIN: ${PRIMARY_DOMAIN}
-      SPA_SERVICE_NAME: ${SPA_SERVICE_NAME}
-      SPA_PORT: ${SPA_PORT}
-      GRAPH_SERVICE_NAME: ${GRAPH_SERVICE_NAME}
-      GRAPH_PORT: ${GRAPH_PORT}
-      MARKETING_SERVICE_NAME: ${MARKETING_SERVICE_NAME}
-      MARKETING_PORT: ${MARKETING_PORT}
+      MAIN_SERVICE_NAME: ${MAIN_SERVICE_NAME}
+      MAIN_SERVICE_PORT: ${MAIN_SERVICE_PORT}
     volumes:
       - ./dev-services/reverse-proxy/templates:/etc/nginx/templates
     networks:
-      vm:
-        aliases:
-          - ${PRIMARY_DOMAIN}
+      - vm
 
   dnsmasq:
     image: 4km3/dnsmasq:2.85-r2-alpine-3.14
     ports:
       - 53535:53/tcp
       - 53535:53/udp
-    cap_add: ["NET_ADMIN"]
+    cap_add: ['NET_ADMIN']
     volumes:
       - ./dev-services/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf
     networks:

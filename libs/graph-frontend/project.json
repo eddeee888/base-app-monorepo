@@ -1,0 +1,42 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/graph-frontend/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/graph-frontend/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/graph-frontend"],
+      "options": {
+        "jestConfig": "libs/graph-frontend/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "graphql-codegen": {
+      "executor": "@eddeee888/nx-graphql-code-generator:codegen",
+      "outputs": ["libs/graph-frontend/src/generated"],
+      "options": {
+        "configFile": "libs/graph-frontend/graphql-codegen.yml",
+        "watch": false
+      },
+      "configurations": {
+        "watch": {
+          "watch": true
+        }
+      },
+      "dependsOn": [
+        {
+          "target": "graphql-codegen",
+          "projects": "dependencies"
+        }
+      ]
+    }
+  },
+  "tags": []
+}

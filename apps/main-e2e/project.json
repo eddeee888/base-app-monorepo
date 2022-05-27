@@ -1,0 +1,43 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/main-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "defaultConfiguration": "host",
+      "options": {
+        "cypressConfig": "apps/main-e2e/cypress.json"
+      },
+      "configurations": {
+        "host": {
+          "baseUrl": "http://localhost:3000"
+        },
+        "docker": {
+          "baseUrl": "http://main:3000"
+        }
+      }
+    },
+    "run-e2e": {
+      "executor": "@nrwl/workspace:run-commands",
+      "defaultConfiguration": "host",
+      "configurations": {
+        "host": {
+          "command": "apps/main-e2e/bin/run-e2e.sh host"
+        },
+        "docker": {
+          "command": "apps/main-e2e/bin/run-e2e.sh docker"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/main-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["main"]
+}

@@ -1,10 +1,11 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "bam",
   "affected": {
     "defaultBase": "master"
   },
   "cli": {
-    "defaultCollection": "@nrwl/react"
+    "defaultCollection": "@nrwl/next"
   },
   "implicitDependencies": {
     "package.json": {
@@ -15,7 +16,7 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "nx/tasks-runners/default",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e", "graphql-codegen"]
       }
@@ -32,16 +33,7 @@
   "generators": {
     "@nrwl/react": {
       "application": {
-        "style": "@emotion/styled",
-        "linter": "eslint",
         "babel": true
-      },
-      "component": {
-        "style": "@emotion/styled"
-      },
-      "library": {
-        "style": "@emotion/styled",
-        "linter": "eslint"
       }
     },
     "@nrwl/next": {
@@ -49,7 +41,14 @@
         "style": "@emotion/styled",
         "linter": "eslint"
       }
+    },
+    "@eddeee888/nx-graphql-code-generator": {
+      "add": {
+        "schema": "libs/graph-backend/**/*.graphqls",
+        "config": "graphql-codegen.yml",
+        "pluginPreset": "typescript-resolvers"
+      }
     }
   },
-  "defaultProject": "spa"
+  "defaultProject": "main"
 }

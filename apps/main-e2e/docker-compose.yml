@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  cypress:
+    image: cypress/included:9.7.0
+    working_dir: /e2e
+    volumes:
+      - ../..:/e2e
+
+  main:
+    build:
+      context: ../..
+      dockerfile: apps/main-e2e/Dockerfile
+    ports:
+      - 3000:3000
+
+  database:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PORT=3306
+    volumes:
+      - database_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+volumes:
+  database_data:
