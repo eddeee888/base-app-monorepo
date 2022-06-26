@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   main:
-    image: bam/dev-backend:latest
+    image: main/dev-backend:latest
     command: nx serve main --port=${MAIN_SERVICE_PORT}
     volumes:
       - .:/usr/src/app/
@@ -28,7 +28,7 @@ services:
   reverse-proxy:
     build:
       context: .
-      dockerfile: dev-services/reverse-proxy/Dockerfile
+      dockerfile: dev-tools/reverse-proxy/Dockerfile
     tty: true
     ports:
       - 80:80
@@ -41,7 +41,7 @@ services:
       MAIN_SERVICE_NAME: ${MAIN_SERVICE_NAME}
       MAIN_SERVICE_PORT: ${MAIN_SERVICE_PORT}
     volumes:
-      - ./dev-services/reverse-proxy/templates:/etc/nginx/templates
+      - ./dev-tools/reverse-proxy/templates:/etc/nginx/templates
     networks:
       - vm
 
@@ -52,7 +52,7 @@ services:
       - 53535:53/udp
     cap_add: ['NET_ADMIN']
     volumes:
-      - ./dev-services/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf
+      - ./dev-tools/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf
     networks:
       - vm
 
