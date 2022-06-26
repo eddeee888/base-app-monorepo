@@ -1129,6 +1129,11 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
+"@eddeee888/nx-dev-tools@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@eddeee888/nx-dev-tools/-/nx-dev-tools-0.0.5.tgz#620efbbb6977ce5fe97d68adb96556b3f619b1be"
+  integrity sha512-Gj7hqtmDARV+W7Zh+KKC9P2n0lWfbjAy5zRYxpQrN+FkPj1zVYBA+iOquU/KwlbnT/5HjWGFcP29BzBwlstrBw==
+
 "@eddeee888/nx-graphql-code-generator@0.0.14":
   version "0.0.14"
   resolved "https://registry.yarnpkg.com/@eddeee888/nx-graphql-code-generator/-/nx-graphql-code-generator-0.0.14.tgz#deac832f2511beed89052e2ea28ba211c703d0ff"
