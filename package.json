@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": "14.19.3"
+    "node": "16.x"
   },
   "dependencies": {
     "@apollo/client": "3.6.5",
