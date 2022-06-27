@@ -2,13 +2,13 @@ version: '3.7'
 
 services:
   dev:
-    image: main/dev:latest
+    image: bam/dev:latest
     build:
       context: ../..
       dockerfile: dev-tools/docker-images/Dockerfile.dev
 
   dev-backend:
-    image: main/dev-backend:latest
+    image: bam/dev-backend:latest
     build:
       context: ../..
       dockerfile: dev-tools/docker-images/Dockerfile.dev-backend

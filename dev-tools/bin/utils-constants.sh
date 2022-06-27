@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CORE_CMD_NAME="bam"
-PROJECT_NAME="main"
+PROJECT_NAME="bam"
 USR_BIN="/usr/local/bin"
 TOP_LEVEL_DOMAIN="dev"
 PRIMARY_DOMAIN="${PROJECT_NAME}.${TOP_LEVEL_DOMAIN}"

@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   main:
-    image: main/dev-backend:latest
+    image: bam/dev-backend:latest
     command: nx serve main --port=${MAIN_SERVICE_PORT}
     volumes:
       - .:/usr/src/app/
