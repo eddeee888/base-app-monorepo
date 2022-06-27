@@ -3,7 +3,6 @@ export default {
   displayName: 'main',
   preset: '../../jest.preset.js',
   transform: {
-    '\\.(gql|graphql)$': 'jest-transform-graphql',
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nrwl/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nrwl/next/babel'] }],
   },

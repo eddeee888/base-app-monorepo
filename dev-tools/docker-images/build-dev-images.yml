@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  dev:
+    image: bam/dev:latest
+    build:
+      context: ../..
+      dockerfile: dev-tools/docker-images/Dockerfile.dev
+
+  dev-backend:
+    image: bam/dev-backend:latest
+    build:
+      context: ../..
+      dockerfile: dev-tools/docker-images/Dockerfile.dev-backend
+      args:
+        PRISMA_SCHEMA_FLAG: ${PRISMA_SCHEMA_FLAG}
+        PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
+        PRISMA_BINARY_TARGET: ${PRISMA_BINARY_TARGET}

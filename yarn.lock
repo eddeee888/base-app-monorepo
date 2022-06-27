@@ -1129,6 +1129,11 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
+"@eddeee888/nx-dev-tools@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@eddeee888/nx-dev-tools/-/nx-dev-tools-0.0.5.tgz#620efbbb6977ce5fe97d68adb96556b3f619b1be"
+  integrity sha512-Gj7hqtmDARV+W7Zh+KKC9P2n0lWfbjAy5zRYxpQrN+FkPj1zVYBA+iOquU/KwlbnT/5HjWGFcP29BzBwlstrBw==
+
 "@eddeee888/nx-graphql-code-generator@0.0.14":
   version "0.0.14"
   resolved "https://registry.yarnpkg.com/@eddeee888/nx-graphql-code-generator/-/nx-graphql-code-generator-0.0.14.tgz#deac832f2511beed89052e2ea28ba211c703d0ff"
@@ -1404,14 +1409,6 @@
   dependencies:
     "@graphql-codegen/plugin-helpers" "^2.3.2"
     "@graphql-tools/utils" "^8.1.1"
-    tslib "~2.3.0"
-
-"@graphql-codegen/typescript-graphql-files-modules@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-graphql-files-modules/-/typescript-graphql-files-modules-2.1.1.tgz#33b988a3e42140a972799030b840286039baa87b"
-  integrity sha512-MmLHjLoS5zrzDOtu9B4XjSs/OJr267dhRX9Wuz8jIB0azZBhJWVDw3p8O/0/Y+IbIXAbhSPlPVyaU4eWsJOgtQ==
-  dependencies:
-    "@graphql-codegen/plugin-helpers" "^2.3.2"
     tslib "~2.3.0"
 
 "@graphql-codegen/typescript-operations@2.4.0":
@@ -7937,11 +7934,6 @@ jest-snapshot@^27.5.1:
     natural-compare "^1.4.0"
     pretty-format "^27.5.1"
     semver "^7.3.2"
-
-jest-transform-graphql@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/jest-transform-graphql/-/jest-transform-graphql-2.1.0.tgz#903cb66bb27bc2772fd3e5dd4f7e9b57230f5829"
-  integrity sha1-kDy2a7J7wncv0+XdT36bVyMPWCk=
 
 jest-util@27.5.1, jest-util@^27.0.0, jest-util@^27.5.1:
   version "27.5.1"

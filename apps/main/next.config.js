@@ -15,12 +15,6 @@ const nextConfig = {
       config.externals.push('@bam/main-prisma');
     }
 
-    config.module.rules.push({
-      test: /\.graphql$/,
-      exclude: /node_modules/,
-      loader: 'graphql-tag/loader',
-    });
-
     return config;
   },
   nx: {

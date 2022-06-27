@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": "14.19.3"
+    "node": "16.x"
   },
   "dependencies": {
     "@apollo/client": "3.6.5",
@@ -24,6 +24,7 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@eddeee888/nx-dev-tools": "0.0.5",
     "@eddeee888/nx-graphql-code-generator": "0.0.14",
     "@emotion/babel-plugin": "11.9.2",
     "@graphql-codegen/add": "3.1.1",
@@ -31,7 +32,6 @@
     "@graphql-codegen/fragment-matcher": "3.2.1",
     "@graphql-codegen/near-operation-file-preset": "2.2.12",
     "@graphql-codegen/typescript": "2.4.11",
-    "@graphql-codegen/typescript-graphql-files-modules": "2.1.1",
     "@graphql-codegen/typescript-operations": "2.4.0",
     "@graphql-codegen/typescript-react-apollo": "3.2.14",
     "@graphql-codegen/typescript-resolvers": "2.6.4",
@@ -66,7 +66,6 @@
     "eslint-plugin-react": "7.29.4",
     "eslint-plugin-react-hooks": "4.5.0",
     "jest": "27.5.1",
-    "jest-transform-graphql": "2.1.0",
     "nx": "14.1.9",
     "prettier": "2.5.1",
     "prisma": "3.14.0",

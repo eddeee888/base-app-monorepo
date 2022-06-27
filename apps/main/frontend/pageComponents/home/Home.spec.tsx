@@ -2,7 +2,7 @@ import { Home } from './Home';
 import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import { ErrorCodes } from '@bam/shared-config';
-import * as Operations from './Home.graphql';
+import { HomeDocument } from './Home.generated';
 
 describe('Homepage', () => {
   it('should render no users correctly', async () => {
@@ -11,7 +11,7 @@ describe('Homepage', () => {
         mocks={[
           {
             request: {
-              query: Operations.Home,
+              query: HomeDocument,
             },
             result: {
               data: {
@@ -38,7 +38,7 @@ describe('Homepage', () => {
         mocks={[
           {
             request: {
-              query: Operations.Home,
+              query: HomeDocument,
             },
             result: {
               data: {
@@ -69,7 +69,7 @@ describe('Homepage', () => {
         mocks={[
           {
             request: {
-              query: Operations.Home,
+              query: HomeDocument,
             },
             result: {
               data: {
@@ -95,7 +95,7 @@ describe('Homepage', () => {
         mocks={[
           {
             request: {
-              query: Operations.Home,
+              query: HomeDocument,
             },
             error: new Error('An error occurred'),
           },
