@@ -7,10 +7,6 @@ hooks:
     - eslint --fix
     - prettier --write
 generates:
-  apps/main/frontend/graph/generated/operations.generated.d.ts:
-    plugins:
-      - typescript-graphql-files-modules
-
   apps/main:
     preset: near-operation-file
     presetConfig:
@@ -24,5 +20,5 @@ generates:
     config:
       enumsAsTypes: true
       nonOptionalTypename: true
-      documentMode: external
+      documentMode: documentNode
       importDocumentNodeExternallyFrom: near-operation-file

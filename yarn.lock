@@ -1411,14 +1411,6 @@
     "@graphql-tools/utils" "^8.1.1"
     tslib "~2.3.0"
 
-"@graphql-codegen/typescript-graphql-files-modules@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-graphql-files-modules/-/typescript-graphql-files-modules-2.1.1.tgz#33b988a3e42140a972799030b840286039baa87b"
-  integrity sha512-MmLHjLoS5zrzDOtu9B4XjSs/OJr267dhRX9Wuz8jIB0azZBhJWVDw3p8O/0/Y+IbIXAbhSPlPVyaU4eWsJOgtQ==
-  dependencies:
-    "@graphql-codegen/plugin-helpers" "^2.3.2"
-    tslib "~2.3.0"
-
 "@graphql-codegen/typescript-operations@2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-2.4.0.tgz#07f371bcda31ecb8edc4c742442014b21c11d53b"
@@ -7942,11 +7934,6 @@ jest-snapshot@^27.5.1:
     natural-compare "^1.4.0"
     pretty-format "^27.5.1"
     semver "^7.3.2"
-
-jest-transform-graphql@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/jest-transform-graphql/-/jest-transform-graphql-2.1.0.tgz#903cb66bb27bc2772fd3e5dd4f7e9b57230f5829"
-  integrity sha1-kDy2a7J7wncv0+XdT36bVyMPWCk=
 
 jest-util@27.5.1, jest-util@^27.0.0, jest-util@^27.5.1:
   version "27.5.1"

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import * as Types from '@bam/graph-frontend/generated-types';
 
-import * as Operations from './Home.graphql';
+import { DocumentNode } from 'graphql';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type HomeQueryVariables = Types.Exact<{ [key: string]: never }>;
@@ -12,6 +12,59 @@ export type HomeQuery = {
     | { __typename: 'UsersError'; error: Types.ErrorType }
     | { __typename: 'UsersResult'; result: Array<{ __typename: 'User'; id: string; displayName: string }> };
 };
+
+export const HomeDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'Home' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'users' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'InlineFragment',
+                  typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'UsersResult' } },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'result' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                            { kind: 'Field', name: { kind: 'Name', value: 'displayName' } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'InlineFragment',
+                  typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'UsersError' } },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'error' } }],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode;
 
 /**
  * __useHomeQuery__
@@ -30,11 +83,11 @@ export type HomeQuery = {
  */
 export function useHomeQuery(baseOptions?: Apollo.QueryHookOptions<HomeQuery, HomeQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<HomeQuery, HomeQueryVariables>(Operations.Home, options);
+  return Apollo.useQuery<HomeQuery, HomeQueryVariables>(HomeDocument, options);
 }
 export function useHomeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HomeQuery, HomeQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<HomeQuery, HomeQueryVariables>(Operations.Home, options);
+  return Apollo.useLazyQuery<HomeQuery, HomeQueryVariables>(HomeDocument, options);
 }
 export type HomeQueryHookResult = ReturnType<typeof useHomeQuery>;
 export type HomeLazyQueryHookResult = ReturnType<typeof useHomeLazyQuery>;
