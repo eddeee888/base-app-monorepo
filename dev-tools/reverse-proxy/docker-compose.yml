@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  reverse-proxy:
+    build:
+      context: .
+      dockerfile: dev-tools/reverse-proxy/Dockerfile
+    tty: true
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - main
+      - dnsmasq
+    environment:
+      PRIMARY_DOMAIN: ${PRIMARY_DOMAIN}
+      MAIN_SERVICE_NAME: ${MAIN_SERVICE_NAME}
+      MAIN_SERVICE_PORT: ${MAIN_SERVICE_PORT}
+    volumes:
+      - ./dev-tools/reverse-proxy/templates:/etc/nginx/templates

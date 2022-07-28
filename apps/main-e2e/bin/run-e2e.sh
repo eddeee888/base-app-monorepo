@@ -17,11 +17,11 @@ fi
 dc_file=apps/main-e2e/docker-compose.yml
 
 echo "=> Starting services..."
-docker-compose -f $dc_file up -d main database
+docker-compose -f $dc_file up -d main main-db
 
 echo "=> Initialising data..."
 docker-compose -f $dc_file exec -T main \
-  ./apps/main-e2e/bin/wait-for-it.sh database:3306 -- yarn env-cmd -f libs/main-prisma/.env.main-e2e nx init-database main-prisma
+  ./apps/main-e2e/bin/wait-for-it.sh main-db:3306 -- yarn env-cmd -f libs/main-prisma/.env.main-e2e nx init-database main-prisma
 
 echo "=> Running e2e tests..."
 if [ "$mode" == "host" ]; then

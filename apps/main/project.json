@@ -12,7 +12,9 @@
         "outputPath": "dist/apps/main"
       },
       "configurations": {
-        "development": {},
+        "development": {
+          "outputPath": "tmp/apps/main"
+        },
         "production": {
           "fileReplacements": [
             {
