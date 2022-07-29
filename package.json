@@ -35,7 +35,7 @@
     "@graphql-codegen/typescript-operations": "2.4.0",
     "@graphql-codegen/typescript-react-apollo": "3.2.14",
     "@graphql-codegen/typescript-resolvers": "2.6.4",
-    "@graphql-eslint/eslint-plugin": "3.10.3",
+    "@graphql-eslint/eslint-plugin": "3.10.7",
     "@graphql-tools/load-files": "6.5.3",
     "@nrwl/cli": "14.1.9",
     "@nrwl/cypress": "14.4.3",
