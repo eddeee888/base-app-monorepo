@@ -11,7 +11,7 @@
     "@emotion/react": "11.9.3",
     "@emotion/server": "11.4.0",
     "@emotion/styled": "11.9.3",
-    "@envelop/disable-introspection": "3.3.2",
+    "@envelop/disable-introspection": "3.6.0",
     "@graphql-yoga/node": "2.7.0",
     "@nrwl/next": "14.4.3",
     "@prisma/client": "3.14.0",
