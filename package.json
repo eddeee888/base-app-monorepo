@@ -48,7 +48,7 @@
     "@nrwl/react": "14.6.5",
     "@nrwl/web": "14.6.5",
     "@nrwl/workspace": "14.6.5",
-    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
     "@types/jest": "28.1.8",
     "@types/node": "18.7.14",
