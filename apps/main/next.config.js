@@ -4,7 +4,7 @@ const withNx = require('@nrwl/next/plugins/with-nx');
  * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
-  assetPrefix: process.env.BASE_ASSETS_URL || '',
+  assetPrefix: process.env.BASE_ASSETS_URL || undefined,
   images: {
     domains: [process.env.IMAGE_DOMAIN || ''],
   },
