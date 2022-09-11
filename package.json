@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.19.0",
-    "@eddeee888/nx-dev-tools": "0.0.6",
+    "@eddeee888/nx-dev-tools": "0.0.7",
     "@eddeee888/nx-graphql-code-generator": "0.0.14",
     "@emotion/babel-plugin": "11.10.0",
     "@graphql-codegen/add": "3.2.1",

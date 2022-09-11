@@ -2051,10 +2051,10 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
-"@eddeee888/nx-dev-tools@0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@eddeee888/nx-dev-tools/-/nx-dev-tools-0.0.6.tgz#db008b281fa967e0e3131623833cd5ec78f56a1d"
-  integrity sha512-KbcJr8Furqa/K2DVtI15X+WBOejlbqpXHQ/wbimY87JdMEFMEtfIFquvXnR5hcBB7mR0wmy8qgdJK7zNEtsO7A==
+"@eddeee888/nx-dev-tools@0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@eddeee888/nx-dev-tools/-/nx-dev-tools-0.0.7.tgz#ca67019f2292f89614ffc28067b4facfea4ad8a5"
+  integrity sha512-9BSblCeJ2sY1C5SKQ7imTigIvWKt8EL2+7dMQurEITZWc6wPVxAynrVqXcbIOgX8aWi3AiBcto3UT6Zb3EykMw==
 
 "@eddeee888/nx-graphql-code-generator@0.0.14":
   version "0.0.14"
