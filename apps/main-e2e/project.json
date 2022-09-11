@@ -7,7 +7,8 @@
       "executor": "@nrwl/cypress:cypress",
       "defaultConfiguration": "host",
       "options": {
-        "cypressConfig": "apps/main-e2e/cypress.json"
+        "cypressConfig": "apps/main-e2e/cypress.config.ts",
+        "testingType": "e2e"
       },
       "configurations": {
         "host": {
@@ -18,15 +19,36 @@
         }
       }
     },
-    "run-e2e": {
+    "setup": {
+      "executor": "@nrwl/workspace:run-commands",
+      "defaultConfiguration": "prod",
+      "configurations": {
+        "dev": {
+          "command": "SERVE_MODE=dev apps/main-e2e/bin/setup.sh"
+        },
+        "prod": {
+          "command": "apps/main-e2e/bin/setup.sh"
+        }
+      },
+      "options": {
+        "command": "apps/main-e2e/bin/setup.sh"
+      }
+    },
+    "teardown": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "apps/main-e2e/bin/teardown.sh"
+      }
+    },
+    "run": {
       "executor": "@nrwl/workspace:run-commands",
       "defaultConfiguration": "host",
       "configurations": {
         "host": {
-          "command": "apps/main-e2e/bin/run-e2e.sh host"
+          "command": "apps/main-e2e/bin/run.sh host"
         },
         "docker": {
-          "command": "apps/main-e2e/bin/run-e2e.sh docker"
+          "command": "apps/main-e2e/bin/run.sh docker"
         }
       }
     },

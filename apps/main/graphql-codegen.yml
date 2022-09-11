@@ -11,7 +11,7 @@ generates:
     preset: near-operation-file
     presetConfig:
       baseTypesPath: '~@bam/graph-frontend/generated-types'
-      extension: .generated.tsx
+      extension: .generated.ts
     plugins:
       - typescript-operations
       - typescript-react-apollo

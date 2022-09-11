@@ -18,7 +18,7 @@ To start on MacOS, setting up the CLI command to make development easier. Go to 
 For convenience, this will install packages, set up SSL, etc.
 
 ```
-$ ./bin/init.sh
+$ ./dev-tools/bin/init.sh
 ```
 
 ### ⚡️ Start the Apps!
@@ -32,7 +32,7 @@ $ bam vm-up
 Create a base dev image to be shared in the apps. We do this to avoid installing packages multiple times.
 
 ```
-$ bam build-dev-image
+$ bam build-dev-images
 ```
 
 ```

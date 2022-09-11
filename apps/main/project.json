@@ -13,7 +13,7 @@
       },
       "configurations": {
         "development": {
-          "outputPath": "tmp/apps/main"
+          "outputPath": "apps/main"
         },
         "production": {
           "fileReplacements": [
