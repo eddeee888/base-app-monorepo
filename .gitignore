@@ -39,3 +39,6 @@ testem.log
 Thumbs.db
 
 libs/main-prisma/src/prisma/generated/prisma-client-js
+
+# Next.js
+.next
