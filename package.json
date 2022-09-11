@@ -11,8 +11,9 @@
     "@emotion/react": "11.10.4",
     "@emotion/server": "11.10.0",
     "@emotion/styled": "11.10.4",
-    "@envelop/disable-introspection": "3.3.2",
-    "@graphql-yoga/node": "2.7.0",
+    "@envelop/core": "2.6.0",
+    "@envelop/disable-introspection": "3.6.0",
+    "@graphql-yoga/node": "2.13.13",
     "@nrwl/next": "14.6.5",
     "@prisma/client": "3.14.0",
     "core-js": "^3.6.5",
@@ -24,6 +25,7 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@babel/core": "7.19.0",
     "@eddeee888/nx-dev-tools": "0.0.6",
     "@eddeee888/nx-graphql-code-generator": "0.0.14",
     "@emotion/babel-plugin": "11.10.0",
@@ -37,7 +39,7 @@
     "@graphql-codegen/typescript-resolvers": "2.6.4",
     "@graphql-eslint/eslint-plugin": "3.10.3",
     "@graphql-tools/load-files": "6.5.3",
-    "@nrwl/cli": "14.1.9",
+    "@graphql-tools/merge": "8.3.6",
     "@nrwl/cypress": "14.6.5",
     "@nrwl/eslint-plugin-nx": "14.6.5",
     "@nrwl/jest": "14.6.5",
