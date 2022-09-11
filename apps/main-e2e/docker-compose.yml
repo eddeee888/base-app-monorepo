@@ -10,7 +10,13 @@ services:
   main:
     build:
       context: ../..
-      dockerfile: apps/main-e2e/Dockerfile
+      dockerfile: apps/main-e2e/Dockerfile.e2e
+    environment:
+      - SERVE_MODE
+    volumes:
+      - ../..:/usr/src/app/
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist
     ports:
       - 3000:3000
 
@@ -19,11 +25,11 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_PORT=3306
+      - MYSQL_TCP_PORT=3307
     volumes:
       - main-db-data:/var/lib/mysql
     ports:
-      - 3306:3306
+      - 3307:3307
 
 volumes:
   main-db-data:

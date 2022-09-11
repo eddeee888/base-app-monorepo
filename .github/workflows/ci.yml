@@ -73,4 +73,7 @@ jobs:
         run: yarn nx test main
 
       - name: Test - e2e
-        run: yarn nx run main-e2e:run-e2e:docker
+        run: |
+          yarn nx run main-e2e:setup:prod
+          yarn nx run main-e2e:run:docker
+          yarn nx run main-e2e:teardown
