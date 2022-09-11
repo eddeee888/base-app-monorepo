@@ -7,7 +7,7 @@
     "node": "16.x"
   },
   "dependencies": {
-    "@apollo/client": "3.6.5",
+    "@apollo/client": "3.6.9",
     "@emotion/react": "11.10.4",
     "@emotion/server": "11.10.0",
     "@emotion/styled": "11.10.4",
@@ -22,7 +22,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "regenerator-runtime": "0.13.7",
-    "tslib": "^2.3.0"
+    "tslib": "2.4.0"
   },
   "devDependencies": {
     "@babel/core": "7.19.0",
@@ -49,7 +49,7 @@
     "@nrwl/web": "14.6.5",
     "@nrwl/workspace": "14.6.5",
     "@testing-library/jest-dom": "5.16.4",
-    "@testing-library/react": "13.2.0",
+    "@testing-library/react": "13.4.0",
     "@types/jest": "28.1.8",
     "@types/node": "18.7.14",
     "@types/react": "18.0.18",
