@@ -7,7 +7,8 @@
       "executor": "@nrwl/cypress:cypress",
       "defaultConfiguration": "host",
       "options": {
-        "cypressConfig": "apps/main-e2e/cypress.json"
+        "cypressConfig": "apps/main-e2e/cypress.config.ts",
+        "testingType": "e2e"
       },
       "configurations": {
         "host": {
