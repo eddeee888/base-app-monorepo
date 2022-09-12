@@ -3,10 +3,12 @@ version: '3.7'
 services:
   main:
     image: bam/dev:latest
-    command: nx serve main --port=${MAIN_SERVICE_PORT}
+    command: nx serve main --hostname=0.0.0.0 --port=${MAIN_SERVICE_PORT}
     volumes:
       - .:/usr/src/app/
       - /usr/src/app/node_modules
+      - /usr/src/app/dist
+      - /usr/src/app/apps/main/.next
 
   main-db:
     image: mysql:8.0
