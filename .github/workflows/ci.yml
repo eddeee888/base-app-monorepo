@@ -72,8 +72,20 @@ jobs:
       - name: Test - Unit
         run: yarn nx test main
 
-      - name: Test - e2e
-        run: |
-          yarn nx run main-e2e:setup:prod
-          yarn nx run main-e2e:run:docker
-          yarn nx run main-e2e:teardown
+      - name: Test - e2e - Setup
+        run: yarn nx run main-e2e:setup:prod
+
+      - name: Test - e2e - Run
+        id: test-main-e2e-run
+        run: yarn nx run main-e2e:run:docker
+
+      - name: Upload failed e2e artifacts
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: main-e2e-cypress-artifacts
+          path: dist/cypress
+
+      - name: Test - e2e - Teardown
+        if: always()
+        run: yarn nx run main-e2e:teardown

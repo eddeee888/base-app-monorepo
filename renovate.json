@@ -26,5 +26,8 @@
     "ts-jest",
     "ts-node",
     "typescript"
-  ]
+  ],
+  "patch": {
+    "enabled": false
+  }
 }
