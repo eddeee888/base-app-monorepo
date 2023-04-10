@@ -11,7 +11,7 @@
     "@emotion/react": "11.10.5",
     "@emotion/server": "11.10.0",
     "@emotion/styled": "11.10.5",
-    "@envelop/core": "2.6.0",
+    "@envelop/core": "3.0.6",
     "@envelop/disable-introspection": "3.6.0",
     "@nrwl/next": "15.9.2",
     "@prisma/client": "4.12.0",
