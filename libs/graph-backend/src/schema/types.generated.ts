@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */ /* eslint-disable @typescript-eslint/ban-types */ /* eslint-disable @typescript-eslint/no-unused-vars */
 import { GraphQLResolveInfo } from 'graphql';
-import { UserMapper } from '../mappers';
+import { UserMapper } from './user/schema.mappers';
 import { ResolverContext } from '../types';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -25,7 +24,7 @@ export type Error = {
 export type ErrorType = 'FORBIDDEN_ERROR' | 'INPUT_VALIDATION_ERROR' | 'NOT_FOUND' | 'UNEXPECTED_ERROR';
 
 export type Query = {
-  __typename?: 'Query';
+  __typename: 'Query';
   me: UserPayload;
   users: UsersPayload;
 };
@@ -35,7 +34,7 @@ export type Result = {
 };
 
 export type User = {
-  __typename?: 'User';
+  __typename: 'User';
   displayName: Scalars['String'];
   email: Scalars['String'];
   id: Scalars['ID'];
@@ -43,7 +42,7 @@ export type User = {
 };
 
 export type UserError = Error & {
-  __typename?: 'UserError';
+  __typename: 'UserError';
   error: ErrorType;
   ok: Scalars['Boolean'];
 };
@@ -51,13 +50,13 @@ export type UserError = Error & {
 export type UserPayload = UserError | UserResult;
 
 export type UserResult = Result & {
-  __typename?: 'UserResult';
+  __typename: 'UserResult';
   ok: Scalars['Boolean'];
   result?: Maybe<User>;
 };
 
 export type UsersError = Error & {
-  __typename?: 'UsersError';
+  __typename: 'UsersError';
   error: ErrorType;
   ok: Scalars['Boolean'];
 };
@@ -65,13 +64,10 @@ export type UsersError = Error & {
 export type UsersPayload = UsersError | UsersResult;
 
 export type UsersResult = Result & {
-  __typename?: 'UsersResult';
+  __typename: 'UsersResult';
   ok: Scalars['Boolean'];
   result: Array<User>;
 };
-
-export type WithIndex<TObject> = TObject & Record<string, any>;
-export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -143,128 +139,140 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
   info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
+/** Mapping of union types */
+export type ResolversUnionTypes = {
+  UserPayload: UserError | (Omit<UserResult, 'result'> & { result?: Maybe<ResolversTypes['User']> });
+  UsersPayload: UsersError | (Omit<UsersResult, 'result'> & { result: Array<ResolversTypes['User']> });
+};
+
+/** Mapping of union parent types */
+export type ResolversUnionParentTypes = {
+  UserPayload: UserError | (Omit<UserResult, 'result'> & { result?: Maybe<ResolversParentTypes['User']> });
+  UsersPayload: UsersError | (Omit<UsersResult, 'result'> & { result: Array<ResolversParentTypes['User']> });
+};
+
 /** Mapping between all available schema types and the resolvers types */
-export type ResolversTypes = ResolversObject<{
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+export type ResolversTypes = {
   Error: ResolversTypes['UserError'] | ResolversTypes['UsersError'];
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   ErrorType: ErrorType;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
   Query: ResolverTypeWrapper<{}>;
   Result: ResolversTypes['UserResult'] | ResolversTypes['UsersResult'];
-  String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<UserMapper>;
+  String: ResolverTypeWrapper<Scalars['String']>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   UserError: ResolverTypeWrapper<UserError>;
-  UserPayload: ResolversTypes['UserError'] | ResolversTypes['UserResult'];
+  UserPayload: ResolverTypeWrapper<ResolversUnionTypes['UserPayload']>;
   UserResult: ResolverTypeWrapper<Omit<UserResult, 'result'> & { result?: Maybe<ResolversTypes['User']> }>;
   UsersError: ResolverTypeWrapper<UsersError>;
-  UsersPayload: ResolversTypes['UsersError'] | ResolversTypes['UsersResult'];
+  UsersPayload: ResolverTypeWrapper<ResolversUnionTypes['UsersPayload']>;
   UsersResult: ResolverTypeWrapper<Omit<UsersResult, 'result'> & { result: Array<ResolversTypes['User']> }>;
-}>;
+};
 
 /** Mapping between all available schema types and the resolvers parents */
-export type ResolversParentTypes = ResolversObject<{
-  Boolean: Scalars['Boolean'];
+export type ResolversParentTypes = {
   Error: ResolversParentTypes['UserError'] | ResolversParentTypes['UsersError'];
-  ID: Scalars['ID'];
+  Boolean: Scalars['Boolean'];
   Query: {};
   Result: ResolversParentTypes['UserResult'] | ResolversParentTypes['UsersResult'];
-  String: Scalars['String'];
   User: UserMapper;
+  String: Scalars['String'];
+  ID: Scalars['ID'];
   UserError: UserError;
-  UserPayload: ResolversParentTypes['UserError'] | ResolversParentTypes['UserResult'];
+  UserPayload: ResolversUnionParentTypes['UserPayload'];
   UserResult: Omit<UserResult, 'result'> & { result?: Maybe<ResolversParentTypes['User']> };
   UsersError: UsersError;
-  UsersPayload: ResolversParentTypes['UsersError'] | ResolversParentTypes['UsersResult'];
+  UsersPayload: ResolversUnionParentTypes['UsersPayload'];
   UsersResult: Omit<UsersResult, 'result'> & { result: Array<ResolversParentTypes['User']> };
-}>;
+};
 
 export type ErrorResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['Error'] = ResolversParentTypes['Error']
-> = ResolversObject<{
+> = {
   __resolveType: TypeResolveFn<'UserError' | 'UsersError', ParentType, ContextType>;
   error?: Resolver<ResolversTypes['ErrorType'], ParentType, ContextType>;
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-}>;
+};
 
 export type QueryResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
-> = ResolversObject<{
+> = {
   me?: Resolver<ResolversTypes['UserPayload'], ParentType, ContextType>;
   users?: Resolver<ResolversTypes['UsersPayload'], ParentType, ContextType>;
-}>;
+};
 
 export type ResultResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['Result'] = ResolversParentTypes['Result']
-> = ResolversObject<{
+> = {
   __resolveType: TypeResolveFn<'UserResult' | 'UsersResult', ParentType, ContextType>;
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-}>;
+};
 
 export type UserResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']
-> = ResolversObject<{
+> = {
   displayName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
+};
 
 export type UserErrorResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['UserError'] = ResolversParentTypes['UserError']
-> = ResolversObject<{
+> = {
   error?: Resolver<ResolversTypes['ErrorType'], ParentType, ContextType>;
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
+};
 
 export type UserPayloadResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['UserPayload'] = ResolversParentTypes['UserPayload']
-> = ResolversObject<{
+> = {
   __resolveType: TypeResolveFn<'UserError' | 'UserResult', ParentType, ContextType>;
-}>;
+};
 
 export type UserResultResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['UserResult'] = ResolversParentTypes['UserResult']
-> = ResolversObject<{
+> = {
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   result?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
+};
 
 export type UsersErrorResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['UsersError'] = ResolversParentTypes['UsersError']
-> = ResolversObject<{
+> = {
   error?: Resolver<ResolversTypes['ErrorType'], ParentType, ContextType>;
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
+};
 
 export type UsersPayloadResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['UsersPayload'] = ResolversParentTypes['UsersPayload']
-> = ResolversObject<{
+> = {
   __resolveType: TypeResolveFn<'UsersError' | 'UsersResult', ParentType, ContextType>;
-}>;
+};
 
 export type UsersResultResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes['UsersResult'] = ResolversParentTypes['UsersResult']
-> = ResolversObject<{
+> = {
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   result?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
+};
 
-export type Resolvers<ContextType = ResolverContext> = ResolversObject<{
+export type Resolvers<ContextType = ResolverContext> = {
   Error?: ErrorResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Result?: ResultResolvers<ContextType>;
@@ -275,4 +283,4 @@ export type Resolvers<ContextType = ResolverContext> = ResolversObject<{
   UsersError?: UsersErrorResolvers<ContextType>;
   UsersPayload?: UsersPayloadResolvers<ContextType>;
   UsersResult?: UsersResultResolvers<ContextType>;
-}>;
+};

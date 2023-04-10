@@ -19,22 +19,10 @@
         "passWithNoTests": true
       }
     },
-    "prepare-prod-typedefs": {
-      "executor": "nx:run-commands",
-      "outputs": ["{projectRoot}/src/schemas/utils/getTypeDefs.prod.js"],
-      "options": {
-        "commands": [
-          "node --loader ts-node/esm libs/graph-backend/bin/prepare-prod-typedefs.ts",
-          "nx format:write --projects=graph-backend"
-        ],
-        "parallel": false
-      }
-    },
     "graphql-codegen": {
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",
-      "outputs": ["{projectRoot}/src/generated"],
       "options": {
-        "configFile": "libs/graph-backend/graphql-codegen.yml",
+        "configFile": "libs/graph-backend/graphql-codegen.ts",
         "watch": false
       },
       "configurations": {
@@ -42,16 +30,7 @@
           "watch": true
         }
       },
-      "dependsOn": [
-        {
-          "target": "graphql-codegen",
-          "projects": "dependencies"
-        },
-        {
-          "target": "prepare-prod-typedefs",
-          "projects": "self"
-        }
-      ]
+      "dependsOn": [{ "target": "graphql-codegen", "projects": "dependencies" }]
     }
   },
   "tags": []
