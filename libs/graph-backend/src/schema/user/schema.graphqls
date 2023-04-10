@@ -10,26 +10,14 @@ type User {
   displayName: String!
 }
 
-type UserResult implements Result {
-  ok: Boolean!
+type UserResult {
   result: User
 }
 
-type UserError implements Error {
-  ok: Boolean!
-  error: ErrorType!
-}
+union UserPayload = UserResult | PayloadError
 
-union UserPayload = UserResult | UserError
-
-type UsersResult implements Result {
-  ok: Boolean!
+type UsersResult {
   result: [User!]!
 }
 
-type UsersError implements Error {
-  ok: Boolean!
-  error: ErrorType!
-}
-
-union UsersPayload = UsersResult | UsersError
+union UsersPayload = UsersResult | PayloadError

@@ -63,7 +63,7 @@ describe('Homepage', () => {
     expect(await screen.findByText('2 - User Two')).toBeInTheDocument();
   });
 
-  it('should render UsersError correctly', async () => {
+  it('should render PayloadError correctly', async () => {
     render(
       <MockedProvider
         mocks={[
@@ -74,7 +74,7 @@ describe('Homepage', () => {
             result: {
               data: {
                 users: {
-                  __typename: 'UsersError',
+                  __typename: 'PayloadError',
                   error: ErrorCodes.FORBIDDEN_ERROR,
                 },
               },

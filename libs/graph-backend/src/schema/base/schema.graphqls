@@ -1,12 +1,6 @@
 type Query
 
-interface Result {
-  ok: Boolean!
-}
-
-interface Error {
-  ok: Boolean!
-  # eslint-disable-next-line @graphql-eslint/no-typename-prefix
+type PayloadError {
   error: ErrorType!
 }
 

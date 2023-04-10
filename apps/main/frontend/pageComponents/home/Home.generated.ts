@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import * as Types from '@bam/graph-frontend/generated-types';
 
 import { DocumentNode } from 'graphql';
@@ -9,7 +8,7 @@ export type HomeQueryVariables = Types.Exact<{ [key: string]: never }>;
 export type HomeQuery = {
   __typename: 'Query';
   users:
-    | { __typename: 'UsersError'; error: Types.ErrorType }
+    | { __typename: 'PayloadError'; error: Types.ErrorType }
     | { __typename: 'UsersResult'; result: Array<{ __typename: 'User'; id: string; displayName: string }> };
 };
 
@@ -51,7 +50,7 @@ export const HomeDocument = {
                 },
                 {
                   kind: 'InlineFragment',
-                  typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'UsersError' } },
+                  typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'PayloadError' } },
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [{ kind: 'Field', name: { kind: 'Name', value: 'error' } }],
