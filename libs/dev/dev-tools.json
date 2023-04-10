@@ -1,0 +1,17 @@
+{
+  "primaryDomain": "bam.dev",
+  "infra": {
+    "files": [
+      "libs/dev/dnsmasq/docker-compose.yml",
+      "libs/dev/reverse-proxy/docker-compose.yml",
+      "libs/main-prisma/docker-compose.yml"
+    ],
+    "env": {
+      "PRIMARY_DOMAIN": "bam.dev",
+      "MAIN_SERVICE_NAME": "bam",
+      "MAIN_SERVICE_HOST": "host.docker.internal:4200",
+      "MYSQL_ROOT_PASSWORD": "root",
+      "MYSQL_PORT": "3306"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 {
+  "name": "main-prisma",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/main-prisma/src",
   "projectType": "library",
@@ -14,7 +15,7 @@
       }
     },
     "init-database": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           "prisma migrate reset --schema=libs/main-prisma/src/prisma/schema.prisma --force",
@@ -24,19 +25,19 @@
       }
     },
     "create-migration": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "prisma migrate dev --schema=libs/main-prisma/src/prisma/schema.prisma --name={args.name} --create-only"
       }
     },
     "apply-migration": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "prisma migrate dev --schema=libs/main-prisma/src/prisma/schema.prisma --skip-generate"
       }
     },
     "codegen": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "prisma generate --schema=libs/main-prisma/src/prisma/schema.prisma"
       }
@@ -50,7 +51,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/main-prisma"],
+      "outputs": ["{workspaceRoot}/coverage/libs/main-prisma"],
       "options": {
         "jestConfig": "libs/main-prisma/jest.config.ts",
         "passWithNoTests": true

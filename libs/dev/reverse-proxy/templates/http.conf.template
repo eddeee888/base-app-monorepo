@@ -1,0 +1,24 @@
+upstream ${MAIN_SERVICE_NAME} {
+  server ${MAIN_SERVICE_HOST};
+}
+
+server {
+  listen 80;
+  
+  location / {
+        return 301 https://$host$request_uri;
+  }      
+}
+
+server {
+  listen 443 ssl http2;
+  server_name ${PRIMARY_DOMAIN};
+  ssl_certificate /usr/share/nginx/certificates/primary/device.crt;
+  ssl_certificate_key /usr/share/nginx/certificates/primary/device.key;
+
+  location / {
+    proxy_pass http://${MAIN_SERVICE_NAME};
+    include /etc/nginx/proxy.conf;
+    include /etc/nginx/ws.conf;
+  }
+}

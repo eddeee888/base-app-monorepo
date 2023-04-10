@@ -15,8 +15,6 @@ generates:
     plugins:
       - typescript-operations
       - typescript-react-apollo
-      - add:
-          content: '/* eslint-disable @typescript-eslint/explicit-function-return-type */'
     config:
       enumsAsTypes: true
       nonOptionalTypename: true

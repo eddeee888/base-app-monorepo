@@ -5,17 +5,17 @@ on:
       - 'master'
 
 env:
-  node-version: '16.14'
+  node-version: '18.x'
 
 jobs:
   precheck:
     name: Check jobs to run
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     outputs:
       affected-main: ${{ steps.affected.outputs.main }}
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.10.0
+        uses: styfle/cancel-workflow-action@0.11.0
         with:
           access_token: ${{ github.token }}
 
@@ -37,11 +37,12 @@ jobs:
       - name: Check affected apps
         id: affected
         run: |
-          echo "::set-output name=main::$(./ops/bin/check-affected.sh apps main origin/master)"
+          main_affected=`./ops/bin/check-affected.sh apps main origin/master`
+          echo "::set-output name=main::$main_affected"
 
   main:
     name: Main app CI
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     needs: precheck
     if: ${{ needs.precheck.outputs.affected-main == 'true' }}
     steps:

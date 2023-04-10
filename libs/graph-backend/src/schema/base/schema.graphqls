@@ -1,0 +1,12 @@
+type Query
+
+type PayloadError {
+  error: ErrorType!
+}
+
+enum ErrorType {
+  NOT_FOUND
+  INPUT_VALIDATION_ERROR
+  FORBIDDEN_ERROR
+  UNEXPECTED_ERROR
+}

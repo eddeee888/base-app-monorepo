@@ -1,4 +1,5 @@
 {
+  "name": "main",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/main",
   "projectType": "application",
@@ -16,17 +17,12 @@
           "outputPath": "apps/main"
         },
         "production": {
-          "fileReplacements": [
-            {
-              "replace": "libs/graph-backend/src/schemas/utils/getTypeDefs.ts",
-              "with": "libs/graph-backend/src/schemas/utils/getTypeDefs.prod.js"
-            }
-          ]
+          "fileReplacements": []
         }
       }
     },
     "build-for-runtime": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "defaultConfiguration": "vercel",
       "configurations": {
         "vercel": {
@@ -47,7 +43,9 @@
       "configurations": {
         "development": {
           "buildTarget": "main:build:development",
-          "dev": true
+          "dev": true,
+          "hostname": "0.0.0.0",
+          "port": 4200
         },
         "production": {
           "buildTarget": "main:build:production",
@@ -63,7 +61,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/main"],
+      "outputs": ["{workspaceRoot}/coverage/apps/main"],
       "options": {
         "jestConfig": "apps/main/jest.config.ts",
         "passWithNoTests": true
@@ -78,7 +76,7 @@
     },
     "graphql-codegen": {
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",
-      "outputs": ["apps/main/frontend/graph/generated"],
+      "outputs": ["{projectRoot}/frontend/graph/generated"],
       "options": {
         "configFile": "apps/main/graphql-codegen.yml",
         "watch": false

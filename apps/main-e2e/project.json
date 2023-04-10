@@ -1,4 +1,5 @@
 {
+  "name": "main-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/main-e2e/src",
   "projectType": "application",
@@ -20,7 +21,7 @@
       }
     },
     "setup": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "defaultConfiguration": "prod",
       "configurations": {
         "dev": {
@@ -35,13 +36,13 @@
       }
     },
     "teardown": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "apps/main-e2e/bin/teardown.sh"
       }
     },
     "run": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "defaultConfiguration": "host",
       "configurations": {
         "host": {

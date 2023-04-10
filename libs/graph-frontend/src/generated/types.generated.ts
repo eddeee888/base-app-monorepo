@@ -12,21 +12,17 @@ export type Scalars = {
   Float: number;
 };
 
-export type Error = {
-  error: ErrorType;
-  ok: Scalars['Boolean'];
-};
-
 export type ErrorType = 'FORBIDDEN_ERROR' | 'INPUT_VALIDATION_ERROR' | 'NOT_FOUND' | 'UNEXPECTED_ERROR';
+
+export type PayloadError = {
+  __typename: 'PayloadError';
+  error: ErrorType;
+};
 
 export type Query = {
   __typename: 'Query';
   me: UserPayload;
   users: UsersPayload;
-};
-
-export type Result = {
-  ok: Scalars['Boolean'];
 };
 
 export type User = {
@@ -37,30 +33,16 @@ export type User = {
   name?: Maybe<Scalars['String']>;
 };
 
-export type UserError = Error & {
-  __typename: 'UserError';
-  error: ErrorType;
-  ok: Scalars['Boolean'];
-};
+export type UserPayload = PayloadError | UserResult;
 
-export type UserPayload = UserError | UserResult;
-
-export type UserResult = Result & {
+export type UserResult = {
   __typename: 'UserResult';
-  ok: Scalars['Boolean'];
   result?: Maybe<User>;
 };
 
-export type UsersError = Error & {
-  __typename: 'UsersError';
-  error: ErrorType;
-  ok: Scalars['Boolean'];
-};
+export type UsersPayload = PayloadError | UsersResult;
 
-export type UsersPayload = UsersError | UsersResult;
-
-export type UsersResult = Result & {
+export type UsersResult = {
   __typename: 'UsersResult';
-  ok: Scalars['Boolean'];
   result: Array<User>;
 };

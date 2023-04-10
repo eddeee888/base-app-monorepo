@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  dnsmasq:
+    image: 4km3/dnsmasq:2.85-r2-alpine-3.14
+    ports:
+      - 53535:53/tcp
+      - 53535:53/udp
+    cap_add: ['NET_ADMIN']
+    volumes:
+      - ./libs/dev/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf

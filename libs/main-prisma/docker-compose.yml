@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  main-db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PORT=${MYSQL_PORT}
+    volumes:
+      - main-db-data:/var/lib/mysql
+    expose:
+      - ${MYSQL_PORT}
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+
+volumes:
+  main-db-data:

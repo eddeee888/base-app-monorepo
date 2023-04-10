@@ -11,44 +11,34 @@ Note: This setup is for Mac, you will have to do the equivalent if you use Linux
 - [Nx](https://nx.dev/)
 - [Docker](https://www.docker.com/)
 
-### 🌟 Setting up CLI (Recommended)
+### ⚡️ Get Started!
 
-To start on MacOS, setting up the CLI command to make development easier. Go to the root of the project and run the init script.
-
-For convenience, this will install packages, set up SSL, etc.
-
-```
-$ ./dev-tools/bin/init.sh
-```
-
-### ⚡️ Start the Apps!
+#### Set Up Networking
 
 Set up DNS resolver to point related traffic to your host machine using the following command:
 
-```
-$ bam vm-up
-```
-
-Create a base dev image to be shared in the apps. We do this to avoid installing packages multiple times.
-
-```
-$ bam build-dev-images
+```bash
+$ nx nw-cert dev # Set up TLS certificate
+$ nx nw-up dev   # Set up DNS resolver
 ```
 
-```
-$ bam up
-```
+#### Start the app
 
-Once the containers have been successfully built, go to the following URLs from your favourite browser:
-
-- `https://bam.dev`: Main app
-- `https://bam.dev/api/graphql`: GraphQL endpoint
+```bash
+$ nx serve main
+$ nx up dev
+```
 
 #### Generate dummy data
 
 ```
 $ nx init-database main-prisma
 ```
+
+Once the containers have been successfully built, go to the following URLs from your favourite browser:
+
+- `https://bam.dev`: Main app
+- `https://bam.dev/api/graphql`: GraphQL endpoint
 
 Made with ♥ by Eddy Nguyen
 https://eddeee888.me

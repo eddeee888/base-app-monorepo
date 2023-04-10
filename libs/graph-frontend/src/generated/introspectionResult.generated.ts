@@ -5,10 +5,8 @@ export interface PossibleTypesResultData {
 }
 const result: PossibleTypesResultData = {
   possibleTypes: {
-    Error: ['UserError', 'UsersError'],
-    Result: ['UserResult', 'UsersResult'],
-    UserPayload: ['UserError', 'UserResult'],
-    UsersPayload: ['UsersError', 'UsersResult'],
+    UserPayload: ['PayloadError', 'UserResult'],
+    UsersPayload: ['PayloadError', 'UsersResult'],
   },
 };
 export default result;

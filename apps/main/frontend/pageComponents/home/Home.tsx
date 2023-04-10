@@ -13,7 +13,7 @@ export const Home: FunctionComponent = () => {
     return <div>Error!</div>;
   }
 
-  if (data.users.__typename === 'UsersError') {
+  if (data.users.__typename === 'PayloadError') {
     return <div>{errorMessage(data.users.error)}</div>;
   }
 

@@ -1,0 +1,23 @@
+extend type Query {
+  me: UserPayload!
+  users: UsersPayload!
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String
+  displayName: String!
+}
+
+type UserResult {
+  result: User
+}
+
+union UserPayload = UserResult | PayloadError
+
+type UsersResult {
+  result: [User!]!
+}
+
+union UsersPayload = UsersResult | PayloadError

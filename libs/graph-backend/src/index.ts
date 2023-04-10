@@ -1,2 +1,2 @@
-export * from './resolvers';
-export * from './schemas/utils';
+export * from './schema/resolvers.generated';
+export * from './schema/typeDefs.generated';
