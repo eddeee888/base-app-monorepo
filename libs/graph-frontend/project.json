@@ -1,4 +1,5 @@
 {
+  "name": "graph-frontend",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/graph-frontend/src",
   "projectType": "library",
@@ -12,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/graph-frontend"],
+      "outputs": ["{workspaceRoot}/coverage/libs/graph-frontend"],
       "options": {
         "jestConfig": "libs/graph-frontend/jest.config.ts",
         "passWithNoTests": true
@@ -20,7 +21,7 @@
     },
     "graphql-codegen": {
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",
-      "outputs": ["libs/graph-frontend/src/generated"],
+      "outputs": ["{projectRoot}/src/generated"],
       "options": {
         "configFile": "libs/graph-frontend/graphql-codegen.yml",
         "watch": false

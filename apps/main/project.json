@@ -1,4 +1,5 @@
 {
+  "name": "main",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/main",
   "projectType": "application",
@@ -26,7 +27,7 @@
       }
     },
     "build-for-runtime": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "defaultConfiguration": "vercel",
       "configurations": {
         "vercel": {
@@ -63,7 +64,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/main"],
+      "outputs": ["{workspaceRoot}/coverage/apps/main"],
       "options": {
         "jestConfig": "apps/main/jest.config.ts",
         "passWithNoTests": true
@@ -78,7 +79,7 @@
     },
     "graphql-codegen": {
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",
-      "outputs": ["apps/main/frontend/graph/generated"],
+      "outputs": ["{projectRoot}/frontend/graph/generated"],
       "options": {
         "configFile": "apps/main/graphql-codegen.yml",
         "watch": false

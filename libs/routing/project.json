@@ -1,4 +1,5 @@
 {
+  "name": "routing",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/routing/src",
   "projectType": "library",
@@ -12,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/routing"],
+      "outputs": ["{workspaceRoot}/coverage/libs/routing"],
       "options": {
         "jestConfig": "libs/routing/jest.config.ts",
         "passWithNoTests": true

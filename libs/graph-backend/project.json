@@ -1,4 +1,5 @@
 {
+  "name": "graph-backend",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/graph-backend/src",
   "projectType": "library",
@@ -12,15 +13,15 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/graph-backend"],
+      "outputs": ["{workspaceRoot}/coverage/libs/graph-backend"],
       "options": {
         "jestConfig": "libs/graph-backend/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "prepare-prod-typedefs": {
-      "executor": "@nrwl/workspace:run-commands",
-      "outputs": ["libs/graph-backend/src/schemas/utils/getTypeDefs.prod.js"],
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/src/schemas/utils/getTypeDefs.prod.js"],
       "options": {
         "commands": [
           "node --loader ts-node/esm libs/graph-backend/bin/prepare-prod-typedefs.ts",
@@ -31,7 +32,7 @@
     },
     "graphql-codegen": {
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",
-      "outputs": ["libs/graph-backend/src/generated"],
+      "outputs": ["{projectRoot}/src/generated"],
       "options": {
         "configFile": "libs/graph-backend/graphql-codegen.yml",
         "watch": false
