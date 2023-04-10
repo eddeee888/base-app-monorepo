@@ -1372,12 +1372,12 @@
     "@envelop/types" "3.0.2"
     tslib "^2.5.0"
 
-"@envelop/disable-introspection@3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@envelop/disable-introspection/-/disable-introspection-3.6.0.tgz#04b033389a83b9831442caabcbae30bde89857b9"
-  integrity sha512-Zf505LqWo2efM0EtTBvXyYPynSTSL2+Ps0X+dCH33vQ3wF6gxMui9g1pGa4MDcGjaXWG67qZcT4eojpGlmmavA==
+"@envelop/disable-introspection@4.0.6":
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/@envelop/disable-introspection/-/disable-introspection-4.0.6.tgz#b77e8487639f0add48c331b17aec070cabae9d6c"
+  integrity sha512-5NDThm17IYVHcSvU1K30rsUlzWdviPPIa4jMn92Qmq1KGkJOmWg173u23fwFmMptk7tNJhj/haMa1MllGWyxqA==
   dependencies:
-    tslib "^2.4.0"
+    tslib "^2.5.0"
 
 "@envelop/types@2.4.0":
   version "2.4.0"
