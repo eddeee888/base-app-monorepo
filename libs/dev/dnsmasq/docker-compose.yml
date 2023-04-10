@@ -8,4 +8,4 @@ services:
       - 53535:53/udp
     cap_add: ['NET_ADMIN']
     volumes:
-      - ./dev-tools/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf
+      - ./libs/dev/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf

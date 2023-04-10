@@ -1,0 +1,64 @@
+{
+  "name": "dev",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/dev",
+  "projectType": "library",
+  "targets": {
+    "nw-cert": {
+      "executor": "@eddeee888/nx-dev-tools:setup",
+      "options": {
+        "command": "cert"
+      }
+    },
+    "nw-up": {
+      "executor": "@eddeee888/nx-dev-tools:setup",
+      "options": {
+        "command": "network-up"
+      }
+    },
+    "nw-down": {
+      "executor": "@eddeee888/nx-dev-tools:setup",
+      "options": {
+        "command": "network-down"
+      }
+    },
+    "up": {
+      "executor": "@eddeee888/nx-dev-tools:infra",
+      "options": {
+        "subCommand": "up",
+        "args": "-d"
+      }
+    },
+    "down": {
+      "executor": "@eddeee888/nx-dev-tools:infra",
+      "options": {
+        "subCommand": "down"
+      }
+    },
+    "logs": {
+      "executor": "@eddeee888/nx-dev-tools:infra",
+      "options": {
+        "subCommand": "logs"
+      }
+    },
+    "start": {
+      "executor": "@eddeee888/nx-dev-tools:infra",
+      "options": {
+        "subCommand": "start"
+      }
+    },
+    "stop": {
+      "executor": "@eddeee888/nx-dev-tools:infra",
+      "options": {
+        "subCommand": "stop"
+      }
+    },
+    "open": {
+      "executor": "@eddeee888/nx-dev-tools:infra",
+      "options": {
+        "subCommand": "open"
+      }
+    }
+  },
+  "tags": []
+}

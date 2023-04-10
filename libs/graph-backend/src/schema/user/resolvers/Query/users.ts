@@ -6,6 +6,7 @@ export const users: NonNullable<QueryResolvers['users']> = async (_parent, _arg,
     const users = await prisma.user.findMany();
     return { __typename: 'UsersResult', ok: true, result: users };
   } catch (e) {
+    console.log(e);
     return { __typename: 'UsersError', ok: false, error: ErrorCodes.UNEXPECTED_ERROR };
   }
 };

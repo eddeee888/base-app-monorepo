@@ -17,12 +17,7 @@
           "outputPath": "apps/main"
         },
         "production": {
-          "fileReplacements": [
-            {
-              "replace": "libs/graph-backend/src/schemas/utils/getTypeDefs.ts",
-              "with": "libs/graph-backend/src/schemas/utils/getTypeDefs.prod.js"
-            }
-          ]
+          "fileReplacements": []
         }
       }
     },
@@ -48,7 +43,9 @@
       "configurations": {
         "development": {
           "buildTarget": "main:build:development",
-          "dev": true
+          "dev": true,
+          "hostname": "0.0.0.0",
+          "port": 4200
         },
         "production": {
           "buildTarget": "main:build:production",

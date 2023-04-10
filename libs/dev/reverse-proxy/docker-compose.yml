@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  reverse-proxy:
+    image: nginx:1.23.1-alpine
+    tty: true
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - dnsmasq
+    environment:
+      PRIMARY_DOMAIN: ${PRIMARY_DOMAIN}
+      MAIN_SERVICE_NAME: ${MAIN_SERVICE_NAME}
+      MAIN_SERVICE_HOST: ${MAIN_SERVICE_HOST}
+    volumes:
+      - ./libs/dev/reverse-proxy/templates:/etc/nginx/templates
+      - ./libs/dev/reverse-proxy/certificates/primary/device.crt:/usr/share/nginx/certificates/primary/device.crt
+      - ./libs/dev/reverse-proxy/certificates/primary/device.key:/usr/share/nginx/certificates/primary/device.key
+      - ./libs/dev/reverse-proxy/proxy.conf:/etc/nginx/proxy.conf
+      - ./libs/dev/reverse-proxy/ws.conf:/etc/nginx/ws.conf

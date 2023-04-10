@@ -1,5 +1,5 @@
 upstream ${MAIN_SERVICE_NAME} {
-  server ${MAIN_SERVICE_NAME}:${MAIN_SERVICE_PORT};
+  server ${MAIN_SERVICE_HOST};
 }
 
 server {
