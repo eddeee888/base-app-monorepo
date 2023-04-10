@@ -36,7 +36,6 @@
     "@graphql-codegen/typescript": "3.0.3",
     "@graphql-codegen/typescript-operations": "3.0.3",
     "@graphql-codegen/typescript-react-apollo": "3.3.7",
-    "@graphql-codegen/typescript-resolvers": "3.2.0",
     "@graphql-eslint/eslint-plugin": "3.10.7",
     "@graphql-tools/load-files": "6.6.1",
     "@graphql-tools/merge": "8.3.6",
