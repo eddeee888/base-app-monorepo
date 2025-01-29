@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.19.1",
-    "@eddeee888/gcg-typescript-resolver-files": "0.4.0",
+    "@eddeee888/gcg-typescript-resolver-files": "0.12.0",
     "@eddeee888/nx-dev-tools": "1.0.0",
     "@eddeee888/nx-graphql-code-generator": "0.1.0",
     "@emotion/babel-plugin": "11.10.5",
