@@ -36,7 +36,7 @@ jobs:
       - name: Check affected apps
         id: affected
         run: |
-          main_affected=`./ops/bin/check-affected.sh apps main origin/master`
+          main_affected=`./ops/bin/check-affected.sh app main origin/master`
           echo "::set-output name=main::$main_affected"
 
   main:
