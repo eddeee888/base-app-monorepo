@@ -7,11 +7,11 @@ export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> =
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
 };
 
 export type MeResult = MeResultOk | ResultError;
@@ -32,7 +32,11 @@ export type ResultError = {
   error: ResultErrorType;
 };
 
-export type ResultErrorType = 'FORBIDDEN_ERROR' | 'INPUT_VALIDATION_ERROR' | 'NOT_FOUND' | 'UNEXPECTED_ERROR';
+export type ResultErrorType =
+  | 'FORBIDDEN_ERROR'
+  | 'INPUT_VALIDATION_ERROR'
+  | 'NOT_FOUND'
+  | 'UNEXPECTED_ERROR';
 
 export type User = {
   __typename: 'User';

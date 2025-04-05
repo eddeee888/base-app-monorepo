@@ -72,7 +72,7 @@
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",
       "outputs": ["{projectRoot}/frontend/graph/generated"],
       "options": {
-        "configFile": "apps/main/graphql-codegen.yml",
+        "configFile": "apps/main/graphql-codegen.ts",
         "watch": false
       },
       "configurations": {
