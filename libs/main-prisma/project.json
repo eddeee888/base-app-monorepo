@@ -11,8 +11,7 @@
         "outputPath": "dist/libs/main-prisma",
         "tsConfig": "libs/main-prisma/tsconfig.lib.json",
         "packageJson": "libs/main-prisma/package.json",
-        "main": "libs/main-prisma/src/index.ts",
-        "updateBuildableProjectDepsInPackageJson": true
+        "main": "libs/main-prisma/src/index.ts"
       }
     },
     "init-database": {
@@ -44,18 +43,14 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/main-prisma/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/main-prisma"],
       "options": {
-        "jestConfig": "libs/main-prisma/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/main-prisma/jest.config.ts"
       }
     }
   },

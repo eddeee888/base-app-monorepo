@@ -5,18 +5,14 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/graph-frontend/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/graph-frontend"],
       "options": {
-        "jestConfig": "libs/graph-frontend/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/graph-frontend/jest.config.ts"
       }
     },
     "graphql-codegen": {

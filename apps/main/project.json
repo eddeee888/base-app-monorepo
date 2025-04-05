@@ -62,16 +62,12 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/main"],
       "options": {
-        "jestConfig": "apps/main/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/main/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/main/**/*.{ts,tsx,js,jsx}"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "graphql-codegen": {
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",

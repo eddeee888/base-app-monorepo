@@ -42,3 +42,5 @@ libs/main-prisma/src/prisma/generated/prisma-client-js
 
 # Next.js
 .next
+
+.nx/cache
