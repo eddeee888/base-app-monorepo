@@ -5,13 +5,14 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/main-prisma",
         "tsConfig": "libs/main-prisma/tsconfig.lib.json",
         "packageJson": "libs/main-prisma/package.json",
-        "main": "libs/main-prisma/src/index.ts"
+        "main": "libs/main-prisma/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": true
       }
     },
     "init-database": {
@@ -43,14 +44,14 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/main-prisma/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/main-prisma"],
       "options": {
         "jestConfig": "libs/main-prisma/jest.config.ts",

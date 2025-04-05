@@ -5,11 +5,10 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/next:build",
+      "executor": "@nx/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/main",
         "outputPath": "dist/apps/main"
       },
       "configurations": {
@@ -34,7 +33,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/next:server",
+      "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "main:build",
@@ -54,13 +53,13 @@
       }
     },
     "export": {
-      "executor": "@nrwl/next:export",
+      "executor": "@nx/next:export",
       "options": {
         "buildTarget": "main:build:production"
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/main"],
       "options": {
         "jestConfig": "apps/main/jest.config.ts",
@@ -68,7 +67,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/main/**/*.{ts,tsx,js,jsx}"]
@@ -89,7 +88,7 @@
       "dependsOn": [
         {
           "target": "graphql-codegen",
-          "projects": "dependencies"
+          "dependencies": true
         }
       ]
     }

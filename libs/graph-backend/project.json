@@ -5,14 +5,14 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/graph-backend/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/graph-backend"],
       "options": {
         "jestConfig": "libs/graph-backend/jest.config.ts",
@@ -30,7 +30,12 @@
           "watch": true
         }
       },
-      "dependsOn": [{ "target": "graphql-codegen", "projects": "dependencies" }]
+      "dependsOn": [
+        {
+          "target": "graphql-codegen",
+          "dependencies": true
+        }
+      ]
     }
   },
   "tags": []
