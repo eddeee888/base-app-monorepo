@@ -11,7 +11,7 @@ export const Home: FC = () => {
     return <div>Loading...</div>;
   }
 
-  if (error) {
+  if (error || !data) {
     return <div>Error!</div>;
   }
 

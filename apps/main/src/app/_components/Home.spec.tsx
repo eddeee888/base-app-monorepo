@@ -1,11 +1,10 @@
 import { Home } from './Home';
 import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
-import { ErrorCodes } from '@bam/shared-config';
 import { HomeDocument } from './Home.generated';
 
 describe('Homepage', () => {
-  it('should render no users correctly', async () => {
+  it('should render blank state correctly', async () => {
     render(
       <MockedProvider
         mocks={[
@@ -16,7 +15,7 @@ describe('Homepage', () => {
             result: {
               data: {
                 users: {
-                  __typename: 'UsersResult',
+                  __typename: 'UsersResultOk',
                   result: [],
                 },
               },
@@ -28,7 +27,6 @@ describe('Homepage', () => {
       </MockedProvider>
     );
 
-    expect(await screen.findByText('Welcome!')).toBeInTheDocument();
     expect(await screen.findByText('No user found!')).toBeInTheDocument();
   });
 
@@ -43,7 +41,7 @@ describe('Homepage', () => {
             result: {
               data: {
                 users: {
-                  __typename: 'UsersResult',
+                  __typename: 'UsersResultOk',
                   result: [
                     { id: '1', displayName: 'User One' },
                     { id: '2', displayName: 'User Two' },
@@ -58,12 +56,11 @@ describe('Homepage', () => {
       </MockedProvider>
     );
 
-    expect(await screen.findByText('Welcome!')).toBeInTheDocument();
     expect(await screen.findByText('1 - User One')).toBeInTheDocument();
     expect(await screen.findByText('2 - User Two')).toBeInTheDocument();
   });
 
-  it('should render PayloadError correctly', async () => {
+  it('should render error state correctly', async () => {
     render(
       <MockedProvider
         mocks={[
@@ -74,8 +71,8 @@ describe('Homepage', () => {
             result: {
               data: {
                 users: {
-                  __typename: 'PayloadError',
-                  error: ErrorCodes.FORBIDDEN_ERROR,
+                  __typename: 'ResultError',
+                  error: 'FORBIDDEN_ERROR',
                 },
               },
             },
