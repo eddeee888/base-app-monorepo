@@ -4,13 +4,13 @@ import {
   HttpLink,
   InMemoryCache,
   Observable,
-  NormalizedCacheObject,
+  type NormalizedCacheObject,
   split,
 } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
-import { onError, ErrorResponse } from '@apollo/client/link/error';
+import { onError, type ErrorResponse } from '@apollo/client/link/error';
 import type { IncomingHttpHeaders } from 'http';
 import type { GraphQLError } from 'graphql';
 import { routes } from '@bam/routing';
@@ -33,12 +33,16 @@ export const createApolloClient = (params: CreateApolloClientParams = {}): Apoll
   const {
     uri = routes.apiGraphQL(),
     webSocket,
-    headers,
+    headers = {},
     onGraphqlError = console.error,
     onNetworkError = console.error,
     initialState = {},
     isSsr = false,
   } = params;
+
+  // Newer Node.js versions comes with Undici fetch which throws if has connection header
+  // https://github.com/nodejs/undici/issues/1470
+  delete headers.connection;
 
   // Link: Transport i.e. HTTP and WebSocket
   const httpLink = new HttpLink({ uri, credentials: 'include' });
@@ -79,8 +83,8 @@ export const createApolloClient = (params: CreateApolloClientParams = {}): Apoll
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let handle: any;
         Promise.resolve(operation)
-          .then(async (operation) => {
-            operation.setContext({ headers: { ...headers } });
+          .then(async (op) => {
+            op.setContext({ headers: { ...headers } });
           })
           .then(() => {
             if (forward) {

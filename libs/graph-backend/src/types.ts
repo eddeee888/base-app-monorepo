@@ -1,9 +1,9 @@
-import { PrismaClient, User } from '@bam/main-prisma';
+import { type ExtendedPrismaClient, User } from '@bam/main-prisma';
 
 export type JWT = string;
 export interface ResolverContext<U = User | null> {
   viewer: U;
-  prisma: PrismaClient;
+  prisma: ExtendedPrismaClient;
 }
 
 export type ResolverContextLoggedIn = ResolverContext<User>;
