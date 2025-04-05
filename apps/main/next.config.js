@@ -1,7 +1,8 @@
-//@ts-check
-
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require('@nx/next');
+const { PrismaPlugin } = require('@prisma/nextjs-monorepo-workaround-plugin');
+
+const isProd = process.env.NODE_ENV === 'production';
 
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
@@ -11,11 +12,12 @@ const nextConfig = {
   images: {
     domains: [process.env.IMAGE_DOMAIN || ''],
   },
-  webpack: (config) => {
-    // For prod, Prisma files live in node_modules
-    // This makes it easier to run Prisma in different runtimes e.g. Lambda vs AWS Fargate
-    if (process.env.NODE_ENV === 'production') {
-      config.externals.push('@bam/main-prisma');
+  distDir: isProd ? '../../dist/apps/main/.next' : undefined,
+  reactStrictMode: true,
+  swcMinify: true,
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.plugins = [...config.plugins, new PrismaPlugin()];
     }
 
     return config;
