@@ -14,7 +14,7 @@ echo "=> Running e2e tests..."
 if [ "$mode" == "host" ]; then
   nx run main-e2e:e2e:host
 elif [ "$mode" == "docker" ]; then
-  docker-compose -f $dc_file run --rm \
+  docker compose -f $dc_file run --rm \
     --entrypoint="./node_modules/.bin/nx run main-e2e:e2e:docker" \
     cypress
 fi
