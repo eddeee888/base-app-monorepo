@@ -44,3 +44,4 @@ libs/main-prisma/src/prisma/generated/prisma-client-js
 .next
 
 .nx/cache
+.nx/workspace-data
