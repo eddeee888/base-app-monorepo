@@ -8,8 +8,8 @@ export type HomeQueryVariables = Types.Exact<{ [key: string]: never }>;
 export type HomeQuery = {
   __typename: 'Query';
   users:
-    | { __typename: 'PayloadError'; error: Types.ErrorType }
-    | { __typename: 'UsersResult'; result: Array<{ __typename: 'User'; id: string; displayName: string }> };
+    | { __typename: 'ResultError'; error: Types.ResultErrorType }
+    | { __typename: 'UsersResultOk'; result: Array<{ __typename: 'User'; id: string; displayName: string }> };
 };
 
 export const HomeDocument = {
@@ -30,7 +30,7 @@ export const HomeDocument = {
               selections: [
                 {
                   kind: 'InlineFragment',
-                  typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'UsersResult' } },
+                  typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'UsersResultOk' } },
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [
@@ -50,7 +50,7 @@ export const HomeDocument = {
                 },
                 {
                   kind: 'InlineFragment',
-                  typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'PayloadError' } },
+                  typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'ResultError' } },
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [{ kind: 'Field', name: { kind: 'Name', value: 'error' } }],
@@ -88,6 +88,13 @@ export function useHomeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HomeQ
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<HomeQuery, HomeQueryVariables>(HomeDocument, options);
 }
+export function useHomeSuspenseQuery(
+  baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<HomeQuery, HomeQueryVariables>
+) {
+  const options = baseOptions === Apollo.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<HomeQuery, HomeQueryVariables>(HomeDocument, options);
+}
 export type HomeQueryHookResult = ReturnType<typeof useHomeQuery>;
 export type HomeLazyQueryHookResult = ReturnType<typeof useHomeLazyQuery>;
+export type HomeSuspenseQueryHookResult = ReturnType<typeof useHomeSuspenseQuery>;
 export type HomeQueryResult = Apollo.QueryResult<HomeQuery, HomeQueryVariables>;

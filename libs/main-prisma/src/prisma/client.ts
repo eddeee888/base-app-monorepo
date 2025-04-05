@@ -1,21 +1,31 @@
 import { PrismaClient } from './generated/prisma-client-js';
+import { performance } from 'perf_hooks';
+import * as util from 'util';
 
 export interface CreatePrismaClientParams {
   mode?: 'development' | 'production' | 'test';
 }
 
-export const createPrismaClient = ({ mode = 'development' }: CreatePrismaClientParams): PrismaClient => {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export const createPrismaClient = ({ mode = 'development' }: CreatePrismaClientParams) => {
   const prisma = new PrismaClient();
 
   if (mode === 'development') {
-    prisma.$use(async (params, next) => {
-      const before = Date.now();
-      const result = await next(params);
-      const after = Date.now();
-      console.log(`Query ${params.model}.${params.action} took ${after - before}ms`);
-      return result;
+    return prisma.$extends({
+      query: {
+        async $allOperations({ operation, model, args, query }) {
+          const start = performance.now();
+          const result = await query(args);
+          const end = performance.now();
+          const time = end - start;
+          console.log(util.inspect({ model, operation, args, time }, { showHidden: false, depth: null, colors: true }));
+          return result;
+        },
+      },
     });
   }
 
   return prisma;
 };
+
+export type ExtendedPrismaClient = ReturnType<typeof createPrismaClient>;

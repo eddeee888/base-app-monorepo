@@ -1,12 +1,12 @@
 query Home {
   users {
-    ... on UsersResult {
+    ... on UsersResultOk {
       result {
         id
         displayName
       }
     }
-    ... on PayloadError {
+    ... on ResultError {
       error
     }
   }
