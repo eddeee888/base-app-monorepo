@@ -5,7 +5,11 @@ on:
       - 'master'
 
 env:
-  node-version: '18.x'
+  node-version: '22.x'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   precheck:
@@ -14,18 +18,13 @@ jobs:
     outputs:
       affected-main: ${{ steps.affected.outputs.main }}
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.11.0
-        with:
-          access_token: ${{ github.token }}
-
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.node-version }}
           cache: yarn
@@ -47,10 +46,10 @@ jobs:
     if: ${{ needs.precheck.outputs.affected-main == 'true' }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.node-version }}
           cache: yarn
@@ -82,7 +81,7 @@ jobs:
 
       - name: Upload failed e2e artifacts
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: main-e2e-cypress-artifacts
           path: dist/cypress
