@@ -66,8 +66,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     },
     "graphql-codegen": {
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",
