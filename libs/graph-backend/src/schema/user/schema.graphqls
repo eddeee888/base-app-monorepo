@@ -1,6 +1,6 @@
 extend type Query {
-  me: UserPayload!
-  users: UsersPayload!
+  me: MeResult!
+  users: UsersResult!
 }
 
 type User {
@@ -10,14 +10,14 @@ type User {
   displayName: String!
 }
 
-type UserResult {
+type MeResultOk {
   result: User
 }
 
-union UserPayload = UserResult | PayloadError
+union MeResult = MeResultOk | ResultError
 
-type UsersResult {
+type UsersResultOk {
   result: [User!]!
 }
 
-union UsersPayload = UsersResult | PayloadError
+union UsersResult = UsersResultOk | ResultError
