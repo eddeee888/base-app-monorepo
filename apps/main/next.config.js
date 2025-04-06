@@ -1,18 +1,23 @@
-const withNx = require('@nrwl/next/plugins/with-nx');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { composePlugins, withNx } = require('@nx/next');
+const { PrismaPlugin } = require('@prisma/nextjs-monorepo-workaround-plugin');
+
+const isProd = process.env.NODE_ENV === 'production';
 
 /**
- * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
+ * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
   assetPrefix: process.env.BASE_ASSETS_URL || undefined,
   images: {
     domains: [process.env.IMAGE_DOMAIN || ''],
   },
-  webpack: (config) => {
-    // For prod, Prisma files live in node_modules
-    // This makes it easier to run Prisma in different runtimes e.g. Lambda vs AWS Fargate
-    if (process.env.NODE_ENV === 'production') {
-      config.externals.push('@bam/main-prisma');
+  distDir: isProd ? '../../dist/apps/main/.next' : undefined,
+  reactStrictMode: true,
+  swcMinify: true,
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.plugins = [...config.plugins, new PrismaPlugin()];
     }
 
     return config;
@@ -24,4 +29,9 @@ const nextConfig = {
   },
 };
 
-module.exports = withNx(nextConfig);
+const plugins = [
+  // Add more Next.js plugins to this list if needed.
+  withNx,
+];
+
+module.exports = composePlugins(...plugins)(nextConfig);

@@ -1,12 +1,12 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "plugins": ["@nx"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@nx/enforce-module-boundaries": [
           "error",
           {
             "enforceBuildableLibDependency": true,
@@ -23,25 +23,39 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
+      "extends": ["plugin:@nx/typescript"],
       "rules": {
         "@typescript-eslint/explicit-function-return-type": [
           "error",
-          { "allowExpressions": true, "allowTypedFunctionExpressions": true }
+          {
+            "allowExpressions": true,
+            "allowTypedFunctionExpressions": true
+          }
         ],
-        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
-        "react/jsx-no-useless-fragment": "off"
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_"
+          }
+        ],
+        "react/jsx-no-useless-fragment": "off",
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
       }
     },
     {
       "files": ["*.tsx"],
-      "extends": ["plugin:@nrwl/nx/react-typescript"],
+      "extends": ["plugin:@nx/react-typescript"],
       "rules": {}
     },
     {
       "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
-      "rules": {}
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
+      }
     },
     {
       "files": ["*.graphqls"],
@@ -50,8 +64,20 @@
         "schema": "./**/*.graphqls"
       },
       "rules": {
-        "@graphql-eslint/require-description": ["error", { "DirectiveDefinition": true }],
-        "@graphql-eslint/strict-id-in-types": ["error", { "exceptions": { "suffixes": ["Error", "Result"] } }]
+        "@graphql-eslint/require-description": [
+          "error",
+          {
+            "DirectiveDefinition": true
+          }
+        ],
+        "@graphql-eslint/strict-id-in-types": [
+          "error",
+          {
+            "exceptions": {
+              "suffixes": ["Error", "Result"]
+            }
+          }
+        ]
       }
     },
     {

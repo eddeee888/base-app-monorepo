@@ -5,36 +5,23 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/graph-frontend/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/graph-frontend"],
       "options": {
-        "jestConfig": "libs/graph-frontend/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/graph-frontend/jest.config.ts"
       }
     },
     "graphql-codegen": {
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",
       "outputs": ["{projectRoot}/src/generated"],
-      "options": {
-        "configFile": "libs/graph-frontend/graphql-codegen.yml",
-        "watch": false
-      },
-      "configurations": {
-        "watch": {
-          "watch": true
-        }
-      },
       "dependsOn": [
         {
           "target": "graphql-codegen",
-          "projects": "dependencies"
+          "dependencies": true
         }
       ]
     }

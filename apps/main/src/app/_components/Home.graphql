@@ -1,0 +1,13 @@
+query Home {
+  users {
+    ... on UsersResultOk {
+      result {
+        id
+        displayName
+      }
+    }
+    ... on ResultError {
+      error
+    }
+  }
+}

@@ -1,10 +1,10 @@
 type Query
 
-type PayloadError {
-  error: ErrorType!
+type ResultError {
+  error: ResultErrorType!
 }
 
-enum ErrorType {
+enum ResultErrorType {
   NOT_FOUND
   INPUT_VALIDATION_ERROR
   FORBIDDEN_ERROR
