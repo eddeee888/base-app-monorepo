@@ -4,22 +4,6 @@
   "sourceRoot": "apps/main",
   "projectType": "application",
   "targets": {
-    "build": {
-      "executor": "@nx/next:build",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
-      "options": {
-        "outputPath": "dist/apps/main"
-      },
-      "configurations": {
-        "development": {
-          "outputPath": "apps/main"
-        },
-        "production": {
-          "fileReplacements": []
-        }
-      }
-    },
     "build-for-runtime": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "vercel",
@@ -29,26 +13,6 @@
         },
         "e2e": {
           "command": "apps/main/bin/build-for-e2e.sh"
-        }
-      }
-    },
-    "serve": {
-      "executor": "@nx/next:server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "main:build",
-        "dev": true
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "main:build:development",
-          "dev": true,
-          "hostname": "0.0.0.0",
-          "port": 4200
-        },
-        "production": {
-          "buildTarget": "main:build:production",
-          "dev": false
         }
       }
     },
