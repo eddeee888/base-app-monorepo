@@ -52,6 +52,19 @@
         }
       }
     },
+    "serve-e2e": {
+      "executor": "nx:run-commands",
+      "defaultConfiguration": "dev",
+      "configurations": {
+        "prod": {
+          "commands": ["yarn nx run main:build-for-runtime:e2e", "yarn --cwd dist/apps/main start"],
+          "parallel": false
+        },
+        "dev": {
+          "command": "yarn env-cmd -f apps/main/.env.e2e yarn nx dev main"
+        }
+      }
+    },
     "export": {
       "executor": "@nx/next:export",
       "options": {
@@ -70,16 +83,6 @@
     },
     "graphql-codegen": {
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",
-      "outputs": ["{projectRoot}/frontend/graph/generated"],
-      "options": {
-        "configFile": "apps/main/graphql-codegen.ts",
-        "watch": false
-      },
-      "configurations": {
-        "watch": {
-          "watch": true
-        }
-      },
       "dependsOn": [
         {
           "target": "graphql-codegen",

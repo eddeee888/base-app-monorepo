@@ -17,15 +17,6 @@
     },
     "graphql-codegen": {
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",
-      "options": {
-        "configFile": "libs/graph-backend/graphql-codegen.ts",
-        "watch": false
-      },
-      "configurations": {
-        "watch": {
-          "watch": true
-        }
-      },
       "dependsOn": [
         {
           "target": "graphql-codegen",

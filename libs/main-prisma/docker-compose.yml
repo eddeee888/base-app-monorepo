@@ -2,17 +2,13 @@ version: '3.7'
 
 services:
   main-db:
-    image: mysql:8.0
-    restart: always
+    image: postgres:17.2
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_PORT=${MYSQL_PORT}
-    volumes:
-      - main-db-data:/var/lib/mysql
-    expose:
-      - ${MYSQL_PORT}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
-      - ${MYSQL_PORT}:${MYSQL_PORT}
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+      - main-db-data:/var/lib/postgresql/data
 
 volumes:
   main-db-data:

@@ -10,8 +10,8 @@
       "PRIMARY_DOMAIN": "bam.dev",
       "MAIN_SERVICE_NAME": "bam",
       "MAIN_SERVICE_HOST": "host.docker.internal:4200",
-      "MYSQL_ROOT_PASSWORD": "root",
-      "MYSQL_PORT": "3306"
+      "DB_PASSWORD": "postgres",
+      "DB_PORT": "5432"
     }
   }
 }

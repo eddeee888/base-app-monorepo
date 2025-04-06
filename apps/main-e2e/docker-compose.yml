@@ -1,36 +1,14 @@
 version: '3.7'
 
 services:
-  cypress:
-    image: cypress/included:12.9.0
-    working_dir: /e2e
-    volumes:
-      - ../..:/e2e
-
-  main:
-    build:
-      context: ../..
-      dockerfile: apps/main-e2e/Dockerfile.e2e
-    environment:
-      - SERVE_MODE
-    volumes:
-      - ../..:/usr/src/app/
-      - /usr/src/app/node_modules
-      - /usr/src/app/dist
-      - /usr/src/app/apps/main/.next
-    ports:
-      - 3000:3000
-
   main-db:
-    image: mysql:8.0
-    restart: always
+    image: postgres:17.2
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_TCP_PORT=3307
-    volumes:
-      - main-db-data:/var/lib/mysql
+      - POSTGRES_PASSWORD=postgres
     ports:
-      - 3307:3307
+      - 5433:5432
+    volumes:
+      - main-db-data:/var/lib/postgresql/data
 
 volumes:
   main-db-data:

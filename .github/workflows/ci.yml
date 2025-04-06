@@ -14,7 +14,7 @@ concurrency:
 jobs:
   precheck:
     name: Check jobs to run
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       affected-main: ${{ steps.affected.outputs.main }}
     steps:
@@ -41,7 +41,7 @@ jobs:
 
   main:
     name: Main app CI
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: precheck
     if: ${{ needs.precheck.outputs.affected-main == 'true' }}
     steps:
@@ -72,20 +72,42 @@ jobs:
       - name: Test - Unit
         run: yarn nx test main
 
-      - name: Test - e2e - Setup
-        run: yarn nx run main-e2e:setup:prod
+  main-ci-e2e:
+    name: Main app CI e2e
+    runs-on: ubuntu-24.04
+    needs: precheck
+    if: ${{ needs.precheck.outputs.affected-main == 'true' }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.node-version }}
 
       - name: Test - e2e - Run
-        id: test-main-e2e-run
-        run: yarn nx run main-e2e:run:docker
-
-      - name: Upload failed e2e artifacts
-        if: failure()
-        uses: actions/upload-artifact@v4
+        uses: cypress-io/github-action@v5
+        timeout-minutes: 10
         with:
-          name: main-e2e-cypress-artifacts
-          path: dist/cypress
+          project: apps/main-e2e
+          build: yarn nx up main-e2e
+          start: yarn nx serve-e2e main # -c prod FIXME: -c prod is not working
+          wait-on: http://localhost:3000
+          wait-on-timeout: 120
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
 
       - name: Test - e2e - Teardown
         if: always()
-        run: yarn nx run main-e2e:teardown
+        run: yarn nx down main-e2e

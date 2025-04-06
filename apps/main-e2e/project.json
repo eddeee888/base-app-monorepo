@@ -6,52 +6,16 @@
   "targets": {
     "e2e": {
       "executor": "@nx/cypress:cypress",
-      "defaultConfiguration": "host",
       "options": {
         "cypressConfig": "apps/main-e2e/cypress.config.ts",
         "testingType": "e2e"
-      },
-      "configurations": {
-        "host": {
-          "baseUrl": "http://localhost:3000"
-        },
-        "docker": {
-          "baseUrl": "http://main:3000"
-        }
       }
     },
-    "setup": {
-      "executor": "nx:run-commands",
-      "defaultConfiguration": "prod",
-      "configurations": {
-        "dev": {
-          "command": "SERVE_MODE=dev apps/main-e2e/bin/setup.sh"
-        },
-        "prod": {
-          "command": "apps/main-e2e/bin/setup.sh"
-        }
-      },
-      "options": {
-        "command": "apps/main-e2e/bin/setup.sh"
-      }
+    "up": {
+      "command": "apps/main-e2e/bin/setup.sh"
     },
-    "teardown": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "apps/main-e2e/bin/teardown.sh"
-      }
-    },
-    "run": {
-      "executor": "nx:run-commands",
-      "defaultConfiguration": "host",
-      "configurations": {
-        "host": {
-          "command": "apps/main-e2e/bin/run.sh host"
-        },
-        "docker": {
-          "command": "apps/main-e2e/bin/run.sh docker"
-        }
-      }
+    "down": {
+      "command": "apps/main-e2e/bin/teardown.sh"
     },
     "lint": {
       "executor": "@nx/eslint:lint"

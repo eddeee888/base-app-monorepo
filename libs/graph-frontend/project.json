@@ -18,15 +18,6 @@
     "graphql-codegen": {
       "executor": "@eddeee888/nx-graphql-code-generator:codegen",
       "outputs": ["{projectRoot}/src/generated"],
-      "options": {
-        "configFile": "libs/graph-frontend/graphql-codegen.ts",
-        "watch": false
-      },
-      "configurations": {
-        "watch": {
-          "watch": true
-        }
-      },
       "dependsOn": [
         {
           "target": "graphql-codegen",
