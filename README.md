@@ -25,7 +25,7 @@ $ nx nw-up dev   # Set up DNS resolver
 #### Start the app
 
 ```bash
-$ nx serve main
+$ nx dev main
 $ nx up dev
 ```
 
