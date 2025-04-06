@@ -33,7 +33,7 @@
     "@graphql-codegen/typescript-react-apollo": "4.3.2",
     "@graphql-eslint/eslint-plugin": "3.10.7",
     "@graphql-tools/load-files": "6.6.1",
-    "@graphql-tools/merge": "8.3.6",
+    "@graphql-tools/merge": "8.4.2",
     "@nx/cypress": "20.7.1",
     "@nx/eslint": "20.7.1",
     "@nx/eslint-plugin": "20.7.1",
