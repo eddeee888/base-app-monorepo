@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   reverse-proxy:
-    image: nginx:1.23.1-alpine
+    image: nginx:1.27.5-alpine
     tty: true
     ports:
       - 80:80
