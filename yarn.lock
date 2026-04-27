@@ -33,26 +33,25 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
-"@apollo/client-integration-nextjs@0.12.0":
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/@apollo/client-integration-nextjs/-/client-integration-nextjs-0.12.0.tgz#ced34fa7c2953b03e318782f4c3be231626ca582"
-  integrity sha512-FE7Fs8AJELgOAcTyAaG55lS/GSf+JDmrxMbOg3gmG4XkvBcoELKUYsZPCT9Nw13oGqcDcbUrHdhrKOzbSt83cg==
+"@apollo/client-integration-nextjs@0.14.5":
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/@apollo/client-integration-nextjs/-/client-integration-nextjs-0.14.5.tgz#fe7c0f38910c74d5498a41521b394deb120043e3"
+  integrity sha512-aNh16zlx5rrGtP946jW+O/J7OUyoSC0dxjicFIztiw/S5tQjNqZgqmlgtOXMn7zAR8qV9VOAiKjK5UROaN8iJg==
   dependencies:
-    "@apollo/client-react-streaming" "0.12.0"
+    "@apollo/client-react-streaming" "0.14.5"
 
-"@apollo/client-react-streaming@0.12.0":
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/@apollo/client-react-streaming/-/client-react-streaming-0.12.0.tgz#9e29ffe123dc873048ac456f9033e6addbb19070"
-  integrity sha512-T38cKGh9G/BlkxJ0vx9uULUIvv4+wraGYpdOY9UBeBkYWINI4aOvGm7mpDX9n4Pj62b36gXSJMONgVQ68/4OZg==
+"@apollo/client-react-streaming@0.14.5":
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/@apollo/client-react-streaming/-/client-react-streaming-0.14.5.tgz#549b183e0efdcae44b7ccea45b7c2ba3e6b05aea"
+  integrity sha512-ru9FP4g5tULITsWBO6oDSHOflnZaD6lm0AtjT9mkZbbrUkWwoYcSrTKdjNrjfrnppqXS1igv+DpcO+SlXdUGXg==
   dependencies:
     "@types/react-dom" "^19.0.0"
     "@wry/equality" "^0.5.6"
-    ts-invariant "^0.10.3"
 
-"@apollo/client@3.13.6":
-  version "3.13.6"
-  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.13.6.tgz#64db62d74b1aa78bfff50d995b3473e9a8c70ab7"
-  integrity sha512-G6A8uNb13V/Tv4TJQOs5PnxuE5Rf5D2dMnBQcg9mng1Eo4YBecwFEJ0L022mraq/dLB0jD5tiAESOD2bTyJ6gg==
+"@apollo/client@3.14.1":
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.14.1.tgz#98931c8feea4a50c89c32ec0c8ffd04ccaa9416f"
+  integrity sha512-SgGX6E23JsZhUdG2anxiyHvEvvN6CUaI4ZfMsndZFeuHPXL3H0IsaiNAhLITSISbeyeYd+CBd9oERXQDdjXWZw==
   dependencies:
     "@graphql-typed-document-node/core" "^3.1.1"
     "@wry/caches" "^1.0.0"
